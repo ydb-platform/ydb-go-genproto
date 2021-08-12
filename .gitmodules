@@ -1,0 +1,3 @@
+[submodule "ydb-proto"]
+	path = api
+	url = https://github.com/YandexDatabase/ydb-proto.git
