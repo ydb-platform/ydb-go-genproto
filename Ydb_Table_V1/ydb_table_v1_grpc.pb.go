@@ -41,6 +41,8 @@ type TableServiceClient interface {
 	CopyTable(ctx context.Context, in *Ydb_Table.CopyTableRequest, opts ...grpc.CallOption) (*Ydb_Table.CopyTableResponse, error)
 	// Creates consistent copy of given tables.
 	CopyTables(ctx context.Context, in *Ydb_Table.CopyTablesRequest, opts ...grpc.CallOption) (*Ydb_Table.CopyTablesResponse, error)
+	// Creates consistent move of given tables.
+	RenameTables(ctx context.Context, in *Ydb_Table.RenameTablesRequest, opts ...grpc.CallOption) (*Ydb_Table.RenameTablesResponse, error)
 	// Returns information about given table (metadata).
 	DescribeTable(ctx context.Context, in *Ydb_Table.DescribeTableRequest, opts ...grpc.CallOption) (*Ydb_Table.DescribeTableResponse, error)
 	// Explains data query.
@@ -147,6 +149,15 @@ func (c *tableServiceClient) CopyTable(ctx context.Context, in *Ydb_Table.CopyTa
 func (c *tableServiceClient) CopyTables(ctx context.Context, in *Ydb_Table.CopyTablesRequest, opts ...grpc.CallOption) (*Ydb_Table.CopyTablesResponse, error) {
 	out := new(Ydb_Table.CopyTablesResponse)
 	err := c.cc.Invoke(ctx, "/Ydb.Table.V1.TableService/CopyTables", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tableServiceClient) RenameTables(ctx context.Context, in *Ydb_Table.RenameTablesRequest, opts ...grpc.CallOption) (*Ydb_Table.RenameTablesResponse, error) {
+	out := new(Ydb_Table.RenameTablesResponse)
+	err := c.cc.Invoke(ctx, "/Ydb.Table.V1.TableService/RenameTables", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -333,6 +344,8 @@ type TableServiceServer interface {
 	CopyTable(context.Context, *Ydb_Table.CopyTableRequest) (*Ydb_Table.CopyTableResponse, error)
 	// Creates consistent copy of given tables.
 	CopyTables(context.Context, *Ydb_Table.CopyTablesRequest) (*Ydb_Table.CopyTablesResponse, error)
+	// Creates consistent move of given tables.
+	RenameTables(context.Context, *Ydb_Table.RenameTablesRequest) (*Ydb_Table.RenameTablesResponse, error)
 	// Returns information about given table (metadata).
 	DescribeTable(context.Context, *Ydb_Table.DescribeTableRequest) (*Ydb_Table.DescribeTableResponse, error)
 	// Explains data query.
@@ -393,6 +406,9 @@ func (UnimplementedTableServiceServer) CopyTable(context.Context, *Ydb_Table.Cop
 }
 func (UnimplementedTableServiceServer) CopyTables(context.Context, *Ydb_Table.CopyTablesRequest) (*Ydb_Table.CopyTablesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CopyTables not implemented")
+}
+func (UnimplementedTableServiceServer) RenameTables(context.Context, *Ydb_Table.RenameTablesRequest) (*Ydb_Table.RenameTablesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RenameTables not implemented")
 }
 func (UnimplementedTableServiceServer) DescribeTable(context.Context, *Ydb_Table.DescribeTableRequest) (*Ydb_Table.DescribeTableResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DescribeTable not implemented")
@@ -583,6 +599,24 @@ func _TableService_CopyTables_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(TableServiceServer).CopyTables(ctx, req.(*Ydb_Table.CopyTablesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TableService_RenameTables_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ydb_Table.RenameTablesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TableServiceServer).RenameTables(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Ydb.Table.V1.TableService/RenameTables",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TableServiceServer).RenameTables(ctx, req.(*Ydb_Table.RenameTablesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -847,6 +881,10 @@ var TableService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CopyTables",
 			Handler:    _TableService_CopyTables_Handler,
+		},
+		{
+			MethodName: "RenameTables",
+			Handler:    _TableService_RenameTables_Handler,
 		},
 		{
 			MethodName: "DescribeTable",
