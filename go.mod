@@ -1,4 +1,4 @@
-module github.com/YandexDatabase/ydb-go-genproto
+module github.com/ydb-platform/ydb-go-genproto
 
 go 1.16
 

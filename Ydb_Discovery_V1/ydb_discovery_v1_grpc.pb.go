@@ -4,7 +4,7 @@ package Ydb_Discovery_V1
 
 import (
 	context "context"
-	Ydb_Discovery "github.com/YandexDatabase/ydb-go-genproto/protos/Ydb_Discovery"
+	Ydb_Discovery "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Discovery"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

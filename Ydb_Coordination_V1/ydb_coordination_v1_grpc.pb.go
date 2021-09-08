@@ -4,7 +4,7 @@ package Ydb_Coordination_V1
 
 import (
 	context "context"
-	Ydb_Coordination "github.com/YandexDatabase/ydb-go-genproto/protos/Ydb_Coordination"
+	Ydb_Coordination "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Coordination"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

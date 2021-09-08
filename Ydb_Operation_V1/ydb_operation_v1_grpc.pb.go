@@ -4,7 +4,7 @@ package Ydb_Operation_V1
 
 import (
 	context "context"
-	Ydb_Operations "github.com/YandexDatabase/ydb-go-genproto/protos/Ydb_Operations"
+	Ydb_Operations "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

@@ -4,7 +4,7 @@ package Ydb_Export_V1
 
 import (
 	context "context"
-	Ydb_Export "github.com/YandexDatabase/ydb-go-genproto/protos/Ydb_Export"
+	Ydb_Export "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Export"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

@@ -4,7 +4,7 @@ package Ydb_RateLimiter_V1
 
 import (
 	context "context"
-	Ydb_RateLimiter "github.com/YandexDatabase/ydb-go-genproto/protos/Ydb_RateLimiter"
+	Ydb_RateLimiter "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_RateLimiter"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

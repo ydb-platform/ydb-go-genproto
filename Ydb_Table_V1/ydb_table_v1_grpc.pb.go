@@ -4,7 +4,7 @@ package Ydb_Table_V1
 
 import (
 	context "context"
-	Ydb_Table "github.com/YandexDatabase/ydb-go-genproto/protos/Ydb_Table"
+	Ydb_Table "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Table"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
