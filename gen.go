@@ -17,6 +17,8 @@ package ydb_go_genproto
 //go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/validation api/protos/ydb_rate_limiter.proto
 //go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/validation api/protos/ydb_coordination.proto
 //go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/validation api/protos/ydb_cms.proto
+//go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/validation api/protos/ydb_persqueue_v1.proto
+//go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/validation api/protos/ydb_persqueue_cluster_discovery.proto
 
 //go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/validation api/ydb_discovery_v1.proto
 //go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/validation api/ydb_export_v1.proto
@@ -30,3 +32,4 @@ package ydb_go_genproto
 //go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/validation api/ydb_rate_limiter_v1.proto
 //go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/validation api/ydb_coordination_v1.proto
 //go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/validation api/ydb_cms_v1.proto
+//go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/validation api/ydb_persqueue_v1.proto
