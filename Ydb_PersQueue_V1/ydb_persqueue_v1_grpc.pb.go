@@ -4,6 +4,7 @@ package Ydb_PersQueue_V1
 
 import (
 	context "context"
+	Ydb_PersQueue_ClusterDiscovery "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_PersQueue_ClusterDiscovery"
 	Ydb_PersQueue_V1 "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_PersQueue_V1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -417,7 +418,7 @@ var PersQueueService_ServiceDesc = grpc.ServiceDesc{
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ClusterDiscoveryServiceClient interface {
 	// Get PQ clusters which are eligible for the specified Write or Read Sessions
-	DiscoverClusters(ctx context.Context, in *Ydb_PersQueue_V1.DiscoverClustersRequest, opts ...grpc.CallOption) (*Ydb_PersQueue_V1.DiscoverClustersResponse, error)
+	DiscoverClusters(ctx context.Context, in *Ydb_PersQueue_ClusterDiscovery.DiscoverClustersRequest, opts ...grpc.CallOption) (*Ydb_PersQueue_ClusterDiscovery.DiscoverClustersResponse, error)
 }
 
 type clusterDiscoveryServiceClient struct {
@@ -428,8 +429,8 @@ func NewClusterDiscoveryServiceClient(cc grpc.ClientConnInterface) ClusterDiscov
 	return &clusterDiscoveryServiceClient{cc}
 }
 
-func (c *clusterDiscoveryServiceClient) DiscoverClusters(ctx context.Context, in *Ydb_PersQueue_V1.DiscoverClustersRequest, opts ...grpc.CallOption) (*Ydb_PersQueue_V1.DiscoverClustersResponse, error) {
-	out := new(Ydb_PersQueue_V1.DiscoverClustersResponse)
+func (c *clusterDiscoveryServiceClient) DiscoverClusters(ctx context.Context, in *Ydb_PersQueue_ClusterDiscovery.DiscoverClustersRequest, opts ...grpc.CallOption) (*Ydb_PersQueue_ClusterDiscovery.DiscoverClustersResponse, error) {
+	out := new(Ydb_PersQueue_ClusterDiscovery.DiscoverClustersResponse)
 	err := c.cc.Invoke(ctx, "/Ydb.PersQueue.V1.ClusterDiscoveryService/DiscoverClusters", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -442,7 +443,7 @@ func (c *clusterDiscoveryServiceClient) DiscoverClusters(ctx context.Context, in
 // for forward compatibility
 type ClusterDiscoveryServiceServer interface {
 	// Get PQ clusters which are eligible for the specified Write or Read Sessions
-	DiscoverClusters(context.Context, *Ydb_PersQueue_V1.DiscoverClustersRequest) (*Ydb_PersQueue_V1.DiscoverClustersResponse, error)
+	DiscoverClusters(context.Context, *Ydb_PersQueue_ClusterDiscovery.DiscoverClustersRequest) (*Ydb_PersQueue_ClusterDiscovery.DiscoverClustersResponse, error)
 	mustEmbedUnimplementedClusterDiscoveryServiceServer()
 }
 
@@ -450,7 +451,7 @@ type ClusterDiscoveryServiceServer interface {
 type UnimplementedClusterDiscoveryServiceServer struct {
 }
 
-func (UnimplementedClusterDiscoveryServiceServer) DiscoverClusters(context.Context, *Ydb_PersQueue_V1.DiscoverClustersRequest) (*Ydb_PersQueue_V1.DiscoverClustersResponse, error) {
+func (UnimplementedClusterDiscoveryServiceServer) DiscoverClusters(context.Context, *Ydb_PersQueue_ClusterDiscovery.DiscoverClustersRequest) (*Ydb_PersQueue_ClusterDiscovery.DiscoverClustersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DiscoverClusters not implemented")
 }
 func (UnimplementedClusterDiscoveryServiceServer) mustEmbedUnimplementedClusterDiscoveryServiceServer() {
@@ -468,7 +469,7 @@ func RegisterClusterDiscoveryServiceServer(s grpc.ServiceRegistrar, srv ClusterD
 }
 
 func _ClusterDiscoveryService_DiscoverClusters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ydb_PersQueue_V1.DiscoverClustersRequest)
+	in := new(Ydb_PersQueue_ClusterDiscovery.DiscoverClustersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -480,7 +481,7 @@ func _ClusterDiscoveryService_DiscoverClusters_Handler(srv interface{}, ctx cont
 		FullMethod: "/Ydb.PersQueue.V1.ClusterDiscoveryService/DiscoverClusters",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ClusterDiscoveryServiceServer).DiscoverClusters(ctx, req.(*Ydb_PersQueue_V1.DiscoverClustersRequest))
+		return srv.(ClusterDiscoveryServiceServer).DiscoverClusters(ctx, req.(*Ydb_PersQueue_ClusterDiscovery.DiscoverClustersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
