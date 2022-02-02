@@ -34,3 +34,4 @@ package ydb_go_genproto
 //go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/annotations api/ydb_coordination_v1.proto
 //go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/annotations api/ydb_cms_v1.proto
 //go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/annotations api/ydb_persqueue_v1.proto
+//go:generate protoc --go_out=. --go_opt=module=github.com/ydb-platform/ydb-go-genproto --go-grpc_out=. --go-grpc_opt=module=github.com/ydb-platform/ydb-go-genproto -Iapi -Iapi/protos -Iapi/protos/annotations api/ydb_persqueue_v0.proto
