@@ -184,10 +184,10 @@ type SelfCheckRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OperationParams     *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	ReturnVerboseStatus bool                            `protobuf:"varint,2,opt,name=return_verbose_status,json=returnVerboseStatus,proto3" json:"return_verbose_status,omitempty"`
-	MinimumStatus       StatusFlag_Status               `protobuf:"varint,3,opt,name=minimum_status,json=minimumStatus,proto3,enum=Ydb.Monitoring.StatusFlag_Status" json:"minimum_status,omitempty"`
-	MaximumLevel        uint32                          `protobuf:"varint,4,opt,name=maximum_level,json=maximumLevel,proto3" json:"maximum_level,omitempty"`
+	OperationParams     *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`                                  // basic operation params, including timeout
+	ReturnVerboseStatus bool                            `protobuf:"varint,2,opt,name=return_verbose_status,json=returnVerboseStatus,proto3" json:"return_verbose_status,omitempty"`                   // return detailed info about components checked with their statuses
+	MinimumStatus       StatusFlag_Status               `protobuf:"varint,3,opt,name=minimum_status,json=minimumStatus,proto3,enum=Ydb.Monitoring.StatusFlag_Status" json:"minimum_status,omitempty"` // minimum status of issues to return
+	MaximumLevel        uint32                          `protobuf:"varint,4,opt,name=maximum_level,json=maximumLevel,proto3" json:"maximum_level,omitempty"`                                          // maximum level of issues to return
 }
 
 func (x *SelfCheckRequest) Reset() {
