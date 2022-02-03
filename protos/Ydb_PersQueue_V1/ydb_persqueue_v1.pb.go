@@ -139,6 +139,66 @@ func (StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState_Statu
 	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{9, 0, 0, 0, 0}
 }
 
+type MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status int32
+
+const (
+	// Not used state.
+	MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_STATUS_UNSPECIFIED MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status = 0
+	// Client seen Create message but not yet responded to server with Created message.
+	MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_CREATING MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status = 1
+	// Client seen Destroy message but not yet responded with Released message.
+	MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_DESTROYING MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status = 2
+	// Client sent Created or ResumeReadRequest message to server for this partition stream.
+	MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_READING MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status = 3
+	// Client sent StopReadRequest for this partition stream.
+	MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_STOPPED MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status = 4
+)
+
+// Enum value maps for MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status.
+var (
+	MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status_name = map[int32]string{
+		0: "STATUS_UNSPECIFIED",
+		1: "CREATING",
+		2: "DESTROYING",
+		3: "READING",
+		4: "STOPPED",
+	}
+	MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status_value = map[string]int32{
+		"STATUS_UNSPECIFIED": 0,
+		"CREATING":           1,
+		"DESTROYING":         2,
+		"READING":            3,
+		"STOPPED":            4,
+	}
+)
+
+func (x MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status) Enum() *MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status {
+	p := new(MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status)
+	*p = x
+	return p
+}
+
+func (x MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status) Descriptor() protoreflect.EnumDescriptor {
+	return file_protos_ydb_persqueue_v1_proto_enumTypes[2].Descriptor()
+}
+
+func (MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status) Type() protoreflect.EnumType {
+	return &file_protos_ydb_persqueue_v1_proto_enumTypes[2]
+}
+
+func (x MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status.Descriptor instead.
+func (MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status) EnumDescriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12, 1, 0, 0, 0}
+}
+
 type TopicSettings_Format int32
 
 const (
@@ -169,11 +229,11 @@ func (x TopicSettings_Format) String() string {
 }
 
 func (TopicSettings_Format) Descriptor() protoreflect.EnumDescriptor {
-	return file_protos_ydb_persqueue_v1_proto_enumTypes[2].Descriptor()
+	return file_protos_ydb_persqueue_v1_proto_enumTypes[3].Descriptor()
 }
 
 func (TopicSettings_Format) Type() protoreflect.EnumType {
-	return &file_protos_ydb_persqueue_v1_proto_enumTypes[2]
+	return &file_protos_ydb_persqueue_v1_proto_enumTypes[3]
 }
 
 func (x TopicSettings_Format) Number() protoreflect.EnumNumber {
@@ -182,7 +242,7 @@ func (x TopicSettings_Format) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use TopicSettings_Format.Descriptor instead.
 func (TopicSettings_Format) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{19, 0}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{21, 0}
 }
 
 type SessionMetaValue struct {
@@ -1329,6 +1389,312 @@ func (x *PartitionStream) GetConnectionMeta() []byte {
 	return nil
 }
 
+type MigrationStreamingReadClientMessage struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to Request:
+	//	*MigrationStreamingReadClientMessage_InitRequest_
+	//	*MigrationStreamingReadClientMessage_Read_
+	//	*MigrationStreamingReadClientMessage_StartRead_
+	//	*MigrationStreamingReadClientMessage_Commit_
+	//	*MigrationStreamingReadClientMessage_Released_
+	//	*MigrationStreamingReadClientMessage_Status_
+	Request isMigrationStreamingReadClientMessage_Request `protobuf_oneof:"request"`
+	// User credentials if update is needed or empty string.
+	Token []byte `protobuf:"bytes,20,opt,name=token,proto3" json:"token,omitempty"`
+}
+
+func (x *MigrationStreamingReadClientMessage) Reset() {
+	*x = MigrationStreamingReadClientMessage{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadClientMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadClientMessage) ProtoMessage() {}
+
+func (x *MigrationStreamingReadClientMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadClientMessage.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadClientMessage) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12}
+}
+
+func (m *MigrationStreamingReadClientMessage) GetRequest() isMigrationStreamingReadClientMessage_Request {
+	if m != nil {
+		return m.Request
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage) GetInitRequest() *MigrationStreamingReadClientMessage_InitRequest {
+	if x, ok := x.GetRequest().(*MigrationStreamingReadClientMessage_InitRequest_); ok {
+		return x.InitRequest
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage) GetRead() *MigrationStreamingReadClientMessage_Read {
+	if x, ok := x.GetRequest().(*MigrationStreamingReadClientMessage_Read_); ok {
+		return x.Read
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage) GetStartRead() *MigrationStreamingReadClientMessage_StartRead {
+	if x, ok := x.GetRequest().(*MigrationStreamingReadClientMessage_StartRead_); ok {
+		return x.StartRead
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage) GetCommit() *MigrationStreamingReadClientMessage_Commit {
+	if x, ok := x.GetRequest().(*MigrationStreamingReadClientMessage_Commit_); ok {
+		return x.Commit
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage) GetReleased() *MigrationStreamingReadClientMessage_Released {
+	if x, ok := x.GetRequest().(*MigrationStreamingReadClientMessage_Released_); ok {
+		return x.Released
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage) GetStatus() *MigrationStreamingReadClientMessage_Status {
+	if x, ok := x.GetRequest().(*MigrationStreamingReadClientMessage_Status_); ok {
+		return x.Status
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage) GetToken() []byte {
+	if x != nil {
+		return x.Token
+	}
+	return nil
+}
+
+type isMigrationStreamingReadClientMessage_Request interface {
+	isMigrationStreamingReadClientMessage_Request()
+}
+
+type MigrationStreamingReadClientMessage_InitRequest_ struct {
+	InitRequest *MigrationStreamingReadClientMessage_InitRequest `protobuf:"bytes,1,opt,name=init_request,json=initRequest,proto3,oneof"`
+}
+
+type MigrationStreamingReadClientMessage_Read_ struct {
+	Read *MigrationStreamingReadClientMessage_Read `protobuf:"bytes,2,opt,name=read,proto3,oneof"`
+}
+
+type MigrationStreamingReadClientMessage_StartRead_ struct {
+	StartRead *MigrationStreamingReadClientMessage_StartRead `protobuf:"bytes,3,opt,name=start_read,json=startRead,proto3,oneof"`
+}
+
+type MigrationStreamingReadClientMessage_Commit_ struct {
+	Commit *MigrationStreamingReadClientMessage_Commit `protobuf:"bytes,4,opt,name=commit,proto3,oneof"`
+}
+
+type MigrationStreamingReadClientMessage_Released_ struct {
+	Released *MigrationStreamingReadClientMessage_Released `protobuf:"bytes,5,opt,name=released,proto3,oneof"`
+}
+
+type MigrationStreamingReadClientMessage_Status_ struct {
+	Status *MigrationStreamingReadClientMessage_Status `protobuf:"bytes,6,opt,name=status,proto3,oneof"`
+}
+
+func (*MigrationStreamingReadClientMessage_InitRequest_) isMigrationStreamingReadClientMessage_Request() {
+}
+
+func (*MigrationStreamingReadClientMessage_Read_) isMigrationStreamingReadClientMessage_Request() {}
+
+func (*MigrationStreamingReadClientMessage_StartRead_) isMigrationStreamingReadClientMessage_Request() {
+}
+
+func (*MigrationStreamingReadClientMessage_Commit_) isMigrationStreamingReadClientMessage_Request() {}
+
+func (*MigrationStreamingReadClientMessage_Released_) isMigrationStreamingReadClientMessage_Request() {
+}
+
+func (*MigrationStreamingReadClientMessage_Status_) isMigrationStreamingReadClientMessage_Request() {}
+
+type MigrationStreamingReadServerMessage struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Status Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
+	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
+	// Types that are assignable to Response:
+	//	*MigrationStreamingReadServerMessage_InitResponse_
+	//	*MigrationStreamingReadServerMessage_DataBatch_
+	//	*MigrationStreamingReadServerMessage_Assigned_
+	//	*MigrationStreamingReadServerMessage_Release_
+	//	*MigrationStreamingReadServerMessage_Committed_
+	//	*MigrationStreamingReadServerMessage_PartitionStatus_
+	Response isMigrationStreamingReadServerMessage_Response `protobuf_oneof:"response"`
+}
+
+func (x *MigrationStreamingReadServerMessage) Reset() {
+	*x = MigrationStreamingReadServerMessage{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadServerMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadServerMessage) ProtoMessage() {}
+
+func (x *MigrationStreamingReadServerMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadServerMessage.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadServerMessage) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *MigrationStreamingReadServerMessage) GetStatus() Ydb.StatusIds_StatusCode {
+	if x != nil {
+		return x.Status
+	}
+	return Ydb.StatusIds_STATUS_CODE_UNSPECIFIED
+}
+
+func (x *MigrationStreamingReadServerMessage) GetIssues() []*Ydb_Issue.IssueMessage {
+	if x != nil {
+		return x.Issues
+	}
+	return nil
+}
+
+func (m *MigrationStreamingReadServerMessage) GetResponse() isMigrationStreamingReadServerMessage_Response {
+	if m != nil {
+		return m.Response
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage) GetInitResponse() *MigrationStreamingReadServerMessage_InitResponse {
+	if x, ok := x.GetResponse().(*MigrationStreamingReadServerMessage_InitResponse_); ok {
+		return x.InitResponse
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage) GetDataBatch() *MigrationStreamingReadServerMessage_DataBatch {
+	if x, ok := x.GetResponse().(*MigrationStreamingReadServerMessage_DataBatch_); ok {
+		return x.DataBatch
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage) GetAssigned() *MigrationStreamingReadServerMessage_Assigned {
+	if x, ok := x.GetResponse().(*MigrationStreamingReadServerMessage_Assigned_); ok {
+		return x.Assigned
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage) GetRelease() *MigrationStreamingReadServerMessage_Release {
+	if x, ok := x.GetResponse().(*MigrationStreamingReadServerMessage_Release_); ok {
+		return x.Release
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage) GetCommitted() *MigrationStreamingReadServerMessage_Committed {
+	if x, ok := x.GetResponse().(*MigrationStreamingReadServerMessage_Committed_); ok {
+		return x.Committed
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage) GetPartitionStatus() *MigrationStreamingReadServerMessage_PartitionStatus {
+	if x, ok := x.GetResponse().(*MigrationStreamingReadServerMessage_PartitionStatus_); ok {
+		return x.PartitionStatus
+	}
+	return nil
+}
+
+type isMigrationStreamingReadServerMessage_Response interface {
+	isMigrationStreamingReadServerMessage_Response()
+}
+
+type MigrationStreamingReadServerMessage_InitResponse_ struct {
+	InitResponse *MigrationStreamingReadServerMessage_InitResponse `protobuf:"bytes,3,opt,name=init_response,json=initResponse,proto3,oneof"`
+}
+
+type MigrationStreamingReadServerMessage_DataBatch_ struct {
+	DataBatch *MigrationStreamingReadServerMessage_DataBatch `protobuf:"bytes,4,opt,name=data_batch,json=dataBatch,proto3,oneof"`
+}
+
+type MigrationStreamingReadServerMessage_Assigned_ struct {
+	Assigned *MigrationStreamingReadServerMessage_Assigned `protobuf:"bytes,5,opt,name=assigned,proto3,oneof"`
+}
+
+type MigrationStreamingReadServerMessage_Release_ struct {
+	Release *MigrationStreamingReadServerMessage_Release `protobuf:"bytes,6,opt,name=release,proto3,oneof"`
+}
+
+type MigrationStreamingReadServerMessage_Committed_ struct {
+	Committed *MigrationStreamingReadServerMessage_Committed `protobuf:"bytes,7,opt,name=committed,proto3,oneof"`
+}
+
+type MigrationStreamingReadServerMessage_PartitionStatus_ struct {
+	PartitionStatus *MigrationStreamingReadServerMessage_PartitionStatus `protobuf:"bytes,8,opt,name=partition_status,json=partitionStatus,proto3,oneof"`
+}
+
+func (*MigrationStreamingReadServerMessage_InitResponse_) isMigrationStreamingReadServerMessage_Response() {
+}
+
+func (*MigrationStreamingReadServerMessage_DataBatch_) isMigrationStreamingReadServerMessage_Response() {
+}
+
+func (*MigrationStreamingReadServerMessage_Assigned_) isMigrationStreamingReadServerMessage_Response() {
+}
+
+func (*MigrationStreamingReadServerMessage_Release_) isMigrationStreamingReadServerMessage_Response() {
+}
+
+func (*MigrationStreamingReadServerMessage_Committed_) isMigrationStreamingReadServerMessage_Response() {
+}
+
+func (*MigrationStreamingReadServerMessage_PartitionStatus_) isMigrationStreamingReadServerMessage_Response() {
+}
+
 type ReadInfoRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1346,7 +1712,7 @@ type ReadInfoRequest struct {
 func (x *ReadInfoRequest) Reset() {
 	*x = ReadInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[12]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1359,7 +1725,7 @@ func (x *ReadInfoRequest) String() string {
 func (*ReadInfoRequest) ProtoMessage() {}
 
 func (x *ReadInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[12]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1372,7 +1738,7 @@ func (x *ReadInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadInfoRequest.ProtoReflect.Descriptor instead.
 func (*ReadInfoRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ReadInfoRequest) GetOperationParams() *Ydb_Operations.OperationParams {
@@ -1415,7 +1781,7 @@ type ReadInfoResponse struct {
 func (x *ReadInfoResponse) Reset() {
 	*x = ReadInfoResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[13]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1428,7 +1794,7 @@ func (x *ReadInfoResponse) String() string {
 func (*ReadInfoResponse) ProtoMessage() {}
 
 func (x *ReadInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[13]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1441,7 +1807,7 @@ func (x *ReadInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadInfoResponse.ProtoReflect.Descriptor instead.
 func (*ReadInfoResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{13}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ReadInfoResponse) GetOperation() *Ydb_Operations.Operation {
@@ -1463,7 +1829,7 @@ type ReadInfoResult struct {
 func (x *ReadInfoResult) Reset() {
 	*x = ReadInfoResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[14]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1476,7 +1842,7 @@ func (x *ReadInfoResult) String() string {
 func (*ReadInfoResult) ProtoMessage() {}
 
 func (x *ReadInfoResult) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[14]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1489,7 +1855,7 @@ func (x *ReadInfoResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadInfoResult.ProtoReflect.Descriptor instead.
 func (*ReadInfoResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{14}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ReadInfoResult) GetTopics() []*ReadInfoResult_TopicInfo {
@@ -1512,7 +1878,7 @@ type DropTopicRequest struct {
 func (x *DropTopicRequest) Reset() {
 	*x = DropTopicRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[15]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1525,7 +1891,7 @@ func (x *DropTopicRequest) String() string {
 func (*DropTopicRequest) ProtoMessage() {}
 
 func (x *DropTopicRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[15]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1538,7 +1904,7 @@ func (x *DropTopicRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DropTopicRequest.ProtoReflect.Descriptor instead.
 func (*DropTopicRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{15}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *DropTopicRequest) GetOperationParams() *Ydb_Operations.OperationParams {
@@ -1567,7 +1933,7 @@ type DropTopicResponse struct {
 func (x *DropTopicResponse) Reset() {
 	*x = DropTopicResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[16]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1580,7 +1946,7 @@ func (x *DropTopicResponse) String() string {
 func (*DropTopicResponse) ProtoMessage() {}
 
 func (x *DropTopicResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[16]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1593,7 +1959,7 @@ func (x *DropTopicResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DropTopicResponse.ProtoReflect.Descriptor instead.
 func (*DropTopicResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{16}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *DropTopicResponse) GetOperation() *Ydb_Operations.Operation {
@@ -1612,7 +1978,7 @@ type DropTopicResult struct {
 func (x *DropTopicResult) Reset() {
 	*x = DropTopicResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[17]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1625,7 +1991,7 @@ func (x *DropTopicResult) String() string {
 func (*DropTopicResult) ProtoMessage() {}
 
 func (x *DropTopicResult) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[17]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1638,7 +2004,7 @@ func (x *DropTopicResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DropTopicResult.ProtoReflect.Descriptor instead.
 func (*DropTopicResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{17}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{19}
 }
 
 type Credentials struct {
@@ -1656,7 +2022,7 @@ type Credentials struct {
 func (x *Credentials) Reset() {
 	*x = Credentials{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[18]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1669,7 +2035,7 @@ func (x *Credentials) String() string {
 func (*Credentials) ProtoMessage() {}
 
 func (x *Credentials) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[18]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1682,7 +2048,7 @@ func (x *Credentials) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Credentials.ProtoReflect.Descriptor instead.
 func (*Credentials) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{18}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{20}
 }
 
 func (m *Credentials) GetCredentials() isCredentials_Credentials {
@@ -1773,7 +2139,7 @@ type TopicSettings struct {
 func (x *TopicSettings) Reset() {
 	*x = TopicSettings{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[19]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1786,7 +2152,7 @@ func (x *TopicSettings) String() string {
 func (*TopicSettings) ProtoMessage() {}
 
 func (x *TopicSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[19]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1799,7 +2165,7 @@ func (x *TopicSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TopicSettings.ProtoReflect.Descriptor instead.
 func (*TopicSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{19}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *TopicSettings) GetPartitionsCount() int32 {
@@ -1908,7 +2274,7 @@ type CreateTopicRequest struct {
 func (x *CreateTopicRequest) Reset() {
 	*x = CreateTopicRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[20]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1921,7 +2287,7 @@ func (x *CreateTopicRequest) String() string {
 func (*CreateTopicRequest) ProtoMessage() {}
 
 func (x *CreateTopicRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[20]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1934,7 +2300,7 @@ func (x *CreateTopicRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTopicRequest.ProtoReflect.Descriptor instead.
 func (*CreateTopicRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{20}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *CreateTopicRequest) GetOperationParams() *Ydb_Operations.OperationParams {
@@ -1970,7 +2336,7 @@ type CreateTopicResponse struct {
 func (x *CreateTopicResponse) Reset() {
 	*x = CreateTopicResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[21]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1983,7 +2349,7 @@ func (x *CreateTopicResponse) String() string {
 func (*CreateTopicResponse) ProtoMessage() {}
 
 func (x *CreateTopicResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[21]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1996,7 +2362,7 @@ func (x *CreateTopicResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTopicResponse.ProtoReflect.Descriptor instead.
 func (*CreateTopicResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{21}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *CreateTopicResponse) GetOperation() *Ydb_Operations.Operation {
@@ -2015,7 +2381,7 @@ type CreateTopicResult struct {
 func (x *CreateTopicResult) Reset() {
 	*x = CreateTopicResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[22]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2028,7 +2394,7 @@ func (x *CreateTopicResult) String() string {
 func (*CreateTopicResult) ProtoMessage() {}
 
 func (x *CreateTopicResult) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[22]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2041,7 +2407,7 @@ func (x *CreateTopicResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTopicResult.ProtoReflect.Descriptor instead.
 func (*CreateTopicResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{22}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{24}
 }
 
 type AlterTopicRequest struct {
@@ -2059,7 +2425,7 @@ type AlterTopicRequest struct {
 func (x *AlterTopicRequest) Reset() {
 	*x = AlterTopicRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[23]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2072,7 +2438,7 @@ func (x *AlterTopicRequest) String() string {
 func (*AlterTopicRequest) ProtoMessage() {}
 
 func (x *AlterTopicRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[23]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2085,7 +2451,7 @@ func (x *AlterTopicRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AlterTopicRequest.ProtoReflect.Descriptor instead.
 func (*AlterTopicRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{23}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *AlterTopicRequest) GetOperationParams() *Ydb_Operations.OperationParams {
@@ -2121,7 +2487,7 @@ type AlterTopicResponse struct {
 func (x *AlterTopicResponse) Reset() {
 	*x = AlterTopicResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[24]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2134,7 +2500,7 @@ func (x *AlterTopicResponse) String() string {
 func (*AlterTopicResponse) ProtoMessage() {}
 
 func (x *AlterTopicResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[24]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2147,7 +2513,7 @@ func (x *AlterTopicResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AlterTopicResponse.ProtoReflect.Descriptor instead.
 func (*AlterTopicResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{24}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *AlterTopicResponse) GetOperation() *Ydb_Operations.Operation {
@@ -2168,7 +2534,7 @@ type AlterTopicResult struct {
 func (x *AlterTopicResult) Reset() {
 	*x = AlterTopicResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[25]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2181,7 +2547,7 @@ func (x *AlterTopicResult) String() string {
 func (*AlterTopicResult) ProtoMessage() {}
 
 func (x *AlterTopicResult) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[25]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2194,7 +2560,7 @@ func (x *AlterTopicResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AlterTopicResult.ProtoReflect.Descriptor instead.
 func (*AlterTopicResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{25}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{27}
 }
 
 //*
@@ -2214,7 +2580,7 @@ type AddReadRuleRequest struct {
 func (x *AddReadRuleRequest) Reset() {
 	*x = AddReadRuleRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[26]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2227,7 +2593,7 @@ func (x *AddReadRuleRequest) String() string {
 func (*AddReadRuleRequest) ProtoMessage() {}
 
 func (x *AddReadRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[26]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2240,7 +2606,7 @@ func (x *AddReadRuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddReadRuleRequest.ProtoReflect.Descriptor instead.
 func (*AddReadRuleRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{26}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *AddReadRuleRequest) GetOperationParams() *Ydb_Operations.OperationParams {
@@ -2278,7 +2644,7 @@ type AddReadRuleResponse struct {
 func (x *AddReadRuleResponse) Reset() {
 	*x = AddReadRuleResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[27]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2291,7 +2657,7 @@ func (x *AddReadRuleResponse) String() string {
 func (*AddReadRuleResponse) ProtoMessage() {}
 
 func (x *AddReadRuleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[27]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2304,7 +2670,7 @@ func (x *AddReadRuleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddReadRuleResponse.ProtoReflect.Descriptor instead.
 func (*AddReadRuleResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{27}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *AddReadRuleResponse) GetOperation() *Ydb_Operations.Operation {
@@ -2325,7 +2691,7 @@ type AddReadRuleResult struct {
 func (x *AddReadRuleResult) Reset() {
 	*x = AddReadRuleResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[28]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2338,7 +2704,7 @@ func (x *AddReadRuleResult) String() string {
 func (*AddReadRuleResult) ProtoMessage() {}
 
 func (x *AddReadRuleResult) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[28]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2351,7 +2717,7 @@ func (x *AddReadRuleResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddReadRuleResult.ProtoReflect.Descriptor instead.
 func (*AddReadRuleResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{28}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{30}
 }
 
 //*
@@ -2371,7 +2737,7 @@ type RemoveReadRuleRequest struct {
 func (x *RemoveReadRuleRequest) Reset() {
 	*x = RemoveReadRuleRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[29]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2384,7 +2750,7 @@ func (x *RemoveReadRuleRequest) String() string {
 func (*RemoveReadRuleRequest) ProtoMessage() {}
 
 func (x *RemoveReadRuleRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[29]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2397,7 +2763,7 @@ func (x *RemoveReadRuleRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveReadRuleRequest.ProtoReflect.Descriptor instead.
 func (*RemoveReadRuleRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{29}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *RemoveReadRuleRequest) GetOperationParams() *Ydb_Operations.OperationParams {
@@ -2435,7 +2801,7 @@ type RemoveReadRuleResponse struct {
 func (x *RemoveReadRuleResponse) Reset() {
 	*x = RemoveReadRuleResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[30]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2448,7 +2814,7 @@ func (x *RemoveReadRuleResponse) String() string {
 func (*RemoveReadRuleResponse) ProtoMessage() {}
 
 func (x *RemoveReadRuleResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[30]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2461,7 +2827,7 @@ func (x *RemoveReadRuleResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveReadRuleResponse.ProtoReflect.Descriptor instead.
 func (*RemoveReadRuleResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{30}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *RemoveReadRuleResponse) GetOperation() *Ydb_Operations.Operation {
@@ -2482,7 +2848,7 @@ type RemoveReadRuleResult struct {
 func (x *RemoveReadRuleResult) Reset() {
 	*x = RemoveReadRuleResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[31]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2495,7 +2861,7 @@ func (x *RemoveReadRuleResult) String() string {
 func (*RemoveReadRuleResult) ProtoMessage() {}
 
 func (x *RemoveReadRuleResult) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[31]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2508,7 +2874,7 @@ func (x *RemoveReadRuleResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveReadRuleResult.ProtoReflect.Descriptor instead.
 func (*RemoveReadRuleResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{31}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{33}
 }
 
 type DescribeTopicRequest struct {
@@ -2524,7 +2890,7 @@ type DescribeTopicRequest struct {
 func (x *DescribeTopicRequest) Reset() {
 	*x = DescribeTopicRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[32]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2537,7 +2903,7 @@ func (x *DescribeTopicRequest) String() string {
 func (*DescribeTopicRequest) ProtoMessage() {}
 
 func (x *DescribeTopicRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[32]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2550,7 +2916,7 @@ func (x *DescribeTopicRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DescribeTopicRequest.ProtoReflect.Descriptor instead.
 func (*DescribeTopicRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{32}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *DescribeTopicRequest) GetOperationParams() *Ydb_Operations.OperationParams {
@@ -2579,7 +2945,7 @@ type DescribeTopicResponse struct {
 func (x *DescribeTopicResponse) Reset() {
 	*x = DescribeTopicResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[33]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2592,7 +2958,7 @@ func (x *DescribeTopicResponse) String() string {
 func (*DescribeTopicResponse) ProtoMessage() {}
 
 func (x *DescribeTopicResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[33]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2605,7 +2971,7 @@ func (x *DescribeTopicResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DescribeTopicResponse.ProtoReflect.Descriptor instead.
 func (*DescribeTopicResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{33}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *DescribeTopicResponse) GetOperation() *Ydb_Operations.Operation {
@@ -2629,7 +2995,7 @@ type DescribeTopicResult struct {
 func (x *DescribeTopicResult) Reset() {
 	*x = DescribeTopicResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[34]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2642,7 +3008,7 @@ func (x *DescribeTopicResult) String() string {
 func (*DescribeTopicResult) ProtoMessage() {}
 
 func (x *DescribeTopicResult) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[34]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2655,7 +3021,7 @@ func (x *DescribeTopicResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DescribeTopicResult.ProtoReflect.Descriptor instead.
 func (*DescribeTopicResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{34}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *DescribeTopicResult) GetSelf() *Ydb_Scheme.Entry {
@@ -2702,7 +3068,7 @@ type StreamingWriteClientMessage_InitRequest struct {
 func (x *StreamingWriteClientMessage_InitRequest) Reset() {
 	*x = StreamingWriteClientMessage_InitRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[36]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2715,7 +3081,7 @@ func (x *StreamingWriteClientMessage_InitRequest) String() string {
 func (*StreamingWriteClientMessage_InitRequest) ProtoMessage() {}
 
 func (x *StreamingWriteClientMessage_InitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[36]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2831,7 +3197,7 @@ type StreamingWriteClientMessage_WriteRequest struct {
 func (x *StreamingWriteClientMessage_WriteRequest) Reset() {
 	*x = StreamingWriteClientMessage_WriteRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[37]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2844,7 +3210,7 @@ func (x *StreamingWriteClientMessage_WriteRequest) String() string {
 func (*StreamingWriteClientMessage_WriteRequest) ProtoMessage() {}
 
 func (x *StreamingWriteClientMessage_WriteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[37]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2942,7 +3308,7 @@ type StreamingWriteClientMessage_UpdateTokenRequest struct {
 func (x *StreamingWriteClientMessage_UpdateTokenRequest) Reset() {
 	*x = StreamingWriteClientMessage_UpdateTokenRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[38]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2955,7 +3321,7 @@ func (x *StreamingWriteClientMessage_UpdateTokenRequest) String() string {
 func (*StreamingWriteClientMessage_UpdateTokenRequest) ProtoMessage() {}
 
 func (x *StreamingWriteClientMessage_UpdateTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[38]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3010,7 +3376,7 @@ type StreamingWriteServerMessage_InitResponse struct {
 func (x *StreamingWriteServerMessage_InitResponse) Reset() {
 	*x = StreamingWriteServerMessage_InitResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[40]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[42]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3023,7 +3389,7 @@ func (x *StreamingWriteServerMessage_InitResponse) String() string {
 func (*StreamingWriteServerMessage_InitResponse) ProtoMessage() {}
 
 func (x *StreamingWriteServerMessage_InitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[40]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[42]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3131,7 +3497,7 @@ type StreamingWriteServerMessage_BatchWriteResponse struct {
 func (x *StreamingWriteServerMessage_BatchWriteResponse) Reset() {
 	*x = StreamingWriteServerMessage_BatchWriteResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[41]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3144,7 +3510,7 @@ func (x *StreamingWriteServerMessage_BatchWriteResponse) String() string {
 func (*StreamingWriteServerMessage_BatchWriteResponse) ProtoMessage() {}
 
 func (x *StreamingWriteServerMessage_BatchWriteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[41]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3204,7 +3570,7 @@ type StreamingWriteServerMessage_UpdateTokenResponse struct {
 func (x *StreamingWriteServerMessage_UpdateTokenResponse) Reset() {
 	*x = StreamingWriteServerMessage_UpdateTokenResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[42]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[44]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3217,7 +3583,7 @@ func (x *StreamingWriteServerMessage_UpdateTokenResponse) String() string {
 func (*StreamingWriteServerMessage_UpdateTokenResponse) ProtoMessage() {}
 
 func (x *StreamingWriteServerMessage_UpdateTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[42]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[44]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3252,7 +3618,7 @@ type StreamingWriteServerMessage_WriteStatistics struct {
 func (x *StreamingWriteServerMessage_WriteStatistics) Reset() {
 	*x = StreamingWriteServerMessage_WriteStatistics{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[43]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[45]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3265,7 +3631,7 @@ func (x *StreamingWriteServerMessage_WriteStatistics) String() string {
 func (*StreamingWriteServerMessage_WriteStatistics) ProtoMessage() {}
 
 func (x *StreamingWriteServerMessage_WriteStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[43]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[45]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3346,7 +3712,7 @@ type StreamingReadClientMessageNew_InitRequest struct {
 func (x *StreamingReadClientMessageNew_InitRequest) Reset() {
 	*x = StreamingReadClientMessageNew_InitRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[44]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[46]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3359,7 +3725,7 @@ func (x *StreamingReadClientMessageNew_InitRequest) String() string {
 func (*StreamingReadClientMessageNew_InitRequest) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_InitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[44]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[46]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3466,7 +3832,7 @@ type StreamingReadClientMessageNew_ReadRequest struct {
 func (x *StreamingReadClientMessageNew_ReadRequest) Reset() {
 	*x = StreamingReadClientMessageNew_ReadRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[45]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[47]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3479,7 +3845,7 @@ func (x *StreamingReadClientMessageNew_ReadRequest) String() string {
 func (*StreamingReadClientMessageNew_ReadRequest) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_ReadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[45]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[47]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3526,7 +3892,7 @@ type StreamingReadClientMessageNew_CreatePartitionStreamResponse struct {
 func (x *StreamingReadClientMessageNew_CreatePartitionStreamResponse) Reset() {
 	*x = StreamingReadClientMessageNew_CreatePartitionStreamResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[46]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[48]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3539,7 +3905,7 @@ func (x *StreamingReadClientMessageNew_CreatePartitionStreamResponse) String() s
 func (*StreamingReadClientMessageNew_CreatePartitionStreamResponse) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_CreatePartitionStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[46]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[48]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3597,7 +3963,7 @@ type StreamingReadClientMessageNew_DestroyPartitionStreamResponse struct {
 func (x *StreamingReadClientMessageNew_DestroyPartitionStreamResponse) Reset() {
 	*x = StreamingReadClientMessageNew_DestroyPartitionStreamResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[47]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[49]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3610,7 +3976,7 @@ func (x *StreamingReadClientMessageNew_DestroyPartitionStreamResponse) String() 
 func (*StreamingReadClientMessageNew_DestroyPartitionStreamResponse) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_DestroyPartitionStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[47]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[49]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3645,7 +4011,7 @@ type StreamingReadClientMessageNew_StopReadRequest struct {
 func (x *StreamingReadClientMessageNew_StopReadRequest) Reset() {
 	*x = StreamingReadClientMessageNew_StopReadRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[48]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[50]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3658,7 +4024,7 @@ func (x *StreamingReadClientMessageNew_StopReadRequest) String() string {
 func (*StreamingReadClientMessageNew_StopReadRequest) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_StopReadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[48]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[50]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3697,7 +4063,7 @@ type StreamingReadClientMessageNew_ResumeReadRequest struct {
 func (x *StreamingReadClientMessageNew_ResumeReadRequest) Reset() {
 	*x = StreamingReadClientMessageNew_ResumeReadRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[49]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[51]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3710,7 +4076,7 @@ func (x *StreamingReadClientMessageNew_ResumeReadRequest) String() string {
 func (*StreamingReadClientMessageNew_ResumeReadRequest) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_ResumeReadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[49]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[51]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3760,7 +4126,7 @@ type StreamingReadClientMessageNew_CommitRequest struct {
 func (x *StreamingReadClientMessageNew_CommitRequest) Reset() {
 	*x = StreamingReadClientMessageNew_CommitRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[50]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[52]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3773,7 +4139,7 @@ func (x *StreamingReadClientMessageNew_CommitRequest) String() string {
 func (*StreamingReadClientMessageNew_CommitRequest) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_CommitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[50]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[52]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3807,7 +4173,7 @@ type StreamingReadClientMessageNew_PartitionStreamStatusRequest struct {
 func (x *StreamingReadClientMessageNew_PartitionStreamStatusRequest) Reset() {
 	*x = StreamingReadClientMessageNew_PartitionStreamStatusRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[51]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[53]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3820,7 +4186,7 @@ func (x *StreamingReadClientMessageNew_PartitionStreamStatusRequest) String() st
 func (*StreamingReadClientMessageNew_PartitionStreamStatusRequest) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_PartitionStreamStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[51]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[53]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3855,7 +4221,7 @@ type StreamingReadClientMessageNew_AddTopicRequest struct {
 func (x *StreamingReadClientMessageNew_AddTopicRequest) Reset() {
 	*x = StreamingReadClientMessageNew_AddTopicRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[52]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[54]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3868,7 +4234,7 @@ func (x *StreamingReadClientMessageNew_AddTopicRequest) String() string {
 func (*StreamingReadClientMessageNew_AddTopicRequest) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_AddTopicRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[52]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[54]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3903,7 +4269,7 @@ type StreamingReadClientMessageNew_RemoveTopicRequest struct {
 func (x *StreamingReadClientMessageNew_RemoveTopicRequest) Reset() {
 	*x = StreamingReadClientMessageNew_RemoveTopicRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[53]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[55]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3916,7 +4282,7 @@ func (x *StreamingReadClientMessageNew_RemoveTopicRequest) String() string {
 func (*StreamingReadClientMessageNew_RemoveTopicRequest) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_RemoveTopicRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[53]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[55]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3956,7 +4322,7 @@ type StreamingReadClientMessageNew_TopicReadSettings struct {
 func (x *StreamingReadClientMessageNew_TopicReadSettings) Reset() {
 	*x = StreamingReadClientMessageNew_TopicReadSettings{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[54]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[56]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3969,7 +4335,7 @@ func (x *StreamingReadClientMessageNew_TopicReadSettings) String() string {
 func (*StreamingReadClientMessageNew_TopicReadSettings) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_TopicReadSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[54]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[56]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4022,7 +4388,7 @@ type StreamingReadClientMessageNew_PartitionCommit struct {
 func (x *StreamingReadClientMessageNew_PartitionCommit) Reset() {
 	*x = StreamingReadClientMessageNew_PartitionCommit{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[55]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[57]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4035,7 +4401,7 @@ func (x *StreamingReadClientMessageNew_PartitionCommit) String() string {
 func (*StreamingReadClientMessageNew_PartitionCommit) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_PartitionCommit) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[55]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[57]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4077,7 +4443,7 @@ type StreamingReadClientMessageNew_InitRequest_State struct {
 func (x *StreamingReadClientMessageNew_InitRequest_State) Reset() {
 	*x = StreamingReadClientMessageNew_InitRequest_State{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[56]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[58]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4090,7 +4456,7 @@ func (x *StreamingReadClientMessageNew_InitRequest_State) String() string {
 func (*StreamingReadClientMessageNew_InitRequest_State) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_InitRequest_State) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[56]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[58]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4131,7 +4497,7 @@ type StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState struct
 func (x *StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState) Reset() {
 	*x = StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[57]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[59]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4144,7 +4510,7 @@ func (x *StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState) S
 func (*StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState) ProtoMessage() {}
 
 func (x *StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[57]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[59]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4206,7 +4572,7 @@ type StreamingReadServerMessageNew_InitResponse struct {
 func (x *StreamingReadServerMessageNew_InitResponse) Reset() {
 	*x = StreamingReadServerMessageNew_InitResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[58]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[60]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4219,7 +4585,7 @@ func (x *StreamingReadServerMessageNew_InitResponse) String() string {
 func (*StreamingReadServerMessageNew_InitResponse) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_InitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[58]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[60]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4274,7 +4640,7 @@ type StreamingReadServerMessageNew_CreatePartitionStreamRequest struct {
 func (x *StreamingReadServerMessageNew_CreatePartitionStreamRequest) Reset() {
 	*x = StreamingReadServerMessageNew_CreatePartitionStreamRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[59]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[61]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4287,7 +4653,7 @@ func (x *StreamingReadServerMessageNew_CreatePartitionStreamRequest) String() st
 func (*StreamingReadServerMessageNew_CreatePartitionStreamRequest) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_CreatePartitionStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[59]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[61]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4346,7 +4712,7 @@ type StreamingReadServerMessageNew_DestroyPartitionStreamRequest struct {
 func (x *StreamingReadServerMessageNew_DestroyPartitionStreamRequest) Reset() {
 	*x = StreamingReadServerMessageNew_DestroyPartitionStreamRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[60]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[62]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4359,7 +4725,7 @@ func (x *StreamingReadServerMessageNew_DestroyPartitionStreamRequest) String() s
 func (*StreamingReadServerMessageNew_DestroyPartitionStreamRequest) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_DestroyPartitionStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[60]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[62]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4409,7 +4775,7 @@ type StreamingReadServerMessageNew_CommitResponse struct {
 func (x *StreamingReadServerMessageNew_CommitResponse) Reset() {
 	*x = StreamingReadServerMessageNew_CommitResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[61]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[63]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4422,7 +4788,7 @@ func (x *StreamingReadServerMessageNew_CommitResponse) String() string {
 func (*StreamingReadServerMessageNew_CommitResponse) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_CommitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[61]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[63]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4459,7 +4825,7 @@ type StreamingReadServerMessageNew_BatchReadResponse struct {
 func (x *StreamingReadServerMessageNew_BatchReadResponse) Reset() {
 	*x = StreamingReadServerMessageNew_BatchReadResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[62]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[64]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4472,7 +4838,7 @@ func (x *StreamingReadServerMessageNew_BatchReadResponse) String() string {
 func (*StreamingReadServerMessageNew_BatchReadResponse) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_BatchReadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[62]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[64]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4519,7 +4885,7 @@ type StreamingReadServerMessageNew_PartitionStreamStatusResponse struct {
 func (x *StreamingReadServerMessageNew_PartitionStreamStatusResponse) Reset() {
 	*x = StreamingReadServerMessageNew_PartitionStreamStatusResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[63]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[65]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4532,7 +4898,7 @@ func (x *StreamingReadServerMessageNew_PartitionStreamStatusResponse) String() s
 func (*StreamingReadServerMessageNew_PartitionStreamStatusResponse) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_PartitionStreamStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[63]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[65]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4585,7 +4951,7 @@ type StreamingReadServerMessageNew_StopReadResponse struct {
 func (x *StreamingReadServerMessageNew_StopReadResponse) Reset() {
 	*x = StreamingReadServerMessageNew_StopReadResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[64]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[66]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4598,7 +4964,7 @@ func (x *StreamingReadServerMessageNew_StopReadResponse) String() string {
 func (*StreamingReadServerMessageNew_StopReadResponse) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_StopReadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[64]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[66]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4623,7 +4989,7 @@ type StreamingReadServerMessageNew_ResumeReadResponse struct {
 func (x *StreamingReadServerMessageNew_ResumeReadResponse) Reset() {
 	*x = StreamingReadServerMessageNew_ResumeReadResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[65]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[67]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4636,7 +5002,7 @@ func (x *StreamingReadServerMessageNew_ResumeReadResponse) String() string {
 func (*StreamingReadServerMessageNew_ResumeReadResponse) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_ResumeReadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[65]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[67]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4664,7 +5030,7 @@ type StreamingReadServerMessageNew_AddTopicResponse struct {
 func (x *StreamingReadServerMessageNew_AddTopicResponse) Reset() {
 	*x = StreamingReadServerMessageNew_AddTopicResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[66]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[68]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4677,7 +5043,7 @@ func (x *StreamingReadServerMessageNew_AddTopicResponse) String() string {
 func (*StreamingReadServerMessageNew_AddTopicResponse) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_AddTopicResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[66]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[68]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4709,7 +5075,7 @@ type StreamingReadServerMessageNew_RemoveTopicResponse struct {
 func (x *StreamingReadServerMessageNew_RemoveTopicResponse) Reset() {
 	*x = StreamingReadServerMessageNew_RemoveTopicResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[67]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[69]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4722,7 +5088,7 @@ func (x *StreamingReadServerMessageNew_RemoveTopicResponse) String() string {
 func (*StreamingReadServerMessageNew_RemoveTopicResponse) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_RemoveTopicResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[67]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[69]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4753,7 +5119,7 @@ type StreamingReadServerMessageNew_CommitResponse_PartitionCommittedOffset struc
 func (x *StreamingReadServerMessageNew_CommitResponse_PartitionCommittedOffset) Reset() {
 	*x = StreamingReadServerMessageNew_CommitResponse_PartitionCommittedOffset{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[69]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[71]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4766,7 +5132,7 @@ func (x *StreamingReadServerMessageNew_CommitResponse_PartitionCommittedOffset) 
 func (*StreamingReadServerMessageNew_CommitResponse_PartitionCommittedOffset) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_CommitResponse_PartitionCommittedOffset) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[69]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[71]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4878,7 +5244,7 @@ type StreamingReadServerMessageNew_BatchReadResponse_PartitionData struct {
 func (x *StreamingReadServerMessageNew_BatchReadResponse_PartitionData) Reset() {
 	*x = StreamingReadServerMessageNew_BatchReadResponse_PartitionData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[70]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[72]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4891,7 +5257,7 @@ func (x *StreamingReadServerMessageNew_BatchReadResponse_PartitionData) String()
 func (*StreamingReadServerMessageNew_BatchReadResponse_PartitionData) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_BatchReadResponse_PartitionData) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[70]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[72]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5062,7 +5428,7 @@ type StreamingReadServerMessageNew_BatchReadResponse_SkipRange struct {
 func (x *StreamingReadServerMessageNew_BatchReadResponse_SkipRange) Reset() {
 	*x = StreamingReadServerMessageNew_BatchReadResponse_SkipRange{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[71]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[73]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5075,7 +5441,7 @@ func (x *StreamingReadServerMessageNew_BatchReadResponse_SkipRange) String() str
 func (*StreamingReadServerMessageNew_BatchReadResponse_SkipRange) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_BatchReadResponse_SkipRange) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[71]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[73]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5121,7 +5487,7 @@ type StreamingReadServerMessageNew_BatchReadResponse_PartitionData_ReadStatistic
 func (x *StreamingReadServerMessageNew_BatchReadResponse_PartitionData_ReadStatistics) Reset() {
 	*x = StreamingReadServerMessageNew_BatchReadResponse_PartitionData_ReadStatistics{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[72]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[74]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5134,7 +5500,7 @@ func (x *StreamingReadServerMessageNew_BatchReadResponse_PartitionData_ReadStati
 func (*StreamingReadServerMessageNew_BatchReadResponse_PartitionData_ReadStatistics) ProtoMessage() {}
 
 func (x *StreamingReadServerMessageNew_BatchReadResponse_PartitionData_ReadStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[72]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[74]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5192,6 +5558,1466 @@ func (x *StreamingReadServerMessageNew_BatchReadResponse_PartitionData_ReadStati
 	return 0
 }
 
+type MigrationStreamingReadClientMessage_TopicReadSettings struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Topic path.
+	Topic string `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	// Partition groups that will be read by this session.
+	// If list is empty - then session will read all partition groups.
+	PartitionGroupIds []int64 `protobuf:"varint,2,rep,packed,name=partition_group_ids,json=partitionGroupIds,proto3" json:"partition_group_ids,omitempty"`
+	// Read data only after this timestamp from this topic.
+	StartFromWrittenAtMs int64 `protobuf:"varint,3,opt,name=start_from_written_at_ms,json=startFromWrittenAtMs,proto3" json:"start_from_written_at_ms,omitempty"`
+}
+
+func (x *MigrationStreamingReadClientMessage_TopicReadSettings) Reset() {
+	*x = MigrationStreamingReadClientMessage_TopicReadSettings{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[75]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadClientMessage_TopicReadSettings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadClientMessage_TopicReadSettings) ProtoMessage() {}
+
+func (x *MigrationStreamingReadClientMessage_TopicReadSettings) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[75]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadClientMessage_TopicReadSettings.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadClientMessage_TopicReadSettings) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12, 0}
+}
+
+func (x *MigrationStreamingReadClientMessage_TopicReadSettings) GetTopic() string {
+	if x != nil {
+		return x.Topic
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadClientMessage_TopicReadSettings) GetPartitionGroupIds() []int64 {
+	if x != nil {
+		return x.PartitionGroupIds
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage_TopicReadSettings) GetStartFromWrittenAtMs() int64 {
+	if x != nil {
+		return x.StartFromWrittenAtMs
+	}
+	return 0
+}
+
+// Handshake request.
+type MigrationStreamingReadClientMessage_InitRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Message that describes topic to read.
+	// Topics that will be read by this session.
+	TopicsReadSettings []*MigrationStreamingReadClientMessage_TopicReadSettings `protobuf:"bytes,1,rep,name=topics_read_settings,json=topicsReadSettings,proto3" json:"topics_read_settings,omitempty"`
+	// Flag that indicates reading only of original topics in cluster or all including mirrored.
+	ReadOnlyOriginal bool `protobuf:"varint,2,opt,name=read_only_original,json=readOnlyOriginal,proto3" json:"read_only_original,omitempty"`
+	// Path of consumer that is used for reading by this session.
+	Consumer string `protobuf:"bytes,3,opt,name=consumer,proto3" json:"consumer,omitempty"`
+	// Skip all messages that has write timestamp smaller than now - max_time_lag_ms.
+	MaxLagDurationMs int64 `protobuf:"varint,4,opt,name=max_lag_duration_ms,json=maxLagDurationMs,proto3" json:"max_lag_duration_ms,omitempty"`
+	// Read data only after this timestamp from all topics.
+	StartFromWrittenAtMs int64 `protobuf:"varint,5,opt,name=start_from_written_at_ms,json=startFromWrittenAtMs,proto3" json:"start_from_written_at_ms,omitempty"`
+	// Maximum block format version supported by the client. Server will asses this parameter and return actual data blocks version in
+	// StreamingReadServerMessage.InitResponse.block_format_version_by_topic (and StreamingReadServerMessage.AddTopicResponse.block_format_version)
+	// or error if client will not be able to read data.
+	MaxSupportedBlockFormatVersion int64 `protobuf:"varint,6,opt,name=max_supported_block_format_version,json=maxSupportedBlockFormatVersion,proto3" json:"max_supported_block_format_version,omitempty"`
+	// Maximal size of client cache for message_group_id, ip and meta, per partition.
+	// There is separate caches for each partition partition streams.
+	// There is separate caches for message group identifiers, ip and meta inside one partition partition stream.
+	MaxMetaCacheSize int64 `protobuf:"varint,10,opt,name=max_meta_cache_size,json=maxMetaCacheSize,proto3" json:"max_meta_cache_size,omitempty"`
+	// Session identifier for retries. Must be the same as session_id from Inited server response. If this is first connect, not retry - do not use this field.
+	SessionId string `protobuf:"bytes,100,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	// 0 for first init message and incremental value for connect retries.
+	ConnectionAttempt int64 `protobuf:"varint,101,opt,name=connection_attempt,json=connectionAttempt,proto3" json:"connection_attempt,omitempty"`
+	// Formed state for retries. If not retry - do not use this field.
+	State         *MigrationStreamingReadClientMessage_InitRequest_State `protobuf:"bytes,102,opt,name=state,proto3" json:"state,omitempty"`
+	IdleTimeoutMs int64                                                  `protobuf:"varint,200,opt,name=idle_timeout_ms,json=idleTimeoutMs,proto3" json:"idle_timeout_ms,omitempty"`
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// TODO: remove after refactoring
+	// Single read request params.
+	ReadParams *ReadParams `protobuf:"bytes,42,opt,name=read_params,json=readParams,proto3" json:"read_params,omitempty"`
+	RangesMode bool        `protobuf:"varint,442,opt,name=ranges_mode,json=rangesMode,proto3" json:"ranges_mode,omitempty"` ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) Reset() {
+	*x = MigrationStreamingReadClientMessage_InitRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[76]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadClientMessage_InitRequest) ProtoMessage() {}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[76]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadClientMessage_InitRequest.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadClientMessage_InitRequest) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12, 1}
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetTopicsReadSettings() []*MigrationStreamingReadClientMessage_TopicReadSettings {
+	if x != nil {
+		return x.TopicsReadSettings
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetReadOnlyOriginal() bool {
+	if x != nil {
+		return x.ReadOnlyOriginal
+	}
+	return false
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetConsumer() string {
+	if x != nil {
+		return x.Consumer
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetMaxLagDurationMs() int64 {
+	if x != nil {
+		return x.MaxLagDurationMs
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetStartFromWrittenAtMs() int64 {
+	if x != nil {
+		return x.StartFromWrittenAtMs
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetMaxSupportedBlockFormatVersion() int64 {
+	if x != nil {
+		return x.MaxSupportedBlockFormatVersion
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetMaxMetaCacheSize() int64 {
+	if x != nil {
+		return x.MaxMetaCacheSize
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetConnectionAttempt() int64 {
+	if x != nil {
+		return x.ConnectionAttempt
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetState() *MigrationStreamingReadClientMessage_InitRequest_State {
+	if x != nil {
+		return x.State
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetIdleTimeoutMs() int64 {
+	if x != nil {
+		return x.IdleTimeoutMs
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetReadParams() *ReadParams {
+	if x != nil {
+		return x.ReadParams
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest) GetRangesMode() bool {
+	if x != nil {
+		return x.RangesMode
+	}
+	return false
+}
+
+// Request of single read.
+type MigrationStreamingReadClientMessage_Read struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *MigrationStreamingReadClientMessage_Read) Reset() {
+	*x = MigrationStreamingReadClientMessage_Read{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[77]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadClientMessage_Read) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadClientMessage_Read) ProtoMessage() {}
+
+func (x *MigrationStreamingReadClientMessage_Read) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[77]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadClientMessage_Read.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadClientMessage_Read) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12, 2}
+}
+
+type MigrationStreamingReadClientMessage_StartRead struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Topic path of partition.
+	Topic *Path `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	// Cluster of topic instance.
+	Cluster string `protobuf:"bytes,2,opt,name=cluster,proto3" json:"cluster,omitempty"`
+	// Partition identifier. Explicit only for debug purposes.
+	Partition uint64 `protobuf:"varint,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	// Assign identifier of Assign request from server. Used for mathing Assign requests from server with StartRead responses from client.
+	AssignId uint64 `protobuf:"varint,5,opt,name=assign_id,json=assignId,proto3" json:"assign_id,omitempty"`
+	// Start reading from partition offset that is not less than read_offset.
+	// ReadParams.max_time_lag_ms and ReadParams.read_timestamp_ms could lead to skip of more messages.
+	// The same with actual committed offset. Regardless of set read_offset server will return data from maximal offset from read_offset, actual committed offset
+	// and offsets calculated from ReadParams.max_time_lag_ms and ReadParams.read_timestamp_ms.
+	ReadOffset uint64 `protobuf:"varint,6,opt,name=read_offset,json=readOffset,proto3" json:"read_offset,omitempty"`
+	// All messages with offset less than commit_offset are processed by client. Server will commit this position if this is not done yet.
+	CommitOffset uint64 `protobuf:"varint,7,opt,name=commit_offset,json=commitOffset,proto3" json:"commit_offset,omitempty"`
+	// This option will enable sanity check on server for read_offset. Server will verify that read_offset is no less that actual committed offset.
+	// If verification will fail then server will kill this read session and client will find out error in reading logic.
+	// If client is not setting read_offset, sanity check will fail so do not set verify_read_offset if you not setting correct read_offset.
+	VerifyReadOffset bool `protobuf:"varint,8,opt,name=verify_read_offset,json=verifyReadOffset,proto3" json:"verify_read_offset,omitempty"` //if true then check that committed position is <= ReadOffset; otherwise it means error in client logic
+}
+
+func (x *MigrationStreamingReadClientMessage_StartRead) Reset() {
+	*x = MigrationStreamingReadClientMessage_StartRead{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[78]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadClientMessage_StartRead) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadClientMessage_StartRead) ProtoMessage() {}
+
+func (x *MigrationStreamingReadClientMessage_StartRead) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[78]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadClientMessage_StartRead.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadClientMessage_StartRead) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12, 3}
+}
+
+func (x *MigrationStreamingReadClientMessage_StartRead) GetTopic() *Path {
+	if x != nil {
+		return x.Topic
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage_StartRead) GetCluster() string {
+	if x != nil {
+		return x.Cluster
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadClientMessage_StartRead) GetPartition() uint64 {
+	if x != nil {
+		return x.Partition
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_StartRead) GetAssignId() uint64 {
+	if x != nil {
+		return x.AssignId
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_StartRead) GetReadOffset() uint64 {
+	if x != nil {
+		return x.ReadOffset
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_StartRead) GetCommitOffset() uint64 {
+	if x != nil {
+		return x.CommitOffset
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_StartRead) GetVerifyReadOffset() bool {
+	if x != nil {
+		return x.VerifyReadOffset
+	}
+	return false
+}
+
+// Signal for server that client finished working with this partition. Must be sent only after corresponding Release request from server.
+// Server will give this partition to other read session only after Released signal.
+type MigrationStreamingReadClientMessage_Released struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Topic path of partition.
+	Topic *Path `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	// Cluster of topic instance.
+	Cluster string `protobuf:"bytes,2,opt,name=cluster,proto3" json:"cluster,omitempty"`
+	// Partition identifier. Explicit only for debug purposes.
+	Partition uint64 `protobuf:"varint,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	// Assign identifier of Assign request from server. Used for mathing Assign requests from server with Released responses from client.
+	AssignId uint64 `protobuf:"varint,5,opt,name=assign_id,json=assignId,proto3" json:"assign_id,omitempty"`
+}
+
+func (x *MigrationStreamingReadClientMessage_Released) Reset() {
+	*x = MigrationStreamingReadClientMessage_Released{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[79]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadClientMessage_Released) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadClientMessage_Released) ProtoMessage() {}
+
+func (x *MigrationStreamingReadClientMessage_Released) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[79]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadClientMessage_Released.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadClientMessage_Released) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12, 4}
+}
+
+func (x *MigrationStreamingReadClientMessage_Released) GetTopic() *Path {
+	if x != nil {
+		return x.Topic
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage_Released) GetCluster() string {
+	if x != nil {
+		return x.Cluster
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadClientMessage_Released) GetPartition() uint64 {
+	if x != nil {
+		return x.Partition
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_Released) GetAssignId() uint64 {
+	if x != nil {
+		return x.AssignId
+	}
+	return 0
+}
+
+// Signal for server that client processed some read data.
+type MigrationStreamingReadClientMessage_Commit struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Partition read cookies that indicates processed data.
+	Cookies      []*CommitCookie      `protobuf:"bytes,1,rep,name=cookies,proto3" json:"cookies,omitempty"`
+	OffsetRanges []*CommitOffsetRange `protobuf:"bytes,2,rep,name=offset_ranges,json=offsetRanges,proto3" json:"offset_ranges,omitempty"`
+}
+
+func (x *MigrationStreamingReadClientMessage_Commit) Reset() {
+	*x = MigrationStreamingReadClientMessage_Commit{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[80]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadClientMessage_Commit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadClientMessage_Commit) ProtoMessage() {}
+
+func (x *MigrationStreamingReadClientMessage_Commit) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[80]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadClientMessage_Commit.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadClientMessage_Commit) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12, 5}
+}
+
+func (x *MigrationStreamingReadClientMessage_Commit) GetCookies() []*CommitCookie {
+	if x != nil {
+		return x.Cookies
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage_Commit) GetOffsetRanges() []*CommitOffsetRange {
+	if x != nil {
+		return x.OffsetRanges
+	}
+	return nil
+}
+
+type MigrationStreamingReadClientMessage_Status struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Topic path of partition.
+	Topic *Path `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	// Cluster of topic instance.
+	Cluster string `protobuf:"bytes,2,opt,name=cluster,proto3" json:"cluster,omitempty"`
+	// Partition identifier. Explicit only for debug purposes.
+	Partition uint64 `protobuf:"varint,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	// Assign identifier of Assign request from server. Used for mathing Assign requests from server with Released responses from client.
+	AssignId uint64 `protobuf:"varint,5,opt,name=assign_id,json=assignId,proto3" json:"assign_id,omitempty"`
+}
+
+func (x *MigrationStreamingReadClientMessage_Status) Reset() {
+	*x = MigrationStreamingReadClientMessage_Status{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[81]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadClientMessage_Status) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadClientMessage_Status) ProtoMessage() {}
+
+func (x *MigrationStreamingReadClientMessage_Status) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[81]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadClientMessage_Status.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadClientMessage_Status) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12, 6}
+}
+
+func (x *MigrationStreamingReadClientMessage_Status) GetTopic() *Path {
+	if x != nil {
+		return x.Topic
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage_Status) GetCluster() string {
+	if x != nil {
+		return x.Cluster
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadClientMessage_Status) GetPartition() uint64 {
+	if x != nil {
+		return x.Partition
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_Status) GetAssignId() uint64 {
+	if x != nil {
+		return x.AssignId
+	}
+	return 0
+}
+
+// State of client read session. Could be provided to server for retries.
+type MigrationStreamingReadClientMessage_InitRequest_State struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PartitionStreamsStates []*MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState `protobuf:"bytes,1,rep,name=partition_streams_states,json=partitionStreamsStates,proto3" json:"partition_streams_states,omitempty"`
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest_State) Reset() {
+	*x = MigrationStreamingReadClientMessage_InitRequest_State{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[82]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest_State) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadClientMessage_InitRequest_State) ProtoMessage() {}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest_State) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[82]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadClientMessage_InitRequest_State.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadClientMessage_InitRequest_State) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12, 1, 0}
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest_State) GetPartitionStreamsStates() []*MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState {
+	if x != nil {
+		return x.PartitionStreamsStates
+	}
+	return nil
+}
+
+type MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Partition partition stream.
+	PartitionStream *PartitionStream `protobuf:"bytes,1,opt,name=partition_stream,json=partitionStream,proto3" json:"partition_stream,omitempty"`
+	// Current read offset if has one. Actual for states DESTROYING, READING and STOPPED.
+	ReadOffset int64 `protobuf:"varint,2,opt,name=read_offset,json=readOffset,proto3" json:"read_offset,omitempty"`
+	// Ranges of committed by client offsets.
+	OffsetRanges []*OffsetsRange `protobuf:"bytes,3,rep,name=offset_ranges,json=offsetRanges,proto3" json:"offset_ranges,omitempty"`
+	// Status of partition stream.
+	Status MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status `protobuf:"varint,4,opt,name=status,proto3,enum=Ydb.PersQueue.V1.MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status" json:"status,omitempty"`
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState) Reset() {
+	*x = MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[83]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState) ProtoMessage() {}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[83]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{12, 1, 0, 0}
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState) GetPartitionStream() *PartitionStream {
+	if x != nil {
+		return x.PartitionStream
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState) GetReadOffset() int64 {
+	if x != nil {
+		return x.ReadOffset
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState) GetOffsetRanges() []*OffsetsRange {
+	if x != nil {
+		return x.OffsetRanges
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState) GetStatus() MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status {
+	if x != nil {
+		return x.Status
+	}
+	return MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_STATUS_UNSPECIFIED
+}
+
+// Handshake response.
+type MigrationStreamingReadServerMessage_InitResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Read session identifier for debug purposes.
+	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
+	// Block format version of data client will receive from topics.
+	BlockFormatVersionByTopic map[string]int64 `protobuf:"bytes,2,rep,name=block_format_version_by_topic,json=blockFormatVersionByTopic,proto3" json:"block_format_version_by_topic,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+	// Choosed maximan cache size by server.
+	// Client must use cache of this size. Could change on retries - reduce size of cache in this case.
+	MaxMetaCacheSize int64 `protobuf:"varint,10,opt,name=max_meta_cache_size,json=maxMetaCacheSize,proto3" json:"max_meta_cache_size,omitempty"`
+}
+
+func (x *MigrationStreamingReadServerMessage_InitResponse) Reset() {
+	*x = MigrationStreamingReadServerMessage_InitResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[84]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadServerMessage_InitResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadServerMessage_InitResponse) ProtoMessage() {}
+
+func (x *MigrationStreamingReadServerMessage_InitResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[84]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadServerMessage_InitResponse.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadServerMessage_InitResponse) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{13, 0}
+}
+
+func (x *MigrationStreamingReadServerMessage_InitResponse) GetSessionId() string {
+	if x != nil {
+		return x.SessionId
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadServerMessage_InitResponse) GetBlockFormatVersionByTopic() map[string]int64 {
+	if x != nil {
+		return x.BlockFormatVersionByTopic
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage_InitResponse) GetMaxMetaCacheSize() int64 {
+	if x != nil {
+		return x.MaxMetaCacheSize
+	}
+	return 0
+}
+
+// Signal that partition is assigned to this read session. Client must react on this signal by sending StartRead when ready.
+type MigrationStreamingReadServerMessage_Assigned struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Partition's topic path.
+	Topic *Path `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	// Topic's instance cluster name.
+	Cluster string `protobuf:"bytes,2,opt,name=cluster,proto3" json:"cluster,omitempty"`
+	// Partition identifier. topic:cluster:partition is unique addressing of partition.
+	Partition uint64 `protobuf:"varint,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	// Assign idenfier. Is not unique between diffrent partitions. Used for matching Assigned request from server and StartRead response from client.
+	AssignId uint64 `protobuf:"varint,5,opt,name=assign_id,json=assignId,proto3" json:"assign_id,omitempty"`
+	// Actual read offset. Equeal to last committed offset.
+	ReadOffset uint64 `protobuf:"varint,6,opt,name=read_offset,json=readOffset,proto3" json:"read_offset,omitempty"`
+	// Offset of first not existing message in partition at this time.
+	EndOffset uint64 `protobuf:"varint,7,opt,name=end_offset,json=endOffset,proto3" json:"end_offset,omitempty"`
+}
+
+func (x *MigrationStreamingReadServerMessage_Assigned) Reset() {
+	*x = MigrationStreamingReadServerMessage_Assigned{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[85]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadServerMessage_Assigned) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadServerMessage_Assigned) ProtoMessage() {}
+
+func (x *MigrationStreamingReadServerMessage_Assigned) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[85]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadServerMessage_Assigned.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadServerMessage_Assigned) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{13, 1}
+}
+
+func (x *MigrationStreamingReadServerMessage_Assigned) GetTopic() *Path {
+	if x != nil {
+		return x.Topic
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage_Assigned) GetCluster() string {
+	if x != nil {
+		return x.Cluster
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadServerMessage_Assigned) GetPartition() uint64 {
+	if x != nil {
+		return x.Partition
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_Assigned) GetAssignId() uint64 {
+	if x != nil {
+		return x.AssignId
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_Assigned) GetReadOffset() uint64 {
+	if x != nil {
+		return x.ReadOffset
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_Assigned) GetEndOffset() uint64 {
+	if x != nil {
+		return x.EndOffset
+	}
+	return 0
+}
+
+// Partition release request from server.
+type MigrationStreamingReadServerMessage_Release struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Partition's topic path.
+	Topic *Path `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	// Topic's instance cluster name.
+	Cluster string `protobuf:"bytes,2,opt,name=cluster,proto3" json:"cluster,omitempty"`
+	// Partition identifier. topic:cluster:partition is unique addressing of partition.
+	Partition uint64 `protobuf:"varint,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	// Assign idenfier. Used for matching Assigned and Release requests from server.
+	AssignId uint64 `protobuf:"varint,5,opt,name=assign_id,json=assignId,proto3" json:"assign_id,omitempty"`
+	// If False then server is waiting for Released signal from client before giving of this partition for other read session.
+	// If True then server gives partition for other session right now. All futher commits for this partition has no effect. Server is not waiting for Released signal.
+	ForcefulRelease bool `protobuf:"varint,6,opt,name=forceful_release,json=forcefulRelease,proto3" json:"forceful_release,omitempty"`
+	// Last known committed offset.
+	CommitOffset uint64 `protobuf:"varint,7,opt,name=commit_offset,json=commitOffset,proto3" json:"commit_offset,omitempty"`
+}
+
+func (x *MigrationStreamingReadServerMessage_Release) Reset() {
+	*x = MigrationStreamingReadServerMessage_Release{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[86]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadServerMessage_Release) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadServerMessage_Release) ProtoMessage() {}
+
+func (x *MigrationStreamingReadServerMessage_Release) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[86]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadServerMessage_Release.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadServerMessage_Release) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{13, 2}
+}
+
+func (x *MigrationStreamingReadServerMessage_Release) GetTopic() *Path {
+	if x != nil {
+		return x.Topic
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage_Release) GetCluster() string {
+	if x != nil {
+		return x.Cluster
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadServerMessage_Release) GetPartition() uint64 {
+	if x != nil {
+		return x.Partition
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_Release) GetAssignId() uint64 {
+	if x != nil {
+		return x.AssignId
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_Release) GetForcefulRelease() bool {
+	if x != nil {
+		return x.ForcefulRelease
+	}
+	return false
+}
+
+func (x *MigrationStreamingReadServerMessage_Release) GetCommitOffset() uint64 {
+	if x != nil {
+		return x.CommitOffset
+	}
+	return 0
+}
+
+// Acknowledgement for commits.
+type MigrationStreamingReadServerMessage_Committed struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// List of cookies that correspond to commit of processing read data.
+	Cookies      []*CommitCookie      `protobuf:"bytes,1,rep,name=cookies,proto3" json:"cookies,omitempty"`
+	OffsetRanges []*CommitOffsetRange `protobuf:"bytes,2,rep,name=offset_ranges,json=offsetRanges,proto3" json:"offset_ranges,omitempty"`
+}
+
+func (x *MigrationStreamingReadServerMessage_Committed) Reset() {
+	*x = MigrationStreamingReadServerMessage_Committed{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[87]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadServerMessage_Committed) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadServerMessage_Committed) ProtoMessage() {}
+
+func (x *MigrationStreamingReadServerMessage_Committed) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[87]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadServerMessage_Committed.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadServerMessage_Committed) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{13, 3}
+}
+
+func (x *MigrationStreamingReadServerMessage_Committed) GetCookies() []*CommitCookie {
+	if x != nil {
+		return x.Cookies
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage_Committed) GetOffsetRanges() []*CommitOffsetRange {
+	if x != nil {
+		return x.OffsetRanges
+	}
+	return nil
+}
+
+// Readed data.
+type MigrationStreamingReadServerMessage_DataBatch struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Client messages, divided by partitions.
+	PartitionData []*MigrationStreamingReadServerMessage_DataBatch_PartitionData `protobuf:"bytes,1,rep,name=partition_data,json=partitionData,proto3" json:"partition_data,omitempty"`
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch) Reset() {
+	*x = MigrationStreamingReadServerMessage_DataBatch{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[88]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadServerMessage_DataBatch) ProtoMessage() {}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[88]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadServerMessage_DataBatch.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadServerMessage_DataBatch) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{13, 4}
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch) GetPartitionData() []*MigrationStreamingReadServerMessage_DataBatch_PartitionData {
+	if x != nil {
+		return x.PartitionData
+	}
+	return nil
+}
+
+// Response for status requst.
+type MigrationStreamingReadServerMessage_PartitionStatus struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Partition's topic path.
+	Topic *Path `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	// Topic's instance cluster name.
+	Cluster string `protobuf:"bytes,2,opt,name=cluster,proto3" json:"cluster,omitempty"`
+	// Partition identifier. topic:cluster:partition is unique addressing of partition.
+	Partition uint64 `protobuf:"varint,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	// Assign idenfier. Used for matching Assigned and Release requests from server.
+	AssignId         uint64 `protobuf:"varint,5,opt,name=assign_id,json=assignId,proto3" json:"assign_id,omitempty"`
+	CommittedOffset  uint64 `protobuf:"varint,6,opt,name=committed_offset,json=committedOffset,proto3" json:"committed_offset,omitempty"`
+	EndOffset        uint64 `protobuf:"varint,7,opt,name=end_offset,json=endOffset,proto3" json:"end_offset,omitempty"`
+	WriteWatermarkMs uint64 `protobuf:"varint,8,opt,name=write_watermark_ms,json=writeWatermarkMs,proto3" json:"write_watermark_ms,omitempty"`
+}
+
+func (x *MigrationStreamingReadServerMessage_PartitionStatus) Reset() {
+	*x = MigrationStreamingReadServerMessage_PartitionStatus{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[89]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadServerMessage_PartitionStatus) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadServerMessage_PartitionStatus) ProtoMessage() {}
+
+func (x *MigrationStreamingReadServerMessage_PartitionStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[89]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadServerMessage_PartitionStatus.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadServerMessage_PartitionStatus) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{13, 5}
+}
+
+func (x *MigrationStreamingReadServerMessage_PartitionStatus) GetTopic() *Path {
+	if x != nil {
+		return x.Topic
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage_PartitionStatus) GetCluster() string {
+	if x != nil {
+		return x.Cluster
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadServerMessage_PartitionStatus) GetPartition() uint64 {
+	if x != nil {
+		return x.Partition
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_PartitionStatus) GetAssignId() uint64 {
+	if x != nil {
+		return x.AssignId
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_PartitionStatus) GetCommittedOffset() uint64 {
+	if x != nil {
+		return x.CommittedOffset
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_PartitionStatus) GetEndOffset() uint64 {
+	if x != nil {
+		return x.EndOffset
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_PartitionStatus) GetWriteWatermarkMs() uint64 {
+	if x != nil {
+		return x.WriteWatermarkMs
+	}
+	return 0
+}
+
+// One client message representation.
+type MigrationStreamingReadServerMessage_DataBatch_MessageData struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Partition offset in partition that assigned for message.
+	Offset uint64 `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"` //unique value for clientside deduplication - Topic:Cluster:Partition:Offset
+	// Sequence number that provided with message on write from client.
+	SeqNo uint64 `protobuf:"varint,2,opt,name=seq_no,json=seqNo,proto3" json:"seq_no,omitempty"`
+	// Timestamp of creation of message provided on write from client.
+	CreateTimestampMs uint64 `protobuf:"varint,3,opt,name=create_timestamp_ms,json=createTimestampMs,proto3" json:"create_timestamp_ms,omitempty"`
+	// Codec that is used for data compressing.
+	Codec Codec `protobuf:"varint,4,opt,name=codec,proto3,enum=Ydb.PersQueue.V1.Codec" json:"codec,omitempty"`
+	// Compressed client message body.
+	Data []byte `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
+	// Uncompressed size of client message body.
+	UncompressedSize uint64 `protobuf:"varint,6,opt,name=uncompressed_size,json=uncompressedSize,proto3" json:"uncompressed_size,omitempty"`
+	// kinesis data
+	PartitionKey string `protobuf:"bytes,7,opt,name=partition_key,json=partitionKey,proto3" json:"partition_key,omitempty"`
+	ExplicitHash []byte `protobuf:"bytes,8,opt,name=explicit_hash,json=explicitHash,proto3" json:"explicit_hash,omitempty"`
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_MessageData) Reset() {
+	*x = MigrationStreamingReadServerMessage_DataBatch_MessageData{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[91]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_MessageData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadServerMessage_DataBatch_MessageData) ProtoMessage() {}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_MessageData) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[91]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadServerMessage_DataBatch_MessageData.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadServerMessage_DataBatch_MessageData) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{13, 4, 0}
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_MessageData) GetOffset() uint64 {
+	if x != nil {
+		return x.Offset
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_MessageData) GetSeqNo() uint64 {
+	if x != nil {
+		return x.SeqNo
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_MessageData) GetCreateTimestampMs() uint64 {
+	if x != nil {
+		return x.CreateTimestampMs
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_MessageData) GetCodec() Codec {
+	if x != nil {
+		return x.Codec
+	}
+	return Codec_CODEC_UNSPECIFIED
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_MessageData) GetData() []byte {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_MessageData) GetUncompressedSize() uint64 {
+	if x != nil {
+		return x.UncompressedSize
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_MessageData) GetPartitionKey() string {
+	if x != nil {
+		return x.PartitionKey
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_MessageData) GetExplicitHash() []byte {
+	if x != nil {
+		return x.ExplicitHash
+	}
+	return nil
+}
+
+// Representation of sequence of client messages from one write session.
+type MigrationStreamingReadServerMessage_DataBatch_Batch struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Source identifier provided by client for this batch of client messages.
+	SourceId []byte `protobuf:"bytes,2,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
+	// Client metadata attached to write session, the same for all messages in batch.
+	ExtraFields []*KeyValue `protobuf:"bytes,3,rep,name=extra_fields,json=extraFields,proto3" json:"extra_fields,omitempty"`
+	// Persist timestamp on server for batch.
+	WriteTimestampMs uint64 `protobuf:"varint,4,opt,name=write_timestamp_ms,json=writeTimestampMs,proto3" json:"write_timestamp_ms,omitempty"`
+	// Peer address of node that created write session.
+	Ip string `protobuf:"bytes,5,opt,name=ip,proto3" json:"ip,omitempty"`
+	// List of client messages.
+	MessageData []*MigrationStreamingReadServerMessage_DataBatch_MessageData `protobuf:"bytes,1,rep,name=message_data,json=messageData,proto3" json:"message_data,omitempty"`
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_Batch) Reset() {
+	*x = MigrationStreamingReadServerMessage_DataBatch_Batch{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[92]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_Batch) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadServerMessage_DataBatch_Batch) ProtoMessage() {}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_Batch) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[92]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadServerMessage_DataBatch_Batch.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadServerMessage_DataBatch_Batch) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{13, 4, 1}
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_Batch) GetSourceId() []byte {
+	if x != nil {
+		return x.SourceId
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_Batch) GetExtraFields() []*KeyValue {
+	if x != nil {
+		return x.ExtraFields
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_Batch) GetWriteTimestampMs() uint64 {
+	if x != nil {
+		return x.WriteTimestampMs
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_Batch) GetIp() string {
+	if x != nil {
+		return x.Ip
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_Batch) GetMessageData() []*MigrationStreamingReadServerMessage_DataBatch_MessageData {
+	if x != nil {
+		return x.MessageData
+	}
+	return nil
+}
+
+// Representation of sequence of messages from one partition.
+type MigrationStreamingReadServerMessage_DataBatch_PartitionData struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Partition's topic path.
+	Topic *Path `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	// Topic's instance cluster name.
+	Cluster string `protobuf:"bytes,2,opt,name=cluster,proto3" json:"cluster,omitempty"`
+	// Partition identifier. topic:cluster:partition is unique addressing for partition.
+	Partition uint64 `protobuf:"varint,3,opt,name=partition,proto3" json:"partition,omitempty"`
+	// Client messages, divided by write sessions.
+	Batches []*MigrationStreamingReadServerMessage_DataBatch_Batch `protobuf:"bytes,4,rep,name=batches,proto3" json:"batches,omitempty"`
+	// Cookie for addressing this partition messages batch for committing.
+	Cookie *CommitCookie `protobuf:"bytes,5,opt,name=cookie,proto3" json:"cookie,omitempty"`
+	// Old formatted topic name with cluster inside.
+	DeprecatedTopic string `protobuf:"bytes,10,opt,name=deprecated_topic,json=deprecatedTopic,proto3" json:"deprecated_topic,omitempty"`
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_PartitionData) Reset() {
+	*x = MigrationStreamingReadServerMessage_DataBatch_PartitionData{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[93]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_PartitionData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MigrationStreamingReadServerMessage_DataBatch_PartitionData) ProtoMessage() {}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_PartitionData) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[93]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MigrationStreamingReadServerMessage_DataBatch_PartitionData.ProtoReflect.Descriptor instead.
+func (*MigrationStreamingReadServerMessage_DataBatch_PartitionData) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{13, 4, 2}
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_PartitionData) GetTopic() *Path {
+	if x != nil {
+		return x.Topic
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_PartitionData) GetCluster() string {
+	if x != nil {
+		return x.Cluster
+	}
+	return ""
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_PartitionData) GetPartition() uint64 {
+	if x != nil {
+		return x.Partition
+	}
+	return 0
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_PartitionData) GetBatches() []*MigrationStreamingReadServerMessage_DataBatch_Batch {
+	if x != nil {
+		return x.Batches
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_PartitionData) GetCookie() *CommitCookie {
+	if x != nil {
+		return x.Cookie
+	}
+	return nil
+}
+
+func (x *MigrationStreamingReadServerMessage_DataBatch_PartitionData) GetDeprecatedTopic() string {
+	if x != nil {
+		return x.DeprecatedTopic
+	}
+	return ""
+}
+
 // Message containing information about concrete topic reading.
 type ReadInfoResult_TopicInfo struct {
 	state         protoimpl.MessageState
@@ -5213,7 +7039,7 @@ type ReadInfoResult_TopicInfo struct {
 func (x *ReadInfoResult_TopicInfo) Reset() {
 	*x = ReadInfoResult_TopicInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[73]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[94]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5226,7 +7052,7 @@ func (x *ReadInfoResult_TopicInfo) String() string {
 func (*ReadInfoResult_TopicInfo) ProtoMessage() {}
 
 func (x *ReadInfoResult_TopicInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[73]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[94]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5239,7 +7065,7 @@ func (x *ReadInfoResult_TopicInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadInfoResult_TopicInfo.ProtoReflect.Descriptor instead.
 func (*ReadInfoResult_TopicInfo) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{14, 0}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{16, 0}
 }
 
 func (x *ReadInfoResult_TopicInfo) GetTopic() *Path {
@@ -5326,7 +7152,7 @@ type ReadInfoResult_TopicInfo_PartitionInfo struct {
 func (x *ReadInfoResult_TopicInfo_PartitionInfo) Reset() {
 	*x = ReadInfoResult_TopicInfo_PartitionInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[74]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[95]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5339,7 +7165,7 @@ func (x *ReadInfoResult_TopicInfo_PartitionInfo) String() string {
 func (*ReadInfoResult_TopicInfo_PartitionInfo) ProtoMessage() {}
 
 func (x *ReadInfoResult_TopicInfo_PartitionInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[74]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[95]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5352,7 +7178,7 @@ func (x *ReadInfoResult_TopicInfo_PartitionInfo) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ReadInfoResult_TopicInfo_PartitionInfo.ProtoReflect.Descriptor instead.
 func (*ReadInfoResult_TopicInfo_PartitionInfo) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{14, 0, 0}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{16, 0, 0}
 }
 
 func (x *ReadInfoResult_TopicInfo_PartitionInfo) GetPartition() uint64 {
@@ -5493,7 +7319,7 @@ type Credentials_Iam struct {
 func (x *Credentials_Iam) Reset() {
 	*x = Credentials_Iam{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[75]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[96]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5506,7 +7332,7 @@ func (x *Credentials_Iam) String() string {
 func (*Credentials_Iam) ProtoMessage() {}
 
 func (x *Credentials_Iam) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[75]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[96]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5519,7 +7345,7 @@ func (x *Credentials_Iam) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Credentials_Iam.ProtoReflect.Descriptor instead.
 func (*Credentials_Iam) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{18, 0}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{20, 0}
 }
 
 func (x *Credentials_Iam) GetEndpoint() string {
@@ -5564,7 +7390,7 @@ type TopicSettings_ReadRule struct {
 func (x *TopicSettings_ReadRule) Reset() {
 	*x = TopicSettings_ReadRule{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[76]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[97]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5577,7 +7403,7 @@ func (x *TopicSettings_ReadRule) String() string {
 func (*TopicSettings_ReadRule) ProtoMessage() {}
 
 func (x *TopicSettings_ReadRule) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[76]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[97]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5590,7 +7416,7 @@ func (x *TopicSettings_ReadRule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TopicSettings_ReadRule.ProtoReflect.Descriptor instead.
 func (*TopicSettings_ReadRule) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{19, 0}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{21, 0}
 }
 
 func (x *TopicSettings_ReadRule) GetConsumerName() string {
@@ -5665,7 +7491,7 @@ type TopicSettings_RemoteMirrorRule struct {
 func (x *TopicSettings_RemoteMirrorRule) Reset() {
 	*x = TopicSettings_RemoteMirrorRule{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[78]
+		mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[99]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -5678,7 +7504,7 @@ func (x *TopicSettings_RemoteMirrorRule) String() string {
 func (*TopicSettings_RemoteMirrorRule) ProtoMessage() {}
 
 func (x *TopicSettings_RemoteMirrorRule) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[78]
+	mi := &file_protos_ydb_persqueue_v1_proto_msgTypes[99]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5691,7 +7517,7 @@ func (x *TopicSettings_RemoteMirrorRule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TopicSettings_RemoteMirrorRule.ProtoReflect.Descriptor instead.
 func (*TopicSettings_RemoteMirrorRule) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{19, 2}
+	return file_protos_ydb_persqueue_v1_proto_rawDescGZIP(), []int{21, 2}
 }
 
 func (x *TopicSettings_RemoteMirrorRule) GetEndpoint() string {
@@ -6489,341 +8315,701 @@ var file_protos_ydb_persqueue_v1_proto_rawDesc = []byte{
 	0x11, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d,
 	0x49, 0x64, 0x12, 0x27, 0x0a, 0x0f, 0x63, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e,
 	0x5f, 0x6d, 0x65, 0x74, 0x61, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0e, 0x63, 0x6f, 0x6e,
-	0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x65, 0x74, 0x61, 0x22, 0xed, 0x01, 0x0a, 0x0f,
-	0x52, 0x65, 0x61, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x4a, 0x0a, 0x10, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e,
-	0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72,
-	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x2e, 0x0a, 0x06, 0x74,
-	0x6f, 0x70, 0x69, 0x63, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x59, 0x64,
+	0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x65, 0x74, 0x61, 0x22, 0xf3, 0x15, 0x0a, 0x23,
+	0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69,
+	0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x12, 0x66, 0x0a, 0x0c, 0x69, 0x6e, 0x69, 0x74, 0x5f, 0x72, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x41, 0x2e, 0x59, 0x64, 0x62, 0x2e,
+	0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52,
+	0x65, 0x61, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x2e, 0x49, 0x6e, 0x69, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x48, 0x00, 0x52, 0x0b,
+	0x69, 0x6e, 0x69, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x50, 0x0a, 0x04, 0x72,
+	0x65, 0x61, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3a, 0x2e, 0x59, 0x64, 0x62, 0x2e,
+	0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52,
+	0x65, 0x61, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x2e, 0x52, 0x65, 0x61, 0x64, 0x48, 0x00, 0x52, 0x04, 0x72, 0x65, 0x61, 0x64, 0x12, 0x60, 0x0a,
+	0x0a, 0x73, 0x74, 0x61, 0x72, 0x74, 0x5f, 0x72, 0x65, 0x61, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x3f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75,
+	0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74,
+	0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x52, 0x65,
+	0x61, 0x64, 0x48, 0x00, 0x52, 0x09, 0x73, 0x74, 0x61, 0x72, 0x74, 0x52, 0x65, 0x61, 0x64, 0x12,
+	0x56, 0x0a, 0x06, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x3c, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e,
+	0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65,
+	0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x48, 0x00, 0x52,
+	0x06, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x12, 0x5c, 0x0a, 0x08, 0x72, 0x65, 0x6c, 0x65, 0x61,
+	0x73, 0x65, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3e, 0x2e, 0x59, 0x64, 0x62, 0x2e,
+	0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52,
+	0x65, 0x61, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x2e, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x64, 0x48, 0x00, 0x52, 0x08, 0x72, 0x65, 0x6c,
+	0x65, 0x61, 0x73, 0x65, 0x64, 0x12, 0x56, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18,
+	0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3c, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73,
+	0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x43,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x53, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x48, 0x00, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x14, 0x0a,
+	0x05, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x14, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x05, 0x74, 0x6f,
+	0x6b, 0x65, 0x6e, 0x1a, 0x91, 0x01, 0x0a, 0x11, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x61,
+	0x64, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x70,
+	0x69, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x12,
+	0x2e, 0x0a, 0x13, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x67, 0x72, 0x6f,
+	0x75, 0x70, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x03, 0x52, 0x11, 0x70, 0x61,
+	0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x73, 0x12,
+	0x36, 0x0a, 0x18, 0x73, 0x74, 0x61, 0x72, 0x74, 0x5f, 0x66, 0x72, 0x6f, 0x6d, 0x5f, 0x77, 0x72,
+	0x69, 0x74, 0x74, 0x65, 0x6e, 0x5f, 0x61, 0x74, 0x5f, 0x6d, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x14, 0x73, 0x74, 0x61, 0x72, 0x74, 0x46, 0x72, 0x6f, 0x6d, 0x57, 0x72, 0x69, 0x74,
+	0x74, 0x65, 0x6e, 0x41, 0x74, 0x4d, 0x73, 0x1a, 0xb2, 0x0a, 0x0a, 0x0b, 0x49, 0x6e, 0x69, 0x74,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x79, 0x0a, 0x14, 0x74, 0x6f, 0x70, 0x69, 0x63,
+	0x73, 0x5f, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x47, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73,
+	0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x43,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x54, 0x6f, 0x70,
+	0x69, 0x63, 0x52, 0x65, 0x61, 0x64, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x12,
+	0x74, 0x6f, 0x70, 0x69, 0x63, 0x73, 0x52, 0x65, 0x61, 0x64, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e,
+	0x67, 0x73, 0x12, 0x2c, 0x0a, 0x12, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x6f, 0x6e, 0x6c, 0x79, 0x5f,
+	0x6f, 0x72, 0x69, 0x67, 0x69, 0x6e, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x10,
+	0x72, 0x65, 0x61, 0x64, 0x4f, 0x6e, 0x6c, 0x79, 0x4f, 0x72, 0x69, 0x67, 0x69, 0x6e, 0x61, 0x6c,
+	0x12, 0x1a, 0x0a, 0x08, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x12, 0x2d, 0x0a, 0x13,
+	0x6d, 0x61, 0x78, 0x5f, 0x6c, 0x61, 0x67, 0x5f, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x5f, 0x6d, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x6d, 0x61, 0x78, 0x4c, 0x61,
+	0x67, 0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x73, 0x12, 0x36, 0x0a, 0x18, 0x73,
+	0x74, 0x61, 0x72, 0x74, 0x5f, 0x66, 0x72, 0x6f, 0x6d, 0x5f, 0x77, 0x72, 0x69, 0x74, 0x74, 0x65,
+	0x6e, 0x5f, 0x61, 0x74, 0x5f, 0x6d, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x14, 0x73,
+	0x74, 0x61, 0x72, 0x74, 0x46, 0x72, 0x6f, 0x6d, 0x57, 0x72, 0x69, 0x74, 0x74, 0x65, 0x6e, 0x41,
+	0x74, 0x4d, 0x73, 0x12, 0x4a, 0x0a, 0x22, 0x6d, 0x61, 0x78, 0x5f, 0x73, 0x75, 0x70, 0x70, 0x6f,
+	0x72, 0x74, 0x65, 0x64, 0x5f, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x5f, 0x66, 0x6f, 0x72, 0x6d, 0x61,
+	0x74, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x1e, 0x6d, 0x61, 0x78, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x42, 0x6c, 0x6f,
+	0x63, 0x6b, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12,
+	0x2d, 0x0a, 0x13, 0x6d, 0x61, 0x78, 0x5f, 0x6d, 0x65, 0x74, 0x61, 0x5f, 0x63, 0x61, 0x63, 0x68,
+	0x65, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x6d, 0x61,
+	0x78, 0x4d, 0x65, 0x74, 0x61, 0x43, 0x61, 0x63, 0x68, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x1d,
+	0x0a, 0x0a, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x64, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x09, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x2d, 0x0a,
+	0x12, 0x63, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x61, 0x74, 0x74, 0x65,
+	0x6d, 0x70, 0x74, 0x18, 0x65, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11, 0x63, 0x6f, 0x6e, 0x6e, 0x65,
+	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x74, 0x74, 0x65, 0x6d, 0x70, 0x74, 0x12, 0x5d, 0x0a, 0x05,
+	0x73, 0x74, 0x61, 0x74, 0x65, 0x18, 0x66, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x47, 0x2e, 0x59, 0x64,
+	0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d,
+	0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e,
+	0x67, 0x52, 0x65, 0x61, 0x64, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x53,
+	0x74, 0x61, 0x74, 0x65, 0x52, 0x05, 0x73, 0x74, 0x61, 0x74, 0x65, 0x12, 0x27, 0x0a, 0x0f, 0x69,
+	0x64, 0x6c, 0x65, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x6f, 0x75, 0x74, 0x5f, 0x6d, 0x73, 0x18, 0xc8,
+	0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0d, 0x69, 0x64, 0x6c, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x6f,
+	0x75, 0x74, 0x4d, 0x73, 0x12, 0x3d, 0x0a, 0x0b, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x70, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x18, 0x2a, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x59, 0x64, 0x62, 0x2e,
+	0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x52, 0x65, 0x61,
+	0x64, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0a, 0x72, 0x65, 0x61, 0x64, 0x50, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x12, 0x20, 0x0a, 0x0b, 0x72, 0x61, 0x6e, 0x67, 0x65, 0x73, 0x5f, 0x6d, 0x6f,
+	0x64, 0x65, 0x18, 0xba, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x72, 0x61, 0x6e, 0x67, 0x65,
+	0x73, 0x4d, 0x6f, 0x64, 0x65, 0x1a, 0xc4, 0x04, 0x0a, 0x05, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12,
+	0x96, 0x01, 0x0a, 0x18, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x73, 0x74,
+	0x72, 0x65, 0x61, 0x6d, 0x73, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x5c, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65,
+	0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x43, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x65, 0x2e, 0x50, 0x61, 0x72, 0x74,
+	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x53, 0x74, 0x61, 0x74, 0x65,
+	0x52, 0x16, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61,
+	0x6d, 0x73, 0x53, 0x74, 0x61, 0x74, 0x65, 0x73, 0x1a, 0xa1, 0x03, 0x0a, 0x14, 0x50, 0x61, 0x72,
+	0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x53, 0x74, 0x61, 0x74,
+	0x65, 0x12, 0x4c, 0x0a, 0x10, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x73,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x59, 0x64,
 	0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x50,
-	0x61, 0x74, 0x68, 0x52, 0x06, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x73, 0x12, 0x2a, 0x0a, 0x11, 0x67,
-	0x65, 0x74, 0x5f, 0x6f, 0x6e, 0x6c, 0x79, 0x5f, 0x6f, 0x72, 0x69, 0x67, 0x69, 0x6e, 0x61, 0x6c,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0f, 0x67, 0x65, 0x74, 0x4f, 0x6e, 0x6c, 0x79, 0x4f,
-	0x72, 0x69, 0x67, 0x69, 0x6e, 0x61, 0x6c, 0x12, 0x32, 0x0a, 0x08, 0x63, 0x6f, 0x6e, 0x73, 0x75,
-	0x6d, 0x65, 0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x59, 0x64, 0x62, 0x2e,
-	0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x50, 0x61, 0x74,
-	0x68, 0x52, 0x08, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x22, 0x4b, 0x0a, 0x10, 0x52,
-	0x65, 0x61, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
-	0x37, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f,
-	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xd1, 0x08, 0x0a, 0x0e, 0x52, 0x65, 0x61,
-	0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x42, 0x0a, 0x06, 0x74,
-	0x6f, 0x70, 0x69, 0x63, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2a, 0x2e, 0x59, 0x64,
-	0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x52,
-	0x65, 0x61, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x2e, 0x54, 0x6f,
-	0x70, 0x69, 0x63, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x06, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x73, 0x1a,
-	0xfa, 0x07, 0x0a, 0x09, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x2c, 0x0a,
+	0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x0f,
+	0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12,
+	0x1f, 0x0a, 0x0b, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x72, 0x65, 0x61, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74,
+	0x12, 0x43, 0x0a, 0x0d, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x5f, 0x72, 0x61, 0x6e, 0x67, 0x65,
+	0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65,
+	0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4f, 0x66, 0x66, 0x73, 0x65,
+	0x74, 0x73, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x0c, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x52,
+	0x61, 0x6e, 0x67, 0x65, 0x73, 0x12, 0x7b, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18,
+	0x04, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x63, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73,
+	0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x43,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x49, 0x6e, 0x69,
+	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x65, 0x2e, 0x50,
+	0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x53, 0x74,
+	0x61, 0x74, 0x65, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x22, 0x58, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x16, 0x0a, 0x12,
+	0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49,
+	0x45, 0x44, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x43, 0x52, 0x45, 0x41, 0x54, 0x49, 0x4e, 0x47,
+	0x10, 0x01, 0x12, 0x0e, 0x0a, 0x0a, 0x44, 0x45, 0x53, 0x54, 0x52, 0x4f, 0x59, 0x49, 0x4e, 0x47,
+	0x10, 0x02, 0x12, 0x0b, 0x0a, 0x07, 0x52, 0x45, 0x41, 0x44, 0x49, 0x4e, 0x47, 0x10, 0x03, 0x12,
+	0x0b, 0x0a, 0x07, 0x53, 0x54, 0x4f, 0x50, 0x50, 0x45, 0x44, 0x10, 0x04, 0x1a, 0x06, 0x0a, 0x04,
+	0x52, 0x65, 0x61, 0x64, 0x1a, 0x82, 0x02, 0x0a, 0x09, 0x53, 0x74, 0x61, 0x72, 0x74, 0x52, 0x65,
+	0x61, 0x64, 0x12, 0x2c, 0x0a, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x16, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75,
+	0x65, 0x2e, 0x56, 0x31, 0x2e, 0x50, 0x61, 0x74, 0x68, 0x52, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63,
+	0x12, 0x18, 0x0a, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x61,
+	0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70,
+	0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1b, 0x0a, 0x09, 0x61, 0x73, 0x73, 0x69,
+	0x67, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x61, 0x73, 0x73,
+	0x69, 0x67, 0x6e, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x6f, 0x66,
+	0x66, 0x73, 0x65, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x72, 0x65, 0x61, 0x64,
+	0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x23, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74,
+	0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0c, 0x63,
+	0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x2c, 0x0a, 0x12, 0x76,
+	0x65, 0x72, 0x69, 0x66, 0x79, 0x5f, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65,
+	0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x08, 0x52, 0x10, 0x76, 0x65, 0x72, 0x69, 0x66, 0x79, 0x52,
+	0x65, 0x61, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x1a, 0x8d, 0x01, 0x0a, 0x08, 0x52, 0x65,
+	0x6c, 0x65, 0x61, 0x73, 0x65, 0x64, 0x12, 0x2c, 0x0a, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73,
+	0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x50, 0x61, 0x74, 0x68, 0x52, 0x05, 0x74,
+	0x6f, 0x70, 0x69, 0x63, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x12, 0x1c,
+	0x0a, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1b, 0x0a, 0x09,
+	0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x08, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x49, 0x64, 0x1a, 0x8c, 0x01, 0x0a, 0x06, 0x43, 0x6f,
+	0x6d, 0x6d, 0x69, 0x74, 0x12, 0x38, 0x0a, 0x07, 0x63, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x73, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73,
+	0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x43,
+	0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x52, 0x07, 0x63, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x73, 0x12, 0x48,
+	0x0a, 0x0d, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x5f, 0x72, 0x61, 0x6e, 0x67, 0x65, 0x73, 0x18,
+	0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73,
+	0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x4f,
+	0x66, 0x66, 0x73, 0x65, 0x74, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x0c, 0x6f, 0x66, 0x66, 0x73,
+	0x65, 0x74, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x73, 0x1a, 0x8b, 0x01, 0x0a, 0x06, 0x53, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x12, 0x2c, 0x0a, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x16, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65,
+	0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x50, 0x61, 0x74, 0x68, 0x52, 0x05, 0x74, 0x6f, 0x70, 0x69,
+	0x63, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x12, 0x1c, 0x0a, 0x09, 0x70,
+	0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09,
+	0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1b, 0x0a, 0x09, 0x61, 0x73, 0x73,
+	0x69, 0x67, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x61, 0x73,
+	0x73, 0x69, 0x67, 0x6e, 0x49, 0x64, 0x42, 0x09, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x22, 0x90, 0x17, 0x0a, 0x23, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x53, 0x65, 0x72, 0x76,
+	0x65, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x31, 0x0a, 0x06, 0x73, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e,
+	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x49, 0x64, 0x73, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x43, 0x6f, 0x64, 0x65, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x2f, 0x0a, 0x06,
+	0x69, 0x73, 0x73, 0x75, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x59,
+	0x64, 0x62, 0x2e, 0x49, 0x73, 0x73, 0x75, 0x65, 0x2e, 0x49, 0x73, 0x73, 0x75, 0x65, 0x4d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x06, 0x69, 0x73, 0x73, 0x75, 0x65, 0x73, 0x12, 0x69, 0x0a,
+	0x0d, 0x69, 0x6e, 0x69, 0x74, 0x5f, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x42, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51,
+	0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x53, 0x65,
+	0x72, 0x76, 0x65, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x49, 0x6e, 0x69, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x48, 0x00, 0x52, 0x0c, 0x69, 0x6e, 0x69, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x60, 0x0a, 0x0a, 0x64, 0x61, 0x74, 0x61,
+	0x5f, 0x62, 0x61, 0x74, 0x63, 0x68, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3f, 0x2e, 0x59,
+	0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e,
+	0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69,
+	0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x42, 0x61, 0x74, 0x63, 0x68, 0x48, 0x00, 0x52,
+	0x09, 0x64, 0x61, 0x74, 0x61, 0x42, 0x61, 0x74, 0x63, 0x68, 0x12, 0x5c, 0x0a, 0x08, 0x61, 0x73,
+	0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3e, 0x2e, 0x59,
+	0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e,
+	0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69,
+	0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x2e, 0x41, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x48, 0x00, 0x52, 0x08,
+	0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x12, 0x59, 0x0a, 0x07, 0x72, 0x65, 0x6c, 0x65,
+	0x61, 0x73, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3d, 0x2e, 0x59, 0x64, 0x62, 0x2e,
+	0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52,
+	0x65, 0x61, 0x64, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x2e, 0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x48, 0x00, 0x52, 0x07, 0x72, 0x65, 0x6c, 0x65,
+	0x61, 0x73, 0x65, 0x12, 0x5f, 0x0a, 0x09, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64,
+	0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72,
+	0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64,
+	0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x43, 0x6f,
+	0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x48, 0x00, 0x52, 0x09, 0x63, 0x6f, 0x6d, 0x6d, 0x69,
+	0x74, 0x74, 0x65, 0x64, 0x12, 0x72, 0x0a, 0x10, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f,
+	0x6e, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x45,
+	0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56,
+	0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61,
+	0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x48, 0x00, 0x52, 0x0f, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69,
+	0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x1a, 0xd0, 0x02, 0x0a, 0x0c, 0x49, 0x6e, 0x69,
+	0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x73, 0x65, 0x73,
+	0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73,
+	0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0xa3, 0x01, 0x0a, 0x1d, 0x62, 0x6c, 0x6f,
+	0x63, 0x6b, 0x5f, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f,
+	0x6e, 0x5f, 0x62, 0x79, 0x5f, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x61, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65,
+	0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72,
+	0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72,
+	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x49, 0x6e, 0x69, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74,
+	0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x45, 0x6e,
+	0x74, 0x72, 0x79, 0x52, 0x19, 0x62, 0x6c, 0x6f, 0x63, 0x6b, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74,
+	0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x79, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x12, 0x2d,
+	0x0a, 0x13, 0x6d, 0x61, 0x78, 0x5f, 0x6d, 0x65, 0x74, 0x61, 0x5f, 0x63, 0x61, 0x63, 0x68, 0x65,
+	0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x03, 0x52, 0x10, 0x6d, 0x61, 0x78,
+	0x4d, 0x65, 0x74, 0x61, 0x43, 0x61, 0x63, 0x68, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x1a, 0x4c, 0x0a,
+	0x1e, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x56, 0x65, 0x72, 0x73,
+	0x69, 0x6f, 0x6e, 0x42, 0x79, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12,
+	0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65,
+	0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x1a, 0xcd, 0x01, 0x0a, 0x08,
+	0x41, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x64, 0x12, 0x2c, 0x0a, 0x05, 0x74, 0x6f, 0x70, 0x69,
+	0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65,
+	0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x50, 0x61, 0x74, 0x68, 0x52,
+	0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65,
+	0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72,
+	0x12, 0x1c, 0x0a, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1b,
+	0x0a, 0x09, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x08, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x72,
+	0x65, 0x61, 0x64, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x0a, 0x72, 0x65, 0x61, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x1d, 0x0a, 0x0a,
+	0x65, 0x6e, 0x64, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x09, 0x65, 0x6e, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x1a, 0xdc, 0x01, 0x0a, 0x07,
+	0x52, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x12, 0x2c, 0x0a, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72,
+	0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x50, 0x61, 0x74, 0x68, 0x52, 0x05,
+	0x74, 0x6f, 0x70, 0x69, 0x63, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x12,
+	0x1c, 0x0a, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1b, 0x0a,
+	0x09, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x08, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x49, 0x64, 0x12, 0x29, 0x0a, 0x10, 0x66, 0x6f,
+	0x72, 0x63, 0x65, 0x66, 0x75, 0x6c, 0x5f, 0x72, 0x65, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x18, 0x06,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x0f, 0x66, 0x6f, 0x72, 0x63, 0x65, 0x66, 0x75, 0x6c, 0x52, 0x65,
+	0x6c, 0x65, 0x61, 0x73, 0x65, 0x12, 0x23, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x5f,
+	0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0c, 0x63, 0x6f,
+	0x6d, 0x6d, 0x69, 0x74, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x1a, 0x8f, 0x01, 0x0a, 0x09, 0x43,
+	0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x12, 0x38, 0x0a, 0x07, 0x63, 0x6f, 0x6f, 0x6b,
+	0x69, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x59, 0x64, 0x62, 0x2e,
+	0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x43, 0x6f, 0x6d,
+	0x6d, 0x69, 0x74, 0x43, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x52, 0x07, 0x63, 0x6f, 0x6f, 0x6b, 0x69,
+	0x65, 0x73, 0x12, 0x48, 0x0a, 0x0d, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x5f, 0x72, 0x61, 0x6e,
+	0x67, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x59, 0x64, 0x62, 0x2e,
+	0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x43, 0x6f, 0x6d,
+	0x6d, 0x69, 0x74, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x0c,
+	0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x73, 0x1a, 0xfa, 0x07, 0x0a,
+	0x09, 0x44, 0x61, 0x74, 0x61, 0x42, 0x61, 0x74, 0x63, 0x68, 0x12, 0x74, 0x0a, 0x0e, 0x70, 0x61,
+	0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x4d, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65,
+	0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x53,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x53, 0x65, 0x72, 0x76,
+	0x65, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x42, 0x61,
+	0x74, 0x63, 0x68, 0x2e, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74,
+	0x61, 0x52, 0x0d, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61,
+	0x1a, 0xa6, 0x02, 0x0a, 0x0b, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61,
+	0x12, 0x16, 0x0a, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x06, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x15, 0x0a, 0x06, 0x73, 0x65, 0x71, 0x5f,
+	0x6e, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x73, 0x65, 0x71, 0x4e, 0x6f, 0x12,
+	0x2e, 0x0a, 0x13, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74,
+	0x61, 0x6d, 0x70, 0x5f, 0x6d, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x11, 0x63, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x4d, 0x73, 0x12,
+	0x2d, 0x0a, 0x05, 0x63, 0x6f, 0x64, 0x65, 0x63, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x17,
+	0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56,
+	0x31, 0x2e, 0x43, 0x6f, 0x64, 0x65, 0x63, 0x52, 0x05, 0x63, 0x6f, 0x64, 0x65, 0x63, 0x12, 0x12,
+	0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x64, 0x61,
+	0x74, 0x61, 0x12, 0x2b, 0x0a, 0x11, 0x75, 0x6e, 0x63, 0x6f, 0x6d, 0x70, 0x72, 0x65, 0x73, 0x73,
+	0x65, 0x64, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x10, 0x75,
+	0x6e, 0x63, 0x6f, 0x6d, 0x70, 0x72, 0x65, 0x73, 0x73, 0x65, 0x64, 0x53, 0x69, 0x7a, 0x65, 0x12,
+	0x23, 0x0a, 0x0d, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x6b, 0x65, 0x79,
+	0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f,
+	0x6e, 0x4b, 0x65, 0x79, 0x12, 0x23, 0x0a, 0x0d, 0x65, 0x78, 0x70, 0x6c, 0x69, 0x63, 0x69, 0x74,
+	0x5f, 0x68, 0x61, 0x73, 0x68, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x0c, 0x65, 0x78, 0x70,
+	0x6c, 0x69, 0x63, 0x69, 0x74, 0x48, 0x61, 0x73, 0x68, 0x1a, 0x91, 0x02, 0x0a, 0x05, 0x42, 0x61,
+	0x74, 0x63, 0x68, 0x12, 0x1b, 0x0a, 0x09, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x69, 0x64,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x08, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x49, 0x64,
+	0x12, 0x3d, 0x0a, 0x0c, 0x65, 0x78, 0x74, 0x72, 0x61, 0x5f, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x73,
+	0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72,
+	0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4b, 0x65, 0x79, 0x56, 0x61, 0x6c,
+	0x75, 0x65, 0x52, 0x0b, 0x65, 0x78, 0x74, 0x72, 0x61, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x73, 0x12,
+	0x2c, 0x0a, 0x12, 0x77, 0x72, 0x69, 0x74, 0x65, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61,
+	0x6d, 0x70, 0x5f, 0x6d, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x10, 0x77, 0x72, 0x69,
+	0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x4d, 0x73, 0x12, 0x0e, 0x0a,
+	0x02, 0x69, 0x70, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x70, 0x12, 0x6e, 0x0a,
+	0x0c, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x4b, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75,
+	0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64, 0x53, 0x65, 0x72,
+	0x76, 0x65, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x42,
+	0x61, 0x74, 0x63, 0x68, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61,
+	0x52, 0x0b, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x44, 0x61, 0x74, 0x61, 0x1a, 0xb9, 0x02,
+	0x0a, 0x0d, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x12,
+	0x2c, 0x0a, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16,
+	0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56,
+	0x31, 0x2e, 0x50, 0x61, 0x74, 0x68, 0x52, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x12, 0x18, 0x0a,
+	0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69,
+	0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x61, 0x72, 0x74,
+	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x5f, 0x0a, 0x07, 0x62, 0x61, 0x74, 0x63, 0x68, 0x65, 0x73,
+	0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x45, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72,
+	0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x4d, 0x69, 0x67, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x61, 0x64,
+	0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x44, 0x61,
+	0x74, 0x61, 0x42, 0x61, 0x74, 0x63, 0x68, 0x2e, 0x42, 0x61, 0x74, 0x63, 0x68, 0x52, 0x07, 0x62,
+	0x61, 0x74, 0x63, 0x68, 0x65, 0x73, 0x12, 0x36, 0x0a, 0x06, 0x63, 0x6f, 0x6f, 0x6b, 0x69, 0x65,
+	0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72,
+	0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74,
+	0x43, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x52, 0x06, 0x63, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x12, 0x29,
+	0x0a, 0x10, 0x64, 0x65, 0x70, 0x72, 0x65, 0x63, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x74, 0x6f, 0x70,
+	0x69, 0x63, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x64, 0x65, 0x70, 0x72, 0x65, 0x63,
+	0x61, 0x74, 0x65, 0x64, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x1a, 0x8c, 0x02, 0x0a, 0x0f, 0x50, 0x61,
+	0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x2c, 0x0a,
 	0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x59,
 	0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e,
 	0x50, 0x61, 0x74, 0x68, 0x52, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x12, 0x18, 0x0a, 0x07, 0x63,
 	0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6c,
-	0x75, 0x73, 0x74, 0x65, 0x72, 0x12, 0x31, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x53, 0x74, 0x61, 0x74,
-	0x75, 0x73, 0x49, 0x64, 0x73, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x43, 0x6f, 0x64, 0x65,
-	0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x2f, 0x0a, 0x06, 0x69, 0x73, 0x73, 0x75,
-	0x65, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x49,
-	0x73, 0x73, 0x75, 0x65, 0x2e, 0x49, 0x73, 0x73, 0x75, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x52, 0x06, 0x69, 0x73, 0x73, 0x75, 0x65, 0x73, 0x12, 0x58, 0x0a, 0x0a, 0x70, 0x61, 0x72,
-	0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x38, 0x2e,
-	0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31,
-	0x2e, 0x52, 0x65, 0x61, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x2e,
-	0x54, 0x6f, 0x70, 0x69, 0x63, 0x49, 0x6e, 0x66, 0x6f, 0x2e, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74,
-	0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x0a, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69,
-	0x6f, 0x6e, 0x73, 0x1a, 0xe6, 0x05, 0x0a, 0x0d, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f,
-	0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69,
-	0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74,
-	0x69, 0x6f, 0x6e, 0x12, 0x31, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
-	0x49, 0x64, 0x73, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x06,
-	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x2f, 0x0a, 0x06, 0x69, 0x73, 0x73, 0x75, 0x65, 0x73,
-	0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x49, 0x73, 0x73,
-	0x75, 0x65, 0x2e, 0x49, 0x73, 0x73, 0x75, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52,
-	0x06, 0x69, 0x73, 0x73, 0x75, 0x65, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x73, 0x74, 0x61, 0x72, 0x74,
-	0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x73,
-	0x74, 0x61, 0x72, 0x74, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x65, 0x6e,
-	0x64, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09,
-	0x65, 0x6e, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x23, 0x0a, 0x0d, 0x63, 0x6f, 0x6d,
-	0x6d, 0x69, 0x74, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x2b,
-	0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x5f, 0x6c, 0x61,
-	0x67, 0x5f, 0x6d, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0f, 0x63, 0x6f, 0x6d, 0x6d,
-	0x69, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x4c, 0x61, 0x67, 0x4d, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x72,
-	0x65, 0x61, 0x64, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x04,
-	0x52, 0x0a, 0x72, 0x65, 0x61, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x27, 0x0a, 0x10,
-	0x72, 0x65, 0x61, 0x64, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x5f, 0x6c, 0x61, 0x67, 0x5f, 0x6d, 0x73,
-	0x18, 0x09, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0d, 0x72, 0x65, 0x61, 0x64, 0x54, 0x69, 0x6d, 0x65,
-	0x4c, 0x61, 0x67, 0x4d, 0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e,
-	0x5f, 0x69, 0x64, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x65, 0x73, 0x73, 0x69,
-	0x6f, 0x6e, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x6e,
-	0x6f, 0x64, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e,
-	0x74, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x78, 0x79, 0x5f, 0x6e,
-	0x6f, 0x64, 0x65, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x78, 0x79,
-	0x4e, 0x6f, 0x64, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x74, 0x5f, 0x6e,
-	0x6f, 0x64, 0x65, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x74, 0x61, 0x62, 0x6c, 0x65,
-	0x74, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x5f,
-	0x69, 0x64, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e,
-	0x49, 0x64, 0x12, 0x2e, 0x0a, 0x13, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x5f, 0x74, 0x69, 0x6d,
-	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x5f, 0x6d, 0x73, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x04, 0x52,
-	0x11, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
-	0x4d, 0x73, 0x12, 0x28, 0x0a, 0x10, 0x6c, 0x61, 0x73, 0x74, 0x5f, 0x72, 0x65, 0x61, 0x64, 0x5f,
-	0x63, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x18, 0x10, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0e, 0x6c, 0x61,
-	0x73, 0x74, 0x52, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x12, 0x32, 0x0a, 0x15,
-	0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x5f, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x63,
-	0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x18, 0x11, 0x20, 0x01, 0x28, 0x04, 0x52, 0x13, 0x63, 0x6f, 0x6d,
-	0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x52, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x6f, 0x6b, 0x69, 0x65,
-	0x12, 0x4a, 0x0a, 0x23, 0x6f, 0x75, 0x74, 0x5f, 0x6f, 0x66, 0x5f, 0x6f, 0x72, 0x64, 0x65, 0x72,
-	0x5f, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x63, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x73, 0x5f, 0x74, 0x6f,
-	0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x18, 0x12, 0x20, 0x03, 0x28, 0x04, 0x52, 0x1d, 0x6f,
-	0x75, 0x74, 0x4f, 0x66, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x6f,
-	0x6b, 0x69, 0x65, 0x73, 0x54, 0x6f, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x22, 0x72, 0x0a, 0x10,
-	0x44, 0x72, 0x6f, 0x70, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x75, 0x73, 0x74, 0x65, 0x72, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69,
+	0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74,
+	0x69, 0x6f, 0x6e, 0x12, 0x1b, 0x0a, 0x09, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x5f, 0x69, 0x64,
+	0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x49, 0x64,
+	0x12, 0x29, 0x0a, 0x10, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x5f, 0x6f, 0x66,
+	0x66, 0x73, 0x65, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0f, 0x63, 0x6f, 0x6d, 0x6d,
+	0x69, 0x74, 0x74, 0x65, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x65,
+	0x6e, 0x64, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x09, 0x65, 0x6e, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x2c, 0x0a, 0x12, 0x77, 0x72,
+	0x69, 0x74, 0x65, 0x5f, 0x77, 0x61, 0x74, 0x65, 0x72, 0x6d, 0x61, 0x72, 0x6b, 0x5f, 0x6d, 0x73,
+	0x18, 0x08, 0x20, 0x01, 0x28, 0x04, 0x52, 0x10, 0x77, 0x72, 0x69, 0x74, 0x65, 0x57, 0x61, 0x74,
+	0x65, 0x72, 0x6d, 0x61, 0x72, 0x6b, 0x4d, 0x73, 0x42, 0x0a, 0x0a, 0x08, 0x72, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0xed, 0x01, 0x0a, 0x0f, 0x52, 0x65, 0x61, 0x64, 0x49, 0x6e, 0x66,
+	0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x4a, 0x0a, 0x10, 0x6f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61,
+	0x72, 0x61, 0x6d, 0x73, 0x12, 0x2e, 0x0a, 0x06, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x73, 0x18, 0x02,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51,
+	0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x50, 0x61, 0x74, 0x68, 0x52, 0x06, 0x74, 0x6f,
+	0x70, 0x69, 0x63, 0x73, 0x12, 0x2a, 0x0a, 0x11, 0x67, 0x65, 0x74, 0x5f, 0x6f, 0x6e, 0x6c, 0x79,
+	0x5f, 0x6f, 0x72, 0x69, 0x67, 0x69, 0x6e, 0x61, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x0f, 0x67, 0x65, 0x74, 0x4f, 0x6e, 0x6c, 0x79, 0x4f, 0x72, 0x69, 0x67, 0x69, 0x6e, 0x61, 0x6c,
+	0x12, 0x32, 0x0a, 0x08, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x16, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65,
+	0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x50, 0x61, 0x74, 0x68, 0x52, 0x08, 0x63, 0x6f, 0x6e, 0x73,
+	0x75, 0x6d, 0x65, 0x72, 0x22, 0x4b, 0x0a, 0x10, 0x52, 0x65, 0x61, 0x64, 0x49, 0x6e, 0x66, 0x6f,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x59, 0x64,
+	0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x22, 0xd1, 0x08, 0x0a, 0x0e, 0x52, 0x65, 0x61, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65,
+	0x73, 0x75, 0x6c, 0x74, 0x12, 0x42, 0x0a, 0x06, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x73, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x2a, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51,
+	0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x49, 0x6e, 0x66, 0x6f,
+	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x49, 0x6e, 0x66, 0x6f,
+	0x52, 0x06, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x73, 0x1a, 0xfa, 0x07, 0x0a, 0x09, 0x54, 0x6f, 0x70,
+	0x69, 0x63, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x2c, 0x0a, 0x05, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73,
+	0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x50, 0x61, 0x74, 0x68, 0x52, 0x05, 0x74,
+	0x6f, 0x70, 0x69, 0x63, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x12, 0x31,
+	0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x19,
+	0x2e, 0x59, 0x64, 0x62, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x49, 0x64, 0x73, 0x2e, 0x53,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x12, 0x2f, 0x0a, 0x06, 0x69, 0x73, 0x73, 0x75, 0x65, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x17, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x49, 0x73, 0x73, 0x75, 0x65, 0x2e, 0x49, 0x73,
+	0x73, 0x75, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x06, 0x69, 0x73, 0x73, 0x75,
+	0x65, 0x73, 0x12, 0x58, 0x0a, 0x0a, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x38, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72,
+	0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x49, 0x6e,
+	0x66, 0x6f, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x49, 0x6e,
+	0x66, 0x6f, 0x2e, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x66, 0x6f,
+	0x52, 0x0a, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x1a, 0xe6, 0x05, 0x0a,
+	0x0d, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x1c,
+	0x0a, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x09, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x31, 0x0a, 0x06,
+	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e, 0x59,
+	0x64, 0x62, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x49, 0x64, 0x73, 0x2e, 0x53, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12,
+	0x2f, 0x0a, 0x06, 0x69, 0x73, 0x73, 0x75, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x17, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x49, 0x73, 0x73, 0x75, 0x65, 0x2e, 0x49, 0x73, 0x73, 0x75,
+	0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x06, 0x69, 0x73, 0x73, 0x75, 0x65, 0x73,
+	0x12, 0x21, 0x0a, 0x0c, 0x73, 0x74, 0x61, 0x72, 0x74, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x73, 0x74, 0x61, 0x72, 0x74, 0x4f, 0x66, 0x66,
+	0x73, 0x65, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x65, 0x6e, 0x64, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65,
+	0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x65, 0x6e, 0x64, 0x4f, 0x66, 0x66, 0x73,
+	0x65, 0x74, 0x12, 0x23, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x5f, 0x6f, 0x66, 0x66,
+	0x73, 0x65, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0c, 0x63, 0x6f, 0x6d, 0x6d, 0x69,
+	0x74, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x2b, 0x0a, 0x12, 0x63, 0x6f, 0x6d, 0x6d, 0x69,
+	0x74, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x5f, 0x6c, 0x61, 0x67, 0x5f, 0x6d, 0x73, 0x18, 0x07, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x0f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x4c,
+	0x61, 0x67, 0x4d, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x6f, 0x66, 0x66,
+	0x73, 0x65, 0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x72, 0x65, 0x61, 0x64, 0x4f,
+	0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x27, 0x0a, 0x10, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x74, 0x69,
+	0x6d, 0x65, 0x5f, 0x6c, 0x61, 0x67, 0x5f, 0x6d, 0x73, 0x18, 0x09, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x0d, 0x72, 0x65, 0x61, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x4c, 0x61, 0x67, 0x4d, 0x73, 0x12, 0x1d,
+	0x0a, 0x0a, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x0a, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x09, 0x73, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x1f, 0x0a,
+	0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x18, 0x0b, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x1d,
+	0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x78, 0x79, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x18, 0x0c, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x78, 0x79, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x1f, 0x0a,
+	0x0b, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x74, 0x5f, 0x6e, 0x6f, 0x64, 0x65, 0x18, 0x0d, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0a, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x74, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x1b,
+	0x0a, 0x09, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x0e, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x08, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x49, 0x64, 0x12, 0x2e, 0x0a, 0x13, 0x61,
+	0x73, 0x73, 0x69, 0x67, 0x6e, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x5f,
+	0x6d, 0x73, 0x18, 0x0f, 0x20, 0x01, 0x28, 0x04, 0x52, 0x11, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e,
+	0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x4d, 0x73, 0x12, 0x28, 0x0a, 0x10, 0x6c,
+	0x61, 0x73, 0x74, 0x5f, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x63, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x18,
+	0x10, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0e, 0x6c, 0x61, 0x73, 0x74, 0x52, 0x65, 0x61, 0x64, 0x43,
+	0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x12, 0x32, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74,
+	0x65, 0x64, 0x5f, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x63, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x18, 0x11,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x13, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x52,
+	0x65, 0x61, 0x64, 0x43, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x12, 0x4a, 0x0a, 0x23, 0x6f, 0x75, 0x74,
+	0x5f, 0x6f, 0x66, 0x5f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x63,
+	0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x73, 0x5f, 0x74, 0x6f, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74,
+	0x18, 0x12, 0x20, 0x03, 0x28, 0x04, 0x52, 0x1d, 0x6f, 0x75, 0x74, 0x4f, 0x66, 0x4f, 0x72, 0x64,
+	0x65, 0x72, 0x52, 0x65, 0x61, 0x64, 0x43, 0x6f, 0x6f, 0x6b, 0x69, 0x65, 0x73, 0x54, 0x6f, 0x43,
+	0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x22, 0x72, 0x0a, 0x10, 0x44, 0x72, 0x6f, 0x70, 0x54, 0x6f, 0x70,
+	0x69, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x4a, 0x0a, 0x10, 0x6f, 0x70, 0x65,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61,
+	0x72, 0x61, 0x6d, 0x73, 0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x61, 0x74, 0x68, 0x22, 0x4c, 0x0a, 0x11, 0x44, 0x72, 0x6f,
+	0x70, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37,
+	0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70,
+	0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x11, 0x0a, 0x0f, 0x44, 0x72, 0x6f, 0x70, 0x54,
+	0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0xea, 0x01, 0x0a, 0x0b, 0x43,
+	0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x12, 0x21, 0x0a, 0x0b, 0x6f, 0x61,
+	0x75, 0x74, 0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x48,
+	0x00, 0x52, 0x0a, 0x6f, 0x61, 0x75, 0x74, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x1f, 0x0a,
+	0x0a, 0x6a, 0x77, 0x74, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x48, 0x00, 0x52, 0x09, 0x6a, 0x77, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x35,
+	0x0a, 0x03, 0x69, 0x61, 0x6d, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x59, 0x64,
+	0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x43,
+	0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x2e, 0x49, 0x61, 0x6d, 0x48, 0x00,
+	0x52, 0x03, 0x69, 0x61, 0x6d, 0x1a, 0x51, 0x0a, 0x03, 0x49, 0x61, 0x6d, 0x12, 0x1a, 0x0a, 0x08,
+	0x65, 0x6e, 0x64, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x65, 0x6e, 0x64, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x2e, 0x0a, 0x13, 0x73, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x6b, 0x65, 0x79, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x11, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x41, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x4b, 0x65, 0x79, 0x42, 0x0d, 0x0a, 0x0b, 0x63, 0x72, 0x65, 0x64,
+	0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x22, 0xff, 0x0d, 0x0a, 0x0d, 0x54, 0x6f, 0x70, 0x69,
+	0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x32, 0x0a, 0x10, 0x70, 0x61, 0x72,
+	0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x05, 0x42, 0x07, 0xb2, 0xe6, 0x2a, 0x03, 0x3e, 0x20, 0x30, 0x52, 0x0f, 0x70, 0x61,
+	0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x37, 0x0a,
+	0x13, 0x72, 0x65, 0x74, 0x65, 0x6e, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x65, 0x72, 0x69, 0x6f,
+	0x64, 0x5f, 0x6d, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x42, 0x07, 0xb2, 0xe6, 0x2a, 0x03,
+	0x3e, 0x20, 0x30, 0x52, 0x11, 0x72, 0x65, 0x74, 0x65, 0x6e, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x65,
+	0x72, 0x69, 0x6f, 0x64, 0x4d, 0x73, 0x12, 0x5d, 0x0a, 0x27, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x5f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x5f, 0x73, 0x65, 0x71, 0x6e, 0x6f, 0x5f, 0x72, 0x65,
+	0x74, 0x65, 0x6e, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x5f, 0x6d,
+	0x73, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a, 0x04, 0x3e, 0x3d, 0x20,
+	0x30, 0x52, 0x22, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x53,
+	0x65, 0x71, 0x6e, 0x6f, 0x52, 0x65, 0x74, 0x65, 0x6e, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x65, 0x72,
+	0x69, 0x6f, 0x64, 0x4d, 0x73, 0x12, 0x61, 0x0a, 0x29, 0x6d, 0x61, 0x78, 0x5f, 0x70, 0x61, 0x72,
+	0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x67,
+	0x72, 0x6f, 0x75, 0x70, 0x73, 0x5f, 0x73, 0x65, 0x71, 0x6e, 0x6f, 0x5f, 0x73, 0x74, 0x6f, 0x72,
+	0x65, 0x64, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a, 0x04, 0x3e, 0x3d,
+	0x20, 0x30, 0x52, 0x24, 0x6d, 0x61, 0x78, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e,
+	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x53, 0x65, 0x71,
+	0x6e, 0x6f, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x12, 0x51, 0x0a, 0x10, 0x73, 0x75, 0x70, 0x70,
+	0x6f, 0x72, 0x74, 0x65, 0x64, 0x5f, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x0e, 0x32, 0x26, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65,
+	0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69,
+	0x6e, 0x67, 0x73, 0x2e, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x52, 0x0f, 0x73, 0x75, 0x70, 0x70,
+	0x6f, 0x72, 0x74, 0x65, 0x64, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12, 0x4a, 0x0a, 0x10, 0x73,
+	0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x5f, 0x63, 0x6f, 0x64, 0x65, 0x63, 0x73, 0x18,
+	0x04, 0x20, 0x03, 0x28, 0x0e, 0x32, 0x17, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73,
+	0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x43, 0x6f, 0x64, 0x65, 0x63, 0x42, 0x06,
+	0x9a, 0xe6, 0x2a, 0x02, 0x18, 0x64, 0x52, 0x0f, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65,
+	0x64, 0x43, 0x6f, 0x64, 0x65, 0x63, 0x73, 0x12, 0x45, 0x0a, 0x1a, 0x6d, 0x61, 0x78, 0x5f, 0x70,
+	0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65,
+	0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a,
+	0x04, 0x3e, 0x3d, 0x20, 0x30, 0x52, 0x17, 0x6d, 0x61, 0x78, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74,
+	0x69, 0x6f, 0x6e, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x43,
+	0x0a, 0x19, 0x6d, 0x61, 0x78, 0x5f, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f,
+	0x77, 0x72, 0x69, 0x74, 0x65, 0x5f, 0x73, 0x70, 0x65, 0x65, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28,
+	0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a, 0x04, 0x3e, 0x3d, 0x20, 0x30, 0x52, 0x16, 0x6d, 0x61, 0x78,
+	0x50, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x72, 0x69, 0x74, 0x65, 0x53, 0x70,
+	0x65, 0x65, 0x64, 0x12, 0x43, 0x0a, 0x19, 0x6d, 0x61, 0x78, 0x5f, 0x70, 0x61, 0x72, 0x74, 0x69,
+	0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x77, 0x72, 0x69, 0x74, 0x65, 0x5f, 0x62, 0x75, 0x72, 0x73, 0x74,
+	0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a, 0x04, 0x3e, 0x3d, 0x20, 0x30,
+	0x52, 0x16, 0x6d, 0x61, 0x78, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x72,
+	0x69, 0x74, 0x65, 0x42, 0x75, 0x72, 0x73, 0x74, 0x12, 0x32, 0x0a, 0x15, 0x63, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x5f, 0x77, 0x72, 0x69, 0x74, 0x65, 0x5f, 0x64, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65,
+	0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x08, 0x52, 0x13, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x57,
+	0x72, 0x69, 0x74, 0x65, 0x44, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x50, 0x0a, 0x0a,
+	0x72, 0x65, 0x61, 0x64, 0x5f, 0x72, 0x75, 0x6c, 0x65, 0x73, 0x18, 0x09, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x28, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65,
+	0x2e, 0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
+	0x73, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x42, 0x07, 0x9a, 0xe6, 0x2a, 0x03,
+	0x18, 0xb8, 0x17, 0x52, 0x09, 0x72, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x73, 0x12, 0x4f,
+	0x0a, 0x0a, 0x61, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x73, 0x18, 0x0a, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65,
+	0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69,
+	0x6e, 0x67, 0x73, 0x2e, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x73, 0x45, 0x6e,
+	0x74, 0x72, 0x79, 0x52, 0x0a, 0x61, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x73, 0x12,
+	0x5e, 0x0a, 0x12, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x5f, 0x6d, 0x69, 0x72, 0x72, 0x6f, 0x72,
+	0x5f, 0x72, 0x75, 0x6c, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x30, 0x2e, 0x59, 0x64,
+	0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54,
+	0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x52, 0x65, 0x6d,
+	0x6f, 0x74, 0x65, 0x4d, 0x69, 0x72, 0x72, 0x6f, 0x72, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x10, 0x72,
+	0x65, 0x6d, 0x6f, 0x74, 0x65, 0x4d, 0x69, 0x72, 0x72, 0x6f, 0x72, 0x52, 0x75, 0x6c, 0x65, 0x1a,
+	0x86, 0x03, 0x0a, 0x08, 0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x29, 0x0a, 0x0d,
+	0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x42, 0x04, 0x90, 0xe6, 0x2a, 0x01, 0x52, 0x0c, 0x63, 0x6f, 0x6e, 0x73, 0x75,
+	0x6d, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x69, 0x6d, 0x70, 0x6f, 0x72,
+	0x74, 0x61, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x69, 0x6d, 0x70, 0x6f,
+	0x72, 0x74, 0x61, 0x6e, 0x74, 0x12, 0x4b, 0x0a, 0x1d, 0x73, 0x74, 0x61, 0x72, 0x74, 0x69, 0x6e,
+	0x67, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74,
+	0x61, 0x6d, 0x70, 0x5f, 0x6d, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6,
+	0x2a, 0x04, 0x3e, 0x3d, 0x20, 0x30, 0x52, 0x1a, 0x73, 0x74, 0x61, 0x72, 0x74, 0x69, 0x6e, 0x67,
+	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
+	0x4d, 0x73, 0x12, 0x51, 0x0a, 0x10, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x5f,
+	0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x26, 0x2e, 0x59,
+	0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e,
+	0x54, 0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x46, 0x6f,
+	0x72, 0x6d, 0x61, 0x74, 0x52, 0x0f, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x46,
+	0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12, 0x4a, 0x0a, 0x10, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74,
+	0x65, 0x64, 0x5f, 0x63, 0x6f, 0x64, 0x65, 0x63, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0e, 0x32,
+	0x17, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e,
+	0x56, 0x31, 0x2e, 0x43, 0x6f, 0x64, 0x65, 0x63, 0x42, 0x06, 0x9a, 0xe6, 0x2a, 0x02, 0x18, 0x64,
+	0x52, 0x0f, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x43, 0x6f, 0x64, 0x65, 0x63,
+	0x73, 0x12, 0x22, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x06, 0x20, 0x01,
+	0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a, 0x04, 0x3e, 0x3d, 0x20, 0x30, 0x52, 0x07, 0x76, 0x65,
+	0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x21, 0x0a, 0x0c, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x1a, 0x3d, 0x0a, 0x0f, 0x41, 0x74, 0x74, 0x72,
+	0x69, 0x62, 0x75, 0x74, 0x65, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b,
+	0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a,
+	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61,
+	0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x1a, 0x9c, 0x02, 0x0a, 0x10, 0x52, 0x65, 0x6d, 0x6f,
+	0x74, 0x65, 0x4d, 0x69, 0x72, 0x72, 0x6f, 0x72, 0x52, 0x75, 0x6c, 0x65, 0x12, 0x1a, 0x0a, 0x08,
+	0x65, 0x6e, 0x64, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x65, 0x6e, 0x64, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x74, 0x6f, 0x70, 0x69,
+	0x63, 0x5f, 0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x74, 0x6f,
+	0x70, 0x69, 0x63, 0x50, 0x61, 0x74, 0x68, 0x12, 0x23, 0x0a, 0x0d, 0x63, 0x6f, 0x6e, 0x73, 0x75,
+	0x6d, 0x65, 0x72, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c,
+	0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x3f, 0x0a, 0x0b,
+	0x63, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1d, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75,
+	0x65, 0x2e, 0x56, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73,
+	0x52, 0x0b, 0x63, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x12, 0x4b, 0x0a,
+	0x1d, 0x73, 0x74, 0x61, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x5f, 0x6d, 0x73, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a, 0x04, 0x3e, 0x3d, 0x20, 0x30, 0x52, 0x1a,
+	0x73, 0x74, 0x61, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x54,
+	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x4d, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x64, 0x61,
+	0x74, 0x61, 0x62, 0x61, 0x73, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x64, 0x61,
+	0x74, 0x61, 0x62, 0x61, 0x73, 0x65, 0x22, 0x31, 0x0a, 0x06, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74,
+	0x12, 0x16, 0x0a, 0x12, 0x46, 0x4f, 0x52, 0x4d, 0x41, 0x54, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45,
+	0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x46, 0x4f, 0x52, 0x4d,
+	0x41, 0x54, 0x5f, 0x42, 0x41, 0x53, 0x45, 0x10, 0x01, 0x22, 0xb7, 0x01, 0x0a, 0x12, 0x43, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
 	0x12, 0x4a, 0x0a, 0x10, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x61,
 	0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62,
 	0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72,
 	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0f, 0x6f, 0x70, 0x65,
-	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x12, 0x0a, 0x04,
-	0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x61, 0x74, 0x68,
-	0x22, 0x4c, 0x0a, 0x11, 0x44, 0x72, 0x6f, 0x70, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f,
-	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x11,
-	0x0a, 0x0f, 0x44, 0x72, 0x6f, 0x70, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x22, 0xea, 0x01, 0x0a, 0x0b, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c,
-	0x73, 0x12, 0x21, 0x0a, 0x0b, 0x6f, 0x61, 0x75, 0x74, 0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x0a, 0x6f, 0x61, 0x75, 0x74, 0x68, 0x54,
-	0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x1f, 0x0a, 0x0a, 0x6a, 0x77, 0x74, 0x5f, 0x70, 0x61, 0x72, 0x61,
-	0x6d, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x09, 0x6a, 0x77, 0x74, 0x50,
-	0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x35, 0x0a, 0x03, 0x69, 0x61, 0x6d, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x21, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65,
-	0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c,
-	0x73, 0x2e, 0x49, 0x61, 0x6d, 0x48, 0x00, 0x52, 0x03, 0x69, 0x61, 0x6d, 0x1a, 0x51, 0x0a, 0x03,
-	0x49, 0x61, 0x6d, 0x12, 0x1a, 0x0a, 0x08, 0x65, 0x6e, 0x64, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x65, 0x6e, 0x64, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x12,
-	0x2e, 0x0a, 0x13, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x61, 0x63, 0x63, 0x6f, 0x75,
-	0x6e, 0x74, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x11, 0x73, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x4b, 0x65, 0x79, 0x42,
-	0x0d, 0x0a, 0x0b, 0x63, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x22, 0xff,
-	0x0d, 0x0a, 0x0d, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
-	0x12, 0x32, 0x0a, 0x10, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x5f, 0x63,
-	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x42, 0x07, 0xb2, 0xe6, 0x2a, 0x03,
-	0x3e, 0x20, 0x30, 0x52, 0x0f, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x43,
-	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x37, 0x0a, 0x13, 0x72, 0x65, 0x74, 0x65, 0x6e, 0x74, 0x69, 0x6f,
-	0x6e, 0x5f, 0x70, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x5f, 0x6d, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x03, 0x42, 0x07, 0xb2, 0xe6, 0x2a, 0x03, 0x3e, 0x20, 0x30, 0x52, 0x11, 0x72, 0x65, 0x74, 0x65,
-	0x6e, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x4d, 0x73, 0x12, 0x5d, 0x0a,
-	0x27, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x5f, 0x73,
-	0x65, 0x71, 0x6e, 0x6f, 0x5f, 0x72, 0x65, 0x74, 0x65, 0x6e, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70,
-	0x65, 0x72, 0x69, 0x6f, 0x64, 0x5f, 0x6d, 0x73, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x42, 0x08,
-	0xb2, 0xe6, 0x2a, 0x04, 0x3e, 0x3d, 0x20, 0x30, 0x52, 0x22, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x53, 0x65, 0x71, 0x6e, 0x6f, 0x52, 0x65, 0x74, 0x65, 0x6e,
-	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x4d, 0x73, 0x12, 0x61, 0x0a, 0x29,
-	0x6d, 0x61, 0x78, 0x5f, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x6d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x5f, 0x73, 0x65, 0x71,
-	0x6e, 0x6f, 0x5f, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x03, 0x42,
-	0x08, 0xb2, 0xe6, 0x2a, 0x04, 0x3e, 0x3d, 0x20, 0x30, 0x52, 0x24, 0x6d, 0x61, 0x78, 0x50, 0x61,
-	0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x47, 0x72,
-	0x6f, 0x75, 0x70, 0x73, 0x53, 0x65, 0x71, 0x6e, 0x6f, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x64, 0x12,
-	0x51, 0x0a, 0x10, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x5f, 0x66, 0x6f, 0x72,
-	0x6d, 0x61, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x26, 0x2e, 0x59, 0x64, 0x62, 0x2e,
-	0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70,
-	0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x46, 0x6f, 0x72, 0x6d, 0x61,
-	0x74, 0x52, 0x0f, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x46, 0x6f, 0x72, 0x6d,
-	0x61, 0x74, 0x12, 0x4a, 0x0a, 0x10, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x5f,
-	0x63, 0x6f, 0x64, 0x65, 0x63, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0e, 0x32, 0x17, 0x2e, 0x59,
-	0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e,
-	0x43, 0x6f, 0x64, 0x65, 0x63, 0x42, 0x06, 0x9a, 0xe6, 0x2a, 0x02, 0x18, 0x64, 0x52, 0x0f, 0x73,
-	0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x43, 0x6f, 0x64, 0x65, 0x63, 0x73, 0x12, 0x45,
-	0x0a, 0x1a, 0x6d, 0x61, 0x78, 0x5f, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f,
-	0x73, 0x74, 0x6f, 0x72, 0x61, 0x67, 0x65, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x05, 0x20, 0x01,
-	0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a, 0x04, 0x3e, 0x3d, 0x20, 0x30, 0x52, 0x17, 0x6d, 0x61,
-	0x78, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x6f, 0x72, 0x61, 0x67,
-	0x65, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x43, 0x0a, 0x19, 0x6d, 0x61, 0x78, 0x5f, 0x70, 0x61, 0x72,
-	0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x77, 0x72, 0x69, 0x74, 0x65, 0x5f, 0x73, 0x70, 0x65,
-	0x65, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a, 0x04, 0x3e, 0x3d,
-	0x20, 0x30, 0x52, 0x16, 0x6d, 0x61, 0x78, 0x50, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e,
-	0x57, 0x72, 0x69, 0x74, 0x65, 0x53, 0x70, 0x65, 0x65, 0x64, 0x12, 0x43, 0x0a, 0x19, 0x6d, 0x61,
-	0x78, 0x5f, 0x70, 0x61, 0x72, 0x74, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x77, 0x72, 0x69, 0x74,
-	0x65, 0x5f, 0x62, 0x75, 0x72, 0x73, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28, 0x03, 0x42, 0x08, 0xb2,
-	0xe6, 0x2a, 0x04, 0x3e, 0x3d, 0x20, 0x30, 0x52, 0x16, 0x6d, 0x61, 0x78, 0x50, 0x61, 0x72, 0x74,
-	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x57, 0x72, 0x69, 0x74, 0x65, 0x42, 0x75, 0x72, 0x73, 0x74, 0x12,
-	0x32, 0x0a, 0x15, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x5f, 0x77, 0x72, 0x69, 0x74, 0x65, 0x5f,
-	0x64, 0x69, 0x73, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x08, 0x52, 0x13,
-	0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x57, 0x72, 0x69, 0x74, 0x65, 0x44, 0x69, 0x73, 0x61, 0x62,
-	0x6c, 0x65, 0x64, 0x12, 0x50, 0x0a, 0x0a, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x72, 0x75, 0x6c, 0x65,
-	0x73, 0x18, 0x09, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65,
-	0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63,
-	0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c,
-	0x65, 0x42, 0x07, 0x9a, 0xe6, 0x2a, 0x03, 0x18, 0xb8, 0x17, 0x52, 0x09, 0x72, 0x65, 0x61, 0x64,
-	0x52, 0x75, 0x6c, 0x65, 0x73, 0x12, 0x4f, 0x0a, 0x0a, 0x61, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75,
-	0x74, 0x65, 0x73, 0x18, 0x0a, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x59, 0x64, 0x62, 0x2e,
-	0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70,
-	0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x41, 0x74, 0x74, 0x72, 0x69,
-	0x62, 0x75, 0x74, 0x65, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0a, 0x61, 0x74, 0x74, 0x72,
-	0x69, 0x62, 0x75, 0x74, 0x65, 0x73, 0x12, 0x5e, 0x0a, 0x12, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65,
-	0x5f, 0x6d, 0x69, 0x72, 0x72, 0x6f, 0x72, 0x5f, 0x72, 0x75, 0x6c, 0x65, 0x18, 0x0b, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x30, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65,
-	0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69,
-	0x6e, 0x67, 0x73, 0x2e, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x4d, 0x69, 0x72, 0x72, 0x6f, 0x72,
-	0x52, 0x75, 0x6c, 0x65, 0x52, 0x10, 0x72, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x4d, 0x69, 0x72, 0x72,
-	0x6f, 0x72, 0x52, 0x75, 0x6c, 0x65, 0x1a, 0x86, 0x03, 0x0a, 0x08, 0x52, 0x65, 0x61, 0x64, 0x52,
-	0x75, 0x6c, 0x65, 0x12, 0x29, 0x0a, 0x0d, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x5f,
-	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0x90, 0xe6, 0x2a, 0x01,
-	0x52, 0x0c, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1c,
-	0x0a, 0x09, 0x69, 0x6d, 0x70, 0x6f, 0x72, 0x74, 0x61, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x08, 0x52, 0x09, 0x69, 0x6d, 0x70, 0x6f, 0x72, 0x74, 0x61, 0x6e, 0x74, 0x12, 0x4b, 0x0a, 0x1d,
-	0x73, 0x74, 0x61, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x5f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x5f, 0x6d, 0x73, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a, 0x04, 0x3e, 0x3d, 0x20, 0x30, 0x52, 0x1a, 0x73,
-	0x74, 0x61, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x54, 0x69,
-	0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x4d, 0x73, 0x12, 0x51, 0x0a, 0x10, 0x73, 0x75, 0x70,
-	0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x5f, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x18, 0x04, 0x20,
-	0x01, 0x28, 0x0e, 0x32, 0x26, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75,
-	0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74,
-	0x69, 0x6e, 0x67, 0x73, 0x2e, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x52, 0x0f, 0x73, 0x75, 0x70,
-	0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12, 0x4a, 0x0a, 0x10,
-	0x73, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x64, 0x5f, 0x63, 0x6f, 0x64, 0x65, 0x63, 0x73,
-	0x18, 0x05, 0x20, 0x03, 0x28, 0x0e, 0x32, 0x17, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72,
-	0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x43, 0x6f, 0x64, 0x65, 0x63, 0x42,
-	0x06, 0x9a, 0xe6, 0x2a, 0x02, 0x18, 0x64, 0x52, 0x0f, 0x73, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74,
-	0x65, 0x64, 0x43, 0x6f, 0x64, 0x65, 0x63, 0x73, 0x12, 0x22, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73,
-	0x69, 0x6f, 0x6e, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a, 0x04, 0x3e,
-	0x3d, 0x20, 0x30, 0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x21, 0x0a, 0x0c,
-	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x07, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x0b, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x54, 0x79, 0x70, 0x65, 0x1a,
-	0x3d, 0x0a, 0x0f, 0x41, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x73, 0x45, 0x6e, 0x74,
-	0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x1a, 0x9c,
-	0x02, 0x0a, 0x10, 0x52, 0x65, 0x6d, 0x6f, 0x74, 0x65, 0x4d, 0x69, 0x72, 0x72, 0x6f, 0x72, 0x52,
-	0x75, 0x6c, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x65, 0x6e, 0x64, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x65, 0x6e, 0x64, 0x70, 0x6f, 0x69, 0x6e, 0x74, 0x12,
-	0x1d, 0x0a, 0x0a, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x5f, 0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x09, 0x74, 0x6f, 0x70, 0x69, 0x63, 0x50, 0x61, 0x74, 0x68, 0x12, 0x23,
-	0x0a, 0x0d, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18,
-	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x4e,
-	0x61, 0x6d, 0x65, 0x12, 0x3f, 0x0a, 0x0b, 0x63, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61,
-	0x6c, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50,
-	0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x64,
-	0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x52, 0x0b, 0x63, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74,
-	0x69, 0x61, 0x6c, 0x73, 0x12, 0x4b, 0x0a, 0x1d, 0x73, 0x74, 0x61, 0x72, 0x74, 0x69, 0x6e, 0x67,
-	0x5f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61,
-	0x6d, 0x70, 0x5f, 0x6d, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x42, 0x08, 0xb2, 0xe6, 0x2a,
-	0x04, 0x3e, 0x3d, 0x20, 0x30, 0x52, 0x1a, 0x73, 0x74, 0x61, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x4d,
-	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x4d,
-	0x73, 0x12, 0x1a, 0x0a, 0x08, 0x64, 0x61, 0x74, 0x61, 0x62, 0x61, 0x73, 0x65, 0x18, 0x06, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x08, 0x64, 0x61, 0x74, 0x61, 0x62, 0x61, 0x73, 0x65, 0x22, 0x31, 0x0a,
-	0x06, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12, 0x16, 0x0a, 0x12, 0x46, 0x4f, 0x52, 0x4d, 0x41,
-	0x54, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12,
-	0x0f, 0x0a, 0x0b, 0x46, 0x4f, 0x52, 0x4d, 0x41, 0x54, 0x5f, 0x42, 0x41, 0x53, 0x45, 0x10, 0x01,
-	0x22, 0xb7, 0x01, 0x0a, 0x12, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x6f, 0x70, 0x69, 0x63,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x4a, 0x0a, 0x10, 0x6f, 0x70, 0x65, 0x72, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61,
-	0x6d, 0x73, 0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x12, 0x18, 0x0a, 0x04, 0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x42, 0x04, 0x90, 0xe6, 0x2a, 0x01, 0x52, 0x04, 0x70, 0x61, 0x74, 0x68, 0x12, 0x3b, 0x0a,
-	0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e,
-	0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
-	0x52, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x22, 0x4e, 0x0a, 0x13, 0x43, 0x72,
-	0x65, 0x61, 0x74, 0x65, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x12, 0x37, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52,
-	0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x13, 0x0a, 0x11, 0x43, 0x72,
-	0x65, 0x61, 0x74, 0x65, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22,
-	0xb6, 0x01, 0x0a, 0x11, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x4a, 0x0a, 0x10, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73,
-	0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d,
-	0x73, 0x12, 0x18, 0x0a, 0x04, 0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42,
-	0x04, 0x90, 0xe6, 0x2a, 0x01, 0x52, 0x04, 0x70, 0x61, 0x74, 0x68, 0x12, 0x3b, 0x0a, 0x08, 0x73,
-	0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e,
-	0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31,
-	0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x08,
-	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x22, 0x4d, 0x0a, 0x12, 0x41, 0x6c, 0x74, 0x65,
-	0x72, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37,
-	0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70,
-	0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x12, 0x0a, 0x10, 0x41, 0x6c, 0x74, 0x65, 0x72,
-	0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0xc1, 0x01, 0x0a, 0x12,
-	0x41, 0x64, 0x64, 0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x12, 0x4a, 0x0a, 0x10, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f,
-	0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59,
-	0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70,
-	0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0f, 0x6f,
-	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x18,
-	0x0a, 0x04, 0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0x90, 0xe6,
-	0x2a, 0x01, 0x52, 0x04, 0x70, 0x61, 0x74, 0x68, 0x12, 0x45, 0x0a, 0x09, 0x72, 0x65, 0x61, 0x64,
-	0x5f, 0x72, 0x75, 0x6c, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x59, 0x64,
-	0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54,
-	0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x52, 0x65, 0x61,
-	0x64, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x08, 0x72, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x22,
-	0x4e, 0x0a, 0x13, 0x41, 0x64, 0x64, 0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74,
-	0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e,
-	0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22,
-	0x13, 0x0a, 0x11, 0x41, 0x64, 0x64, 0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65,
-	0x73, 0x75, 0x6c, 0x74, 0x22, 0xa2, 0x01, 0x0a, 0x15, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x52,
-	0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x4a,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x18, 0x0a, 0x04,
+	0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0x90, 0xe6, 0x2a, 0x01,
+	0x52, 0x04, 0x70, 0x61, 0x74, 0x68, 0x12, 0x3b, 0x0a, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e,
+	0x67, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50,
+	0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70, 0x69,
+	0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69,
+	0x6e, 0x67, 0x73, 0x22, 0x4e, 0x0a, 0x13, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x6f, 0x70,
+	0x69, 0x63, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x09, 0x6f, 0x70,
+	0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e,
+	0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x22, 0x13, 0x0a, 0x11, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x6f, 0x70,
+	0x69, 0x63, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0xb6, 0x01, 0x0a, 0x11, 0x41, 0x6c, 0x74,
+	0x65, 0x72, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x4a,
 	0x0a, 0x10, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72, 0x61,
 	0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f,
 	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74,
 	0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72, 0x61,
 	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x18, 0x0a, 0x04, 0x70, 0x61,
 	0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0x90, 0xe6, 0x2a, 0x01, 0x52, 0x04,
-	0x70, 0x61, 0x74, 0x68, 0x12, 0x23, 0x0a, 0x0d, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72,
-	0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x63, 0x6f, 0x6e,
-	0x73, 0x75, 0x6d, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x51, 0x0a, 0x16, 0x52, 0x65, 0x6d,
-	0x6f, 0x76, 0x65, 0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65,
-	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x52, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x16, 0x0a, 0x14,
-	0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65,
-	0x73, 0x75, 0x6c, 0x74, 0x22, 0x7c, 0x0a, 0x14, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65,
-	0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x4a, 0x0a, 0x10,
-	0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65,
-	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x18, 0x0a, 0x04, 0x70, 0x61, 0x74, 0x68,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0x90, 0xe6, 0x2a, 0x01, 0x52, 0x04, 0x70, 0x61,
-	0x74, 0x68, 0x22, 0x50, 0x0a, 0x15, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x54, 0x6f,
-	0x70, 0x69, 0x63, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x09, 0x6f,
-	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19,
-	0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e,
-	0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x22, 0x79, 0x0a, 0x13, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65,
-	0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x25, 0x0a, 0x04, 0x73,
-	0x65, 0x6c, 0x66, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x59, 0x64, 0x62, 0x2e,
-	0x53, 0x63, 0x68, 0x65, 0x6d, 0x65, 0x2e, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x04, 0x73, 0x65,
-	0x6c, 0x66, 0x12, 0x3b, 0x0a, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51,
+	0x70, 0x61, 0x74, 0x68, 0x12, 0x3b, 0x0a, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72,
+	0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x53,
+	0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67,
+	0x73, 0x22, 0x4d, 0x0a, 0x12, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62,
+	0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x22, 0x12, 0x0a, 0x10, 0x41, 0x6c, 0x74, 0x65, 0x72, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65,
+	0x73, 0x75, 0x6c, 0x74, 0x22, 0xc1, 0x01, 0x0a, 0x12, 0x41, 0x64, 0x64, 0x52, 0x65, 0x61, 0x64,
+	0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x4a, 0x0a, 0x10, 0x6f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x18, 0x0a, 0x04, 0x70, 0x61, 0x74, 0x68, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x04, 0x90, 0xe6, 0x2a, 0x01, 0x52, 0x04, 0x70, 0x61, 0x74,
+	0x68, 0x12, 0x45, 0x0a, 0x09, 0x72, 0x65, 0x61, 0x64, 0x5f, 0x72, 0x75, 0x6c, 0x65, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51,
 	0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31, 0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74,
-	0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2a,
-	0x5d, 0x0a, 0x05, 0x43, 0x6f, 0x64, 0x65, 0x63, 0x12, 0x15, 0x0a, 0x11, 0x43, 0x4f, 0x44, 0x45,
-	0x43, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12,
-	0x0d, 0x0a, 0x09, 0x43, 0x4f, 0x44, 0x45, 0x43, 0x5f, 0x52, 0x41, 0x57, 0x10, 0x01, 0x12, 0x0e,
-	0x0a, 0x0a, 0x43, 0x4f, 0x44, 0x45, 0x43, 0x5f, 0x47, 0x5a, 0x49, 0x50, 0x10, 0x02, 0x12, 0x0e,
-	0x0a, 0x0a, 0x43, 0x4f, 0x44, 0x45, 0x43, 0x5f, 0x4c, 0x5a, 0x4f, 0x50, 0x10, 0x03, 0x12, 0x0e,
-	0x0a, 0x0a, 0x43, 0x4f, 0x44, 0x45, 0x43, 0x5f, 0x5a, 0x53, 0x54, 0x44, 0x10, 0x04, 0x42, 0x5e,
-	0x0a, 0x18, 0x63, 0x6f, 0x6d, 0x2e, 0x79, 0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x79, 0x64, 0x62,
-	0x2e, 0x70, 0x65, 0x72, 0x73, 0x71, 0x75, 0x65, 0x75, 0x65, 0x5a, 0x3f, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x64, 0x62, 0x2d, 0x70, 0x6c, 0x61, 0x74, 0x66,
-	0x6f, 0x72, 0x6d, 0x2f, 0x79, 0x64, 0x62, 0x2d, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x59, 0x64, 0x62, 0x5f, 0x50,
-	0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x5f, 0x56, 0x31, 0xf8, 0x01, 0x01, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x69, 0x6e, 0x67, 0x73, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x08,
+	0x72, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x22, 0x4e, 0x0a, 0x13, 0x41, 0x64, 0x64, 0x52,
+	0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x37, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x13, 0x0a, 0x11, 0x41, 0x64, 0x64, 0x52,
+	0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0xa2, 0x01,
+	0x0a, 0x15, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x52, 0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x4a, 0x0a, 0x10, 0x6f, 0x70, 0x65, 0x72, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61,
+	0x6d, 0x73, 0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72,
+	0x61, 0x6d, 0x73, 0x12, 0x18, 0x0a, 0x04, 0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x42, 0x04, 0x90, 0xe6, 0x2a, 0x01, 0x52, 0x04, 0x70, 0x61, 0x74, 0x68, 0x12, 0x23, 0x0a,
+	0x0d, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72, 0x4e, 0x61,
+	0x6d, 0x65, 0x22, 0x51, 0x0a, 0x16, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x52, 0x65, 0x61, 0x64,
+	0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x09,
+	0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x16, 0x0a, 0x14, 0x52, 0x65, 0x6d, 0x6f, 0x76, 0x65, 0x52,
+	0x65, 0x61, 0x64, 0x52, 0x75, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x7c, 0x0a,
+	0x14, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x4a, 0x0a, 0x10, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73,
+	0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d,
+	0x73, 0x12, 0x18, 0x0a, 0x04, 0x70, 0x61, 0x74, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42,
+	0x04, 0x90, 0xe6, 0x2a, 0x01, 0x52, 0x04, 0x70, 0x61, 0x74, 0x68, 0x22, 0x50, 0x0a, 0x15, 0x44,
+	0x65, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70,
+	0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x79, 0x0a,
+	0x13, 0x44, 0x65, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x52, 0x65,
+	0x73, 0x75, 0x6c, 0x74, 0x12, 0x25, 0x0a, 0x04, 0x73, 0x65, 0x6c, 0x66, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x11, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x53, 0x63, 0x68, 0x65, 0x6d, 0x65, 0x2e,
+	0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x04, 0x73, 0x65, 0x6c, 0x66, 0x12, 0x3b, 0x0a, 0x08, 0x73,
+	0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e,
+	0x59, 0x64, 0x62, 0x2e, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75, 0x65, 0x2e, 0x56, 0x31,
+	0x2e, 0x54, 0x6f, 0x70, 0x69, 0x63, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x08,
+	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x2a, 0x5d, 0x0a, 0x05, 0x43, 0x6f, 0x64, 0x65,
+	0x63, 0x12, 0x15, 0x0a, 0x11, 0x43, 0x4f, 0x44, 0x45, 0x43, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45,
+	0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09, 0x43, 0x4f, 0x44, 0x45,
+	0x43, 0x5f, 0x52, 0x41, 0x57, 0x10, 0x01, 0x12, 0x0e, 0x0a, 0x0a, 0x43, 0x4f, 0x44, 0x45, 0x43,
+	0x5f, 0x47, 0x5a, 0x49, 0x50, 0x10, 0x02, 0x12, 0x0e, 0x0a, 0x0a, 0x43, 0x4f, 0x44, 0x45, 0x43,
+	0x5f, 0x4c, 0x5a, 0x4f, 0x50, 0x10, 0x03, 0x12, 0x0e, 0x0a, 0x0a, 0x43, 0x4f, 0x44, 0x45, 0x43,
+	0x5f, 0x5a, 0x53, 0x54, 0x44, 0x10, 0x04, 0x42, 0x5e, 0x0a, 0x18, 0x63, 0x6f, 0x6d, 0x2e, 0x79,
+	0x61, 0x6e, 0x64, 0x65, 0x78, 0x2e, 0x79, 0x64, 0x62, 0x2e, 0x70, 0x65, 0x72, 0x73, 0x71, 0x75,
+	0x65, 0x75, 0x65, 0x5a, 0x3f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
+	0x79, 0x64, 0x62, 0x2d, 0x70, 0x6c, 0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x2f, 0x79, 0x64, 0x62,
+	0x2d, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x73, 0x2f, 0x59, 0x64, 0x62, 0x5f, 0x50, 0x65, 0x72, 0x73, 0x51, 0x75, 0x65, 0x75,
+	0x65, 0x5f, 0x56, 0x31, 0xf8, 0x01, 0x01, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -6838,191 +9024,252 @@ func file_protos_ydb_persqueue_v1_proto_rawDescGZIP() []byte {
 	return file_protos_ydb_persqueue_v1_proto_rawDescData
 }
 
-var file_protos_ydb_persqueue_v1_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_protos_ydb_persqueue_v1_proto_msgTypes = make([]protoimpl.MessageInfo, 79)
+var file_protos_ydb_persqueue_v1_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_protos_ydb_persqueue_v1_proto_msgTypes = make([]protoimpl.MessageInfo, 100)
 var file_protos_ydb_persqueue_v1_proto_goTypes = []interface{}{
 	(Codec)(0), // 0: Ydb.PersQueue.V1.Codec
-	(StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState_Status)(0), // 1: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState.Status
-	(TopicSettings_Format)(0),                              // 2: Ydb.PersQueue.V1.TopicSettings.Format
-	(*SessionMetaValue)(nil),                               // 3: Ydb.PersQueue.V1.SessionMetaValue
-	(*OffsetsRange)(nil),                                   // 4: Ydb.PersQueue.V1.OffsetsRange
-	(*StreamingWriteClientMessage)(nil),                    // 5: Ydb.PersQueue.V1.StreamingWriteClientMessage
-	(*StreamingWriteServerMessage)(nil),                    // 6: Ydb.PersQueue.V1.StreamingWriteServerMessage
-	(*Path)(nil),                                           // 7: Ydb.PersQueue.V1.Path
-	(*KeyValue)(nil),                                       // 8: Ydb.PersQueue.V1.KeyValue
-	(*ReadParams)(nil),                                     // 9: Ydb.PersQueue.V1.ReadParams
-	(*CommitCookie)(nil),                                   // 10: Ydb.PersQueue.V1.CommitCookie
-	(*CommitOffsetRange)(nil),                              // 11: Ydb.PersQueue.V1.CommitOffsetRange
-	(*StreamingReadClientMessageNew)(nil),                  // 12: Ydb.PersQueue.V1.StreamingReadClientMessageNew
-	(*StreamingReadServerMessageNew)(nil),                  // 13: Ydb.PersQueue.V1.StreamingReadServerMessageNew
-	(*PartitionStream)(nil),                                // 14: Ydb.PersQueue.V1.PartitionStream
-	(*ReadInfoRequest)(nil),                                // 15: Ydb.PersQueue.V1.ReadInfoRequest
-	(*ReadInfoResponse)(nil),                               // 16: Ydb.PersQueue.V1.ReadInfoResponse
-	(*ReadInfoResult)(nil),                                 // 17: Ydb.PersQueue.V1.ReadInfoResult
-	(*DropTopicRequest)(nil),                               // 18: Ydb.PersQueue.V1.DropTopicRequest
-	(*DropTopicResponse)(nil),                              // 19: Ydb.PersQueue.V1.DropTopicResponse
-	(*DropTopicResult)(nil),                                // 20: Ydb.PersQueue.V1.DropTopicResult
-	(*Credentials)(nil),                                    // 21: Ydb.PersQueue.V1.Credentials
-	(*TopicSettings)(nil),                                  // 22: Ydb.PersQueue.V1.TopicSettings
-	(*CreateTopicRequest)(nil),                             // 23: Ydb.PersQueue.V1.CreateTopicRequest
-	(*CreateTopicResponse)(nil),                            // 24: Ydb.PersQueue.V1.CreateTopicResponse
-	(*CreateTopicResult)(nil),                              // 25: Ydb.PersQueue.V1.CreateTopicResult
-	(*AlterTopicRequest)(nil),                              // 26: Ydb.PersQueue.V1.AlterTopicRequest
-	(*AlterTopicResponse)(nil),                             // 27: Ydb.PersQueue.V1.AlterTopicResponse
-	(*AlterTopicResult)(nil),                               // 28: Ydb.PersQueue.V1.AlterTopicResult
-	(*AddReadRuleRequest)(nil),                             // 29: Ydb.PersQueue.V1.AddReadRuleRequest
-	(*AddReadRuleResponse)(nil),                            // 30: Ydb.PersQueue.V1.AddReadRuleResponse
-	(*AddReadRuleResult)(nil),                              // 31: Ydb.PersQueue.V1.AddReadRuleResult
-	(*RemoveReadRuleRequest)(nil),                          // 32: Ydb.PersQueue.V1.RemoveReadRuleRequest
-	(*RemoveReadRuleResponse)(nil),                         // 33: Ydb.PersQueue.V1.RemoveReadRuleResponse
-	(*RemoveReadRuleResult)(nil),                           // 34: Ydb.PersQueue.V1.RemoveReadRuleResult
-	(*DescribeTopicRequest)(nil),                           // 35: Ydb.PersQueue.V1.DescribeTopicRequest
-	(*DescribeTopicResponse)(nil),                          // 36: Ydb.PersQueue.V1.DescribeTopicResponse
-	(*DescribeTopicResult)(nil),                            // 37: Ydb.PersQueue.V1.DescribeTopicResult
-	nil,                                                    // 38: Ydb.PersQueue.V1.SessionMetaValue.ValueEntry
-	(*StreamingWriteClientMessage_InitRequest)(nil),        // 39: Ydb.PersQueue.V1.StreamingWriteClientMessage.InitRequest
-	(*StreamingWriteClientMessage_WriteRequest)(nil),       // 40: Ydb.PersQueue.V1.StreamingWriteClientMessage.WriteRequest
-	(*StreamingWriteClientMessage_UpdateTokenRequest)(nil), // 41: Ydb.PersQueue.V1.StreamingWriteClientMessage.UpdateTokenRequest
-	nil, // 42: Ydb.PersQueue.V1.StreamingWriteClientMessage.InitRequest.SessionMetaEntry
-	(*StreamingWriteServerMessage_InitResponse)(nil),                             // 43: Ydb.PersQueue.V1.StreamingWriteServerMessage.InitResponse
-	(*StreamingWriteServerMessage_BatchWriteResponse)(nil),                       // 44: Ydb.PersQueue.V1.StreamingWriteServerMessage.BatchWriteResponse
-	(*StreamingWriteServerMessage_UpdateTokenResponse)(nil),                      // 45: Ydb.PersQueue.V1.StreamingWriteServerMessage.UpdateTokenResponse
-	(*StreamingWriteServerMessage_WriteStatistics)(nil),                          // 46: Ydb.PersQueue.V1.StreamingWriteServerMessage.WriteStatistics
-	(*StreamingReadClientMessageNew_InitRequest)(nil),                            // 47: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest
-	(*StreamingReadClientMessageNew_ReadRequest)(nil),                            // 48: Ydb.PersQueue.V1.StreamingReadClientMessageNew.ReadRequest
-	(*StreamingReadClientMessageNew_CreatePartitionStreamResponse)(nil),          // 49: Ydb.PersQueue.V1.StreamingReadClientMessageNew.CreatePartitionStreamResponse
-	(*StreamingReadClientMessageNew_DestroyPartitionStreamResponse)(nil),         // 50: Ydb.PersQueue.V1.StreamingReadClientMessageNew.DestroyPartitionStreamResponse
-	(*StreamingReadClientMessageNew_StopReadRequest)(nil),                        // 51: Ydb.PersQueue.V1.StreamingReadClientMessageNew.StopReadRequest
-	(*StreamingReadClientMessageNew_ResumeReadRequest)(nil),                      // 52: Ydb.PersQueue.V1.StreamingReadClientMessageNew.ResumeReadRequest
-	(*StreamingReadClientMessageNew_CommitRequest)(nil),                          // 53: Ydb.PersQueue.V1.StreamingReadClientMessageNew.CommitRequest
-	(*StreamingReadClientMessageNew_PartitionStreamStatusRequest)(nil),           // 54: Ydb.PersQueue.V1.StreamingReadClientMessageNew.PartitionStreamStatusRequest
-	(*StreamingReadClientMessageNew_AddTopicRequest)(nil),                        // 55: Ydb.PersQueue.V1.StreamingReadClientMessageNew.AddTopicRequest
-	(*StreamingReadClientMessageNew_RemoveTopicRequest)(nil),                     // 56: Ydb.PersQueue.V1.StreamingReadClientMessageNew.RemoveTopicRequest
-	(*StreamingReadClientMessageNew_TopicReadSettings)(nil),                      // 57: Ydb.PersQueue.V1.StreamingReadClientMessageNew.TopicReadSettings
-	(*StreamingReadClientMessageNew_PartitionCommit)(nil),                        // 58: Ydb.PersQueue.V1.StreamingReadClientMessageNew.PartitionCommit
-	(*StreamingReadClientMessageNew_InitRequest_State)(nil),                      // 59: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State
-	(*StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState)(nil), // 60: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState
-	(*StreamingReadServerMessageNew_InitResponse)(nil),                           // 61: Ydb.PersQueue.V1.StreamingReadServerMessageNew.InitResponse
-	(*StreamingReadServerMessageNew_CreatePartitionStreamRequest)(nil),           // 62: Ydb.PersQueue.V1.StreamingReadServerMessageNew.CreatePartitionStreamRequest
-	(*StreamingReadServerMessageNew_DestroyPartitionStreamRequest)(nil),          // 63: Ydb.PersQueue.V1.StreamingReadServerMessageNew.DestroyPartitionStreamRequest
-	(*StreamingReadServerMessageNew_CommitResponse)(nil),                         // 64: Ydb.PersQueue.V1.StreamingReadServerMessageNew.CommitResponse
-	(*StreamingReadServerMessageNew_BatchReadResponse)(nil),                      // 65: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse
-	(*StreamingReadServerMessageNew_PartitionStreamStatusResponse)(nil),          // 66: Ydb.PersQueue.V1.StreamingReadServerMessageNew.PartitionStreamStatusResponse
-	(*StreamingReadServerMessageNew_StopReadResponse)(nil),                       // 67: Ydb.PersQueue.V1.StreamingReadServerMessageNew.StopReadResponse
-	(*StreamingReadServerMessageNew_ResumeReadResponse)(nil),                     // 68: Ydb.PersQueue.V1.StreamingReadServerMessageNew.ResumeReadResponse
-	(*StreamingReadServerMessageNew_AddTopicResponse)(nil),                       // 69: Ydb.PersQueue.V1.StreamingReadServerMessageNew.AddTopicResponse
-	(*StreamingReadServerMessageNew_RemoveTopicResponse)(nil),                    // 70: Ydb.PersQueue.V1.StreamingReadServerMessageNew.RemoveTopicResponse
-	nil, // 71: Ydb.PersQueue.V1.StreamingReadServerMessageNew.InitResponse.BlockFormatVersionByTopicEntry
-	(*StreamingReadServerMessageNew_CommitResponse_PartitionCommittedOffset)(nil),        // 72: Ydb.PersQueue.V1.StreamingReadServerMessageNew.CommitResponse.PartitionCommittedOffset
-	(*StreamingReadServerMessageNew_BatchReadResponse_PartitionData)(nil),                // 73: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData
-	(*StreamingReadServerMessageNew_BatchReadResponse_SkipRange)(nil),                    // 74: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.SkipRange
-	(*StreamingReadServerMessageNew_BatchReadResponse_PartitionData_ReadStatistics)(nil), // 75: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData.ReadStatistics
-	(*ReadInfoResult_TopicInfo)(nil),                                                     // 76: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo
-	(*ReadInfoResult_TopicInfo_PartitionInfo)(nil),                                       // 77: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.PartitionInfo
-	(*Credentials_Iam)(nil),                // 78: Ydb.PersQueue.V1.Credentials.Iam
-	(*TopicSettings_ReadRule)(nil),         // 79: Ydb.PersQueue.V1.TopicSettings.ReadRule
-	nil,                                    // 80: Ydb.PersQueue.V1.TopicSettings.AttributesEntry
-	(*TopicSettings_RemoteMirrorRule)(nil), // 81: Ydb.PersQueue.V1.TopicSettings.RemoteMirrorRule
-	(Ydb.StatusIds_StatusCode)(0),          // 82: Ydb.StatusIds.StatusCode
-	(*Ydb_Issue.IssueMessage)(nil),         // 83: Ydb.Issue.IssueMessage
-	(*Ydb_Operations.OperationParams)(nil), // 84: Ydb.Operations.OperationParams
-	(*Ydb_Operations.Operation)(nil),       // 85: Ydb.Operations.Operation
-	(*Ydb_Scheme.Entry)(nil),               // 86: Ydb.Scheme.Entry
+	(StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState_Status)(0),       // 1: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState.Status
+	(MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState_Status)(0), // 2: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.State.PartitionStreamState.Status
+	(TopicSettings_Format)(0),                              // 3: Ydb.PersQueue.V1.TopicSettings.Format
+	(*SessionMetaValue)(nil),                               // 4: Ydb.PersQueue.V1.SessionMetaValue
+	(*OffsetsRange)(nil),                                   // 5: Ydb.PersQueue.V1.OffsetsRange
+	(*StreamingWriteClientMessage)(nil),                    // 6: Ydb.PersQueue.V1.StreamingWriteClientMessage
+	(*StreamingWriteServerMessage)(nil),                    // 7: Ydb.PersQueue.V1.StreamingWriteServerMessage
+	(*Path)(nil),                                           // 8: Ydb.PersQueue.V1.Path
+	(*KeyValue)(nil),                                       // 9: Ydb.PersQueue.V1.KeyValue
+	(*ReadParams)(nil),                                     // 10: Ydb.PersQueue.V1.ReadParams
+	(*CommitCookie)(nil),                                   // 11: Ydb.PersQueue.V1.CommitCookie
+	(*CommitOffsetRange)(nil),                              // 12: Ydb.PersQueue.V1.CommitOffsetRange
+	(*StreamingReadClientMessageNew)(nil),                  // 13: Ydb.PersQueue.V1.StreamingReadClientMessageNew
+	(*StreamingReadServerMessageNew)(nil),                  // 14: Ydb.PersQueue.V1.StreamingReadServerMessageNew
+	(*PartitionStream)(nil),                                // 15: Ydb.PersQueue.V1.PartitionStream
+	(*MigrationStreamingReadClientMessage)(nil),            // 16: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage
+	(*MigrationStreamingReadServerMessage)(nil),            // 17: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage
+	(*ReadInfoRequest)(nil),                                // 18: Ydb.PersQueue.V1.ReadInfoRequest
+	(*ReadInfoResponse)(nil),                               // 19: Ydb.PersQueue.V1.ReadInfoResponse
+	(*ReadInfoResult)(nil),                                 // 20: Ydb.PersQueue.V1.ReadInfoResult
+	(*DropTopicRequest)(nil),                               // 21: Ydb.PersQueue.V1.DropTopicRequest
+	(*DropTopicResponse)(nil),                              // 22: Ydb.PersQueue.V1.DropTopicResponse
+	(*DropTopicResult)(nil),                                // 23: Ydb.PersQueue.V1.DropTopicResult
+	(*Credentials)(nil),                                    // 24: Ydb.PersQueue.V1.Credentials
+	(*TopicSettings)(nil),                                  // 25: Ydb.PersQueue.V1.TopicSettings
+	(*CreateTopicRequest)(nil),                             // 26: Ydb.PersQueue.V1.CreateTopicRequest
+	(*CreateTopicResponse)(nil),                            // 27: Ydb.PersQueue.V1.CreateTopicResponse
+	(*CreateTopicResult)(nil),                              // 28: Ydb.PersQueue.V1.CreateTopicResult
+	(*AlterTopicRequest)(nil),                              // 29: Ydb.PersQueue.V1.AlterTopicRequest
+	(*AlterTopicResponse)(nil),                             // 30: Ydb.PersQueue.V1.AlterTopicResponse
+	(*AlterTopicResult)(nil),                               // 31: Ydb.PersQueue.V1.AlterTopicResult
+	(*AddReadRuleRequest)(nil),                             // 32: Ydb.PersQueue.V1.AddReadRuleRequest
+	(*AddReadRuleResponse)(nil),                            // 33: Ydb.PersQueue.V1.AddReadRuleResponse
+	(*AddReadRuleResult)(nil),                              // 34: Ydb.PersQueue.V1.AddReadRuleResult
+	(*RemoveReadRuleRequest)(nil),                          // 35: Ydb.PersQueue.V1.RemoveReadRuleRequest
+	(*RemoveReadRuleResponse)(nil),                         // 36: Ydb.PersQueue.V1.RemoveReadRuleResponse
+	(*RemoveReadRuleResult)(nil),                           // 37: Ydb.PersQueue.V1.RemoveReadRuleResult
+	(*DescribeTopicRequest)(nil),                           // 38: Ydb.PersQueue.V1.DescribeTopicRequest
+	(*DescribeTopicResponse)(nil),                          // 39: Ydb.PersQueue.V1.DescribeTopicResponse
+	(*DescribeTopicResult)(nil),                            // 40: Ydb.PersQueue.V1.DescribeTopicResult
+	nil,                                                    // 41: Ydb.PersQueue.V1.SessionMetaValue.ValueEntry
+	(*StreamingWriteClientMessage_InitRequest)(nil),        // 42: Ydb.PersQueue.V1.StreamingWriteClientMessage.InitRequest
+	(*StreamingWriteClientMessage_WriteRequest)(nil),       // 43: Ydb.PersQueue.V1.StreamingWriteClientMessage.WriteRequest
+	(*StreamingWriteClientMessage_UpdateTokenRequest)(nil), // 44: Ydb.PersQueue.V1.StreamingWriteClientMessage.UpdateTokenRequest
+	nil, // 45: Ydb.PersQueue.V1.StreamingWriteClientMessage.InitRequest.SessionMetaEntry
+	(*StreamingWriteServerMessage_InitResponse)(nil),                             // 46: Ydb.PersQueue.V1.StreamingWriteServerMessage.InitResponse
+	(*StreamingWriteServerMessage_BatchWriteResponse)(nil),                       // 47: Ydb.PersQueue.V1.StreamingWriteServerMessage.BatchWriteResponse
+	(*StreamingWriteServerMessage_UpdateTokenResponse)(nil),                      // 48: Ydb.PersQueue.V1.StreamingWriteServerMessage.UpdateTokenResponse
+	(*StreamingWriteServerMessage_WriteStatistics)(nil),                          // 49: Ydb.PersQueue.V1.StreamingWriteServerMessage.WriteStatistics
+	(*StreamingReadClientMessageNew_InitRequest)(nil),                            // 50: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest
+	(*StreamingReadClientMessageNew_ReadRequest)(nil),                            // 51: Ydb.PersQueue.V1.StreamingReadClientMessageNew.ReadRequest
+	(*StreamingReadClientMessageNew_CreatePartitionStreamResponse)(nil),          // 52: Ydb.PersQueue.V1.StreamingReadClientMessageNew.CreatePartitionStreamResponse
+	(*StreamingReadClientMessageNew_DestroyPartitionStreamResponse)(nil),         // 53: Ydb.PersQueue.V1.StreamingReadClientMessageNew.DestroyPartitionStreamResponse
+	(*StreamingReadClientMessageNew_StopReadRequest)(nil),                        // 54: Ydb.PersQueue.V1.StreamingReadClientMessageNew.StopReadRequest
+	(*StreamingReadClientMessageNew_ResumeReadRequest)(nil),                      // 55: Ydb.PersQueue.V1.StreamingReadClientMessageNew.ResumeReadRequest
+	(*StreamingReadClientMessageNew_CommitRequest)(nil),                          // 56: Ydb.PersQueue.V1.StreamingReadClientMessageNew.CommitRequest
+	(*StreamingReadClientMessageNew_PartitionStreamStatusRequest)(nil),           // 57: Ydb.PersQueue.V1.StreamingReadClientMessageNew.PartitionStreamStatusRequest
+	(*StreamingReadClientMessageNew_AddTopicRequest)(nil),                        // 58: Ydb.PersQueue.V1.StreamingReadClientMessageNew.AddTopicRequest
+	(*StreamingReadClientMessageNew_RemoveTopicRequest)(nil),                     // 59: Ydb.PersQueue.V1.StreamingReadClientMessageNew.RemoveTopicRequest
+	(*StreamingReadClientMessageNew_TopicReadSettings)(nil),                      // 60: Ydb.PersQueue.V1.StreamingReadClientMessageNew.TopicReadSettings
+	(*StreamingReadClientMessageNew_PartitionCommit)(nil),                        // 61: Ydb.PersQueue.V1.StreamingReadClientMessageNew.PartitionCommit
+	(*StreamingReadClientMessageNew_InitRequest_State)(nil),                      // 62: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State
+	(*StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState)(nil), // 63: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState
+	(*StreamingReadServerMessageNew_InitResponse)(nil),                           // 64: Ydb.PersQueue.V1.StreamingReadServerMessageNew.InitResponse
+	(*StreamingReadServerMessageNew_CreatePartitionStreamRequest)(nil),           // 65: Ydb.PersQueue.V1.StreamingReadServerMessageNew.CreatePartitionStreamRequest
+	(*StreamingReadServerMessageNew_DestroyPartitionStreamRequest)(nil),          // 66: Ydb.PersQueue.V1.StreamingReadServerMessageNew.DestroyPartitionStreamRequest
+	(*StreamingReadServerMessageNew_CommitResponse)(nil),                         // 67: Ydb.PersQueue.V1.StreamingReadServerMessageNew.CommitResponse
+	(*StreamingReadServerMessageNew_BatchReadResponse)(nil),                      // 68: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse
+	(*StreamingReadServerMessageNew_PartitionStreamStatusResponse)(nil),          // 69: Ydb.PersQueue.V1.StreamingReadServerMessageNew.PartitionStreamStatusResponse
+	(*StreamingReadServerMessageNew_StopReadResponse)(nil),                       // 70: Ydb.PersQueue.V1.StreamingReadServerMessageNew.StopReadResponse
+	(*StreamingReadServerMessageNew_ResumeReadResponse)(nil),                     // 71: Ydb.PersQueue.V1.StreamingReadServerMessageNew.ResumeReadResponse
+	(*StreamingReadServerMessageNew_AddTopicResponse)(nil),                       // 72: Ydb.PersQueue.V1.StreamingReadServerMessageNew.AddTopicResponse
+	(*StreamingReadServerMessageNew_RemoveTopicResponse)(nil),                    // 73: Ydb.PersQueue.V1.StreamingReadServerMessageNew.RemoveTopicResponse
+	nil, // 74: Ydb.PersQueue.V1.StreamingReadServerMessageNew.InitResponse.BlockFormatVersionByTopicEntry
+	(*StreamingReadServerMessageNew_CommitResponse_PartitionCommittedOffset)(nil),        // 75: Ydb.PersQueue.V1.StreamingReadServerMessageNew.CommitResponse.PartitionCommittedOffset
+	(*StreamingReadServerMessageNew_BatchReadResponse_PartitionData)(nil),                // 76: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData
+	(*StreamingReadServerMessageNew_BatchReadResponse_SkipRange)(nil),                    // 77: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.SkipRange
+	(*StreamingReadServerMessageNew_BatchReadResponse_PartitionData_ReadStatistics)(nil), // 78: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData.ReadStatistics
+	(*MigrationStreamingReadClientMessage_TopicReadSettings)(nil),                        // 79: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.TopicReadSettings
+	(*MigrationStreamingReadClientMessage_InitRequest)(nil),                              // 80: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest
+	(*MigrationStreamingReadClientMessage_Read)(nil),                                     // 81: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Read
+	(*MigrationStreamingReadClientMessage_StartRead)(nil),                                // 82: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.StartRead
+	(*MigrationStreamingReadClientMessage_Released)(nil),                                 // 83: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Released
+	(*MigrationStreamingReadClientMessage_Commit)(nil),                                   // 84: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Commit
+	(*MigrationStreamingReadClientMessage_Status)(nil),                                   // 85: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Status
+	(*MigrationStreamingReadClientMessage_InitRequest_State)(nil),                        // 86: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.State
+	(*MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState)(nil),   // 87: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.State.PartitionStreamState
+	(*MigrationStreamingReadServerMessage_InitResponse)(nil),                             // 88: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.InitResponse
+	(*MigrationStreamingReadServerMessage_Assigned)(nil),                                 // 89: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.Assigned
+	(*MigrationStreamingReadServerMessage_Release)(nil),                                  // 90: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.Release
+	(*MigrationStreamingReadServerMessage_Committed)(nil),                                // 91: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.Committed
+	(*MigrationStreamingReadServerMessage_DataBatch)(nil),                                // 92: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch
+	(*MigrationStreamingReadServerMessage_PartitionStatus)(nil),                          // 93: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.PartitionStatus
+	nil, // 94: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.InitResponse.BlockFormatVersionByTopicEntry
+	(*MigrationStreamingReadServerMessage_DataBatch_MessageData)(nil),   // 95: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.MessageData
+	(*MigrationStreamingReadServerMessage_DataBatch_Batch)(nil),         // 96: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.Batch
+	(*MigrationStreamingReadServerMessage_DataBatch_PartitionData)(nil), // 97: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.PartitionData
+	(*ReadInfoResult_TopicInfo)(nil),                                    // 98: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo
+	(*ReadInfoResult_TopicInfo_PartitionInfo)(nil),                      // 99: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.PartitionInfo
+	(*Credentials_Iam)(nil),                                             // 100: Ydb.PersQueue.V1.Credentials.Iam
+	(*TopicSettings_ReadRule)(nil),                                      // 101: Ydb.PersQueue.V1.TopicSettings.ReadRule
+	nil,                                                                 // 102: Ydb.PersQueue.V1.TopicSettings.AttributesEntry
+	(*TopicSettings_RemoteMirrorRule)(nil),                              // 103: Ydb.PersQueue.V1.TopicSettings.RemoteMirrorRule
+	(Ydb.StatusIds_StatusCode)(0),                                       // 104: Ydb.StatusIds.StatusCode
+	(*Ydb_Issue.IssueMessage)(nil),                                      // 105: Ydb.Issue.IssueMessage
+	(*Ydb_Operations.OperationParams)(nil),                              // 106: Ydb.Operations.OperationParams
+	(*Ydb_Operations.Operation)(nil),                                    // 107: Ydb.Operations.Operation
+	(*Ydb_Scheme.Entry)(nil),                                            // 108: Ydb.Scheme.Entry
 }
 var file_protos_ydb_persqueue_v1_proto_depIdxs = []int32{
-	38, // 0: Ydb.PersQueue.V1.SessionMetaValue.value:type_name -> Ydb.PersQueue.V1.SessionMetaValue.ValueEntry
-	39, // 1: Ydb.PersQueue.V1.StreamingWriteClientMessage.init_request:type_name -> Ydb.PersQueue.V1.StreamingWriteClientMessage.InitRequest
-	40, // 2: Ydb.PersQueue.V1.StreamingWriteClientMessage.write_request:type_name -> Ydb.PersQueue.V1.StreamingWriteClientMessage.WriteRequest
-	41, // 3: Ydb.PersQueue.V1.StreamingWriteClientMessage.update_token_request:type_name -> Ydb.PersQueue.V1.StreamingWriteClientMessage.UpdateTokenRequest
-	43, // 4: Ydb.PersQueue.V1.StreamingWriteServerMessage.init_response:type_name -> Ydb.PersQueue.V1.StreamingWriteServerMessage.InitResponse
-	44, // 5: Ydb.PersQueue.V1.StreamingWriteServerMessage.batch_write_response:type_name -> Ydb.PersQueue.V1.StreamingWriteServerMessage.BatchWriteResponse
-	45, // 6: Ydb.PersQueue.V1.StreamingWriteServerMessage.update_token_response:type_name -> Ydb.PersQueue.V1.StreamingWriteServerMessage.UpdateTokenResponse
-	82, // 7: Ydb.PersQueue.V1.StreamingWriteServerMessage.status:type_name -> Ydb.StatusIds.StatusCode
-	83, // 8: Ydb.PersQueue.V1.StreamingWriteServerMessage.issues:type_name -> Ydb.Issue.IssueMessage
-	47, // 9: Ydb.PersQueue.V1.StreamingReadClientMessageNew.init_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest
-	48, // 10: Ydb.PersQueue.V1.StreamingReadClientMessageNew.read_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.ReadRequest
-	49, // 11: Ydb.PersQueue.V1.StreamingReadClientMessageNew.create_partition_stream_response:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.CreatePartitionStreamResponse
-	53, // 12: Ydb.PersQueue.V1.StreamingReadClientMessageNew.commit_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.CommitRequest
-	50, // 13: Ydb.PersQueue.V1.StreamingReadClientMessageNew.destroy_partition_stream_response:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.DestroyPartitionStreamResponse
-	51, // 14: Ydb.PersQueue.V1.StreamingReadClientMessageNew.stop_read_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.StopReadRequest
-	52, // 15: Ydb.PersQueue.V1.StreamingReadClientMessageNew.resume_read_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.ResumeReadRequest
-	54, // 16: Ydb.PersQueue.V1.StreamingReadClientMessageNew.partition_stream_status_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.PartitionStreamStatusRequest
-	55, // 17: Ydb.PersQueue.V1.StreamingReadClientMessageNew.add_topic_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.AddTopicRequest
-	56, // 18: Ydb.PersQueue.V1.StreamingReadClientMessageNew.remove_topic_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.RemoveTopicRequest
-	61, // 19: Ydb.PersQueue.V1.StreamingReadServerMessageNew.init_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.InitResponse
-	65, // 20: Ydb.PersQueue.V1.StreamingReadServerMessageNew.batch_read_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse
-	62, // 21: Ydb.PersQueue.V1.StreamingReadServerMessageNew.create_partition_stream_request:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.CreatePartitionStreamRequest
-	63, // 22: Ydb.PersQueue.V1.StreamingReadServerMessageNew.destroy_partition_stream_request:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.DestroyPartitionStreamRequest
-	64, // 23: Ydb.PersQueue.V1.StreamingReadServerMessageNew.commit_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.CommitResponse
-	66, // 24: Ydb.PersQueue.V1.StreamingReadServerMessageNew.partition_stream_status_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.PartitionStreamStatusResponse
-	67, // 25: Ydb.PersQueue.V1.StreamingReadServerMessageNew.stop_read_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.StopReadResponse
-	68, // 26: Ydb.PersQueue.V1.StreamingReadServerMessageNew.resume_read_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.ResumeReadResponse
-	69, // 27: Ydb.PersQueue.V1.StreamingReadServerMessageNew.add_topic_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.AddTopicResponse
-	70, // 28: Ydb.PersQueue.V1.StreamingReadServerMessageNew.remove_topic_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.RemoveTopicResponse
-	82, // 29: Ydb.PersQueue.V1.StreamingReadServerMessageNew.status:type_name -> Ydb.StatusIds.StatusCode
-	83, // 30: Ydb.PersQueue.V1.StreamingReadServerMessageNew.issues:type_name -> Ydb.Issue.IssueMessage
-	84, // 31: Ydb.PersQueue.V1.ReadInfoRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	7,  // 32: Ydb.PersQueue.V1.ReadInfoRequest.topics:type_name -> Ydb.PersQueue.V1.Path
-	7,  // 33: Ydb.PersQueue.V1.ReadInfoRequest.consumer:type_name -> Ydb.PersQueue.V1.Path
-	85, // 34: Ydb.PersQueue.V1.ReadInfoResponse.operation:type_name -> Ydb.Operations.Operation
-	76, // 35: Ydb.PersQueue.V1.ReadInfoResult.topics:type_name -> Ydb.PersQueue.V1.ReadInfoResult.TopicInfo
-	84, // 36: Ydb.PersQueue.V1.DropTopicRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	85, // 37: Ydb.PersQueue.V1.DropTopicResponse.operation:type_name -> Ydb.Operations.Operation
-	78, // 38: Ydb.PersQueue.V1.Credentials.iam:type_name -> Ydb.PersQueue.V1.Credentials.Iam
-	2,  // 39: Ydb.PersQueue.V1.TopicSettings.supported_format:type_name -> Ydb.PersQueue.V1.TopicSettings.Format
-	0,  // 40: Ydb.PersQueue.V1.TopicSettings.supported_codecs:type_name -> Ydb.PersQueue.V1.Codec
-	79, // 41: Ydb.PersQueue.V1.TopicSettings.read_rules:type_name -> Ydb.PersQueue.V1.TopicSettings.ReadRule
-	80, // 42: Ydb.PersQueue.V1.TopicSettings.attributes:type_name -> Ydb.PersQueue.V1.TopicSettings.AttributesEntry
-	81, // 43: Ydb.PersQueue.V1.TopicSettings.remote_mirror_rule:type_name -> Ydb.PersQueue.V1.TopicSettings.RemoteMirrorRule
-	84, // 44: Ydb.PersQueue.V1.CreateTopicRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	22, // 45: Ydb.PersQueue.V1.CreateTopicRequest.settings:type_name -> Ydb.PersQueue.V1.TopicSettings
-	85, // 46: Ydb.PersQueue.V1.CreateTopicResponse.operation:type_name -> Ydb.Operations.Operation
-	84, // 47: Ydb.PersQueue.V1.AlterTopicRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	22, // 48: Ydb.PersQueue.V1.AlterTopicRequest.settings:type_name -> Ydb.PersQueue.V1.TopicSettings
-	85, // 49: Ydb.PersQueue.V1.AlterTopicResponse.operation:type_name -> Ydb.Operations.Operation
-	84, // 50: Ydb.PersQueue.V1.AddReadRuleRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	79, // 51: Ydb.PersQueue.V1.AddReadRuleRequest.read_rule:type_name -> Ydb.PersQueue.V1.TopicSettings.ReadRule
-	85, // 52: Ydb.PersQueue.V1.AddReadRuleResponse.operation:type_name -> Ydb.Operations.Operation
-	84, // 53: Ydb.PersQueue.V1.RemoveReadRuleRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	85, // 54: Ydb.PersQueue.V1.RemoveReadRuleResponse.operation:type_name -> Ydb.Operations.Operation
-	84, // 55: Ydb.PersQueue.V1.DescribeTopicRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	85, // 56: Ydb.PersQueue.V1.DescribeTopicResponse.operation:type_name -> Ydb.Operations.Operation
-	86, // 57: Ydb.PersQueue.V1.DescribeTopicResult.self:type_name -> Ydb.Scheme.Entry
-	22, // 58: Ydb.PersQueue.V1.DescribeTopicResult.settings:type_name -> Ydb.PersQueue.V1.TopicSettings
-	42, // 59: Ydb.PersQueue.V1.StreamingWriteClientMessage.InitRequest.session_meta:type_name -> Ydb.PersQueue.V1.StreamingWriteClientMessage.InitRequest.SessionMetaEntry
-	0,  // 60: Ydb.PersQueue.V1.StreamingWriteServerMessage.InitResponse.supported_codecs:type_name -> Ydb.PersQueue.V1.Codec
-	46, // 61: Ydb.PersQueue.V1.StreamingWriteServerMessage.BatchWriteResponse.write_statistics:type_name -> Ydb.PersQueue.V1.StreamingWriteServerMessage.WriteStatistics
-	57, // 62: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.topics_read_settings:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.TopicReadSettings
-	59, // 63: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.state:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State
-	58, // 64: Ydb.PersQueue.V1.StreamingReadClientMessageNew.CommitRequest.commits:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.PartitionCommit
-	57, // 65: Ydb.PersQueue.V1.StreamingReadClientMessageNew.AddTopicRequest.topic_read_settings:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.TopicReadSettings
-	4,  // 66: Ydb.PersQueue.V1.StreamingReadClientMessageNew.PartitionCommit.offsets:type_name -> Ydb.PersQueue.V1.OffsetsRange
-	60, // 67: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.partition_streams_states:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState
-	14, // 68: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState.partition_stream:type_name -> Ydb.PersQueue.V1.PartitionStream
-	4,  // 69: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState.offset_ranges:type_name -> Ydb.PersQueue.V1.OffsetsRange
-	1,  // 70: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState.status:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState.Status
-	71, // 71: Ydb.PersQueue.V1.StreamingReadServerMessageNew.InitResponse.block_format_version_by_topic:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.InitResponse.BlockFormatVersionByTopicEntry
-	14, // 72: Ydb.PersQueue.V1.StreamingReadServerMessageNew.CreatePartitionStreamRequest.partition_stream:type_name -> Ydb.PersQueue.V1.PartitionStream
-	72, // 73: Ydb.PersQueue.V1.StreamingReadServerMessageNew.CommitResponse.partitions_committed_offsets:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.CommitResponse.PartitionCommittedOffset
-	74, // 74: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.skip_range:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.SkipRange
-	73, // 75: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.partitions:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData
-	3,  // 76: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData.message_session_meta:type_name -> Ydb.PersQueue.V1.SessionMetaValue
-	75, // 77: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData.read_statistics:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData.ReadStatistics
-	4,  // 78: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.SkipRange.skip_range:type_name -> Ydb.PersQueue.V1.OffsetsRange
-	7,  // 79: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.topic:type_name -> Ydb.PersQueue.V1.Path
-	82, // 80: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.status:type_name -> Ydb.StatusIds.StatusCode
-	83, // 81: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.issues:type_name -> Ydb.Issue.IssueMessage
-	77, // 82: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.partitions:type_name -> Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.PartitionInfo
-	82, // 83: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.PartitionInfo.status:type_name -> Ydb.StatusIds.StatusCode
-	83, // 84: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.PartitionInfo.issues:type_name -> Ydb.Issue.IssueMessage
-	2,  // 85: Ydb.PersQueue.V1.TopicSettings.ReadRule.supported_format:type_name -> Ydb.PersQueue.V1.TopicSettings.Format
-	0,  // 86: Ydb.PersQueue.V1.TopicSettings.ReadRule.supported_codecs:type_name -> Ydb.PersQueue.V1.Codec
-	21, // 87: Ydb.PersQueue.V1.TopicSettings.RemoteMirrorRule.credentials:type_name -> Ydb.PersQueue.V1.Credentials
-	88, // [88:88] is the sub-list for method output_type
-	88, // [88:88] is the sub-list for method input_type
-	88, // [88:88] is the sub-list for extension type_name
-	88, // [88:88] is the sub-list for extension extendee
-	0,  // [0:88] is the sub-list for field type_name
+	41,  // 0: Ydb.PersQueue.V1.SessionMetaValue.value:type_name -> Ydb.PersQueue.V1.SessionMetaValue.ValueEntry
+	42,  // 1: Ydb.PersQueue.V1.StreamingWriteClientMessage.init_request:type_name -> Ydb.PersQueue.V1.StreamingWriteClientMessage.InitRequest
+	43,  // 2: Ydb.PersQueue.V1.StreamingWriteClientMessage.write_request:type_name -> Ydb.PersQueue.V1.StreamingWriteClientMessage.WriteRequest
+	44,  // 3: Ydb.PersQueue.V1.StreamingWriteClientMessage.update_token_request:type_name -> Ydb.PersQueue.V1.StreamingWriteClientMessage.UpdateTokenRequest
+	46,  // 4: Ydb.PersQueue.V1.StreamingWriteServerMessage.init_response:type_name -> Ydb.PersQueue.V1.StreamingWriteServerMessage.InitResponse
+	47,  // 5: Ydb.PersQueue.V1.StreamingWriteServerMessage.batch_write_response:type_name -> Ydb.PersQueue.V1.StreamingWriteServerMessage.BatchWriteResponse
+	48,  // 6: Ydb.PersQueue.V1.StreamingWriteServerMessage.update_token_response:type_name -> Ydb.PersQueue.V1.StreamingWriteServerMessage.UpdateTokenResponse
+	104, // 7: Ydb.PersQueue.V1.StreamingWriteServerMessage.status:type_name -> Ydb.StatusIds.StatusCode
+	105, // 8: Ydb.PersQueue.V1.StreamingWriteServerMessage.issues:type_name -> Ydb.Issue.IssueMessage
+	50,  // 9: Ydb.PersQueue.V1.StreamingReadClientMessageNew.init_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest
+	51,  // 10: Ydb.PersQueue.V1.StreamingReadClientMessageNew.read_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.ReadRequest
+	52,  // 11: Ydb.PersQueue.V1.StreamingReadClientMessageNew.create_partition_stream_response:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.CreatePartitionStreamResponse
+	56,  // 12: Ydb.PersQueue.V1.StreamingReadClientMessageNew.commit_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.CommitRequest
+	53,  // 13: Ydb.PersQueue.V1.StreamingReadClientMessageNew.destroy_partition_stream_response:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.DestroyPartitionStreamResponse
+	54,  // 14: Ydb.PersQueue.V1.StreamingReadClientMessageNew.stop_read_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.StopReadRequest
+	55,  // 15: Ydb.PersQueue.V1.StreamingReadClientMessageNew.resume_read_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.ResumeReadRequest
+	57,  // 16: Ydb.PersQueue.V1.StreamingReadClientMessageNew.partition_stream_status_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.PartitionStreamStatusRequest
+	58,  // 17: Ydb.PersQueue.V1.StreamingReadClientMessageNew.add_topic_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.AddTopicRequest
+	59,  // 18: Ydb.PersQueue.V1.StreamingReadClientMessageNew.remove_topic_request:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.RemoveTopicRequest
+	64,  // 19: Ydb.PersQueue.V1.StreamingReadServerMessageNew.init_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.InitResponse
+	68,  // 20: Ydb.PersQueue.V1.StreamingReadServerMessageNew.batch_read_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse
+	65,  // 21: Ydb.PersQueue.V1.StreamingReadServerMessageNew.create_partition_stream_request:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.CreatePartitionStreamRequest
+	66,  // 22: Ydb.PersQueue.V1.StreamingReadServerMessageNew.destroy_partition_stream_request:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.DestroyPartitionStreamRequest
+	67,  // 23: Ydb.PersQueue.V1.StreamingReadServerMessageNew.commit_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.CommitResponse
+	69,  // 24: Ydb.PersQueue.V1.StreamingReadServerMessageNew.partition_stream_status_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.PartitionStreamStatusResponse
+	70,  // 25: Ydb.PersQueue.V1.StreamingReadServerMessageNew.stop_read_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.StopReadResponse
+	71,  // 26: Ydb.PersQueue.V1.StreamingReadServerMessageNew.resume_read_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.ResumeReadResponse
+	72,  // 27: Ydb.PersQueue.V1.StreamingReadServerMessageNew.add_topic_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.AddTopicResponse
+	73,  // 28: Ydb.PersQueue.V1.StreamingReadServerMessageNew.remove_topic_response:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.RemoveTopicResponse
+	104, // 29: Ydb.PersQueue.V1.StreamingReadServerMessageNew.status:type_name -> Ydb.StatusIds.StatusCode
+	105, // 30: Ydb.PersQueue.V1.StreamingReadServerMessageNew.issues:type_name -> Ydb.Issue.IssueMessage
+	80,  // 31: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.init_request:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest
+	81,  // 32: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.read:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Read
+	82,  // 33: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.start_read:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.StartRead
+	84,  // 34: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.commit:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Commit
+	83,  // 35: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.released:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Released
+	85,  // 36: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.status:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Status
+	104, // 37: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.status:type_name -> Ydb.StatusIds.StatusCode
+	105, // 38: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.issues:type_name -> Ydb.Issue.IssueMessage
+	88,  // 39: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.init_response:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.InitResponse
+	92,  // 40: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.data_batch:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch
+	89,  // 41: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.assigned:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.Assigned
+	90,  // 42: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.release:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.Release
+	91,  // 43: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.committed:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.Committed
+	93,  // 44: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.partition_status:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.PartitionStatus
+	106, // 45: Ydb.PersQueue.V1.ReadInfoRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	8,   // 46: Ydb.PersQueue.V1.ReadInfoRequest.topics:type_name -> Ydb.PersQueue.V1.Path
+	8,   // 47: Ydb.PersQueue.V1.ReadInfoRequest.consumer:type_name -> Ydb.PersQueue.V1.Path
+	107, // 48: Ydb.PersQueue.V1.ReadInfoResponse.operation:type_name -> Ydb.Operations.Operation
+	98,  // 49: Ydb.PersQueue.V1.ReadInfoResult.topics:type_name -> Ydb.PersQueue.V1.ReadInfoResult.TopicInfo
+	106, // 50: Ydb.PersQueue.V1.DropTopicRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	107, // 51: Ydb.PersQueue.V1.DropTopicResponse.operation:type_name -> Ydb.Operations.Operation
+	100, // 52: Ydb.PersQueue.V1.Credentials.iam:type_name -> Ydb.PersQueue.V1.Credentials.Iam
+	3,   // 53: Ydb.PersQueue.V1.TopicSettings.supported_format:type_name -> Ydb.PersQueue.V1.TopicSettings.Format
+	0,   // 54: Ydb.PersQueue.V1.TopicSettings.supported_codecs:type_name -> Ydb.PersQueue.V1.Codec
+	101, // 55: Ydb.PersQueue.V1.TopicSettings.read_rules:type_name -> Ydb.PersQueue.V1.TopicSettings.ReadRule
+	102, // 56: Ydb.PersQueue.V1.TopicSettings.attributes:type_name -> Ydb.PersQueue.V1.TopicSettings.AttributesEntry
+	103, // 57: Ydb.PersQueue.V1.TopicSettings.remote_mirror_rule:type_name -> Ydb.PersQueue.V1.TopicSettings.RemoteMirrorRule
+	106, // 58: Ydb.PersQueue.V1.CreateTopicRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	25,  // 59: Ydb.PersQueue.V1.CreateTopicRequest.settings:type_name -> Ydb.PersQueue.V1.TopicSettings
+	107, // 60: Ydb.PersQueue.V1.CreateTopicResponse.operation:type_name -> Ydb.Operations.Operation
+	106, // 61: Ydb.PersQueue.V1.AlterTopicRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	25,  // 62: Ydb.PersQueue.V1.AlterTopicRequest.settings:type_name -> Ydb.PersQueue.V1.TopicSettings
+	107, // 63: Ydb.PersQueue.V1.AlterTopicResponse.operation:type_name -> Ydb.Operations.Operation
+	106, // 64: Ydb.PersQueue.V1.AddReadRuleRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	101, // 65: Ydb.PersQueue.V1.AddReadRuleRequest.read_rule:type_name -> Ydb.PersQueue.V1.TopicSettings.ReadRule
+	107, // 66: Ydb.PersQueue.V1.AddReadRuleResponse.operation:type_name -> Ydb.Operations.Operation
+	106, // 67: Ydb.PersQueue.V1.RemoveReadRuleRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	107, // 68: Ydb.PersQueue.V1.RemoveReadRuleResponse.operation:type_name -> Ydb.Operations.Operation
+	106, // 69: Ydb.PersQueue.V1.DescribeTopicRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	107, // 70: Ydb.PersQueue.V1.DescribeTopicResponse.operation:type_name -> Ydb.Operations.Operation
+	108, // 71: Ydb.PersQueue.V1.DescribeTopicResult.self:type_name -> Ydb.Scheme.Entry
+	25,  // 72: Ydb.PersQueue.V1.DescribeTopicResult.settings:type_name -> Ydb.PersQueue.V1.TopicSettings
+	45,  // 73: Ydb.PersQueue.V1.StreamingWriteClientMessage.InitRequest.session_meta:type_name -> Ydb.PersQueue.V1.StreamingWriteClientMessage.InitRequest.SessionMetaEntry
+	0,   // 74: Ydb.PersQueue.V1.StreamingWriteServerMessage.InitResponse.supported_codecs:type_name -> Ydb.PersQueue.V1.Codec
+	49,  // 75: Ydb.PersQueue.V1.StreamingWriteServerMessage.BatchWriteResponse.write_statistics:type_name -> Ydb.PersQueue.V1.StreamingWriteServerMessage.WriteStatistics
+	60,  // 76: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.topics_read_settings:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.TopicReadSettings
+	62,  // 77: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.state:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State
+	61,  // 78: Ydb.PersQueue.V1.StreamingReadClientMessageNew.CommitRequest.commits:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.PartitionCommit
+	60,  // 79: Ydb.PersQueue.V1.StreamingReadClientMessageNew.AddTopicRequest.topic_read_settings:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.TopicReadSettings
+	5,   // 80: Ydb.PersQueue.V1.StreamingReadClientMessageNew.PartitionCommit.offsets:type_name -> Ydb.PersQueue.V1.OffsetsRange
+	63,  // 81: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.partition_streams_states:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState
+	15,  // 82: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState.partition_stream:type_name -> Ydb.PersQueue.V1.PartitionStream
+	5,   // 83: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState.offset_ranges:type_name -> Ydb.PersQueue.V1.OffsetsRange
+	1,   // 84: Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState.status:type_name -> Ydb.PersQueue.V1.StreamingReadClientMessageNew.InitRequest.State.PartitionStreamState.Status
+	74,  // 85: Ydb.PersQueue.V1.StreamingReadServerMessageNew.InitResponse.block_format_version_by_topic:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.InitResponse.BlockFormatVersionByTopicEntry
+	15,  // 86: Ydb.PersQueue.V1.StreamingReadServerMessageNew.CreatePartitionStreamRequest.partition_stream:type_name -> Ydb.PersQueue.V1.PartitionStream
+	75,  // 87: Ydb.PersQueue.V1.StreamingReadServerMessageNew.CommitResponse.partitions_committed_offsets:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.CommitResponse.PartitionCommittedOffset
+	77,  // 88: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.skip_range:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.SkipRange
+	76,  // 89: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.partitions:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData
+	4,   // 90: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData.message_session_meta:type_name -> Ydb.PersQueue.V1.SessionMetaValue
+	78,  // 91: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData.read_statistics:type_name -> Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.PartitionData.ReadStatistics
+	5,   // 92: Ydb.PersQueue.V1.StreamingReadServerMessageNew.BatchReadResponse.SkipRange.skip_range:type_name -> Ydb.PersQueue.V1.OffsetsRange
+	79,  // 93: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.topics_read_settings:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.TopicReadSettings
+	86,  // 94: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.state:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.State
+	10,  // 95: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.read_params:type_name -> Ydb.PersQueue.V1.ReadParams
+	8,   // 96: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.StartRead.topic:type_name -> Ydb.PersQueue.V1.Path
+	8,   // 97: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Released.topic:type_name -> Ydb.PersQueue.V1.Path
+	11,  // 98: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Commit.cookies:type_name -> Ydb.PersQueue.V1.CommitCookie
+	12,  // 99: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Commit.offset_ranges:type_name -> Ydb.PersQueue.V1.CommitOffsetRange
+	8,   // 100: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.Status.topic:type_name -> Ydb.PersQueue.V1.Path
+	87,  // 101: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.State.partition_streams_states:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.State.PartitionStreamState
+	15,  // 102: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.State.PartitionStreamState.partition_stream:type_name -> Ydb.PersQueue.V1.PartitionStream
+	5,   // 103: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.State.PartitionStreamState.offset_ranges:type_name -> Ydb.PersQueue.V1.OffsetsRange
+	2,   // 104: Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.State.PartitionStreamState.status:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadClientMessage.InitRequest.State.PartitionStreamState.Status
+	94,  // 105: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.InitResponse.block_format_version_by_topic:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.InitResponse.BlockFormatVersionByTopicEntry
+	8,   // 106: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.Assigned.topic:type_name -> Ydb.PersQueue.V1.Path
+	8,   // 107: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.Release.topic:type_name -> Ydb.PersQueue.V1.Path
+	11,  // 108: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.Committed.cookies:type_name -> Ydb.PersQueue.V1.CommitCookie
+	12,  // 109: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.Committed.offset_ranges:type_name -> Ydb.PersQueue.V1.CommitOffsetRange
+	97,  // 110: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.partition_data:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.PartitionData
+	8,   // 111: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.PartitionStatus.topic:type_name -> Ydb.PersQueue.V1.Path
+	0,   // 112: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.MessageData.codec:type_name -> Ydb.PersQueue.V1.Codec
+	9,   // 113: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.Batch.extra_fields:type_name -> Ydb.PersQueue.V1.KeyValue
+	95,  // 114: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.Batch.message_data:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.MessageData
+	8,   // 115: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.PartitionData.topic:type_name -> Ydb.PersQueue.V1.Path
+	96,  // 116: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.PartitionData.batches:type_name -> Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.Batch
+	11,  // 117: Ydb.PersQueue.V1.MigrationStreamingReadServerMessage.DataBatch.PartitionData.cookie:type_name -> Ydb.PersQueue.V1.CommitCookie
+	8,   // 118: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.topic:type_name -> Ydb.PersQueue.V1.Path
+	104, // 119: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.status:type_name -> Ydb.StatusIds.StatusCode
+	105, // 120: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.issues:type_name -> Ydb.Issue.IssueMessage
+	99,  // 121: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.partitions:type_name -> Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.PartitionInfo
+	104, // 122: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.PartitionInfo.status:type_name -> Ydb.StatusIds.StatusCode
+	105, // 123: Ydb.PersQueue.V1.ReadInfoResult.TopicInfo.PartitionInfo.issues:type_name -> Ydb.Issue.IssueMessage
+	3,   // 124: Ydb.PersQueue.V1.TopicSettings.ReadRule.supported_format:type_name -> Ydb.PersQueue.V1.TopicSettings.Format
+	0,   // 125: Ydb.PersQueue.V1.TopicSettings.ReadRule.supported_codecs:type_name -> Ydb.PersQueue.V1.Codec
+	24,  // 126: Ydb.PersQueue.V1.TopicSettings.RemoteMirrorRule.credentials:type_name -> Ydb.PersQueue.V1.Credentials
+	127, // [127:127] is the sub-list for method output_type
+	127, // [127:127] is the sub-list for method input_type
+	127, // [127:127] is the sub-list for extension type_name
+	127, // [127:127] is the sub-list for extension extendee
+	0,   // [0:127] is the sub-list for field type_name
 }
 
 func init() { file_protos_ydb_persqueue_v1_proto_init() }
@@ -7176,7 +9423,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadInfoRequest); i {
+			switch v := v.(*MigrationStreamingReadClientMessage); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7188,7 +9435,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadInfoResponse); i {
+			switch v := v.(*MigrationStreamingReadServerMessage); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7200,7 +9447,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadInfoResult); i {
+			switch v := v.(*ReadInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7212,7 +9459,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DropTopicRequest); i {
+			switch v := v.(*ReadInfoResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7224,7 +9471,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DropTopicResponse); i {
+			switch v := v.(*ReadInfoResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7236,7 +9483,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DropTopicResult); i {
+			switch v := v.(*DropTopicRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7248,7 +9495,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Credentials); i {
+			switch v := v.(*DropTopicResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7260,7 +9507,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TopicSettings); i {
+			switch v := v.(*DropTopicResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7272,7 +9519,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateTopicRequest); i {
+			switch v := v.(*Credentials); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7284,7 +9531,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateTopicResponse); i {
+			switch v := v.(*TopicSettings); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7296,7 +9543,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateTopicResult); i {
+			switch v := v.(*CreateTopicRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7308,7 +9555,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AlterTopicRequest); i {
+			switch v := v.(*CreateTopicResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7320,7 +9567,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AlterTopicResponse); i {
+			switch v := v.(*CreateTopicResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7332,7 +9579,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AlterTopicResult); i {
+			switch v := v.(*AlterTopicRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7344,7 +9591,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddReadRuleRequest); i {
+			switch v := v.(*AlterTopicResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7356,7 +9603,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddReadRuleResponse); i {
+			switch v := v.(*AlterTopicResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7368,7 +9615,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddReadRuleResult); i {
+			switch v := v.(*AddReadRuleRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7380,7 +9627,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RemoveReadRuleRequest); i {
+			switch v := v.(*AddReadRuleResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7392,7 +9639,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RemoveReadRuleResponse); i {
+			switch v := v.(*AddReadRuleResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7404,7 +9651,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RemoveReadRuleResult); i {
+			switch v := v.(*RemoveReadRuleRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7416,7 +9663,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DescribeTopicRequest); i {
+			switch v := v.(*RemoveReadRuleResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7428,7 +9675,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DescribeTopicResponse); i {
+			switch v := v.(*RemoveReadRuleResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7440,7 +9687,19 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DescribeTopicResult); i {
+			switch v := v.(*DescribeTopicRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DescribeTopicResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7452,19 +9711,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingWriteClientMessage_InitRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protos_ydb_persqueue_v1_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingWriteClientMessage_WriteRequest); i {
+			switch v := v.(*DescribeTopicResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7476,7 +9723,19 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingWriteClientMessage_UpdateTokenRequest); i {
+			switch v := v.(*StreamingWriteClientMessage_InitRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StreamingWriteClientMessage_WriteRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7488,19 +9747,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingWriteServerMessage_InitResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protos_ydb_persqueue_v1_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingWriteServerMessage_BatchWriteResponse); i {
+			switch v := v.(*StreamingWriteClientMessage_UpdateTokenRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7512,7 +9759,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingWriteServerMessage_UpdateTokenResponse); i {
+			switch v := v.(*StreamingWriteServerMessage_InitResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7524,7 +9771,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingWriteServerMessage_WriteStatistics); i {
+			switch v := v.(*StreamingWriteServerMessage_BatchWriteResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7536,7 +9783,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_InitRequest); i {
+			switch v := v.(*StreamingWriteServerMessage_UpdateTokenResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7548,7 +9795,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_ReadRequest); i {
+			switch v := v.(*StreamingWriteServerMessage_WriteStatistics); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7560,7 +9807,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_CreatePartitionStreamResponse); i {
+			switch v := v.(*StreamingReadClientMessageNew_InitRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7572,7 +9819,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_DestroyPartitionStreamResponse); i {
+			switch v := v.(*StreamingReadClientMessageNew_ReadRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7584,7 +9831,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_StopReadRequest); i {
+			switch v := v.(*StreamingReadClientMessageNew_CreatePartitionStreamResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7596,7 +9843,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_ResumeReadRequest); i {
+			switch v := v.(*StreamingReadClientMessageNew_DestroyPartitionStreamResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7608,7 +9855,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_CommitRequest); i {
+			switch v := v.(*StreamingReadClientMessageNew_StopReadRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7620,7 +9867,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_PartitionStreamStatusRequest); i {
+			switch v := v.(*StreamingReadClientMessageNew_ResumeReadRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7632,7 +9879,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_AddTopicRequest); i {
+			switch v := v.(*StreamingReadClientMessageNew_CommitRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7644,7 +9891,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_RemoveTopicRequest); i {
+			switch v := v.(*StreamingReadClientMessageNew_PartitionStreamStatusRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7656,7 +9903,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_TopicReadSettings); i {
+			switch v := v.(*StreamingReadClientMessageNew_AddTopicRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7668,7 +9915,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_PartitionCommit); i {
+			switch v := v.(*StreamingReadClientMessageNew_RemoveTopicRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7680,7 +9927,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_InitRequest_State); i {
+			switch v := v.(*StreamingReadClientMessageNew_TopicReadSettings); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7692,7 +9939,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState); i {
+			switch v := v.(*StreamingReadClientMessageNew_PartitionCommit); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7704,7 +9951,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_InitResponse); i {
+			switch v := v.(*StreamingReadClientMessageNew_InitRequest_State); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7716,7 +9963,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_CreatePartitionStreamRequest); i {
+			switch v := v.(*StreamingReadClientMessageNew_InitRequest_State_PartitionStreamState); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7728,7 +9975,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_DestroyPartitionStreamRequest); i {
+			switch v := v.(*StreamingReadServerMessageNew_InitResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7740,7 +9987,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_CommitResponse); i {
+			switch v := v.(*StreamingReadServerMessageNew_CreatePartitionStreamRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7752,7 +9999,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_BatchReadResponse); i {
+			switch v := v.(*StreamingReadServerMessageNew_DestroyPartitionStreamRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7764,7 +10011,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_PartitionStreamStatusResponse); i {
+			switch v := v.(*StreamingReadServerMessageNew_CommitResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7776,7 +10023,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_StopReadResponse); i {
+			switch v := v.(*StreamingReadServerMessageNew_BatchReadResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7788,7 +10035,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_ResumeReadResponse); i {
+			switch v := v.(*StreamingReadServerMessageNew_PartitionStreamStatusResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7800,7 +10047,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_AddTopicResponse); i {
+			switch v := v.(*StreamingReadServerMessageNew_StopReadResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7812,7 +10059,19 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_RemoveTopicResponse); i {
+			switch v := v.(*StreamingReadServerMessageNew_ResumeReadResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StreamingReadServerMessageNew_AddTopicResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7824,19 +10083,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_CommitResponse_PartitionCommittedOffset); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_protos_ydb_persqueue_v1_proto_msgTypes[70].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_BatchReadResponse_PartitionData); i {
+			switch v := v.(*StreamingReadServerMessageNew_RemoveTopicResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7848,7 +10095,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[71].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_BatchReadResponse_SkipRange); i {
+			switch v := v.(*StreamingReadServerMessageNew_CommitResponse_PartitionCommittedOffset); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7860,7 +10107,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[72].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StreamingReadServerMessageNew_BatchReadResponse_PartitionData_ReadStatistics); i {
+			switch v := v.(*StreamingReadServerMessageNew_BatchReadResponse_PartitionData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7872,7 +10119,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[73].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadInfoResult_TopicInfo); i {
+			switch v := v.(*StreamingReadServerMessageNew_BatchReadResponse_SkipRange); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7884,7 +10131,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[74].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadInfoResult_TopicInfo_PartitionInfo); i {
+			switch v := v.(*StreamingReadServerMessageNew_BatchReadResponse_PartitionData_ReadStatistics); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7896,7 +10143,7 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[75].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Credentials_Iam); i {
+			switch v := v.(*MigrationStreamingReadClientMessage_TopicReadSettings); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7908,7 +10155,19 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[76].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*TopicSettings_ReadRule); i {
+			switch v := v.(*MigrationStreamingReadClientMessage_InitRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[77].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadClientMessage_Read); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -7920,6 +10179,234 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 			}
 		}
 		file_protos_ydb_persqueue_v1_proto_msgTypes[78].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadClientMessage_StartRead); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[79].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadClientMessage_Released); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[80].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadClientMessage_Commit); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[81].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadClientMessage_Status); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[82].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadClientMessage_InitRequest_State); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[83].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadClientMessage_InitRequest_State_PartitionStreamState); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[84].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadServerMessage_InitResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[85].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadServerMessage_Assigned); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[86].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadServerMessage_Release); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[87].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadServerMessage_Committed); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[88].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadServerMessage_DataBatch); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[89].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadServerMessage_PartitionStatus); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[91].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadServerMessage_DataBatch_MessageData); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[92].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadServerMessage_DataBatch_Batch); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[93].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MigrationStreamingReadServerMessage_DataBatch_PartitionData); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[94].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ReadInfoResult_TopicInfo); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[95].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ReadInfoResult_TopicInfo_PartitionInfo); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[96].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Credentials_Iam); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[97].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*TopicSettings_ReadRule); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_persqueue_v1_proto_msgTypes[99].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TopicSettings_RemoteMirrorRule); i {
 			case 0:
 				return &v.state
@@ -7966,7 +10453,23 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 		(*StreamingReadServerMessageNew_AddTopicResponse_)(nil),
 		(*StreamingReadServerMessageNew_RemoveTopicResponse_)(nil),
 	}
-	file_protos_ydb_persqueue_v1_proto_msgTypes[18].OneofWrappers = []interface{}{
+	file_protos_ydb_persqueue_v1_proto_msgTypes[12].OneofWrappers = []interface{}{
+		(*MigrationStreamingReadClientMessage_InitRequest_)(nil),
+		(*MigrationStreamingReadClientMessage_Read_)(nil),
+		(*MigrationStreamingReadClientMessage_StartRead_)(nil),
+		(*MigrationStreamingReadClientMessage_Commit_)(nil),
+		(*MigrationStreamingReadClientMessage_Released_)(nil),
+		(*MigrationStreamingReadClientMessage_Status_)(nil),
+	}
+	file_protos_ydb_persqueue_v1_proto_msgTypes[13].OneofWrappers = []interface{}{
+		(*MigrationStreamingReadServerMessage_InitResponse_)(nil),
+		(*MigrationStreamingReadServerMessage_DataBatch_)(nil),
+		(*MigrationStreamingReadServerMessage_Assigned_)(nil),
+		(*MigrationStreamingReadServerMessage_Release_)(nil),
+		(*MigrationStreamingReadServerMessage_Committed_)(nil),
+		(*MigrationStreamingReadServerMessage_PartitionStatus_)(nil),
+	}
+	file_protos_ydb_persqueue_v1_proto_msgTypes[20].OneofWrappers = []interface{}{
 		(*Credentials_OauthToken)(nil),
 		(*Credentials_JwtParams)(nil),
 		(*Credentials_Iam_)(nil),
@@ -7976,8 +10479,8 @@ func file_protos_ydb_persqueue_v1_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_protos_ydb_persqueue_v1_proto_rawDesc,
-			NumEnums:      3,
-			NumMessages:   79,
+			NumEnums:      4,
+			NumMessages:   100,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
