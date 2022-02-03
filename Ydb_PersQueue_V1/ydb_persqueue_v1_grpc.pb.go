@@ -21,39 +21,6 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PersQueueServiceClient interface {
 	StreamingWrite(ctx context.Context, opts ...grpc.CallOption) (PersQueueService_StreamingWriteClient, error)
-	//*
-	// Creates Read Session
-	// Pipeline:
-	// client                  server
-	//         Init(Topics, ClientId, ...)
-	//        ---------------->
-	//         Init(SessionId)
-	//        <----------------
-	//         read1
-	//        ---------------->
-	//         read2
-	//        ---------------->
-	//         assign(Topic1, Cluster, Partition1, ...) - assigns and releases are optional
-	//        <----------------
-	//         assign(Topic2, Clutster, Partition2, ...)
-	//        <----------------
-	//         start_read(Topic1, Partition1, ...) - client must respond to assign request with this message. Only after this client will start recieving messages from this partition
-	//        ---------------->
-	//         release(Topic1, Partition1, ...)
-	//        <----------------
-	//         released(Topic1, Partition1, ...) - only after released server will give this parittion to other session.
-	//        ---------------->
-	//         start_read(Topic2, Partition2, ...) - client must respond to assign request with this message. Only after this client will start recieving messages from this partition
-	//        ---------------->
-	//         read data(data, ...)
-	//        <----------------
-	//         commit(cookie1)
-	//        ---------------->
-	//         committed(cookie1)
-	//        <----------------
-	//         issue(description, ...)
-	//        <----------------
-	MigrationStreamingRead(ctx context.Context, opts ...grpc.CallOption) (PersQueueService_MigrationStreamingReadClient, error)
 	// Get information about reading
 	GetReadSessionsInfo(ctx context.Context, in *Ydb_PersQueue_V1.ReadInfoRequest, opts ...grpc.CallOption) (*Ydb_PersQueue_V1.ReadInfoResponse, error)
 	//
@@ -109,37 +76,6 @@ func (x *persQueueServiceStreamingWriteClient) Send(m *Ydb_PersQueue_V1.Streamin
 
 func (x *persQueueServiceStreamingWriteClient) Recv() (*Ydb_PersQueue_V1.StreamingWriteServerMessage, error) {
 	m := new(Ydb_PersQueue_V1.StreamingWriteServerMessage)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *persQueueServiceClient) MigrationStreamingRead(ctx context.Context, opts ...grpc.CallOption) (PersQueueService_MigrationStreamingReadClient, error) {
-	stream, err := c.cc.NewStream(ctx, &PersQueueService_ServiceDesc.Streams[1], "/Ydb.PersQueue.V1.PersQueueService/MigrationStreamingRead", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &persQueueServiceMigrationStreamingReadClient{stream}
-	return x, nil
-}
-
-type PersQueueService_MigrationStreamingReadClient interface {
-	Send(*Ydb_PersQueue_V1.MigrationStreamingReadClientMessage) error
-	Recv() (*Ydb_PersQueue_V1.MigrationStreamingReadServerMessage, error)
-	grpc.ClientStream
-}
-
-type persQueueServiceMigrationStreamingReadClient struct {
-	grpc.ClientStream
-}
-
-func (x *persQueueServiceMigrationStreamingReadClient) Send(m *Ydb_PersQueue_V1.MigrationStreamingReadClientMessage) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *persQueueServiceMigrationStreamingReadClient) Recv() (*Ydb_PersQueue_V1.MigrationStreamingReadServerMessage, error) {
-	m := new(Ydb_PersQueue_V1.MigrationStreamingReadServerMessage)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -214,39 +150,6 @@ func (c *persQueueServiceClient) RemoveReadRule(ctx context.Context, in *Ydb_Per
 // for forward compatibility
 type PersQueueServiceServer interface {
 	StreamingWrite(PersQueueService_StreamingWriteServer) error
-	//*
-	// Creates Read Session
-	// Pipeline:
-	// client                  server
-	//         Init(Topics, ClientId, ...)
-	//        ---------------->
-	//         Init(SessionId)
-	//        <----------------
-	//         read1
-	//        ---------------->
-	//         read2
-	//        ---------------->
-	//         assign(Topic1, Cluster, Partition1, ...) - assigns and releases are optional
-	//        <----------------
-	//         assign(Topic2, Clutster, Partition2, ...)
-	//        <----------------
-	//         start_read(Topic1, Partition1, ...) - client must respond to assign request with this message. Only after this client will start recieving messages from this partition
-	//        ---------------->
-	//         release(Topic1, Partition1, ...)
-	//        <----------------
-	//         released(Topic1, Partition1, ...) - only after released server will give this parittion to other session.
-	//        ---------------->
-	//         start_read(Topic2, Partition2, ...) - client must respond to assign request with this message. Only after this client will start recieving messages from this partition
-	//        ---------------->
-	//         read data(data, ...)
-	//        <----------------
-	//         commit(cookie1)
-	//        ---------------->
-	//         committed(cookie1)
-	//        <----------------
-	//         issue(description, ...)
-	//        <----------------
-	MigrationStreamingRead(PersQueueService_MigrationStreamingReadServer) error
 	// Get information about reading
 	GetReadSessionsInfo(context.Context, *Ydb_PersQueue_V1.ReadInfoRequest) (*Ydb_PersQueue_V1.ReadInfoResponse, error)
 	//
@@ -276,9 +179,6 @@ type UnimplementedPersQueueServiceServer struct {
 
 func (UnimplementedPersQueueServiceServer) StreamingWrite(PersQueueService_StreamingWriteServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamingWrite not implemented")
-}
-func (UnimplementedPersQueueServiceServer) MigrationStreamingRead(PersQueueService_MigrationStreamingReadServer) error {
-	return status.Errorf(codes.Unimplemented, "method MigrationStreamingRead not implemented")
 }
 func (UnimplementedPersQueueServiceServer) GetReadSessionsInfo(context.Context, *Ydb_PersQueue_V1.ReadInfoRequest) (*Ydb_PersQueue_V1.ReadInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReadSessionsInfo not implemented")
@@ -334,32 +234,6 @@ func (x *persQueueServiceStreamingWriteServer) Send(m *Ydb_PersQueue_V1.Streamin
 
 func (x *persQueueServiceStreamingWriteServer) Recv() (*Ydb_PersQueue_V1.StreamingWriteClientMessage, error) {
 	m := new(Ydb_PersQueue_V1.StreamingWriteClientMessage)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func _PersQueueService_MigrationStreamingRead_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(PersQueueServiceServer).MigrationStreamingRead(&persQueueServiceMigrationStreamingReadServer{stream})
-}
-
-type PersQueueService_MigrationStreamingReadServer interface {
-	Send(*Ydb_PersQueue_V1.MigrationStreamingReadServerMessage) error
-	Recv() (*Ydb_PersQueue_V1.MigrationStreamingReadClientMessage, error)
-	grpc.ServerStream
-}
-
-type persQueueServiceMigrationStreamingReadServer struct {
-	grpc.ServerStream
-}
-
-func (x *persQueueServiceMigrationStreamingReadServer) Send(m *Ydb_PersQueue_V1.MigrationStreamingReadServerMessage) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *persQueueServiceMigrationStreamingReadServer) Recv() (*Ydb_PersQueue_V1.MigrationStreamingReadClientMessage, error) {
-	m := new(Ydb_PersQueue_V1.MigrationStreamingReadClientMessage)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -532,12 +406,6 @@ var PersQueueService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamingWrite",
 			Handler:       _PersQueueService_StreamingWrite_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
-		},
-		{
-			StreamName:    "MigrationStreamingRead",
-			Handler:       _PersQueueService_MigrationStreamingRead_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},
