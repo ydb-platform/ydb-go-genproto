@@ -22,7 +22,7 @@ cd ../
 ```
 2. Run generation `*.pb.go` code from command:
 ```
-go generate
+make proto
 ```
 This command re-generate `*.pb.go` files
 

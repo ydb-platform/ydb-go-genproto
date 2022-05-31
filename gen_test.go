@@ -7,7 +7,6 @@ import (
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Cms"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Coordination"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Discovery"
-	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Experimental"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Export"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Formats"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Import"
