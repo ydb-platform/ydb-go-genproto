@@ -29,13 +29,6 @@ type PersQueueServiceClient interface {
 	// Creates Read Session
 	// Pipeline:
 	// client                  server
-	//
-	// TODO description
-	StreamingRead(ctx context.Context, opts ...grpc.CallOption) (PersQueueService_StreamingReadClient, error)
-	//*
-	// Creates Read Session
-	// Pipeline:
-	// client                  server
 	//         Init(Topics, ClientId, ...)
 	//        ---------------->
 	//         Init(SessionId)
@@ -126,39 +119,8 @@ func (x *persQueueServiceStreamingWriteClient) Recv() (*Ydb_PersQueue_V1.Streami
 	return m, nil
 }
 
-func (c *persQueueServiceClient) StreamingRead(ctx context.Context, opts ...grpc.CallOption) (PersQueueService_StreamingReadClient, error) {
-	stream, err := c.cc.NewStream(ctx, &PersQueueService_ServiceDesc.Streams[1], "/Ydb.PersQueue.V1.PersQueueService/StreamingRead", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &persQueueServiceStreamingReadClient{stream}
-	return x, nil
-}
-
-type PersQueueService_StreamingReadClient interface {
-	Send(*Ydb_PersQueue_V1.StreamingReadClientMessage) error
-	Recv() (*Ydb_PersQueue_V1.StreamingReadServerMessage, error)
-	grpc.ClientStream
-}
-
-type persQueueServiceStreamingReadClient struct {
-	grpc.ClientStream
-}
-
-func (x *persQueueServiceStreamingReadClient) Send(m *Ydb_PersQueue_V1.StreamingReadClientMessage) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *persQueueServiceStreamingReadClient) Recv() (*Ydb_PersQueue_V1.StreamingReadServerMessage, error) {
-	m := new(Ydb_PersQueue_V1.StreamingReadServerMessage)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *persQueueServiceClient) MigrationStreamingRead(ctx context.Context, opts ...grpc.CallOption) (PersQueueService_MigrationStreamingReadClient, error) {
-	stream, err := c.cc.NewStream(ctx, &PersQueueService_ServiceDesc.Streams[2], "/Ydb.PersQueue.V1.PersQueueService/MigrationStreamingRead", opts...)
+	stream, err := c.cc.NewStream(ctx, &PersQueueService_ServiceDesc.Streams[1], "/Ydb.PersQueue.V1.PersQueueService/MigrationStreamingRead", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -260,13 +222,6 @@ type PersQueueServiceServer interface {
 	// Creates Read Session
 	// Pipeline:
 	// client                  server
-	//
-	// TODO description
-	StreamingRead(PersQueueService_StreamingReadServer) error
-	//*
-	// Creates Read Session
-	// Pipeline:
-	// client                  server
 	//         Init(Topics, ClientId, ...)
 	//        ---------------->
 	//         Init(SessionId)
@@ -326,9 +281,6 @@ type UnimplementedPersQueueServiceServer struct {
 func (UnimplementedPersQueueServiceServer) StreamingWrite(PersQueueService_StreamingWriteServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamingWrite not implemented")
 }
-func (UnimplementedPersQueueServiceServer) StreamingRead(PersQueueService_StreamingReadServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamingRead not implemented")
-}
 func (UnimplementedPersQueueServiceServer) MigrationStreamingRead(PersQueueService_MigrationStreamingReadServer) error {
 	return status.Errorf(codes.Unimplemented, "method MigrationStreamingRead not implemented")
 }
@@ -386,32 +338,6 @@ func (x *persQueueServiceStreamingWriteServer) Send(m *Ydb_PersQueue_V1.Streamin
 
 func (x *persQueueServiceStreamingWriteServer) Recv() (*Ydb_PersQueue_V1.StreamingWriteClientMessage, error) {
 	m := new(Ydb_PersQueue_V1.StreamingWriteClientMessage)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func _PersQueueService_StreamingRead_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(PersQueueServiceServer).StreamingRead(&persQueueServiceStreamingReadServer{stream})
-}
-
-type PersQueueService_StreamingReadServer interface {
-	Send(*Ydb_PersQueue_V1.StreamingReadServerMessage) error
-	Recv() (*Ydb_PersQueue_V1.StreamingReadClientMessage, error)
-	grpc.ServerStream
-}
-
-type persQueueServiceStreamingReadServer struct {
-	grpc.ServerStream
-}
-
-func (x *persQueueServiceStreamingReadServer) Send(m *Ydb_PersQueue_V1.StreamingReadServerMessage) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *persQueueServiceStreamingReadServer) Recv() (*Ydb_PersQueue_V1.StreamingReadClientMessage, error) {
-	m := new(Ydb_PersQueue_V1.StreamingReadClientMessage)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -610,12 +536,6 @@ var PersQueueService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamingWrite",
 			Handler:       _PersQueueService_StreamingWrite_Handler,
-			ServerStreams: true,
-			ClientStreams: true,
-		},
-		{
-			StreamName:    "StreamingRead",
-			Handler:       _PersQueueService_StreamingRead_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},
