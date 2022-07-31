@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb"
+	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Auth"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Cms"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Coordination"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Discovery"
@@ -20,6 +21,7 @@ import (
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Scripting"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Table"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_TableStats"
+	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Topic"
 )
 
 func TestCompatibility(_ *testing.T) {
