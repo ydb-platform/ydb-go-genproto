@@ -14,8 +14,6 @@ import (
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Issue"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Monitoring"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations"
-	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_PersQueue_ClusterDiscovery"
-	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_PersQueue_V1"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_RateLimiter"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Scheme"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Scripting"
