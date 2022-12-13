@@ -81,6 +81,8 @@ type TopicServiceClient interface {
 	CreateTopic(ctx context.Context, in *Ydb_Topic.CreateTopicRequest, opts ...grpc.CallOption) (*Ydb_Topic.CreateTopicResponse, error)
 	// Describe topic command.
 	DescribeTopic(ctx context.Context, in *Ydb_Topic.DescribeTopicRequest, opts ...grpc.CallOption) (*Ydb_Topic.DescribeTopicResponse, error)
+	// Describe topic's consumer command.
+	DescribeConsumer(ctx context.Context, in *Ydb_Topic.DescribeConsumerRequest, opts ...grpc.CallOption) (*Ydb_Topic.DescribeConsumerResponse, error)
 	// Alter topic command.
 	AlterTopic(ctx context.Context, in *Ydb_Topic.AlterTopicRequest, opts ...grpc.CallOption) (*Ydb_Topic.AlterTopicResponse, error)
 	// Drop topic command.
@@ -175,6 +177,15 @@ func (c *topicServiceClient) DescribeTopic(ctx context.Context, in *Ydb_Topic.De
 	return out, nil
 }
 
+func (c *topicServiceClient) DescribeConsumer(ctx context.Context, in *Ydb_Topic.DescribeConsumerRequest, opts ...grpc.CallOption) (*Ydb_Topic.DescribeConsumerResponse, error) {
+	out := new(Ydb_Topic.DescribeConsumerResponse)
+	err := c.cc.Invoke(ctx, "/Ydb.Topic.V1.TopicService/DescribeConsumer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *topicServiceClient) AlterTopic(ctx context.Context, in *Ydb_Topic.AlterTopicRequest, opts ...grpc.CallOption) (*Ydb_Topic.AlterTopicResponse, error) {
 	out := new(Ydb_Topic.AlterTopicResponse)
 	err := c.cc.Invoke(ctx, "/Ydb.Topic.V1.TopicService/AlterTopic", in, out, opts...)
@@ -255,6 +266,8 @@ type TopicServiceServer interface {
 	CreateTopic(context.Context, *Ydb_Topic.CreateTopicRequest) (*Ydb_Topic.CreateTopicResponse, error)
 	// Describe topic command.
 	DescribeTopic(context.Context, *Ydb_Topic.DescribeTopicRequest) (*Ydb_Topic.DescribeTopicResponse, error)
+	// Describe topic's consumer command.
+	DescribeConsumer(context.Context, *Ydb_Topic.DescribeConsumerRequest) (*Ydb_Topic.DescribeConsumerResponse, error)
 	// Alter topic command.
 	AlterTopic(context.Context, *Ydb_Topic.AlterTopicRequest) (*Ydb_Topic.AlterTopicResponse, error)
 	// Drop topic command.
@@ -277,6 +290,9 @@ func (UnimplementedTopicServiceServer) CreateTopic(context.Context, *Ydb_Topic.C
 }
 func (UnimplementedTopicServiceServer) DescribeTopic(context.Context, *Ydb_Topic.DescribeTopicRequest) (*Ydb_Topic.DescribeTopicResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DescribeTopic not implemented")
+}
+func (UnimplementedTopicServiceServer) DescribeConsumer(context.Context, *Ydb_Topic.DescribeConsumerRequest) (*Ydb_Topic.DescribeConsumerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DescribeConsumer not implemented")
 }
 func (UnimplementedTopicServiceServer) AlterTopic(context.Context, *Ydb_Topic.AlterTopicRequest) (*Ydb_Topic.AlterTopicResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AlterTopic not implemented")
@@ -385,6 +401,24 @@ func _TopicService_DescribeTopic_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TopicService_DescribeConsumer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ydb_Topic.DescribeConsumerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicServiceServer).DescribeConsumer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/Ydb.Topic.V1.TopicService/DescribeConsumer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicServiceServer).DescribeConsumer(ctx, req.(*Ydb_Topic.DescribeConsumerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _TopicService_AlterTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Ydb_Topic.AlterTopicRequest)
 	if err := dec(in); err != nil {
@@ -435,6 +469,10 @@ var TopicService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DescribeTopic",
 			Handler:    _TopicService_DescribeTopic_Handler,
+		},
+		{
+			MethodName: "DescribeConsumer",
+			Handler:    _TopicService_DescribeConsumer_Handler,
 		},
 		{
 			MethodName: "AlterTopic",
