@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	TopicService_StreamWrite_FullMethodName      = "/Ydb.Topic.V1.TopicService/StreamWrite"
 	TopicService_StreamRead_FullMethodName       = "/Ydb.Topic.V1.TopicService/StreamRead"
+	TopicService_CommitOffset_FullMethodName     = "/Ydb.Topic.V1.TopicService/CommitOffset"
 	TopicService_CreateTopic_FullMethodName      = "/Ydb.Topic.V1.TopicService/CreateTopic"
 	TopicService_DescribeTopic_FullMethodName    = "/Ydb.Topic.V1.TopicService/DescribeTopic"
 	TopicService_DescribeConsumer_FullMethodName = "/Ydb.Topic.V1.TopicService/DescribeConsumer"
@@ -89,6 +90,8 @@ type TopicServiceClient interface {
 	//	 [something went wrong] (status != SUCCESS, issues not empty)
 	//	<----------------
 	StreamRead(ctx context.Context, opts ...grpc.CallOption) (TopicService_StreamReadClient, error)
+	// Single commit offset request.
+	CommitOffset(ctx context.Context, in *Ydb_Topic.CommitOffsetRequest, opts ...grpc.CallOption) (*Ydb_Topic.CommitOffsetResponse, error)
 	// Create topic command.
 	CreateTopic(ctx context.Context, in *Ydb_Topic.CreateTopicRequest, opts ...grpc.CallOption) (*Ydb_Topic.CreateTopicResponse, error)
 	// Describe topic command.
@@ -169,6 +172,15 @@ func (x *topicServiceStreamReadClient) Recv() (*Ydb_Topic.StreamReadMessage_From
 		return nil, err
 	}
 	return m, nil
+}
+
+func (c *topicServiceClient) CommitOffset(ctx context.Context, in *Ydb_Topic.CommitOffsetRequest, opts ...grpc.CallOption) (*Ydb_Topic.CommitOffsetResponse, error) {
+	out := new(Ydb_Topic.CommitOffsetResponse)
+	err := c.cc.Invoke(ctx, TopicService_CommitOffset_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *topicServiceClient) CreateTopic(ctx context.Context, in *Ydb_Topic.CreateTopicRequest, opts ...grpc.CallOption) (*Ydb_Topic.CreateTopicResponse, error) {
@@ -276,6 +288,8 @@ type TopicServiceServer interface {
 	//	 [something went wrong] (status != SUCCESS, issues not empty)
 	//	<----------------
 	StreamRead(TopicService_StreamReadServer) error
+	// Single commit offset request.
+	CommitOffset(context.Context, *Ydb_Topic.CommitOffsetRequest) (*Ydb_Topic.CommitOffsetResponse, error)
 	// Create topic command.
 	CreateTopic(context.Context, *Ydb_Topic.CreateTopicRequest) (*Ydb_Topic.CreateTopicResponse, error)
 	// Describe topic command.
@@ -298,6 +312,9 @@ func (UnimplementedTopicServiceServer) StreamWrite(TopicService_StreamWriteServe
 }
 func (UnimplementedTopicServiceServer) StreamRead(TopicService_StreamReadServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamRead not implemented")
+}
+func (UnimplementedTopicServiceServer) CommitOffset(context.Context, *Ydb_Topic.CommitOffsetRequest) (*Ydb_Topic.CommitOffsetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommitOffset not implemented")
 }
 func (UnimplementedTopicServiceServer) CreateTopic(context.Context, *Ydb_Topic.CreateTopicRequest) (*Ydb_Topic.CreateTopicResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTopic not implemented")
@@ -377,6 +394,24 @@ func (x *topicServiceStreamReadServer) Recv() (*Ydb_Topic.StreamReadMessage_From
 		return nil, err
 	}
 	return m, nil
+}
+
+func _TopicService_CommitOffset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ydb_Topic.CommitOffsetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TopicServiceServer).CommitOffset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TopicService_CommitOffset_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TopicServiceServer).CommitOffset(ctx, req.(*Ydb_Topic.CommitOffsetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _TopicService_CreateTopic_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -476,6 +511,10 @@ var TopicService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "Ydb.Topic.V1.TopicService",
 	HandlerType: (*TopicServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CommitOffset",
+			Handler:    _TopicService_CommitOffset_Handler,
+		},
 		{
 			MethodName: "CreateTopic",
 			Handler:    _TopicService_CreateTopic_Handler,
