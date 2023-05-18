@@ -4,11 +4,11 @@
 // - protoc             v3.21.12
 // source: ydb_federation_discovery_v1.proto
 
-package Ydb_Discovery_V1
+package Ydb_FederationDiscovery_V1
 
 import (
 	context "context"
-	Ydb_Discovery "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Discovery"
+	Ydb_FederationDiscovery "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_FederationDiscovery"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -28,7 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FederationDiscoveryServiceClient interface {
 	// Get list of databases.
-	ListFederationDatabases(ctx context.Context, in *Ydb_Discovery.ListFederationDatabasesRequest, opts ...grpc.CallOption) (*Ydb_Discovery.ListFederationDatabasesResponse, error)
+	ListFederationDatabases(ctx context.Context, in *Ydb_FederationDiscovery.ListFederationDatabasesRequest, opts ...grpc.CallOption) (*Ydb_FederationDiscovery.ListFederationDatabasesResponse, error)
 }
 
 type federationDiscoveryServiceClient struct {
@@ -39,8 +39,8 @@ func NewFederationDiscoveryServiceClient(cc grpc.ClientConnInterface) Federation
 	return &federationDiscoveryServiceClient{cc}
 }
 
-func (c *federationDiscoveryServiceClient) ListFederationDatabases(ctx context.Context, in *Ydb_Discovery.ListFederationDatabasesRequest, opts ...grpc.CallOption) (*Ydb_Discovery.ListFederationDatabasesResponse, error) {
-	out := new(Ydb_Discovery.ListFederationDatabasesResponse)
+func (c *federationDiscoveryServiceClient) ListFederationDatabases(ctx context.Context, in *Ydb_FederationDiscovery.ListFederationDatabasesRequest, opts ...grpc.CallOption) (*Ydb_FederationDiscovery.ListFederationDatabasesResponse, error) {
+	out := new(Ydb_FederationDiscovery.ListFederationDatabasesResponse)
 	err := c.cc.Invoke(ctx, FederationDiscoveryService_ListFederationDatabases_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -53,7 +53,7 @@ func (c *federationDiscoveryServiceClient) ListFederationDatabases(ctx context.C
 // for forward compatibility
 type FederationDiscoveryServiceServer interface {
 	// Get list of databases.
-	ListFederationDatabases(context.Context, *Ydb_Discovery.ListFederationDatabasesRequest) (*Ydb_Discovery.ListFederationDatabasesResponse, error)
+	ListFederationDatabases(context.Context, *Ydb_FederationDiscovery.ListFederationDatabasesRequest) (*Ydb_FederationDiscovery.ListFederationDatabasesResponse, error)
 	mustEmbedUnimplementedFederationDiscoveryServiceServer()
 }
 
@@ -61,7 +61,7 @@ type FederationDiscoveryServiceServer interface {
 type UnimplementedFederationDiscoveryServiceServer struct {
 }
 
-func (UnimplementedFederationDiscoveryServiceServer) ListFederationDatabases(context.Context, *Ydb_Discovery.ListFederationDatabasesRequest) (*Ydb_Discovery.ListFederationDatabasesResponse, error) {
+func (UnimplementedFederationDiscoveryServiceServer) ListFederationDatabases(context.Context, *Ydb_FederationDiscovery.ListFederationDatabasesRequest) (*Ydb_FederationDiscovery.ListFederationDatabasesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListFederationDatabases not implemented")
 }
 func (UnimplementedFederationDiscoveryServiceServer) mustEmbedUnimplementedFederationDiscoveryServiceServer() {
@@ -79,7 +79,7 @@ func RegisterFederationDiscoveryServiceServer(s grpc.ServiceRegistrar, srv Feder
 }
 
 func _FederationDiscoveryService_ListFederationDatabases_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ydb_Discovery.ListFederationDatabasesRequest)
+	in := new(Ydb_FederationDiscovery.ListFederationDatabasesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ func _FederationDiscoveryService_ListFederationDatabases_Handler(srv interface{}
 		FullMethod: FederationDiscoveryService_ListFederationDatabases_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FederationDiscoveryServiceServer).ListFederationDatabases(ctx, req.(*Ydb_Discovery.ListFederationDatabasesRequest))
+		return srv.(FederationDiscoveryServiceServer).ListFederationDatabases(ctx, req.(*Ydb_FederationDiscovery.ListFederationDatabasesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
