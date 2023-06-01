@@ -20,6 +20,9 @@ import (
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Table"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_TableStats"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Topic"
+
+	_ "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Maintenance"
+	_ "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Query"
 )
 
 func TestCompatibility(_ *testing.T) {
