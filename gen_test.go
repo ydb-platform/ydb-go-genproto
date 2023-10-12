@@ -14,6 +14,7 @@ import (
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Issue"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Monitoring"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations"
+	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Query"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_RateLimiter"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Scheme"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Scripting"
@@ -22,7 +23,6 @@ import (
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Topic"
 
 	_ "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Maintenance"
-	_ "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Query"
 )
 
 func TestCompatibility(_ *testing.T) {

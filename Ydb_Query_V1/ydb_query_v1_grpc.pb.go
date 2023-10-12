@@ -2,14 +2,14 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.23.4
-// source: draft/ydb_query_v1.proto
+// source: ydb_query_v1.proto
 
 package Ydb_Query_V1
 
 import (
 	context "context"
-	Ydb_Query "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Query"
 	Ydb_Operations "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations"
+	Ydb_Query "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Query"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -23,16 +23,13 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	QueryService_CreateSession_FullMethodName       = "/Ydb.Query.V1.QueryService/CreateSession"
 	QueryService_DeleteSession_FullMethodName       = "/Ydb.Query.V1.QueryService/DeleteSession"
-	QueryService_PingSession_FullMethodName         = "/Ydb.Query.V1.QueryService/PingSession"
+	QueryService_AttachSession_FullMethodName       = "/Ydb.Query.V1.QueryService/AttachSession"
 	QueryService_BeginTransaction_FullMethodName    = "/Ydb.Query.V1.QueryService/BeginTransaction"
 	QueryService_CommitTransaction_FullMethodName   = "/Ydb.Query.V1.QueryService/CommitTransaction"
 	QueryService_RollbackTransaction_FullMethodName = "/Ydb.Query.V1.QueryService/RollbackTransaction"
 	QueryService_ExecuteQuery_FullMethodName        = "/Ydb.Query.V1.QueryService/ExecuteQuery"
 	QueryService_ExecuteScript_FullMethodName       = "/Ydb.Query.V1.QueryService/ExecuteScript"
 	QueryService_FetchScriptResults_FullMethodName  = "/Ydb.Query.V1.QueryService/FetchScriptResults"
-	QueryService_SaveScript_FullMethodName          = "/Ydb.Query.V1.QueryService/SaveScript"
-	QueryService_ListScripts_FullMethodName         = "/Ydb.Query.V1.QueryService/ListScripts"
-	QueryService_DeleteScript_FullMethodName        = "/Ydb.Query.V1.QueryService/DeleteScript"
 )
 
 // QueryServiceClient is the client API for QueryService service.
@@ -46,7 +43,7 @@ type QueryServiceClient interface {
 	// 3. Store state for volatile stateful operations, such as short-living transactions.
 	CreateSession(ctx context.Context, in *Ydb_Query.CreateSessionRequest, opts ...grpc.CallOption) (*Ydb_Query.CreateSessionResponse, error)
 	DeleteSession(ctx context.Context, in *Ydb_Query.DeleteSessionRequest, opts ...grpc.CallOption) (*Ydb_Query.DeleteSessionResponse, error)
-	PingSession(ctx context.Context, in *Ydb_Query.PingSessionRequest, opts ...grpc.CallOption) (*Ydb_Query.PingSessionResponse, error)
+	AttachSession(ctx context.Context, in *Ydb_Query.AttachSessionRequest, opts ...grpc.CallOption) (QueryService_AttachSessionClient, error)
 	// Short-living transactions allow transactional execution of several queries, including support
 	// for interactive transactions. Transaction control can be implemented via flags in ExecuteQuery
 	// call (recommended), or via explicit calls to Begin/Commit/RollbackTransaction.
@@ -79,12 +76,6 @@ type QueryServiceClient interface {
 	// For persistent scripts, you can fetch results in specific position of specific result set using
 	// position instead of fetch_token.
 	FetchScriptResults(ctx context.Context, in *Ydb_Query.FetchScriptResultsRequest, opts ...grpc.CallOption) (*Ydb_Query.FetchScriptResultsResponse, error)
-	// Persistently save script content in DB.
-	SaveScript(ctx context.Context, in *Ydb_Query.SaveScriptRequest, opts ...grpc.CallOption) (*Ydb_Query.SaveScriptResponse, error)
-	// List saved scripts in DB.
-	ListScripts(ctx context.Context, in *Ydb_Query.ListScriptsRequest, opts ...grpc.CallOption) (*Ydb_Query.ListScriptsResponse, error)
-	// Delete saved script by id.
-	DeleteScript(ctx context.Context, in *Ydb_Query.DeleteScriptRequest, opts ...grpc.CallOption) (*Ydb_Query.DeleteScriptResponse, error)
 }
 
 type queryServiceClient struct {
@@ -113,13 +104,36 @@ func (c *queryServiceClient) DeleteSession(ctx context.Context, in *Ydb_Query.De
 	return out, nil
 }
 
-func (c *queryServiceClient) PingSession(ctx context.Context, in *Ydb_Query.PingSessionRequest, opts ...grpc.CallOption) (*Ydb_Query.PingSessionResponse, error) {
-	out := new(Ydb_Query.PingSessionResponse)
-	err := c.cc.Invoke(ctx, QueryService_PingSession_FullMethodName, in, out, opts...)
+func (c *queryServiceClient) AttachSession(ctx context.Context, in *Ydb_Query.AttachSessionRequest, opts ...grpc.CallOption) (QueryService_AttachSessionClient, error) {
+	stream, err := c.cc.NewStream(ctx, &QueryService_ServiceDesc.Streams[0], QueryService_AttachSession_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &queryServiceAttachSessionClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type QueryService_AttachSessionClient interface {
+	Recv() (*Ydb_Query.SessionState, error)
+	grpc.ClientStream
+}
+
+type queryServiceAttachSessionClient struct {
+	grpc.ClientStream
+}
+
+func (x *queryServiceAttachSessionClient) Recv() (*Ydb_Query.SessionState, error) {
+	m := new(Ydb_Query.SessionState)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *queryServiceClient) BeginTransaction(ctx context.Context, in *Ydb_Query.BeginTransactionRequest, opts ...grpc.CallOption) (*Ydb_Query.BeginTransactionResponse, error) {
@@ -150,7 +164,7 @@ func (c *queryServiceClient) RollbackTransaction(ctx context.Context, in *Ydb_Qu
 }
 
 func (c *queryServiceClient) ExecuteQuery(ctx context.Context, in *Ydb_Query.ExecuteQueryRequest, opts ...grpc.CallOption) (QueryService_ExecuteQueryClient, error) {
-	stream, err := c.cc.NewStream(ctx, &QueryService_ServiceDesc.Streams[0], QueryService_ExecuteQuery_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &QueryService_ServiceDesc.Streams[1], QueryService_ExecuteQuery_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -199,33 +213,6 @@ func (c *queryServiceClient) FetchScriptResults(ctx context.Context, in *Ydb_Que
 	return out, nil
 }
 
-func (c *queryServiceClient) SaveScript(ctx context.Context, in *Ydb_Query.SaveScriptRequest, opts ...grpc.CallOption) (*Ydb_Query.SaveScriptResponse, error) {
-	out := new(Ydb_Query.SaveScriptResponse)
-	err := c.cc.Invoke(ctx, QueryService_SaveScript_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryServiceClient) ListScripts(ctx context.Context, in *Ydb_Query.ListScriptsRequest, opts ...grpc.CallOption) (*Ydb_Query.ListScriptsResponse, error) {
-	out := new(Ydb_Query.ListScriptsResponse)
-	err := c.cc.Invoke(ctx, QueryService_ListScripts_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryServiceClient) DeleteScript(ctx context.Context, in *Ydb_Query.DeleteScriptRequest, opts ...grpc.CallOption) (*Ydb_Query.DeleteScriptResponse, error) {
-	out := new(Ydb_Query.DeleteScriptResponse)
-	err := c.cc.Invoke(ctx, QueryService_DeleteScript_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // QueryServiceServer is the server API for QueryService service.
 // All implementations must embed UnimplementedQueryServiceServer
 // for forward compatibility
@@ -237,7 +224,7 @@ type QueryServiceServer interface {
 	// 3. Store state for volatile stateful operations, such as short-living transactions.
 	CreateSession(context.Context, *Ydb_Query.CreateSessionRequest) (*Ydb_Query.CreateSessionResponse, error)
 	DeleteSession(context.Context, *Ydb_Query.DeleteSessionRequest) (*Ydb_Query.DeleteSessionResponse, error)
-	PingSession(context.Context, *Ydb_Query.PingSessionRequest) (*Ydb_Query.PingSessionResponse, error)
+	AttachSession(*Ydb_Query.AttachSessionRequest, QueryService_AttachSessionServer) error
 	// Short-living transactions allow transactional execution of several queries, including support
 	// for interactive transactions. Transaction control can be implemented via flags in ExecuteQuery
 	// call (recommended), or via explicit calls to Begin/Commit/RollbackTransaction.
@@ -270,12 +257,6 @@ type QueryServiceServer interface {
 	// For persistent scripts, you can fetch results in specific position of specific result set using
 	// position instead of fetch_token.
 	FetchScriptResults(context.Context, *Ydb_Query.FetchScriptResultsRequest) (*Ydb_Query.FetchScriptResultsResponse, error)
-	// Persistently save script content in DB.
-	SaveScript(context.Context, *Ydb_Query.SaveScriptRequest) (*Ydb_Query.SaveScriptResponse, error)
-	// List saved scripts in DB.
-	ListScripts(context.Context, *Ydb_Query.ListScriptsRequest) (*Ydb_Query.ListScriptsResponse, error)
-	// Delete saved script by id.
-	DeleteScript(context.Context, *Ydb_Query.DeleteScriptRequest) (*Ydb_Query.DeleteScriptResponse, error)
 	mustEmbedUnimplementedQueryServiceServer()
 }
 
@@ -289,8 +270,8 @@ func (UnimplementedQueryServiceServer) CreateSession(context.Context, *Ydb_Query
 func (UnimplementedQueryServiceServer) DeleteSession(context.Context, *Ydb_Query.DeleteSessionRequest) (*Ydb_Query.DeleteSessionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteSession not implemented")
 }
-func (UnimplementedQueryServiceServer) PingSession(context.Context, *Ydb_Query.PingSessionRequest) (*Ydb_Query.PingSessionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PingSession not implemented")
+func (UnimplementedQueryServiceServer) AttachSession(*Ydb_Query.AttachSessionRequest, QueryService_AttachSessionServer) error {
+	return status.Errorf(codes.Unimplemented, "method AttachSession not implemented")
 }
 func (UnimplementedQueryServiceServer) BeginTransaction(context.Context, *Ydb_Query.BeginTransactionRequest) (*Ydb_Query.BeginTransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BeginTransaction not implemented")
@@ -309,15 +290,6 @@ func (UnimplementedQueryServiceServer) ExecuteScript(context.Context, *Ydb_Query
 }
 func (UnimplementedQueryServiceServer) FetchScriptResults(context.Context, *Ydb_Query.FetchScriptResultsRequest) (*Ydb_Query.FetchScriptResultsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FetchScriptResults not implemented")
-}
-func (UnimplementedQueryServiceServer) SaveScript(context.Context, *Ydb_Query.SaveScriptRequest) (*Ydb_Query.SaveScriptResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SaveScript not implemented")
-}
-func (UnimplementedQueryServiceServer) ListScripts(context.Context, *Ydb_Query.ListScriptsRequest) (*Ydb_Query.ListScriptsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListScripts not implemented")
-}
-func (UnimplementedQueryServiceServer) DeleteScript(context.Context, *Ydb_Query.DeleteScriptRequest) (*Ydb_Query.DeleteScriptResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteScript not implemented")
 }
 func (UnimplementedQueryServiceServer) mustEmbedUnimplementedQueryServiceServer() {}
 
@@ -368,22 +340,25 @@ func _QueryService_DeleteSession_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _QueryService_PingSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ydb_Query.PingSessionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _QueryService_AttachSession_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(Ydb_Query.AttachSessionRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(QueryServiceServer).PingSession(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: QueryService_PingSession_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServiceServer).PingSession(ctx, req.(*Ydb_Query.PingSessionRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(QueryServiceServer).AttachSession(m, &queryServiceAttachSessionServer{stream})
+}
+
+type QueryService_AttachSessionServer interface {
+	Send(*Ydb_Query.SessionState) error
+	grpc.ServerStream
+}
+
+type queryServiceAttachSessionServer struct {
+	grpc.ServerStream
+}
+
+func (x *queryServiceAttachSessionServer) Send(m *Ydb_Query.SessionState) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _QueryService_BeginTransaction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -497,60 +472,6 @@ func _QueryService_FetchScriptResults_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _QueryService_SaveScript_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ydb_Query.SaveScriptRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServiceServer).SaveScript(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: QueryService_SaveScript_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServiceServer).SaveScript(ctx, req.(*Ydb_Query.SaveScriptRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _QueryService_ListScripts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ydb_Query.ListScriptsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServiceServer).ListScripts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: QueryService_ListScripts_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServiceServer).ListScripts(ctx, req.(*Ydb_Query.ListScriptsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _QueryService_DeleteScript_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ydb_Query.DeleteScriptRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServiceServer).DeleteScript(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: QueryService_DeleteScript_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServiceServer).DeleteScript(ctx, req.(*Ydb_Query.DeleteScriptRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // QueryService_ServiceDesc is the grpc.ServiceDesc for QueryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -565,10 +486,6 @@ var QueryService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteSession",
 			Handler:    _QueryService_DeleteSession_Handler,
-		},
-		{
-			MethodName: "PingSession",
-			Handler:    _QueryService_PingSession_Handler,
 		},
 		{
 			MethodName: "BeginTransaction",
@@ -590,25 +507,18 @@ var QueryService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "FetchScriptResults",
 			Handler:    _QueryService_FetchScriptResults_Handler,
 		},
-		{
-			MethodName: "SaveScript",
-			Handler:    _QueryService_SaveScript_Handler,
-		},
-		{
-			MethodName: "ListScripts",
-			Handler:    _QueryService_ListScripts_Handler,
-		},
-		{
-			MethodName: "DeleteScript",
-			Handler:    _QueryService_DeleteScript_Handler,
-		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "AttachSession",
+			Handler:       _QueryService_AttachSession_Handler,
+			ServerStreams: true,
+		},
 		{
 			StreamName:    "ExecuteQuery",
 			Handler:       _QueryService_ExecuteQuery_Handler,
 			ServerStreams: true,
 		},
 	},
-	Metadata: "draft/ydb_query_v1.proto",
+	Metadata: "ydb_query_v1.proto",
 }
