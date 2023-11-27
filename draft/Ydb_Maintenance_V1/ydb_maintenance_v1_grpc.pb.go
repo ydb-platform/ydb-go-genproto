@@ -20,43 +20,33 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	MaintenanceService_ListClusterNodes_FullMethodName          = "/Ydb.Maintenance.V1.MaintenanceService/ListClusterNodes"
-	MaintenanceService_CreateMaintenanceTask_FullMethodName     = "/Ydb.Maintenance.V1.MaintenanceService/CreateMaintenanceTask"
-	MaintenanceService_RefreshMaintenanceTask_FullMethodName    = "/Ydb.Maintenance.V1.MaintenanceService/RefreshMaintenanceTask"
-	MaintenanceService_GetMaintenanceTaskDetails_FullMethodName = "/Ydb.Maintenance.V1.MaintenanceService/GetMaintenanceTaskDetails"
-	MaintenanceService_ListMaintenanceTasks_FullMethodName      = "/Ydb.Maintenance.V1.MaintenanceService/ListMaintenanceTasks"
-	MaintenanceService_DropMaintenanceTask_FullMethodName       = "/Ydb.Maintenance.V1.MaintenanceService/DropMaintenanceTask"
-	MaintenanceService_ProlongateMaintenanceTask_FullMethodName = "/Ydb.Maintenance.V1.MaintenanceService/ProlongateMaintenanceTask"
-	MaintenanceService_ReleasePermit_FullMethodName             = "/Ydb.Maintenance.V1.MaintenanceService/ReleasePermit"
-	MaintenanceService_ProlongatePermit_FullMethodName          = "/Ydb.Maintenance.V1.MaintenanceService/ProlongatePermit"
-	MaintenanceService_GetReadableActionReason_FullMethodName   = "/Ydb.Maintenance.V1.MaintenanceService/GetReadableActionReason"
+	MaintenanceService_ListClusterNodes_FullMethodName       = "/Ydb.Maintenance.V1.MaintenanceService/ListClusterNodes"
+	MaintenanceService_CreateMaintenanceTask_FullMethodName  = "/Ydb.Maintenance.V1.MaintenanceService/CreateMaintenanceTask"
+	MaintenanceService_RefreshMaintenanceTask_FullMethodName = "/Ydb.Maintenance.V1.MaintenanceService/RefreshMaintenanceTask"
+	MaintenanceService_GetMaintenanceTask_FullMethodName     = "/Ydb.Maintenance.V1.MaintenanceService/GetMaintenanceTask"
+	MaintenanceService_ListMaintenanceTasks_FullMethodName   = "/Ydb.Maintenance.V1.MaintenanceService/ListMaintenanceTasks"
+	MaintenanceService_DropMaintenanceTask_FullMethodName    = "/Ydb.Maintenance.V1.MaintenanceService/DropMaintenanceTask"
+	MaintenanceService_CompleteAction_FullMethodName         = "/Ydb.Maintenance.V1.MaintenanceService/CompleteAction"
 )
 
 // MaintenanceServiceClient is the client API for MaintenanceService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MaintenanceServiceClient interface {
-	// List cluster hosts
+	// List cluster nodes.
 	ListClusterNodes(ctx context.Context, in *Ydb_Maintenance.ListClusterNodesRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.ListClusterNodesResponse, error)
-	// Request for permissions
+	// Create maintenance task.
 	CreateMaintenanceTask(ctx context.Context, in *Ydb_Maintenance.CreateMaintenanceTaskRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.MaintenanceTaskResponse, error)
-	// Get new permissions
+	// Try to perform maintenance task's actions (polling).
 	RefreshMaintenanceTask(ctx context.Context, in *Ydb_Maintenance.RefreshMaintenanceTaskRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.MaintenanceTaskResponse, error)
-	// Get scheduled task
-	GetMaintenanceTaskDetails(ctx context.Context, in *Ydb_Maintenance.GetMaintenanceTaskRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.GetMaintenanceTaskResponse, error)
-	// List maintenance tasks
+	// Get detailed task information.
+	GetMaintenanceTask(ctx context.Context, in *Ydb_Maintenance.GetMaintenanceTaskRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.GetMaintenanceTaskResponse, error)
+	// List maintenance tasks.
 	ListMaintenanceTasks(ctx context.Context, in *Ydb_Maintenance.ListMaintenanceTasksRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.ListMaintenanceTasksResponse, error)
-	// Drop scheduled task
+	// Drop maintenance task.
 	DropMaintenanceTask(ctx context.Context, in *Ydb_Maintenance.DropMaintenanceTaskRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.ManageMaintenanceTaskResponse, error)
-	// Update scheduled task deadline
-	ProlongateMaintenanceTask(ctx context.Context, in *Ydb_Maintenance.ProlongateMaintenanceTaskRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.ManageMaintenanceTaskResponse, error)
-	// Mark permission as finished
-	ReleasePermit(ctx context.Context, in *Ydb_Maintenance.ReleasePermitRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.ManagePermitResponse, error)
-	// Update permission's deadline
-	ProlongatePermit(ctx context.Context, in *Ydb_Maintenance.ProlongatePermitRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.ManagePermitResponse, error)
-	// Get detailed action state messages. Used for debugging service tasks to find out
-	// the reason why an action does not get resolution.
-	GetReadableActionReason(ctx context.Context, in *Ydb_Maintenance.GetReadableActionReasonRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.GetReadableActionReasonResponse, error)
+	// Mark action as completed.
+	CompleteAction(ctx context.Context, in *Ydb_Maintenance.CompleteActionRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.ManageActionResponse, error)
 }
 
 type maintenanceServiceClient struct {
@@ -94,9 +84,9 @@ func (c *maintenanceServiceClient) RefreshMaintenanceTask(ctx context.Context, i
 	return out, nil
 }
 
-func (c *maintenanceServiceClient) GetMaintenanceTaskDetails(ctx context.Context, in *Ydb_Maintenance.GetMaintenanceTaskRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.GetMaintenanceTaskResponse, error) {
+func (c *maintenanceServiceClient) GetMaintenanceTask(ctx context.Context, in *Ydb_Maintenance.GetMaintenanceTaskRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.GetMaintenanceTaskResponse, error) {
 	out := new(Ydb_Maintenance.GetMaintenanceTaskResponse)
-	err := c.cc.Invoke(ctx, MaintenanceService_GetMaintenanceTaskDetails_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, MaintenanceService_GetMaintenanceTask_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -121,36 +111,9 @@ func (c *maintenanceServiceClient) DropMaintenanceTask(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *maintenanceServiceClient) ProlongateMaintenanceTask(ctx context.Context, in *Ydb_Maintenance.ProlongateMaintenanceTaskRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.ManageMaintenanceTaskResponse, error) {
-	out := new(Ydb_Maintenance.ManageMaintenanceTaskResponse)
-	err := c.cc.Invoke(ctx, MaintenanceService_ProlongateMaintenanceTask_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *maintenanceServiceClient) ReleasePermit(ctx context.Context, in *Ydb_Maintenance.ReleasePermitRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.ManagePermitResponse, error) {
-	out := new(Ydb_Maintenance.ManagePermitResponse)
-	err := c.cc.Invoke(ctx, MaintenanceService_ReleasePermit_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *maintenanceServiceClient) ProlongatePermit(ctx context.Context, in *Ydb_Maintenance.ProlongatePermitRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.ManagePermitResponse, error) {
-	out := new(Ydb_Maintenance.ManagePermitResponse)
-	err := c.cc.Invoke(ctx, MaintenanceService_ProlongatePermit_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *maintenanceServiceClient) GetReadableActionReason(ctx context.Context, in *Ydb_Maintenance.GetReadableActionReasonRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.GetReadableActionReasonResponse, error) {
-	out := new(Ydb_Maintenance.GetReadableActionReasonResponse)
-	err := c.cc.Invoke(ctx, MaintenanceService_GetReadableActionReason_FullMethodName, in, out, opts...)
+func (c *maintenanceServiceClient) CompleteAction(ctx context.Context, in *Ydb_Maintenance.CompleteActionRequest, opts ...grpc.CallOption) (*Ydb_Maintenance.ManageActionResponse, error) {
+	out := new(Ydb_Maintenance.ManageActionResponse)
+	err := c.cc.Invoke(ctx, MaintenanceService_CompleteAction_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -161,27 +124,20 @@ func (c *maintenanceServiceClient) GetReadableActionReason(ctx context.Context, 
 // All implementations must embed UnimplementedMaintenanceServiceServer
 // for forward compatibility
 type MaintenanceServiceServer interface {
-	// List cluster hosts
+	// List cluster nodes.
 	ListClusterNodes(context.Context, *Ydb_Maintenance.ListClusterNodesRequest) (*Ydb_Maintenance.ListClusterNodesResponse, error)
-	// Request for permissions
+	// Create maintenance task.
 	CreateMaintenanceTask(context.Context, *Ydb_Maintenance.CreateMaintenanceTaskRequest) (*Ydb_Maintenance.MaintenanceTaskResponse, error)
-	// Get new permissions
+	// Try to perform maintenance task's actions (polling).
 	RefreshMaintenanceTask(context.Context, *Ydb_Maintenance.RefreshMaintenanceTaskRequest) (*Ydb_Maintenance.MaintenanceTaskResponse, error)
-	// Get scheduled task
-	GetMaintenanceTaskDetails(context.Context, *Ydb_Maintenance.GetMaintenanceTaskRequest) (*Ydb_Maintenance.GetMaintenanceTaskResponse, error)
-	// List maintenance tasks
+	// Get detailed task information.
+	GetMaintenanceTask(context.Context, *Ydb_Maintenance.GetMaintenanceTaskRequest) (*Ydb_Maintenance.GetMaintenanceTaskResponse, error)
+	// List maintenance tasks.
 	ListMaintenanceTasks(context.Context, *Ydb_Maintenance.ListMaintenanceTasksRequest) (*Ydb_Maintenance.ListMaintenanceTasksResponse, error)
-	// Drop scheduled task
+	// Drop maintenance task.
 	DropMaintenanceTask(context.Context, *Ydb_Maintenance.DropMaintenanceTaskRequest) (*Ydb_Maintenance.ManageMaintenanceTaskResponse, error)
-	// Update scheduled task deadline
-	ProlongateMaintenanceTask(context.Context, *Ydb_Maintenance.ProlongateMaintenanceTaskRequest) (*Ydb_Maintenance.ManageMaintenanceTaskResponse, error)
-	// Mark permission as finished
-	ReleasePermit(context.Context, *Ydb_Maintenance.ReleasePermitRequest) (*Ydb_Maintenance.ManagePermitResponse, error)
-	// Update permission's deadline
-	ProlongatePermit(context.Context, *Ydb_Maintenance.ProlongatePermitRequest) (*Ydb_Maintenance.ManagePermitResponse, error)
-	// Get detailed action state messages. Used for debugging service tasks to find out
-	// the reason why an action does not get resolution.
-	GetReadableActionReason(context.Context, *Ydb_Maintenance.GetReadableActionReasonRequest) (*Ydb_Maintenance.GetReadableActionReasonResponse, error)
+	// Mark action as completed.
+	CompleteAction(context.Context, *Ydb_Maintenance.CompleteActionRequest) (*Ydb_Maintenance.ManageActionResponse, error)
 	mustEmbedUnimplementedMaintenanceServiceServer()
 }
 
@@ -198,8 +154,8 @@ func (UnimplementedMaintenanceServiceServer) CreateMaintenanceTask(context.Conte
 func (UnimplementedMaintenanceServiceServer) RefreshMaintenanceTask(context.Context, *Ydb_Maintenance.RefreshMaintenanceTaskRequest) (*Ydb_Maintenance.MaintenanceTaskResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefreshMaintenanceTask not implemented")
 }
-func (UnimplementedMaintenanceServiceServer) GetMaintenanceTaskDetails(context.Context, *Ydb_Maintenance.GetMaintenanceTaskRequest) (*Ydb_Maintenance.GetMaintenanceTaskResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMaintenanceTaskDetails not implemented")
+func (UnimplementedMaintenanceServiceServer) GetMaintenanceTask(context.Context, *Ydb_Maintenance.GetMaintenanceTaskRequest) (*Ydb_Maintenance.GetMaintenanceTaskResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMaintenanceTask not implemented")
 }
 func (UnimplementedMaintenanceServiceServer) ListMaintenanceTasks(context.Context, *Ydb_Maintenance.ListMaintenanceTasksRequest) (*Ydb_Maintenance.ListMaintenanceTasksResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMaintenanceTasks not implemented")
@@ -207,17 +163,8 @@ func (UnimplementedMaintenanceServiceServer) ListMaintenanceTasks(context.Contex
 func (UnimplementedMaintenanceServiceServer) DropMaintenanceTask(context.Context, *Ydb_Maintenance.DropMaintenanceTaskRequest) (*Ydb_Maintenance.ManageMaintenanceTaskResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DropMaintenanceTask not implemented")
 }
-func (UnimplementedMaintenanceServiceServer) ProlongateMaintenanceTask(context.Context, *Ydb_Maintenance.ProlongateMaintenanceTaskRequest) (*Ydb_Maintenance.ManageMaintenanceTaskResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProlongateMaintenanceTask not implemented")
-}
-func (UnimplementedMaintenanceServiceServer) ReleasePermit(context.Context, *Ydb_Maintenance.ReleasePermitRequest) (*Ydb_Maintenance.ManagePermitResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReleasePermit not implemented")
-}
-func (UnimplementedMaintenanceServiceServer) ProlongatePermit(context.Context, *Ydb_Maintenance.ProlongatePermitRequest) (*Ydb_Maintenance.ManagePermitResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ProlongatePermit not implemented")
-}
-func (UnimplementedMaintenanceServiceServer) GetReadableActionReason(context.Context, *Ydb_Maintenance.GetReadableActionReasonRequest) (*Ydb_Maintenance.GetReadableActionReasonResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetReadableActionReason not implemented")
+func (UnimplementedMaintenanceServiceServer) CompleteAction(context.Context, *Ydb_Maintenance.CompleteActionRequest) (*Ydb_Maintenance.ManageActionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CompleteAction not implemented")
 }
 func (UnimplementedMaintenanceServiceServer) mustEmbedUnimplementedMaintenanceServiceServer() {}
 
@@ -286,20 +233,20 @@ func _MaintenanceService_RefreshMaintenanceTask_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MaintenanceService_GetMaintenanceTaskDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _MaintenanceService_GetMaintenanceTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Ydb_Maintenance.GetMaintenanceTaskRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MaintenanceServiceServer).GetMaintenanceTaskDetails(ctx, in)
+		return srv.(MaintenanceServiceServer).GetMaintenanceTask(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MaintenanceService_GetMaintenanceTaskDetails_FullMethodName,
+		FullMethod: MaintenanceService_GetMaintenanceTask_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MaintenanceServiceServer).GetMaintenanceTaskDetails(ctx, req.(*Ydb_Maintenance.GetMaintenanceTaskRequest))
+		return srv.(MaintenanceServiceServer).GetMaintenanceTask(ctx, req.(*Ydb_Maintenance.GetMaintenanceTaskRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -340,74 +287,20 @@ func _MaintenanceService_DropMaintenanceTask_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MaintenanceService_ProlongateMaintenanceTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ydb_Maintenance.ProlongateMaintenanceTaskRequest)
+func _MaintenanceService_CompleteAction_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ydb_Maintenance.CompleteActionRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MaintenanceServiceServer).ProlongateMaintenanceTask(ctx, in)
+		return srv.(MaintenanceServiceServer).CompleteAction(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: MaintenanceService_ProlongateMaintenanceTask_FullMethodName,
+		FullMethod: MaintenanceService_CompleteAction_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MaintenanceServiceServer).ProlongateMaintenanceTask(ctx, req.(*Ydb_Maintenance.ProlongateMaintenanceTaskRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MaintenanceService_ReleasePermit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ydb_Maintenance.ReleasePermitRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MaintenanceServiceServer).ReleasePermit(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MaintenanceService_ReleasePermit_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MaintenanceServiceServer).ReleasePermit(ctx, req.(*Ydb_Maintenance.ReleasePermitRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MaintenanceService_ProlongatePermit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ydb_Maintenance.ProlongatePermitRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MaintenanceServiceServer).ProlongatePermit(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MaintenanceService_ProlongatePermit_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MaintenanceServiceServer).ProlongatePermit(ctx, req.(*Ydb_Maintenance.ProlongatePermitRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MaintenanceService_GetReadableActionReason_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ydb_Maintenance.GetReadableActionReasonRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MaintenanceServiceServer).GetReadableActionReason(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: MaintenanceService_GetReadableActionReason_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MaintenanceServiceServer).GetReadableActionReason(ctx, req.(*Ydb_Maintenance.GetReadableActionReasonRequest))
+		return srv.(MaintenanceServiceServer).CompleteAction(ctx, req.(*Ydb_Maintenance.CompleteActionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -432,8 +325,8 @@ var MaintenanceService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MaintenanceService_RefreshMaintenanceTask_Handler,
 		},
 		{
-			MethodName: "GetMaintenanceTaskDetails",
-			Handler:    _MaintenanceService_GetMaintenanceTaskDetails_Handler,
+			MethodName: "GetMaintenanceTask",
+			Handler:    _MaintenanceService_GetMaintenanceTask_Handler,
 		},
 		{
 			MethodName: "ListMaintenanceTasks",
@@ -444,20 +337,8 @@ var MaintenanceService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MaintenanceService_DropMaintenanceTask_Handler,
 		},
 		{
-			MethodName: "ProlongateMaintenanceTask",
-			Handler:    _MaintenanceService_ProlongateMaintenanceTask_Handler,
-		},
-		{
-			MethodName: "ReleasePermit",
-			Handler:    _MaintenanceService_ReleasePermit_Handler,
-		},
-		{
-			MethodName: "ProlongatePermit",
-			Handler:    _MaintenanceService_ProlongatePermit_Handler,
-		},
-		{
-			MethodName: "GetReadableActionReason",
-			Handler:    _MaintenanceService_GetReadableActionReason_Handler,
+			MethodName: "CompleteAction",
+			Handler:    _MaintenanceService_CompleteAction_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
