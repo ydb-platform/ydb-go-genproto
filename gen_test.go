@@ -22,6 +22,7 @@ import (
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_TableStats"
 	_ "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Topic"
 
+	_ "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_DynamicConfig"
 	_ "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Maintenance"
 )
 
