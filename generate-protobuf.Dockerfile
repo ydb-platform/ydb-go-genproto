@@ -1,0 +1,22 @@
+FROM golang:1.16-alpine
+
+ARG PROTOC_VER=25.3
+ARG PTOCOC_GEN_GO=1.32.0
+ARG PROTOC_GEN_GO_GRPC=1.3.0
+ENV GOBIN=/github.com/ydb-platform/ydb-go-genproto/
+ENV PATH="${PATH}:/github.com/ydb-platform/ydb-go-genproto/"
+
+COPY . /github.com/ydb-platform/ydb-go-genproto/
+RUN mkdir /github.com/ydb-platform/ydb-go-genproto/volumes
+WORKDIR /github.com/ydb-platform/ydb-go-genproto/
+
+RUN \
+    wget https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VER}/protoc-${PROTOC_VER}-linux-x86_64.zip &&\
+    unzip -o protoc-*.zip -d /usr/local bin/protoc &&\
+    unzip -o protoc-*.zip -d /usr/local 'include/*' &&\
+    rm -f protoc-*.zip
+
+RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@v${PTOCOC_GEN_GO}
+RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v${PROTOC_GEN_GO_GRPC}
+RUN apk add bash
+
