@@ -3,12 +3,8 @@ FROM golang:1.21
 ARG PROTOC_VER=25.1
 ARG PTOCOC_GEN_GO=1.31.0
 ARG PROTOC_GEN_GO_GRPC=1.3.0
-ENV GOBIN=/github.com/ydb-platform/ydb-go-genproto/
-ENV PATH="${PATH}:/github.com/ydb-platform/ydb-go-genproto/"
 
-COPY . /github.com/ydb-platform/ydb-go-genproto/
-RUN mkdir /github.com/ydb-platform/ydb-go-genproto/volumes
-WORKDIR /github.com/ydb-platform/ydb-go-genproto/
+WORKDIR /project
 
 RUN apt-get update && apt-get install -y unzip && apt-get clean
 
