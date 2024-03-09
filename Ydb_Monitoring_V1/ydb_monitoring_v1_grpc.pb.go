@@ -8,7 +8,7 @@ package Ydb_Monitoring_V1
 
 import (
 	context "context"
-	Ydb_Monitoring "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Monitoring"
+	Ydb_Monitoring "github.com/sourcecd/ydb-go-genproto/protos/Ydb_Monitoring"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

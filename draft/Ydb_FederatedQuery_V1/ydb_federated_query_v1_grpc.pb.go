@@ -8,7 +8,7 @@ package Ydb_FederatedQuery_V1
 
 import (
 	context "context"
-	Ydb_FederatedQuery "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_FederatedQuery"
+	Ydb_FederatedQuery "github.com/sourcecd/ydb-go-genproto/draft/protos/Ydb_FederatedQuery"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

@@ -8,7 +8,7 @@ package Ydb_Topic_V1
 
 import (
 	context "context"
-	Ydb_Topic "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Topic"
+	Ydb_Topic "github.com/sourcecd/ydb-go-genproto/protos/Ydb_Topic"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
