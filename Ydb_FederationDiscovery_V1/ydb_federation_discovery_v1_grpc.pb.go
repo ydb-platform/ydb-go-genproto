@@ -8,7 +8,7 @@ package Ydb_FederationDiscovery_V1
 
 import (
 	context "context"
-	Ydb_FederationDiscovery "github.com/sourcecd/ydb-go-genproto/protos/Ydb_FederationDiscovery"
+	Ydb_FederationDiscovery "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_FederationDiscovery"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

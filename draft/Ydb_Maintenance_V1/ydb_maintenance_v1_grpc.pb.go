@@ -8,7 +8,7 @@ package Ydb_Maintenance_V1
 
 import (
 	context "context"
-	Ydb_Maintenance "github.com/sourcecd/ydb-go-genproto/draft/protos/Ydb_Maintenance"
+	Ydb_Maintenance "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Maintenance"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

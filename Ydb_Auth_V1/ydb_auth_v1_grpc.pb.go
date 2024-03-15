@@ -8,7 +8,7 @@ package Ydb_Auth_V1
 
 import (
 	context "context"
-	Ydb_Auth "github.com/sourcecd/ydb-go-genproto/protos/Ydb_Auth"
+	Ydb_Auth "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Auth"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

@@ -8,7 +8,7 @@ package Ydb_KeyValue_V1
 
 import (
 	context "context"
-	Ydb_KeyValue "github.com/sourcecd/ydb-go-genproto/draft/protos/Ydb_KeyValue"
+	Ydb_KeyValue "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_KeyValue"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

@@ -8,7 +8,7 @@ package Ydb_Cms_V1
 
 import (
 	context "context"
-	Ydb_Cms "github.com/sourcecd/ydb-go-genproto/protos/Ydb_Cms"
+	Ydb_Cms "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Cms"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
