@@ -24,6 +24,7 @@ import (
 
 	_ "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_DynamicConfig"
 	_ "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Maintenance"
+	_ "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_ObjectStorage"
 )
 
 func TestCompatibility(_ *testing.T) {
