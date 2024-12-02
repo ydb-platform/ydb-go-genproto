@@ -728,7 +728,7 @@ func (x ExecuteScanQueryRequest_Mode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ExecuteScanQueryRequest_Mode.Descriptor instead.
 func (ExecuteScanQueryRequest_Mode) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{110, 0}
+	return file_protos_ydb_table_proto_rawDescGZIP(), []int{111, 0}
 }
 
 // Create new session
@@ -8325,12 +8325,72 @@ func (x *ReadRowsResponse) GetResultSet() *Ydb.ResultSet {
 	return nil
 }
 
+type MultiTable struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Tables []string `protobuf:"bytes,1,rep,name=tables,proto3" json:"tables,omitempty"`
+	// size of each table in tables list
+	Numrows []uint64 `protobuf:"varint,2,rep,packed,name=numrows,proto3" json:"numrows,omitempty"`
+}
+
+func (x *MultiTable) Reset() {
+	*x = MultiTable{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protos_ydb_table_proto_msgTypes[107]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MultiTable) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MultiTable) ProtoMessage() {}
+
+func (x *MultiTable) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_table_proto_msgTypes[107]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MultiTable.ProtoReflect.Descriptor instead.
+func (*MultiTable) Descriptor() ([]byte, []int) {
+	return file_protos_ydb_table_proto_rawDescGZIP(), []int{107}
+}
+
+func (x *MultiTable) GetTables() []string {
+	if x != nil {
+		return x.Tables
+	}
+	return nil
+}
+
+func (x *MultiTable) GetNumrows() []uint64 {
+	if x != nil {
+		return x.Numrows
+	}
+	return nil
+}
+
 type BulkUpsertRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Table string `protobuf:"bytes,1,opt,name=table,proto3" json:"table,omitempty"`
+	// Types that are assignable to Mode:
+	//
+	//	*BulkUpsertRequest_Table
+	//	*BulkUpsertRequest_MultiTable
+	Mode isBulkUpsertRequest_Mode `protobuf_oneof:"mode"`
 	// "rows" parameter must be a list of structs where each stuct represents one row.
 	// It must contain all key columns but not necessarily all non-key columns.
 	// Similar to UPSERT statement only values of specified columns will be updated.
@@ -8350,7 +8410,7 @@ type BulkUpsertRequest struct {
 func (x *BulkUpsertRequest) Reset() {
 	*x = BulkUpsertRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_table_proto_msgTypes[107]
+		mi := &file_protos_ydb_table_proto_msgTypes[108]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8363,7 +8423,7 @@ func (x *BulkUpsertRequest) String() string {
 func (*BulkUpsertRequest) ProtoMessage() {}
 
 func (x *BulkUpsertRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_table_proto_msgTypes[107]
+	mi := &file_protos_ydb_table_proto_msgTypes[108]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8376,14 +8436,28 @@ func (x *BulkUpsertRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BulkUpsertRequest.ProtoReflect.Descriptor instead.
 func (*BulkUpsertRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{107}
+	return file_protos_ydb_table_proto_rawDescGZIP(), []int{108}
+}
+
+func (m *BulkUpsertRequest) GetMode() isBulkUpsertRequest_Mode {
+	if m != nil {
+		return m.Mode
+	}
+	return nil
 }
 
 func (x *BulkUpsertRequest) GetTable() string {
-	if x != nil {
+	if x, ok := x.GetMode().(*BulkUpsertRequest_Table); ok {
 		return x.Table
 	}
 	return ""
+}
+
+func (x *BulkUpsertRequest) GetMultiTable() *MultiTable {
+	if x, ok := x.GetMode().(*BulkUpsertRequest_MultiTable); ok {
+		return x.MultiTable
+	}
+	return nil
 }
 
 func (x *BulkUpsertRequest) GetRows() *Ydb.TypedValue {
@@ -8428,6 +8502,22 @@ func (x *BulkUpsertRequest) GetData() []byte {
 	return nil
 }
 
+type isBulkUpsertRequest_Mode interface {
+	isBulkUpsertRequest_Mode()
+}
+
+type BulkUpsertRequest_Table struct {
+	Table string `protobuf:"bytes,1,opt,name=table,proto3,oneof"`
+}
+
+type BulkUpsertRequest_MultiTable struct {
+	MultiTable *MultiTable `protobuf:"bytes,9,opt,name=multi_table,json=multiTable,proto3,oneof"`
+}
+
+func (*BulkUpsertRequest_Table) isBulkUpsertRequest_Mode() {}
+
+func (*BulkUpsertRequest_MultiTable) isBulkUpsertRequest_Mode() {}
+
 type isBulkUpsertRequest_DataFormat interface {
 	isBulkUpsertRequest_DataFormat()
 }
@@ -8455,7 +8545,7 @@ type BulkUpsertResponse struct {
 func (x *BulkUpsertResponse) Reset() {
 	*x = BulkUpsertResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_table_proto_msgTypes[108]
+		mi := &file_protos_ydb_table_proto_msgTypes[109]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8468,7 +8558,7 @@ func (x *BulkUpsertResponse) String() string {
 func (*BulkUpsertResponse) ProtoMessage() {}
 
 func (x *BulkUpsertResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_table_proto_msgTypes[108]
+	mi := &file_protos_ydb_table_proto_msgTypes[109]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8481,7 +8571,7 @@ func (x *BulkUpsertResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BulkUpsertResponse.ProtoReflect.Descriptor instead.
 func (*BulkUpsertResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{108}
+	return file_protos_ydb_table_proto_rawDescGZIP(), []int{109}
 }
 
 func (x *BulkUpsertResponse) GetOperation() *Ydb_Operations.Operation {
@@ -8500,7 +8590,7 @@ type BulkUpsertResult struct {
 func (x *BulkUpsertResult) Reset() {
 	*x = BulkUpsertResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_table_proto_msgTypes[109]
+		mi := &file_protos_ydb_table_proto_msgTypes[110]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8513,7 +8603,7 @@ func (x *BulkUpsertResult) String() string {
 func (*BulkUpsertResult) ProtoMessage() {}
 
 func (x *BulkUpsertResult) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_table_proto_msgTypes[109]
+	mi := &file_protos_ydb_table_proto_msgTypes[110]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8526,7 +8616,7 @@ func (x *BulkUpsertResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BulkUpsertResult.ProtoReflect.Descriptor instead.
 func (*BulkUpsertResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{109}
+	return file_protos_ydb_table_proto_rawDescGZIP(), []int{110}
 }
 
 type ExecuteScanQueryRequest struct {
@@ -8546,7 +8636,7 @@ type ExecuteScanQueryRequest struct {
 func (x *ExecuteScanQueryRequest) Reset() {
 	*x = ExecuteScanQueryRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_table_proto_msgTypes[110]
+		mi := &file_protos_ydb_table_proto_msgTypes[111]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8559,7 +8649,7 @@ func (x *ExecuteScanQueryRequest) String() string {
 func (*ExecuteScanQueryRequest) ProtoMessage() {}
 
 func (x *ExecuteScanQueryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_table_proto_msgTypes[110]
+	mi := &file_protos_ydb_table_proto_msgTypes[111]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8572,7 +8662,7 @@ func (x *ExecuteScanQueryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecuteScanQueryRequest.ProtoReflect.Descriptor instead.
 func (*ExecuteScanQueryRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{110}
+	return file_protos_ydb_table_proto_rawDescGZIP(), []int{111}
 }
 
 func (x *ExecuteScanQueryRequest) GetQuery() *Query {
@@ -8623,7 +8713,7 @@ type ExecuteScanQueryPartialResponse struct {
 func (x *ExecuteScanQueryPartialResponse) Reset() {
 	*x = ExecuteScanQueryPartialResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_table_proto_msgTypes[111]
+		mi := &file_protos_ydb_table_proto_msgTypes[112]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8636,7 +8726,7 @@ func (x *ExecuteScanQueryPartialResponse) String() string {
 func (*ExecuteScanQueryPartialResponse) ProtoMessage() {}
 
 func (x *ExecuteScanQueryPartialResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_table_proto_msgTypes[111]
+	mi := &file_protos_ydb_table_proto_msgTypes[112]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8649,7 +8739,7 @@ func (x *ExecuteScanQueryPartialResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecuteScanQueryPartialResponse.ProtoReflect.Descriptor instead.
 func (*ExecuteScanQueryPartialResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{111}
+	return file_protos_ydb_table_proto_rawDescGZIP(), []int{112}
 }
 
 func (x *ExecuteScanQueryPartialResponse) GetStatus() Ydb.StatusIds_StatusCode {
@@ -8688,7 +8778,7 @@ type ExecuteScanQueryPartialResult struct {
 func (x *ExecuteScanQueryPartialResult) Reset() {
 	*x = ExecuteScanQueryPartialResult{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_table_proto_msgTypes[112]
+		mi := &file_protos_ydb_table_proto_msgTypes[113]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8701,7 +8791,7 @@ func (x *ExecuteScanQueryPartialResult) String() string {
 func (*ExecuteScanQueryPartialResult) ProtoMessage() {}
 
 func (x *ExecuteScanQueryPartialResult) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_table_proto_msgTypes[112]
+	mi := &file_protos_ydb_table_proto_msgTypes[113]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8714,7 +8804,7 @@ func (x *ExecuteScanQueryPartialResult) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecuteScanQueryPartialResult.ProtoReflect.Descriptor instead.
 func (*ExecuteScanQueryPartialResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{112}
+	return file_protos_ydb_table_proto_rawDescGZIP(), []int{113}
 }
 
 func (x *ExecuteScanQueryPartialResult) GetResultSet() *Ydb.ResultSet {
@@ -8750,7 +8840,7 @@ type SequenceDescription_SetVal struct {
 func (x *SequenceDescription_SetVal) Reset() {
 	*x = SequenceDescription_SetVal{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protos_ydb_table_proto_msgTypes[115]
+		mi := &file_protos_ydb_table_proto_msgTypes[116]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8763,7 +8853,7 @@ func (x *SequenceDescription_SetVal) String() string {
 func (*SequenceDescription_SetVal) ProtoMessage() {}
 
 func (x *SequenceDescription_SetVal) ProtoReflect() protoreflect.Message {
-	mi := &file_protos_ydb_table_proto_msgTypes[115]
+	mi := &file_protos_ydb_table_proto_msgTypes[116]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10299,104 +10389,113 @@ var file_protos_ydb_table_proto_rawDesc = []byte{
 	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x06, 0x69, 0x73, 0x73, 0x75, 0x65, 0x73, 0x12,
 	0x2d, 0x0a, 0x0a, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x5f, 0x73, 0x65, 0x74, 0x18, 0x03, 0x20,
 	0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74,
-	0x53, 0x65, 0x74, 0x52, 0x09, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x53, 0x65, 0x74, 0x22, 0xd2,
-	0x02, 0x0a, 0x11, 0x42, 0x75, 0x6c, 0x6b, 0x55, 0x70, 0x73, 0x65, 0x72, 0x74, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x12, 0x23, 0x0a, 0x04, 0x72, 0x6f,
-	0x77, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54,
-	0x79, 0x70, 0x65, 0x64, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x04, 0x72, 0x6f, 0x77, 0x73, 0x12,
-	0x4a, 0x0a, 0x10, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72,
-	0x61, 0x6d, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e,
-	0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72,
-	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x53, 0x0a, 0x14, 0x61,
-	0x72, 0x72, 0x6f, 0x77, 0x5f, 0x62, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x73, 0x65, 0x74, 0x74, 0x69,
-	0x6e, 0x67, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e,
-	0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x73, 0x2e, 0x41, 0x72, 0x72, 0x6f, 0x77, 0x42, 0x61, 0x74,
-	0x63, 0x68, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x48, 0x00, 0x52, 0x12, 0x61, 0x72,
-	0x72, 0x6f, 0x77, 0x42, 0x61, 0x74, 0x63, 0x68, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
-	0x12, 0x3d, 0x0a, 0x0c, 0x63, 0x73, 0x76, 0x5f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
-	0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x46, 0x6f, 0x72,
-	0x6d, 0x61, 0x74, 0x73, 0x2e, 0x43, 0x73, 0x76, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73,
-	0x48, 0x00, 0x52, 0x0b, 0x63, 0x73, 0x76, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12,
-	0x13, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0xe8, 0x07, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04,
-	0x64, 0x61, 0x74, 0x61, 0x42, 0x0d, 0x0a, 0x0b, 0x64, 0x61, 0x74, 0x61, 0x5f, 0x66, 0x6f, 0x72,
-	0x6d, 0x61, 0x74, 0x22, 0x4d, 0x0a, 0x12, 0x42, 0x75, 0x6c, 0x6b, 0x55, 0x70, 0x73, 0x65, 0x72,
-	0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x09, 0x6f, 0x70, 0x65,
-	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x59,
-	0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70,
-	0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x22, 0x12, 0x0a, 0x10, 0x42, 0x75, 0x6c, 0x6b, 0x55, 0x70, 0x73, 0x65, 0x72, 0x74,
-	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0xfe, 0x03, 0x0a, 0x17, 0x45, 0x78, 0x65, 0x63, 0x75,
-	0x74, 0x65, 0x53, 0x63, 0x61, 0x6e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x12, 0x26, 0x0a, 0x05, 0x71, 0x75, 0x65, 0x72, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x10, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x2e, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x52, 0x05, 0x71, 0x75, 0x65, 0x72, 0x79, 0x12, 0x52, 0x0a, 0x0a, 0x70, 0x61,
-	0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x32,
-	0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x2e, 0x45, 0x78, 0x65, 0x63, 0x75,
-	0x74, 0x65, 0x53, 0x63, 0x61, 0x6e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x74,
-	0x72, 0x79, 0x52, 0x0a, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x3b,
-	0x0a, 0x04, 0x6d, 0x6f, 0x64, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x27, 0x2e, 0x59,
-	0x64, 0x62, 0x2e, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x2e, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65,
-	0x53, 0x63, 0x61, 0x6e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x52, 0x04, 0x6d, 0x6f, 0x64, 0x65, 0x12, 0x49, 0x0a, 0x0d, 0x63,
-	0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x73, 0x18, 0x08, 0x20, 0x01,
-	0x28, 0x0e, 0x32, 0x24, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x2e, 0x51,
-	0x75, 0x65, 0x72, 0x79, 0x53, 0x74, 0x61, 0x74, 0x73, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74,
-	0x69, 0x6f, 0x6e, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x52, 0x0c, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63,
-	0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x12, 0x38, 0x0a, 0x18, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63,
-	0x74, 0x5f, 0x66, 0x75, 0x6c, 0x6c, 0x5f, 0x64, 0x69, 0x61, 0x67, 0x6e, 0x6f, 0x73, 0x74, 0x69,
-	0x63, 0x73, 0x18, 0x09, 0x20, 0x01, 0x28, 0x08, 0x52, 0x16, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63,
-	0x74, 0x46, 0x75, 0x6c, 0x6c, 0x44, 0x69, 0x61, 0x67, 0x6e, 0x6f, 0x73, 0x74, 0x69, 0x63, 0x73,
-	0x1a, 0x4e, 0x0a, 0x0f, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x45, 0x6e,
-	0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x25, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02,
+	0x53, 0x65, 0x74, 0x52, 0x09, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x53, 0x65, 0x74, 0x22, 0x3e,
+	0x0a, 0x0a, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x12, 0x16, 0x0a, 0x06,
+	0x74, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x06, 0x74, 0x61,
+	0x62, 0x6c, 0x65, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x6e, 0x75, 0x6d, 0x72, 0x6f, 0x77, 0x73, 0x18,
+	0x02, 0x20, 0x03, 0x28, 0x04, 0x52, 0x07, 0x6e, 0x75, 0x6d, 0x72, 0x6f, 0x77, 0x73, 0x22, 0x96,
+	0x03, 0x0a, 0x11, 0x42, 0x75, 0x6c, 0x6b, 0x55, 0x70, 0x73, 0x65, 0x72, 0x74, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x05, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x48, 0x00, 0x52, 0x05, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x12, 0x38, 0x0a, 0x0b,
+	0x6d, 0x75, 0x6c, 0x74, 0x69, 0x5f, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x15, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x2e, 0x4d, 0x75,
+	0x6c, 0x74, 0x69, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x48, 0x00, 0x52, 0x0a, 0x6d, 0x75, 0x6c, 0x74,
+	0x69, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x12, 0x23, 0x0a, 0x04, 0x72, 0x6f, 0x77, 0x73, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x79, 0x70, 0x65, 0x64,
-	0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01,
-	0x22, 0x3d, 0x0a, 0x04, 0x4d, 0x6f, 0x64, 0x65, 0x12, 0x14, 0x0a, 0x10, 0x4d, 0x4f, 0x44, 0x45,
-	0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x10,
-	0x0a, 0x0c, 0x4d, 0x4f, 0x44, 0x45, 0x5f, 0x45, 0x58, 0x50, 0x4c, 0x41, 0x49, 0x4e, 0x10, 0x01,
-	0x12, 0x0d, 0x0a, 0x09, 0x4d, 0x4f, 0x44, 0x45, 0x5f, 0x45, 0x58, 0x45, 0x43, 0x10, 0x03, 0x4a,
-	0x04, 0x08, 0x01, 0x10, 0x02, 0x4a, 0x04, 0x08, 0x02, 0x10, 0x03, 0x4a, 0x04, 0x08, 0x05, 0x10,
-	0x06, 0x4a, 0x04, 0x08, 0x07, 0x10, 0x08, 0x22, 0xc7, 0x01, 0x0a, 0x1f, 0x45, 0x78, 0x65, 0x63,
-	0x75, 0x74, 0x65, 0x53, 0x63, 0x61, 0x6e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x74,
-	0x69, 0x61, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x31, 0x0a, 0x06, 0x73,
-	0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e, 0x59, 0x64,
-	0x62, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x49, 0x64, 0x73, 0x2e, 0x53, 0x74, 0x61, 0x74,
-	0x75, 0x73, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x2f,
-	0x0a, 0x06, 0x69, 0x73, 0x73, 0x75, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17,
-	0x2e, 0x59, 0x64, 0x62, 0x2e, 0x49, 0x73, 0x73, 0x75, 0x65, 0x2e, 0x49, 0x73, 0x73, 0x75, 0x65,
-	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x06, 0x69, 0x73, 0x73, 0x75, 0x65, 0x73, 0x12,
-	0x40, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x28, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x2e, 0x45, 0x78, 0x65, 0x63,
-	0x75, 0x74, 0x65, 0x53, 0x63, 0x61, 0x6e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x74,
-	0x69, 0x61, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c,
-	0x74, 0x22, 0xd9, 0x01, 0x0a, 0x1d, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x53, 0x63, 0x61,
-	0x6e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x74, 0x69, 0x61, 0x6c, 0x52, 0x65, 0x73,
-	0x75, 0x6c, 0x74, 0x12, 0x2d, 0x0a, 0x0a, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x5f, 0x73, 0x65,
-	0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x52, 0x65,
-	0x73, 0x75, 0x6c, 0x74, 0x53, 0x65, 0x74, 0x52, 0x09, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x53,
-	0x65, 0x74, 0x12, 0x3b, 0x0a, 0x0b, 0x71, 0x75, 0x65, 0x72, 0x79, 0x5f, 0x73, 0x74, 0x61, 0x74,
-	0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x61,
-	0x62, 0x6c, 0x65, 0x53, 0x74, 0x61, 0x74, 0x73, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x74,
-	0x61, 0x74, 0x73, 0x52, 0x0a, 0x71, 0x75, 0x65, 0x72, 0x79, 0x53, 0x74, 0x61, 0x74, 0x73, 0x12,
-	0x34, 0x0a, 0x16, 0x71, 0x75, 0x65, 0x72, 0x79, 0x5f, 0x66, 0x75, 0x6c, 0x6c, 0x5f, 0x64, 0x69,
-	0x61, 0x67, 0x6e, 0x6f, 0x73, 0x74, 0x69, 0x63, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x14, 0x71, 0x75, 0x65, 0x72, 0x79, 0x46, 0x75, 0x6c, 0x6c, 0x44, 0x69, 0x61, 0x67, 0x6e, 0x6f,
-	0x73, 0x74, 0x69, 0x63, 0x73, 0x4a, 0x04, 0x08, 0x02, 0x10, 0x03, 0x4a, 0x04, 0x08, 0x03, 0x10,
-	0x04, 0x4a, 0x04, 0x08, 0x04, 0x10, 0x05, 0x4a, 0x04, 0x08, 0x05, 0x10, 0x06, 0x2a, 0x52, 0x0a,
-	0x09, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1a, 0x0a, 0x16, 0x53, 0x54,
-	0x4f, 0x52, 0x45, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49,
-	0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x12, 0x0a, 0x0e, 0x53, 0x54, 0x4f, 0x52, 0x45, 0x5f,
-	0x54, 0x59, 0x50, 0x45, 0x5f, 0x52, 0x4f, 0x57, 0x10, 0x01, 0x12, 0x15, 0x0a, 0x11, 0x53, 0x54,
-	0x4f, 0x52, 0x45, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x43, 0x4f, 0x4c, 0x55, 0x4d, 0x4e, 0x10,
-	0x02, 0x42, 0x53, 0x0a, 0x14, 0x74, 0x65, 0x63, 0x68, 0x2e, 0x79, 0x64, 0x62, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2e, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x5a, 0x38, 0x67, 0x69, 0x74, 0x68, 0x75,
-	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x64, 0x62, 0x2d, 0x70, 0x6c, 0x61, 0x74, 0x66, 0x6f,
-	0x72, 0x6d, 0x2f, 0x79, 0x64, 0x62, 0x2d, 0x67, 0x6f, 0x2d, 0x67, 0x65, 0x6e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x59, 0x64, 0x62, 0x5f, 0x54, 0x61,
-	0x62, 0x6c, 0x65, 0xf8, 0x01, 0x01, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x04, 0x72, 0x6f, 0x77, 0x73, 0x12, 0x4a, 0x0a, 0x10, 0x6f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x0f, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x53, 0x0a, 0x14, 0x61, 0x72, 0x72, 0x6f, 0x77,
+	0x5f, 0x62, 0x61, 0x74, 0x63, 0x68, 0x5f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18,
+	0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x46, 0x6f, 0x72, 0x6d,
+	0x61, 0x74, 0x73, 0x2e, 0x41, 0x72, 0x72, 0x6f, 0x77, 0x42, 0x61, 0x74, 0x63, 0x68, 0x53, 0x65,
+	0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x48, 0x01, 0x52, 0x12, 0x61, 0x72, 0x72, 0x6f, 0x77, 0x42,
+	0x61, 0x74, 0x63, 0x68, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x3d, 0x0a, 0x0c,
+	0x63, 0x73, 0x76, 0x5f, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x08, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x18, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x73,
+	0x2e, 0x43, 0x73, 0x76, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x48, 0x01, 0x52, 0x0b,
+	0x63, 0x73, 0x76, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x12, 0x13, 0x0a, 0x04, 0x64,
+	0x61, 0x74, 0x61, 0x18, 0xe8, 0x07, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61,
+	0x42, 0x06, 0x0a, 0x04, 0x6d, 0x6f, 0x64, 0x65, 0x42, 0x0d, 0x0a, 0x0b, 0x64, 0x61, 0x74, 0x61,
+	0x5f, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x22, 0x4d, 0x0a, 0x12, 0x42, 0x75, 0x6c, 0x6b, 0x55,
+	0x70, 0x73, 0x65, 0x72, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a,
+	0x09, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x6f, 0x70, 0x65,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x12, 0x0a, 0x10, 0x42, 0x75, 0x6c, 0x6b, 0x55, 0x70,
+	0x73, 0x65, 0x72, 0x74, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0xfe, 0x03, 0x0a, 0x17, 0x45,
+	0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x53, 0x63, 0x61, 0x6e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x26, 0x0a, 0x05, 0x71, 0x75, 0x65, 0x72, 0x79, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x10, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x61, 0x62, 0x6c,
+	0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x52, 0x05, 0x71, 0x75, 0x65, 0x72, 0x79, 0x12, 0x52,
+	0x0a, 0x0a, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x18, 0x04, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x32, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x2e, 0x45,
+	0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x53, 0x63, 0x61, 0x6e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72,
+	0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0a, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65,
+	0x72, 0x73, 0x12, 0x3b, 0x0a, 0x04, 0x6d, 0x6f, 0x64, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0e,
+	0x32, 0x27, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x2e, 0x45, 0x78, 0x65,
+	0x63, 0x75, 0x74, 0x65, 0x53, 0x63, 0x61, 0x6e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x52, 0x04, 0x6d, 0x6f, 0x64, 0x65, 0x12,
+	0x49, 0x0a, 0x0d, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x5f, 0x73, 0x74, 0x61, 0x74, 0x73,
+	0x18, 0x08, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x24, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x61, 0x62,
+	0x6c, 0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x74, 0x61, 0x74, 0x73, 0x43, 0x6f, 0x6c,
+	0x6c, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x4d, 0x6f, 0x64, 0x65, 0x52, 0x0c, 0x63, 0x6f,
+	0x6c, 0x6c, 0x65, 0x63, 0x74, 0x53, 0x74, 0x61, 0x74, 0x73, 0x12, 0x38, 0x0a, 0x18, 0x63, 0x6f,
+	0x6c, 0x6c, 0x65, 0x63, 0x74, 0x5f, 0x66, 0x75, 0x6c, 0x6c, 0x5f, 0x64, 0x69, 0x61, 0x67, 0x6e,
+	0x6f, 0x73, 0x74, 0x69, 0x63, 0x73, 0x18, 0x09, 0x20, 0x01, 0x28, 0x08, 0x52, 0x16, 0x63, 0x6f,
+	0x6c, 0x6c, 0x65, 0x63, 0x74, 0x46, 0x75, 0x6c, 0x6c, 0x44, 0x69, 0x61, 0x67, 0x6e, 0x6f, 0x73,
+	0x74, 0x69, 0x63, 0x73, 0x1a, 0x4e, 0x0a, 0x0f, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65,
+	0x72, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x25, 0x0a, 0x05, 0x76, 0x61, 0x6c,
+	0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54,
+	0x79, 0x70, 0x65, 0x64, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65,
+	0x3a, 0x02, 0x38, 0x01, 0x22, 0x3d, 0x0a, 0x04, 0x4d, 0x6f, 0x64, 0x65, 0x12, 0x14, 0x0a, 0x10,
+	0x4d, 0x4f, 0x44, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44,
+	0x10, 0x00, 0x12, 0x10, 0x0a, 0x0c, 0x4d, 0x4f, 0x44, 0x45, 0x5f, 0x45, 0x58, 0x50, 0x4c, 0x41,
+	0x49, 0x4e, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x4d, 0x4f, 0x44, 0x45, 0x5f, 0x45, 0x58, 0x45,
+	0x43, 0x10, 0x03, 0x4a, 0x04, 0x08, 0x01, 0x10, 0x02, 0x4a, 0x04, 0x08, 0x02, 0x10, 0x03, 0x4a,
+	0x04, 0x08, 0x05, 0x10, 0x06, 0x4a, 0x04, 0x08, 0x07, 0x10, 0x08, 0x22, 0xc7, 0x01, 0x0a, 0x1f,
+	0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x53, 0x63, 0x61, 0x6e, 0x51, 0x75, 0x65, 0x72, 0x79,
+	0x50, 0x61, 0x72, 0x74, 0x69, 0x61, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x31, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32,
+	0x19, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x49, 0x64, 0x73, 0x2e,
+	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x43, 0x6f, 0x64, 0x65, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x12, 0x2f, 0x0a, 0x06, 0x69, 0x73, 0x73, 0x75, 0x65, 0x73, 0x18, 0x02, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x17, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x49, 0x73, 0x73, 0x75, 0x65, 0x2e, 0x49,
+	0x73, 0x73, 0x75, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x06, 0x69, 0x73, 0x73,
+	0x75, 0x65, 0x73, 0x12, 0x40, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x59, 0x64, 0x62, 0x2e, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x2e,
+	0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x53, 0x63, 0x61, 0x6e, 0x51, 0x75, 0x65, 0x72, 0x79,
+	0x50, 0x61, 0x72, 0x74, 0x69, 0x61, 0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x52, 0x06, 0x72,
+	0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0xd9, 0x01, 0x0a, 0x1d, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74,
+	0x65, 0x53, 0x63, 0x61, 0x6e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x74, 0x69, 0x61,
+	0x6c, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x2d, 0x0a, 0x0a, 0x72, 0x65, 0x73, 0x75, 0x6c,
+	0x74, 0x5f, 0x73, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x59, 0x64,
+	0x62, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x53, 0x65, 0x74, 0x52, 0x09, 0x72, 0x65, 0x73,
+	0x75, 0x6c, 0x74, 0x53, 0x65, 0x74, 0x12, 0x3b, 0x0a, 0x0b, 0x71, 0x75, 0x65, 0x72, 0x79, 0x5f,
+	0x73, 0x74, 0x61, 0x74, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x59, 0x64,
+	0x62, 0x2e, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x53, 0x74, 0x61, 0x74, 0x73, 0x2e, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x53, 0x74, 0x61, 0x74, 0x73, 0x52, 0x0a, 0x71, 0x75, 0x65, 0x72, 0x79, 0x53, 0x74,
+	0x61, 0x74, 0x73, 0x12, 0x34, 0x0a, 0x16, 0x71, 0x75, 0x65, 0x72, 0x79, 0x5f, 0x66, 0x75, 0x6c,
+	0x6c, 0x5f, 0x64, 0x69, 0x61, 0x67, 0x6e, 0x6f, 0x73, 0x74, 0x69, 0x63, 0x73, 0x18, 0x07, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x14, 0x71, 0x75, 0x65, 0x72, 0x79, 0x46, 0x75, 0x6c, 0x6c, 0x44, 0x69,
+	0x61, 0x67, 0x6e, 0x6f, 0x73, 0x74, 0x69, 0x63, 0x73, 0x4a, 0x04, 0x08, 0x02, 0x10, 0x03, 0x4a,
+	0x04, 0x08, 0x03, 0x10, 0x04, 0x4a, 0x04, 0x08, 0x04, 0x10, 0x05, 0x4a, 0x04, 0x08, 0x05, 0x10,
+	0x06, 0x2a, 0x52, 0x0a, 0x09, 0x53, 0x74, 0x6f, 0x72, 0x65, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1a,
+	0x0a, 0x16, 0x53, 0x54, 0x4f, 0x52, 0x45, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53,
+	0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x12, 0x0a, 0x0e, 0x53, 0x54,
+	0x4f, 0x52, 0x45, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x52, 0x4f, 0x57, 0x10, 0x01, 0x12, 0x15,
+	0x0a, 0x11, 0x53, 0x54, 0x4f, 0x52, 0x45, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x43, 0x4f, 0x4c,
+	0x55, 0x4d, 0x4e, 0x10, 0x02, 0x42, 0x53, 0x0a, 0x14, 0x74, 0x65, 0x63, 0x68, 0x2e, 0x79, 0x64,
+	0x62, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x5a, 0x38, 0x67,
+	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x79, 0x64, 0x62, 0x2d, 0x70, 0x6c,
+	0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x2f, 0x79, 0x64, 0x62, 0x2d, 0x67, 0x6f, 0x2d, 0x67, 0x65,
+	0x6e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x73, 0x2f, 0x59, 0x64,
+	0x62, 0x5f, 0x54, 0x61, 0x62, 0x6c, 0x65, 0xf8, 0x01, 0x01, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -10412,7 +10511,7 @@ func file_protos_ydb_table_proto_rawDescGZIP() []byte {
 }
 
 var file_protos_ydb_table_proto_enumTypes = make([]protoimpl.EnumInfo, 13)
-var file_protos_ydb_table_proto_msgTypes = make([]protoimpl.MessageInfo, 130)
+var file_protos_ydb_table_proto_msgTypes = make([]protoimpl.MessageInfo, 131)
 var file_protos_ydb_table_proto_goTypes = []interface{}{
 	(StoreType)(0),                                 // 0: Ydb.Table.StoreType
 	(TableIndexDescription_Status)(0),              // 1: Ydb.Table.TableIndexDescription.Status
@@ -10534,52 +10633,53 @@ var file_protos_ydb_table_proto_goTypes = []interface{}{
 	(*ReadTableResult)(nil),                        // 117: Ydb.Table.ReadTableResult
 	(*ReadRowsRequest)(nil),                        // 118: Ydb.Table.ReadRowsRequest
 	(*ReadRowsResponse)(nil),                       // 119: Ydb.Table.ReadRowsResponse
-	(*BulkUpsertRequest)(nil),                      // 120: Ydb.Table.BulkUpsertRequest
-	(*BulkUpsertResponse)(nil),                     // 121: Ydb.Table.BulkUpsertResponse
-	(*BulkUpsertResult)(nil),                       // 122: Ydb.Table.BulkUpsertResult
-	(*ExecuteScanQueryRequest)(nil),                // 123: Ydb.Table.ExecuteScanQueryRequest
-	(*ExecuteScanQueryPartialResponse)(nil),        // 124: Ydb.Table.ExecuteScanQueryPartialResponse
-	(*ExecuteScanQueryPartialResult)(nil),          // 125: Ydb.Table.ExecuteScanQueryPartialResult
-	nil,                                            // 126: Ydb.Table.Changefeed.AttributesEntry
-	nil,                                            // 127: Ydb.Table.ChangefeedDescription.AttributesEntry
-	(*SequenceDescription_SetVal)(nil),             // 128: Ydb.Table.SequenceDescription.SetVal
-	nil,                                            // 129: Ydb.Table.CreateTableRequest.AttributesEntry
-	nil,                                            // 130: Ydb.Table.AlterTableRequest.AlterAttributesEntry
-	nil,                                            // 131: Ydb.Table.DescribeTableResult.AttributesEntry
-	nil,                                            // 132: Ydb.Table.ExecuteDataQueryRequest.ParametersEntry
-	nil,                                            // 133: Ydb.Table.QueryMeta.ParametersTypesEntry
-	nil,                                            // 134: Ydb.Table.PrepareQueryResult.ParametersTypesEntry
-	nil,                                            // 135: Ydb.Table.StoragePolicyDescription.LabelsEntry
-	nil,                                            // 136: Ydb.Table.CompactionPolicyDescription.LabelsEntry
-	nil,                                            // 137: Ydb.Table.PartitioningPolicyDescription.LabelsEntry
-	nil,                                            // 138: Ydb.Table.ExecutionPolicyDescription.LabelsEntry
-	nil,                                            // 139: Ydb.Table.ReplicationPolicyDescription.LabelsEntry
-	nil,                                            // 140: Ydb.Table.CachingPolicyDescription.LabelsEntry
-	nil,                                            // 141: Ydb.Table.TableProfileDescription.LabelsEntry
-	nil,                                            // 142: Ydb.Table.ExecuteScanQueryRequest.ParametersEntry
-	(*Ydb_Operations.OperationParams)(nil),         // 143: Ydb.Operations.OperationParams
-	(*Ydb_Operations.Operation)(nil),               // 144: Ydb.Operations.Operation
-	(*durationpb.Duration)(nil),                    // 145: google.protobuf.Duration
-	(*Ydb_Topic.PartitioningSettings)(nil),         // 146: Ydb.Topic.PartitioningSettings
-	(Ydb.FeatureFlag_Status)(0),                    // 147: Ydb.FeatureFlag.Status
-	(*Ydb.TypedValue)(nil),                         // 148: Ydb.TypedValue
-	(*timestamppb.Timestamp)(nil),                  // 149: google.protobuf.Timestamp
-	(*Ydb.Type)(nil),                               // 150: Ydb.Type
-	(*emptypb.Empty)(nil),                          // 151: google.protobuf.Empty
-	(*Ydb_Scheme.Entry)(nil),                       // 152: Ydb.Scheme.Entry
-	(*Ydb.ResultSet)(nil),                          // 153: Ydb.ResultSet
-	(*Ydb_TableStats.QueryStats)(nil),              // 154: Ydb.TableStats.QueryStats
-	(Ydb.StatusIds_StatusCode)(0),                  // 155: Ydb.StatusIds.StatusCode
-	(*Ydb_Issue.IssueMessage)(nil),                 // 156: Ydb.Issue.IssueMessage
-	(*Ydb.VirtualTimestamp)(nil),                   // 157: Ydb.VirtualTimestamp
-	(*Ydb_Formats.ArrowBatchSettings)(nil),         // 158: Ydb.Formats.ArrowBatchSettings
-	(*Ydb_Formats.CsvSettings)(nil),                // 159: Ydb.Formats.CsvSettings
+	(*MultiTable)(nil),                             // 120: Ydb.Table.MultiTable
+	(*BulkUpsertRequest)(nil),                      // 121: Ydb.Table.BulkUpsertRequest
+	(*BulkUpsertResponse)(nil),                     // 122: Ydb.Table.BulkUpsertResponse
+	(*BulkUpsertResult)(nil),                       // 123: Ydb.Table.BulkUpsertResult
+	(*ExecuteScanQueryRequest)(nil),                // 124: Ydb.Table.ExecuteScanQueryRequest
+	(*ExecuteScanQueryPartialResponse)(nil),        // 125: Ydb.Table.ExecuteScanQueryPartialResponse
+	(*ExecuteScanQueryPartialResult)(nil),          // 126: Ydb.Table.ExecuteScanQueryPartialResult
+	nil,                                            // 127: Ydb.Table.Changefeed.AttributesEntry
+	nil,                                            // 128: Ydb.Table.ChangefeedDescription.AttributesEntry
+	(*SequenceDescription_SetVal)(nil),             // 129: Ydb.Table.SequenceDescription.SetVal
+	nil,                                            // 130: Ydb.Table.CreateTableRequest.AttributesEntry
+	nil,                                            // 131: Ydb.Table.AlterTableRequest.AlterAttributesEntry
+	nil,                                            // 132: Ydb.Table.DescribeTableResult.AttributesEntry
+	nil,                                            // 133: Ydb.Table.ExecuteDataQueryRequest.ParametersEntry
+	nil,                                            // 134: Ydb.Table.QueryMeta.ParametersTypesEntry
+	nil,                                            // 135: Ydb.Table.PrepareQueryResult.ParametersTypesEntry
+	nil,                                            // 136: Ydb.Table.StoragePolicyDescription.LabelsEntry
+	nil,                                            // 137: Ydb.Table.CompactionPolicyDescription.LabelsEntry
+	nil,                                            // 138: Ydb.Table.PartitioningPolicyDescription.LabelsEntry
+	nil,                                            // 139: Ydb.Table.ExecutionPolicyDescription.LabelsEntry
+	nil,                                            // 140: Ydb.Table.ReplicationPolicyDescription.LabelsEntry
+	nil,                                            // 141: Ydb.Table.CachingPolicyDescription.LabelsEntry
+	nil,                                            // 142: Ydb.Table.TableProfileDescription.LabelsEntry
+	nil,                                            // 143: Ydb.Table.ExecuteScanQueryRequest.ParametersEntry
+	(*Ydb_Operations.OperationParams)(nil),         // 144: Ydb.Operations.OperationParams
+	(*Ydb_Operations.Operation)(nil),               // 145: Ydb.Operations.Operation
+	(*durationpb.Duration)(nil),                    // 146: google.protobuf.Duration
+	(*Ydb_Topic.PartitioningSettings)(nil),         // 147: Ydb.Topic.PartitioningSettings
+	(Ydb.FeatureFlag_Status)(0),                    // 148: Ydb.FeatureFlag.Status
+	(*Ydb.TypedValue)(nil),                         // 149: Ydb.TypedValue
+	(*timestamppb.Timestamp)(nil),                  // 150: google.protobuf.Timestamp
+	(*Ydb.Type)(nil),                               // 151: Ydb.Type
+	(*emptypb.Empty)(nil),                          // 152: google.protobuf.Empty
+	(*Ydb_Scheme.Entry)(nil),                       // 153: Ydb.Scheme.Entry
+	(*Ydb.ResultSet)(nil),                          // 154: Ydb.ResultSet
+	(*Ydb_TableStats.QueryStats)(nil),              // 155: Ydb.TableStats.QueryStats
+	(Ydb.StatusIds_StatusCode)(0),                  // 156: Ydb.StatusIds.StatusCode
+	(*Ydb_Issue.IssueMessage)(nil),                 // 157: Ydb.Issue.IssueMessage
+	(*Ydb.VirtualTimestamp)(nil),                   // 158: Ydb.VirtualTimestamp
+	(*Ydb_Formats.ArrowBatchSettings)(nil),         // 159: Ydb.Formats.ArrowBatchSettings
+	(*Ydb_Formats.CsvSettings)(nil),                // 160: Ydb.Formats.CsvSettings
 }
 var file_protos_ydb_table_proto_depIdxs = []int32{
-	143, // 0: Ydb.Table.CreateSessionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 1: Ydb.Table.CreateSessionResponse.operation:type_name -> Ydb.Operations.Operation
-	143, // 2: Ydb.Table.DeleteSessionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 3: Ydb.Table.DeleteSessionResponse.operation:type_name -> Ydb.Operations.Operation
+	144, // 0: Ydb.Table.CreateSessionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 1: Ydb.Table.CreateSessionResponse.operation:type_name -> Ydb.Operations.Operation
+	144, // 2: Ydb.Table.DeleteSessionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 3: Ydb.Table.DeleteSessionResponse.operation:type_name -> Ydb.Operations.Operation
 	18,  // 4: Ydb.Table.TableIndex.global_index:type_name -> Ydb.Table.GlobalIndex
 	19,  // 5: Ydb.Table.TableIndex.global_async_index:type_name -> Ydb.Table.GlobalAsyncIndex
 	20,  // 6: Ydb.Table.TableIndex.global_unique_index:type_name -> Ydb.Table.GlobalUniqueIndex
@@ -10592,42 +10692,42 @@ var file_protos_ydb_table_proto_depIdxs = []int32{
 	2,   // 13: Ydb.Table.IndexBuildMetadata.state:type_name -> Ydb.Table.IndexBuildState.State
 	3,   // 14: Ydb.Table.Changefeed.mode:type_name -> Ydb.Table.ChangefeedMode.Mode
 	4,   // 15: Ydb.Table.Changefeed.format:type_name -> Ydb.Table.ChangefeedFormat.Format
-	145, // 16: Ydb.Table.Changefeed.retention_period:type_name -> google.protobuf.Duration
-	126, // 17: Ydb.Table.Changefeed.attributes:type_name -> Ydb.Table.Changefeed.AttributesEntry
-	145, // 18: Ydb.Table.Changefeed.resolved_timestamps_interval:type_name -> google.protobuf.Duration
-	146, // 19: Ydb.Table.Changefeed.topic_partitioning_settings:type_name -> Ydb.Topic.PartitioningSettings
+	146, // 16: Ydb.Table.Changefeed.retention_period:type_name -> google.protobuf.Duration
+	127, // 17: Ydb.Table.Changefeed.attributes:type_name -> Ydb.Table.Changefeed.AttributesEntry
+	146, // 18: Ydb.Table.Changefeed.resolved_timestamps_interval:type_name -> google.protobuf.Duration
+	147, // 19: Ydb.Table.Changefeed.topic_partitioning_settings:type_name -> Ydb.Topic.PartitioningSettings
 	3,   // 20: Ydb.Table.ChangefeedDescription.mode:type_name -> Ydb.Table.ChangefeedMode.Mode
 	4,   // 21: Ydb.Table.ChangefeedDescription.format:type_name -> Ydb.Table.ChangefeedFormat.Format
 	5,   // 22: Ydb.Table.ChangefeedDescription.state:type_name -> Ydb.Table.ChangefeedDescription.State
-	127, // 23: Ydb.Table.ChangefeedDescription.attributes:type_name -> Ydb.Table.ChangefeedDescription.AttributesEntry
-	145, // 24: Ydb.Table.ChangefeedDescription.resolved_timestamps_interval:type_name -> google.protobuf.Duration
+	128, // 23: Ydb.Table.ChangefeedDescription.attributes:type_name -> Ydb.Table.ChangefeedDescription.AttributesEntry
+	146, // 24: Ydb.Table.ChangefeedDescription.resolved_timestamps_interval:type_name -> google.protobuf.Duration
 	30,  // 25: Ydb.Table.StoragePolicy.syslog:type_name -> Ydb.Table.StoragePool
 	30,  // 26: Ydb.Table.StoragePolicy.log:type_name -> Ydb.Table.StoragePool
 	30,  // 27: Ydb.Table.StoragePolicy.data:type_name -> Ydb.Table.StoragePool
 	30,  // 28: Ydb.Table.StoragePolicy.external:type_name -> Ydb.Table.StoragePool
-	147, // 29: Ydb.Table.StoragePolicy.keep_in_memory:type_name -> Ydb.FeatureFlag.Status
+	148, // 29: Ydb.Table.StoragePolicy.keep_in_memory:type_name -> Ydb.FeatureFlag.Status
 	32,  // 30: Ydb.Table.StoragePolicy.column_families:type_name -> Ydb.Table.ColumnFamilyPolicy
 	30,  // 31: Ydb.Table.ColumnFamilyPolicy.data:type_name -> Ydb.Table.StoragePool
 	30,  // 32: Ydb.Table.ColumnFamilyPolicy.external:type_name -> Ydb.Table.StoragePool
-	147, // 33: Ydb.Table.ColumnFamilyPolicy.keep_in_memory:type_name -> Ydb.FeatureFlag.Status
+	148, // 33: Ydb.Table.ColumnFamilyPolicy.keep_in_memory:type_name -> Ydb.FeatureFlag.Status
 	6,   // 34: Ydb.Table.ColumnFamilyPolicy.compression:type_name -> Ydb.Table.ColumnFamilyPolicy.Compression
-	148, // 35: Ydb.Table.ExplicitPartitions.split_points:type_name -> Ydb.TypedValue
+	149, // 35: Ydb.Table.ExplicitPartitions.split_points:type_name -> Ydb.TypedValue
 	35,  // 36: Ydb.Table.TableStats.partition_stats:type_name -> Ydb.Table.PartitionStats
-	149, // 37: Ydb.Table.TableStats.creation_time:type_name -> google.protobuf.Timestamp
-	149, // 38: Ydb.Table.TableStats.modification_time:type_name -> google.protobuf.Timestamp
+	150, // 37: Ydb.Table.TableStats.creation_time:type_name -> google.protobuf.Timestamp
+	150, // 38: Ydb.Table.TableStats.modification_time:type_name -> google.protobuf.Timestamp
 	7,   // 39: Ydb.Table.PartitioningPolicy.auto_partitioning:type_name -> Ydb.Table.PartitioningPolicy.AutoPartitioningPolicy
 	34,  // 40: Ydb.Table.PartitioningPolicy.explicit_partitions:type_name -> Ydb.Table.ExplicitPartitions
-	147, // 41: Ydb.Table.ReplicationPolicy.create_per_availability_zone:type_name -> Ydb.FeatureFlag.Status
-	147, // 42: Ydb.Table.ReplicationPolicy.allow_promotion:type_name -> Ydb.FeatureFlag.Status
+	148, // 41: Ydb.Table.ReplicationPolicy.create_per_availability_zone:type_name -> Ydb.FeatureFlag.Status
+	148, // 42: Ydb.Table.ReplicationPolicy.allow_promotion:type_name -> Ydb.FeatureFlag.Status
 	31,  // 43: Ydb.Table.TableProfile.storage_policy:type_name -> Ydb.Table.StoragePolicy
 	33,  // 44: Ydb.Table.TableProfile.compaction_policy:type_name -> Ydb.Table.CompactionPolicy
 	37,  // 45: Ydb.Table.TableProfile.partitioning_policy:type_name -> Ydb.Table.PartitioningPolicy
 	38,  // 46: Ydb.Table.TableProfile.execution_policy:type_name -> Ydb.Table.ExecutionPolicy
 	39,  // 47: Ydb.Table.TableProfile.replication_policy:type_name -> Ydb.Table.ReplicationPolicy
 	40,  // 48: Ydb.Table.TableProfile.caching_policy:type_name -> Ydb.Table.CachingPolicy
-	128, // 49: Ydb.Table.SequenceDescription.set_val:type_name -> Ydb.Table.SequenceDescription.SetVal
-	150, // 50: Ydb.Table.ColumnMeta.type:type_name -> Ydb.Type
-	148, // 51: Ydb.Table.ColumnMeta.from_literal:type_name -> Ydb.TypedValue
+	129, // 49: Ydb.Table.SequenceDescription.set_val:type_name -> Ydb.Table.SequenceDescription.SetVal
+	151, // 50: Ydb.Table.ColumnMeta.type:type_name -> Ydb.Type
+	149, // 51: Ydb.Table.ColumnMeta.from_literal:type_name -> Ydb.TypedValue
 	42,  // 52: Ydb.Table.ColumnMeta.from_sequence:type_name -> Ydb.Table.SequenceDescription
 	8,   // 53: Ydb.Table.ValueSinceUnixEpochModeSettings.column_unit:type_name -> Ydb.Table.ValueSinceUnixEpochModeSettings.Unit
 	44,  // 54: Ydb.Table.TtlSettings.date_type_column:type_name -> Ydb.Table.DateTypeColumnModeSettings
@@ -10635,67 +10735,67 @@ var file_protos_ydb_table_proto_depIdxs = []int32{
 	30,  // 56: Ydb.Table.StorageSettings.tablet_commit_log0:type_name -> Ydb.Table.StoragePool
 	30,  // 57: Ydb.Table.StorageSettings.tablet_commit_log1:type_name -> Ydb.Table.StoragePool
 	30,  // 58: Ydb.Table.StorageSettings.external:type_name -> Ydb.Table.StoragePool
-	147, // 59: Ydb.Table.StorageSettings.store_external_blobs:type_name -> Ydb.FeatureFlag.Status
+	148, // 59: Ydb.Table.StorageSettings.store_external_blobs:type_name -> Ydb.FeatureFlag.Status
 	30,  // 60: Ydb.Table.ColumnFamily.data:type_name -> Ydb.Table.StoragePool
 	9,   // 61: Ydb.Table.ColumnFamily.compression:type_name -> Ydb.Table.ColumnFamily.Compression
-	147, // 62: Ydb.Table.ColumnFamily.keep_in_memory:type_name -> Ydb.FeatureFlag.Status
-	147, // 63: Ydb.Table.PartitioningSettings.partitioning_by_size:type_name -> Ydb.FeatureFlag.Status
-	147, // 64: Ydb.Table.PartitioningSettings.partitioning_by_load:type_name -> Ydb.FeatureFlag.Status
+	148, // 62: Ydb.Table.ColumnFamily.keep_in_memory:type_name -> Ydb.FeatureFlag.Status
+	148, // 63: Ydb.Table.PartitioningSettings.partitioning_by_size:type_name -> Ydb.FeatureFlag.Status
+	148, // 64: Ydb.Table.PartitioningSettings.partitioning_by_load:type_name -> Ydb.FeatureFlag.Status
 	50,  // 65: Ydb.Table.ClusterReplicasSettings.az_read_replicas_settings:type_name -> Ydb.Table.AzReadReplicasSettings
 	43,  // 66: Ydb.Table.CreateTableRequest.columns:type_name -> Ydb.Table.ColumnMeta
 	41,  // 67: Ydb.Table.CreateTableRequest.profile:type_name -> Ydb.Table.TableProfile
-	143, // 68: Ydb.Table.CreateTableRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	144, // 68: Ydb.Table.CreateTableRequest.operation_params:type_name -> Ydb.Operations.OperationParams
 	21,  // 69: Ydb.Table.CreateTableRequest.indexes:type_name -> Ydb.Table.TableIndex
 	46,  // 70: Ydb.Table.CreateTableRequest.ttl_settings:type_name -> Ydb.Table.TtlSettings
 	47,  // 71: Ydb.Table.CreateTableRequest.storage_settings:type_name -> Ydb.Table.StorageSettings
 	48,  // 72: Ydb.Table.CreateTableRequest.column_families:type_name -> Ydb.Table.ColumnFamily
-	129, // 73: Ydb.Table.CreateTableRequest.attributes:type_name -> Ydb.Table.CreateTableRequest.AttributesEntry
+	130, // 73: Ydb.Table.CreateTableRequest.attributes:type_name -> Ydb.Table.CreateTableRequest.AttributesEntry
 	34,  // 74: Ydb.Table.CreateTableRequest.partition_at_keys:type_name -> Ydb.Table.ExplicitPartitions
 	49,  // 75: Ydb.Table.CreateTableRequest.partitioning_settings:type_name -> Ydb.Table.PartitioningSettings
-	147, // 76: Ydb.Table.CreateTableRequest.key_bloom_filter:type_name -> Ydb.FeatureFlag.Status
+	148, // 76: Ydb.Table.CreateTableRequest.key_bloom_filter:type_name -> Ydb.FeatureFlag.Status
 	52,  // 77: Ydb.Table.CreateTableRequest.read_replicas_settings:type_name -> Ydb.Table.ReadReplicasSettings
 	0,   // 78: Ydb.Table.CreateTableRequest.store_type:type_name -> Ydb.Table.StoreType
-	144, // 79: Ydb.Table.CreateTableResponse.operation:type_name -> Ydb.Operations.Operation
-	143, // 80: Ydb.Table.DropTableRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 81: Ydb.Table.DropTableResponse.operation:type_name -> Ydb.Operations.Operation
+	145, // 79: Ydb.Table.CreateTableResponse.operation:type_name -> Ydb.Operations.Operation
+	144, // 80: Ydb.Table.DropTableRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 81: Ydb.Table.DropTableResponse.operation:type_name -> Ydb.Operations.Operation
 	43,  // 82: Ydb.Table.AlterTableRequest.add_columns:type_name -> Ydb.Table.ColumnMeta
-	143, // 83: Ydb.Table.AlterTableRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	144, // 83: Ydb.Table.AlterTableRequest.operation_params:type_name -> Ydb.Operations.OperationParams
 	43,  // 84: Ydb.Table.AlterTableRequest.alter_columns:type_name -> Ydb.Table.ColumnMeta
 	46,  // 85: Ydb.Table.AlterTableRequest.set_ttl_settings:type_name -> Ydb.Table.TtlSettings
-	151, // 86: Ydb.Table.AlterTableRequest.drop_ttl_settings:type_name -> google.protobuf.Empty
+	152, // 86: Ydb.Table.AlterTableRequest.drop_ttl_settings:type_name -> google.protobuf.Empty
 	21,  // 87: Ydb.Table.AlterTableRequest.add_indexes:type_name -> Ydb.Table.TableIndex
 	47,  // 88: Ydb.Table.AlterTableRequest.alter_storage_settings:type_name -> Ydb.Table.StorageSettings
 	48,  // 89: Ydb.Table.AlterTableRequest.add_column_families:type_name -> Ydb.Table.ColumnFamily
 	48,  // 90: Ydb.Table.AlterTableRequest.alter_column_families:type_name -> Ydb.Table.ColumnFamily
-	130, // 91: Ydb.Table.AlterTableRequest.alter_attributes:type_name -> Ydb.Table.AlterTableRequest.AlterAttributesEntry
+	131, // 91: Ydb.Table.AlterTableRequest.alter_attributes:type_name -> Ydb.Table.AlterTableRequest.AlterAttributesEntry
 	49,  // 92: Ydb.Table.AlterTableRequest.alter_partitioning_settings:type_name -> Ydb.Table.PartitioningSettings
-	147, // 93: Ydb.Table.AlterTableRequest.set_key_bloom_filter:type_name -> Ydb.FeatureFlag.Status
+	148, // 93: Ydb.Table.AlterTableRequest.set_key_bloom_filter:type_name -> Ydb.FeatureFlag.Status
 	52,  // 94: Ydb.Table.AlterTableRequest.set_read_replicas_settings:type_name -> Ydb.Table.ReadReplicasSettings
 	28,  // 95: Ydb.Table.AlterTableRequest.add_changefeeds:type_name -> Ydb.Table.Changefeed
 	57,  // 96: Ydb.Table.AlterTableRequest.rename_indexes:type_name -> Ydb.Table.RenameIndexItem
-	151, // 97: Ydb.Table.AlterTableRequest.drop_tiering:type_name -> google.protobuf.Empty
-	144, // 98: Ydb.Table.AlterTableResponse.operation:type_name -> Ydb.Operations.Operation
-	143, // 99: Ydb.Table.CopyTableRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 100: Ydb.Table.CopyTableResponse.operation:type_name -> Ydb.Operations.Operation
-	143, // 101: Ydb.Table.CopyTablesRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	152, // 97: Ydb.Table.AlterTableRequest.drop_tiering:type_name -> google.protobuf.Empty
+	145, // 98: Ydb.Table.AlterTableResponse.operation:type_name -> Ydb.Operations.Operation
+	144, // 99: Ydb.Table.CopyTableRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 100: Ydb.Table.CopyTableResponse.operation:type_name -> Ydb.Operations.Operation
+	144, // 101: Ydb.Table.CopyTablesRequest.operation_params:type_name -> Ydb.Operations.OperationParams
 	62,  // 102: Ydb.Table.CopyTablesRequest.tables:type_name -> Ydb.Table.CopyTableItem
-	144, // 103: Ydb.Table.CopyTablesResponse.operation:type_name -> Ydb.Operations.Operation
-	143, // 104: Ydb.Table.RenameTablesRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 103: Ydb.Table.CopyTablesResponse.operation:type_name -> Ydb.Operations.Operation
+	144, // 104: Ydb.Table.RenameTablesRequest.operation_params:type_name -> Ydb.Operations.OperationParams
 	65,  // 105: Ydb.Table.RenameTablesRequest.tables:type_name -> Ydb.Table.RenameTableItem
-	144, // 106: Ydb.Table.RenameTablesResponse.operation:type_name -> Ydb.Operations.Operation
-	143, // 107: Ydb.Table.DescribeTableRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 108: Ydb.Table.DescribeTableResponse.operation:type_name -> Ydb.Operations.Operation
-	152, // 109: Ydb.Table.DescribeTableResult.self:type_name -> Ydb.Scheme.Entry
+	145, // 106: Ydb.Table.RenameTablesResponse.operation:type_name -> Ydb.Operations.Operation
+	144, // 107: Ydb.Table.DescribeTableRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 108: Ydb.Table.DescribeTableResponse.operation:type_name -> Ydb.Operations.Operation
+	153, // 109: Ydb.Table.DescribeTableResult.self:type_name -> Ydb.Scheme.Entry
 	43,  // 110: Ydb.Table.DescribeTableResult.columns:type_name -> Ydb.Table.ColumnMeta
-	148, // 111: Ydb.Table.DescribeTableResult.shard_key_bounds:type_name -> Ydb.TypedValue
+	149, // 111: Ydb.Table.DescribeTableResult.shard_key_bounds:type_name -> Ydb.TypedValue
 	22,  // 112: Ydb.Table.DescribeTableResult.indexes:type_name -> Ydb.Table.TableIndexDescription
 	36,  // 113: Ydb.Table.DescribeTableResult.table_stats:type_name -> Ydb.Table.TableStats
 	46,  // 114: Ydb.Table.DescribeTableResult.ttl_settings:type_name -> Ydb.Table.TtlSettings
 	47,  // 115: Ydb.Table.DescribeTableResult.storage_settings:type_name -> Ydb.Table.StorageSettings
 	48,  // 116: Ydb.Table.DescribeTableResult.column_families:type_name -> Ydb.Table.ColumnFamily
-	131, // 117: Ydb.Table.DescribeTableResult.attributes:type_name -> Ydb.Table.DescribeTableResult.AttributesEntry
+	132, // 117: Ydb.Table.DescribeTableResult.attributes:type_name -> Ydb.Table.DescribeTableResult.AttributesEntry
 	49,  // 118: Ydb.Table.DescribeTableResult.partitioning_settings:type_name -> Ydb.Table.PartitioningSettings
-	147, // 119: Ydb.Table.DescribeTableResult.key_bloom_filter:type_name -> Ydb.FeatureFlag.Status
+	148, // 119: Ydb.Table.DescribeTableResult.key_bloom_filter:type_name -> Ydb.FeatureFlag.Status
 	52,  // 120: Ydb.Table.DescribeTableResult.read_replicas_settings:type_name -> Ydb.Table.ReadReplicasSettings
 	29,  // 121: Ydb.Table.DescribeTableResult.changefeeds:type_name -> Ydb.Table.ChangefeedDescription
 	0,   // 122: Ydb.Table.DescribeTableResult.store_type:type_name -> Ydb.Table.StoreType
@@ -10706,45 +10806,45 @@ var file_protos_ydb_table_proto_depIdxs = []int32{
 	76,  // 127: Ydb.Table.TransactionControl.begin_tx:type_name -> Ydb.Table.TransactionSettings
 	77,  // 128: Ydb.Table.ExecuteDataQueryRequest.tx_control:type_name -> Ydb.Table.TransactionControl
 	71,  // 129: Ydb.Table.ExecuteDataQueryRequest.query:type_name -> Ydb.Table.Query
-	132, // 130: Ydb.Table.ExecuteDataQueryRequest.parameters:type_name -> Ydb.Table.ExecuteDataQueryRequest.ParametersEntry
+	133, // 130: Ydb.Table.ExecuteDataQueryRequest.parameters:type_name -> Ydb.Table.ExecuteDataQueryRequest.ParametersEntry
 	78,  // 131: Ydb.Table.ExecuteDataQueryRequest.query_cache_policy:type_name -> Ydb.Table.QueryCachePolicy
-	143, // 132: Ydb.Table.ExecuteDataQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	144, // 132: Ydb.Table.ExecuteDataQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
 	10,  // 133: Ydb.Table.ExecuteDataQueryRequest.collect_stats:type_name -> Ydb.Table.QueryStatsCollection.Mode
-	144, // 134: Ydb.Table.ExecuteDataQueryResponse.operation:type_name -> Ydb.Operations.Operation
-	143, // 135: Ydb.Table.ExecuteSchemeQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 136: Ydb.Table.ExecuteSchemeQueryResponse.operation:type_name -> Ydb.Operations.Operation
-	133, // 137: Ydb.Table.QueryMeta.parameters_types:type_name -> Ydb.Table.QueryMeta.ParametersTypesEntry
-	153, // 138: Ydb.Table.ExecuteQueryResult.result_sets:type_name -> Ydb.ResultSet
+	145, // 134: Ydb.Table.ExecuteDataQueryResponse.operation:type_name -> Ydb.Operations.Operation
+	144, // 135: Ydb.Table.ExecuteSchemeQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 136: Ydb.Table.ExecuteSchemeQueryResponse.operation:type_name -> Ydb.Operations.Operation
+	134, // 137: Ydb.Table.QueryMeta.parameters_types:type_name -> Ydb.Table.QueryMeta.ParametersTypesEntry
+	154, // 138: Ydb.Table.ExecuteQueryResult.result_sets:type_name -> Ydb.ResultSet
 	84,  // 139: Ydb.Table.ExecuteQueryResult.tx_meta:type_name -> Ydb.Table.TransactionMeta
 	85,  // 140: Ydb.Table.ExecuteQueryResult.query_meta:type_name -> Ydb.Table.QueryMeta
-	154, // 141: Ydb.Table.ExecuteQueryResult.query_stats:type_name -> Ydb.TableStats.QueryStats
-	143, // 142: Ydb.Table.ExplainDataQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 143: Ydb.Table.ExplainDataQueryResponse.operation:type_name -> Ydb.Operations.Operation
-	143, // 144: Ydb.Table.PrepareDataQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 145: Ydb.Table.PrepareDataQueryResponse.operation:type_name -> Ydb.Operations.Operation
-	134, // 146: Ydb.Table.PrepareQueryResult.parameters_types:type_name -> Ydb.Table.PrepareQueryResult.ParametersTypesEntry
-	143, // 147: Ydb.Table.KeepAliveRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 148: Ydb.Table.KeepAliveResponse.operation:type_name -> Ydb.Operations.Operation
+	155, // 141: Ydb.Table.ExecuteQueryResult.query_stats:type_name -> Ydb.TableStats.QueryStats
+	144, // 142: Ydb.Table.ExplainDataQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 143: Ydb.Table.ExplainDataQueryResponse.operation:type_name -> Ydb.Operations.Operation
+	144, // 144: Ydb.Table.PrepareDataQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 145: Ydb.Table.PrepareDataQueryResponse.operation:type_name -> Ydb.Operations.Operation
+	135, // 146: Ydb.Table.PrepareQueryResult.parameters_types:type_name -> Ydb.Table.PrepareQueryResult.ParametersTypesEntry
+	144, // 147: Ydb.Table.KeepAliveRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 148: Ydb.Table.KeepAliveResponse.operation:type_name -> Ydb.Operations.Operation
 	11,  // 149: Ydb.Table.KeepAliveResult.session_status:type_name -> Ydb.Table.KeepAliveResult.SessionStatus
 	76,  // 150: Ydb.Table.BeginTransactionRequest.tx_settings:type_name -> Ydb.Table.TransactionSettings
-	143, // 151: Ydb.Table.BeginTransactionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 152: Ydb.Table.BeginTransactionResponse.operation:type_name -> Ydb.Operations.Operation
+	144, // 151: Ydb.Table.BeginTransactionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 152: Ydb.Table.BeginTransactionResponse.operation:type_name -> Ydb.Operations.Operation
 	84,  // 153: Ydb.Table.BeginTransactionResult.tx_meta:type_name -> Ydb.Table.TransactionMeta
-	143, // 154: Ydb.Table.CommitTransactionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	144, // 154: Ydb.Table.CommitTransactionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
 	10,  // 155: Ydb.Table.CommitTransactionRequest.collect_stats:type_name -> Ydb.Table.QueryStatsCollection.Mode
-	144, // 156: Ydb.Table.CommitTransactionResponse.operation:type_name -> Ydb.Operations.Operation
-	154, // 157: Ydb.Table.CommitTransactionResult.query_stats:type_name -> Ydb.TableStats.QueryStats
-	143, // 158: Ydb.Table.RollbackTransactionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 159: Ydb.Table.RollbackTransactionResponse.operation:type_name -> Ydb.Operations.Operation
-	135, // 160: Ydb.Table.StoragePolicyDescription.labels:type_name -> Ydb.Table.StoragePolicyDescription.LabelsEntry
-	136, // 161: Ydb.Table.CompactionPolicyDescription.labels:type_name -> Ydb.Table.CompactionPolicyDescription.LabelsEntry
-	137, // 162: Ydb.Table.PartitioningPolicyDescription.labels:type_name -> Ydb.Table.PartitioningPolicyDescription.LabelsEntry
-	138, // 163: Ydb.Table.ExecutionPolicyDescription.labels:type_name -> Ydb.Table.ExecutionPolicyDescription.LabelsEntry
-	139, // 164: Ydb.Table.ReplicationPolicyDescription.labels:type_name -> Ydb.Table.ReplicationPolicyDescription.LabelsEntry
-	140, // 165: Ydb.Table.CachingPolicyDescription.labels:type_name -> Ydb.Table.CachingPolicyDescription.LabelsEntry
-	141, // 166: Ydb.Table.TableProfileDescription.labels:type_name -> Ydb.Table.TableProfileDescription.LabelsEntry
-	143, // 167: Ydb.Table.DescribeTableOptionsRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	144, // 168: Ydb.Table.DescribeTableOptionsResponse.operation:type_name -> Ydb.Operations.Operation
+	145, // 156: Ydb.Table.CommitTransactionResponse.operation:type_name -> Ydb.Operations.Operation
+	155, // 157: Ydb.Table.CommitTransactionResult.query_stats:type_name -> Ydb.TableStats.QueryStats
+	144, // 158: Ydb.Table.RollbackTransactionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 159: Ydb.Table.RollbackTransactionResponse.operation:type_name -> Ydb.Operations.Operation
+	136, // 160: Ydb.Table.StoragePolicyDescription.labels:type_name -> Ydb.Table.StoragePolicyDescription.LabelsEntry
+	137, // 161: Ydb.Table.CompactionPolicyDescription.labels:type_name -> Ydb.Table.CompactionPolicyDescription.LabelsEntry
+	138, // 162: Ydb.Table.PartitioningPolicyDescription.labels:type_name -> Ydb.Table.PartitioningPolicyDescription.LabelsEntry
+	139, // 163: Ydb.Table.ExecutionPolicyDescription.labels:type_name -> Ydb.Table.ExecutionPolicyDescription.LabelsEntry
+	140, // 164: Ydb.Table.ReplicationPolicyDescription.labels:type_name -> Ydb.Table.ReplicationPolicyDescription.LabelsEntry
+	141, // 165: Ydb.Table.CachingPolicyDescription.labels:type_name -> Ydb.Table.CachingPolicyDescription.LabelsEntry
+	142, // 166: Ydb.Table.TableProfileDescription.labels:type_name -> Ydb.Table.TableProfileDescription.LabelsEntry
+	144, // 167: Ydb.Table.DescribeTableOptionsRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	145, // 168: Ydb.Table.DescribeTableOptionsResponse.operation:type_name -> Ydb.Operations.Operation
 	110, // 169: Ydb.Table.DescribeTableOptionsResult.table_profile_presets:type_name -> Ydb.Table.TableProfileDescription
 	104, // 170: Ydb.Table.DescribeTableOptionsResult.storage_policy_presets:type_name -> Ydb.Table.StoragePolicyDescription
 	105, // 171: Ydb.Table.DescribeTableOptionsResult.compaction_policy_presets:type_name -> Ydb.Table.CompactionPolicyDescription
@@ -10752,45 +10852,46 @@ var file_protos_ydb_table_proto_depIdxs = []int32{
 	107, // 173: Ydb.Table.DescribeTableOptionsResult.execution_policy_presets:type_name -> Ydb.Table.ExecutionPolicyDescription
 	108, // 174: Ydb.Table.DescribeTableOptionsResult.replication_policy_presets:type_name -> Ydb.Table.ReplicationPolicyDescription
 	109, // 175: Ydb.Table.DescribeTableOptionsResult.caching_policy_presets:type_name -> Ydb.Table.CachingPolicyDescription
-	148, // 176: Ydb.Table.KeyRange.greater:type_name -> Ydb.TypedValue
-	148, // 177: Ydb.Table.KeyRange.greater_or_equal:type_name -> Ydb.TypedValue
-	148, // 178: Ydb.Table.KeyRange.less:type_name -> Ydb.TypedValue
-	148, // 179: Ydb.Table.KeyRange.less_or_equal:type_name -> Ydb.TypedValue
+	149, // 176: Ydb.Table.KeyRange.greater:type_name -> Ydb.TypedValue
+	149, // 177: Ydb.Table.KeyRange.greater_or_equal:type_name -> Ydb.TypedValue
+	149, // 178: Ydb.Table.KeyRange.less:type_name -> Ydb.TypedValue
+	149, // 179: Ydb.Table.KeyRange.less_or_equal:type_name -> Ydb.TypedValue
 	114, // 180: Ydb.Table.ReadTableRequest.key_range:type_name -> Ydb.Table.KeyRange
-	147, // 181: Ydb.Table.ReadTableRequest.use_snapshot:type_name -> Ydb.FeatureFlag.Status
-	147, // 182: Ydb.Table.ReadTableRequest.return_not_null_data_as_optional:type_name -> Ydb.FeatureFlag.Status
-	155, // 183: Ydb.Table.ReadTableResponse.status:type_name -> Ydb.StatusIds.StatusCode
-	156, // 184: Ydb.Table.ReadTableResponse.issues:type_name -> Ydb.Issue.IssueMessage
-	157, // 185: Ydb.Table.ReadTableResponse.snapshot:type_name -> Ydb.VirtualTimestamp
+	148, // 181: Ydb.Table.ReadTableRequest.use_snapshot:type_name -> Ydb.FeatureFlag.Status
+	148, // 182: Ydb.Table.ReadTableRequest.return_not_null_data_as_optional:type_name -> Ydb.FeatureFlag.Status
+	156, // 183: Ydb.Table.ReadTableResponse.status:type_name -> Ydb.StatusIds.StatusCode
+	157, // 184: Ydb.Table.ReadTableResponse.issues:type_name -> Ydb.Issue.IssueMessage
+	158, // 185: Ydb.Table.ReadTableResponse.snapshot:type_name -> Ydb.VirtualTimestamp
 	117, // 186: Ydb.Table.ReadTableResponse.result:type_name -> Ydb.Table.ReadTableResult
-	153, // 187: Ydb.Table.ReadTableResult.result_set:type_name -> Ydb.ResultSet
-	148, // 188: Ydb.Table.ReadRowsRequest.keys:type_name -> Ydb.TypedValue
-	155, // 189: Ydb.Table.ReadRowsResponse.status:type_name -> Ydb.StatusIds.StatusCode
-	156, // 190: Ydb.Table.ReadRowsResponse.issues:type_name -> Ydb.Issue.IssueMessage
-	153, // 191: Ydb.Table.ReadRowsResponse.result_set:type_name -> Ydb.ResultSet
-	148, // 192: Ydb.Table.BulkUpsertRequest.rows:type_name -> Ydb.TypedValue
-	143, // 193: Ydb.Table.BulkUpsertRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	158, // 194: Ydb.Table.BulkUpsertRequest.arrow_batch_settings:type_name -> Ydb.Formats.ArrowBatchSettings
-	159, // 195: Ydb.Table.BulkUpsertRequest.csv_settings:type_name -> Ydb.Formats.CsvSettings
-	144, // 196: Ydb.Table.BulkUpsertResponse.operation:type_name -> Ydb.Operations.Operation
-	71,  // 197: Ydb.Table.ExecuteScanQueryRequest.query:type_name -> Ydb.Table.Query
-	142, // 198: Ydb.Table.ExecuteScanQueryRequest.parameters:type_name -> Ydb.Table.ExecuteScanQueryRequest.ParametersEntry
-	12,  // 199: Ydb.Table.ExecuteScanQueryRequest.mode:type_name -> Ydb.Table.ExecuteScanQueryRequest.Mode
-	10,  // 200: Ydb.Table.ExecuteScanQueryRequest.collect_stats:type_name -> Ydb.Table.QueryStatsCollection.Mode
-	155, // 201: Ydb.Table.ExecuteScanQueryPartialResponse.status:type_name -> Ydb.StatusIds.StatusCode
-	156, // 202: Ydb.Table.ExecuteScanQueryPartialResponse.issues:type_name -> Ydb.Issue.IssueMessage
-	125, // 203: Ydb.Table.ExecuteScanQueryPartialResponse.result:type_name -> Ydb.Table.ExecuteScanQueryPartialResult
-	153, // 204: Ydb.Table.ExecuteScanQueryPartialResult.result_set:type_name -> Ydb.ResultSet
-	154, // 205: Ydb.Table.ExecuteScanQueryPartialResult.query_stats:type_name -> Ydb.TableStats.QueryStats
-	148, // 206: Ydb.Table.ExecuteDataQueryRequest.ParametersEntry.value:type_name -> Ydb.TypedValue
-	150, // 207: Ydb.Table.QueryMeta.ParametersTypesEntry.value:type_name -> Ydb.Type
-	150, // 208: Ydb.Table.PrepareQueryResult.ParametersTypesEntry.value:type_name -> Ydb.Type
-	148, // 209: Ydb.Table.ExecuteScanQueryRequest.ParametersEntry.value:type_name -> Ydb.TypedValue
-	210, // [210:210] is the sub-list for method output_type
-	210, // [210:210] is the sub-list for method input_type
-	210, // [210:210] is the sub-list for extension type_name
-	210, // [210:210] is the sub-list for extension extendee
-	0,   // [0:210] is the sub-list for field type_name
+	154, // 187: Ydb.Table.ReadTableResult.result_set:type_name -> Ydb.ResultSet
+	149, // 188: Ydb.Table.ReadRowsRequest.keys:type_name -> Ydb.TypedValue
+	156, // 189: Ydb.Table.ReadRowsResponse.status:type_name -> Ydb.StatusIds.StatusCode
+	157, // 190: Ydb.Table.ReadRowsResponse.issues:type_name -> Ydb.Issue.IssueMessage
+	154, // 191: Ydb.Table.ReadRowsResponse.result_set:type_name -> Ydb.ResultSet
+	120, // 192: Ydb.Table.BulkUpsertRequest.multi_table:type_name -> Ydb.Table.MultiTable
+	149, // 193: Ydb.Table.BulkUpsertRequest.rows:type_name -> Ydb.TypedValue
+	144, // 194: Ydb.Table.BulkUpsertRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	159, // 195: Ydb.Table.BulkUpsertRequest.arrow_batch_settings:type_name -> Ydb.Formats.ArrowBatchSettings
+	160, // 196: Ydb.Table.BulkUpsertRequest.csv_settings:type_name -> Ydb.Formats.CsvSettings
+	145, // 197: Ydb.Table.BulkUpsertResponse.operation:type_name -> Ydb.Operations.Operation
+	71,  // 198: Ydb.Table.ExecuteScanQueryRequest.query:type_name -> Ydb.Table.Query
+	143, // 199: Ydb.Table.ExecuteScanQueryRequest.parameters:type_name -> Ydb.Table.ExecuteScanQueryRequest.ParametersEntry
+	12,  // 200: Ydb.Table.ExecuteScanQueryRequest.mode:type_name -> Ydb.Table.ExecuteScanQueryRequest.Mode
+	10,  // 201: Ydb.Table.ExecuteScanQueryRequest.collect_stats:type_name -> Ydb.Table.QueryStatsCollection.Mode
+	156, // 202: Ydb.Table.ExecuteScanQueryPartialResponse.status:type_name -> Ydb.StatusIds.StatusCode
+	157, // 203: Ydb.Table.ExecuteScanQueryPartialResponse.issues:type_name -> Ydb.Issue.IssueMessage
+	126, // 204: Ydb.Table.ExecuteScanQueryPartialResponse.result:type_name -> Ydb.Table.ExecuteScanQueryPartialResult
+	154, // 205: Ydb.Table.ExecuteScanQueryPartialResult.result_set:type_name -> Ydb.ResultSet
+	155, // 206: Ydb.Table.ExecuteScanQueryPartialResult.query_stats:type_name -> Ydb.TableStats.QueryStats
+	149, // 207: Ydb.Table.ExecuteDataQueryRequest.ParametersEntry.value:type_name -> Ydb.TypedValue
+	151, // 208: Ydb.Table.QueryMeta.ParametersTypesEntry.value:type_name -> Ydb.Type
+	151, // 209: Ydb.Table.PrepareQueryResult.ParametersTypesEntry.value:type_name -> Ydb.Type
+	149, // 210: Ydb.Table.ExecuteScanQueryRequest.ParametersEntry.value:type_name -> Ydb.TypedValue
+	211, // [211:211] is the sub-list for method output_type
+	211, // [211:211] is the sub-list for method input_type
+	211, // [211:211] is the sub-list for extension type_name
+	211, // [211:211] is the sub-list for extension extendee
+	0,   // [0:211] is the sub-list for field type_name
 }
 
 func init() { file_protos_ydb_table_proto_init() }
@@ -12084,7 +12185,7 @@ func file_protos_ydb_table_proto_init() {
 			}
 		}
 		file_protos_ydb_table_proto_msgTypes[107].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BulkUpsertRequest); i {
+			switch v := v.(*MultiTable); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -12096,7 +12197,7 @@ func file_protos_ydb_table_proto_init() {
 			}
 		}
 		file_protos_ydb_table_proto_msgTypes[108].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BulkUpsertResponse); i {
+			switch v := v.(*BulkUpsertRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -12108,7 +12209,7 @@ func file_protos_ydb_table_proto_init() {
 			}
 		}
 		file_protos_ydb_table_proto_msgTypes[109].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BulkUpsertResult); i {
+			switch v := v.(*BulkUpsertResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -12120,7 +12221,7 @@ func file_protos_ydb_table_proto_init() {
 			}
 		}
 		file_protos_ydb_table_proto_msgTypes[110].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ExecuteScanQueryRequest); i {
+			switch v := v.(*BulkUpsertResult); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -12132,7 +12233,7 @@ func file_protos_ydb_table_proto_init() {
 			}
 		}
 		file_protos_ydb_table_proto_msgTypes[111].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ExecuteScanQueryPartialResponse); i {
+			switch v := v.(*ExecuteScanQueryRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -12144,6 +12245,18 @@ func file_protos_ydb_table_proto_init() {
 			}
 		}
 		file_protos_ydb_table_proto_msgTypes[112].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ExecuteScanQueryPartialResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protos_ydb_table_proto_msgTypes[113].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ExecuteScanQueryPartialResult); i {
 			case 0:
 				return &v.state
@@ -12155,7 +12268,7 @@ func file_protos_ydb_table_proto_init() {
 				return nil
 			}
 		}
-		file_protos_ydb_table_proto_msgTypes[115].Exporter = func(v interface{}, i int) interface{} {
+		file_protos_ydb_table_proto_msgTypes[116].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SequenceDescription_SetVal); i {
 			case 0:
 				return &v.state
@@ -12225,18 +12338,20 @@ func file_protos_ydb_table_proto_init() {
 		(*KeyRange_Less)(nil),
 		(*KeyRange_LessOrEqual)(nil),
 	}
-	file_protos_ydb_table_proto_msgTypes[107].OneofWrappers = []interface{}{
+	file_protos_ydb_table_proto_msgTypes[108].OneofWrappers = []interface{}{
+		(*BulkUpsertRequest_Table)(nil),
+		(*BulkUpsertRequest_MultiTable)(nil),
 		(*BulkUpsertRequest_ArrowBatchSettings)(nil),
 		(*BulkUpsertRequest_CsvSettings)(nil),
 	}
-	file_protos_ydb_table_proto_msgTypes[115].OneofWrappers = []interface{}{}
+	file_protos_ydb_table_proto_msgTypes[116].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_protos_ydb_table_proto_rawDesc,
 			NumEnums:      13,
-			NumMessages:   130,
+			NumMessages:   131,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
