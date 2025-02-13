@@ -1807,7 +1807,7 @@ func (x *ChangefeedDescription) GetState() ChangefeedDescription_State {
 	return ChangefeedDescription_STATE_UNSPECIFIED
 }
 
-func (x *ChangefeedDescription) GetVirtualTimestamps() bool {
+func (x *ChangefeedDescription) GetаVirtualTimestamps() bool {
 	if x != nil {
 		return x.VirtualTimestamps
 	}
