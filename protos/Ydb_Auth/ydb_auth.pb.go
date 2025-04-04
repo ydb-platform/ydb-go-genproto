@@ -11,7 +11,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -23,12 +22,12 @@ const (
 )
 
 type LoginRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	User            string                          `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
-	Password        string                          `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_User            string                          `protobuf:"bytes,2,opt,name=user,proto3"`
+	xxx_hidden_Password        string                          `protobuf:"bytes,3,opt,name=password,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *LoginRequest) Reset() {
@@ -56,38 +55,73 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
-func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_auth_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *LoginRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *LoginRequest) GetUser() string {
 	if x != nil {
-		return x.User
+		return x.xxx_hidden_User
 	}
 	return ""
 }
 
 func (x *LoginRequest) GetPassword() string {
 	if x != nil {
-		return x.Password
+		return x.xxx_hidden_Password
 	}
 	return ""
 }
 
+func (x *LoginRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *LoginRequest) SetUser(v string) {
+	x.xxx_hidden_User = v
+}
+
+func (x *LoginRequest) SetPassword(v string) {
+	x.xxx_hidden_Password = v
+}
+
+func (x *LoginRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *LoginRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type LoginRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	User            string
+	Password        string
+}
+
+func (b0 LoginRequest_builder) Build() *LoginRequest {
+	m0 := &LoginRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_User = b.User
+	x.xxx_hidden_Password = b.Password
+	return m0
+}
+
 type LoginResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// After successfull completion must contain LoginResult.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *LoginResponse) Reset() {
@@ -115,23 +149,48 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
-func (*LoginResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_auth_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *LoginResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *LoginResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *LoginResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *LoginResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type LoginResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// After successfull completion must contain LoginResult.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 LoginResponse_builder) Build() *LoginResponse {
+	m0 := &LoginResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type LoginResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Token string                 `protobuf:"bytes,1,opt,name=token,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *LoginResult) Reset() {
@@ -159,16 +218,29 @@ func (x *LoginResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LoginResult.ProtoReflect.Descriptor instead.
-func (*LoginResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_auth_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *LoginResult) GetToken() string {
 	if x != nil {
-		return x.Token
+		return x.xxx_hidden_Token
 	}
 	return ""
+}
+
+func (x *LoginResult) SetToken(v string) {
+	x.xxx_hidden_Token = v
+}
+
+type LoginResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Token string
+}
+
+func (b0 LoginResult_builder) Build() *LoginResult {
+	m0 := &LoginResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Token = b.Token
+	return m0
 }
 
 var File_protos_ydb_auth_proto protoreflect.FileDescriptor
@@ -185,18 +257,6 @@ const file_protos_ydb_auth_proto_rawDesc = "" +
 	"\vLoginResult\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05tokenBQ\n" +
 	"\x13tech.ydb.proto.authZ7github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Auth\xf8\x01\x01b\x06proto3"
-
-var (
-	file_protos_ydb_auth_proto_rawDescOnce sync.Once
-	file_protos_ydb_auth_proto_rawDescData []byte
-)
-
-func file_protos_ydb_auth_proto_rawDescGZIP() []byte {
-	file_protos_ydb_auth_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_auth_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_auth_proto_rawDesc), len(file_protos_ydb_auth_proto_rawDesc)))
-	})
-	return file_protos_ydb_auth_proto_rawDescData
-}
 
 var file_protos_ydb_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_protos_ydb_auth_proto_goTypes = []any{

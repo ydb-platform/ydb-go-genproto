@@ -10,7 +10,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -23,11 +22,11 @@ const (
 
 // Describes select, update (insert, upsert, replace) and delete operations
 type OperationStats struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Rows          uint64                 `protobuf:"varint,1,opt,name=rows,proto3" json:"rows,omitempty"`
-	Bytes         uint64                 `protobuf:"varint,2,opt,name=bytes,proto3" json:"bytes,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Rows  uint64                 `protobuf:"varint,1,opt,name=rows,proto3"`
+	xxx_hidden_Bytes uint64                 `protobuf:"varint,2,opt,name=bytes,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *OperationStats) Reset() {
@@ -55,35 +54,54 @@ func (x *OperationStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OperationStats.ProtoReflect.Descriptor instead.
-func (*OperationStats) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_stats_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *OperationStats) GetRows() uint64 {
 	if x != nil {
-		return x.Rows
+		return x.xxx_hidden_Rows
 	}
 	return 0
 }
 
 func (x *OperationStats) GetBytes() uint64 {
 	if x != nil {
-		return x.Bytes
+		return x.xxx_hidden_Bytes
 	}
 	return 0
 }
 
+func (x *OperationStats) SetRows(v uint64) {
+	x.xxx_hidden_Rows = v
+}
+
+func (x *OperationStats) SetBytes(v uint64) {
+	x.xxx_hidden_Bytes = v
+}
+
+type OperationStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Rows  uint64
+	Bytes uint64
+}
+
+func (b0 OperationStats_builder) Build() *OperationStats {
+	m0 := &OperationStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Rows = b.Rows
+	x.xxx_hidden_Bytes = b.Bytes
+	return m0
+}
+
 // Describes all operations on a table
 type TableAccessStats struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	Name            string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Reads           *OperationStats        `protobuf:"bytes,3,opt,name=reads,proto3" json:"reads,omitempty"`
-	Updates         *OperationStats        `protobuf:"bytes,4,opt,name=updates,proto3" json:"updates,omitempty"`
-	Deletes         *OperationStats        `protobuf:"bytes,5,opt,name=deletes,proto3" json:"deletes,omitempty"`
-	PartitionsCount uint64                 `protobuf:"varint,6,opt,name=partitions_count,json=partitionsCount,proto3" json:"partitions_count,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name            string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Reads           *OperationStats        `protobuf:"bytes,3,opt,name=reads,proto3"`
+	xxx_hidden_Updates         *OperationStats        `protobuf:"bytes,4,opt,name=updates,proto3"`
+	xxx_hidden_Deletes         *OperationStats        `protobuf:"bytes,5,opt,name=deletes,proto3"`
+	xxx_hidden_PartitionsCount uint64                 `protobuf:"varint,6,opt,name=partitions_count,json=partitionsCount,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *TableAccessStats) Reset() {
@@ -111,55 +129,125 @@ func (x *TableAccessStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TableAccessStats.ProtoReflect.Descriptor instead.
-func (*TableAccessStats) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_stats_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *TableAccessStats) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *TableAccessStats) GetReads() *OperationStats {
 	if x != nil {
-		return x.Reads
+		return x.xxx_hidden_Reads
 	}
 	return nil
 }
 
 func (x *TableAccessStats) GetUpdates() *OperationStats {
 	if x != nil {
-		return x.Updates
+		return x.xxx_hidden_Updates
 	}
 	return nil
 }
 
 func (x *TableAccessStats) GetDeletes() *OperationStats {
 	if x != nil {
-		return x.Deletes
+		return x.xxx_hidden_Deletes
 	}
 	return nil
 }
 
 func (x *TableAccessStats) GetPartitionsCount() uint64 {
 	if x != nil {
-		return x.PartitionsCount
+		return x.xxx_hidden_PartitionsCount
 	}
 	return 0
 }
 
+func (x *TableAccessStats) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *TableAccessStats) SetReads(v *OperationStats) {
+	x.xxx_hidden_Reads = v
+}
+
+func (x *TableAccessStats) SetUpdates(v *OperationStats) {
+	x.xxx_hidden_Updates = v
+}
+
+func (x *TableAccessStats) SetDeletes(v *OperationStats) {
+	x.xxx_hidden_Deletes = v
+}
+
+func (x *TableAccessStats) SetPartitionsCount(v uint64) {
+	x.xxx_hidden_PartitionsCount = v
+}
+
+func (x *TableAccessStats) HasReads() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Reads != nil
+}
+
+func (x *TableAccessStats) HasUpdates() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Updates != nil
+}
+
+func (x *TableAccessStats) HasDeletes() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Deletes != nil
+}
+
+func (x *TableAccessStats) ClearReads() {
+	x.xxx_hidden_Reads = nil
+}
+
+func (x *TableAccessStats) ClearUpdates() {
+	x.xxx_hidden_Updates = nil
+}
+
+func (x *TableAccessStats) ClearDeletes() {
+	x.xxx_hidden_Deletes = nil
+}
+
+type TableAccessStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name            string
+	Reads           *OperationStats
+	Updates         *OperationStats
+	Deletes         *OperationStats
+	PartitionsCount uint64
+}
+
+func (b0 TableAccessStats_builder) Build() *TableAccessStats {
+	m0 := &TableAccessStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Reads = b.Reads
+	x.xxx_hidden_Updates = b.Updates
+	x.xxx_hidden_Deletes = b.Deletes
+	x.xxx_hidden_PartitionsCount = b.PartitionsCount
+	return m0
+}
+
 type QueryPhaseStats struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	DurationUs     uint64                 `protobuf:"varint,1,opt,name=duration_us,json=durationUs,proto3" json:"duration_us,omitempty"`
-	TableAccess    []*TableAccessStats    `protobuf:"bytes,2,rep,name=table_access,json=tableAccess,proto3" json:"table_access,omitempty"`
-	CpuTimeUs      uint64                 `protobuf:"varint,3,opt,name=cpu_time_us,json=cpuTimeUs,proto3" json:"cpu_time_us,omitempty"`
-	AffectedShards uint64                 `protobuf:"varint,4,opt,name=affected_shards,json=affectedShards,proto3" json:"affected_shards,omitempty"`
-	LiteralPhase   bool                   `protobuf:"varint,5,opt,name=literal_phase,json=literalPhase,proto3" json:"literal_phase,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DurationUs     uint64                 `protobuf:"varint,1,opt,name=duration_us,json=durationUs,proto3"`
+	xxx_hidden_TableAccess    *[]*TableAccessStats   `protobuf:"bytes,2,rep,name=table_access,json=tableAccess,proto3"`
+	xxx_hidden_CpuTimeUs      uint64                 `protobuf:"varint,3,opt,name=cpu_time_us,json=cpuTimeUs,proto3"`
+	xxx_hidden_AffectedShards uint64                 `protobuf:"varint,4,opt,name=affected_shards,json=affectedShards,proto3"`
+	xxx_hidden_LiteralPhase   bool                   `protobuf:"varint,5,opt,name=literal_phase,json=literalPhase,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *QueryPhaseStats) Reset() {
@@ -187,53 +275,92 @@ func (x *QueryPhaseStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryPhaseStats.ProtoReflect.Descriptor instead.
-func (*QueryPhaseStats) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_stats_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *QueryPhaseStats) GetDurationUs() uint64 {
 	if x != nil {
-		return x.DurationUs
+		return x.xxx_hidden_DurationUs
 	}
 	return 0
 }
 
 func (x *QueryPhaseStats) GetTableAccess() []*TableAccessStats {
 	if x != nil {
-		return x.TableAccess
+		if x.xxx_hidden_TableAccess != nil {
+			return *x.xxx_hidden_TableAccess
+		}
 	}
 	return nil
 }
 
 func (x *QueryPhaseStats) GetCpuTimeUs() uint64 {
 	if x != nil {
-		return x.CpuTimeUs
+		return x.xxx_hidden_CpuTimeUs
 	}
 	return 0
 }
 
 func (x *QueryPhaseStats) GetAffectedShards() uint64 {
 	if x != nil {
-		return x.AffectedShards
+		return x.xxx_hidden_AffectedShards
 	}
 	return 0
 }
 
 func (x *QueryPhaseStats) GetLiteralPhase() bool {
 	if x != nil {
-		return x.LiteralPhase
+		return x.xxx_hidden_LiteralPhase
 	}
 	return false
 }
 
+func (x *QueryPhaseStats) SetDurationUs(v uint64) {
+	x.xxx_hidden_DurationUs = v
+}
+
+func (x *QueryPhaseStats) SetTableAccess(v []*TableAccessStats) {
+	x.xxx_hidden_TableAccess = &v
+}
+
+func (x *QueryPhaseStats) SetCpuTimeUs(v uint64) {
+	x.xxx_hidden_CpuTimeUs = v
+}
+
+func (x *QueryPhaseStats) SetAffectedShards(v uint64) {
+	x.xxx_hidden_AffectedShards = v
+}
+
+func (x *QueryPhaseStats) SetLiteralPhase(v bool) {
+	x.xxx_hidden_LiteralPhase = v
+}
+
+type QueryPhaseStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	DurationUs     uint64
+	TableAccess    []*TableAccessStats
+	CpuTimeUs      uint64
+	AffectedShards uint64
+	LiteralPhase   bool
+}
+
+func (b0 QueryPhaseStats_builder) Build() *QueryPhaseStats {
+	m0 := &QueryPhaseStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_DurationUs = b.DurationUs
+	x.xxx_hidden_TableAccess = &b.TableAccess
+	x.xxx_hidden_CpuTimeUs = b.CpuTimeUs
+	x.xxx_hidden_AffectedShards = b.AffectedShards
+	x.xxx_hidden_LiteralPhase = b.LiteralPhase
+	return m0
+}
+
 type CompilationStats struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	FromCache     bool                   `protobuf:"varint,1,opt,name=from_cache,json=fromCache,proto3" json:"from_cache,omitempty"`
-	DurationUs    uint64                 `protobuf:"varint,2,opt,name=duration_us,json=durationUs,proto3" json:"duration_us,omitempty"`
-	CpuTimeUs     uint64                 `protobuf:"varint,3,opt,name=cpu_time_us,json=cpuTimeUs,proto3" json:"cpu_time_us,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_FromCache  bool                   `protobuf:"varint,1,opt,name=from_cache,json=fromCache,proto3"`
+	xxx_hidden_DurationUs uint64                 `protobuf:"varint,2,opt,name=duration_us,json=durationUs,proto3"`
+	xxx_hidden_CpuTimeUs  uint64                 `protobuf:"varint,3,opt,name=cpu_time_us,json=cpuTimeUs,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CompilationStats) Reset() {
@@ -261,44 +388,68 @@ func (x *CompilationStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CompilationStats.ProtoReflect.Descriptor instead.
-func (*CompilationStats) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_stats_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *CompilationStats) GetFromCache() bool {
 	if x != nil {
-		return x.FromCache
+		return x.xxx_hidden_FromCache
 	}
 	return false
 }
 
 func (x *CompilationStats) GetDurationUs() uint64 {
 	if x != nil {
-		return x.DurationUs
+		return x.xxx_hidden_DurationUs
 	}
 	return 0
 }
 
 func (x *CompilationStats) GetCpuTimeUs() uint64 {
 	if x != nil {
-		return x.CpuTimeUs
+		return x.xxx_hidden_CpuTimeUs
 	}
 	return 0
 }
 
+func (x *CompilationStats) SetFromCache(v bool) {
+	x.xxx_hidden_FromCache = v
+}
+
+func (x *CompilationStats) SetDurationUs(v uint64) {
+	x.xxx_hidden_DurationUs = v
+}
+
+func (x *CompilationStats) SetCpuTimeUs(v uint64) {
+	x.xxx_hidden_CpuTimeUs = v
+}
+
+type CompilationStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	FromCache  bool
+	DurationUs uint64
+	CpuTimeUs  uint64
+}
+
+func (b0 CompilationStats_builder) Build() *CompilationStats {
+	m0 := &CompilationStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_FromCache = b.FromCache
+	x.xxx_hidden_DurationUs = b.DurationUs
+	x.xxx_hidden_CpuTimeUs = b.CpuTimeUs
+	return m0
+}
+
 type QueryStats struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// A query might have one or more execution phases
-	QueryPhases      []*QueryPhaseStats `protobuf:"bytes,1,rep,name=query_phases,json=queryPhases,proto3" json:"query_phases,omitempty"`
-	Compilation      *CompilationStats  `protobuf:"bytes,2,opt,name=compilation,proto3" json:"compilation,omitempty"`
-	ProcessCpuTimeUs uint64             `protobuf:"varint,3,opt,name=process_cpu_time_us,json=processCpuTimeUs,proto3" json:"process_cpu_time_us,omitempty"`
-	QueryPlan        string             `protobuf:"bytes,4,opt,name=query_plan,json=queryPlan,proto3" json:"query_plan,omitempty"`
-	QueryAst         string             `protobuf:"bytes,5,opt,name=query_ast,json=queryAst,proto3" json:"query_ast,omitempty"`
-	TotalDurationUs  uint64             `protobuf:"varint,6,opt,name=total_duration_us,json=totalDurationUs,proto3" json:"total_duration_us,omitempty"`
-	TotalCpuTimeUs   uint64             `protobuf:"varint,7,opt,name=total_cpu_time_us,json=totalCpuTimeUs,proto3" json:"total_cpu_time_us,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_QueryPhases      *[]*QueryPhaseStats    `protobuf:"bytes,1,rep,name=query_phases,json=queryPhases,proto3"`
+	xxx_hidden_Compilation      *CompilationStats      `protobuf:"bytes,2,opt,name=compilation,proto3"`
+	xxx_hidden_ProcessCpuTimeUs uint64                 `protobuf:"varint,3,opt,name=process_cpu_time_us,json=processCpuTimeUs,proto3"`
+	xxx_hidden_QueryPlan        string                 `protobuf:"bytes,4,opt,name=query_plan,json=queryPlan,proto3"`
+	xxx_hidden_QueryAst         string                 `protobuf:"bytes,5,opt,name=query_ast,json=queryAst,proto3"`
+	xxx_hidden_TotalDurationUs  uint64                 `protobuf:"varint,6,opt,name=total_duration_us,json=totalDurationUs,proto3"`
+	xxx_hidden_TotalCpuTimeUs   uint64                 `protobuf:"varint,7,opt,name=total_cpu_time_us,json=totalCpuTimeUs,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *QueryStats) Reset() {
@@ -326,58 +477,121 @@ func (x *QueryStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryStats.ProtoReflect.Descriptor instead.
-func (*QueryStats) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_stats_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *QueryStats) GetQueryPhases() []*QueryPhaseStats {
 	if x != nil {
-		return x.QueryPhases
+		if x.xxx_hidden_QueryPhases != nil {
+			return *x.xxx_hidden_QueryPhases
+		}
 	}
 	return nil
 }
 
 func (x *QueryStats) GetCompilation() *CompilationStats {
 	if x != nil {
-		return x.Compilation
+		return x.xxx_hidden_Compilation
 	}
 	return nil
 }
 
 func (x *QueryStats) GetProcessCpuTimeUs() uint64 {
 	if x != nil {
-		return x.ProcessCpuTimeUs
+		return x.xxx_hidden_ProcessCpuTimeUs
 	}
 	return 0
 }
 
 func (x *QueryStats) GetQueryPlan() string {
 	if x != nil {
-		return x.QueryPlan
+		return x.xxx_hidden_QueryPlan
 	}
 	return ""
 }
 
 func (x *QueryStats) GetQueryAst() string {
 	if x != nil {
-		return x.QueryAst
+		return x.xxx_hidden_QueryAst
 	}
 	return ""
 }
 
 func (x *QueryStats) GetTotalDurationUs() uint64 {
 	if x != nil {
-		return x.TotalDurationUs
+		return x.xxx_hidden_TotalDurationUs
 	}
 	return 0
 }
 
 func (x *QueryStats) GetTotalCpuTimeUs() uint64 {
 	if x != nil {
-		return x.TotalCpuTimeUs
+		return x.xxx_hidden_TotalCpuTimeUs
 	}
 	return 0
+}
+
+func (x *QueryStats) SetQueryPhases(v []*QueryPhaseStats) {
+	x.xxx_hidden_QueryPhases = &v
+}
+
+func (x *QueryStats) SetCompilation(v *CompilationStats) {
+	x.xxx_hidden_Compilation = v
+}
+
+func (x *QueryStats) SetProcessCpuTimeUs(v uint64) {
+	x.xxx_hidden_ProcessCpuTimeUs = v
+}
+
+func (x *QueryStats) SetQueryPlan(v string) {
+	x.xxx_hidden_QueryPlan = v
+}
+
+func (x *QueryStats) SetQueryAst(v string) {
+	x.xxx_hidden_QueryAst = v
+}
+
+func (x *QueryStats) SetTotalDurationUs(v uint64) {
+	x.xxx_hidden_TotalDurationUs = v
+}
+
+func (x *QueryStats) SetTotalCpuTimeUs(v uint64) {
+	x.xxx_hidden_TotalCpuTimeUs = v
+}
+
+func (x *QueryStats) HasCompilation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Compilation != nil
+}
+
+func (x *QueryStats) ClearCompilation() {
+	x.xxx_hidden_Compilation = nil
+}
+
+type QueryStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// A query might have one or more execution phases
+	QueryPhases      []*QueryPhaseStats
+	Compilation      *CompilationStats
+	ProcessCpuTimeUs uint64
+	QueryPlan        string
+	QueryAst         string
+	TotalDurationUs  uint64
+	TotalCpuTimeUs   uint64
+}
+
+func (b0 QueryStats_builder) Build() *QueryStats {
+	m0 := &QueryStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_QueryPhases = &b.QueryPhases
+	x.xxx_hidden_Compilation = b.Compilation
+	x.xxx_hidden_ProcessCpuTimeUs = b.ProcessCpuTimeUs
+	x.xxx_hidden_QueryPlan = b.QueryPlan
+	x.xxx_hidden_QueryAst = b.QueryAst
+	x.xxx_hidden_TotalDurationUs = b.TotalDurationUs
+	x.xxx_hidden_TotalCpuTimeUs = b.TotalCpuTimeUs
+	return m0
 }
 
 var File_protos_ydb_query_stats_proto protoreflect.FileDescriptor
@@ -418,18 +632,6 @@ const file_protos_ydb_query_stats_proto_rawDesc = "" +
 	"\x11total_duration_us\x18\x06 \x01(\x04R\x0ftotalDurationUs\x12)\n" +
 	"\x11total_cpu_time_us\x18\a \x01(\x04R\x0etotalCpuTimeUsBR\n" +
 	"\x0etech.ydb.protoZ=github.com/ydb-platform/ydb-go-genproto/protos/Ydb_TableStats\xf8\x01\x01b\x06proto3"
-
-var (
-	file_protos_ydb_query_stats_proto_rawDescOnce sync.Once
-	file_protos_ydb_query_stats_proto_rawDescData []byte
-)
-
-func file_protos_ydb_query_stats_proto_rawDescGZIP() []byte {
-	file_protos_ydb_query_stats_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_query_stats_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_query_stats_proto_rawDesc), len(file_protos_ydb_query_stats_proto_rawDesc)))
-	})
-	return file_protos_ydb_query_stats_proto_rawDescData
-}
 
 var file_protos_ydb_query_stats_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_protos_ydb_query_stats_proto_goTypes = []any{

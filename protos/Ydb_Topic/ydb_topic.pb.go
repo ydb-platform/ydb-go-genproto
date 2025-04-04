@@ -16,7 +16,6 @@ import (
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -81,11 +80,6 @@ func (x Codec) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use Codec.Descriptor instead.
-func (Codec) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{0}
-}
-
 type AutoPartitioningStrategy int32
 
 const (
@@ -142,11 +136,6 @@ func (x AutoPartitioningStrategy) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use AutoPartitioningStrategy.Descriptor instead.
-func (AutoPartitioningStrategy) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{1}
-}
-
 // Metering mode specifies the method used to determine consumption of resources by the topic.
 // This settings will have an effect only in a serverless database.
 type MeteringMode int32
@@ -196,11 +185,6 @@ func (x MeteringMode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use MeteringMode.Descriptor instead.
-func (MeteringMode) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{2}
-}
-
 type StreamWriteMessage_WriteResponse_WriteAck_Skipped_Reason int32
 
 const (
@@ -242,19 +226,12 @@ func (x StreamWriteMessage_WriteResponse_WriteAck_Skipped_Reason) Number() proto
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use StreamWriteMessage_WriteResponse_WriteAck_Skipped_Reason.Descriptor instead.
-func (StreamWriteMessage_WriteResponse_WriteAck_Skipped_Reason) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 5, 0, 1, 0}
-}
-
 // Description of supported codecs.
 type SupportedCodecs struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of supported codecs.
-	// See enum Codec above for values.
-	Codecs        []int32 `protobuf:"varint,1,rep,packed,name=codecs,proto3" json:"codecs,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Codecs []int32                `protobuf:"varint,1,rep,packed,name=codecs,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *SupportedCodecs) Reset() {
@@ -282,26 +259,41 @@ func (x *SupportedCodecs) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SupportedCodecs.ProtoReflect.Descriptor instead.
-func (*SupportedCodecs) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *SupportedCodecs) GetCodecs() []int32 {
 	if x != nil {
-		return x.Codecs
+		return x.xxx_hidden_Codecs
 	}
 	return nil
+}
+
+func (x *SupportedCodecs) SetCodecs(v []int32) {
+	x.xxx_hidden_Codecs = v
+}
+
+type SupportedCodecs_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// List of supported codecs.
+	// See enum Codec above for values.
+	Codecs []int32
+}
+
+func (b0 SupportedCodecs_builder) Build() *SupportedCodecs {
+	m0 := &SupportedCodecs{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Codecs = b.Codecs
+	return m0
 }
 
 // Represents range [start, end).
 // I.e. (end - 1) is the greatest of offsets, included in non-empty range.
 type OffsetsRange struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Start         int64                  `protobuf:"varint,1,opt,name=start,proto3" json:"start,omitempty"`
-	End           int64                  `protobuf:"varint,2,opt,name=end,proto3" json:"end,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Start int64                  `protobuf:"varint,1,opt,name=start,proto3"`
+	xxx_hidden_End   int64                  `protobuf:"varint,2,opt,name=end,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *OffsetsRange) Reset() {
@@ -329,32 +321,51 @@ func (x *OffsetsRange) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OffsetsRange.ProtoReflect.Descriptor instead.
-func (*OffsetsRange) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *OffsetsRange) GetStart() int64 {
 	if x != nil {
-		return x.Start
+		return x.xxx_hidden_Start
 	}
 	return 0
 }
 
 func (x *OffsetsRange) GetEnd() int64 {
 	if x != nil {
-		return x.End
+		return x.xxx_hidden_End
 	}
 	return 0
+}
+
+func (x *OffsetsRange) SetStart(v int64) {
+	x.xxx_hidden_Start = v
+}
+
+func (x *OffsetsRange) SetEnd(v int64) {
+	x.xxx_hidden_End = v
+}
+
+type OffsetsRange_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Start int64
+	End   int64
+}
+
+func (b0 OffsetsRange_builder) Build() *OffsetsRange {
+	m0 := &OffsetsRange{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Start = b.Start
+	x.xxx_hidden_End = b.End
+	return m0
 }
 
 // In-session reauthentication and reauthorization, lets user increase session lifetime.
 // Client should wait for UpdateTokenResponse before sending next UpdateTokenRequest.
 type UpdateTokenRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Token string                 `protobuf:"bytes,1,opt,name=token,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *UpdateTokenRequest) Reset() {
@@ -382,20 +393,33 @@ func (x *UpdateTokenRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateTokenRequest.ProtoReflect.Descriptor instead.
-func (*UpdateTokenRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *UpdateTokenRequest) GetToken() string {
 	if x != nil {
-		return x.Token
+		return x.xxx_hidden_Token
 	}
 	return ""
 }
 
+func (x *UpdateTokenRequest) SetToken(v string) {
+	x.xxx_hidden_Token = v
+}
+
+type UpdateTokenRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Token string
+}
+
+func (b0 UpdateTokenRequest_builder) Build() *UpdateTokenRequest {
+	m0 := &UpdateTokenRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Token = b.Token
+	return m0
+}
+
 type UpdateTokenResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -425,19 +449,24 @@ func (x *UpdateTokenResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateTokenResponse.ProtoReflect.Descriptor instead.
-func (*UpdateTokenResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{3}
+type UpdateTokenResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 UpdateTokenResponse_builder) Build() *UpdateTokenResponse {
+	m0 := &UpdateTokenResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type PartitionWithGeneration struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition identifier.
-	PartitionId int64 `protobuf:"varint,1,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
-	// Partition generation.
-	Generation    int64 `protobuf:"varint,2,opt,name=generation,proto3" json:"generation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionId int64                  `protobuf:"varint,1,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_Generation  int64                  `protobuf:"varint,2,opt,name=generation,proto3"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *PartitionWithGeneration) Reset() {
@@ -465,31 +494,52 @@ func (x *PartitionWithGeneration) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PartitionWithGeneration.ProtoReflect.Descriptor instead.
-func (*PartitionWithGeneration) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *PartitionWithGeneration) GetPartitionId() int64 {
 	if x != nil {
-		return x.PartitionId
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *PartitionWithGeneration) GetGeneration() int64 {
 	if x != nil {
-		return x.Generation
+		return x.xxx_hidden_Generation
 	}
 	return 0
 }
 
+func (x *PartitionWithGeneration) SetPartitionId(v int64) {
+	x.xxx_hidden_PartitionId = v
+}
+
+func (x *PartitionWithGeneration) SetGeneration(v int64) {
+	x.xxx_hidden_Generation = v
+}
+
+type PartitionWithGeneration_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition identifier.
+	PartitionId int64
+	// Partition generation.
+	Generation int64
+}
+
+func (b0 PartitionWithGeneration_builder) Build() *PartitionWithGeneration {
+	m0 := &PartitionWithGeneration{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionId = b.PartitionId
+	x.xxx_hidden_Generation = b.Generation
+	return m0
+}
+
 type MetadataItem struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Value         []byte                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Key   string                 `protobuf:"bytes,1,opt,name=key,proto3"`
+	xxx_hidden_Value []byte                 `protobuf:"bytes,2,opt,name=value,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *MetadataItem) Reset() {
@@ -517,28 +567,50 @@ func (x *MetadataItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MetadataItem.ProtoReflect.Descriptor instead.
-func (*MetadataItem) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *MetadataItem) GetKey() string {
 	if x != nil {
-		return x.Key
+		return x.xxx_hidden_Key
 	}
 	return ""
 }
 
 func (x *MetadataItem) GetValue() []byte {
 	if x != nil {
-		return x.Value
+		return x.xxx_hidden_Value
 	}
 	return nil
 }
 
+func (x *MetadataItem) SetKey(v string) {
+	x.xxx_hidden_Key = v
+}
+
+func (x *MetadataItem) SetValue(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Value = v
+}
+
+type MetadataItem_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Key   string
+	Value []byte
+}
+
+func (b0 MetadataItem_builder) Build() *MetadataItem {
+	m0 := &MetadataItem{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Key = b.Key
+	x.xxx_hidden_Value = b.Value
+	return m0
+}
+
 // Messages for bidirectional streaming rpc StreamWrite
 type StreamWriteMessage struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -568,14 +640,21 @@ func (x *StreamWriteMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6}
+type StreamWriteMessage_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 StreamWriteMessage_builder) Build() *StreamWriteMessage {
+	m0 := &StreamWriteMessage{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Messages for bidirectional streaming rpc StreamRead
 type StreamReadMessage struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -605,14 +684,21 @@ func (x *StreamReadMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7}
+type StreamReadMessage_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 StreamReadMessage_builder) Build() *StreamReadMessage {
+	m0 := &StreamReadMessage{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Messages for bidirectional streaming rpc StreamDirectRead
 type StreamDirectReadMessage struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -642,19 +728,24 @@ func (x *StreamDirectReadMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamDirectReadMessage.ProtoReflect.Descriptor instead.
-func (*StreamDirectReadMessage) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{8}
+type StreamDirectReadMessage_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 StreamDirectReadMessage_builder) Build() *StreamDirectReadMessage {
+	m0 := &StreamDirectReadMessage{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type TransactionIdentity struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Transaction identifier from TableService.
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Session identifier from TableService.
-	Session       string `protobuf:"bytes,2,opt,name=session,proto3" json:"session,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id      string                 `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_Session string                 `protobuf:"bytes,2,opt,name=session,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *TransactionIdentity) Reset() {
@@ -682,35 +773,55 @@ func (x *TransactionIdentity) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TransactionIdentity.ProtoReflect.Descriptor instead.
-func (*TransactionIdentity) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *TransactionIdentity) GetId() string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *TransactionIdentity) GetSession() string {
 	if x != nil {
-		return x.Session
+		return x.xxx_hidden_Session
 	}
 	return ""
 }
 
+func (x *TransactionIdentity) SetId(v string) {
+	x.xxx_hidden_Id = v
+}
+
+func (x *TransactionIdentity) SetSession(v string) {
+	x.xxx_hidden_Session = v
+}
+
+type TransactionIdentity_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Transaction identifier from TableService.
+	Id string
+	// Session identifier from TableService.
+	Session string
+}
+
+func (b0 TransactionIdentity_builder) Build() *TransactionIdentity {
+	m0 := &TransactionIdentity{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Session = b.Session
+	return m0
+}
+
 // Add offsets to transaction request sent from client to server.
 type UpdateOffsetsInTransactionRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	Tx              *TransactionIdentity            `protobuf:"bytes,2,opt,name=tx,proto3" json:"tx,omitempty"`
-	// Ranges of offsets by topics.
-	Topics        []*UpdateOffsetsInTransactionRequest_TopicOffsets `protobuf:"bytes,3,rep,name=topics,proto3" json:"topics,omitempty"`
-	Consumer      string                                            `protobuf:"bytes,4,opt,name=consumer,proto3" json:"consumer,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState                             `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams                    `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Tx              *TransactionIdentity                               `protobuf:"bytes,2,opt,name=tx,proto3"`
+	xxx_hidden_Topics          *[]*UpdateOffsetsInTransactionRequest_TopicOffsets `protobuf:"bytes,3,rep,name=topics,proto3"`
+	xxx_hidden_Consumer        string                                             `protobuf:"bytes,4,opt,name=consumer,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *UpdateOffsetsInTransactionRequest) Reset() {
@@ -738,46 +849,101 @@ func (x *UpdateOffsetsInTransactionRequest) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateOffsetsInTransactionRequest.ProtoReflect.Descriptor instead.
-func (*UpdateOffsetsInTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{10}
-}
-
 func (x *UpdateOffsetsInTransactionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *UpdateOffsetsInTransactionRequest) GetTx() *TransactionIdentity {
 	if x != nil {
-		return x.Tx
+		return x.xxx_hidden_Tx
 	}
 	return nil
 }
 
 func (x *UpdateOffsetsInTransactionRequest) GetTopics() []*UpdateOffsetsInTransactionRequest_TopicOffsets {
 	if x != nil {
-		return x.Topics
+		if x.xxx_hidden_Topics != nil {
+			return *x.xxx_hidden_Topics
+		}
 	}
 	return nil
 }
 
 func (x *UpdateOffsetsInTransactionRequest) GetConsumer() string {
 	if x != nil {
-		return x.Consumer
+		return x.xxx_hidden_Consumer
 	}
 	return ""
 }
 
+func (x *UpdateOffsetsInTransactionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *UpdateOffsetsInTransactionRequest) SetTx(v *TransactionIdentity) {
+	x.xxx_hidden_Tx = v
+}
+
+func (x *UpdateOffsetsInTransactionRequest) SetTopics(v []*UpdateOffsetsInTransactionRequest_TopicOffsets) {
+	x.xxx_hidden_Topics = &v
+}
+
+func (x *UpdateOffsetsInTransactionRequest) SetConsumer(v string) {
+	x.xxx_hidden_Consumer = v
+}
+
+func (x *UpdateOffsetsInTransactionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *UpdateOffsetsInTransactionRequest) HasTx() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Tx != nil
+}
+
+func (x *UpdateOffsetsInTransactionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *UpdateOffsetsInTransactionRequest) ClearTx() {
+	x.xxx_hidden_Tx = nil
+}
+
+type UpdateOffsetsInTransactionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	Tx              *TransactionIdentity
+	// Ranges of offsets by topics.
+	Topics   []*UpdateOffsetsInTransactionRequest_TopicOffsets
+	Consumer string
+}
+
+func (b0 UpdateOffsetsInTransactionRequest_builder) Build() *UpdateOffsetsInTransactionRequest {
+	m0 := &UpdateOffsetsInTransactionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Tx = b.Tx
+	x.xxx_hidden_Topics = &b.Topics
+	x.xxx_hidden_Consumer = b.Consumer
+	return m0
+}
+
 // Add offsets to transaction response sent from server to client.
 type UpdateOffsetsInTransactionResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *UpdateOffsetsInTransactionResponse) Reset() {
@@ -805,21 +971,46 @@ func (x *UpdateOffsetsInTransactionResponse) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateOffsetsInTransactionResponse.ProtoReflect.Descriptor instead.
-func (*UpdateOffsetsInTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{11}
-}
-
 func (x *UpdateOffsetsInTransactionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *UpdateOffsetsInTransactionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *UpdateOffsetsInTransactionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *UpdateOffsetsInTransactionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type UpdateOffsetsInTransactionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 UpdateOffsetsInTransactionResponse_builder) Build() *UpdateOffsetsInTransactionResponse {
+	m0 := &UpdateOffsetsInTransactionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Add offsets to transaction result message that will be inside UpdateOffsetsInTransactionResponse.operation.
 type UpdateOffsetsInTransactionResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -849,25 +1040,28 @@ func (x *UpdateOffsetsInTransactionResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateOffsetsInTransactionResult.ProtoReflect.Descriptor instead.
-func (*UpdateOffsetsInTransactionResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{12}
+type UpdateOffsetsInTransactionResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 UpdateOffsetsInTransactionResult_builder) Build() *UpdateOffsetsInTransactionResult {
+	m0 := &UpdateOffsetsInTransactionResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Commit offset request sent from client to server.
 type CommitOffsetRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Topic path of partition.
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Partition identifier.
-	PartitionId int64 `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
-	// Path of consumer.
-	Consumer string `protobuf:"bytes,4,opt,name=consumer,proto3" json:"consumer,omitempty"`
-	// Processed offset.
-	Offset        int64 `protobuf:"varint,5,opt,name=offset,proto3" json:"offset,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_PartitionId     int64                           `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_Consumer        string                          `protobuf:"bytes,4,opt,name=consumer,proto3"`
+	xxx_hidden_Offset          int64                           `protobuf:"varint,5,opt,name=offset,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CommitOffsetRequest) Reset() {
@@ -895,53 +1089,104 @@ func (x *CommitOffsetRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CommitOffsetRequest.ProtoReflect.Descriptor instead.
-func (*CommitOffsetRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{13}
-}
-
 func (x *CommitOffsetRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CommitOffsetRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *CommitOffsetRequest) GetPartitionId() int64 {
 	if x != nil {
-		return x.PartitionId
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *CommitOffsetRequest) GetConsumer() string {
 	if x != nil {
-		return x.Consumer
+		return x.xxx_hidden_Consumer
 	}
 	return ""
 }
 
 func (x *CommitOffsetRequest) GetOffset() int64 {
 	if x != nil {
-		return x.Offset
+		return x.xxx_hidden_Offset
 	}
 	return 0
 }
 
+func (x *CommitOffsetRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CommitOffsetRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *CommitOffsetRequest) SetPartitionId(v int64) {
+	x.xxx_hidden_PartitionId = v
+}
+
+func (x *CommitOffsetRequest) SetConsumer(v string) {
+	x.xxx_hidden_Consumer = v
+}
+
+func (x *CommitOffsetRequest) SetOffset(v int64) {
+	x.xxx_hidden_Offset = v
+}
+
+func (x *CommitOffsetRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CommitOffsetRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type CommitOffsetRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Topic path of partition.
+	Path string
+	// Partition identifier.
+	PartitionId int64
+	// Path of consumer.
+	Consumer string
+	// Processed offset.
+	Offset int64
+}
+
+func (b0 CommitOffsetRequest_builder) Build() *CommitOffsetRequest {
+	m0 := &CommitOffsetRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionId = b.PartitionId
+	x.xxx_hidden_Consumer = b.Consumer
+	x.xxx_hidden_Offset = b.Offset
+	return m0
+}
+
 // Commit offset response sent from server to client.
 type CommitOffsetResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CommitOffsetResponse) Reset() {
@@ -969,21 +1214,46 @@ func (x *CommitOffsetResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CommitOffsetResponse.ProtoReflect.Descriptor instead.
-func (*CommitOffsetResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{14}
-}
-
 func (x *CommitOffsetResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CommitOffsetResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CommitOffsetResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CommitOffsetResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CommitOffsetResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CommitOffsetResponse_builder) Build() *CommitOffsetResponse {
+	m0 := &CommitOffsetResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Commit offset result message inside CommitOffsetResponse.operation.
 type CommitOffsetResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1013,19 +1283,26 @@ func (x *CommitOffsetResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CommitOffsetResult.ProtoReflect.Descriptor instead.
-func (*CommitOffsetResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{15}
+type CommitOffsetResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 CommitOffsetResult_builder) Build() *CommitOffsetResult {
+	m0 := &CommitOffsetResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // message representing statistics by several windows
 type MultipleWindowsStat struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PerMinute     int64                  `protobuf:"varint,1,opt,name=per_minute,json=perMinute,proto3" json:"per_minute,omitempty"`
-	PerHour       int64                  `protobuf:"varint,2,opt,name=per_hour,json=perHour,proto3" json:"per_hour,omitempty"`
-	PerDay        int64                  `protobuf:"varint,3,opt,name=per_day,json=perDay,proto3" json:"per_day,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PerMinute int64                  `protobuf:"varint,1,opt,name=per_minute,json=perMinute,proto3"`
+	xxx_hidden_PerHour   int64                  `protobuf:"varint,2,opt,name=per_hour,json=perHour,proto3"`
+	xxx_hidden_PerDay    int64                  `protobuf:"varint,3,opt,name=per_day,json=perDay,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *MultipleWindowsStat) Reset() {
@@ -1053,53 +1330,68 @@ func (x *MultipleWindowsStat) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MultipleWindowsStat.ProtoReflect.Descriptor instead.
-func (*MultipleWindowsStat) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{16}
-}
-
 func (x *MultipleWindowsStat) GetPerMinute() int64 {
 	if x != nil {
-		return x.PerMinute
+		return x.xxx_hidden_PerMinute
 	}
 	return 0
 }
 
 func (x *MultipleWindowsStat) GetPerHour() int64 {
 	if x != nil {
-		return x.PerHour
+		return x.xxx_hidden_PerHour
 	}
 	return 0
 }
 
 func (x *MultipleWindowsStat) GetPerDay() int64 {
 	if x != nil {
-		return x.PerDay
+		return x.xxx_hidden_PerDay
 	}
 	return 0
 }
 
+func (x *MultipleWindowsStat) SetPerMinute(v int64) {
+	x.xxx_hidden_PerMinute = v
+}
+
+func (x *MultipleWindowsStat) SetPerHour(v int64) {
+	x.xxx_hidden_PerHour = v
+}
+
+func (x *MultipleWindowsStat) SetPerDay(v int64) {
+	x.xxx_hidden_PerDay = v
+}
+
+type MultipleWindowsStat_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PerMinute int64
+	PerHour   int64
+	PerDay    int64
+}
+
+func (b0 MultipleWindowsStat_builder) Build() *MultipleWindowsStat {
+	m0 := &MultipleWindowsStat{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PerMinute = b.PerMinute
+	x.xxx_hidden_PerHour = b.PerHour
+	x.xxx_hidden_PerDay = b.PerDay
+	return m0
+}
+
 // Consumer description.
 type Consumer struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Must have valid not empty name as a key.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Consumer may be marked as 'important'. It means messages for this consumer will never expire due to retention.
-	// User should take care that such consumer never stalls, to prevent running out of disk space.
-	// Flag that this consumer is important.
-	Important bool `protobuf:"varint,2,opt,name=important,proto3" json:"important,omitempty"`
-	// All messages with smaller server written_at timestamp will be skipped.
-	ReadFrom *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=read_from,json=readFrom,proto3" json:"read_from,omitempty"`
-	// List of supported codecs by this consumer.
-	// supported_codecs on topic must be contained inside this list.
-	// If empty, codec compatibility check for the consumer is disabled.
-	SupportedCodecs *SupportedCodecs `protobuf:"bytes,5,opt,name=supported_codecs,json=supportedCodecs,proto3" json:"supported_codecs,omitempty"`
-	// Attributes of consumer
-	Attributes map[string]string `protobuf:"bytes,6,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Filled only when requested statistics in Describe*Request.
-	ConsumerStats *Consumer_ConsumerStats `protobuf:"bytes,7,opt,name=consumer_stats,json=consumerStats,proto3" json:"consumer_stats,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Name            string                  `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Important       bool                    `protobuf:"varint,2,opt,name=important,proto3"`
+	xxx_hidden_ReadFrom        *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=read_from,json=readFrom,proto3"`
+	xxx_hidden_SupportedCodecs *SupportedCodecs        `protobuf:"bytes,5,opt,name=supported_codecs,json=supportedCodecs,proto3"`
+	xxx_hidden_Attributes      map[string]string       `protobuf:"bytes,6,rep,name=attributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_ConsumerStats   *Consumer_ConsumerStats `protobuf:"bytes,7,opt,name=consumer_stats,json=consumerStats,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *Consumer) Reset() {
@@ -1127,73 +1419,151 @@ func (x *Consumer) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Consumer.ProtoReflect.Descriptor instead.
-func (*Consumer) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{17}
-}
-
 func (x *Consumer) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *Consumer) GetImportant() bool {
 	if x != nil {
-		return x.Important
+		return x.xxx_hidden_Important
 	}
 	return false
 }
 
 func (x *Consumer) GetReadFrom() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ReadFrom
+		return x.xxx_hidden_ReadFrom
 	}
 	return nil
 }
 
 func (x *Consumer) GetSupportedCodecs() *SupportedCodecs {
 	if x != nil {
-		return x.SupportedCodecs
+		return x.xxx_hidden_SupportedCodecs
 	}
 	return nil
 }
 
 func (x *Consumer) GetAttributes() map[string]string {
 	if x != nil {
-		return x.Attributes
+		return x.xxx_hidden_Attributes
 	}
 	return nil
 }
 
 func (x *Consumer) GetConsumerStats() *Consumer_ConsumerStats {
 	if x != nil {
-		return x.ConsumerStats
+		return x.xxx_hidden_ConsumerStats
 	}
 	return nil
 }
 
-// Consumer alter description.
-type AlterConsumer struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
+func (x *Consumer) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *Consumer) SetImportant(v bool) {
+	x.xxx_hidden_Important = v
+}
+
+func (x *Consumer) SetReadFrom(v *timestamppb.Timestamp) {
+	x.xxx_hidden_ReadFrom = v
+}
+
+func (x *Consumer) SetSupportedCodecs(v *SupportedCodecs) {
+	x.xxx_hidden_SupportedCodecs = v
+}
+
+func (x *Consumer) SetAttributes(v map[string]string) {
+	x.xxx_hidden_Attributes = v
+}
+
+func (x *Consumer) SetConsumerStats(v *Consumer_ConsumerStats) {
+	x.xxx_hidden_ConsumerStats = v
+}
+
+func (x *Consumer) HasReadFrom() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ReadFrom != nil
+}
+
+func (x *Consumer) HasSupportedCodecs() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SupportedCodecs != nil
+}
+
+func (x *Consumer) HasConsumerStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ConsumerStats != nil
+}
+
+func (x *Consumer) ClearReadFrom() {
+	x.xxx_hidden_ReadFrom = nil
+}
+
+func (x *Consumer) ClearSupportedCodecs() {
+	x.xxx_hidden_SupportedCodecs = nil
+}
+
+func (x *Consumer) ClearConsumerStats() {
+	x.xxx_hidden_ConsumerStats = nil
+}
+
+type Consumer_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
 	// Must have valid not empty name as a key.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string
 	// Consumer may be marked as 'important'. It means messages for this consumer will never expire due to retention.
 	// User should take care that such consumer never stalls, to prevent running out of disk space.
 	// Flag that this consumer is important.
-	SetImportant *bool `protobuf:"varint,2,opt,name=set_important,json=setImportant,proto3,oneof" json:"set_important,omitempty"`
+	Important bool
 	// All messages with smaller server written_at timestamp will be skipped.
-	SetReadFrom *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=set_read_from,json=setReadFrom,proto3" json:"set_read_from,omitempty"`
+	ReadFrom *timestamppb.Timestamp
 	// List of supported codecs by this consumer.
 	// supported_codecs on topic must be contained inside this list.
 	// If empty, codec compatibility check for the consumer is disabled.
-	SetSupportedCodecs *SupportedCodecs `protobuf:"bytes,5,opt,name=set_supported_codecs,json=setSupportedCodecs,proto3" json:"set_supported_codecs,omitempty"`
-	// User and server attributes of consumer. Server attributes starts from "_" and will be validated by server.
-	// Leave the value blank to drop an attribute.
-	AlterAttributes map[string]string `protobuf:"bytes,6,rep,name=alter_attributes,json=alterAttributes,proto3" json:"alter_attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	SupportedCodecs *SupportedCodecs
+	// Attributes of consumer
+	Attributes map[string]string
+	// Filled only when requested statistics in Describe*Request.
+	ConsumerStats *Consumer_ConsumerStats
+}
+
+func (b0 Consumer_builder) Build() *Consumer {
+	m0 := &Consumer{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Important = b.Important
+	x.xxx_hidden_ReadFrom = b.ReadFrom
+	x.xxx_hidden_SupportedCodecs = b.SupportedCodecs
+	x.xxx_hidden_Attributes = b.Attributes
+	x.xxx_hidden_ConsumerStats = b.ConsumerStats
+	return m0
+}
+
+// Consumer alter description.
+type AlterConsumer struct {
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name               string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_SetImportant       bool                   `protobuf:"varint,2,opt,name=set_important,json=setImportant,proto3,oneof"`
+	xxx_hidden_SetReadFrom        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=set_read_from,json=setReadFrom,proto3"`
+	xxx_hidden_SetSupportedCodecs *SupportedCodecs       `protobuf:"bytes,5,opt,name=set_supported_codecs,json=setSupportedCodecs,proto3"`
+	xxx_hidden_AlterAttributes    map[string]string      `protobuf:"bytes,6,rep,name=alter_attributes,json=alterAttributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
+	XXX_presence                  [1]uint32
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *AlterConsumer) Reset() {
@@ -1221,65 +1591,140 @@ func (x *AlterConsumer) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterConsumer.ProtoReflect.Descriptor instead.
-func (*AlterConsumer) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{18}
-}
-
 func (x *AlterConsumer) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *AlterConsumer) GetSetImportant() bool {
-	if x != nil && x.SetImportant != nil {
-		return *x.SetImportant
+	if x != nil {
+		return x.xxx_hidden_SetImportant
 	}
 	return false
 }
 
 func (x *AlterConsumer) GetSetReadFrom() *timestamppb.Timestamp {
 	if x != nil {
-		return x.SetReadFrom
+		return x.xxx_hidden_SetReadFrom
 	}
 	return nil
 }
 
 func (x *AlterConsumer) GetSetSupportedCodecs() *SupportedCodecs {
 	if x != nil {
-		return x.SetSupportedCodecs
+		return x.xxx_hidden_SetSupportedCodecs
 	}
 	return nil
 }
 
 func (x *AlterConsumer) GetAlterAttributes() map[string]string {
 	if x != nil {
-		return x.AlterAttributes
+		return x.xxx_hidden_AlterAttributes
 	}
 	return nil
 }
 
+func (x *AlterConsumer) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *AlterConsumer) SetSetImportant(v bool) {
+	x.xxx_hidden_SetImportant = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
+}
+
+func (x *AlterConsumer) SetSetReadFrom(v *timestamppb.Timestamp) {
+	x.xxx_hidden_SetReadFrom = v
+}
+
+func (x *AlterConsumer) SetSetSupportedCodecs(v *SupportedCodecs) {
+	x.xxx_hidden_SetSupportedCodecs = v
+}
+
+func (x *AlterConsumer) SetAlterAttributes(v map[string]string) {
+	x.xxx_hidden_AlterAttributes = v
+}
+
+func (x *AlterConsumer) HasSetImportant() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *AlterConsumer) HasSetReadFrom() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SetReadFrom != nil
+}
+
+func (x *AlterConsumer) HasSetSupportedCodecs() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SetSupportedCodecs != nil
+}
+
+func (x *AlterConsumer) ClearSetImportant() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_SetImportant = false
+}
+
+func (x *AlterConsumer) ClearSetReadFrom() {
+	x.xxx_hidden_SetReadFrom = nil
+}
+
+func (x *AlterConsumer) ClearSetSupportedCodecs() {
+	x.xxx_hidden_SetSupportedCodecs = nil
+}
+
+type AlterConsumer_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Must have valid not empty name as a key.
+	Name string
+	// Consumer may be marked as 'important'. It means messages for this consumer will never expire due to retention.
+	// User should take care that such consumer never stalls, to prevent running out of disk space.
+	// Flag that this consumer is important.
+	SetImportant *bool
+	// All messages with smaller server written_at timestamp will be skipped.
+	SetReadFrom *timestamppb.Timestamp
+	// List of supported codecs by this consumer.
+	// supported_codecs on topic must be contained inside this list.
+	// If empty, codec compatibility check for the consumer is disabled.
+	SetSupportedCodecs *SupportedCodecs
+	// User and server attributes of consumer. Server attributes starts from "_" and will be validated by server.
+	// Leave the value blank to drop an attribute.
+	AlterAttributes map[string]string
+}
+
+func (b0 AlterConsumer_builder) Build() *AlterConsumer {
+	m0 := &AlterConsumer{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	if b.SetImportant != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
+		x.xxx_hidden_SetImportant = *b.SetImportant
+	}
+	x.xxx_hidden_SetReadFrom = b.SetReadFrom
+	x.xxx_hidden_SetSupportedCodecs = b.SetSupportedCodecs
+	x.xxx_hidden_AlterAttributes = b.AlterAttributes
+	return m0
+}
+
 // Partitioning settings for topic.
 type PartitioningSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Auto merge would stop working when the partitions count reaches min_active_partitions
-	// Zero value means default - 1.
-	MinActivePartitions int64 `protobuf:"varint,1,opt,name=min_active_partitions,json=minActivePartitions,proto3" json:"min_active_partitions,omitempty"`
-	// Auto split would stop working when the partitions count reaches max_active_partitions
-	// Zero value means default - 1.
-	MaxActivePartitions int64 `protobuf:"varint,3,opt,name=max_active_partitions,json=maxActivePartitions,proto3" json:"max_active_partitions,omitempty"`
-	// Limit for total partition count, including active (open for write) and read-only partitions.
-	// Zero value means default - 100.
-	// Use max_active_partitions
-	//
-	// Deprecated: Marked as deprecated in protos/ydb_topic.proto.
-	PartitionCountLimit int64 `protobuf:"varint,2,opt,name=partition_count_limit,json=partitionCountLimit,proto3" json:"partition_count_limit,omitempty"`
-	// Settings for the partitions count auto partitioning.
-	AutoPartitioningSettings *AutoPartitioningSettings `protobuf:"bytes,4,opt,name=auto_partitioning_settings,json=autoPartitioningSettings,proto3" json:"auto_partitioning_settings,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                               protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_MinActivePartitions      int64                     `protobuf:"varint,1,opt,name=min_active_partitions,json=minActivePartitions,proto3"`
+	xxx_hidden_MaxActivePartitions      int64                     `protobuf:"varint,3,opt,name=max_active_partitions,json=maxActivePartitions,proto3"`
+	xxx_hidden_PartitionCountLimit      int64                     `protobuf:"varint,2,opt,name=partition_count_limit,json=partitionCountLimit,proto3"`
+	xxx_hidden_AutoPartitioningSettings *AutoPartitioningSettings `protobuf:"bytes,4,opt,name=auto_partitioning_settings,json=autoPartitioningSettings,proto3"`
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
 }
 
 func (x *PartitioningSettings) Reset() {
@@ -1307,21 +1752,16 @@ func (x *PartitioningSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PartitioningSettings.ProtoReflect.Descriptor instead.
-func (*PartitioningSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{19}
-}
-
 func (x *PartitioningSettings) GetMinActivePartitions() int64 {
 	if x != nil {
-		return x.MinActivePartitions
+		return x.xxx_hidden_MinActivePartitions
 	}
 	return 0
 }
 
 func (x *PartitioningSettings) GetMaxActivePartitions() int64 {
 	if x != nil {
-		return x.MaxActivePartitions
+		return x.xxx_hidden_MaxActivePartitions
 	}
 	return 0
 }
@@ -1329,26 +1769,82 @@ func (x *PartitioningSettings) GetMaxActivePartitions() int64 {
 // Deprecated: Marked as deprecated in protos/ydb_topic.proto.
 func (x *PartitioningSettings) GetPartitionCountLimit() int64 {
 	if x != nil {
-		return x.PartitionCountLimit
+		return x.xxx_hidden_PartitionCountLimit
 	}
 	return 0
 }
 
 func (x *PartitioningSettings) GetAutoPartitioningSettings() *AutoPartitioningSettings {
 	if x != nil {
-		return x.AutoPartitioningSettings
+		return x.xxx_hidden_AutoPartitioningSettings
 	}
 	return nil
 }
 
+func (x *PartitioningSettings) SetMinActivePartitions(v int64) {
+	x.xxx_hidden_MinActivePartitions = v
+}
+
+func (x *PartitioningSettings) SetMaxActivePartitions(v int64) {
+	x.xxx_hidden_MaxActivePartitions = v
+}
+
+// Deprecated: Marked as deprecated in protos/ydb_topic.proto.
+func (x *PartitioningSettings) SetPartitionCountLimit(v int64) {
+	x.xxx_hidden_PartitionCountLimit = v
+}
+
+func (x *PartitioningSettings) SetAutoPartitioningSettings(v *AutoPartitioningSettings) {
+	x.xxx_hidden_AutoPartitioningSettings = v
+}
+
+func (x *PartitioningSettings) HasAutoPartitioningSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_AutoPartitioningSettings != nil
+}
+
+func (x *PartitioningSettings) ClearAutoPartitioningSettings() {
+	x.xxx_hidden_AutoPartitioningSettings = nil
+}
+
+type PartitioningSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Auto merge would stop working when the partitions count reaches min_active_partitions
+	// Zero value means default - 1.
+	MinActivePartitions int64
+	// Auto split would stop working when the partitions count reaches max_active_partitions
+	// Zero value means default - 1.
+	MaxActivePartitions int64
+	// Limit for total partition count, including active (open for write) and read-only partitions.
+	// Zero value means default - 100.
+	// Use max_active_partitions
+	//
+	// Deprecated: Marked as deprecated in protos/ydb_topic.proto.
+	PartitionCountLimit int64
+	// Settings for the partitions count auto partitioning.
+	AutoPartitioningSettings *AutoPartitioningSettings
+}
+
+func (b0 PartitioningSettings_builder) Build() *PartitioningSettings {
+	m0 := &PartitioningSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_MinActivePartitions = b.MinActivePartitions
+	x.xxx_hidden_MaxActivePartitions = b.MaxActivePartitions
+	x.xxx_hidden_PartitionCountLimit = b.PartitionCountLimit
+	x.xxx_hidden_AutoPartitioningSettings = b.AutoPartitioningSettings
+	return m0
+}
+
 type AutoPartitioningSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Strategy of auto partitioning.
-	Strategy AutoPartitioningStrategy `protobuf:"varint,1,opt,name=strategy,proto3,enum=Ydb.Topic.AutoPartitioningStrategy" json:"strategy,omitempty"`
-	// Partition write speed auto partitioning options.
-	PartitionWriteSpeed *AutoPartitioningWriteSpeedStrategy `protobuf:"bytes,2,opt,name=partition_write_speed,json=partitionWriteSpeed,proto3" json:"partition_write_speed,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                          protoimpl.MessageState              `protogen:"opaque.v1"`
+	xxx_hidden_Strategy            AutoPartitioningStrategy            `protobuf:"varint,1,opt,name=strategy,proto3,enum=Ydb.Topic.AutoPartitioningStrategy"`
+	xxx_hidden_PartitionWriteSpeed *AutoPartitioningWriteSpeedStrategy `protobuf:"bytes,2,opt,name=partition_write_speed,json=partitionWriteSpeed,proto3"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *AutoPartitioningSettings) Reset() {
@@ -1376,35 +1872,64 @@ func (x *AutoPartitioningSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AutoPartitioningSettings.ProtoReflect.Descriptor instead.
-func (*AutoPartitioningSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{20}
-}
-
 func (x *AutoPartitioningSettings) GetStrategy() AutoPartitioningStrategy {
 	if x != nil {
-		return x.Strategy
+		return x.xxx_hidden_Strategy
 	}
 	return AutoPartitioningStrategy_AUTO_PARTITIONING_STRATEGY_UNSPECIFIED
 }
 
 func (x *AutoPartitioningSettings) GetPartitionWriteSpeed() *AutoPartitioningWriteSpeedStrategy {
 	if x != nil {
-		return x.PartitionWriteSpeed
+		return x.xxx_hidden_PartitionWriteSpeed
 	}
 	return nil
 }
 
+func (x *AutoPartitioningSettings) SetStrategy(v AutoPartitioningStrategy) {
+	x.xxx_hidden_Strategy = v
+}
+
+func (x *AutoPartitioningSettings) SetPartitionWriteSpeed(v *AutoPartitioningWriteSpeedStrategy) {
+	x.xxx_hidden_PartitionWriteSpeed = v
+}
+
+func (x *AutoPartitioningSettings) HasPartitionWriteSpeed() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionWriteSpeed != nil
+}
+
+func (x *AutoPartitioningSettings) ClearPartitionWriteSpeed() {
+	x.xxx_hidden_PartitionWriteSpeed = nil
+}
+
+type AutoPartitioningSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Strategy of auto partitioning.
+	Strategy AutoPartitioningStrategy
+	// Partition write speed auto partitioning options.
+	PartitionWriteSpeed *AutoPartitioningWriteSpeedStrategy
+}
+
+func (b0 AutoPartitioningSettings_builder) Build() *AutoPartitioningSettings {
+	m0 := &AutoPartitioningSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Strategy = b.Strategy
+	x.xxx_hidden_PartitionWriteSpeed = b.PartitionWriteSpeed
+	return m0
+}
+
 type AutoPartitioningWriteSpeedStrategy struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Zero value means default - 300.
-	StabilizationWindow *durationpb.Duration `protobuf:"bytes,1,opt,name=stabilization_window,json=stabilizationWindow,proto3" json:"stabilization_window,omitempty"`
-	// Zero value means default - 90.
-	UpUtilizationPercent int32 `protobuf:"varint,2,opt,name=up_utilization_percent,json=upUtilizationPercent,proto3" json:"up_utilization_percent,omitempty"`
-	// Zero value means default - 30.
-	DownUtilizationPercent int32 `protobuf:"varint,3,opt,name=down_utilization_percent,json=downUtilizationPercent,proto3" json:"down_utilization_percent,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StabilizationWindow    *durationpb.Duration   `protobuf:"bytes,1,opt,name=stabilization_window,json=stabilizationWindow,proto3"`
+	xxx_hidden_UpUtilizationPercent   int32                  `protobuf:"varint,2,opt,name=up_utilization_percent,json=upUtilizationPercent,proto3"`
+	xxx_hidden_DownUtilizationPercent int32                  `protobuf:"varint,3,opt,name=down_utilization_percent,json=downUtilizationPercent,proto3"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *AutoPartitioningWriteSpeedStrategy) Reset() {
@@ -1432,51 +1957,82 @@ func (x *AutoPartitioningWriteSpeedStrategy) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AutoPartitioningWriteSpeedStrategy.ProtoReflect.Descriptor instead.
-func (*AutoPartitioningWriteSpeedStrategy) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{21}
-}
-
 func (x *AutoPartitioningWriteSpeedStrategy) GetStabilizationWindow() *durationpb.Duration {
 	if x != nil {
-		return x.StabilizationWindow
+		return x.xxx_hidden_StabilizationWindow
 	}
 	return nil
 }
 
 func (x *AutoPartitioningWriteSpeedStrategy) GetUpUtilizationPercent() int32 {
 	if x != nil {
-		return x.UpUtilizationPercent
+		return x.xxx_hidden_UpUtilizationPercent
 	}
 	return 0
 }
 
 func (x *AutoPartitioningWriteSpeedStrategy) GetDownUtilizationPercent() int32 {
 	if x != nil {
-		return x.DownUtilizationPercent
+		return x.xxx_hidden_DownUtilizationPercent
 	}
 	return 0
 }
 
+func (x *AutoPartitioningWriteSpeedStrategy) SetStabilizationWindow(v *durationpb.Duration) {
+	x.xxx_hidden_StabilizationWindow = v
+}
+
+func (x *AutoPartitioningWriteSpeedStrategy) SetUpUtilizationPercent(v int32) {
+	x.xxx_hidden_UpUtilizationPercent = v
+}
+
+func (x *AutoPartitioningWriteSpeedStrategy) SetDownUtilizationPercent(v int32) {
+	x.xxx_hidden_DownUtilizationPercent = v
+}
+
+func (x *AutoPartitioningWriteSpeedStrategy) HasStabilizationWindow() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StabilizationWindow != nil
+}
+
+func (x *AutoPartitioningWriteSpeedStrategy) ClearStabilizationWindow() {
+	x.xxx_hidden_StabilizationWindow = nil
+}
+
+type AutoPartitioningWriteSpeedStrategy_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Zero value means default - 300.
+	StabilizationWindow *durationpb.Duration
+	// Zero value means default - 90.
+	UpUtilizationPercent int32
+	// Zero value means default - 30.
+	DownUtilizationPercent int32
+}
+
+func (b0 AutoPartitioningWriteSpeedStrategy_builder) Build() *AutoPartitioningWriteSpeedStrategy {
+	m0 := &AutoPartitioningWriteSpeedStrategy{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_StabilizationWindow = b.StabilizationWindow
+	x.xxx_hidden_UpUtilizationPercent = b.UpUtilizationPercent
+	x.xxx_hidden_DownUtilizationPercent = b.DownUtilizationPercent
+	return m0
+}
+
 // Partitioning settings for topic.
 type AlterPartitioningSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Minimum partition count auto merge would stop working at.
-	// Zero value means default - 1.
-	SetMinActivePartitions *int64 `protobuf:"varint,1,opt,name=set_min_active_partitions,json=setMinActivePartitions,proto3,oneof" json:"set_min_active_partitions,omitempty"`
-	// Maximum partition count auto merge would stop working at.
-	// Zero value means default - 1.
-	SetMaxActivePartitions *int64 `protobuf:"varint,3,opt,name=set_max_active_partitions,json=setMaxActivePartitions,proto3,oneof" json:"set_max_active_partitions,omitempty"`
-	// Limit for total partition count, including active (open for write) and read-only partitions.
-	// Zero value means default - 100.
-	// Use set_max_active_partitions
-	//
-	// Deprecated: Marked as deprecated in protos/ydb_topic.proto.
-	SetPartitionCountLimit *int64 `protobuf:"varint,2,opt,name=set_partition_count_limit,json=setPartitionCountLimit,proto3,oneof" json:"set_partition_count_limit,omitempty"`
-	// Settings for auto partitioning the partition number
-	AlterAutoPartitioningSettings *AlterAutoPartitioningSettings `protobuf:"bytes,4,opt,name=alter_auto_partitioning_settings,json=alterAutoPartitioningSettings,proto3,oneof" json:"alter_auto_partitioning_settings,omitempty"`
-	unknownFields                 protoimpl.UnknownFields
-	sizeCache                     protoimpl.SizeCache
+	state                                    protoimpl.MessageState         `protogen:"opaque.v1"`
+	xxx_hidden_SetMinActivePartitions        int64                          `protobuf:"varint,1,opt,name=set_min_active_partitions,json=setMinActivePartitions,proto3,oneof"`
+	xxx_hidden_SetMaxActivePartitions        int64                          `protobuf:"varint,3,opt,name=set_max_active_partitions,json=setMaxActivePartitions,proto3,oneof"`
+	xxx_hidden_SetPartitionCountLimit        int64                          `protobuf:"varint,2,opt,name=set_partition_count_limit,json=setPartitionCountLimit,proto3,oneof"`
+	xxx_hidden_AlterAutoPartitioningSettings *AlterAutoPartitioningSettings `protobuf:"bytes,4,opt,name=alter_auto_partitioning_settings,json=alterAutoPartitioningSettings,proto3,oneof"`
+	XXX_raceDetectHookData                   protoimpl.RaceDetectHookData
+	XXX_presence                             [1]uint32
+	unknownFields                            protoimpl.UnknownFields
+	sizeCache                                protoimpl.SizeCache
 }
 
 func (x *AlterPartitioningSettings) Reset() {
@@ -1504,48 +2060,151 @@ func (x *AlterPartitioningSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterPartitioningSettings.ProtoReflect.Descriptor instead.
-func (*AlterPartitioningSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{22}
-}
-
 func (x *AlterPartitioningSettings) GetSetMinActivePartitions() int64 {
-	if x != nil && x.SetMinActivePartitions != nil {
-		return *x.SetMinActivePartitions
+	if x != nil {
+		return x.xxx_hidden_SetMinActivePartitions
 	}
 	return 0
 }
 
 func (x *AlterPartitioningSettings) GetSetMaxActivePartitions() int64 {
-	if x != nil && x.SetMaxActivePartitions != nil {
-		return *x.SetMaxActivePartitions
+	if x != nil {
+		return x.xxx_hidden_SetMaxActivePartitions
 	}
 	return 0
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_topic.proto.
 func (x *AlterPartitioningSettings) GetSetPartitionCountLimit() int64 {
-	if x != nil && x.SetPartitionCountLimit != nil {
-		return *x.SetPartitionCountLimit
+	if x != nil {
+		return x.xxx_hidden_SetPartitionCountLimit
 	}
 	return 0
 }
 
 func (x *AlterPartitioningSettings) GetAlterAutoPartitioningSettings() *AlterAutoPartitioningSettings {
 	if x != nil {
-		return x.AlterAutoPartitioningSettings
+		return x.xxx_hidden_AlterAutoPartitioningSettings
 	}
 	return nil
 }
 
+func (x *AlterPartitioningSettings) SetSetMinActivePartitions(v int64) {
+	x.xxx_hidden_SetMinActivePartitions = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *AlterPartitioningSettings) SetSetMaxActivePartitions(v int64) {
+	x.xxx_hidden_SetMaxActivePartitions = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+// Deprecated: Marked as deprecated in protos/ydb_topic.proto.
+func (x *AlterPartitioningSettings) SetSetPartitionCountLimit(v int64) {
+	x.xxx_hidden_SetPartitionCountLimit = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *AlterPartitioningSettings) SetAlterAutoPartitioningSettings(v *AlterAutoPartitioningSettings) {
+	x.xxx_hidden_AlterAutoPartitioningSettings = v
+}
+
+func (x *AlterPartitioningSettings) HasSetMinActivePartitions() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *AlterPartitioningSettings) HasSetMaxActivePartitions() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+// Deprecated: Marked as deprecated in protos/ydb_topic.proto.
+func (x *AlterPartitioningSettings) HasSetPartitionCountLimit() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *AlterPartitioningSettings) HasAlterAutoPartitioningSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_AlterAutoPartitioningSettings != nil
+}
+
+func (x *AlterPartitioningSettings) ClearSetMinActivePartitions() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_SetMinActivePartitions = 0
+}
+
+func (x *AlterPartitioningSettings) ClearSetMaxActivePartitions() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_SetMaxActivePartitions = 0
+}
+
+// Deprecated: Marked as deprecated in protos/ydb_topic.proto.
+func (x *AlterPartitioningSettings) ClearSetPartitionCountLimit() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_SetPartitionCountLimit = 0
+}
+
+func (x *AlterPartitioningSettings) ClearAlterAutoPartitioningSettings() {
+	x.xxx_hidden_AlterAutoPartitioningSettings = nil
+}
+
+type AlterPartitioningSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Minimum partition count auto merge would stop working at.
+	// Zero value means default - 1.
+	SetMinActivePartitions *int64
+	// Maximum partition count auto merge would stop working at.
+	// Zero value means default - 1.
+	SetMaxActivePartitions *int64
+	// Limit for total partition count, including active (open for write) and read-only partitions.
+	// Zero value means default - 100.
+	// Use set_max_active_partitions
+	//
+	// Deprecated: Marked as deprecated in protos/ydb_topic.proto.
+	SetPartitionCountLimit *int64
+	// Settings for auto partitioning the partition number
+	AlterAutoPartitioningSettings *AlterAutoPartitioningSettings
+}
+
+func (b0 AlterPartitioningSettings_builder) Build() *AlterPartitioningSettings {
+	m0 := &AlterPartitioningSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.SetMinActivePartitions != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_SetMinActivePartitions = *b.SetMinActivePartitions
+	}
+	if b.SetMaxActivePartitions != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		x.xxx_hidden_SetMaxActivePartitions = *b.SetMaxActivePartitions
+	}
+	if b.SetPartitionCountLimit != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_SetPartitionCountLimit = *b.SetPartitionCountLimit
+	}
+	x.xxx_hidden_AlterAutoPartitioningSettings = b.AlterAutoPartitioningSettings
+	return m0
+}
+
 type AlterAutoPartitioningSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Strategy of auto partitioning
-	SetStrategy *AutoPartitioningStrategy `protobuf:"varint,1,opt,name=set_strategy,json=setStrategy,proto3,enum=Ydb.Topic.AutoPartitioningStrategy,oneof" json:"set_strategy,omitempty"`
-	// Auto partitioning write speed options.
-	SetPartitionWriteSpeed *AlterAutoPartitioningWriteSpeedStrategy `protobuf:"bytes,2,opt,name=set_partition_write_speed,json=setPartitionWriteSpeed,proto3,oneof" json:"set_partition_write_speed,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                             protoimpl.MessageState                   `protogen:"opaque.v1"`
+	xxx_hidden_SetStrategy            AutoPartitioningStrategy                 `protobuf:"varint,1,opt,name=set_strategy,json=setStrategy,proto3,enum=Ydb.Topic.AutoPartitioningStrategy,oneof"`
+	xxx_hidden_SetPartitionWriteSpeed *AlterAutoPartitioningWriteSpeedStrategy `protobuf:"bytes,2,opt,name=set_partition_write_speed,json=setPartitionWriteSpeed,proto3,oneof"`
+	XXX_raceDetectHookData            protoimpl.RaceDetectHookData
+	XXX_presence                      [1]uint32
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *AlterAutoPartitioningSettings) Reset() {
@@ -1573,41 +2232,84 @@ func (x *AlterAutoPartitioningSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterAutoPartitioningSettings.ProtoReflect.Descriptor instead.
-func (*AlterAutoPartitioningSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{23}
-}
-
 func (x *AlterAutoPartitioningSettings) GetSetStrategy() AutoPartitioningStrategy {
-	if x != nil && x.SetStrategy != nil {
-		return *x.SetStrategy
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 0) {
+			return x.xxx_hidden_SetStrategy
+		}
 	}
 	return AutoPartitioningStrategy_AUTO_PARTITIONING_STRATEGY_UNSPECIFIED
 }
 
 func (x *AlterAutoPartitioningSettings) GetSetPartitionWriteSpeed() *AlterAutoPartitioningWriteSpeedStrategy {
 	if x != nil {
-		return x.SetPartitionWriteSpeed
+		return x.xxx_hidden_SetPartitionWriteSpeed
 	}
 	return nil
 }
 
+func (x *AlterAutoPartitioningSettings) SetSetStrategy(v AutoPartitioningStrategy) {
+	x.xxx_hidden_SetStrategy = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *AlterAutoPartitioningSettings) SetSetPartitionWriteSpeed(v *AlterAutoPartitioningWriteSpeedStrategy) {
+	x.xxx_hidden_SetPartitionWriteSpeed = v
+}
+
+func (x *AlterAutoPartitioningSettings) HasSetStrategy() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *AlterAutoPartitioningSettings) HasSetPartitionWriteSpeed() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SetPartitionWriteSpeed != nil
+}
+
+func (x *AlterAutoPartitioningSettings) ClearSetStrategy() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_SetStrategy = AutoPartitioningStrategy_AUTO_PARTITIONING_STRATEGY_UNSPECIFIED
+}
+
+func (x *AlterAutoPartitioningSettings) ClearSetPartitionWriteSpeed() {
+	x.xxx_hidden_SetPartitionWriteSpeed = nil
+}
+
+type AlterAutoPartitioningSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Strategy of auto partitioning
+	SetStrategy *AutoPartitioningStrategy
+	// Auto partitioning write speed options.
+	SetPartitionWriteSpeed *AlterAutoPartitioningWriteSpeedStrategy
+}
+
+func (b0 AlterAutoPartitioningSettings_builder) Build() *AlterAutoPartitioningSettings {
+	m0 := &AlterAutoPartitioningSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.SetStrategy != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_SetStrategy = *b.SetStrategy
+	}
+	x.xxx_hidden_SetPartitionWriteSpeed = b.SetPartitionWriteSpeed
+	return m0
+}
+
 type AlterAutoPartitioningWriteSpeedStrategy struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The time of exceeding the threshold value, after which the partition will be
-	// auto partitioning.
-	// Zero value means default - 300.
-	SetStabilizationWindow *durationpb.Duration `protobuf:"bytes,1,opt,name=set_stabilization_window,json=setStabilizationWindow,proto3,oneof" json:"set_stabilization_window,omitempty"`
-	// The threshold value of the write speed to the partition as a percentage, when exceeded,
-	// the partition will be auto split.
-	// Zero value means default - 90.
-	SetUpUtilizationPercent *int32 `protobuf:"varint,2,opt,name=set_up_utilization_percent,json=setUpUtilizationPercent,proto3,oneof" json:"set_up_utilization_percent,omitempty"`
-	// The threshold value of the write speed to the partition as a percentage, if it is not reached,
-	// the partition will be auto merged.
-	// Zero value means default - 30.
-	SetDownUtilizationPercent *int32 `protobuf:"varint,3,opt,name=set_down_utilization_percent,json=setDownUtilizationPercent,proto3,oneof" json:"set_down_utilization_percent,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state                                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SetStabilizationWindow    *durationpb.Duration   `protobuf:"bytes,1,opt,name=set_stabilization_window,json=setStabilizationWindow,proto3,oneof"`
+	xxx_hidden_SetUpUtilizationPercent   int32                  `protobuf:"varint,2,opt,name=set_up_utilization_percent,json=setUpUtilizationPercent,proto3,oneof"`
+	xxx_hidden_SetDownUtilizationPercent int32                  `protobuf:"varint,3,opt,name=set_down_utilization_percent,json=setDownUtilizationPercent,proto3,oneof"`
+	XXX_raceDetectHookData               protoimpl.RaceDetectHookData
+	XXX_presence                         [1]uint32
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *AlterAutoPartitioningWriteSpeedStrategy) Reset() {
@@ -1635,67 +2337,125 @@ func (x *AlterAutoPartitioningWriteSpeedStrategy) ProtoReflect() protoreflect.Me
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterAutoPartitioningWriteSpeedStrategy.ProtoReflect.Descriptor instead.
-func (*AlterAutoPartitioningWriteSpeedStrategy) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{24}
-}
-
 func (x *AlterAutoPartitioningWriteSpeedStrategy) GetSetStabilizationWindow() *durationpb.Duration {
 	if x != nil {
-		return x.SetStabilizationWindow
+		return x.xxx_hidden_SetStabilizationWindow
 	}
 	return nil
 }
 
 func (x *AlterAutoPartitioningWriteSpeedStrategy) GetSetUpUtilizationPercent() int32 {
-	if x != nil && x.SetUpUtilizationPercent != nil {
-		return *x.SetUpUtilizationPercent
+	if x != nil {
+		return x.xxx_hidden_SetUpUtilizationPercent
 	}
 	return 0
 }
 
 func (x *AlterAutoPartitioningWriteSpeedStrategy) GetSetDownUtilizationPercent() int32 {
-	if x != nil && x.SetDownUtilizationPercent != nil {
-		return *x.SetDownUtilizationPercent
+	if x != nil {
+		return x.xxx_hidden_SetDownUtilizationPercent
 	}
 	return 0
 }
 
+func (x *AlterAutoPartitioningWriteSpeedStrategy) SetSetStabilizationWindow(v *durationpb.Duration) {
+	x.xxx_hidden_SetStabilizationWindow = v
+}
+
+func (x *AlterAutoPartitioningWriteSpeedStrategy) SetSetUpUtilizationPercent(v int32) {
+	x.xxx_hidden_SetUpUtilizationPercent = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *AlterAutoPartitioningWriteSpeedStrategy) SetSetDownUtilizationPercent(v int32) {
+	x.xxx_hidden_SetDownUtilizationPercent = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *AlterAutoPartitioningWriteSpeedStrategy) HasSetStabilizationWindow() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SetStabilizationWindow != nil
+}
+
+func (x *AlterAutoPartitioningWriteSpeedStrategy) HasSetUpUtilizationPercent() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *AlterAutoPartitioningWriteSpeedStrategy) HasSetDownUtilizationPercent() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *AlterAutoPartitioningWriteSpeedStrategy) ClearSetStabilizationWindow() {
+	x.xxx_hidden_SetStabilizationWindow = nil
+}
+
+func (x *AlterAutoPartitioningWriteSpeedStrategy) ClearSetUpUtilizationPercent() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_SetUpUtilizationPercent = 0
+}
+
+func (x *AlterAutoPartitioningWriteSpeedStrategy) ClearSetDownUtilizationPercent() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_SetDownUtilizationPercent = 0
+}
+
+type AlterAutoPartitioningWriteSpeedStrategy_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The time of exceeding the threshold value, after which the partition will be
+	// auto partitioning.
+	// Zero value means default - 300.
+	SetStabilizationWindow *durationpb.Duration
+	// The threshold value of the write speed to the partition as a percentage, when exceeded,
+	// the partition will be auto split.
+	// Zero value means default - 90.
+	SetUpUtilizationPercent *int32
+	// The threshold value of the write speed to the partition as a percentage, if it is not reached,
+	// the partition will be auto merged.
+	// Zero value means default - 30.
+	SetDownUtilizationPercent *int32
+}
+
+func (b0 AlterAutoPartitioningWriteSpeedStrategy_builder) Build() *AlterAutoPartitioningWriteSpeedStrategy {
+	m0 := &AlterAutoPartitioningWriteSpeedStrategy{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SetStabilizationWindow = b.SetStabilizationWindow
+	if b.SetUpUtilizationPercent != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_SetUpUtilizationPercent = *b.SetUpUtilizationPercent
+	}
+	if b.SetDownUtilizationPercent != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_SetDownUtilizationPercent = *b.SetDownUtilizationPercent
+	}
+	return m0
+}
+
 // Create topic request sent from client to server.
 type CreateTopicRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Topic path.
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Settings for partitioning
-	PartitioningSettings *PartitioningSettings `protobuf:"bytes,3,opt,name=partitioning_settings,json=partitioningSettings,proto3" json:"partitioning_settings,omitempty"`
-	// Retention settings.
-	// Currently, only one limit may be set, so other should not be set.
-	//
-	// How long data in partition should be stored. Must be greater than 0 and less than limit for this database.
-	// Default limit - 36 hours.
-	RetentionPeriod *durationpb.Duration `protobuf:"bytes,4,opt,name=retention_period,json=retentionPeriod,proto3" json:"retention_period,omitempty"`
-	// How much data in partition should be stored. Must be greater than 0 and less than limit for this database.
-	// Zero value means infinite limit.
-	RetentionStorageMb int64 `protobuf:"varint,5,opt,name=retention_storage_mb,json=retentionStorageMb,proto3" json:"retention_storage_mb,omitempty"`
-	// List of allowed codecs for writers.
-	// Writes with codec not from this list are forbidden.
-	// If empty, codec compatibility check for the topic is disabled.
-	SupportedCodecs *SupportedCodecs `protobuf:"bytes,7,opt,name=supported_codecs,json=supportedCodecs,proto3" json:"supported_codecs,omitempty"`
-	// Partition write speed in bytes per second. Must be less than database limit.
-	// Zero value means default limit: 1 MB per second.
-	PartitionWriteSpeedBytesPerSecond int64 `protobuf:"varint,8,opt,name=partition_write_speed_bytes_per_second,json=partitionWriteSpeedBytesPerSecond,proto3" json:"partition_write_speed_bytes_per_second,omitempty"`
-	// Burst size for write in partition, in bytes. Must be less than database limit.
-	// Zero value means default limit: 1 MB.
-	PartitionWriteBurstBytes int64 `protobuf:"varint,9,opt,name=partition_write_burst_bytes,json=partitionWriteBurstBytes,proto3" json:"partition_write_burst_bytes,omitempty"`
-	// User and server attributes of topic. Server attributes starts from "_" and will be validated by server.
-	Attributes map[string]string `protobuf:"bytes,10,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// List of consumers for this topic.
-	Consumers []*Consumer `protobuf:"bytes,11,rep,name=consumers,proto3" json:"consumers,omitempty"`
-	// Metering mode for the topic in a serverless database.
-	MeteringMode  MeteringMode `protobuf:"varint,12,opt,name=metering_mode,json=meteringMode,proto3,enum=Ydb.Topic.MeteringMode" json:"metering_mode,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                                        protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams                   *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path                              string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_PartitioningSettings              *PartitioningSettings           `protobuf:"bytes,3,opt,name=partitioning_settings,json=partitioningSettings,proto3"`
+	xxx_hidden_RetentionPeriod                   *durationpb.Duration            `protobuf:"bytes,4,opt,name=retention_period,json=retentionPeriod,proto3"`
+	xxx_hidden_RetentionStorageMb                int64                           `protobuf:"varint,5,opt,name=retention_storage_mb,json=retentionStorageMb,proto3"`
+	xxx_hidden_SupportedCodecs                   *SupportedCodecs                `protobuf:"bytes,7,opt,name=supported_codecs,json=supportedCodecs,proto3"`
+	xxx_hidden_PartitionWriteSpeedBytesPerSecond int64                           `protobuf:"varint,8,opt,name=partition_write_speed_bytes_per_second,json=partitionWriteSpeedBytesPerSecond,proto3"`
+	xxx_hidden_PartitionWriteBurstBytes          int64                           `protobuf:"varint,9,opt,name=partition_write_burst_bytes,json=partitionWriteBurstBytes,proto3"`
+	xxx_hidden_Attributes                        map[string]string               `protobuf:"bytes,10,rep,name=attributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_Consumers                         *[]*Consumer                    `protobuf:"bytes,11,rep,name=consumers,proto3"`
+	xxx_hidden_MeteringMode                      MeteringMode                    `protobuf:"varint,12,opt,name=metering_mode,json=meteringMode,proto3,enum=Ydb.Topic.MeteringMode"`
+	unknownFields                                protoimpl.UnknownFields
+	sizeCache                                    protoimpl.SizeCache
 }
 
 func (x *CreateTopicRequest) Reset() {
@@ -1723,96 +2483,233 @@ func (x *CreateTopicRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateTopicRequest.ProtoReflect.Descriptor instead.
-func (*CreateTopicRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{25}
-}
-
 func (x *CreateTopicRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateTopicRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *CreateTopicRequest) GetPartitioningSettings() *PartitioningSettings {
 	if x != nil {
-		return x.PartitioningSettings
+		return x.xxx_hidden_PartitioningSettings
 	}
 	return nil
 }
 
 func (x *CreateTopicRequest) GetRetentionPeriod() *durationpb.Duration {
 	if x != nil {
-		return x.RetentionPeriod
+		return x.xxx_hidden_RetentionPeriod
 	}
 	return nil
 }
 
 func (x *CreateTopicRequest) GetRetentionStorageMb() int64 {
 	if x != nil {
-		return x.RetentionStorageMb
+		return x.xxx_hidden_RetentionStorageMb
 	}
 	return 0
 }
 
 func (x *CreateTopicRequest) GetSupportedCodecs() *SupportedCodecs {
 	if x != nil {
-		return x.SupportedCodecs
+		return x.xxx_hidden_SupportedCodecs
 	}
 	return nil
 }
 
 func (x *CreateTopicRequest) GetPartitionWriteSpeedBytesPerSecond() int64 {
 	if x != nil {
-		return x.PartitionWriteSpeedBytesPerSecond
+		return x.xxx_hidden_PartitionWriteSpeedBytesPerSecond
 	}
 	return 0
 }
 
 func (x *CreateTopicRequest) GetPartitionWriteBurstBytes() int64 {
 	if x != nil {
-		return x.PartitionWriteBurstBytes
+		return x.xxx_hidden_PartitionWriteBurstBytes
 	}
 	return 0
 }
 
 func (x *CreateTopicRequest) GetAttributes() map[string]string {
 	if x != nil {
-		return x.Attributes
+		return x.xxx_hidden_Attributes
 	}
 	return nil
 }
 
 func (x *CreateTopicRequest) GetConsumers() []*Consumer {
 	if x != nil {
-		return x.Consumers
+		if x.xxx_hidden_Consumers != nil {
+			return *x.xxx_hidden_Consumers
+		}
 	}
 	return nil
 }
 
 func (x *CreateTopicRequest) GetMeteringMode() MeteringMode {
 	if x != nil {
-		return x.MeteringMode
+		return x.xxx_hidden_MeteringMode
 	}
 	return MeteringMode_METERING_MODE_UNSPECIFIED
+}
+
+func (x *CreateTopicRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CreateTopicRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *CreateTopicRequest) SetPartitioningSettings(v *PartitioningSettings) {
+	x.xxx_hidden_PartitioningSettings = v
+}
+
+func (x *CreateTopicRequest) SetRetentionPeriod(v *durationpb.Duration) {
+	x.xxx_hidden_RetentionPeriod = v
+}
+
+func (x *CreateTopicRequest) SetRetentionStorageMb(v int64) {
+	x.xxx_hidden_RetentionStorageMb = v
+}
+
+func (x *CreateTopicRequest) SetSupportedCodecs(v *SupportedCodecs) {
+	x.xxx_hidden_SupportedCodecs = v
+}
+
+func (x *CreateTopicRequest) SetPartitionWriteSpeedBytesPerSecond(v int64) {
+	x.xxx_hidden_PartitionWriteSpeedBytesPerSecond = v
+}
+
+func (x *CreateTopicRequest) SetPartitionWriteBurstBytes(v int64) {
+	x.xxx_hidden_PartitionWriteBurstBytes = v
+}
+
+func (x *CreateTopicRequest) SetAttributes(v map[string]string) {
+	x.xxx_hidden_Attributes = v
+}
+
+func (x *CreateTopicRequest) SetConsumers(v []*Consumer) {
+	x.xxx_hidden_Consumers = &v
+}
+
+func (x *CreateTopicRequest) SetMeteringMode(v MeteringMode) {
+	x.xxx_hidden_MeteringMode = v
+}
+
+func (x *CreateTopicRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CreateTopicRequest) HasPartitioningSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitioningSettings != nil
+}
+
+func (x *CreateTopicRequest) HasRetentionPeriod() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_RetentionPeriod != nil
+}
+
+func (x *CreateTopicRequest) HasSupportedCodecs() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SupportedCodecs != nil
+}
+
+func (x *CreateTopicRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *CreateTopicRequest) ClearPartitioningSettings() {
+	x.xxx_hidden_PartitioningSettings = nil
+}
+
+func (x *CreateTopicRequest) ClearRetentionPeriod() {
+	x.xxx_hidden_RetentionPeriod = nil
+}
+
+func (x *CreateTopicRequest) ClearSupportedCodecs() {
+	x.xxx_hidden_SupportedCodecs = nil
+}
+
+type CreateTopicRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Topic path.
+	Path string
+	// Settings for partitioning
+	PartitioningSettings *PartitioningSettings
+	// Retention settings.
+	// Currently, only one limit may be set, so other should not be set.
+	//
+	// How long data in partition should be stored. Must be greater than 0 and less than limit for this database.
+	// Default limit - 36 hours.
+	RetentionPeriod *durationpb.Duration
+	// How much data in partition should be stored. Must be greater than 0 and less than limit for this database.
+	// Zero value means infinite limit.
+	RetentionStorageMb int64
+	// List of allowed codecs for writers.
+	// Writes with codec not from this list are forbidden.
+	// If empty, codec compatibility check for the topic is disabled.
+	SupportedCodecs *SupportedCodecs
+	// Partition write speed in bytes per second. Must be less than database limit.
+	// Zero value means default limit: 1 MB per second.
+	PartitionWriteSpeedBytesPerSecond int64
+	// Burst size for write in partition, in bytes. Must be less than database limit.
+	// Zero value means default limit: 1 MB.
+	PartitionWriteBurstBytes int64
+	// User and server attributes of topic. Server attributes starts from "_" and will be validated by server.
+	Attributes map[string]string
+	// List of consumers for this topic.
+	Consumers []*Consumer
+	// Metering mode for the topic in a serverless database.
+	MeteringMode MeteringMode
+}
+
+func (b0 CreateTopicRequest_builder) Build() *CreateTopicRequest {
+	m0 := &CreateTopicRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitioningSettings = b.PartitioningSettings
+	x.xxx_hidden_RetentionPeriod = b.RetentionPeriod
+	x.xxx_hidden_RetentionStorageMb = b.RetentionStorageMb
+	x.xxx_hidden_SupportedCodecs = b.SupportedCodecs
+	x.xxx_hidden_PartitionWriteSpeedBytesPerSecond = b.PartitionWriteSpeedBytesPerSecond
+	x.xxx_hidden_PartitionWriteBurstBytes = b.PartitionWriteBurstBytes
+	x.xxx_hidden_Attributes = b.Attributes
+	x.xxx_hidden_Consumers = &b.Consumers
+	x.xxx_hidden_MeteringMode = b.MeteringMode
+	return m0
 }
 
 // Create topic response sent from server to client.
 // If topic is already exists then response status will be "ALREADY_EXISTS".
 type CreateTopicResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateTopicResponse) Reset() {
@@ -1840,21 +2737,46 @@ func (x *CreateTopicResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateTopicResponse.ProtoReflect.Descriptor instead.
-func (*CreateTopicResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{26}
-}
-
 func (x *CreateTopicResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CreateTopicResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CreateTopicResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CreateTopicResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CreateTopicResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CreateTopicResponse_builder) Build() *CreateTopicResponse {
+	m0 := &CreateTopicResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Create topic result message that will be inside CreateTopicResponse.operation.
 type CreateTopicResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1884,20 +2806,25 @@ func (x *CreateTopicResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateTopicResult.ProtoReflect.Descriptor instead.
-func (*CreateTopicResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{27}
+type CreateTopicResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 CreateTopicResult_builder) Build() *CreateTopicResult {
+	m0 := &CreateTopicResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Topic partition location
 type PartitionLocation struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Node identificator.
-	NodeId int32 `protobuf:"varint,1,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
-	// Partition generation.
-	Generation    int64 `protobuf:"varint,2,opt,name=generation,proto3" json:"generation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_NodeId     int32                  `protobuf:"varint,1,opt,name=node_id,json=nodeId,proto3"`
+	xxx_hidden_Generation int64                  `protobuf:"varint,2,opt,name=generation,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *PartitionLocation) Reset() {
@@ -1925,37 +2852,55 @@ func (x *PartitionLocation) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PartitionLocation.ProtoReflect.Descriptor instead.
-func (*PartitionLocation) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{28}
-}
-
 func (x *PartitionLocation) GetNodeId() int32 {
 	if x != nil {
-		return x.NodeId
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *PartitionLocation) GetGeneration() int64 {
 	if x != nil {
-		return x.Generation
+		return x.xxx_hidden_Generation
 	}
 	return 0
 }
 
+func (x *PartitionLocation) SetNodeId(v int32) {
+	x.xxx_hidden_NodeId = v
+}
+
+func (x *PartitionLocation) SetGeneration(v int64) {
+	x.xxx_hidden_Generation = v
+}
+
+type PartitionLocation_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Node identificator.
+	NodeId int32
+	// Partition generation.
+	Generation int64
+}
+
+func (b0 PartitionLocation_builder) Build() *PartitionLocation {
+	m0 := &PartitionLocation{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_NodeId = b.NodeId
+	x.xxx_hidden_Generation = b.Generation
+	return m0
+}
+
 // Describe topic request sent from client to server.
 type DescribeTopicRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Topic path.
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Include topic statistics.
-	IncludeStats bool `protobuf:"varint,3,opt,name=include_stats,json=includeStats,proto3" json:"include_stats,omitempty"`
-	// Include partition location.
-	IncludeLocation bool `protobuf:"varint,4,opt,name=include_location,json=includeLocation,proto3" json:"include_location,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_IncludeStats    bool                            `protobuf:"varint,3,opt,name=include_stats,json=includeStats,proto3"`
+	xxx_hidden_IncludeLocation bool                            `protobuf:"varint,4,opt,name=include_location,json=includeLocation,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeTopicRequest) Reset() {
@@ -1983,47 +2928,91 @@ func (x *DescribeTopicRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeTopicRequest.ProtoReflect.Descriptor instead.
-func (*DescribeTopicRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{29}
-}
-
 func (x *DescribeTopicRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeTopicRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DescribeTopicRequest) GetIncludeStats() bool {
 	if x != nil {
-		return x.IncludeStats
+		return x.xxx_hidden_IncludeStats
 	}
 	return false
 }
 
 func (x *DescribeTopicRequest) GetIncludeLocation() bool {
 	if x != nil {
-		return x.IncludeLocation
+		return x.xxx_hidden_IncludeLocation
 	}
 	return false
+}
+
+func (x *DescribeTopicRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DescribeTopicRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *DescribeTopicRequest) SetIncludeStats(v bool) {
+	x.xxx_hidden_IncludeStats = v
+}
+
+func (x *DescribeTopicRequest) SetIncludeLocation(v bool) {
+	x.xxx_hidden_IncludeLocation = v
+}
+
+func (x *DescribeTopicRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DescribeTopicRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DescribeTopicRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Topic path.
+	Path string
+	// Include topic statistics.
+	IncludeStats bool
+	// Include partition location.
+	IncludeLocation bool
+}
+
+func (b0 DescribeTopicRequest_builder) Build() *DescribeTopicRequest {
+	m0 := &DescribeTopicRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_IncludeStats = b.IncludeStats
+	x.xxx_hidden_IncludeLocation = b.IncludeLocation
+	return m0
 }
 
 // Describe topic response sent from server to client.
 // If topic is not existed then response status will be "SCHEME_ERROR".
 type DescribeTopicResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeTopicResponse) Reset() {
@@ -2051,26 +3040,51 @@ func (x *DescribeTopicResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeTopicResponse.ProtoReflect.Descriptor instead.
-func (*DescribeTopicResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{30}
-}
-
 func (x *DescribeTopicResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DescribeTopicResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DescribeTopicResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DescribeTopicResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DescribeTopicResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DescribeTopicResponse_builder) Build() *DescribeTopicResponse {
+	m0 := &DescribeTopicResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type PartitionKeyRange struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Inclusive left border. Emptiness means -inf.
-	FromBound []byte `protobuf:"bytes,1,opt,name=from_bound,json=fromBound,proto3,oneof" json:"from_bound,omitempty"`
-	// Exclusive right border. Emptiness means +inf.
-	ToBound       []byte `protobuf:"bytes,2,opt,name=to_bound,json=toBound,proto3,oneof" json:"to_bound,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_FromBound   []byte                 `protobuf:"bytes,1,opt,name=from_bound,json=fromBound,proto3,oneof"`
+	xxx_hidden_ToBound     []byte                 `protobuf:"bytes,2,opt,name=to_bound,json=toBound,proto3,oneof"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *PartitionKeyRange) Reset() {
@@ -2098,64 +3112,103 @@ func (x *PartitionKeyRange) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PartitionKeyRange.ProtoReflect.Descriptor instead.
-func (*PartitionKeyRange) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{31}
-}
-
 func (x *PartitionKeyRange) GetFromBound() []byte {
 	if x != nil {
-		return x.FromBound
+		return x.xxx_hidden_FromBound
 	}
 	return nil
 }
 
 func (x *PartitionKeyRange) GetToBound() []byte {
 	if x != nil {
-		return x.ToBound
+		return x.xxx_hidden_ToBound
 	}
 	return nil
 }
 
+func (x *PartitionKeyRange) SetFromBound(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_FromBound = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *PartitionKeyRange) SetToBound(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_ToBound = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *PartitionKeyRange) HasFromBound() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *PartitionKeyRange) HasToBound() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *PartitionKeyRange) ClearFromBound() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_FromBound = nil
+}
+
+func (x *PartitionKeyRange) ClearToBound() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ToBound = nil
+}
+
+type PartitionKeyRange_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Inclusive left border. Emptiness means -inf.
+	FromBound []byte
+	// Exclusive right border. Emptiness means +inf.
+	ToBound []byte
+}
+
+func (b0 PartitionKeyRange_builder) Build() *PartitionKeyRange {
+	m0 := &PartitionKeyRange{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.FromBound != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_FromBound = b.FromBound
+	}
+	if b.ToBound != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_ToBound = b.ToBound
+	}
+	return m0
+}
+
 // Describe topic result message that will be inside DescribeTopicResponse.operation.
 type DescribeTopicResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Description of scheme object.
-	Self *Ydb_Scheme.Entry `protobuf:"bytes,1,opt,name=self,proto3" json:"self,omitempty"`
-	// Settings for partitioning
-	PartitioningSettings *PartitioningSettings `protobuf:"bytes,2,opt,name=partitioning_settings,json=partitioningSettings,proto3" json:"partitioning_settings,omitempty"`
-	// Partitions description.
-	Partitions []*DescribeTopicResult_PartitionInfo `protobuf:"bytes,3,rep,name=partitions,proto3" json:"partitions,omitempty"`
-	// Retention settings.
-	// Currently, only one limit may be set, so other should not be set.
-	//
-	// How long data in partition should be stored.
-	RetentionPeriod *durationpb.Duration `protobuf:"bytes,4,opt,name=retention_period,json=retentionPeriod,proto3" json:"retention_period,omitempty"`
-	// How much data in partition should be stored.
-	// Zero value means infinite limit.
-	RetentionStorageMb int64 `protobuf:"varint,5,opt,name=retention_storage_mb,json=retentionStorageMb,proto3" json:"retention_storage_mb,omitempty"`
-	// List of allowed codecs for writers.
-	// Writes with codec not from this list are forbidden.
-	// If empty, codec compatibility check for the topic is disabled.
-	SupportedCodecs *SupportedCodecs `protobuf:"bytes,7,opt,name=supported_codecs,json=supportedCodecs,proto3" json:"supported_codecs,omitempty"`
-	// Partition write speed in bytes per second.
-	// Zero value means default limit: 1 MB per second.
-	PartitionWriteSpeedBytesPerSecond        int64 `protobuf:"varint,8,opt,name=partition_write_speed_bytes_per_second,json=partitionWriteSpeedBytesPerSecond,proto3" json:"partition_write_speed_bytes_per_second,omitempty"`
-	PartitionTotalReadSpeedBytesPerSecond    int64 `protobuf:"varint,14,opt,name=partition_total_read_speed_bytes_per_second,json=partitionTotalReadSpeedBytesPerSecond,proto3" json:"partition_total_read_speed_bytes_per_second,omitempty"`
-	PartitionConsumerReadSpeedBytesPerSecond int64 `protobuf:"varint,15,opt,name=partition_consumer_read_speed_bytes_per_second,json=partitionConsumerReadSpeedBytesPerSecond,proto3" json:"partition_consumer_read_speed_bytes_per_second,omitempty"`
-	// Burst size for write in partition, in bytes.
-	// Zero value means default limit: 1 MB.
-	PartitionWriteBurstBytes int64 `protobuf:"varint,9,opt,name=partition_write_burst_bytes,json=partitionWriteBurstBytes,proto3" json:"partition_write_burst_bytes,omitempty"`
-	// User and server attributes of topic. Server attributes starts from "_" and will be validated by server.
-	Attributes map[string]string `protobuf:"bytes,10,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// List of consumers for this topic.
-	Consumers []*Consumer `protobuf:"bytes,11,rep,name=consumers,proto3" json:"consumers,omitempty"`
-	// Metering settings.
-	MeteringMode MeteringMode `protobuf:"varint,12,opt,name=metering_mode,json=meteringMode,proto3,enum=Ydb.Topic.MeteringMode" json:"metering_mode,omitempty"`
-	// Statistics of topic.
-	TopicStats    *DescribeTopicResult_TopicStats `protobuf:"bytes,13,opt,name=topic_stats,json=topicStats,proto3" json:"topic_stats,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                                               protoimpl.MessageState                `protogen:"opaque.v1"`
+	xxx_hidden_Self                                     *Ydb_Scheme.Entry                     `protobuf:"bytes,1,opt,name=self,proto3"`
+	xxx_hidden_PartitioningSettings                     *PartitioningSettings                 `protobuf:"bytes,2,opt,name=partitioning_settings,json=partitioningSettings,proto3"`
+	xxx_hidden_Partitions                               *[]*DescribeTopicResult_PartitionInfo `protobuf:"bytes,3,rep,name=partitions,proto3"`
+	xxx_hidden_RetentionPeriod                          *durationpb.Duration                  `protobuf:"bytes,4,opt,name=retention_period,json=retentionPeriod,proto3"`
+	xxx_hidden_RetentionStorageMb                       int64                                 `protobuf:"varint,5,opt,name=retention_storage_mb,json=retentionStorageMb,proto3"`
+	xxx_hidden_SupportedCodecs                          *SupportedCodecs                      `protobuf:"bytes,7,opt,name=supported_codecs,json=supportedCodecs,proto3"`
+	xxx_hidden_PartitionWriteSpeedBytesPerSecond        int64                                 `protobuf:"varint,8,opt,name=partition_write_speed_bytes_per_second,json=partitionWriteSpeedBytesPerSecond,proto3"`
+	xxx_hidden_PartitionTotalReadSpeedBytesPerSecond    int64                                 `protobuf:"varint,14,opt,name=partition_total_read_speed_bytes_per_second,json=partitionTotalReadSpeedBytesPerSecond,proto3"`
+	xxx_hidden_PartitionConsumerReadSpeedBytesPerSecond int64                                 `protobuf:"varint,15,opt,name=partition_consumer_read_speed_bytes_per_second,json=partitionConsumerReadSpeedBytesPerSecond,proto3"`
+	xxx_hidden_PartitionWriteBurstBytes                 int64                                 `protobuf:"varint,9,opt,name=partition_write_burst_bytes,json=partitionWriteBurstBytes,proto3"`
+	xxx_hidden_Attributes                               map[string]string                     `protobuf:"bytes,10,rep,name=attributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_Consumers                                *[]*Consumer                          `protobuf:"bytes,11,rep,name=consumers,proto3"`
+	xxx_hidden_MeteringMode                             MeteringMode                          `protobuf:"varint,12,opt,name=metering_mode,json=meteringMode,proto3,enum=Ydb.Topic.MeteringMode"`
+	xxx_hidden_TopicStats                               *DescribeTopicResult_TopicStats       `protobuf:"bytes,13,opt,name=topic_stats,json=topicStats,proto3"`
+	unknownFields                                       protoimpl.UnknownFields
+	sizeCache                                           protoimpl.SizeCache
 }
 
 func (x *DescribeTopicResult) Reset() {
@@ -2183,123 +3236,289 @@ func (x *DescribeTopicResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeTopicResult.ProtoReflect.Descriptor instead.
-func (*DescribeTopicResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{32}
-}
-
 func (x *DescribeTopicResult) GetSelf() *Ydb_Scheme.Entry {
 	if x != nil {
-		return x.Self
+		return x.xxx_hidden_Self
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult) GetPartitioningSettings() *PartitioningSettings {
 	if x != nil {
-		return x.PartitioningSettings
+		return x.xxx_hidden_PartitioningSettings
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult) GetPartitions() []*DescribeTopicResult_PartitionInfo {
 	if x != nil {
-		return x.Partitions
+		if x.xxx_hidden_Partitions != nil {
+			return *x.xxx_hidden_Partitions
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult) GetRetentionPeriod() *durationpb.Duration {
 	if x != nil {
-		return x.RetentionPeriod
+		return x.xxx_hidden_RetentionPeriod
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult) GetRetentionStorageMb() int64 {
 	if x != nil {
-		return x.RetentionStorageMb
+		return x.xxx_hidden_RetentionStorageMb
 	}
 	return 0
 }
 
 func (x *DescribeTopicResult) GetSupportedCodecs() *SupportedCodecs {
 	if x != nil {
-		return x.SupportedCodecs
+		return x.xxx_hidden_SupportedCodecs
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult) GetPartitionWriteSpeedBytesPerSecond() int64 {
 	if x != nil {
-		return x.PartitionWriteSpeedBytesPerSecond
+		return x.xxx_hidden_PartitionWriteSpeedBytesPerSecond
 	}
 	return 0
 }
 
 func (x *DescribeTopicResult) GetPartitionTotalReadSpeedBytesPerSecond() int64 {
 	if x != nil {
-		return x.PartitionTotalReadSpeedBytesPerSecond
+		return x.xxx_hidden_PartitionTotalReadSpeedBytesPerSecond
 	}
 	return 0
 }
 
 func (x *DescribeTopicResult) GetPartitionConsumerReadSpeedBytesPerSecond() int64 {
 	if x != nil {
-		return x.PartitionConsumerReadSpeedBytesPerSecond
+		return x.xxx_hidden_PartitionConsumerReadSpeedBytesPerSecond
 	}
 	return 0
 }
 
 func (x *DescribeTopicResult) GetPartitionWriteBurstBytes() int64 {
 	if x != nil {
-		return x.PartitionWriteBurstBytes
+		return x.xxx_hidden_PartitionWriteBurstBytes
 	}
 	return 0
 }
 
 func (x *DescribeTopicResult) GetAttributes() map[string]string {
 	if x != nil {
-		return x.Attributes
+		return x.xxx_hidden_Attributes
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult) GetConsumers() []*Consumer {
 	if x != nil {
-		return x.Consumers
+		if x.xxx_hidden_Consumers != nil {
+			return *x.xxx_hidden_Consumers
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult) GetMeteringMode() MeteringMode {
 	if x != nil {
-		return x.MeteringMode
+		return x.xxx_hidden_MeteringMode
 	}
 	return MeteringMode_METERING_MODE_UNSPECIFIED
 }
 
 func (x *DescribeTopicResult) GetTopicStats() *DescribeTopicResult_TopicStats {
 	if x != nil {
-		return x.TopicStats
+		return x.xxx_hidden_TopicStats
 	}
 	return nil
 }
 
+func (x *DescribeTopicResult) SetSelf(v *Ydb_Scheme.Entry) {
+	x.xxx_hidden_Self = v
+}
+
+func (x *DescribeTopicResult) SetPartitioningSettings(v *PartitioningSettings) {
+	x.xxx_hidden_PartitioningSettings = v
+}
+
+func (x *DescribeTopicResult) SetPartitions(v []*DescribeTopicResult_PartitionInfo) {
+	x.xxx_hidden_Partitions = &v
+}
+
+func (x *DescribeTopicResult) SetRetentionPeriod(v *durationpb.Duration) {
+	x.xxx_hidden_RetentionPeriod = v
+}
+
+func (x *DescribeTopicResult) SetRetentionStorageMb(v int64) {
+	x.xxx_hidden_RetentionStorageMb = v
+}
+
+func (x *DescribeTopicResult) SetSupportedCodecs(v *SupportedCodecs) {
+	x.xxx_hidden_SupportedCodecs = v
+}
+
+func (x *DescribeTopicResult) SetPartitionWriteSpeedBytesPerSecond(v int64) {
+	x.xxx_hidden_PartitionWriteSpeedBytesPerSecond = v
+}
+
+func (x *DescribeTopicResult) SetPartitionTotalReadSpeedBytesPerSecond(v int64) {
+	x.xxx_hidden_PartitionTotalReadSpeedBytesPerSecond = v
+}
+
+func (x *DescribeTopicResult) SetPartitionConsumerReadSpeedBytesPerSecond(v int64) {
+	x.xxx_hidden_PartitionConsumerReadSpeedBytesPerSecond = v
+}
+
+func (x *DescribeTopicResult) SetPartitionWriteBurstBytes(v int64) {
+	x.xxx_hidden_PartitionWriteBurstBytes = v
+}
+
+func (x *DescribeTopicResult) SetAttributes(v map[string]string) {
+	x.xxx_hidden_Attributes = v
+}
+
+func (x *DescribeTopicResult) SetConsumers(v []*Consumer) {
+	x.xxx_hidden_Consumers = &v
+}
+
+func (x *DescribeTopicResult) SetMeteringMode(v MeteringMode) {
+	x.xxx_hidden_MeteringMode = v
+}
+
+func (x *DescribeTopicResult) SetTopicStats(v *DescribeTopicResult_TopicStats) {
+	x.xxx_hidden_TopicStats = v
+}
+
+func (x *DescribeTopicResult) HasSelf() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Self != nil
+}
+
+func (x *DescribeTopicResult) HasPartitioningSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitioningSettings != nil
+}
+
+func (x *DescribeTopicResult) HasRetentionPeriod() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_RetentionPeriod != nil
+}
+
+func (x *DescribeTopicResult) HasSupportedCodecs() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SupportedCodecs != nil
+}
+
+func (x *DescribeTopicResult) HasTopicStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TopicStats != nil
+}
+
+func (x *DescribeTopicResult) ClearSelf() {
+	x.xxx_hidden_Self = nil
+}
+
+func (x *DescribeTopicResult) ClearPartitioningSettings() {
+	x.xxx_hidden_PartitioningSettings = nil
+}
+
+func (x *DescribeTopicResult) ClearRetentionPeriod() {
+	x.xxx_hidden_RetentionPeriod = nil
+}
+
+func (x *DescribeTopicResult) ClearSupportedCodecs() {
+	x.xxx_hidden_SupportedCodecs = nil
+}
+
+func (x *DescribeTopicResult) ClearTopicStats() {
+	x.xxx_hidden_TopicStats = nil
+}
+
+type DescribeTopicResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Description of scheme object.
+	Self *Ydb_Scheme.Entry
+	// Settings for partitioning
+	PartitioningSettings *PartitioningSettings
+	// Partitions description.
+	Partitions []*DescribeTopicResult_PartitionInfo
+	// Retention settings.
+	// Currently, only one limit may be set, so other should not be set.
+	//
+	// How long data in partition should be stored.
+	RetentionPeriod *durationpb.Duration
+	// How much data in partition should be stored.
+	// Zero value means infinite limit.
+	RetentionStorageMb int64
+	// List of allowed codecs for writers.
+	// Writes with codec not from this list are forbidden.
+	// If empty, codec compatibility check for the topic is disabled.
+	SupportedCodecs *SupportedCodecs
+	// Partition write speed in bytes per second.
+	// Zero value means default limit: 1 MB per second.
+	PartitionWriteSpeedBytesPerSecond        int64
+	PartitionTotalReadSpeedBytesPerSecond    int64
+	PartitionConsumerReadSpeedBytesPerSecond int64
+	// Burst size for write in partition, in bytes.
+	// Zero value means default limit: 1 MB.
+	PartitionWriteBurstBytes int64
+	// User and server attributes of topic. Server attributes starts from "_" and will be validated by server.
+	Attributes map[string]string
+	// List of consumers for this topic.
+	Consumers []*Consumer
+	// Metering settings.
+	MeteringMode MeteringMode
+	// Statistics of topic.
+	TopicStats *DescribeTopicResult_TopicStats
+}
+
+func (b0 DescribeTopicResult_builder) Build() *DescribeTopicResult {
+	m0 := &DescribeTopicResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Self = b.Self
+	x.xxx_hidden_PartitioningSettings = b.PartitioningSettings
+	x.xxx_hidden_Partitions = &b.Partitions
+	x.xxx_hidden_RetentionPeriod = b.RetentionPeriod
+	x.xxx_hidden_RetentionStorageMb = b.RetentionStorageMb
+	x.xxx_hidden_SupportedCodecs = b.SupportedCodecs
+	x.xxx_hidden_PartitionWriteSpeedBytesPerSecond = b.PartitionWriteSpeedBytesPerSecond
+	x.xxx_hidden_PartitionTotalReadSpeedBytesPerSecond = b.PartitionTotalReadSpeedBytesPerSecond
+	x.xxx_hidden_PartitionConsumerReadSpeedBytesPerSecond = b.PartitionConsumerReadSpeedBytesPerSecond
+	x.xxx_hidden_PartitionWriteBurstBytes = b.PartitionWriteBurstBytes
+	x.xxx_hidden_Attributes = b.Attributes
+	x.xxx_hidden_Consumers = &b.Consumers
+	x.xxx_hidden_MeteringMode = b.MeteringMode
+	x.xxx_hidden_TopicStats = b.TopicStats
+	return m0
+}
+
 // Describe partition request sent from client to server.
 type DescribePartitionRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Topic path.
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Partition identifier.
-	PartitionId int64 `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
-	// Include partition statistics.
-	IncludeStats bool `protobuf:"varint,4,opt,name=include_stats,json=includeStats,proto3" json:"include_stats,omitempty"`
-	// Include partition location.
-	IncludeLocation bool `protobuf:"varint,5,opt,name=include_location,json=includeLocation,proto3" json:"include_location,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_PartitionId     int64                           `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_IncludeStats    bool                            `protobuf:"varint,4,opt,name=include_stats,json=includeStats,proto3"`
+	xxx_hidden_IncludeLocation bool                            `protobuf:"varint,5,opt,name=include_location,json=includeLocation,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribePartitionRequest) Reset() {
@@ -2327,54 +3546,105 @@ func (x *DescribePartitionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribePartitionRequest.ProtoReflect.Descriptor instead.
-func (*DescribePartitionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{33}
-}
-
 func (x *DescribePartitionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribePartitionRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DescribePartitionRequest) GetPartitionId() int64 {
 	if x != nil {
-		return x.PartitionId
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *DescribePartitionRequest) GetIncludeStats() bool {
 	if x != nil {
-		return x.IncludeStats
+		return x.xxx_hidden_IncludeStats
 	}
 	return false
 }
 
 func (x *DescribePartitionRequest) GetIncludeLocation() bool {
 	if x != nil {
-		return x.IncludeLocation
+		return x.xxx_hidden_IncludeLocation
 	}
 	return false
+}
+
+func (x *DescribePartitionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DescribePartitionRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *DescribePartitionRequest) SetPartitionId(v int64) {
+	x.xxx_hidden_PartitionId = v
+}
+
+func (x *DescribePartitionRequest) SetIncludeStats(v bool) {
+	x.xxx_hidden_IncludeStats = v
+}
+
+func (x *DescribePartitionRequest) SetIncludeLocation(v bool) {
+	x.xxx_hidden_IncludeLocation = v
+}
+
+func (x *DescribePartitionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DescribePartitionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DescribePartitionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Topic path.
+	Path string
+	// Partition identifier.
+	PartitionId int64
+	// Include partition statistics.
+	IncludeStats bool
+	// Include partition location.
+	IncludeLocation bool
+}
+
+func (b0 DescribePartitionRequest_builder) Build() *DescribePartitionRequest {
+	m0 := &DescribePartitionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionId = b.PartitionId
+	x.xxx_hidden_IncludeStats = b.IncludeStats
+	x.xxx_hidden_IncludeLocation = b.IncludeLocation
+	return m0
 }
 
 // Describe partition response sent from server to client.
 // If topic is not existed then response status will be "SCHEME_ERROR".
 type DescribePartitionResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribePartitionResponse) Reset() {
@@ -2402,25 +3672,49 @@ func (x *DescribePartitionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribePartitionResponse.ProtoReflect.Descriptor instead.
-func (*DescribePartitionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{34}
-}
-
 func (x *DescribePartitionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DescribePartitionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DescribePartitionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DescribePartitionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DescribePartitionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DescribePartitionResponse_builder) Build() *DescribePartitionResponse {
+	m0 := &DescribePartitionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Describe partition result message that will be inside DescribePartitionResponse.operation.
 type DescribePartitionResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partitions description.
-	Partition     *DescribeTopicResult_PartitionInfo `protobuf:"bytes,1,opt,name=partition,proto3" json:"partition,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState             `protogen:"opaque.v1"`
+	xxx_hidden_Partition *DescribeTopicResult_PartitionInfo `protobuf:"bytes,1,opt,name=partition,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribePartitionResult) Reset() {
@@ -2448,32 +3742,53 @@ func (x *DescribePartitionResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribePartitionResult.ProtoReflect.Descriptor instead.
-func (*DescribePartitionResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{35}
-}
-
 func (x *DescribePartitionResult) GetPartition() *DescribeTopicResult_PartitionInfo {
 	if x != nil {
-		return x.Partition
+		return x.xxx_hidden_Partition
 	}
 	return nil
 }
 
+func (x *DescribePartitionResult) SetPartition(v *DescribeTopicResult_PartitionInfo) {
+	x.xxx_hidden_Partition = v
+}
+
+func (x *DescribePartitionResult) HasPartition() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Partition != nil
+}
+
+func (x *DescribePartitionResult) ClearPartition() {
+	x.xxx_hidden_Partition = nil
+}
+
+type DescribePartitionResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partitions description.
+	Partition *DescribeTopicResult_PartitionInfo
+}
+
+func (b0 DescribePartitionResult_builder) Build() *DescribePartitionResult {
+	m0 := &DescribePartitionResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Partition = b.Partition
+	return m0
+}
+
 // Describe topic's consumer request sent from client to server.
 type DescribeConsumerRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Topic path.
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Consumer name;
-	Consumer string `protobuf:"bytes,3,opt,name=consumer,proto3" json:"consumer,omitempty"`
-	// Include consumer statistics.
-	IncludeStats bool `protobuf:"varint,4,opt,name=include_stats,json=includeStats,proto3" json:"include_stats,omitempty"`
-	// Include partition location.
-	IncludeLocation bool `protobuf:"varint,5,opt,name=include_location,json=includeLocation,proto3" json:"include_location,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_Consumer        string                          `protobuf:"bytes,3,opt,name=consumer,proto3"`
+	xxx_hidden_IncludeStats    bool                            `protobuf:"varint,4,opt,name=include_stats,json=includeStats,proto3"`
+	xxx_hidden_IncludeLocation bool                            `protobuf:"varint,5,opt,name=include_location,json=includeLocation,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeConsumerRequest) Reset() {
@@ -2501,54 +3816,105 @@ func (x *DescribeConsumerRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeConsumerRequest.ProtoReflect.Descriptor instead.
-func (*DescribeConsumerRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{36}
-}
-
 func (x *DescribeConsumerRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeConsumerRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DescribeConsumerRequest) GetConsumer() string {
 	if x != nil {
-		return x.Consumer
+		return x.xxx_hidden_Consumer
 	}
 	return ""
 }
 
 func (x *DescribeConsumerRequest) GetIncludeStats() bool {
 	if x != nil {
-		return x.IncludeStats
+		return x.xxx_hidden_IncludeStats
 	}
 	return false
 }
 
 func (x *DescribeConsumerRequest) GetIncludeLocation() bool {
 	if x != nil {
-		return x.IncludeLocation
+		return x.xxx_hidden_IncludeLocation
 	}
 	return false
+}
+
+func (x *DescribeConsumerRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DescribeConsumerRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *DescribeConsumerRequest) SetConsumer(v string) {
+	x.xxx_hidden_Consumer = v
+}
+
+func (x *DescribeConsumerRequest) SetIncludeStats(v bool) {
+	x.xxx_hidden_IncludeStats = v
+}
+
+func (x *DescribeConsumerRequest) SetIncludeLocation(v bool) {
+	x.xxx_hidden_IncludeLocation = v
+}
+
+func (x *DescribeConsumerRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DescribeConsumerRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DescribeConsumerRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Topic path.
+	Path string
+	// Consumer name;
+	Consumer string
+	// Include consumer statistics.
+	IncludeStats bool
+	// Include partition location.
+	IncludeLocation bool
+}
+
+func (b0 DescribeConsumerRequest_builder) Build() *DescribeConsumerRequest {
+	m0 := &DescribeConsumerRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_Consumer = b.Consumer
+	x.xxx_hidden_IncludeStats = b.IncludeStats
+	x.xxx_hidden_IncludeLocation = b.IncludeLocation
+	return m0
 }
 
 // Describe topic's consumer response sent from server to client.
 // If topic is not existed then response status will be "SCHEME_ERROR".
 type DescribeConsumerResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeConsumerResponse) Reset() {
@@ -2576,27 +3942,51 @@ func (x *DescribeConsumerResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeConsumerResponse.ProtoReflect.Descriptor instead.
-func (*DescribeConsumerResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{37}
-}
-
 func (x *DescribeConsumerResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DescribeConsumerResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DescribeConsumerResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DescribeConsumerResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DescribeConsumerResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DescribeConsumerResponse_builder) Build() *DescribeConsumerResponse {
+	m0 := &DescribeConsumerResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Describe topic's consumer result message that will be inside DescribeConsumerResponse.operation.
 type DescribeConsumerResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Description of scheme object.
-	Self          *Ydb_Scheme.Entry                       `protobuf:"bytes,1,opt,name=self,proto3" json:"self,omitempty"`
-	Consumer      *Consumer                               `protobuf:"bytes,2,opt,name=consumer,proto3" json:"consumer,omitempty"`
-	Partitions    []*DescribeConsumerResult_PartitionInfo `protobuf:"bytes,3,rep,name=partitions,proto3" json:"partitions,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState                   `protogen:"opaque.v1"`
+	xxx_hidden_Self       *Ydb_Scheme.Entry                        `protobuf:"bytes,1,opt,name=self,proto3"`
+	xxx_hidden_Consumer   *Consumer                                `protobuf:"bytes,2,opt,name=consumer,proto3"`
+	xxx_hidden_Partitions *[]*DescribeConsumerResult_PartitionInfo `protobuf:"bytes,3,rep,name=partitions,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *DescribeConsumerResult) Reset() {
@@ -2624,50 +4014,92 @@ func (x *DescribeConsumerResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeConsumerResult.ProtoReflect.Descriptor instead.
-func (*DescribeConsumerResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{38}
-}
-
 func (x *DescribeConsumerResult) GetSelf() *Ydb_Scheme.Entry {
 	if x != nil {
-		return x.Self
+		return x.xxx_hidden_Self
 	}
 	return nil
 }
 
 func (x *DescribeConsumerResult) GetConsumer() *Consumer {
 	if x != nil {
-		return x.Consumer
+		return x.xxx_hidden_Consumer
 	}
 	return nil
 }
 
 func (x *DescribeConsumerResult) GetPartitions() []*DescribeConsumerResult_PartitionInfo {
 	if x != nil {
-		return x.Partitions
+		if x.xxx_hidden_Partitions != nil {
+			return *x.xxx_hidden_Partitions
+		}
 	}
 	return nil
 }
 
+func (x *DescribeConsumerResult) SetSelf(v *Ydb_Scheme.Entry) {
+	x.xxx_hidden_Self = v
+}
+
+func (x *DescribeConsumerResult) SetConsumer(v *Consumer) {
+	x.xxx_hidden_Consumer = v
+}
+
+func (x *DescribeConsumerResult) SetPartitions(v []*DescribeConsumerResult_PartitionInfo) {
+	x.xxx_hidden_Partitions = &v
+}
+
+func (x *DescribeConsumerResult) HasSelf() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Self != nil
+}
+
+func (x *DescribeConsumerResult) HasConsumer() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Consumer != nil
+}
+
+func (x *DescribeConsumerResult) ClearSelf() {
+	x.xxx_hidden_Self = nil
+}
+
+func (x *DescribeConsumerResult) ClearConsumer() {
+	x.xxx_hidden_Consumer = nil
+}
+
+type DescribeConsumerResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Description of scheme object.
+	Self       *Ydb_Scheme.Entry
+	Consumer   *Consumer
+	Partitions []*DescribeConsumerResult_PartitionInfo
+}
+
+func (b0 DescribeConsumerResult_builder) Build() *DescribeConsumerResult {
+	m0 := &DescribeConsumerResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Self = b.Self
+	x.xxx_hidden_Consumer = b.Consumer
+	x.xxx_hidden_Partitions = &b.Partitions
+	return m0
+}
+
 type PartitionStats struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition contains messages with offsets in range [start, end).
-	PartitionOffsets *OffsetsRange `protobuf:"bytes,1,opt,name=partition_offsets,json=partitionOffsets,proto3" json:"partition_offsets,omitempty"`
-	// Approximate size of partition.
-	StoreSizeBytes int64 `protobuf:"varint,2,opt,name=store_size_bytes,json=storeSizeBytes,proto3" json:"store_size_bytes,omitempty"`
-	// Timestamp of last write.
-	LastWriteTime *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=last_write_time,json=lastWriteTime,proto3" json:"last_write_time,omitempty"`
-	// Maximum of differences between write timestamp and create timestamp for all messages, written during last minute.
-	MaxWriteTimeLag *durationpb.Duration `protobuf:"bytes,4,opt,name=max_write_time_lag,json=maxWriteTimeLag,proto3" json:"max_write_time_lag,omitempty"`
-	// How much bytes were written during several windows in this partition.
-	BytesWritten *MultipleWindowsStat `protobuf:"bytes,5,opt,name=bytes_written,json=bytesWritten,proto3" json:"bytes_written,omitempty"`
-	// Partition host. Useful for debugging purposes.
-	//
-	// Deprecated: Marked as deprecated in protos/ydb_topic.proto.
-	PartitionNodeId int32 `protobuf:"varint,8,opt,name=partition_node_id,json=partitionNodeId,proto3" json:"partition_node_id,omitempty"` //Use PartitionLocation
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionOffsets *OffsetsRange          `protobuf:"bytes,1,opt,name=partition_offsets,json=partitionOffsets,proto3"`
+	xxx_hidden_StoreSizeBytes   int64                  `protobuf:"varint,2,opt,name=store_size_bytes,json=storeSizeBytes,proto3"`
+	xxx_hidden_LastWriteTime    *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=last_write_time,json=lastWriteTime,proto3"`
+	xxx_hidden_MaxWriteTimeLag  *durationpb.Duration   `protobuf:"bytes,4,opt,name=max_write_time_lag,json=maxWriteTimeLag,proto3"`
+	xxx_hidden_BytesWritten     *MultipleWindowsStat   `protobuf:"bytes,5,opt,name=bytes_written,json=bytesWritten,proto3"`
+	xxx_hidden_PartitionNodeId  int32                  `protobuf:"varint,8,opt,name=partition_node_id,json=partitionNodeId,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *PartitionStats) Reset() {
@@ -2695,42 +4127,37 @@ func (x *PartitionStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PartitionStats.ProtoReflect.Descriptor instead.
-func (*PartitionStats) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{39}
-}
-
 func (x *PartitionStats) GetPartitionOffsets() *OffsetsRange {
 	if x != nil {
-		return x.PartitionOffsets
+		return x.xxx_hidden_PartitionOffsets
 	}
 	return nil
 }
 
 func (x *PartitionStats) GetStoreSizeBytes() int64 {
 	if x != nil {
-		return x.StoreSizeBytes
+		return x.xxx_hidden_StoreSizeBytes
 	}
 	return 0
 }
 
 func (x *PartitionStats) GetLastWriteTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.LastWriteTime
+		return x.xxx_hidden_LastWriteTime
 	}
 	return nil
 }
 
 func (x *PartitionStats) GetMaxWriteTimeLag() *durationpb.Duration {
 	if x != nil {
-		return x.MaxWriteTimeLag
+		return x.xxx_hidden_MaxWriteTimeLag
 	}
 	return nil
 }
 
 func (x *PartitionStats) GetBytesWritten() *MultipleWindowsStat {
 	if x != nil {
-		return x.BytesWritten
+		return x.xxx_hidden_BytesWritten
 	}
 	return nil
 }
@@ -2738,47 +4165,132 @@ func (x *PartitionStats) GetBytesWritten() *MultipleWindowsStat {
 // Deprecated: Marked as deprecated in protos/ydb_topic.proto.
 func (x *PartitionStats) GetPartitionNodeId() int32 {
 	if x != nil {
-		return x.PartitionNodeId
+		return x.xxx_hidden_PartitionNodeId
 	}
 	return 0
 }
 
+func (x *PartitionStats) SetPartitionOffsets(v *OffsetsRange) {
+	x.xxx_hidden_PartitionOffsets = v
+}
+
+func (x *PartitionStats) SetStoreSizeBytes(v int64) {
+	x.xxx_hidden_StoreSizeBytes = v
+}
+
+func (x *PartitionStats) SetLastWriteTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_LastWriteTime = v
+}
+
+func (x *PartitionStats) SetMaxWriteTimeLag(v *durationpb.Duration) {
+	x.xxx_hidden_MaxWriteTimeLag = v
+}
+
+func (x *PartitionStats) SetBytesWritten(v *MultipleWindowsStat) {
+	x.xxx_hidden_BytesWritten = v
+}
+
+// Deprecated: Marked as deprecated in protos/ydb_topic.proto.
+func (x *PartitionStats) SetPartitionNodeId(v int32) {
+	x.xxx_hidden_PartitionNodeId = v
+}
+
+func (x *PartitionStats) HasPartitionOffsets() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionOffsets != nil
+}
+
+func (x *PartitionStats) HasLastWriteTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_LastWriteTime != nil
+}
+
+func (x *PartitionStats) HasMaxWriteTimeLag() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MaxWriteTimeLag != nil
+}
+
+func (x *PartitionStats) HasBytesWritten() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_BytesWritten != nil
+}
+
+func (x *PartitionStats) ClearPartitionOffsets() {
+	x.xxx_hidden_PartitionOffsets = nil
+}
+
+func (x *PartitionStats) ClearLastWriteTime() {
+	x.xxx_hidden_LastWriteTime = nil
+}
+
+func (x *PartitionStats) ClearMaxWriteTimeLag() {
+	x.xxx_hidden_MaxWriteTimeLag = nil
+}
+
+func (x *PartitionStats) ClearBytesWritten() {
+	x.xxx_hidden_BytesWritten = nil
+}
+
+type PartitionStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition contains messages with offsets in range [start, end).
+	PartitionOffsets *OffsetsRange
+	// Approximate size of partition.
+	StoreSizeBytes int64
+	// Timestamp of last write.
+	LastWriteTime *timestamppb.Timestamp
+	// Maximum of differences between write timestamp and create timestamp for all messages, written during last minute.
+	MaxWriteTimeLag *durationpb.Duration
+	// How much bytes were written during several windows in this partition.
+	BytesWritten *MultipleWindowsStat
+	// Partition host. Useful for debugging purposes.
+	//
+	// Deprecated: Marked as deprecated in protos/ydb_topic.proto.
+	PartitionNodeId int32
+}
+
+func (b0 PartitionStats_builder) Build() *PartitionStats {
+	m0 := &PartitionStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionOffsets = b.PartitionOffsets
+	x.xxx_hidden_StoreSizeBytes = b.StoreSizeBytes
+	x.xxx_hidden_LastWriteTime = b.LastWriteTime
+	x.xxx_hidden_MaxWriteTimeLag = b.MaxWriteTimeLag
+	x.xxx_hidden_BytesWritten = b.BytesWritten
+	x.xxx_hidden_PartitionNodeId = b.PartitionNodeId
+	return m0
+}
+
 // Update existing topic request sent from client to server.
 type AlterTopicRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Topic path.
-	Path                      string                     `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	AlterPartitioningSettings *AlterPartitioningSettings `protobuf:"bytes,3,opt,name=alter_partitioning_settings,json=alterPartitioningSettings,proto3" json:"alter_partitioning_settings,omitempty"` // partitioning_settings
-	// Retention settings.
-	// Currently, only one limit may be set, so other should not be set.
-	//
-	// How long data in partition should be stored. Must be greater than 0 and less than limit for this database.
-	// Default limit - 36 hours.
-	SetRetentionPeriod *durationpb.Duration `protobuf:"bytes,4,opt,name=set_retention_period,json=setRetentionPeriod,proto3" json:"set_retention_period,omitempty"`
-	// How much data in partition should be stored. Must be greater than 0 and less than limit for this database.
-	SetRetentionStorageMb *int64 `protobuf:"varint,5,opt,name=set_retention_storage_mb,json=setRetentionStorageMb,proto3,oneof" json:"set_retention_storage_mb,omitempty"`
-	// List of allowed codecs for writers.
-	// Writes with codec not from this list are forbidden.
-	// If empty, codec compatibility check for the topic is disabled.
-	SetSupportedCodecs *SupportedCodecs `protobuf:"bytes,7,opt,name=set_supported_codecs,json=setSupportedCodecs,proto3" json:"set_supported_codecs,omitempty"`
-	// Partition write speed in bytes per second. Must be less than database limit. Default limit - 1 MB/s.
-	SetPartitionWriteSpeedBytesPerSecond *int64 `protobuf:"varint,8,opt,name=set_partition_write_speed_bytes_per_second,json=setPartitionWriteSpeedBytesPerSecond,proto3,oneof" json:"set_partition_write_speed_bytes_per_second,omitempty"`
-	// Burst size for write in partition, in bytes. Must be less than database limit. Default limit - 1 MB.
-	SetPartitionWriteBurstBytes *int64 `protobuf:"varint,9,opt,name=set_partition_write_burst_bytes,json=setPartitionWriteBurstBytes,proto3,oneof" json:"set_partition_write_burst_bytes,omitempty"`
-	// User and server attributes of topic. Server attributes starts from "_" and will be validated by server.
-	// Leave the value blank to drop an attribute.
-	AlterAttributes map[string]string `protobuf:"bytes,10,rep,name=alter_attributes,json=alterAttributes,proto3" json:"alter_attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Add consumers.
-	AddConsumers []*Consumer `protobuf:"bytes,11,rep,name=add_consumers,json=addConsumers,proto3" json:"add_consumers,omitempty"`
-	// Remove consumers (by their names)
-	DropConsumers []string `protobuf:"bytes,12,rep,name=drop_consumers,json=dropConsumers,proto3" json:"drop_consumers,omitempty"`
-	// Alter consumers
-	AlterConsumers []*AlterConsumer `protobuf:"bytes,13,rep,name=alter_consumers,json=alterConsumers,proto3" json:"alter_consumers,omitempty"`
-	// Set metering mode for topic in serverless database.
-	SetMeteringMode MeteringMode `protobuf:"varint,14,opt,name=set_metering_mode,json=setMeteringMode,proto3,enum=Ydb.Topic.MeteringMode" json:"set_metering_mode,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                                           protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams                      *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path                                 string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_AlterPartitioningSettings            *AlterPartitioningSettings      `protobuf:"bytes,3,opt,name=alter_partitioning_settings,json=alterPartitioningSettings,proto3"`
+	xxx_hidden_SetRetentionPeriod                   *durationpb.Duration            `protobuf:"bytes,4,opt,name=set_retention_period,json=setRetentionPeriod,proto3"`
+	xxx_hidden_SetRetentionStorageMb                int64                           `protobuf:"varint,5,opt,name=set_retention_storage_mb,json=setRetentionStorageMb,proto3,oneof"`
+	xxx_hidden_SetSupportedCodecs                   *SupportedCodecs                `protobuf:"bytes,7,opt,name=set_supported_codecs,json=setSupportedCodecs,proto3"`
+	xxx_hidden_SetPartitionWriteSpeedBytesPerSecond int64                           `protobuf:"varint,8,opt,name=set_partition_write_speed_bytes_per_second,json=setPartitionWriteSpeedBytesPerSecond,proto3,oneof"`
+	xxx_hidden_SetPartitionWriteBurstBytes          int64                           `protobuf:"varint,9,opt,name=set_partition_write_burst_bytes,json=setPartitionWriteBurstBytes,proto3,oneof"`
+	xxx_hidden_AlterAttributes                      map[string]string               `protobuf:"bytes,10,rep,name=alter_attributes,json=alterAttributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_AddConsumers                         *[]*Consumer                    `protobuf:"bytes,11,rep,name=add_consumers,json=addConsumers,proto3"`
+	xxx_hidden_DropConsumers                        []string                        `protobuf:"bytes,12,rep,name=drop_consumers,json=dropConsumers,proto3"`
+	xxx_hidden_AlterConsumers                       *[]*AlterConsumer               `protobuf:"bytes,13,rep,name=alter_consumers,json=alterConsumers,proto3"`
+	xxx_hidden_SetMeteringMode                      MeteringMode                    `protobuf:"varint,14,opt,name=set_metering_mode,json=setMeteringMode,proto3,enum=Ydb.Topic.MeteringMode"`
+	XXX_raceDetectHookData                          protoimpl.RaceDetectHookData
+	XXX_presence                                    [1]uint32
+	unknownFields                                   protoimpl.UnknownFields
+	sizeCache                                       protoimpl.SizeCache
 }
 
 func (x *AlterTopicRequest) Reset() {
@@ -2806,109 +4318,307 @@ func (x *AlterTopicRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterTopicRequest.ProtoReflect.Descriptor instead.
-func (*AlterTopicRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{40}
-}
-
 func (x *AlterTopicRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *AlterTopicRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *AlterTopicRequest) GetAlterPartitioningSettings() *AlterPartitioningSettings {
 	if x != nil {
-		return x.AlterPartitioningSettings
+		return x.xxx_hidden_AlterPartitioningSettings
 	}
 	return nil
 }
 
 func (x *AlterTopicRequest) GetSetRetentionPeriod() *durationpb.Duration {
 	if x != nil {
-		return x.SetRetentionPeriod
+		return x.xxx_hidden_SetRetentionPeriod
 	}
 	return nil
 }
 
 func (x *AlterTopicRequest) GetSetRetentionStorageMb() int64 {
-	if x != nil && x.SetRetentionStorageMb != nil {
-		return *x.SetRetentionStorageMb
+	if x != nil {
+		return x.xxx_hidden_SetRetentionStorageMb
 	}
 	return 0
 }
 
 func (x *AlterTopicRequest) GetSetSupportedCodecs() *SupportedCodecs {
 	if x != nil {
-		return x.SetSupportedCodecs
+		return x.xxx_hidden_SetSupportedCodecs
 	}
 	return nil
 }
 
 func (x *AlterTopicRequest) GetSetPartitionWriteSpeedBytesPerSecond() int64 {
-	if x != nil && x.SetPartitionWriteSpeedBytesPerSecond != nil {
-		return *x.SetPartitionWriteSpeedBytesPerSecond
+	if x != nil {
+		return x.xxx_hidden_SetPartitionWriteSpeedBytesPerSecond
 	}
 	return 0
 }
 
 func (x *AlterTopicRequest) GetSetPartitionWriteBurstBytes() int64 {
-	if x != nil && x.SetPartitionWriteBurstBytes != nil {
-		return *x.SetPartitionWriteBurstBytes
+	if x != nil {
+		return x.xxx_hidden_SetPartitionWriteBurstBytes
 	}
 	return 0
 }
 
 func (x *AlterTopicRequest) GetAlterAttributes() map[string]string {
 	if x != nil {
-		return x.AlterAttributes
+		return x.xxx_hidden_AlterAttributes
 	}
 	return nil
 }
 
 func (x *AlterTopicRequest) GetAddConsumers() []*Consumer {
 	if x != nil {
-		return x.AddConsumers
+		if x.xxx_hidden_AddConsumers != nil {
+			return *x.xxx_hidden_AddConsumers
+		}
 	}
 	return nil
 }
 
 func (x *AlterTopicRequest) GetDropConsumers() []string {
 	if x != nil {
-		return x.DropConsumers
+		return x.xxx_hidden_DropConsumers
 	}
 	return nil
 }
 
 func (x *AlterTopicRequest) GetAlterConsumers() []*AlterConsumer {
 	if x != nil {
-		return x.AlterConsumers
+		if x.xxx_hidden_AlterConsumers != nil {
+			return *x.xxx_hidden_AlterConsumers
+		}
 	}
 	return nil
 }
 
 func (x *AlterTopicRequest) GetSetMeteringMode() MeteringMode {
 	if x != nil {
-		return x.SetMeteringMode
+		return x.xxx_hidden_SetMeteringMode
 	}
 	return MeteringMode_METERING_MODE_UNSPECIFIED
 }
 
+func (x *AlterTopicRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *AlterTopicRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *AlterTopicRequest) SetAlterPartitioningSettings(v *AlterPartitioningSettings) {
+	x.xxx_hidden_AlterPartitioningSettings = v
+}
+
+func (x *AlterTopicRequest) SetSetRetentionPeriod(v *durationpb.Duration) {
+	x.xxx_hidden_SetRetentionPeriod = v
+}
+
+func (x *AlterTopicRequest) SetSetRetentionStorageMb(v int64) {
+	x.xxx_hidden_SetRetentionStorageMb = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 13)
+}
+
+func (x *AlterTopicRequest) SetSetSupportedCodecs(v *SupportedCodecs) {
+	x.xxx_hidden_SetSupportedCodecs = v
+}
+
+func (x *AlterTopicRequest) SetSetPartitionWriteSpeedBytesPerSecond(v int64) {
+	x.xxx_hidden_SetPartitionWriteSpeedBytesPerSecond = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 13)
+}
+
+func (x *AlterTopicRequest) SetSetPartitionWriteBurstBytes(v int64) {
+	x.xxx_hidden_SetPartitionWriteBurstBytes = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 13)
+}
+
+func (x *AlterTopicRequest) SetAlterAttributes(v map[string]string) {
+	x.xxx_hidden_AlterAttributes = v
+}
+
+func (x *AlterTopicRequest) SetAddConsumers(v []*Consumer) {
+	x.xxx_hidden_AddConsumers = &v
+}
+
+func (x *AlterTopicRequest) SetDropConsumers(v []string) {
+	x.xxx_hidden_DropConsumers = v
+}
+
+func (x *AlterTopicRequest) SetAlterConsumers(v []*AlterConsumer) {
+	x.xxx_hidden_AlterConsumers = &v
+}
+
+func (x *AlterTopicRequest) SetSetMeteringMode(v MeteringMode) {
+	x.xxx_hidden_SetMeteringMode = v
+}
+
+func (x *AlterTopicRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *AlterTopicRequest) HasAlterPartitioningSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_AlterPartitioningSettings != nil
+}
+
+func (x *AlterTopicRequest) HasSetRetentionPeriod() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SetRetentionPeriod != nil
+}
+
+func (x *AlterTopicRequest) HasSetRetentionStorageMb() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *AlterTopicRequest) HasSetSupportedCodecs() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SetSupportedCodecs != nil
+}
+
+func (x *AlterTopicRequest) HasSetPartitionWriteSpeedBytesPerSecond() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
+func (x *AlterTopicRequest) HasSetPartitionWriteBurstBytes() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+}
+
+func (x *AlterTopicRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *AlterTopicRequest) ClearAlterPartitioningSettings() {
+	x.xxx_hidden_AlterPartitioningSettings = nil
+}
+
+func (x *AlterTopicRequest) ClearSetRetentionPeriod() {
+	x.xxx_hidden_SetRetentionPeriod = nil
+}
+
+func (x *AlterTopicRequest) ClearSetRetentionStorageMb() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_SetRetentionStorageMb = 0
+}
+
+func (x *AlterTopicRequest) ClearSetSupportedCodecs() {
+	x.xxx_hidden_SetSupportedCodecs = nil
+}
+
+func (x *AlterTopicRequest) ClearSetPartitionWriteSpeedBytesPerSecond() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_SetPartitionWriteSpeedBytesPerSecond = 0
+}
+
+func (x *AlterTopicRequest) ClearSetPartitionWriteBurstBytes() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	x.xxx_hidden_SetPartitionWriteBurstBytes = 0
+}
+
+type AlterTopicRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Topic path.
+	Path                      string
+	AlterPartitioningSettings *AlterPartitioningSettings
+	// Retention settings.
+	// Currently, only one limit may be set, so other should not be set.
+	//
+	// How long data in partition should be stored. Must be greater than 0 and less than limit for this database.
+	// Default limit - 36 hours.
+	SetRetentionPeriod *durationpb.Duration
+	// How much data in partition should be stored. Must be greater than 0 and less than limit for this database.
+	SetRetentionStorageMb *int64
+	// List of allowed codecs for writers.
+	// Writes with codec not from this list are forbidden.
+	// If empty, codec compatibility check for the topic is disabled.
+	SetSupportedCodecs *SupportedCodecs
+	// Partition write speed in bytes per second. Must be less than database limit. Default limit - 1 MB/s.
+	SetPartitionWriteSpeedBytesPerSecond *int64
+	// Burst size for write in partition, in bytes. Must be less than database limit. Default limit - 1 MB.
+	SetPartitionWriteBurstBytes *int64
+	// User and server attributes of topic. Server attributes starts from "_" and will be validated by server.
+	// Leave the value blank to drop an attribute.
+	AlterAttributes map[string]string
+	// Add consumers.
+	AddConsumers []*Consumer
+	// Remove consumers (by their names)
+	DropConsumers []string
+	// Alter consumers
+	AlterConsumers []*AlterConsumer
+	// Set metering mode for topic in serverless database.
+	SetMeteringMode MeteringMode
+}
+
+func (b0 AlterTopicRequest_builder) Build() *AlterTopicRequest {
+	m0 := &AlterTopicRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_AlterPartitioningSettings = b.AlterPartitioningSettings
+	x.xxx_hidden_SetRetentionPeriod = b.SetRetentionPeriod
+	if b.SetRetentionStorageMb != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 13)
+		x.xxx_hidden_SetRetentionStorageMb = *b.SetRetentionStorageMb
+	}
+	x.xxx_hidden_SetSupportedCodecs = b.SetSupportedCodecs
+	if b.SetPartitionWriteSpeedBytesPerSecond != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 13)
+		x.xxx_hidden_SetPartitionWriteSpeedBytesPerSecond = *b.SetPartitionWriteSpeedBytesPerSecond
+	}
+	if b.SetPartitionWriteBurstBytes != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 13)
+		x.xxx_hidden_SetPartitionWriteBurstBytes = *b.SetPartitionWriteBurstBytes
+	}
+	x.xxx_hidden_AlterAttributes = b.AlterAttributes
+	x.xxx_hidden_AddConsumers = &b.AddConsumers
+	x.xxx_hidden_DropConsumers = b.DropConsumers
+	x.xxx_hidden_AlterConsumers = &b.AlterConsumers
+	x.xxx_hidden_SetMeteringMode = b.SetMeteringMode
+	return m0
+}
+
 // Update topic response sent from server to client.
 type AlterTopicResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AlterTopicResponse) Reset() {
@@ -2936,21 +4646,46 @@ func (x *AlterTopicResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterTopicResponse.ProtoReflect.Descriptor instead.
-func (*AlterTopicResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{41}
-}
-
 func (x *AlterTopicResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *AlterTopicResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *AlterTopicResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *AlterTopicResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type AlterTopicResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 AlterTopicResponse_builder) Build() *AlterTopicResponse {
+	m0 := &AlterTopicResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Update topic result message that will be inside UpdateTopicResponse.operation.
 type AlterTopicResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2980,19 +4715,25 @@ func (x *AlterTopicResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterTopicResult.ProtoReflect.Descriptor instead.
-func (*AlterTopicResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{42}
+type AlterTopicResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 AlterTopicResult_builder) Build() *AlterTopicResult {
+	m0 := &AlterTopicResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Drop topic request sent from client to server.
 type DropTopicRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Topic path.
-	Path          string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DropTopicRequest) Reset() {
@@ -3020,33 +4761,63 @@ func (x *DropTopicRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DropTopicRequest.ProtoReflect.Descriptor instead.
-func (*DropTopicRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{43}
-}
-
 func (x *DropTopicRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DropTopicRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
+}
+
+func (x *DropTopicRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DropTopicRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *DropTopicRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DropTopicRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DropTopicRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Topic path.
+	Path string
+}
+
+func (b0 DropTopicRequest_builder) Build() *DropTopicRequest {
+	m0 := &DropTopicRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	return m0
 }
 
 // Drop topic response sent from server to client.
 // If topic not exists then response status will be "SCHEME_ERROR".
 type DropTopicResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DropTopicResponse) Reset() {
@@ -3074,21 +4845,46 @@ func (x *DropTopicResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DropTopicResponse.ProtoReflect.Descriptor instead.
-func (*DropTopicResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{44}
-}
-
 func (x *DropTopicResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DropTopicResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DropTopicResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DropTopicResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DropTopicResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DropTopicResponse_builder) Build() *DropTopicResponse {
+	m0 := &DropTopicResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Drop topic result message that will be inside DropTopicResponse.operation.
 type DropTopicResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3118,9 +4914,16 @@ func (x *DropTopicResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DropTopicResult.ProtoReflect.Descriptor instead.
-func (*DropTopicResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{45}
+type DropTopicResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 DropTopicResult_builder) Build() *DropTopicResult {
+	m0 := &DropTopicResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Client-server message for write session. Contains one of:
@@ -3129,15 +4932,10 @@ func (*DropTopicResult) Descriptor() ([]byte, []int) {
 //	WriteRequest - portion of data to be written.
 //	UpdateTokenRequest - user credentials if update is needed.
 type StreamWriteMessage_FromClient struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to ClientMessage:
-	//
-	//	*StreamWriteMessage_FromClient_InitRequest
-	//	*StreamWriteMessage_FromClient_WriteRequest
-	//	*StreamWriteMessage_FromClient_UpdateTokenRequest
-	ClientMessage isStreamWriteMessage_FromClient_ClientMessage `protobuf_oneof:"client_message"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState                        `protogen:"opaque.v1"`
+	xxx_hidden_ClientMessage isStreamWriteMessage_FromClient_ClientMessage `protobuf_oneof:"client_message"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *StreamWriteMessage_FromClient) Reset() {
@@ -3165,21 +4963,9 @@ func (x *StreamWriteMessage_FromClient) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_FromClient.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_FromClient) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 0}
-}
-
-func (x *StreamWriteMessage_FromClient) GetClientMessage() isStreamWriteMessage_FromClient_ClientMessage {
-	if x != nil {
-		return x.ClientMessage
-	}
-	return nil
-}
-
 func (x *StreamWriteMessage_FromClient) GetInitRequest() *StreamWriteMessage_InitRequest {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamWriteMessage_FromClient_InitRequest); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamWriteMessage_FromClient_InitRequest); ok {
 			return x.InitRequest
 		}
 	}
@@ -3188,7 +4974,7 @@ func (x *StreamWriteMessage_FromClient) GetInitRequest() *StreamWriteMessage_Ini
 
 func (x *StreamWriteMessage_FromClient) GetWriteRequest() *StreamWriteMessage_WriteRequest {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamWriteMessage_FromClient_WriteRequest); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamWriteMessage_FromClient_WriteRequest); ok {
 			return x.WriteRequest
 		}
 	}
@@ -3197,34 +4983,168 @@ func (x *StreamWriteMessage_FromClient) GetWriteRequest() *StreamWriteMessage_Wr
 
 func (x *StreamWriteMessage_FromClient) GetUpdateTokenRequest() *UpdateTokenRequest {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamWriteMessage_FromClient_UpdateTokenRequest); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamWriteMessage_FromClient_UpdateTokenRequest); ok {
 			return x.UpdateTokenRequest
 		}
 	}
 	return nil
 }
 
+func (x *StreamWriteMessage_FromClient) SetInitRequest(v *StreamWriteMessage_InitRequest) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamWriteMessage_FromClient_InitRequest{v}
+}
+
+func (x *StreamWriteMessage_FromClient) SetWriteRequest(v *StreamWriteMessage_WriteRequest) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamWriteMessage_FromClient_WriteRequest{v}
+}
+
+func (x *StreamWriteMessage_FromClient) SetUpdateTokenRequest(v *UpdateTokenRequest) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamWriteMessage_FromClient_UpdateTokenRequest{v}
+}
+
+func (x *StreamWriteMessage_FromClient) HasClientMessage() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ClientMessage != nil
+}
+
+func (x *StreamWriteMessage_FromClient) HasInitRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamWriteMessage_FromClient_InitRequest)
+	return ok
+}
+
+func (x *StreamWriteMessage_FromClient) HasWriteRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamWriteMessage_FromClient_WriteRequest)
+	return ok
+}
+
+func (x *StreamWriteMessage_FromClient) HasUpdateTokenRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamWriteMessage_FromClient_UpdateTokenRequest)
+	return ok
+}
+
+func (x *StreamWriteMessage_FromClient) ClearClientMessage() {
+	x.xxx_hidden_ClientMessage = nil
+}
+
+func (x *StreamWriteMessage_FromClient) ClearInitRequest() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamWriteMessage_FromClient_InitRequest); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+func (x *StreamWriteMessage_FromClient) ClearWriteRequest() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamWriteMessage_FromClient_WriteRequest); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+func (x *StreamWriteMessage_FromClient) ClearUpdateTokenRequest() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamWriteMessage_FromClient_UpdateTokenRequest); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+const StreamWriteMessage_FromClient_ClientMessage_not_set_case case_StreamWriteMessage_FromClient_ClientMessage = 0
+const StreamWriteMessage_FromClient_InitRequest_case case_StreamWriteMessage_FromClient_ClientMessage = 1
+const StreamWriteMessage_FromClient_WriteRequest_case case_StreamWriteMessage_FromClient_ClientMessage = 2
+const StreamWriteMessage_FromClient_UpdateTokenRequest_case case_StreamWriteMessage_FromClient_ClientMessage = 3
+
+func (x *StreamWriteMessage_FromClient) WhichClientMessage() case_StreamWriteMessage_FromClient_ClientMessage {
+	if x == nil {
+		return StreamWriteMessage_FromClient_ClientMessage_not_set_case
+	}
+	switch x.xxx_hidden_ClientMessage.(type) {
+	case *streamWriteMessage_FromClient_InitRequest:
+		return StreamWriteMessage_FromClient_InitRequest_case
+	case *streamWriteMessage_FromClient_WriteRequest:
+		return StreamWriteMessage_FromClient_WriteRequest_case
+	case *streamWriteMessage_FromClient_UpdateTokenRequest:
+		return StreamWriteMessage_FromClient_UpdateTokenRequest_case
+	default:
+		return StreamWriteMessage_FromClient_ClientMessage_not_set_case
+	}
+}
+
+type StreamWriteMessage_FromClient_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_ClientMessage:
+	InitRequest        *StreamWriteMessage_InitRequest
+	WriteRequest       *StreamWriteMessage_WriteRequest
+	UpdateTokenRequest *UpdateTokenRequest
+	// -- end of xxx_hidden_ClientMessage
+}
+
+func (b0 StreamWriteMessage_FromClient_builder) Build() *StreamWriteMessage_FromClient {
+	m0 := &StreamWriteMessage_FromClient{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.InitRequest != nil {
+		x.xxx_hidden_ClientMessage = &streamWriteMessage_FromClient_InitRequest{b.InitRequest}
+	}
+	if b.WriteRequest != nil {
+		x.xxx_hidden_ClientMessage = &streamWriteMessage_FromClient_WriteRequest{b.WriteRequest}
+	}
+	if b.UpdateTokenRequest != nil {
+		x.xxx_hidden_ClientMessage = &streamWriteMessage_FromClient_UpdateTokenRequest{b.UpdateTokenRequest}
+	}
+	return m0
+}
+
+type case_StreamWriteMessage_FromClient_ClientMessage protoreflect.FieldNumber
+
+func (x case_StreamWriteMessage_FromClient_ClientMessage) String() string {
+	md := file_protos_ydb_topic_proto_msgTypes[46].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isStreamWriteMessage_FromClient_ClientMessage interface {
 	isStreamWriteMessage_FromClient_ClientMessage()
 }
 
-type StreamWriteMessage_FromClient_InitRequest struct {
+type streamWriteMessage_FromClient_InitRequest struct {
 	InitRequest *StreamWriteMessage_InitRequest `protobuf:"bytes,1,opt,name=init_request,json=initRequest,proto3,oneof"`
 }
 
-type StreamWriteMessage_FromClient_WriteRequest struct {
+type streamWriteMessage_FromClient_WriteRequest struct {
 	WriteRequest *StreamWriteMessage_WriteRequest `protobuf:"bytes,2,opt,name=write_request,json=writeRequest,proto3,oneof"`
 }
 
-type StreamWriteMessage_FromClient_UpdateTokenRequest struct {
+type streamWriteMessage_FromClient_UpdateTokenRequest struct {
 	UpdateTokenRequest *UpdateTokenRequest `protobuf:"bytes,3,opt,name=update_token_request,json=updateTokenRequest,proto3,oneof"`
 }
 
-func (*StreamWriteMessage_FromClient_InitRequest) isStreamWriteMessage_FromClient_ClientMessage() {}
+func (*streamWriteMessage_FromClient_InitRequest) isStreamWriteMessage_FromClient_ClientMessage() {}
 
-func (*StreamWriteMessage_FromClient_WriteRequest) isStreamWriteMessage_FromClient_ClientMessage() {}
+func (*streamWriteMessage_FromClient_WriteRequest) isStreamWriteMessage_FromClient_ClientMessage() {}
 
-func (*StreamWriteMessage_FromClient_UpdateTokenRequest) isStreamWriteMessage_FromClient_ClientMessage() {
+func (*streamWriteMessage_FromClient_UpdateTokenRequest) isStreamWriteMessage_FromClient_ClientMessage() {
 }
 
 // Server-client message for write session. Contains either non-success status, or one of:
@@ -3233,19 +5153,12 @@ func (*StreamWriteMessage_FromClient_UpdateTokenRequest) isStreamWriteMessage_Fr
 //	WriteResponse - acknowledgment of storing client messages.
 //	UpdateTokenResponse - acknowledgment of reauthentication and reauthorization.
 type StreamWriteMessage_FromServer struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Server status of response.
-	Status Ydb.StatusIds_StatusCode `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	// Issues if any.
-	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	// Types that are valid to be assigned to ServerMessage:
-	//
-	//	*StreamWriteMessage_FromServer_InitResponse
-	//	*StreamWriteMessage_FromServer_WriteResponse
-	//	*StreamWriteMessage_FromServer_UpdateTokenResponse
-	ServerMessage isStreamWriteMessage_FromServer_ServerMessage `protobuf_oneof:"server_message"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState                        `protogen:"opaque.v1"`
+	xxx_hidden_Status        Ydb.StatusIds_StatusCode                      `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues        *[]*Ydb_Issue.IssueMessage                    `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_ServerMessage isStreamWriteMessage_FromServer_ServerMessage `protobuf_oneof:"server_message"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *StreamWriteMessage_FromServer) Reset() {
@@ -3273,35 +5186,25 @@ func (x *StreamWriteMessage_FromServer) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_FromServer.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_FromServer) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 1}
-}
-
 func (x *StreamWriteMessage_FromServer) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *StreamWriteMessage_FromServer) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
-	}
-	return nil
-}
-
-func (x *StreamWriteMessage_FromServer) GetServerMessage() isStreamWriteMessage_FromServer_ServerMessage {
-	if x != nil {
-		return x.ServerMessage
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *StreamWriteMessage_FromServer) GetInitResponse() *StreamWriteMessage_InitResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamWriteMessage_FromServer_InitResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamWriteMessage_FromServer_InitResponse); ok {
 			return x.InitResponse
 		}
 	}
@@ -3310,7 +5213,7 @@ func (x *StreamWriteMessage_FromServer) GetInitResponse() *StreamWriteMessage_In
 
 func (x *StreamWriteMessage_FromServer) GetWriteResponse() *StreamWriteMessage_WriteResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamWriteMessage_FromServer_WriteResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamWriteMessage_FromServer_WriteResponse); ok {
 			return x.WriteResponse
 		}
 	}
@@ -3319,61 +5222,194 @@ func (x *StreamWriteMessage_FromServer) GetWriteResponse() *StreamWriteMessage_W
 
 func (x *StreamWriteMessage_FromServer) GetUpdateTokenResponse() *UpdateTokenResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamWriteMessage_FromServer_UpdateTokenResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamWriteMessage_FromServer_UpdateTokenResponse); ok {
 			return x.UpdateTokenResponse
 		}
 	}
 	return nil
 }
 
+func (x *StreamWriteMessage_FromServer) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *StreamWriteMessage_FromServer) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *StreamWriteMessage_FromServer) SetInitResponse(v *StreamWriteMessage_InitResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamWriteMessage_FromServer_InitResponse{v}
+}
+
+func (x *StreamWriteMessage_FromServer) SetWriteResponse(v *StreamWriteMessage_WriteResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamWriteMessage_FromServer_WriteResponse{v}
+}
+
+func (x *StreamWriteMessage_FromServer) SetUpdateTokenResponse(v *UpdateTokenResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamWriteMessage_FromServer_UpdateTokenResponse{v}
+}
+
+func (x *StreamWriteMessage_FromServer) HasServerMessage() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ServerMessage != nil
+}
+
+func (x *StreamWriteMessage_FromServer) HasInitResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamWriteMessage_FromServer_InitResponse)
+	return ok
+}
+
+func (x *StreamWriteMessage_FromServer) HasWriteResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamWriteMessage_FromServer_WriteResponse)
+	return ok
+}
+
+func (x *StreamWriteMessage_FromServer) HasUpdateTokenResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamWriteMessage_FromServer_UpdateTokenResponse)
+	return ok
+}
+
+func (x *StreamWriteMessage_FromServer) ClearServerMessage() {
+	x.xxx_hidden_ServerMessage = nil
+}
+
+func (x *StreamWriteMessage_FromServer) ClearInitResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamWriteMessage_FromServer_InitResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamWriteMessage_FromServer) ClearWriteResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamWriteMessage_FromServer_WriteResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamWriteMessage_FromServer) ClearUpdateTokenResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamWriteMessage_FromServer_UpdateTokenResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+const StreamWriteMessage_FromServer_ServerMessage_not_set_case case_StreamWriteMessage_FromServer_ServerMessage = 0
+const StreamWriteMessage_FromServer_InitResponse_case case_StreamWriteMessage_FromServer_ServerMessage = 3
+const StreamWriteMessage_FromServer_WriteResponse_case case_StreamWriteMessage_FromServer_ServerMessage = 4
+const StreamWriteMessage_FromServer_UpdateTokenResponse_case case_StreamWriteMessage_FromServer_ServerMessage = 5
+
+func (x *StreamWriteMessage_FromServer) WhichServerMessage() case_StreamWriteMessage_FromServer_ServerMessage {
+	if x == nil {
+		return StreamWriteMessage_FromServer_ServerMessage_not_set_case
+	}
+	switch x.xxx_hidden_ServerMessage.(type) {
+	case *streamWriteMessage_FromServer_InitResponse:
+		return StreamWriteMessage_FromServer_InitResponse_case
+	case *streamWriteMessage_FromServer_WriteResponse:
+		return StreamWriteMessage_FromServer_WriteResponse_case
+	case *streamWriteMessage_FromServer_UpdateTokenResponse:
+		return StreamWriteMessage_FromServer_UpdateTokenResponse_case
+	default:
+		return StreamWriteMessage_FromServer_ServerMessage_not_set_case
+	}
+}
+
+type StreamWriteMessage_FromServer_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Server status of response.
+	Status Ydb.StatusIds_StatusCode
+	// Issues if any.
+	Issues []*Ydb_Issue.IssueMessage
+	// Fields of oneof xxx_hidden_ServerMessage:
+	InitResponse        *StreamWriteMessage_InitResponse
+	WriteResponse       *StreamWriteMessage_WriteResponse
+	UpdateTokenResponse *UpdateTokenResponse
+	// -- end of xxx_hidden_ServerMessage
+}
+
+func (b0 StreamWriteMessage_FromServer_builder) Build() *StreamWriteMessage_FromServer {
+	m0 := &StreamWriteMessage_FromServer{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	if b.InitResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamWriteMessage_FromServer_InitResponse{b.InitResponse}
+	}
+	if b.WriteResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamWriteMessage_FromServer_WriteResponse{b.WriteResponse}
+	}
+	if b.UpdateTokenResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamWriteMessage_FromServer_UpdateTokenResponse{b.UpdateTokenResponse}
+	}
+	return m0
+}
+
+type case_StreamWriteMessage_FromServer_ServerMessage protoreflect.FieldNumber
+
+func (x case_StreamWriteMessage_FromServer_ServerMessage) String() string {
+	md := file_protos_ydb_topic_proto_msgTypes[47].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isStreamWriteMessage_FromServer_ServerMessage interface {
 	isStreamWriteMessage_FromServer_ServerMessage()
 }
 
-type StreamWriteMessage_FromServer_InitResponse struct {
+type streamWriteMessage_FromServer_InitResponse struct {
 	InitResponse *StreamWriteMessage_InitResponse `protobuf:"bytes,3,opt,name=init_response,json=initResponse,proto3,oneof"`
 }
 
-type StreamWriteMessage_FromServer_WriteResponse struct {
+type streamWriteMessage_FromServer_WriteResponse struct {
 	WriteResponse *StreamWriteMessage_WriteResponse `protobuf:"bytes,4,opt,name=write_response,json=writeResponse,proto3,oneof"`
 }
 
-type StreamWriteMessage_FromServer_UpdateTokenResponse struct {
+type streamWriteMessage_FromServer_UpdateTokenResponse struct {
 	UpdateTokenResponse *UpdateTokenResponse `protobuf:"bytes,5,opt,name=update_token_response,json=updateTokenResponse,proto3,oneof"`
 }
 
-func (*StreamWriteMessage_FromServer_InitResponse) isStreamWriteMessage_FromServer_ServerMessage() {}
+func (*streamWriteMessage_FromServer_InitResponse) isStreamWriteMessage_FromServer_ServerMessage() {}
 
-func (*StreamWriteMessage_FromServer_WriteResponse) isStreamWriteMessage_FromServer_ServerMessage() {}
+func (*streamWriteMessage_FromServer_WriteResponse) isStreamWriteMessage_FromServer_ServerMessage() {}
 
-func (*StreamWriteMessage_FromServer_UpdateTokenResponse) isStreamWriteMessage_FromServer_ServerMessage() {
+func (*streamWriteMessage_FromServer_UpdateTokenResponse) isStreamWriteMessage_FromServer_ServerMessage() {
 }
 
 // Handshake request that must be sent to server first.
 type StreamWriteMessage_InitRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Full path of topic to write to.
-	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	// Producer identifier of client data stream.
-	// Used for message deduplication by sequence numbers.
-	ProducerId string `protobuf:"bytes,2,opt,name=producer_id,json=producerId,proto3" json:"producer_id,omitempty"`
-	// User metadata attached to this write session.
-	// Reader will get this session meta data with each message read.
-	WriteSessionMeta map[string]string `protobuf:"bytes,3,rep,name=write_session_meta,json=writeSessionMeta,proto3" json:"write_session_meta,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Option for setting order on messages.
-	// If neither is set, no guarantees on ordering or partitions to write to.
-	//
-	// Types that are valid to be assigned to Partitioning:
-	//
-	//	*StreamWriteMessage_InitRequest_MessageGroupId
-	//	*StreamWriteMessage_InitRequest_PartitionId
-	//	*StreamWriteMessage_InitRequest_PartitionWithGeneration
-	Partitioning isStreamWriteMessage_InitRequest_Partitioning `protobuf_oneof:"partitioning"`
-	// Explicitly request for last sequential number
-	// It may be expensive, if producer wrote to many partitions before.
-	GetLastSeqNo  bool `protobuf:"varint,6,opt,name=get_last_seq_no,json=getLastSeqNo,proto3" json:"get_last_seq_no,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState                        `protogen:"opaque.v1"`
+	xxx_hidden_Path             string                                        `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_ProducerId       string                                        `protobuf:"bytes,2,opt,name=producer_id,json=producerId,proto3"`
+	xxx_hidden_WriteSessionMeta map[string]string                             `protobuf:"bytes,3,rep,name=write_session_meta,json=writeSessionMeta,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_Partitioning     isStreamWriteMessage_InitRequest_Partitioning `protobuf_oneof:"partitioning"`
+	xxx_hidden_GetLastSeqNo     bool                                          `protobuf:"varint,6,opt,name=get_last_seq_no,json=getLastSeqNo,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *StreamWriteMessage_InitRequest) Reset() {
@@ -3401,42 +5437,30 @@ func (x *StreamWriteMessage_InitRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_InitRequest.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_InitRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 2}
-}
-
 func (x *StreamWriteMessage_InitRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *StreamWriteMessage_InitRequest) GetProducerId() string {
 	if x != nil {
-		return x.ProducerId
+		return x.xxx_hidden_ProducerId
 	}
 	return ""
 }
 
 func (x *StreamWriteMessage_InitRequest) GetWriteSessionMeta() map[string]string {
 	if x != nil {
-		return x.WriteSessionMeta
-	}
-	return nil
-}
-
-func (x *StreamWriteMessage_InitRequest) GetPartitioning() isStreamWriteMessage_InitRequest_Partitioning {
-	if x != nil {
-		return x.Partitioning
+		return x.xxx_hidden_WriteSessionMeta
 	}
 	return nil
 }
 
 func (x *StreamWriteMessage_InitRequest) GetMessageGroupId() string {
 	if x != nil {
-		if x, ok := x.Partitioning.(*StreamWriteMessage_InitRequest_MessageGroupId); ok {
+		if x, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_InitRequest_MessageGroupId); ok {
 			return x.MessageGroupId
 		}
 	}
@@ -3445,7 +5469,7 @@ func (x *StreamWriteMessage_InitRequest) GetMessageGroupId() string {
 
 func (x *StreamWriteMessage_InitRequest) GetPartitionId() int64 {
 	if x != nil {
-		if x, ok := x.Partitioning.(*StreamWriteMessage_InitRequest_PartitionId); ok {
+		if x, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_InitRequest_PartitionId); ok {
 			return x.PartitionId
 		}
 	}
@@ -3454,7 +5478,7 @@ func (x *StreamWriteMessage_InitRequest) GetPartitionId() int64 {
 
 func (x *StreamWriteMessage_InitRequest) GetPartitionWithGeneration() *PartitionWithGeneration {
 	if x != nil {
-		if x, ok := x.Partitioning.(*StreamWriteMessage_InitRequest_PartitionWithGeneration); ok {
+		if x, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_InitRequest_PartitionWithGeneration); ok {
 			return x.PartitionWithGeneration
 		}
 	}
@@ -3463,53 +5487,210 @@ func (x *StreamWriteMessage_InitRequest) GetPartitionWithGeneration() *Partition
 
 func (x *StreamWriteMessage_InitRequest) GetGetLastSeqNo() bool {
 	if x != nil {
-		return x.GetLastSeqNo
+		return x.xxx_hidden_GetLastSeqNo
 	}
 	return false
+}
+
+func (x *StreamWriteMessage_InitRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *StreamWriteMessage_InitRequest) SetProducerId(v string) {
+	x.xxx_hidden_ProducerId = v
+}
+
+func (x *StreamWriteMessage_InitRequest) SetWriteSessionMeta(v map[string]string) {
+	x.xxx_hidden_WriteSessionMeta = v
+}
+
+func (x *StreamWriteMessage_InitRequest) SetMessageGroupId(v string) {
+	x.xxx_hidden_Partitioning = &streamWriteMessage_InitRequest_MessageGroupId{v}
+}
+
+func (x *StreamWriteMessage_InitRequest) SetPartitionId(v int64) {
+	x.xxx_hidden_Partitioning = &streamWriteMessage_InitRequest_PartitionId{v}
+}
+
+func (x *StreamWriteMessage_InitRequest) SetPartitionWithGeneration(v *PartitionWithGeneration) {
+	if v == nil {
+		x.xxx_hidden_Partitioning = nil
+		return
+	}
+	x.xxx_hidden_Partitioning = &streamWriteMessage_InitRequest_PartitionWithGeneration{v}
+}
+
+func (x *StreamWriteMessage_InitRequest) SetGetLastSeqNo(v bool) {
+	x.xxx_hidden_GetLastSeqNo = v
+}
+
+func (x *StreamWriteMessage_InitRequest) HasPartitioning() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Partitioning != nil
+}
+
+func (x *StreamWriteMessage_InitRequest) HasMessageGroupId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_InitRequest_MessageGroupId)
+	return ok
+}
+
+func (x *StreamWriteMessage_InitRequest) HasPartitionId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_InitRequest_PartitionId)
+	return ok
+}
+
+func (x *StreamWriteMessage_InitRequest) HasPartitionWithGeneration() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_InitRequest_PartitionWithGeneration)
+	return ok
+}
+
+func (x *StreamWriteMessage_InitRequest) ClearPartitioning() {
+	x.xxx_hidden_Partitioning = nil
+}
+
+func (x *StreamWriteMessage_InitRequest) ClearMessageGroupId() {
+	if _, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_InitRequest_MessageGroupId); ok {
+		x.xxx_hidden_Partitioning = nil
+	}
+}
+
+func (x *StreamWriteMessage_InitRequest) ClearPartitionId() {
+	if _, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_InitRequest_PartitionId); ok {
+		x.xxx_hidden_Partitioning = nil
+	}
+}
+
+func (x *StreamWriteMessage_InitRequest) ClearPartitionWithGeneration() {
+	if _, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_InitRequest_PartitionWithGeneration); ok {
+		x.xxx_hidden_Partitioning = nil
+	}
+}
+
+const StreamWriteMessage_InitRequest_Partitioning_not_set_case case_StreamWriteMessage_InitRequest_Partitioning = 0
+const StreamWriteMessage_InitRequest_MessageGroupId_case case_StreamWriteMessage_InitRequest_Partitioning = 4
+const StreamWriteMessage_InitRequest_PartitionId_case case_StreamWriteMessage_InitRequest_Partitioning = 5
+const StreamWriteMessage_InitRequest_PartitionWithGeneration_case case_StreamWriteMessage_InitRequest_Partitioning = 7
+
+func (x *StreamWriteMessage_InitRequest) WhichPartitioning() case_StreamWriteMessage_InitRequest_Partitioning {
+	if x == nil {
+		return StreamWriteMessage_InitRequest_Partitioning_not_set_case
+	}
+	switch x.xxx_hidden_Partitioning.(type) {
+	case *streamWriteMessage_InitRequest_MessageGroupId:
+		return StreamWriteMessage_InitRequest_MessageGroupId_case
+	case *streamWriteMessage_InitRequest_PartitionId:
+		return StreamWriteMessage_InitRequest_PartitionId_case
+	case *streamWriteMessage_InitRequest_PartitionWithGeneration:
+		return StreamWriteMessage_InitRequest_PartitionWithGeneration_case
+	default:
+		return StreamWriteMessage_InitRequest_Partitioning_not_set_case
+	}
+}
+
+type StreamWriteMessage_InitRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Full path of topic to write to.
+	Path string
+	// Producer identifier of client data stream.
+	// Used for message deduplication by sequence numbers.
+	ProducerId string
+	// User metadata attached to this write session.
+	// Reader will get this session meta data with each message read.
+	WriteSessionMeta map[string]string
+	// Option for setting order on messages.
+	// If neither is set, no guarantees on ordering or partitions to write to.
+
+	// Fields of oneof xxx_hidden_Partitioning:
+	// All messages with given pair (producer_id, message_group_id) go to single partition in order of writes.
+	MessageGroupId *string
+	// Explicit partition id to write to.
+	PartitionId *int64
+	// Explicit partition location to write to.
+	PartitionWithGeneration *PartitionWithGeneration
+	// -- end of xxx_hidden_Partitioning
+	// Explicitly request for last sequential number
+	// It may be expensive, if producer wrote to many partitions before.
+	GetLastSeqNo bool
+}
+
+func (b0 StreamWriteMessage_InitRequest_builder) Build() *StreamWriteMessage_InitRequest {
+	m0 := &StreamWriteMessage_InitRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_ProducerId = b.ProducerId
+	x.xxx_hidden_WriteSessionMeta = b.WriteSessionMeta
+	if b.MessageGroupId != nil {
+		x.xxx_hidden_Partitioning = &streamWriteMessage_InitRequest_MessageGroupId{*b.MessageGroupId}
+	}
+	if b.PartitionId != nil {
+		x.xxx_hidden_Partitioning = &streamWriteMessage_InitRequest_PartitionId{*b.PartitionId}
+	}
+	if b.PartitionWithGeneration != nil {
+		x.xxx_hidden_Partitioning = &streamWriteMessage_InitRequest_PartitionWithGeneration{b.PartitionWithGeneration}
+	}
+	x.xxx_hidden_GetLastSeqNo = b.GetLastSeqNo
+	return m0
+}
+
+type case_StreamWriteMessage_InitRequest_Partitioning protoreflect.FieldNumber
+
+func (x case_StreamWriteMessage_InitRequest_Partitioning) String() string {
+	md := file_protos_ydb_topic_proto_msgTypes[48].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isStreamWriteMessage_InitRequest_Partitioning interface {
 	isStreamWriteMessage_InitRequest_Partitioning()
 }
 
-type StreamWriteMessage_InitRequest_MessageGroupId struct {
+type streamWriteMessage_InitRequest_MessageGroupId struct {
 	// All messages with given pair (producer_id, message_group_id) go to single partition in order of writes.
 	MessageGroupId string `protobuf:"bytes,4,opt,name=message_group_id,json=messageGroupId,proto3,oneof"`
 }
 
-type StreamWriteMessage_InitRequest_PartitionId struct {
+type streamWriteMessage_InitRequest_PartitionId struct {
 	// Explicit partition id to write to.
 	PartitionId int64 `protobuf:"varint,5,opt,name=partition_id,json=partitionId,proto3,oneof"`
 }
 
-type StreamWriteMessage_InitRequest_PartitionWithGeneration struct {
+type streamWriteMessage_InitRequest_PartitionWithGeneration struct {
 	// Explicit partition location to write to.
 	PartitionWithGeneration *PartitionWithGeneration `protobuf:"bytes,7,opt,name=partition_with_generation,json=partitionWithGeneration,proto3,oneof"`
 }
 
-func (*StreamWriteMessage_InitRequest_MessageGroupId) isStreamWriteMessage_InitRequest_Partitioning() {
+func (*streamWriteMessage_InitRequest_MessageGroupId) isStreamWriteMessage_InitRequest_Partitioning() {
 }
 
-func (*StreamWriteMessage_InitRequest_PartitionId) isStreamWriteMessage_InitRequest_Partitioning() {}
+func (*streamWriteMessage_InitRequest_PartitionId) isStreamWriteMessage_InitRequest_Partitioning() {}
 
-func (*StreamWriteMessage_InitRequest_PartitionWithGeneration) isStreamWriteMessage_InitRequest_Partitioning() {
+func (*streamWriteMessage_InitRequest_PartitionWithGeneration) isStreamWriteMessage_InitRequest_Partitioning() {
 }
 
 // Response to the handshake.
 type StreamWriteMessage_InitResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Last persisted message's sequence number for this producer.
-	// Zero for new producer.
-	LastSeqNo int64 `protobuf:"varint,1,opt,name=last_seq_no,json=lastSeqNo,proto3" json:"last_seq_no,omitempty"`
-	// Unique identifier of write session. Used for debug purposes.
-	SessionId string `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Identifier of partition that is matched for this write session.
-	PartitionId int64 `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
-	// Client can only use compression codecs from this set to write messages to topic.
-	// Otherwise session will be closed with BAD_REQUEST.
-	SupportedCodecs *SupportedCodecs `protobuf:"bytes,4,opt,name=supported_codecs,json=supportedCodecs,proto3" json:"supported_codecs,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_LastSeqNo       int64                  `protobuf:"varint,1,opt,name=last_seq_no,json=lastSeqNo,proto3"`
+	xxx_hidden_SessionId       string                 `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_PartitionId     int64                  `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_SupportedCodecs *SupportedCodecs       `protobuf:"bytes,4,opt,name=supported_codecs,json=supportedCodecs,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *StreamWriteMessage_InitResponse) Reset() {
@@ -3537,49 +5718,95 @@ func (x *StreamWriteMessage_InitResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_InitResponse.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_InitResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 3}
-}
-
 func (x *StreamWriteMessage_InitResponse) GetLastSeqNo() int64 {
 	if x != nil {
-		return x.LastSeqNo
+		return x.xxx_hidden_LastSeqNo
 	}
 	return 0
 }
 
 func (x *StreamWriteMessage_InitResponse) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *StreamWriteMessage_InitResponse) GetPartitionId() int64 {
 	if x != nil {
-		return x.PartitionId
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *StreamWriteMessage_InitResponse) GetSupportedCodecs() *SupportedCodecs {
 	if x != nil {
-		return x.SupportedCodecs
+		return x.xxx_hidden_SupportedCodecs
 	}
 	return nil
 }
 
+func (x *StreamWriteMessage_InitResponse) SetLastSeqNo(v int64) {
+	x.xxx_hidden_LastSeqNo = v
+}
+
+func (x *StreamWriteMessage_InitResponse) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *StreamWriteMessage_InitResponse) SetPartitionId(v int64) {
+	x.xxx_hidden_PartitionId = v
+}
+
+func (x *StreamWriteMessage_InitResponse) SetSupportedCodecs(v *SupportedCodecs) {
+	x.xxx_hidden_SupportedCodecs = v
+}
+
+func (x *StreamWriteMessage_InitResponse) HasSupportedCodecs() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SupportedCodecs != nil
+}
+
+func (x *StreamWriteMessage_InitResponse) ClearSupportedCodecs() {
+	x.xxx_hidden_SupportedCodecs = nil
+}
+
+type StreamWriteMessage_InitResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Last persisted message's sequence number for this producer.
+	// Zero for new producer.
+	LastSeqNo int64
+	// Unique identifier of write session. Used for debug purposes.
+	SessionId string
+	// Identifier of partition that is matched for this write session.
+	PartitionId int64
+	// Client can only use compression codecs from this set to write messages to topic.
+	// Otherwise session will be closed with BAD_REQUEST.
+	SupportedCodecs *SupportedCodecs
+}
+
+func (b0 StreamWriteMessage_InitResponse_builder) Build() *StreamWriteMessage_InitResponse {
+	m0 := &StreamWriteMessage_InitResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_LastSeqNo = b.LastSeqNo
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_PartitionId = b.PartitionId
+	x.xxx_hidden_SupportedCodecs = b.SupportedCodecs
+	return m0
+}
+
 // Represents portion of client messages.
 type StreamWriteMessage_WriteRequest struct {
-	state    protoimpl.MessageState                         `protogen:"open.v1"`
-	Messages []*StreamWriteMessage_WriteRequest_MessageData `protobuf:"bytes,1,rep,name=messages,proto3" json:"messages,omitempty"`
-	// Codec that is used for data compression.
-	// See enum Codec above for values.
-	Codec         int32                `protobuf:"varint,2,opt,name=codec,proto3" json:"codec,omitempty"`
-	Tx            *TransactionIdentity `protobuf:"bytes,3,opt,name=tx,proto3,oneof" json:"tx,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState                          `protogen:"opaque.v1"`
+	xxx_hidden_Messages *[]*StreamWriteMessage_WriteRequest_MessageData `protobuf:"bytes,1,rep,name=messages,proto3"`
+	xxx_hidden_Codec    int32                                           `protobuf:"varint,2,opt,name=codec,proto3"`
+	xxx_hidden_Tx       *TransactionIdentity                            `protobuf:"bytes,3,opt,name=tx,proto3,oneof"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *StreamWriteMessage_WriteRequest) Reset() {
@@ -3607,46 +5834,81 @@ func (x *StreamWriteMessage_WriteRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_WriteRequest.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_WriteRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 4}
-}
-
 func (x *StreamWriteMessage_WriteRequest) GetMessages() []*StreamWriteMessage_WriteRequest_MessageData {
 	if x != nil {
-		return x.Messages
+		if x.xxx_hidden_Messages != nil {
+			return *x.xxx_hidden_Messages
+		}
 	}
 	return nil
 }
 
 func (x *StreamWriteMessage_WriteRequest) GetCodec() int32 {
 	if x != nil {
-		return x.Codec
+		return x.xxx_hidden_Codec
 	}
 	return 0
 }
 
 func (x *StreamWriteMessage_WriteRequest) GetTx() *TransactionIdentity {
 	if x != nil {
-		return x.Tx
+		return x.xxx_hidden_Tx
 	}
 	return nil
+}
+
+func (x *StreamWriteMessage_WriteRequest) SetMessages(v []*StreamWriteMessage_WriteRequest_MessageData) {
+	x.xxx_hidden_Messages = &v
+}
+
+func (x *StreamWriteMessage_WriteRequest) SetCodec(v int32) {
+	x.xxx_hidden_Codec = v
+}
+
+func (x *StreamWriteMessage_WriteRequest) SetTx(v *TransactionIdentity) {
+	x.xxx_hidden_Tx = v
+}
+
+func (x *StreamWriteMessage_WriteRequest) HasTx() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Tx != nil
+}
+
+func (x *StreamWriteMessage_WriteRequest) ClearTx() {
+	x.xxx_hidden_Tx = nil
+}
+
+type StreamWriteMessage_WriteRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Messages []*StreamWriteMessage_WriteRequest_MessageData
+	// Codec that is used for data compression.
+	// See enum Codec above for values.
+	Codec int32
+	Tx    *TransactionIdentity
+}
+
+func (b0 StreamWriteMessage_WriteRequest_builder) Build() *StreamWriteMessage_WriteRequest {
+	m0 := &StreamWriteMessage_WriteRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Messages = &b.Messages
+	x.xxx_hidden_Codec = b.Codec
+	x.xxx_hidden_Tx = b.Tx
+	return m0
 }
 
 // Message that represents acknowledgment for sequence of client messages.
 // This sequence is persisted together so write statistics is for messages batch.
 type StreamWriteMessage_WriteResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Number of acks is equal to number of messages in the corresponding WriteRequests.
-	Acks []*StreamWriteMessage_WriteResponse_WriteAck `protobuf:"bytes,1,rep,name=acks,proto3" json:"acks,omitempty"`
-	// Assigned partition for all client messages inside this batch.
-	// This actual partition may differ from that returned in InitResponse
-	// or other WriteResponses in this write session.
-	PartitionId int64 `protobuf:"varint,2,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
-	// Write statistics for this sequence of client messages.
-	WriteStatistics *StreamWriteMessage_WriteResponse_WriteStatistics `protobuf:"bytes,3,opt,name=write_statistics,json=writeStatistics,proto3" json:"write_statistics,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState                            `protogen:"opaque.v1"`
+	xxx_hidden_Acks            *[]*StreamWriteMessage_WriteResponse_WriteAck     `protobuf:"bytes,1,rep,name=acks,proto3"`
+	xxx_hidden_PartitionId     int64                                             `protobuf:"varint,2,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_WriteStatistics *StreamWriteMessage_WriteResponse_WriteStatistics `protobuf:"bytes,3,opt,name=write_statistics,json=writeStatistics,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *StreamWriteMessage_WriteResponse) Reset() {
@@ -3674,55 +5936,85 @@ func (x *StreamWriteMessage_WriteResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_WriteResponse.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_WriteResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 5}
-}
-
 func (x *StreamWriteMessage_WriteResponse) GetAcks() []*StreamWriteMessage_WriteResponse_WriteAck {
 	if x != nil {
-		return x.Acks
+		if x.xxx_hidden_Acks != nil {
+			return *x.xxx_hidden_Acks
+		}
 	}
 	return nil
 }
 
 func (x *StreamWriteMessage_WriteResponse) GetPartitionId() int64 {
 	if x != nil {
-		return x.PartitionId
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *StreamWriteMessage_WriteResponse) GetWriteStatistics() *StreamWriteMessage_WriteResponse_WriteStatistics {
 	if x != nil {
-		return x.WriteStatistics
+		return x.xxx_hidden_WriteStatistics
 	}
 	return nil
 }
 
+func (x *StreamWriteMessage_WriteResponse) SetAcks(v []*StreamWriteMessage_WriteResponse_WriteAck) {
+	x.xxx_hidden_Acks = &v
+}
+
+func (x *StreamWriteMessage_WriteResponse) SetPartitionId(v int64) {
+	x.xxx_hidden_PartitionId = v
+}
+
+func (x *StreamWriteMessage_WriteResponse) SetWriteStatistics(v *StreamWriteMessage_WriteResponse_WriteStatistics) {
+	x.xxx_hidden_WriteStatistics = v
+}
+
+func (x *StreamWriteMessage_WriteResponse) HasWriteStatistics() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_WriteStatistics != nil
+}
+
+func (x *StreamWriteMessage_WriteResponse) ClearWriteStatistics() {
+	x.xxx_hidden_WriteStatistics = nil
+}
+
+type StreamWriteMessage_WriteResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Number of acks is equal to number of messages in the corresponding WriteRequests.
+	Acks []*StreamWriteMessage_WriteResponse_WriteAck
+	// Assigned partition for all client messages inside this batch.
+	// This actual partition may differ from that returned in InitResponse
+	// or other WriteResponses in this write session.
+	PartitionId int64
+	// Write statistics for this sequence of client messages.
+	WriteStatistics *StreamWriteMessage_WriteResponse_WriteStatistics
+}
+
+func (b0 StreamWriteMessage_WriteResponse_builder) Build() *StreamWriteMessage_WriteResponse {
+	m0 := &StreamWriteMessage_WriteResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Acks = &b.Acks
+	x.xxx_hidden_PartitionId = b.PartitionId
+	x.xxx_hidden_WriteStatistics = b.WriteStatistics
+	return m0
+}
+
 type StreamWriteMessage_WriteRequest_MessageData struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Message sequence number, provided by client for deduplication.
-	// Starts at 1
-	SeqNo int64 `protobuf:"varint,1,opt,name=seq_no,json=seqNo,proto3" json:"seq_no,omitempty"`
-	// Creation timestamp
-	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Compressed client message body.
-	Data []byte `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
-	// Uncompressed size of client message body.
-	UncompressedSize int64 `protobuf:"varint,4,opt,name=uncompressed_size,json=uncompressedSize,proto3" json:"uncompressed_size,omitempty"`
-	// Per-message override for respective write session settings.
-	//
-	// Types that are valid to be assigned to Partitioning:
-	//
-	//	*StreamWriteMessage_WriteRequest_MessageData_MessageGroupId
-	//	*StreamWriteMessage_WriteRequest_MessageData_PartitionId
-	//	*StreamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration
-	Partitioning isStreamWriteMessage_WriteRequest_MessageData_Partitioning `protobuf_oneof:"partitioning"`
-	// Message metadata. Overall size is limited to 4096 symbols (all keys and values combined).
-	MetadataItems []*MetadataItem `protobuf:"bytes,7,rep,name=metadata_items,json=metadataItems,proto3" json:"metadata_items,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState                                     `protogen:"opaque.v1"`
+	xxx_hidden_SeqNo            int64                                                      `protobuf:"varint,1,opt,name=seq_no,json=seqNo,proto3"`
+	xxx_hidden_CreatedAt        *timestamppb.Timestamp                                     `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3"`
+	xxx_hidden_Data             []byte                                                     `protobuf:"bytes,3,opt,name=data,proto3"`
+	xxx_hidden_UncompressedSize int64                                                      `protobuf:"varint,4,opt,name=uncompressed_size,json=uncompressedSize,proto3"`
+	xxx_hidden_Partitioning     isStreamWriteMessage_WriteRequest_MessageData_Partitioning `protobuf_oneof:"partitioning"`
+	xxx_hidden_MetadataItems    *[]*MetadataItem                                           `protobuf:"bytes,7,rep,name=metadata_items,json=metadataItems,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *StreamWriteMessage_WriteRequest_MessageData) Reset() {
@@ -3750,49 +6042,37 @@ func (x *StreamWriteMessage_WriteRequest_MessageData) ProtoReflect() protoreflec
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_WriteRequest_MessageData.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_WriteRequest_MessageData) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 4, 0}
-}
-
 func (x *StreamWriteMessage_WriteRequest_MessageData) GetSeqNo() int64 {
 	if x != nil {
-		return x.SeqNo
+		return x.xxx_hidden_SeqNo
 	}
 	return 0
 }
 
 func (x *StreamWriteMessage_WriteRequest_MessageData) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.CreatedAt
+		return x.xxx_hidden_CreatedAt
 	}
 	return nil
 }
 
 func (x *StreamWriteMessage_WriteRequest_MessageData) GetData() []byte {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
 func (x *StreamWriteMessage_WriteRequest_MessageData) GetUncompressedSize() int64 {
 	if x != nil {
-		return x.UncompressedSize
+		return x.xxx_hidden_UncompressedSize
 	}
 	return 0
 }
 
-func (x *StreamWriteMessage_WriteRequest_MessageData) GetPartitioning() isStreamWriteMessage_WriteRequest_MessageData_Partitioning {
-	if x != nil {
-		return x.Partitioning
-	}
-	return nil
-}
-
 func (x *StreamWriteMessage_WriteRequest_MessageData) GetMessageGroupId() string {
 	if x != nil {
-		if x, ok := x.Partitioning.(*StreamWriteMessage_WriteRequest_MessageData_MessageGroupId); ok {
+		if x, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_WriteRequest_MessageData_MessageGroupId); ok {
 			return x.MessageGroupId
 		}
 	}
@@ -3801,7 +6081,7 @@ func (x *StreamWriteMessage_WriteRequest_MessageData) GetMessageGroupId() string
 
 func (x *StreamWriteMessage_WriteRequest_MessageData) GetPartitionId() int64 {
 	if x != nil {
-		if x, ok := x.Partitioning.(*StreamWriteMessage_WriteRequest_MessageData_PartitionId); ok {
+		if x, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_WriteRequest_MessageData_PartitionId); ok {
 			return x.PartitionId
 		}
 	}
@@ -3810,7 +6090,7 @@ func (x *StreamWriteMessage_WriteRequest_MessageData) GetPartitionId() int64 {
 
 func (x *StreamWriteMessage_WriteRequest_MessageData) GetPartitionWithGeneration() *PartitionWithGeneration {
 	if x != nil {
-		if x, ok := x.Partitioning.(*StreamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration); ok {
+		if x, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration); ok {
 			return x.PartitionWithGeneration
 		}
 	}
@@ -3819,54 +6099,229 @@ func (x *StreamWriteMessage_WriteRequest_MessageData) GetPartitionWithGeneration
 
 func (x *StreamWriteMessage_WriteRequest_MessageData) GetMetadataItems() []*MetadataItem {
 	if x != nil {
-		return x.MetadataItems
+		if x.xxx_hidden_MetadataItems != nil {
+			return *x.xxx_hidden_MetadataItems
+		}
 	}
 	return nil
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) SetSeqNo(v int64) {
+	x.xxx_hidden_SeqNo = v
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) SetCreatedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CreatedAt = v
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) SetData(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Data = v
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) SetUncompressedSize(v int64) {
+	x.xxx_hidden_UncompressedSize = v
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) SetMessageGroupId(v string) {
+	x.xxx_hidden_Partitioning = &streamWriteMessage_WriteRequest_MessageData_MessageGroupId{v}
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) SetPartitionId(v int64) {
+	x.xxx_hidden_Partitioning = &streamWriteMessage_WriteRequest_MessageData_PartitionId{v}
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) SetPartitionWithGeneration(v *PartitionWithGeneration) {
+	if v == nil {
+		x.xxx_hidden_Partitioning = nil
+		return
+	}
+	x.xxx_hidden_Partitioning = &streamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration{v}
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) SetMetadataItems(v []*MetadataItem) {
+	x.xxx_hidden_MetadataItems = &v
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) HasCreatedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CreatedAt != nil
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) HasPartitioning() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Partitioning != nil
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) HasMessageGroupId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_WriteRequest_MessageData_MessageGroupId)
+	return ok
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) HasPartitionId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_WriteRequest_MessageData_PartitionId)
+	return ok
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) HasPartitionWithGeneration() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration)
+	return ok
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) ClearCreatedAt() {
+	x.xxx_hidden_CreatedAt = nil
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) ClearPartitioning() {
+	x.xxx_hidden_Partitioning = nil
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) ClearMessageGroupId() {
+	if _, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_WriteRequest_MessageData_MessageGroupId); ok {
+		x.xxx_hidden_Partitioning = nil
+	}
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) ClearPartitionId() {
+	if _, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_WriteRequest_MessageData_PartitionId); ok {
+		x.xxx_hidden_Partitioning = nil
+	}
+}
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) ClearPartitionWithGeneration() {
+	if _, ok := x.xxx_hidden_Partitioning.(*streamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration); ok {
+		x.xxx_hidden_Partitioning = nil
+	}
+}
+
+const StreamWriteMessage_WriteRequest_MessageData_Partitioning_not_set_case case_StreamWriteMessage_WriteRequest_MessageData_Partitioning = 0
+const StreamWriteMessage_WriteRequest_MessageData_MessageGroupId_case case_StreamWriteMessage_WriteRequest_MessageData_Partitioning = 5
+const StreamWriteMessage_WriteRequest_MessageData_PartitionId_case case_StreamWriteMessage_WriteRequest_MessageData_Partitioning = 6
+const StreamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration_case case_StreamWriteMessage_WriteRequest_MessageData_Partitioning = 8
+
+func (x *StreamWriteMessage_WriteRequest_MessageData) WhichPartitioning() case_StreamWriteMessage_WriteRequest_MessageData_Partitioning {
+	if x == nil {
+		return StreamWriteMessage_WriteRequest_MessageData_Partitioning_not_set_case
+	}
+	switch x.xxx_hidden_Partitioning.(type) {
+	case *streamWriteMessage_WriteRequest_MessageData_MessageGroupId:
+		return StreamWriteMessage_WriteRequest_MessageData_MessageGroupId_case
+	case *streamWriteMessage_WriteRequest_MessageData_PartitionId:
+		return StreamWriteMessage_WriteRequest_MessageData_PartitionId_case
+	case *streamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration:
+		return StreamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration_case
+	default:
+		return StreamWriteMessage_WriteRequest_MessageData_Partitioning_not_set_case
+	}
+}
+
+type StreamWriteMessage_WriteRequest_MessageData_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Message sequence number, provided by client for deduplication.
+	// Starts at 1
+	SeqNo int64
+	// Creation timestamp
+	CreatedAt *timestamppb.Timestamp
+	// Compressed client message body.
+	Data []byte
+	// Uncompressed size of client message body.
+	UncompressedSize int64
+	// Per-message override for respective write session settings.
+
+	// Fields of oneof xxx_hidden_Partitioning:
+	// All messages with given pair (producer_id, message_group_id) go to single partition in order of writes.
+	MessageGroupId *string
+	// Explicit partition id to write to.
+	PartitionId *int64
+	// Explicit partition location to write to.
+	PartitionWithGeneration *PartitionWithGeneration
+	// -- end of xxx_hidden_Partitioning
+	// Message metadata. Overall size is limited to 4096 symbols (all keys and values combined).
+	MetadataItems []*MetadataItem
+}
+
+func (b0 StreamWriteMessage_WriteRequest_MessageData_builder) Build() *StreamWriteMessage_WriteRequest_MessageData {
+	m0 := &StreamWriteMessage_WriteRequest_MessageData{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SeqNo = b.SeqNo
+	x.xxx_hidden_CreatedAt = b.CreatedAt
+	x.xxx_hidden_Data = b.Data
+	x.xxx_hidden_UncompressedSize = b.UncompressedSize
+	if b.MessageGroupId != nil {
+		x.xxx_hidden_Partitioning = &streamWriteMessage_WriteRequest_MessageData_MessageGroupId{*b.MessageGroupId}
+	}
+	if b.PartitionId != nil {
+		x.xxx_hidden_Partitioning = &streamWriteMessage_WriteRequest_MessageData_PartitionId{*b.PartitionId}
+	}
+	if b.PartitionWithGeneration != nil {
+		x.xxx_hidden_Partitioning = &streamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration{b.PartitionWithGeneration}
+	}
+	x.xxx_hidden_MetadataItems = &b.MetadataItems
+	return m0
+}
+
+type case_StreamWriteMessage_WriteRequest_MessageData_Partitioning protoreflect.FieldNumber
+
+func (x case_StreamWriteMessage_WriteRequest_MessageData_Partitioning) String() string {
+	md := file_protos_ydb_topic_proto_msgTypes[53].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isStreamWriteMessage_WriteRequest_MessageData_Partitioning interface {
 	isStreamWriteMessage_WriteRequest_MessageData_Partitioning()
 }
 
-type StreamWriteMessage_WriteRequest_MessageData_MessageGroupId struct {
+type streamWriteMessage_WriteRequest_MessageData_MessageGroupId struct {
 	// All messages with given pair (producer_id, message_group_id) go to single partition in order of writes.
 	MessageGroupId string `protobuf:"bytes,5,opt,name=message_group_id,json=messageGroupId,proto3,oneof"`
 }
 
-type StreamWriteMessage_WriteRequest_MessageData_PartitionId struct {
+type streamWriteMessage_WriteRequest_MessageData_PartitionId struct {
 	// Explicit partition id to write to.
 	PartitionId int64 `protobuf:"varint,6,opt,name=partition_id,json=partitionId,proto3,oneof"`
 }
 
-type StreamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration struct {
+type streamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration struct {
 	// Explicit partition location to write to.
 	PartitionWithGeneration *PartitionWithGeneration `protobuf:"bytes,8,opt,name=partition_with_generation,json=partitionWithGeneration,proto3,oneof"`
 }
 
-func (*StreamWriteMessage_WriteRequest_MessageData_MessageGroupId) isStreamWriteMessage_WriteRequest_MessageData_Partitioning() {
+func (*streamWriteMessage_WriteRequest_MessageData_MessageGroupId) isStreamWriteMessage_WriteRequest_MessageData_Partitioning() {
 }
 
-func (*StreamWriteMessage_WriteRequest_MessageData_PartitionId) isStreamWriteMessage_WriteRequest_MessageData_Partitioning() {
+func (*streamWriteMessage_WriteRequest_MessageData_PartitionId) isStreamWriteMessage_WriteRequest_MessageData_Partitioning() {
 }
 
-func (*StreamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration) isStreamWriteMessage_WriteRequest_MessageData_Partitioning() {
+func (*streamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration) isStreamWriteMessage_WriteRequest_MessageData_Partitioning() {
 }
 
 // Acknowledgment for one persistently written message.
 type StreamWriteMessage_WriteResponse_WriteAck struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Sequence number as in WriteRequest.
-	SeqNo int64 `protobuf:"varint,1,opt,name=seq_no,json=seqNo,proto3" json:"seq_no,omitempty"`
-	// Either message is written for the first time or duplicate.
-	//
-	// Types that are valid to be assigned to MessageWriteStatus:
-	//
-	//	*StreamWriteMessage_WriteResponse_WriteAck_Written_
-	//	*StreamWriteMessage_WriteResponse_WriteAck_Skipped_
-	//	*StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx_
-	MessageWriteStatus isStreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus `protobuf_oneof:"message_write_status"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState                                         `protogen:"opaque.v1"`
+	xxx_hidden_SeqNo              int64                                                          `protobuf:"varint,1,opt,name=seq_no,json=seqNo,proto3"`
+	xxx_hidden_MessageWriteStatus isStreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus `protobuf_oneof:"message_write_status"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamWriteMessage_WriteResponse_WriteAck) Reset() {
@@ -3894,28 +6349,16 @@ func (x *StreamWriteMessage_WriteResponse_WriteAck) ProtoReflect() protoreflect.
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_WriteResponse_WriteAck.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_WriteResponse_WriteAck) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 5, 0}
-}
-
 func (x *StreamWriteMessage_WriteResponse_WriteAck) GetSeqNo() int64 {
 	if x != nil {
-		return x.SeqNo
+		return x.xxx_hidden_SeqNo
 	}
 	return 0
 }
 
-func (x *StreamWriteMessage_WriteResponse_WriteAck) GetMessageWriteStatus() isStreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus {
-	if x != nil {
-		return x.MessageWriteStatus
-	}
-	return nil
-}
-
 func (x *StreamWriteMessage_WriteResponse_WriteAck) GetWritten() *StreamWriteMessage_WriteResponse_WriteAck_Written {
 	if x != nil {
-		if x, ok := x.MessageWriteStatus.(*StreamWriteMessage_WriteResponse_WriteAck_Written_); ok {
+		if x, ok := x.xxx_hidden_MessageWriteStatus.(*streamWriteMessage_WriteResponse_WriteAck_Written_); ok {
 			return x.Written
 		}
 	}
@@ -3924,7 +6367,7 @@ func (x *StreamWriteMessage_WriteResponse_WriteAck) GetWritten() *StreamWriteMes
 
 func (x *StreamWriteMessage_WriteResponse_WriteAck) GetSkipped() *StreamWriteMessage_WriteResponse_WriteAck_Skipped {
 	if x != nil {
-		if x, ok := x.MessageWriteStatus.(*StreamWriteMessage_WriteResponse_WriteAck_Skipped_); ok {
+		if x, ok := x.xxx_hidden_MessageWriteStatus.(*streamWriteMessage_WriteResponse_WriteAck_Skipped_); ok {
 			return x.Skipped
 		}
 	}
@@ -3933,53 +6376,191 @@ func (x *StreamWriteMessage_WriteResponse_WriteAck) GetSkipped() *StreamWriteMes
 
 func (x *StreamWriteMessage_WriteResponse_WriteAck) GetWrittenInTx() *StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx {
 	if x != nil {
-		if x, ok := x.MessageWriteStatus.(*StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx_); ok {
+		if x, ok := x.xxx_hidden_MessageWriteStatus.(*streamWriteMessage_WriteResponse_WriteAck_WrittenInTx_); ok {
 			return x.WrittenInTx
 		}
 	}
 	return nil
 }
 
+func (x *StreamWriteMessage_WriteResponse_WriteAck) SetSeqNo(v int64) {
+	x.xxx_hidden_SeqNo = v
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) SetWritten(v *StreamWriteMessage_WriteResponse_WriteAck_Written) {
+	if v == nil {
+		x.xxx_hidden_MessageWriteStatus = nil
+		return
+	}
+	x.xxx_hidden_MessageWriteStatus = &streamWriteMessage_WriteResponse_WriteAck_Written_{v}
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) SetSkipped(v *StreamWriteMessage_WriteResponse_WriteAck_Skipped) {
+	if v == nil {
+		x.xxx_hidden_MessageWriteStatus = nil
+		return
+	}
+	x.xxx_hidden_MessageWriteStatus = &streamWriteMessage_WriteResponse_WriteAck_Skipped_{v}
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) SetWrittenInTx(v *StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx) {
+	if v == nil {
+		x.xxx_hidden_MessageWriteStatus = nil
+		return
+	}
+	x.xxx_hidden_MessageWriteStatus = &streamWriteMessage_WriteResponse_WriteAck_WrittenInTx_{v}
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) HasMessageWriteStatus() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageWriteStatus != nil
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) HasWritten() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_MessageWriteStatus.(*streamWriteMessage_WriteResponse_WriteAck_Written_)
+	return ok
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) HasSkipped() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_MessageWriteStatus.(*streamWriteMessage_WriteResponse_WriteAck_Skipped_)
+	return ok
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) HasWrittenInTx() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_MessageWriteStatus.(*streamWriteMessage_WriteResponse_WriteAck_WrittenInTx_)
+	return ok
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) ClearMessageWriteStatus() {
+	x.xxx_hidden_MessageWriteStatus = nil
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) ClearWritten() {
+	if _, ok := x.xxx_hidden_MessageWriteStatus.(*streamWriteMessage_WriteResponse_WriteAck_Written_); ok {
+		x.xxx_hidden_MessageWriteStatus = nil
+	}
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) ClearSkipped() {
+	if _, ok := x.xxx_hidden_MessageWriteStatus.(*streamWriteMessage_WriteResponse_WriteAck_Skipped_); ok {
+		x.xxx_hidden_MessageWriteStatus = nil
+	}
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) ClearWrittenInTx() {
+	if _, ok := x.xxx_hidden_MessageWriteStatus.(*streamWriteMessage_WriteResponse_WriteAck_WrittenInTx_); ok {
+		x.xxx_hidden_MessageWriteStatus = nil
+	}
+}
+
+const StreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus_not_set_case case_StreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus = 0
+const StreamWriteMessage_WriteResponse_WriteAck_Written_case case_StreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus = 2
+const StreamWriteMessage_WriteResponse_WriteAck_Skipped_case case_StreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus = 3
+const StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx_case case_StreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus = 4
+
+func (x *StreamWriteMessage_WriteResponse_WriteAck) WhichMessageWriteStatus() case_StreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus {
+	if x == nil {
+		return StreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus_not_set_case
+	}
+	switch x.xxx_hidden_MessageWriteStatus.(type) {
+	case *streamWriteMessage_WriteResponse_WriteAck_Written_:
+		return StreamWriteMessage_WriteResponse_WriteAck_Written_case
+	case *streamWriteMessage_WriteResponse_WriteAck_Skipped_:
+		return StreamWriteMessage_WriteResponse_WriteAck_Skipped_case
+	case *streamWriteMessage_WriteResponse_WriteAck_WrittenInTx_:
+		return StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx_case
+	default:
+		return StreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus_not_set_case
+	}
+}
+
+type StreamWriteMessage_WriteResponse_WriteAck_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Sequence number as in WriteRequest.
+	SeqNo int64
+	// Either message is written for the first time or duplicate.
+
+	// Fields of oneof xxx_hidden_MessageWriteStatus:
+	Written     *StreamWriteMessage_WriteResponse_WriteAck_Written
+	Skipped     *StreamWriteMessage_WriteResponse_WriteAck_Skipped
+	WrittenInTx *StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx
+	// -- end of xxx_hidden_MessageWriteStatus
+}
+
+func (b0 StreamWriteMessage_WriteResponse_WriteAck_builder) Build() *StreamWriteMessage_WriteResponse_WriteAck {
+	m0 := &StreamWriteMessage_WriteResponse_WriteAck{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SeqNo = b.SeqNo
+	if b.Written != nil {
+		x.xxx_hidden_MessageWriteStatus = &streamWriteMessage_WriteResponse_WriteAck_Written_{b.Written}
+	}
+	if b.Skipped != nil {
+		x.xxx_hidden_MessageWriteStatus = &streamWriteMessage_WriteResponse_WriteAck_Skipped_{b.Skipped}
+	}
+	if b.WrittenInTx != nil {
+		x.xxx_hidden_MessageWriteStatus = &streamWriteMessage_WriteResponse_WriteAck_WrittenInTx_{b.WrittenInTx}
+	}
+	return m0
+}
+
+type case_StreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus protoreflect.FieldNumber
+
+func (x case_StreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus) String() string {
+	md := file_protos_ydb_topic_proto_msgTypes[54].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isStreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus interface {
 	isStreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus()
 }
 
-type StreamWriteMessage_WriteResponse_WriteAck_Written_ struct {
+type streamWriteMessage_WriteResponse_WriteAck_Written_ struct {
 	Written *StreamWriteMessage_WriteResponse_WriteAck_Written `protobuf:"bytes,2,opt,name=written,proto3,oneof"`
 }
 
-type StreamWriteMessage_WriteResponse_WriteAck_Skipped_ struct {
+type streamWriteMessage_WriteResponse_WriteAck_Skipped_ struct {
 	Skipped *StreamWriteMessage_WriteResponse_WriteAck_Skipped `protobuf:"bytes,3,opt,name=skipped,proto3,oneof"`
 }
 
-type StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx_ struct {
+type streamWriteMessage_WriteResponse_WriteAck_WrittenInTx_ struct {
 	WrittenInTx *StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx `protobuf:"bytes,4,opt,name=written_in_tx,json=writtenInTx,proto3,oneof"`
 }
 
-func (*StreamWriteMessage_WriteResponse_WriteAck_Written_) isStreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus() {
+func (*streamWriteMessage_WriteResponse_WriteAck_Written_) isStreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus() {
 }
 
-func (*StreamWriteMessage_WriteResponse_WriteAck_Skipped_) isStreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus() {
+func (*streamWriteMessage_WriteResponse_WriteAck_Skipped_) isStreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus() {
 }
 
-func (*StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx_) isStreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus() {
+func (*streamWriteMessage_WriteResponse_WriteAck_WrittenInTx_) isStreamWriteMessage_WriteResponse_WriteAck_MessageWriteStatus() {
 }
 
 // Message with write statistics.
 type StreamWriteMessage_WriteResponse_WriteStatistics struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Time spent in persisting of data. Same for each message in response.
-	PersistingTime *durationpb.Duration `protobuf:"bytes,1,opt,name=persisting_time,json=persistingTime,proto3" json:"persisting_time,omitempty"`
-	// Time spent in queue before persisting, minimal of all messages in response.
-	MinQueueWaitTime *durationpb.Duration `protobuf:"bytes,2,opt,name=min_queue_wait_time,json=minQueueWaitTime,proto3" json:"min_queue_wait_time,omitempty"`
-	// Time spent in queue before persisting, maximal of all messages in response.
-	MaxQueueWaitTime *durationpb.Duration `protobuf:"bytes,3,opt,name=max_queue_wait_time,json=maxQueueWaitTime,proto3" json:"max_queue_wait_time,omitempty"`
-	// Time spent awaiting for partition write quota. Same for each message in response.
-	PartitionQuotaWaitTime *durationpb.Duration `protobuf:"bytes,4,opt,name=partition_quota_wait_time,json=partitionQuotaWaitTime,proto3" json:"partition_quota_wait_time,omitempty"`
-	// Time spent awaiting for topic write quota. Same for each message in response.
-	TopicQuotaWaitTime *durationpb.Duration `protobuf:"bytes,5,opt,name=topic_quota_wait_time,json=topicQuotaWaitTime,proto3" json:"topic_quota_wait_time,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PersistingTime         *durationpb.Duration   `protobuf:"bytes,1,opt,name=persisting_time,json=persistingTime,proto3"`
+	xxx_hidden_MinQueueWaitTime       *durationpb.Duration   `protobuf:"bytes,2,opt,name=min_queue_wait_time,json=minQueueWaitTime,proto3"`
+	xxx_hidden_MaxQueueWaitTime       *durationpb.Duration   `protobuf:"bytes,3,opt,name=max_queue_wait_time,json=maxQueueWaitTime,proto3"`
+	xxx_hidden_PartitionQuotaWaitTime *durationpb.Duration   `protobuf:"bytes,4,opt,name=partition_quota_wait_time,json=partitionQuotaWaitTime,proto3"`
+	xxx_hidden_TopicQuotaWaitTime     *durationpb.Duration   `protobuf:"bytes,5,opt,name=topic_quota_wait_time,json=topicQuotaWaitTime,proto3"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *StreamWriteMessage_WriteResponse_WriteStatistics) Reset() {
@@ -4007,52 +6588,148 @@ func (x *StreamWriteMessage_WriteResponse_WriteStatistics) ProtoReflect() protor
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_WriteResponse_WriteStatistics.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_WriteResponse_WriteStatistics) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 5, 1}
-}
-
 func (x *StreamWriteMessage_WriteResponse_WriteStatistics) GetPersistingTime() *durationpb.Duration {
 	if x != nil {
-		return x.PersistingTime
+		return x.xxx_hidden_PersistingTime
 	}
 	return nil
 }
 
 func (x *StreamWriteMessage_WriteResponse_WriteStatistics) GetMinQueueWaitTime() *durationpb.Duration {
 	if x != nil {
-		return x.MinQueueWaitTime
+		return x.xxx_hidden_MinQueueWaitTime
 	}
 	return nil
 }
 
 func (x *StreamWriteMessage_WriteResponse_WriteStatistics) GetMaxQueueWaitTime() *durationpb.Duration {
 	if x != nil {
-		return x.MaxQueueWaitTime
+		return x.xxx_hidden_MaxQueueWaitTime
 	}
 	return nil
 }
 
 func (x *StreamWriteMessage_WriteResponse_WriteStatistics) GetPartitionQuotaWaitTime() *durationpb.Duration {
 	if x != nil {
-		return x.PartitionQuotaWaitTime
+		return x.xxx_hidden_PartitionQuotaWaitTime
 	}
 	return nil
 }
 
 func (x *StreamWriteMessage_WriteResponse_WriteStatistics) GetTopicQuotaWaitTime() *durationpb.Duration {
 	if x != nil {
-		return x.TopicQuotaWaitTime
+		return x.xxx_hidden_TopicQuotaWaitTime
 	}
 	return nil
 }
 
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) SetPersistingTime(v *durationpb.Duration) {
+	x.xxx_hidden_PersistingTime = v
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) SetMinQueueWaitTime(v *durationpb.Duration) {
+	x.xxx_hidden_MinQueueWaitTime = v
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) SetMaxQueueWaitTime(v *durationpb.Duration) {
+	x.xxx_hidden_MaxQueueWaitTime = v
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) SetPartitionQuotaWaitTime(v *durationpb.Duration) {
+	x.xxx_hidden_PartitionQuotaWaitTime = v
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) SetTopicQuotaWaitTime(v *durationpb.Duration) {
+	x.xxx_hidden_TopicQuotaWaitTime = v
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) HasPersistingTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PersistingTime != nil
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) HasMinQueueWaitTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MinQueueWaitTime != nil
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) HasMaxQueueWaitTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MaxQueueWaitTime != nil
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) HasPartitionQuotaWaitTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionQuotaWaitTime != nil
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) HasTopicQuotaWaitTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TopicQuotaWaitTime != nil
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) ClearPersistingTime() {
+	x.xxx_hidden_PersistingTime = nil
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) ClearMinQueueWaitTime() {
+	x.xxx_hidden_MinQueueWaitTime = nil
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) ClearMaxQueueWaitTime() {
+	x.xxx_hidden_MaxQueueWaitTime = nil
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) ClearPartitionQuotaWaitTime() {
+	x.xxx_hidden_PartitionQuotaWaitTime = nil
+}
+
+func (x *StreamWriteMessage_WriteResponse_WriteStatistics) ClearTopicQuotaWaitTime() {
+	x.xxx_hidden_TopicQuotaWaitTime = nil
+}
+
+type StreamWriteMessage_WriteResponse_WriteStatistics_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Time spent in persisting of data. Same for each message in response.
+	PersistingTime *durationpb.Duration
+	// Time spent in queue before persisting, minimal of all messages in response.
+	MinQueueWaitTime *durationpb.Duration
+	// Time spent in queue before persisting, maximal of all messages in response.
+	MaxQueueWaitTime *durationpb.Duration
+	// Time spent awaiting for partition write quota. Same for each message in response.
+	PartitionQuotaWaitTime *durationpb.Duration
+	// Time spent awaiting for topic write quota. Same for each message in response.
+	TopicQuotaWaitTime *durationpb.Duration
+}
+
+func (b0 StreamWriteMessage_WriteResponse_WriteStatistics_builder) Build() *StreamWriteMessage_WriteResponse_WriteStatistics {
+	m0 := &StreamWriteMessage_WriteResponse_WriteStatistics{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PersistingTime = b.PersistingTime
+	x.xxx_hidden_MinQueueWaitTime = b.MinQueueWaitTime
+	x.xxx_hidden_MaxQueueWaitTime = b.MaxQueueWaitTime
+	x.xxx_hidden_PartitionQuotaWaitTime = b.PartitionQuotaWaitTime
+	x.xxx_hidden_TopicQuotaWaitTime = b.TopicQuotaWaitTime
+	return m0
+}
+
 type StreamWriteMessage_WriteResponse_WriteAck_Written struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Assigned partition offset.
-	Offset        int64 `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Offset int64                  `protobuf:"varint,1,opt,name=offset,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *StreamWriteMessage_WriteResponse_WriteAck_Written) Reset() {
@@ -4080,23 +6757,37 @@ func (x *StreamWriteMessage_WriteResponse_WriteAck_Written) ProtoReflect() proto
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_WriteResponse_WriteAck_Written.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_WriteResponse_WriteAck_Written) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 5, 0, 0}
-}
-
 func (x *StreamWriteMessage_WriteResponse_WriteAck_Written) GetOffset() int64 {
 	if x != nil {
-		return x.Offset
+		return x.xxx_hidden_Offset
 	}
 	return 0
 }
 
+func (x *StreamWriteMessage_WriteResponse_WriteAck_Written) SetOffset(v int64) {
+	x.xxx_hidden_Offset = v
+}
+
+type StreamWriteMessage_WriteResponse_WriteAck_Written_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Assigned partition offset.
+	Offset int64
+}
+
+func (b0 StreamWriteMessage_WriteResponse_WriteAck_Written_builder) Build() *StreamWriteMessage_WriteResponse_WriteAck_Written {
+	m0 := &StreamWriteMessage_WriteResponse_WriteAck_Written{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Offset = b.Offset
+	return m0
+}
+
 type StreamWriteMessage_WriteResponse_WriteAck_Skipped struct {
-	state         protoimpl.MessageState                                   `protogen:"open.v1"`
-	Reason        StreamWriteMessage_WriteResponse_WriteAck_Skipped_Reason `protobuf:"varint,1,opt,name=reason,proto3,enum=Ydb.Topic.StreamWriteMessage_WriteResponse_WriteAck_Skipped_Reason" json:"reason,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState                                   `protogen:"opaque.v1"`
+	xxx_hidden_Reason StreamWriteMessage_WriteResponse_WriteAck_Skipped_Reason `protobuf:"varint,1,opt,name=reason,proto3,enum=Ydb.Topic.StreamWriteMessage_WriteResponse_WriteAck_Skipped_Reason"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *StreamWriteMessage_WriteResponse_WriteAck_Skipped) Reset() {
@@ -4124,20 +6815,33 @@ func (x *StreamWriteMessage_WriteResponse_WriteAck_Skipped) ProtoReflect() proto
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_WriteResponse_WriteAck_Skipped.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_WriteResponse_WriteAck_Skipped) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 5, 0, 1}
-}
-
 func (x *StreamWriteMessage_WriteResponse_WriteAck_Skipped) GetReason() StreamWriteMessage_WriteResponse_WriteAck_Skipped_Reason {
 	if x != nil {
-		return x.Reason
+		return x.xxx_hidden_Reason
 	}
 	return StreamWriteMessage_WriteResponse_WriteAck_Skipped_REASON_UNSPECIFIED
 }
 
+func (x *StreamWriteMessage_WriteResponse_WriteAck_Skipped) SetReason(v StreamWriteMessage_WriteResponse_WriteAck_Skipped_Reason) {
+	x.xxx_hidden_Reason = v
+}
+
+type StreamWriteMessage_WriteResponse_WriteAck_Skipped_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Reason StreamWriteMessage_WriteResponse_WriteAck_Skipped_Reason
+}
+
+func (b0 StreamWriteMessage_WriteResponse_WriteAck_Skipped_builder) Build() *StreamWriteMessage_WriteResponse_WriteAck_Skipped {
+	m0 := &StreamWriteMessage_WriteResponse_WriteAck_Skipped{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Reason = b.Reason
+	return m0
+}
+
 type StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4167,23 +6871,27 @@ func (x *StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx) ProtoReflect() p
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx.ProtoReflect.Descriptor instead.
-func (*StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{6, 5, 0, 2}
+type StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx_builder) Build() *StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx {
+	m0 := &StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Within a StreamRead session delivered messages are separated by partition.
 // Reads from a single partition are represented by a partition session.
 type StreamReadMessage_PartitionSession struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Identifier of partition session. Unique inside one RPC call.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Topic path of partition.
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Partition identifier.
-	PartitionId   int64 `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_Path               string                 `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_PartitionId        int64                  `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_PartitionSession) Reset() {
@@ -4211,30 +6919,58 @@ func (x *StreamReadMessage_PartitionSession) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_PartitionSession.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_PartitionSession) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 0}
-}
-
 func (x *StreamReadMessage_PartitionSession) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_PartitionSession) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *StreamReadMessage_PartitionSession) GetPartitionId() int64 {
 	if x != nil {
-		return x.PartitionId
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
+}
+
+func (x *StreamReadMessage_PartitionSession) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamReadMessage_PartitionSession) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *StreamReadMessage_PartitionSession) SetPartitionId(v int64) {
+	x.xxx_hidden_PartitionId = v
+}
+
+type StreamReadMessage_PartitionSession_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Identifier of partition session. Unique inside one RPC call.
+	PartitionSessionId int64
+	// Topic path of partition.
+	Path string
+	// Partition identifier.
+	PartitionId int64
+}
+
+func (b0 StreamReadMessage_PartitionSession_builder) Build() *StreamReadMessage_PartitionSession {
+	m0 := &StreamReadMessage_PartitionSession{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionId = b.PartitionId
+	return m0
 }
 
 // Client-server message for read session. Contains one of:
@@ -4251,20 +6987,10 @@ func (x *StreamReadMessage_PartitionSession) GetPartitionId() int64 {
 //	StopPartitionSessionResponse - Response to StreamReadServerMessage.StopPartitionSessionRequest.
 //	    Client signals it has finished working with partition. Mandatory for graceful stop, optional otherwise.
 type StreamReadMessage_FromClient struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to ClientMessage:
-	//
-	//	*StreamReadMessage_FromClient_InitRequest
-	//	*StreamReadMessage_FromClient_ReadRequest
-	//	*StreamReadMessage_FromClient_CommitOffsetRequest
-	//	*StreamReadMessage_FromClient_PartitionSessionStatusRequest
-	//	*StreamReadMessage_FromClient_UpdateTokenRequest
-	//	*StreamReadMessage_FromClient_DirectReadAck
-	//	*StreamReadMessage_FromClient_StartPartitionSessionResponse
-	//	*StreamReadMessage_FromClient_StopPartitionSessionResponse
-	ClientMessage isStreamReadMessage_FromClient_ClientMessage `protobuf_oneof:"client_message"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState                       `protogen:"opaque.v1"`
+	xxx_hidden_ClientMessage isStreamReadMessage_FromClient_ClientMessage `protobuf_oneof:"client_message"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_FromClient) Reset() {
@@ -4292,21 +7018,9 @@ func (x *StreamReadMessage_FromClient) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_FromClient.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_FromClient) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 1}
-}
-
-func (x *StreamReadMessage_FromClient) GetClientMessage() isStreamReadMessage_FromClient_ClientMessage {
-	if x != nil {
-		return x.ClientMessage
-	}
-	return nil
-}
-
 func (x *StreamReadMessage_FromClient) GetInitRequest() *StreamReadMessage_InitRequest {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamReadMessage_FromClient_InitRequest); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_InitRequest); ok {
 			return x.InitRequest
 		}
 	}
@@ -4315,7 +7029,7 @@ func (x *StreamReadMessage_FromClient) GetInitRequest() *StreamReadMessage_InitR
 
 func (x *StreamReadMessage_FromClient) GetReadRequest() *StreamReadMessage_ReadRequest {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamReadMessage_FromClient_ReadRequest); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_ReadRequest); ok {
 			return x.ReadRequest
 		}
 	}
@@ -4324,7 +7038,7 @@ func (x *StreamReadMessage_FromClient) GetReadRequest() *StreamReadMessage_ReadR
 
 func (x *StreamReadMessage_FromClient) GetCommitOffsetRequest() *StreamReadMessage_CommitOffsetRequest {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamReadMessage_FromClient_CommitOffsetRequest); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_CommitOffsetRequest); ok {
 			return x.CommitOffsetRequest
 		}
 	}
@@ -4333,7 +7047,7 @@ func (x *StreamReadMessage_FromClient) GetCommitOffsetRequest() *StreamReadMessa
 
 func (x *StreamReadMessage_FromClient) GetPartitionSessionStatusRequest() *StreamReadMessage_PartitionSessionStatusRequest {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamReadMessage_FromClient_PartitionSessionStatusRequest); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_PartitionSessionStatusRequest); ok {
 			return x.PartitionSessionStatusRequest
 		}
 	}
@@ -4342,7 +7056,7 @@ func (x *StreamReadMessage_FromClient) GetPartitionSessionStatusRequest() *Strea
 
 func (x *StreamReadMessage_FromClient) GetUpdateTokenRequest() *UpdateTokenRequest {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamReadMessage_FromClient_UpdateTokenRequest); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_UpdateTokenRequest); ok {
 			return x.UpdateTokenRequest
 		}
 	}
@@ -4351,7 +7065,7 @@ func (x *StreamReadMessage_FromClient) GetUpdateTokenRequest() *UpdateTokenReque
 
 func (x *StreamReadMessage_FromClient) GetDirectReadAck() *StreamReadMessage_DirectReadAck {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamReadMessage_FromClient_DirectReadAck); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_DirectReadAck); ok {
 			return x.DirectReadAck
 		}
 	}
@@ -4360,7 +7074,7 @@ func (x *StreamReadMessage_FromClient) GetDirectReadAck() *StreamReadMessage_Dir
 
 func (x *StreamReadMessage_FromClient) GetStartPartitionSessionResponse() *StreamReadMessage_StartPartitionSessionResponse {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamReadMessage_FromClient_StartPartitionSessionResponse); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_StartPartitionSessionResponse); ok {
 			return x.StartPartitionSessionResponse
 		}
 	}
@@ -4369,70 +7083,351 @@ func (x *StreamReadMessage_FromClient) GetStartPartitionSessionResponse() *Strea
 
 func (x *StreamReadMessage_FromClient) GetStopPartitionSessionResponse() *StreamReadMessage_StopPartitionSessionResponse {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamReadMessage_FromClient_StopPartitionSessionResponse); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_StopPartitionSessionResponse); ok {
 			return x.StopPartitionSessionResponse
 		}
 	}
 	return nil
 }
 
+func (x *StreamReadMessage_FromClient) SetInitRequest(v *StreamReadMessage_InitRequest) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_InitRequest{v}
+}
+
+func (x *StreamReadMessage_FromClient) SetReadRequest(v *StreamReadMessage_ReadRequest) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_ReadRequest{v}
+}
+
+func (x *StreamReadMessage_FromClient) SetCommitOffsetRequest(v *StreamReadMessage_CommitOffsetRequest) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_CommitOffsetRequest{v}
+}
+
+func (x *StreamReadMessage_FromClient) SetPartitionSessionStatusRequest(v *StreamReadMessage_PartitionSessionStatusRequest) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_PartitionSessionStatusRequest{v}
+}
+
+func (x *StreamReadMessage_FromClient) SetUpdateTokenRequest(v *UpdateTokenRequest) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_UpdateTokenRequest{v}
+}
+
+func (x *StreamReadMessage_FromClient) SetDirectReadAck(v *StreamReadMessage_DirectReadAck) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_DirectReadAck{v}
+}
+
+func (x *StreamReadMessage_FromClient) SetStartPartitionSessionResponse(v *StreamReadMessage_StartPartitionSessionResponse) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_StartPartitionSessionResponse{v}
+}
+
+func (x *StreamReadMessage_FromClient) SetStopPartitionSessionResponse(v *StreamReadMessage_StopPartitionSessionResponse) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_StopPartitionSessionResponse{v}
+}
+
+func (x *StreamReadMessage_FromClient) HasClientMessage() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ClientMessage != nil
+}
+
+func (x *StreamReadMessage_FromClient) HasInitRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_InitRequest)
+	return ok
+}
+
+func (x *StreamReadMessage_FromClient) HasReadRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_ReadRequest)
+	return ok
+}
+
+func (x *StreamReadMessage_FromClient) HasCommitOffsetRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_CommitOffsetRequest)
+	return ok
+}
+
+func (x *StreamReadMessage_FromClient) HasPartitionSessionStatusRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_PartitionSessionStatusRequest)
+	return ok
+}
+
+func (x *StreamReadMessage_FromClient) HasUpdateTokenRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_UpdateTokenRequest)
+	return ok
+}
+
+func (x *StreamReadMessage_FromClient) HasDirectReadAck() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_DirectReadAck)
+	return ok
+}
+
+func (x *StreamReadMessage_FromClient) HasStartPartitionSessionResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_StartPartitionSessionResponse)
+	return ok
+}
+
+func (x *StreamReadMessage_FromClient) HasStopPartitionSessionResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_StopPartitionSessionResponse)
+	return ok
+}
+
+func (x *StreamReadMessage_FromClient) ClearClientMessage() {
+	x.xxx_hidden_ClientMessage = nil
+}
+
+func (x *StreamReadMessage_FromClient) ClearInitRequest() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_InitRequest); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromClient) ClearReadRequest() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_ReadRequest); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromClient) ClearCommitOffsetRequest() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_CommitOffsetRequest); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromClient) ClearPartitionSessionStatusRequest() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_PartitionSessionStatusRequest); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromClient) ClearUpdateTokenRequest() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_UpdateTokenRequest); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromClient) ClearDirectReadAck() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_DirectReadAck); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromClient) ClearStartPartitionSessionResponse() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_StartPartitionSessionResponse); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromClient) ClearStopPartitionSessionResponse() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamReadMessage_FromClient_StopPartitionSessionResponse); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+const StreamReadMessage_FromClient_ClientMessage_not_set_case case_StreamReadMessage_FromClient_ClientMessage = 0
+const StreamReadMessage_FromClient_InitRequest_case case_StreamReadMessage_FromClient_ClientMessage = 1
+const StreamReadMessage_FromClient_ReadRequest_case case_StreamReadMessage_FromClient_ClientMessage = 2
+const StreamReadMessage_FromClient_CommitOffsetRequest_case case_StreamReadMessage_FromClient_ClientMessage = 3
+const StreamReadMessage_FromClient_PartitionSessionStatusRequest_case case_StreamReadMessage_FromClient_ClientMessage = 4
+const StreamReadMessage_FromClient_UpdateTokenRequest_case case_StreamReadMessage_FromClient_ClientMessage = 5
+const StreamReadMessage_FromClient_DirectReadAck_case case_StreamReadMessage_FromClient_ClientMessage = 8
+const StreamReadMessage_FromClient_StartPartitionSessionResponse_case case_StreamReadMessage_FromClient_ClientMessage = 6
+const StreamReadMessage_FromClient_StopPartitionSessionResponse_case case_StreamReadMessage_FromClient_ClientMessage = 7
+
+func (x *StreamReadMessage_FromClient) WhichClientMessage() case_StreamReadMessage_FromClient_ClientMessage {
+	if x == nil {
+		return StreamReadMessage_FromClient_ClientMessage_not_set_case
+	}
+	switch x.xxx_hidden_ClientMessage.(type) {
+	case *streamReadMessage_FromClient_InitRequest:
+		return StreamReadMessage_FromClient_InitRequest_case
+	case *streamReadMessage_FromClient_ReadRequest:
+		return StreamReadMessage_FromClient_ReadRequest_case
+	case *streamReadMessage_FromClient_CommitOffsetRequest:
+		return StreamReadMessage_FromClient_CommitOffsetRequest_case
+	case *streamReadMessage_FromClient_PartitionSessionStatusRequest:
+		return StreamReadMessage_FromClient_PartitionSessionStatusRequest_case
+	case *streamReadMessage_FromClient_UpdateTokenRequest:
+		return StreamReadMessage_FromClient_UpdateTokenRequest_case
+	case *streamReadMessage_FromClient_DirectReadAck:
+		return StreamReadMessage_FromClient_DirectReadAck_case
+	case *streamReadMessage_FromClient_StartPartitionSessionResponse:
+		return StreamReadMessage_FromClient_StartPartitionSessionResponse_case
+	case *streamReadMessage_FromClient_StopPartitionSessionResponse:
+		return StreamReadMessage_FromClient_StopPartitionSessionResponse_case
+	default:
+		return StreamReadMessage_FromClient_ClientMessage_not_set_case
+	}
+}
+
+type StreamReadMessage_FromClient_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_ClientMessage:
+	// Client requests.
+	InitRequest                   *StreamReadMessage_InitRequest
+	ReadRequest                   *StreamReadMessage_ReadRequest
+	CommitOffsetRequest           *StreamReadMessage_CommitOffsetRequest
+	PartitionSessionStatusRequest *StreamReadMessage_PartitionSessionStatusRequest
+	UpdateTokenRequest            *UpdateTokenRequest
+	DirectReadAck                 *StreamReadMessage_DirectReadAck
+	// Responses to respective server commands.
+	StartPartitionSessionResponse *StreamReadMessage_StartPartitionSessionResponse
+	StopPartitionSessionResponse  *StreamReadMessage_StopPartitionSessionResponse
+	// -- end of xxx_hidden_ClientMessage
+}
+
+func (b0 StreamReadMessage_FromClient_builder) Build() *StreamReadMessage_FromClient {
+	m0 := &StreamReadMessage_FromClient{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.InitRequest != nil {
+		x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_InitRequest{b.InitRequest}
+	}
+	if b.ReadRequest != nil {
+		x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_ReadRequest{b.ReadRequest}
+	}
+	if b.CommitOffsetRequest != nil {
+		x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_CommitOffsetRequest{b.CommitOffsetRequest}
+	}
+	if b.PartitionSessionStatusRequest != nil {
+		x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_PartitionSessionStatusRequest{b.PartitionSessionStatusRequest}
+	}
+	if b.UpdateTokenRequest != nil {
+		x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_UpdateTokenRequest{b.UpdateTokenRequest}
+	}
+	if b.DirectReadAck != nil {
+		x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_DirectReadAck{b.DirectReadAck}
+	}
+	if b.StartPartitionSessionResponse != nil {
+		x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_StartPartitionSessionResponse{b.StartPartitionSessionResponse}
+	}
+	if b.StopPartitionSessionResponse != nil {
+		x.xxx_hidden_ClientMessage = &streamReadMessage_FromClient_StopPartitionSessionResponse{b.StopPartitionSessionResponse}
+	}
+	return m0
+}
+
+type case_StreamReadMessage_FromClient_ClientMessage protoreflect.FieldNumber
+
+func (x case_StreamReadMessage_FromClient_ClientMessage) String() string {
+	md := file_protos_ydb_topic_proto_msgTypes[60].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isStreamReadMessage_FromClient_ClientMessage interface {
 	isStreamReadMessage_FromClient_ClientMessage()
 }
 
-type StreamReadMessage_FromClient_InitRequest struct {
+type streamReadMessage_FromClient_InitRequest struct {
 	// Client requests.
 	InitRequest *StreamReadMessage_InitRequest `protobuf:"bytes,1,opt,name=init_request,json=initRequest,proto3,oneof"`
 }
 
-type StreamReadMessage_FromClient_ReadRequest struct {
+type streamReadMessage_FromClient_ReadRequest struct {
 	ReadRequest *StreamReadMessage_ReadRequest `protobuf:"bytes,2,opt,name=read_request,json=readRequest,proto3,oneof"`
 }
 
-type StreamReadMessage_FromClient_CommitOffsetRequest struct {
+type streamReadMessage_FromClient_CommitOffsetRequest struct {
 	CommitOffsetRequest *StreamReadMessage_CommitOffsetRequest `protobuf:"bytes,3,opt,name=commit_offset_request,json=commitOffsetRequest,proto3,oneof"`
 }
 
-type StreamReadMessage_FromClient_PartitionSessionStatusRequest struct {
+type streamReadMessage_FromClient_PartitionSessionStatusRequest struct {
 	PartitionSessionStatusRequest *StreamReadMessage_PartitionSessionStatusRequest `protobuf:"bytes,4,opt,name=partition_session_status_request,json=partitionSessionStatusRequest,proto3,oneof"`
 }
 
-type StreamReadMessage_FromClient_UpdateTokenRequest struct {
+type streamReadMessage_FromClient_UpdateTokenRequest struct {
 	UpdateTokenRequest *UpdateTokenRequest `protobuf:"bytes,5,opt,name=update_token_request,json=updateTokenRequest,proto3,oneof"`
 }
 
-type StreamReadMessage_FromClient_DirectReadAck struct {
+type streamReadMessage_FromClient_DirectReadAck struct {
 	DirectReadAck *StreamReadMessage_DirectReadAck `protobuf:"bytes,8,opt,name=direct_read_ack,json=directReadAck,proto3,oneof"`
 }
 
-type StreamReadMessage_FromClient_StartPartitionSessionResponse struct {
+type streamReadMessage_FromClient_StartPartitionSessionResponse struct {
 	// Responses to respective server commands.
 	StartPartitionSessionResponse *StreamReadMessage_StartPartitionSessionResponse `protobuf:"bytes,6,opt,name=start_partition_session_response,json=startPartitionSessionResponse,proto3,oneof"`
 }
 
-type StreamReadMessage_FromClient_StopPartitionSessionResponse struct {
+type streamReadMessage_FromClient_StopPartitionSessionResponse struct {
 	StopPartitionSessionResponse *StreamReadMessage_StopPartitionSessionResponse `protobuf:"bytes,7,opt,name=stop_partition_session_response,json=stopPartitionSessionResponse,proto3,oneof"`
 }
 
-func (*StreamReadMessage_FromClient_InitRequest) isStreamReadMessage_FromClient_ClientMessage() {}
+func (*streamReadMessage_FromClient_InitRequest) isStreamReadMessage_FromClient_ClientMessage() {}
 
-func (*StreamReadMessage_FromClient_ReadRequest) isStreamReadMessage_FromClient_ClientMessage() {}
+func (*streamReadMessage_FromClient_ReadRequest) isStreamReadMessage_FromClient_ClientMessage() {}
 
-func (*StreamReadMessage_FromClient_CommitOffsetRequest) isStreamReadMessage_FromClient_ClientMessage() {
+func (*streamReadMessage_FromClient_CommitOffsetRequest) isStreamReadMessage_FromClient_ClientMessage() {
 }
 
-func (*StreamReadMessage_FromClient_PartitionSessionStatusRequest) isStreamReadMessage_FromClient_ClientMessage() {
+func (*streamReadMessage_FromClient_PartitionSessionStatusRequest) isStreamReadMessage_FromClient_ClientMessage() {
 }
 
-func (*StreamReadMessage_FromClient_UpdateTokenRequest) isStreamReadMessage_FromClient_ClientMessage() {
+func (*streamReadMessage_FromClient_UpdateTokenRequest) isStreamReadMessage_FromClient_ClientMessage() {
 }
 
-func (*StreamReadMessage_FromClient_DirectReadAck) isStreamReadMessage_FromClient_ClientMessage() {}
+func (*streamReadMessage_FromClient_DirectReadAck) isStreamReadMessage_FromClient_ClientMessage() {}
 
-func (*StreamReadMessage_FromClient_StartPartitionSessionResponse) isStreamReadMessage_FromClient_ClientMessage() {
+func (*streamReadMessage_FromClient_StartPartitionSessionResponse) isStreamReadMessage_FromClient_ClientMessage() {
 }
 
-func (*StreamReadMessage_FromClient_StopPartitionSessionResponse) isStreamReadMessage_FromClient_ClientMessage() {
+func (*streamReadMessage_FromClient_StopPartitionSessionResponse) isStreamReadMessage_FromClient_ClientMessage() {
 }
 
 // Server-client message for read session. Contains one of:
@@ -4447,25 +7442,12 @@ func (*StreamReadMessage_FromClient_StopPartitionSessionResponse) isStreamReadMe
 //	StopPartitionSessionRequest - command from server to destroy a partition session.
 //	UpdatePartitionSession - command from server to update a partition session.
 type StreamReadMessage_FromServer struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Server status of response.
-	Status Ydb.StatusIds_StatusCode `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	// Issues if any.
-	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	// Types that are valid to be assigned to ServerMessage:
-	//
-	//	*StreamReadMessage_FromServer_InitResponse
-	//	*StreamReadMessage_FromServer_ReadResponse
-	//	*StreamReadMessage_FromServer_CommitOffsetResponse
-	//	*StreamReadMessage_FromServer_PartitionSessionStatusResponse
-	//	*StreamReadMessage_FromServer_UpdateTokenResponse
-	//	*StreamReadMessage_FromServer_StartPartitionSessionRequest
-	//	*StreamReadMessage_FromServer_StopPartitionSessionRequest
-	//	*StreamReadMessage_FromServer_UpdatePartitionSession
-	//	*StreamReadMessage_FromServer_EndPartitionSession
-	ServerMessage isStreamReadMessage_FromServer_ServerMessage `protobuf_oneof:"server_message"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState                       `protogen:"opaque.v1"`
+	xxx_hidden_Status        Ydb.StatusIds_StatusCode                     `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues        *[]*Ydb_Issue.IssueMessage                   `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_ServerMessage isStreamReadMessage_FromServer_ServerMessage `protobuf_oneof:"server_message"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_FromServer) Reset() {
@@ -4493,35 +7475,25 @@ func (x *StreamReadMessage_FromServer) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_FromServer.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_FromServer) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 2}
-}
-
 func (x *StreamReadMessage_FromServer) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *StreamReadMessage_FromServer) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
-	}
-	return nil
-}
-
-func (x *StreamReadMessage_FromServer) GetServerMessage() isStreamReadMessage_FromServer_ServerMessage {
-	if x != nil {
-		return x.ServerMessage
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_FromServer) GetInitResponse() *StreamReadMessage_InitResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamReadMessage_FromServer_InitResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_InitResponse); ok {
 			return x.InitResponse
 		}
 	}
@@ -4530,7 +7502,7 @@ func (x *StreamReadMessage_FromServer) GetInitResponse() *StreamReadMessage_Init
 
 func (x *StreamReadMessage_FromServer) GetReadResponse() *StreamReadMessage_ReadResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamReadMessage_FromServer_ReadResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_ReadResponse); ok {
 			return x.ReadResponse
 		}
 	}
@@ -4539,7 +7511,7 @@ func (x *StreamReadMessage_FromServer) GetReadResponse() *StreamReadMessage_Read
 
 func (x *StreamReadMessage_FromServer) GetCommitOffsetResponse() *StreamReadMessage_CommitOffsetResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamReadMessage_FromServer_CommitOffsetResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_CommitOffsetResponse); ok {
 			return x.CommitOffsetResponse
 		}
 	}
@@ -4548,7 +7520,7 @@ func (x *StreamReadMessage_FromServer) GetCommitOffsetResponse() *StreamReadMess
 
 func (x *StreamReadMessage_FromServer) GetPartitionSessionStatusResponse() *StreamReadMessage_PartitionSessionStatusResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamReadMessage_FromServer_PartitionSessionStatusResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_PartitionSessionStatusResponse); ok {
 			return x.PartitionSessionStatusResponse
 		}
 	}
@@ -4557,7 +7529,7 @@ func (x *StreamReadMessage_FromServer) GetPartitionSessionStatusResponse() *Stre
 
 func (x *StreamReadMessage_FromServer) GetUpdateTokenResponse() *UpdateTokenResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamReadMessage_FromServer_UpdateTokenResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_UpdateTokenResponse); ok {
 			return x.UpdateTokenResponse
 		}
 	}
@@ -4566,7 +7538,7 @@ func (x *StreamReadMessage_FromServer) GetUpdateTokenResponse() *UpdateTokenResp
 
 func (x *StreamReadMessage_FromServer) GetStartPartitionSessionRequest() *StreamReadMessage_StartPartitionSessionRequest {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamReadMessage_FromServer_StartPartitionSessionRequest); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_StartPartitionSessionRequest); ok {
 			return x.StartPartitionSessionRequest
 		}
 	}
@@ -4575,7 +7547,7 @@ func (x *StreamReadMessage_FromServer) GetStartPartitionSessionRequest() *Stream
 
 func (x *StreamReadMessage_FromServer) GetStopPartitionSessionRequest() *StreamReadMessage_StopPartitionSessionRequest {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamReadMessage_FromServer_StopPartitionSessionRequest); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_StopPartitionSessionRequest); ok {
 			return x.StopPartitionSessionRequest
 		}
 	}
@@ -4584,7 +7556,7 @@ func (x *StreamReadMessage_FromServer) GetStopPartitionSessionRequest() *StreamR
 
 func (x *StreamReadMessage_FromServer) GetUpdatePartitionSession() *StreamReadMessage_UpdatePartitionSession {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamReadMessage_FromServer_UpdatePartitionSession); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_UpdatePartitionSession); ok {
 			return x.UpdatePartitionSession
 		}
 	}
@@ -4593,96 +7565,414 @@ func (x *StreamReadMessage_FromServer) GetUpdatePartitionSession() *StreamReadMe
 
 func (x *StreamReadMessage_FromServer) GetEndPartitionSession() *StreamReadMessage_EndPartitionSession {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamReadMessage_FromServer_EndPartitionSession); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_EndPartitionSession); ok {
 			return x.EndPartitionSession
 		}
 	}
 	return nil
 }
 
+func (x *StreamReadMessage_FromServer) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *StreamReadMessage_FromServer) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *StreamReadMessage_FromServer) SetInitResponse(v *StreamReadMessage_InitResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_InitResponse{v}
+}
+
+func (x *StreamReadMessage_FromServer) SetReadResponse(v *StreamReadMessage_ReadResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_ReadResponse{v}
+}
+
+func (x *StreamReadMessage_FromServer) SetCommitOffsetResponse(v *StreamReadMessage_CommitOffsetResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_CommitOffsetResponse{v}
+}
+
+func (x *StreamReadMessage_FromServer) SetPartitionSessionStatusResponse(v *StreamReadMessage_PartitionSessionStatusResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_PartitionSessionStatusResponse{v}
+}
+
+func (x *StreamReadMessage_FromServer) SetUpdateTokenResponse(v *UpdateTokenResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_UpdateTokenResponse{v}
+}
+
+func (x *StreamReadMessage_FromServer) SetStartPartitionSessionRequest(v *StreamReadMessage_StartPartitionSessionRequest) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_StartPartitionSessionRequest{v}
+}
+
+func (x *StreamReadMessage_FromServer) SetStopPartitionSessionRequest(v *StreamReadMessage_StopPartitionSessionRequest) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_StopPartitionSessionRequest{v}
+}
+
+func (x *StreamReadMessage_FromServer) SetUpdatePartitionSession(v *StreamReadMessage_UpdatePartitionSession) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_UpdatePartitionSession{v}
+}
+
+func (x *StreamReadMessage_FromServer) SetEndPartitionSession(v *StreamReadMessage_EndPartitionSession) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_EndPartitionSession{v}
+}
+
+func (x *StreamReadMessage_FromServer) HasServerMessage() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ServerMessage != nil
+}
+
+func (x *StreamReadMessage_FromServer) HasInitResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_InitResponse)
+	return ok
+}
+
+func (x *StreamReadMessage_FromServer) HasReadResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_ReadResponse)
+	return ok
+}
+
+func (x *StreamReadMessage_FromServer) HasCommitOffsetResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_CommitOffsetResponse)
+	return ok
+}
+
+func (x *StreamReadMessage_FromServer) HasPartitionSessionStatusResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_PartitionSessionStatusResponse)
+	return ok
+}
+
+func (x *StreamReadMessage_FromServer) HasUpdateTokenResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_UpdateTokenResponse)
+	return ok
+}
+
+func (x *StreamReadMessage_FromServer) HasStartPartitionSessionRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_StartPartitionSessionRequest)
+	return ok
+}
+
+func (x *StreamReadMessage_FromServer) HasStopPartitionSessionRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_StopPartitionSessionRequest)
+	return ok
+}
+
+func (x *StreamReadMessage_FromServer) HasUpdatePartitionSession() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_UpdatePartitionSession)
+	return ok
+}
+
+func (x *StreamReadMessage_FromServer) HasEndPartitionSession() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_EndPartitionSession)
+	return ok
+}
+
+func (x *StreamReadMessage_FromServer) ClearServerMessage() {
+	x.xxx_hidden_ServerMessage = nil
+}
+
+func (x *StreamReadMessage_FromServer) ClearInitResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_InitResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromServer) ClearReadResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_ReadResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromServer) ClearCommitOffsetResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_CommitOffsetResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromServer) ClearPartitionSessionStatusResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_PartitionSessionStatusResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromServer) ClearUpdateTokenResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_UpdateTokenResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromServer) ClearStartPartitionSessionRequest() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_StartPartitionSessionRequest); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromServer) ClearStopPartitionSessionRequest() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_StopPartitionSessionRequest); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromServer) ClearUpdatePartitionSession() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_UpdatePartitionSession); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamReadMessage_FromServer) ClearEndPartitionSession() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamReadMessage_FromServer_EndPartitionSession); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+const StreamReadMessage_FromServer_ServerMessage_not_set_case case_StreamReadMessage_FromServer_ServerMessage = 0
+const StreamReadMessage_FromServer_InitResponse_case case_StreamReadMessage_FromServer_ServerMessage = 3
+const StreamReadMessage_FromServer_ReadResponse_case case_StreamReadMessage_FromServer_ServerMessage = 4
+const StreamReadMessage_FromServer_CommitOffsetResponse_case case_StreamReadMessage_FromServer_ServerMessage = 5
+const StreamReadMessage_FromServer_PartitionSessionStatusResponse_case case_StreamReadMessage_FromServer_ServerMessage = 6
+const StreamReadMessage_FromServer_UpdateTokenResponse_case case_StreamReadMessage_FromServer_ServerMessage = 7
+const StreamReadMessage_FromServer_StartPartitionSessionRequest_case case_StreamReadMessage_FromServer_ServerMessage = 8
+const StreamReadMessage_FromServer_StopPartitionSessionRequest_case case_StreamReadMessage_FromServer_ServerMessage = 9
+const StreamReadMessage_FromServer_UpdatePartitionSession_case case_StreamReadMessage_FromServer_ServerMessage = 10
+const StreamReadMessage_FromServer_EndPartitionSession_case case_StreamReadMessage_FromServer_ServerMessage = 11
+
+func (x *StreamReadMessage_FromServer) WhichServerMessage() case_StreamReadMessage_FromServer_ServerMessage {
+	if x == nil {
+		return StreamReadMessage_FromServer_ServerMessage_not_set_case
+	}
+	switch x.xxx_hidden_ServerMessage.(type) {
+	case *streamReadMessage_FromServer_InitResponse:
+		return StreamReadMessage_FromServer_InitResponse_case
+	case *streamReadMessage_FromServer_ReadResponse:
+		return StreamReadMessage_FromServer_ReadResponse_case
+	case *streamReadMessage_FromServer_CommitOffsetResponse:
+		return StreamReadMessage_FromServer_CommitOffsetResponse_case
+	case *streamReadMessage_FromServer_PartitionSessionStatusResponse:
+		return StreamReadMessage_FromServer_PartitionSessionStatusResponse_case
+	case *streamReadMessage_FromServer_UpdateTokenResponse:
+		return StreamReadMessage_FromServer_UpdateTokenResponse_case
+	case *streamReadMessage_FromServer_StartPartitionSessionRequest:
+		return StreamReadMessage_FromServer_StartPartitionSessionRequest_case
+	case *streamReadMessage_FromServer_StopPartitionSessionRequest:
+		return StreamReadMessage_FromServer_StopPartitionSessionRequest_case
+	case *streamReadMessage_FromServer_UpdatePartitionSession:
+		return StreamReadMessage_FromServer_UpdatePartitionSession_case
+	case *streamReadMessage_FromServer_EndPartitionSession:
+		return StreamReadMessage_FromServer_EndPartitionSession_case
+	default:
+		return StreamReadMessage_FromServer_ServerMessage_not_set_case
+	}
+}
+
+type StreamReadMessage_FromServer_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Server status of response.
+	Status Ydb.StatusIds_StatusCode
+	// Issues if any.
+	Issues []*Ydb_Issue.IssueMessage
+	// Fields of oneof xxx_hidden_ServerMessage:
+	// Responses to respective client requests.
+	InitResponse                   *StreamReadMessage_InitResponse
+	ReadResponse                   *StreamReadMessage_ReadResponse
+	CommitOffsetResponse           *StreamReadMessage_CommitOffsetResponse
+	PartitionSessionStatusResponse *StreamReadMessage_PartitionSessionStatusResponse
+	UpdateTokenResponse            *UpdateTokenResponse
+	// Server commands.
+	StartPartitionSessionRequest *StreamReadMessage_StartPartitionSessionRequest
+	StopPartitionSessionRequest  *StreamReadMessage_StopPartitionSessionRequest
+	UpdatePartitionSession       *StreamReadMessage_UpdatePartitionSession
+	EndPartitionSession          *StreamReadMessage_EndPartitionSession
+	// -- end of xxx_hidden_ServerMessage
+}
+
+func (b0 StreamReadMessage_FromServer_builder) Build() *StreamReadMessage_FromServer {
+	m0 := &StreamReadMessage_FromServer{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	if b.InitResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_InitResponse{b.InitResponse}
+	}
+	if b.ReadResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_ReadResponse{b.ReadResponse}
+	}
+	if b.CommitOffsetResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_CommitOffsetResponse{b.CommitOffsetResponse}
+	}
+	if b.PartitionSessionStatusResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_PartitionSessionStatusResponse{b.PartitionSessionStatusResponse}
+	}
+	if b.UpdateTokenResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_UpdateTokenResponse{b.UpdateTokenResponse}
+	}
+	if b.StartPartitionSessionRequest != nil {
+		x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_StartPartitionSessionRequest{b.StartPartitionSessionRequest}
+	}
+	if b.StopPartitionSessionRequest != nil {
+		x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_StopPartitionSessionRequest{b.StopPartitionSessionRequest}
+	}
+	if b.UpdatePartitionSession != nil {
+		x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_UpdatePartitionSession{b.UpdatePartitionSession}
+	}
+	if b.EndPartitionSession != nil {
+		x.xxx_hidden_ServerMessage = &streamReadMessage_FromServer_EndPartitionSession{b.EndPartitionSession}
+	}
+	return m0
+}
+
+type case_StreamReadMessage_FromServer_ServerMessage protoreflect.FieldNumber
+
+func (x case_StreamReadMessage_FromServer_ServerMessage) String() string {
+	md := file_protos_ydb_topic_proto_msgTypes[61].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isStreamReadMessage_FromServer_ServerMessage interface {
 	isStreamReadMessage_FromServer_ServerMessage()
 }
 
-type StreamReadMessage_FromServer_InitResponse struct {
+type streamReadMessage_FromServer_InitResponse struct {
 	// Responses to respective client requests.
 	InitResponse *StreamReadMessage_InitResponse `protobuf:"bytes,3,opt,name=init_response,json=initResponse,proto3,oneof"`
 }
 
-type StreamReadMessage_FromServer_ReadResponse struct {
+type streamReadMessage_FromServer_ReadResponse struct {
 	ReadResponse *StreamReadMessage_ReadResponse `protobuf:"bytes,4,opt,name=read_response,json=readResponse,proto3,oneof"`
 }
 
-type StreamReadMessage_FromServer_CommitOffsetResponse struct {
+type streamReadMessage_FromServer_CommitOffsetResponse struct {
 	CommitOffsetResponse *StreamReadMessage_CommitOffsetResponse `protobuf:"bytes,5,opt,name=commit_offset_response,json=commitOffsetResponse,proto3,oneof"`
 }
 
-type StreamReadMessage_FromServer_PartitionSessionStatusResponse struct {
+type streamReadMessage_FromServer_PartitionSessionStatusResponse struct {
 	PartitionSessionStatusResponse *StreamReadMessage_PartitionSessionStatusResponse `protobuf:"bytes,6,opt,name=partition_session_status_response,json=partitionSessionStatusResponse,proto3,oneof"`
 }
 
-type StreamReadMessage_FromServer_UpdateTokenResponse struct {
+type streamReadMessage_FromServer_UpdateTokenResponse struct {
 	UpdateTokenResponse *UpdateTokenResponse `protobuf:"bytes,7,opt,name=update_token_response,json=updateTokenResponse,proto3,oneof"`
 }
 
-type StreamReadMessage_FromServer_StartPartitionSessionRequest struct {
+type streamReadMessage_FromServer_StartPartitionSessionRequest struct {
 	// Server commands.
 	StartPartitionSessionRequest *StreamReadMessage_StartPartitionSessionRequest `protobuf:"bytes,8,opt,name=start_partition_session_request,json=startPartitionSessionRequest,proto3,oneof"`
 }
 
-type StreamReadMessage_FromServer_StopPartitionSessionRequest struct {
+type streamReadMessage_FromServer_StopPartitionSessionRequest struct {
 	StopPartitionSessionRequest *StreamReadMessage_StopPartitionSessionRequest `protobuf:"bytes,9,opt,name=stop_partition_session_request,json=stopPartitionSessionRequest,proto3,oneof"`
 }
 
-type StreamReadMessage_FromServer_UpdatePartitionSession struct {
+type streamReadMessage_FromServer_UpdatePartitionSession struct {
 	UpdatePartitionSession *StreamReadMessage_UpdatePartitionSession `protobuf:"bytes,10,opt,name=update_partition_session,json=updatePartitionSession,proto3,oneof"`
 }
 
-type StreamReadMessage_FromServer_EndPartitionSession struct {
+type streamReadMessage_FromServer_EndPartitionSession struct {
 	EndPartitionSession *StreamReadMessage_EndPartitionSession `protobuf:"bytes,11,opt,name=end_partition_session,json=endPartitionSession,proto3,oneof"`
 }
 
-func (*StreamReadMessage_FromServer_InitResponse) isStreamReadMessage_FromServer_ServerMessage() {}
+func (*streamReadMessage_FromServer_InitResponse) isStreamReadMessage_FromServer_ServerMessage() {}
 
-func (*StreamReadMessage_FromServer_ReadResponse) isStreamReadMessage_FromServer_ServerMessage() {}
+func (*streamReadMessage_FromServer_ReadResponse) isStreamReadMessage_FromServer_ServerMessage() {}
 
-func (*StreamReadMessage_FromServer_CommitOffsetResponse) isStreamReadMessage_FromServer_ServerMessage() {
+func (*streamReadMessage_FromServer_CommitOffsetResponse) isStreamReadMessage_FromServer_ServerMessage() {
 }
 
-func (*StreamReadMessage_FromServer_PartitionSessionStatusResponse) isStreamReadMessage_FromServer_ServerMessage() {
+func (*streamReadMessage_FromServer_PartitionSessionStatusResponse) isStreamReadMessage_FromServer_ServerMessage() {
 }
 
-func (*StreamReadMessage_FromServer_UpdateTokenResponse) isStreamReadMessage_FromServer_ServerMessage() {
+func (*streamReadMessage_FromServer_UpdateTokenResponse) isStreamReadMessage_FromServer_ServerMessage() {
 }
 
-func (*StreamReadMessage_FromServer_StartPartitionSessionRequest) isStreamReadMessage_FromServer_ServerMessage() {
+func (*streamReadMessage_FromServer_StartPartitionSessionRequest) isStreamReadMessage_FromServer_ServerMessage() {
 }
 
-func (*StreamReadMessage_FromServer_StopPartitionSessionRequest) isStreamReadMessage_FromServer_ServerMessage() {
+func (*streamReadMessage_FromServer_StopPartitionSessionRequest) isStreamReadMessage_FromServer_ServerMessage() {
 }
 
-func (*StreamReadMessage_FromServer_UpdatePartitionSession) isStreamReadMessage_FromServer_ServerMessage() {
+func (*streamReadMessage_FromServer_UpdatePartitionSession) isStreamReadMessage_FromServer_ServerMessage() {
 }
 
-func (*StreamReadMessage_FromServer_EndPartitionSession) isStreamReadMessage_FromServer_ServerMessage() {
+func (*streamReadMessage_FromServer_EndPartitionSession) isStreamReadMessage_FromServer_ServerMessage() {
 }
 
 // Handshake request.
 type StreamReadMessage_InitRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Message that describes topic to read.
-	// Topics that will be read by this session.
-	TopicsReadSettings []*StreamReadMessage_InitRequest_TopicReadSettings `protobuf:"bytes,1,rep,name=topics_read_settings,json=topicsReadSettings,proto3" json:"topics_read_settings,omitempty"`
-	// Path of consumer that is used for reading by this session.
-	Consumer string `protobuf:"bytes,2,opt,name=consumer,proto3" json:"consumer,omitempty"`
-	// Optional name. Will be shown in debug stat.
-	ReaderName string `protobuf:"bytes,3,opt,name=reader_name,json=readerName,proto3" json:"reader_name,omitempty"`
-	// Direct reading from a partition node.
-	DirectRead bool `protobuf:"varint,4,opt,name=direct_read,json=directRead,proto3" json:"direct_read,omitempty"`
-	// Indicates that the SDK supports auto partitioning.
-	AutoPartitioningSupport bool `protobuf:"varint,5,opt,name=auto_partitioning_support,json=autoPartitioningSupport,proto3" json:"auto_partitioning_support,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                              protoimpl.MessageState                              `protogen:"opaque.v1"`
+	xxx_hidden_TopicsReadSettings      *[]*StreamReadMessage_InitRequest_TopicReadSettings `protobuf:"bytes,1,rep,name=topics_read_settings,json=topicsReadSettings,proto3"`
+	xxx_hidden_Consumer                string                                              `protobuf:"bytes,2,opt,name=consumer,proto3"`
+	xxx_hidden_ReaderName              string                                              `protobuf:"bytes,3,opt,name=reader_name,json=readerName,proto3"`
+	xxx_hidden_DirectRead              bool                                                `protobuf:"varint,4,opt,name=direct_read,json=directRead,proto3"`
+	xxx_hidden_AutoPartitioningSupport bool                                                `protobuf:"varint,5,opt,name=auto_partitioning_support,json=autoPartitioningSupport,proto3"`
+	unknownFields                      protoimpl.UnknownFields
+	sizeCache                          protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_InitRequest) Reset() {
@@ -4710,53 +8000,97 @@ func (x *StreamReadMessage_InitRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_InitRequest.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_InitRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 3}
-}
-
 func (x *StreamReadMessage_InitRequest) GetTopicsReadSettings() []*StreamReadMessage_InitRequest_TopicReadSettings {
 	if x != nil {
-		return x.TopicsReadSettings
+		if x.xxx_hidden_TopicsReadSettings != nil {
+			return *x.xxx_hidden_TopicsReadSettings
+		}
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_InitRequest) GetConsumer() string {
 	if x != nil {
-		return x.Consumer
+		return x.xxx_hidden_Consumer
 	}
 	return ""
 }
 
 func (x *StreamReadMessage_InitRequest) GetReaderName() string {
 	if x != nil {
-		return x.ReaderName
+		return x.xxx_hidden_ReaderName
 	}
 	return ""
 }
 
 func (x *StreamReadMessage_InitRequest) GetDirectRead() bool {
 	if x != nil {
-		return x.DirectRead
+		return x.xxx_hidden_DirectRead
 	}
 	return false
 }
 
 func (x *StreamReadMessage_InitRequest) GetAutoPartitioningSupport() bool {
 	if x != nil {
-		return x.AutoPartitioningSupport
+		return x.xxx_hidden_AutoPartitioningSupport
 	}
 	return false
 }
 
+func (x *StreamReadMessage_InitRequest) SetTopicsReadSettings(v []*StreamReadMessage_InitRequest_TopicReadSettings) {
+	x.xxx_hidden_TopicsReadSettings = &v
+}
+
+func (x *StreamReadMessage_InitRequest) SetConsumer(v string) {
+	x.xxx_hidden_Consumer = v
+}
+
+func (x *StreamReadMessage_InitRequest) SetReaderName(v string) {
+	x.xxx_hidden_ReaderName = v
+}
+
+func (x *StreamReadMessage_InitRequest) SetDirectRead(v bool) {
+	x.xxx_hidden_DirectRead = v
+}
+
+func (x *StreamReadMessage_InitRequest) SetAutoPartitioningSupport(v bool) {
+	x.xxx_hidden_AutoPartitioningSupport = v
+}
+
+type StreamReadMessage_InitRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Message that describes topic to read.
+	// Topics that will be read by this session.
+	TopicsReadSettings []*StreamReadMessage_InitRequest_TopicReadSettings
+	// Path of consumer that is used for reading by this session.
+	Consumer string
+	// Optional name. Will be shown in debug stat.
+	ReaderName string
+	// Direct reading from a partition node.
+	DirectRead bool
+	// Indicates that the SDK supports auto partitioning.
+	AutoPartitioningSupport bool
+}
+
+func (b0 StreamReadMessage_InitRequest_builder) Build() *StreamReadMessage_InitRequest {
+	m0 := &StreamReadMessage_InitRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TopicsReadSettings = &b.TopicsReadSettings
+	x.xxx_hidden_Consumer = b.Consumer
+	x.xxx_hidden_ReaderName = b.ReaderName
+	x.xxx_hidden_DirectRead = b.DirectRead
+	x.xxx_hidden_AutoPartitioningSupport = b.AutoPartitioningSupport
+	return m0
+}
+
 // Handshake response.
 type StreamReadMessage_InitResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Read session identifier.
-	SessionId     string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_InitResponse) Reset() {
@@ -4784,45 +8118,38 @@ func (x *StreamReadMessage_InitResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_InitResponse.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_InitResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 4}
-}
-
 func (x *StreamReadMessage_InitResponse) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
+func (x *StreamReadMessage_InitResponse) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+type StreamReadMessage_InitResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Read session identifier.
+	SessionId string
+}
+
+func (b0 StreamReadMessage_InitResponse_builder) Build() *StreamReadMessage_InitResponse {
+	m0 := &StreamReadMessage_InitResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	return m0
+}
+
 // Message that represents client readiness for receiving more data.
 type StreamReadMessage_ReadRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Server and client each keep track of total bytes size of all ReadResponses.
-	// When client is ready to receive N more bytes in responses (to increment possible total by N),
-	// it sends a ReadRequest with bytes_size = N.
-	// bytes_size value must be positive.
-	// So in expression 'A = (sum of bytes_size in all ReadRequests) - (sum of bytes_size in all ReadResponses)'
-	//
-	//	server will keep A (available size for responses) non-negative.
-	//
-	// But there is an exception. If server receives ReadRequest, and the first message in response exceeds A -
-	// then it will still be delivered, and A will become negative until enough additional ReadRequests.
-	//
-	// Example:
-	//  1. Let client have 200 bytes buffer. It sends ReadRequest with bytes_size = 200;
-	//  2. Server may return one ReadResponse with bytes_size = 70 and than another 80 bytes response;
-	//     now client buffer has 50 free bytes, server is free to send up to 50 bytes in responses.
-	//  3. Client processes 100 bytes from buffer, now buffer free space is 150 bytes,
-	//     so client sends ReadRequest with bytes_size = 100;
-	//  4. Server is free to send up to 50 + 100 = 150 bytes. But the next read message is too big,
-	//     and it sends 160 bytes ReadResponse.
-	//  5. Let's assume client somehow processes it, and its 200 bytes buffer is free again.
-	//     It should account for excess 10 bytes and send ReadRequest with bytes_size = 210.
-	BytesSize     int64 `protobuf:"varint,1,opt,name=bytes_size,json=bytesSize,proto3" json:"bytes_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_BytesSize int64                  `protobuf:"varint,1,opt,name=bytes_size,json=bytesSize,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_ReadRequest) Reset() {
@@ -4850,28 +8177,59 @@ func (x *StreamReadMessage_ReadRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_ReadRequest.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_ReadRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 5}
-}
-
 func (x *StreamReadMessage_ReadRequest) GetBytesSize() int64 {
 	if x != nil {
-		return x.BytesSize
+		return x.xxx_hidden_BytesSize
 	}
 	return 0
 }
 
+func (x *StreamReadMessage_ReadRequest) SetBytesSize(v int64) {
+	x.xxx_hidden_BytesSize = v
+}
+
+type StreamReadMessage_ReadRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Server and client each keep track of total bytes size of all ReadResponses.
+	// When client is ready to receive N more bytes in responses (to increment possible total by N),
+	// it sends a ReadRequest with bytes_size = N.
+	// bytes_size value must be positive.
+	// So in expression 'A = (sum of bytes_size in all ReadRequests) - (sum of bytes_size in all ReadResponses)'
+	//
+	//	server will keep A (available size for responses) non-negative.
+	//
+	// But there is an exception. If server receives ReadRequest, and the first message in response exceeds A -
+	// then it will still be delivered, and A will become negative until enough additional ReadRequests.
+	//
+	// Example:
+	//  1. Let client have 200 bytes buffer. It sends ReadRequest with bytes_size = 200;
+	//  2. Server may return one ReadResponse with bytes_size = 70 and than another 80 bytes response;
+	//     now client buffer has 50 free bytes, server is free to send up to 50 bytes in responses.
+	//  3. Client processes 100 bytes from buffer, now buffer free space is 150 bytes,
+	//     so client sends ReadRequest with bytes_size = 100;
+	//  4. Server is free to send up to 50 + 100 = 150 bytes. But the next read message is too big,
+	//     and it sends 160 bytes ReadResponse.
+	//  5. Let's assume client somehow processes it, and its 200 bytes buffer is free again.
+	//     It should account for excess 10 bytes and send ReadRequest with bytes_size = 210.
+	BytesSize int64
+}
+
+func (b0 StreamReadMessage_ReadRequest_builder) Build() *StreamReadMessage_ReadRequest {
+	m0 := &StreamReadMessage_ReadRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_BytesSize = b.BytesSize
+	return m0
+}
+
 // Data read.
 type StreamReadMessage_ReadResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Client messages, divided by partitions.
-	PartitionData []*StreamReadMessage_ReadResponse_PartitionData `protobuf:"bytes,1,rep,name=partition_data,json=partitionData,proto3" json:"partition_data,omitempty"`
-	// Total size in bytes of this response as calculated by server.
-	// See ReadRequest comment above.
-	BytesSize     int64 `protobuf:"varint,2,opt,name=bytes_size,json=bytesSize,proto3" json:"bytes_size,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState                           `protogen:"opaque.v1"`
+	xxx_hidden_PartitionData *[]*StreamReadMessage_ReadResponse_PartitionData `protobuf:"bytes,1,rep,name=partition_data,json=partitionData,proto3"`
+	xxx_hidden_BytesSize     int64                                            `protobuf:"varint,2,opt,name=bytes_size,json=bytesSize,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_ReadResponse) Reset() {
@@ -4899,32 +8257,55 @@ func (x *StreamReadMessage_ReadResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_ReadResponse.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_ReadResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 6}
-}
-
 func (x *StreamReadMessage_ReadResponse) GetPartitionData() []*StreamReadMessage_ReadResponse_PartitionData {
 	if x != nil {
-		return x.PartitionData
+		if x.xxx_hidden_PartitionData != nil {
+			return *x.xxx_hidden_PartitionData
+		}
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_ReadResponse) GetBytesSize() int64 {
 	if x != nil {
-		return x.BytesSize
+		return x.xxx_hidden_BytesSize
 	}
 	return 0
 }
 
+func (x *StreamReadMessage_ReadResponse) SetPartitionData(v []*StreamReadMessage_ReadResponse_PartitionData) {
+	x.xxx_hidden_PartitionData = &v
+}
+
+func (x *StreamReadMessage_ReadResponse) SetBytesSize(v int64) {
+	x.xxx_hidden_BytesSize = v
+}
+
+type StreamReadMessage_ReadResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Client messages, divided by partitions.
+	PartitionData []*StreamReadMessage_ReadResponse_PartitionData
+	// Total size in bytes of this response as calculated by server.
+	// See ReadRequest comment above.
+	BytesSize int64
+}
+
+func (b0 StreamReadMessage_ReadResponse_builder) Build() *StreamReadMessage_ReadResponse {
+	m0 := &StreamReadMessage_ReadResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionData = &b.PartitionData
+	x.xxx_hidden_BytesSize = b.BytesSize
+	return m0
+}
+
 // Signal for server that client processed some read data.
 type StreamReadMessage_CommitOffsetRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition offsets that indicates processed data.
-	CommitOffsets []*StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset `protobuf:"bytes,1,rep,name=commit_offsets,json=commitOffsets,proto3" json:"commit_offsets,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState                                          `protogen:"opaque.v1"`
+	xxx_hidden_CommitOffsets *[]*StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset `protobuf:"bytes,1,rep,name=commit_offsets,json=commitOffsets,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_CommitOffsetRequest) Reset() {
@@ -4952,25 +8333,40 @@ func (x *StreamReadMessage_CommitOffsetRequest) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_CommitOffsetRequest.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_CommitOffsetRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 7}
-}
-
 func (x *StreamReadMessage_CommitOffsetRequest) GetCommitOffsets() []*StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset {
 	if x != nil {
-		return x.CommitOffsets
+		if x.xxx_hidden_CommitOffsets != nil {
+			return *x.xxx_hidden_CommitOffsets
+		}
 	}
 	return nil
 }
 
+func (x *StreamReadMessage_CommitOffsetRequest) SetCommitOffsets(v []*StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset) {
+	x.xxx_hidden_CommitOffsets = &v
+}
+
+type StreamReadMessage_CommitOffsetRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition offsets that indicates processed data.
+	CommitOffsets []*StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset
+}
+
+func (b0 StreamReadMessage_CommitOffsetRequest_builder) Build() *StreamReadMessage_CommitOffsetRequest {
+	m0 := &StreamReadMessage_CommitOffsetRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_CommitOffsets = &b.CommitOffsets
+	return m0
+}
+
 // Acknowledgement for commits.
 type StreamReadMessage_CommitOffsetResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partitions with progress.
-	PartitionsCommittedOffsets []*StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset `protobuf:"bytes,1,rep,name=partitions_committed_offsets,json=partitionsCommittedOffsets,proto3" json:"partitions_committed_offsets,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	state                                 protoimpl.MessageState                                              `protogen:"opaque.v1"`
+	xxx_hidden_PartitionsCommittedOffsets *[]*StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset `protobuf:"bytes,1,rep,name=partitions_committed_offsets,json=partitionsCommittedOffsets,proto3"`
+	unknownFields                         protoimpl.UnknownFields
+	sizeCache                             protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_CommitOffsetResponse) Reset() {
@@ -4998,23 +8394,39 @@ func (x *StreamReadMessage_CommitOffsetResponse) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_CommitOffsetResponse.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_CommitOffsetResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 8}
-}
-
 func (x *StreamReadMessage_CommitOffsetResponse) GetPartitionsCommittedOffsets() []*StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset {
 	if x != nil {
-		return x.PartitionsCommittedOffsets
+		if x.xxx_hidden_PartitionsCommittedOffsets != nil {
+			return *x.xxx_hidden_PartitionsCommittedOffsets
+		}
 	}
 	return nil
 }
 
+func (x *StreamReadMessage_CommitOffsetResponse) SetPartitionsCommittedOffsets(v []*StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset) {
+	x.xxx_hidden_PartitionsCommittedOffsets = &v
+}
+
+type StreamReadMessage_CommitOffsetResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partitions with progress.
+	PartitionsCommittedOffsets []*StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset
+}
+
+func (b0 StreamReadMessage_CommitOffsetResponse_builder) Build() *StreamReadMessage_CommitOffsetResponse {
+	m0 := &StreamReadMessage_CommitOffsetResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionsCommittedOffsets = &b.PartitionsCommittedOffsets
+	return m0
+}
+
 type StreamReadMessage_PartitionSessionStatusRequest struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_PartitionSessionStatusRequest) Reset() {
@@ -5042,31 +8454,40 @@ func (x *StreamReadMessage_PartitionSessionStatusRequest) ProtoReflect() protore
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_PartitionSessionStatusRequest.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_PartitionSessionStatusRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 9}
-}
-
 func (x *StreamReadMessage_PartitionSessionStatusRequest) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
+func (x *StreamReadMessage_PartitionSessionStatusRequest) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+type StreamReadMessage_PartitionSessionStatusRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PartitionSessionId int64
+}
+
+func (b0 StreamReadMessage_PartitionSessionStatusRequest_builder) Build() *StreamReadMessage_PartitionSessionStatusRequest {
+	m0 := &StreamReadMessage_PartitionSessionStatusRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	return m0
+}
+
 // Response to status request.
 type StreamReadMessage_PartitionSessionStatusResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Identifier of partition session whose status was requested.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Partition contains messages with offsets in range [start, end).
-	PartitionOffsets *OffsetsRange `protobuf:"bytes,2,opt,name=partition_offsets,json=partitionOffsets,proto3" json:"partition_offsets,omitempty"`
-	// Each offset up to and including (committed_offset - 1) was fully processed.
-	CommittedOffset int64 `protobuf:"varint,3,opt,name=committed_offset,json=committedOffset,proto3" json:"committed_offset,omitempty"`
-	// Write timestamp of next message written to this partition will be no less than write_time_high_watermark.
-	WriteTimeHighWatermark *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=write_time_high_watermark,json=writeTimeHighWatermark,proto3" json:"write_time_high_watermark,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId     int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_PartitionOffsets       *OffsetsRange          `protobuf:"bytes,2,opt,name=partition_offsets,json=partitionOffsets,proto3"`
+	xxx_hidden_CommittedOffset        int64                  `protobuf:"varint,3,opt,name=committed_offset,json=committedOffset,proto3"`
+	xxx_hidden_WriteTimeHighWatermark *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=write_time_high_watermark,json=writeTimeHighWatermark,proto3"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_PartitionSessionStatusResponse) Reset() {
@@ -5094,53 +8515,106 @@ func (x *StreamReadMessage_PartitionSessionStatusResponse) ProtoReflect() protor
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_PartitionSessionStatusResponse.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_PartitionSessionStatusResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 10}
-}
-
 func (x *StreamReadMessage_PartitionSessionStatusResponse) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_PartitionSessionStatusResponse) GetPartitionOffsets() *OffsetsRange {
 	if x != nil {
-		return x.PartitionOffsets
+		return x.xxx_hidden_PartitionOffsets
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_PartitionSessionStatusResponse) GetCommittedOffset() int64 {
 	if x != nil {
-		return x.CommittedOffset
+		return x.xxx_hidden_CommittedOffset
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_PartitionSessionStatusResponse) GetWriteTimeHighWatermark() *timestamppb.Timestamp {
 	if x != nil {
-		return x.WriteTimeHighWatermark
+		return x.xxx_hidden_WriteTimeHighWatermark
 	}
 	return nil
+}
+
+func (x *StreamReadMessage_PartitionSessionStatusResponse) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamReadMessage_PartitionSessionStatusResponse) SetPartitionOffsets(v *OffsetsRange) {
+	x.xxx_hidden_PartitionOffsets = v
+}
+
+func (x *StreamReadMessage_PartitionSessionStatusResponse) SetCommittedOffset(v int64) {
+	x.xxx_hidden_CommittedOffset = v
+}
+
+func (x *StreamReadMessage_PartitionSessionStatusResponse) SetWriteTimeHighWatermark(v *timestamppb.Timestamp) {
+	x.xxx_hidden_WriteTimeHighWatermark = v
+}
+
+func (x *StreamReadMessage_PartitionSessionStatusResponse) HasPartitionOffsets() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionOffsets != nil
+}
+
+func (x *StreamReadMessage_PartitionSessionStatusResponse) HasWriteTimeHighWatermark() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_WriteTimeHighWatermark != nil
+}
+
+func (x *StreamReadMessage_PartitionSessionStatusResponse) ClearPartitionOffsets() {
+	x.xxx_hidden_PartitionOffsets = nil
+}
+
+func (x *StreamReadMessage_PartitionSessionStatusResponse) ClearWriteTimeHighWatermark() {
+	x.xxx_hidden_WriteTimeHighWatermark = nil
+}
+
+type StreamReadMessage_PartitionSessionStatusResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Identifier of partition session whose status was requested.
+	PartitionSessionId int64
+	// Partition contains messages with offsets in range [start, end).
+	PartitionOffsets *OffsetsRange
+	// Each offset up to and including (committed_offset - 1) was fully processed.
+	CommittedOffset int64
+	// Write timestamp of next message written to this partition will be no less than write_time_high_watermark.
+	WriteTimeHighWatermark *timestamppb.Timestamp
+}
+
+func (b0 StreamReadMessage_PartitionSessionStatusResponse_builder) Build() *StreamReadMessage_PartitionSessionStatusResponse {
+	m0 := &StreamReadMessage_PartitionSessionStatusResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_PartitionOffsets = b.PartitionOffsets
+	x.xxx_hidden_CommittedOffset = b.CommittedOffset
+	x.xxx_hidden_WriteTimeHighWatermark = b.WriteTimeHighWatermark
+	return m0
 }
 
 // Command from server to create and start a partition session.
 // Client must respond with StartPartitionSessionResponse when ready to receive data from this partition.
 type StreamReadMessage_StartPartitionSessionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition session description.
-	PartitionSession *StreamReadMessage_PartitionSession `protobuf:"bytes,1,opt,name=partition_session,json=partitionSession,proto3" json:"partition_session,omitempty"`
-	// Each offset up to and including (committed_offset - 1) was fully processed.
-	CommittedOffset int64 `protobuf:"varint,2,opt,name=committed_offset,json=committedOffset,proto3" json:"committed_offset,omitempty"`
-	// Partition contains messages with offsets in range [start, end).
-	PartitionOffsets *OffsetsRange `protobuf:"bytes,3,opt,name=partition_offsets,json=partitionOffsets,proto3" json:"partition_offsets,omitempty"`
-	// Partition location, filled only when InitRequest.direct_read is true.
-	PartitionLocation *PartitionLocation `protobuf:"bytes,4,opt,name=partition_location,json=partitionLocation,proto3" json:"partition_location,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                        protoimpl.MessageState              `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSession  *StreamReadMessage_PartitionSession `protobuf:"bytes,1,opt,name=partition_session,json=partitionSession,proto3"`
+	xxx_hidden_CommittedOffset   int64                               `protobuf:"varint,2,opt,name=committed_offset,json=committedOffset,proto3"`
+	xxx_hidden_PartitionOffsets  *OffsetsRange                       `protobuf:"bytes,3,opt,name=partition_offsets,json=partitionOffsets,proto3"`
+	xxx_hidden_PartitionLocation *PartitionLocation                  `protobuf:"bytes,4,opt,name=partition_location,json=partitionLocation,proto3"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_StartPartitionSessionRequest) Reset() {
@@ -5168,58 +8642,117 @@ func (x *StreamReadMessage_StartPartitionSessionRequest) ProtoReflect() protoref
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_StartPartitionSessionRequest.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_StartPartitionSessionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 11}
-}
-
 func (x *StreamReadMessage_StartPartitionSessionRequest) GetPartitionSession() *StreamReadMessage_PartitionSession {
 	if x != nil {
-		return x.PartitionSession
+		return x.xxx_hidden_PartitionSession
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_StartPartitionSessionRequest) GetCommittedOffset() int64 {
 	if x != nil {
-		return x.CommittedOffset
+		return x.xxx_hidden_CommittedOffset
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_StartPartitionSessionRequest) GetPartitionOffsets() *OffsetsRange {
 	if x != nil {
-		return x.PartitionOffsets
+		return x.xxx_hidden_PartitionOffsets
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_StartPartitionSessionRequest) GetPartitionLocation() *PartitionLocation {
 	if x != nil {
-		return x.PartitionLocation
+		return x.xxx_hidden_PartitionLocation
 	}
 	return nil
 }
 
+func (x *StreamReadMessage_StartPartitionSessionRequest) SetPartitionSession(v *StreamReadMessage_PartitionSession) {
+	x.xxx_hidden_PartitionSession = v
+}
+
+func (x *StreamReadMessage_StartPartitionSessionRequest) SetCommittedOffset(v int64) {
+	x.xxx_hidden_CommittedOffset = v
+}
+
+func (x *StreamReadMessage_StartPartitionSessionRequest) SetPartitionOffsets(v *OffsetsRange) {
+	x.xxx_hidden_PartitionOffsets = v
+}
+
+func (x *StreamReadMessage_StartPartitionSessionRequest) SetPartitionLocation(v *PartitionLocation) {
+	x.xxx_hidden_PartitionLocation = v
+}
+
+func (x *StreamReadMessage_StartPartitionSessionRequest) HasPartitionSession() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionSession != nil
+}
+
+func (x *StreamReadMessage_StartPartitionSessionRequest) HasPartitionOffsets() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionOffsets != nil
+}
+
+func (x *StreamReadMessage_StartPartitionSessionRequest) HasPartitionLocation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionLocation != nil
+}
+
+func (x *StreamReadMessage_StartPartitionSessionRequest) ClearPartitionSession() {
+	x.xxx_hidden_PartitionSession = nil
+}
+
+func (x *StreamReadMessage_StartPartitionSessionRequest) ClearPartitionOffsets() {
+	x.xxx_hidden_PartitionOffsets = nil
+}
+
+func (x *StreamReadMessage_StartPartitionSessionRequest) ClearPartitionLocation() {
+	x.xxx_hidden_PartitionLocation = nil
+}
+
+type StreamReadMessage_StartPartitionSessionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition session description.
+	PartitionSession *StreamReadMessage_PartitionSession
+	// Each offset up to and including (committed_offset - 1) was fully processed.
+	CommittedOffset int64
+	// Partition contains messages with offsets in range [start, end).
+	PartitionOffsets *OffsetsRange
+	// Partition location, filled only when InitRequest.direct_read is true.
+	PartitionLocation *PartitionLocation
+}
+
+func (b0 StreamReadMessage_StartPartitionSessionRequest_builder) Build() *StreamReadMessage_StartPartitionSessionRequest {
+	m0 := &StreamReadMessage_StartPartitionSessionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSession = b.PartitionSession
+	x.xxx_hidden_CommittedOffset = b.CommittedOffset
+	x.xxx_hidden_PartitionOffsets = b.PartitionOffsets
+	x.xxx_hidden_PartitionLocation = b.PartitionLocation
+	return m0
+}
+
 // Signal for server that client is ready to recive data for partition.
 type StreamReadMessage_StartPartitionSessionResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition session identifier of partition to start read.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Reads in this partition session will start from offset no less than read_offset.
-	// If read_offset is set, server will check that read_offset is no less that actual committed offset.
-	// If check fails then server will send an error message (status != SUCCESS) and close stream.
-	//
-	// If read_offset is not set, no check will be made.
-	// InitRequest.max_lag and InitRequest.read_from could lead to skip of more messages.
-	// Server will return data starting from offset that is maximum of actual committed offset, read_offset (if set)
-	// and offsets calculated from InitRequest.max_lag and InitRequest.read_from.
-	ReadOffset *int64 `protobuf:"varint,2,opt,name=read_offset,json=readOffset,proto3,oneof" json:"read_offset,omitempty"`
-	// All messages with offset less than commit_offset are processed by client.
-	// Server will commit this position if this is not done yet.
-	CommitOffset  *int64 `protobuf:"varint,3,opt,name=commit_offset,json=commitOffset,proto3,oneof" json:"commit_offset,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_ReadOffset         int64                  `protobuf:"varint,2,opt,name=read_offset,json=readOffset,proto3,oneof"`
+	xxx_hidden_CommitOffset       int64                  `protobuf:"varint,3,opt,name=commit_offset,json=commitOffset,proto3,oneof"`
+	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
+	XXX_presence                  [1]uint32
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_StartPartitionSessionResponse) Reset() {
@@ -5247,50 +8780,109 @@ func (x *StreamReadMessage_StartPartitionSessionResponse) ProtoReflect() protore
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_StartPartitionSessionResponse.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_StartPartitionSessionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 12}
-}
-
 func (x *StreamReadMessage_StartPartitionSessionResponse) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_StartPartitionSessionResponse) GetReadOffset() int64 {
-	if x != nil && x.ReadOffset != nil {
-		return *x.ReadOffset
+	if x != nil {
+		return x.xxx_hidden_ReadOffset
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_StartPartitionSessionResponse) GetCommitOffset() int64 {
-	if x != nil && x.CommitOffset != nil {
-		return *x.CommitOffset
+	if x != nil {
+		return x.xxx_hidden_CommitOffset
 	}
 	return 0
 }
 
+func (x *StreamReadMessage_StartPartitionSessionResponse) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamReadMessage_StartPartitionSessionResponse) SetReadOffset(v int64) {
+	x.xxx_hidden_ReadOffset = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *StreamReadMessage_StartPartitionSessionResponse) SetCommitOffset(v int64) {
+	x.xxx_hidden_CommitOffset = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *StreamReadMessage_StartPartitionSessionResponse) HasReadOffset() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *StreamReadMessage_StartPartitionSessionResponse) HasCommitOffset() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *StreamReadMessage_StartPartitionSessionResponse) ClearReadOffset() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ReadOffset = 0
+}
+
+func (x *StreamReadMessage_StartPartitionSessionResponse) ClearCommitOffset() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_CommitOffset = 0
+}
+
+type StreamReadMessage_StartPartitionSessionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition session identifier of partition to start read.
+	PartitionSessionId int64
+	// Reads in this partition session will start from offset no less than read_offset.
+	// If read_offset is set, server will check that read_offset is no less that actual committed offset.
+	// If check fails then server will send an error message (status != SUCCESS) and close stream.
+	//
+	// If read_offset is not set, no check will be made.
+	// InitRequest.max_lag and InitRequest.read_from could lead to skip of more messages.
+	// Server will return data starting from offset that is maximum of actual committed offset, read_offset (if set)
+	// and offsets calculated from InitRequest.max_lag and InitRequest.read_from.
+	ReadOffset *int64
+	// All messages with offset less than commit_offset are processed by client.
+	// Server will commit this position if this is not done yet.
+	CommitOffset *int64
+}
+
+func (b0 StreamReadMessage_StartPartitionSessionResponse_builder) Build() *StreamReadMessage_StartPartitionSessionResponse {
+	m0 := &StreamReadMessage_StartPartitionSessionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	if b.ReadOffset != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_ReadOffset = *b.ReadOffset
+	}
+	if b.CommitOffset != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_CommitOffset = *b.CommitOffset
+	}
+	return m0
+}
+
 // Command from server to stop and destroy concrete partition session.
 type StreamReadMessage_StopPartitionSessionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Identifier of partition session that is ready to be closed by server.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Flag of graceful stop.
-	// If set, server will wait for response from client before giving this partition to other read session.
-	// Server will not send more data from this partition.
-	// Client can process all received data and wait for commit and only after send response.
-	// If False then server gives partition for other session right now.
-	// All further commits for this partition session has no effect. Server is not waiting for response.
-	Graceful bool `protobuf:"varint,2,opt,name=graceful,proto3" json:"graceful,omitempty"`
-	// Upper bound for committed offsets.
-	CommittedOffset int64 `protobuf:"varint,3,opt,name=committed_offset,json=committedOffset,proto3" json:"committed_offset,omitempty"`
-	// Upper bound for read request identifiers, filled only when InitRequest.direct_read is true and graceful is true.
-	LastDirectReadId int64 `protobuf:"varint,4,opt,name=last_direct_read_id,json=lastDirectReadId,proto3" json:"last_direct_read_id,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_Graceful           bool                   `protobuf:"varint,2,opt,name=graceful,proto3"`
+	xxx_hidden_CommittedOffset    int64                  `protobuf:"varint,3,opt,name=committed_offset,json=committedOffset,proto3"`
+	xxx_hidden_LastDirectReadId   int64                  `protobuf:"varint,4,opt,name=last_direct_read_id,json=lastDirectReadId,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_StopPartitionSessionRequest) Reset() {
@@ -5318,52 +8910,88 @@ func (x *StreamReadMessage_StopPartitionSessionRequest) ProtoReflect() protorefl
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_StopPartitionSessionRequest.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_StopPartitionSessionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 13}
-}
-
 func (x *StreamReadMessage_StopPartitionSessionRequest) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_StopPartitionSessionRequest) GetGraceful() bool {
 	if x != nil {
-		return x.Graceful
+		return x.xxx_hidden_Graceful
 	}
 	return false
 }
 
 func (x *StreamReadMessage_StopPartitionSessionRequest) GetCommittedOffset() int64 {
 	if x != nil {
-		return x.CommittedOffset
+		return x.xxx_hidden_CommittedOffset
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_StopPartitionSessionRequest) GetLastDirectReadId() int64 {
 	if x != nil {
-		return x.LastDirectReadId
+		return x.xxx_hidden_LastDirectReadId
 	}
 	return 0
+}
+
+func (x *StreamReadMessage_StopPartitionSessionRequest) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamReadMessage_StopPartitionSessionRequest) SetGraceful(v bool) {
+	x.xxx_hidden_Graceful = v
+}
+
+func (x *StreamReadMessage_StopPartitionSessionRequest) SetCommittedOffset(v int64) {
+	x.xxx_hidden_CommittedOffset = v
+}
+
+func (x *StreamReadMessage_StopPartitionSessionRequest) SetLastDirectReadId(v int64) {
+	x.xxx_hidden_LastDirectReadId = v
+}
+
+type StreamReadMessage_StopPartitionSessionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Identifier of partition session that is ready to be closed by server.
+	PartitionSessionId int64
+	// Flag of graceful stop.
+	// If set, server will wait for response from client before giving this partition to other read session.
+	// Server will not send more data from this partition.
+	// Client can process all received data and wait for commit and only after send response.
+	// If False then server gives partition for other session right now.
+	// All further commits for this partition session has no effect. Server is not waiting for response.
+	Graceful bool
+	// Upper bound for committed offsets.
+	CommittedOffset int64
+	// Upper bound for read request identifiers, filled only when InitRequest.direct_read is true and graceful is true.
+	LastDirectReadId int64
+}
+
+func (b0 StreamReadMessage_StopPartitionSessionRequest_builder) Build() *StreamReadMessage_StopPartitionSessionRequest {
+	m0 := &StreamReadMessage_StopPartitionSessionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_Graceful = b.Graceful
+	x.xxx_hidden_CommittedOffset = b.CommittedOffset
+	x.xxx_hidden_LastDirectReadId = b.LastDirectReadId
+	return m0
 }
 
 // Signal for server that client finished working with this partition.
 // Must be sent only after corresponding StopPartitionSessionRequest from server.
 // Server will give this partition to other read session only after StopPartitionSessionResponse signal.
 type StreamReadMessage_StopPartitionSessionResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition session identifier of partition session that is released by client.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Flag of graceful stop, used only when InitRequest.direct_read is true
-	// Client must pass this value unchanged from the StopPartitionSessionRequest.
-	// Server can sent two StopPartitionSessionRequests, the first with graceful=true, the second with graceful=false. The client must answer both of them.
-	Graceful      bool `protobuf:"varint,2,opt,name=graceful,proto3" json:"graceful,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_Graceful           bool                   `protobuf:"varint,2,opt,name=graceful,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_StopPartitionSessionResponse) Reset() {
@@ -5391,35 +9019,56 @@ func (x *StreamReadMessage_StopPartitionSessionResponse) ProtoReflect() protoref
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_StopPartitionSessionResponse.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_StopPartitionSessionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 14}
-}
-
 func (x *StreamReadMessage_StopPartitionSessionResponse) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_StopPartitionSessionResponse) GetGraceful() bool {
 	if x != nil {
-		return x.Graceful
+		return x.xxx_hidden_Graceful
 	}
 	return false
+}
+
+func (x *StreamReadMessage_StopPartitionSessionResponse) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamReadMessage_StopPartitionSessionResponse) SetGraceful(v bool) {
+	x.xxx_hidden_Graceful = v
+}
+
+type StreamReadMessage_StopPartitionSessionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition session identifier of partition session that is released by client.
+	PartitionSessionId int64
+	// Flag of graceful stop, used only when InitRequest.direct_read is true
+	// Client must pass this value unchanged from the StopPartitionSessionRequest.
+	// Server can sent two StopPartitionSessionRequests, the first with graceful=true, the second with graceful=false. The client must answer both of them.
+	Graceful bool
+}
+
+func (b0 StreamReadMessage_StopPartitionSessionResponse_builder) Build() *StreamReadMessage_StopPartitionSessionResponse {
+	m0 := &StreamReadMessage_StopPartitionSessionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_Graceful = b.Graceful
+	return m0
 }
 
 // Command from server to notify about a partition session update.
 // Client should not send a response to the command.
 type StreamReadMessage_UpdatePartitionSession struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition session identifier.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Partition location, filled only when InitRequest.direct_read is true.
-	PartitionLocation *PartitionLocation `protobuf:"bytes,2,opt,name=partition_location,json=partitionLocation,proto3" json:"partition_location,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_PartitionLocation  *PartitionLocation     `protobuf:"bytes,2,opt,name=partition_location,json=partitionLocation,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_UpdatePartitionSession) Reset() {
@@ -5447,35 +9096,65 @@ func (x *StreamReadMessage_UpdatePartitionSession) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_UpdatePartitionSession.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_UpdatePartitionSession) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 15}
-}
-
 func (x *StreamReadMessage_UpdatePartitionSession) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_UpdatePartitionSession) GetPartitionLocation() *PartitionLocation {
 	if x != nil {
-		return x.PartitionLocation
+		return x.xxx_hidden_PartitionLocation
 	}
 	return nil
+}
+
+func (x *StreamReadMessage_UpdatePartitionSession) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamReadMessage_UpdatePartitionSession) SetPartitionLocation(v *PartitionLocation) {
+	x.xxx_hidden_PartitionLocation = v
+}
+
+func (x *StreamReadMessage_UpdatePartitionSession) HasPartitionLocation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionLocation != nil
+}
+
+func (x *StreamReadMessage_UpdatePartitionSession) ClearPartitionLocation() {
+	x.xxx_hidden_PartitionLocation = nil
+}
+
+type StreamReadMessage_UpdatePartitionSession_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition session identifier.
+	PartitionSessionId int64
+	// Partition location, filled only when InitRequest.direct_read is true.
+	PartitionLocation *PartitionLocation
+}
+
+func (b0 StreamReadMessage_UpdatePartitionSession_builder) Build() *StreamReadMessage_UpdatePartitionSession {
+	m0 := &StreamReadMessage_UpdatePartitionSession{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_PartitionLocation = b.PartitionLocation
+	return m0
 }
 
 // Signal for server that client has finished direct reading.
 // Server should not send a response to the command.
 type StreamReadMessage_DirectReadAck struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition session identifier.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Identifier of the successfully completed read request.
-	DirectReadId  int64 `protobuf:"varint,2,opt,name=direct_read_id,json=directReadId,proto3" json:"direct_read_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_DirectReadId       int64                  `protobuf:"varint,2,opt,name=direct_read_id,json=directReadId,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_DirectReadAck) Reset() {
@@ -5503,23 +9182,44 @@ func (x *StreamReadMessage_DirectReadAck) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_DirectReadAck.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_DirectReadAck) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 16}
-}
-
 func (x *StreamReadMessage_DirectReadAck) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_DirectReadAck) GetDirectReadId() int64 {
 	if x != nil {
-		return x.DirectReadId
+		return x.xxx_hidden_DirectReadId
 	}
 	return 0
+}
+
+func (x *StreamReadMessage_DirectReadAck) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamReadMessage_DirectReadAck) SetDirectReadId(v int64) {
+	x.xxx_hidden_DirectReadId = v
+}
+
+type StreamReadMessage_DirectReadAck_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition session identifier.
+	PartitionSessionId int64
+	// Identifier of the successfully completed read request.
+	DirectReadId int64
+}
+
+func (b0 StreamReadMessage_DirectReadAck_builder) Build() *StreamReadMessage_DirectReadAck {
+	m0 := &StreamReadMessage_DirectReadAck{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_DirectReadId = b.DirectReadId
+	return m0
 }
 
 // Signal from server that client has finished reading the partition and all messages have been read.
@@ -5528,15 +9228,12 @@ func (x *StreamReadMessage_DirectReadAck) GetDirectReadId() int64 {
 // Unlike StopPartitionSessionRequest, the client does not have to close the reading session.
 // Client should not send a response to the command.
 type StreamReadMessage_EndPartitionSession struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition session identifier.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Ids of partitions which were merged with the ended partition.
-	AdjacentPartitionIds []int64 `protobuf:"varint,2,rep,packed,name=adjacent_partition_ids,json=adjacentPartitionIds,proto3" json:"adjacent_partition_ids,omitempty"`
-	// Ids of partitions which was formed when the ended partition was split or merged.
-	ChildPartitionIds []int64 `protobuf:"varint,3,rep,packed,name=child_partition_ids,json=childPartitionIds,proto3" json:"child_partition_ids,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId   int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_AdjacentPartitionIds []int64                `protobuf:"varint,2,rep,packed,name=adjacent_partition_ids,json=adjacentPartitionIds,proto3"`
+	xxx_hidden_ChildPartitionIds    []int64                `protobuf:"varint,3,rep,packed,name=child_partition_ids,json=childPartitionIds,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_EndPartitionSession) Reset() {
@@ -5564,47 +9261,68 @@ func (x *StreamReadMessage_EndPartitionSession) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_EndPartitionSession.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_EndPartitionSession) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 17}
-}
-
 func (x *StreamReadMessage_EndPartitionSession) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_EndPartitionSession) GetAdjacentPartitionIds() []int64 {
 	if x != nil {
-		return x.AdjacentPartitionIds
+		return x.xxx_hidden_AdjacentPartitionIds
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_EndPartitionSession) GetChildPartitionIds() []int64 {
 	if x != nil {
-		return x.ChildPartitionIds
+		return x.xxx_hidden_ChildPartitionIds
 	}
 	return nil
 }
 
+func (x *StreamReadMessage_EndPartitionSession) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamReadMessage_EndPartitionSession) SetAdjacentPartitionIds(v []int64) {
+	x.xxx_hidden_AdjacentPartitionIds = v
+}
+
+func (x *StreamReadMessage_EndPartitionSession) SetChildPartitionIds(v []int64) {
+	x.xxx_hidden_ChildPartitionIds = v
+}
+
+type StreamReadMessage_EndPartitionSession_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition session identifier.
+	PartitionSessionId int64
+	// Ids of partitions which were merged with the ended partition.
+	AdjacentPartitionIds []int64
+	// Ids of partitions which was formed when the ended partition was split or merged.
+	ChildPartitionIds []int64
+}
+
+func (b0 StreamReadMessage_EndPartitionSession_builder) Build() *StreamReadMessage_EndPartitionSession {
+	m0 := &StreamReadMessage_EndPartitionSession{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_AdjacentPartitionIds = b.AdjacentPartitionIds
+	x.xxx_hidden_ChildPartitionIds = b.ChildPartitionIds
+	return m0
+}
+
 type StreamReadMessage_InitRequest_TopicReadSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Topic path.
-	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	// Partitions that will be read by this session.
-	// If list is empty - then session will read all partitions.
-	PartitionIds []int64 `protobuf:"varint,2,rep,packed,name=partition_ids,json=partitionIds,proto3" json:"partition_ids,omitempty"`
-	// Skip all messages that has write timestamp smaller than now - max_lag.
-	// Zero means infinite lag.
-	MaxLag *durationpb.Duration `protobuf:"bytes,3,opt,name=max_lag,json=maxLag,proto3" json:"max_lag,omitempty"`
-	// Read data only after this timestamp from this topic.
-	// Read only messages with 'written_at' value greater or equal than this timestamp.
-	ReadFrom      *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=read_from,json=readFrom,proto3" json:"read_from,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Path         string                 `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_PartitionIds []int64                `protobuf:"varint,2,rep,packed,name=partition_ids,json=partitionIds,proto3"`
+	xxx_hidden_MaxLag       *durationpb.Duration   `protobuf:"bytes,3,opt,name=max_lag,json=maxLag,proto3"`
+	xxx_hidden_ReadFrom     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=read_from,json=readFrom,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_InitRequest_TopicReadSettings) Reset() {
@@ -5632,59 +9350,111 @@ func (x *StreamReadMessage_InitRequest_TopicReadSettings) ProtoReflect() protore
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_InitRequest_TopicReadSettings.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_InitRequest_TopicReadSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 3, 0}
-}
-
 func (x *StreamReadMessage_InitRequest_TopicReadSettings) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *StreamReadMessage_InitRequest_TopicReadSettings) GetPartitionIds() []int64 {
 	if x != nil {
-		return x.PartitionIds
+		return x.xxx_hidden_PartitionIds
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_InitRequest_TopicReadSettings) GetMaxLag() *durationpb.Duration {
 	if x != nil {
-		return x.MaxLag
+		return x.xxx_hidden_MaxLag
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_InitRequest_TopicReadSettings) GetReadFrom() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ReadFrom
+		return x.xxx_hidden_ReadFrom
 	}
 	return nil
 }
 
+func (x *StreamReadMessage_InitRequest_TopicReadSettings) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *StreamReadMessage_InitRequest_TopicReadSettings) SetPartitionIds(v []int64) {
+	x.xxx_hidden_PartitionIds = v
+}
+
+func (x *StreamReadMessage_InitRequest_TopicReadSettings) SetMaxLag(v *durationpb.Duration) {
+	x.xxx_hidden_MaxLag = v
+}
+
+func (x *StreamReadMessage_InitRequest_TopicReadSettings) SetReadFrom(v *timestamppb.Timestamp) {
+	x.xxx_hidden_ReadFrom = v
+}
+
+func (x *StreamReadMessage_InitRequest_TopicReadSettings) HasMaxLag() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MaxLag != nil
+}
+
+func (x *StreamReadMessage_InitRequest_TopicReadSettings) HasReadFrom() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ReadFrom != nil
+}
+
+func (x *StreamReadMessage_InitRequest_TopicReadSettings) ClearMaxLag() {
+	x.xxx_hidden_MaxLag = nil
+}
+
+func (x *StreamReadMessage_InitRequest_TopicReadSettings) ClearReadFrom() {
+	x.xxx_hidden_ReadFrom = nil
+}
+
+type StreamReadMessage_InitRequest_TopicReadSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Topic path.
+	Path string
+	// Partitions that will be read by this session.
+	// If list is empty - then session will read all partitions.
+	PartitionIds []int64
+	// Skip all messages that has write timestamp smaller than now - max_lag.
+	// Zero means infinite lag.
+	MaxLag *durationpb.Duration
+	// Read data only after this timestamp from this topic.
+	// Read only messages with 'written_at' value greater or equal than this timestamp.
+	ReadFrom *timestamppb.Timestamp
+}
+
+func (b0 StreamReadMessage_InitRequest_TopicReadSettings_builder) Build() *StreamReadMessage_InitRequest_TopicReadSettings {
+	m0 := &StreamReadMessage_InitRequest_TopicReadSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionIds = b.PartitionIds
+	x.xxx_hidden_MaxLag = b.MaxLag
+	x.xxx_hidden_ReadFrom = b.ReadFrom
+	return m0
+}
+
 // One client message representation.
 type StreamReadMessage_ReadResponse_MessageData struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition offset in partition that assigned for message.
-	Offset int64 `protobuf:"varint,1,opt,name=offset,proto3" json:"offset,omitempty"` //unique value for client side deduplication - Topic:Partition:Offset
-	// Sequence number that provided with message on write from client.
-	SeqNo int64 `protobuf:"varint,2,opt,name=seq_no,json=seqNo,proto3" json:"seq_no,omitempty"`
-	// Timestamp of creation of message provided on write from client.
-	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	// Compressed client message body.
-	Data []byte `protobuf:"bytes,5,opt,name=data,proto3" json:"data,omitempty"`
-	// Uncompressed size of client message body.
-	// sent as is from WriteRequest, without check on server side. May be empty (for writes from old client) or wrong (if bug in writer).
-	// Use it for optimization purposes only, don't trust it.
-	UncompressedSize int64 `protobuf:"varint,6,opt,name=uncompressed_size,json=uncompressedSize,proto3" json:"uncompressed_size,omitempty"`
-	// Filled if message_group_id was set on message write.
-	MessageGroupId string          `protobuf:"bytes,7,opt,name=message_group_id,json=messageGroupId,proto3" json:"message_group_id,omitempty"`
-	MetadataItems  []*MetadataItem `protobuf:"bytes,8,rep,name=metadata_items,json=metadataItems,proto3" json:"metadata_items,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Offset           int64                  `protobuf:"varint,1,opt,name=offset,proto3"`
+	xxx_hidden_SeqNo            int64                  `protobuf:"varint,2,opt,name=seq_no,json=seqNo,proto3"`
+	xxx_hidden_CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3"`
+	xxx_hidden_Data             []byte                 `protobuf:"bytes,5,opt,name=data,proto3"`
+	xxx_hidden_UncompressedSize int64                  `protobuf:"varint,6,opt,name=uncompressed_size,json=uncompressedSize,proto3"`
+	xxx_hidden_MessageGroupId   string                 `protobuf:"bytes,7,opt,name=message_group_id,json=messageGroupId,proto3"`
+	xxx_hidden_MetadataItems    *[]*MetadataItem       `protobuf:"bytes,8,rep,name=metadata_items,json=metadataItems,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_ReadResponse_MessageData) Reset() {
@@ -5712,76 +9482,143 @@ func (x *StreamReadMessage_ReadResponse_MessageData) ProtoReflect() protoreflect
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_ReadResponse_MessageData.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_ReadResponse_MessageData) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 6, 0}
-}
-
 func (x *StreamReadMessage_ReadResponse_MessageData) GetOffset() int64 {
 	if x != nil {
-		return x.Offset
+		return x.xxx_hidden_Offset
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_ReadResponse_MessageData) GetSeqNo() int64 {
 	if x != nil {
-		return x.SeqNo
+		return x.xxx_hidden_SeqNo
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_ReadResponse_MessageData) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.CreatedAt
+		return x.xxx_hidden_CreatedAt
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_ReadResponse_MessageData) GetData() []byte {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_ReadResponse_MessageData) GetUncompressedSize() int64 {
 	if x != nil {
-		return x.UncompressedSize
+		return x.xxx_hidden_UncompressedSize
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_ReadResponse_MessageData) GetMessageGroupId() string {
 	if x != nil {
-		return x.MessageGroupId
+		return x.xxx_hidden_MessageGroupId
 	}
 	return ""
 }
 
 func (x *StreamReadMessage_ReadResponse_MessageData) GetMetadataItems() []*MetadataItem {
 	if x != nil {
-		return x.MetadataItems
+		if x.xxx_hidden_MetadataItems != nil {
+			return *x.xxx_hidden_MetadataItems
+		}
 	}
 	return nil
 }
 
+func (x *StreamReadMessage_ReadResponse_MessageData) SetOffset(v int64) {
+	x.xxx_hidden_Offset = v
+}
+
+func (x *StreamReadMessage_ReadResponse_MessageData) SetSeqNo(v int64) {
+	x.xxx_hidden_SeqNo = v
+}
+
+func (x *StreamReadMessage_ReadResponse_MessageData) SetCreatedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CreatedAt = v
+}
+
+func (x *StreamReadMessage_ReadResponse_MessageData) SetData(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Data = v
+}
+
+func (x *StreamReadMessage_ReadResponse_MessageData) SetUncompressedSize(v int64) {
+	x.xxx_hidden_UncompressedSize = v
+}
+
+func (x *StreamReadMessage_ReadResponse_MessageData) SetMessageGroupId(v string) {
+	x.xxx_hidden_MessageGroupId = v
+}
+
+func (x *StreamReadMessage_ReadResponse_MessageData) SetMetadataItems(v []*MetadataItem) {
+	x.xxx_hidden_MetadataItems = &v
+}
+
+func (x *StreamReadMessage_ReadResponse_MessageData) HasCreatedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CreatedAt != nil
+}
+
+func (x *StreamReadMessage_ReadResponse_MessageData) ClearCreatedAt() {
+	x.xxx_hidden_CreatedAt = nil
+}
+
+type StreamReadMessage_ReadResponse_MessageData_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition offset in partition that assigned for message.
+	Offset int64
+	// Sequence number that provided with message on write from client.
+	SeqNo int64
+	// Timestamp of creation of message provided on write from client.
+	CreatedAt *timestamppb.Timestamp
+	// Compressed client message body.
+	Data []byte
+	// Uncompressed size of client message body.
+	// sent as is from WriteRequest, without check on server side. May be empty (for writes from old client) or wrong (if bug in writer).
+	// Use it for optimization purposes only, don't trust it.
+	UncompressedSize int64
+	// Filled if message_group_id was set on message write.
+	MessageGroupId string
+	MetadataItems  []*MetadataItem
+}
+
+func (b0 StreamReadMessage_ReadResponse_MessageData_builder) Build() *StreamReadMessage_ReadResponse_MessageData {
+	m0 := &StreamReadMessage_ReadResponse_MessageData{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Offset = b.Offset
+	x.xxx_hidden_SeqNo = b.SeqNo
+	x.xxx_hidden_CreatedAt = b.CreatedAt
+	x.xxx_hidden_Data = b.Data
+	x.xxx_hidden_UncompressedSize = b.UncompressedSize
+	x.xxx_hidden_MessageGroupId = b.MessageGroupId
+	x.xxx_hidden_MetadataItems = &b.MetadataItems
+	return m0
+}
+
 // Representation of sequence of client messages from one write session.
 type StreamReadMessage_ReadResponse_Batch struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of client messages.
-	MessageData []*StreamReadMessage_ReadResponse_MessageData `protobuf:"bytes,1,rep,name=message_data,json=messageData,proto3" json:"message_data,omitempty"`
-	// Producer identifier provided by client for this batch of client messages.
-	ProducerId string `protobuf:"bytes,2,opt,name=producer_id,json=producerId,proto3" json:"producer_id,omitempty"`
-	// Client metadata attached to write session, the same for all messages in batch.
-	WriteSessionMeta map[string]string `protobuf:"bytes,3,rep,name=write_session_meta,json=writeSessionMeta,proto3" json:"write_session_meta,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Codec that is used for data compression.
-	// See enum Codec above for values.
-	Codec int32 `protobuf:"varint,4,opt,name=codec,proto3" json:"codec,omitempty"`
-	// Persist timestamp on server for batch.
-	WrittenAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=written_at,json=writtenAt,proto3" json:"written_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState                         `protogen:"opaque.v1"`
+	xxx_hidden_MessageData      *[]*StreamReadMessage_ReadResponse_MessageData `protobuf:"bytes,1,rep,name=message_data,json=messageData,proto3"`
+	xxx_hidden_ProducerId       string                                         `protobuf:"bytes,2,opt,name=producer_id,json=producerId,proto3"`
+	xxx_hidden_WriteSessionMeta map[string]string                              `protobuf:"bytes,3,rep,name=write_session_meta,json=writeSessionMeta,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_Codec            int32                                          `protobuf:"varint,4,opt,name=codec,proto3"`
+	xxx_hidden_WrittenAt        *timestamppb.Timestamp                         `protobuf:"bytes,5,opt,name=written_at,json=writtenAt,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_ReadResponse_Batch) Reset() {
@@ -5809,54 +9646,109 @@ func (x *StreamReadMessage_ReadResponse_Batch) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_ReadResponse_Batch.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_ReadResponse_Batch) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 6, 1}
-}
-
 func (x *StreamReadMessage_ReadResponse_Batch) GetMessageData() []*StreamReadMessage_ReadResponse_MessageData {
 	if x != nil {
-		return x.MessageData
+		if x.xxx_hidden_MessageData != nil {
+			return *x.xxx_hidden_MessageData
+		}
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_ReadResponse_Batch) GetProducerId() string {
 	if x != nil {
-		return x.ProducerId
+		return x.xxx_hidden_ProducerId
 	}
 	return ""
 }
 
 func (x *StreamReadMessage_ReadResponse_Batch) GetWriteSessionMeta() map[string]string {
 	if x != nil {
-		return x.WriteSessionMeta
+		return x.xxx_hidden_WriteSessionMeta
 	}
 	return nil
 }
 
 func (x *StreamReadMessage_ReadResponse_Batch) GetCodec() int32 {
 	if x != nil {
-		return x.Codec
+		return x.xxx_hidden_Codec
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_ReadResponse_Batch) GetWrittenAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.WrittenAt
+		return x.xxx_hidden_WrittenAt
 	}
 	return nil
 }
 
+func (x *StreamReadMessage_ReadResponse_Batch) SetMessageData(v []*StreamReadMessage_ReadResponse_MessageData) {
+	x.xxx_hidden_MessageData = &v
+}
+
+func (x *StreamReadMessage_ReadResponse_Batch) SetProducerId(v string) {
+	x.xxx_hidden_ProducerId = v
+}
+
+func (x *StreamReadMessage_ReadResponse_Batch) SetWriteSessionMeta(v map[string]string) {
+	x.xxx_hidden_WriteSessionMeta = v
+}
+
+func (x *StreamReadMessage_ReadResponse_Batch) SetCodec(v int32) {
+	x.xxx_hidden_Codec = v
+}
+
+func (x *StreamReadMessage_ReadResponse_Batch) SetWrittenAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_WrittenAt = v
+}
+
+func (x *StreamReadMessage_ReadResponse_Batch) HasWrittenAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_WrittenAt != nil
+}
+
+func (x *StreamReadMessage_ReadResponse_Batch) ClearWrittenAt() {
+	x.xxx_hidden_WrittenAt = nil
+}
+
+type StreamReadMessage_ReadResponse_Batch_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// List of client messages.
+	MessageData []*StreamReadMessage_ReadResponse_MessageData
+	// Producer identifier provided by client for this batch of client messages.
+	ProducerId string
+	// Client metadata attached to write session, the same for all messages in batch.
+	WriteSessionMeta map[string]string
+	// Codec that is used for data compression.
+	// See enum Codec above for values.
+	Codec int32
+	// Persist timestamp on server for batch.
+	WrittenAt *timestamppb.Timestamp
+}
+
+func (b0 StreamReadMessage_ReadResponse_Batch_builder) Build() *StreamReadMessage_ReadResponse_Batch {
+	m0 := &StreamReadMessage_ReadResponse_Batch{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_MessageData = &b.MessageData
+	x.xxx_hidden_ProducerId = b.ProducerId
+	x.xxx_hidden_WriteSessionMeta = b.WriteSessionMeta
+	x.xxx_hidden_Codec = b.Codec
+	x.xxx_hidden_WrittenAt = b.WrittenAt
+	return m0
+}
+
 // Representation of sequence of messages from one partition.
 type StreamReadMessage_ReadResponse_PartitionData struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Client messages, divided by write sessions.
-	Batches       []*StreamReadMessage_ReadResponse_Batch `protobuf:"bytes,2,rep,name=batches,proto3" json:"batches,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState                   `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                                    `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_Batches            *[]*StreamReadMessage_ReadResponse_Batch `protobuf:"bytes,2,rep,name=batches,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_ReadResponse_PartitionData) Reset() {
@@ -5884,34 +9776,54 @@ func (x *StreamReadMessage_ReadResponse_PartitionData) ProtoReflect() protorefle
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_ReadResponse_PartitionData.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_ReadResponse_PartitionData) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 6, 2}
-}
-
 func (x *StreamReadMessage_ReadResponse_PartitionData) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_ReadResponse_PartitionData) GetBatches() []*StreamReadMessage_ReadResponse_Batch {
 	if x != nil {
-		return x.Batches
+		if x.xxx_hidden_Batches != nil {
+			return *x.xxx_hidden_Batches
+		}
 	}
 	return nil
 }
 
+func (x *StreamReadMessage_ReadResponse_PartitionData) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamReadMessage_ReadResponse_PartitionData) SetBatches(v []*StreamReadMessage_ReadResponse_Batch) {
+	x.xxx_hidden_Batches = &v
+}
+
+type StreamReadMessage_ReadResponse_PartitionData_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PartitionSessionId int64
+	// Client messages, divided by write sessions.
+	Batches []*StreamReadMessage_ReadResponse_Batch
+}
+
+func (b0 StreamReadMessage_ReadResponse_PartitionData_builder) Build() *StreamReadMessage_ReadResponse_PartitionData {
+	m0 := &StreamReadMessage_ReadResponse_PartitionData{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_Batches = &b.Batches
+	return m0
+}
+
 // Message that is used for describing commit.
 type StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Identifier of partition session with data to commit.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Processed offsets ranges, repeated in case of disjoint ranges.
-	Offsets       []*OffsetsRange `protobuf:"bytes,2,rep,name=offsets,proto3" json:"offsets,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_Offsets            *[]*OffsetsRange       `protobuf:"bytes,2,rep,name=offsets,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset) Reset() {
@@ -5939,34 +9851,55 @@ func (x *StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset) ProtoRefle
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 7, 0}
-}
-
 func (x *StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset) GetOffsets() []*OffsetsRange {
 	if x != nil {
-		return x.Offsets
+		if x.xxx_hidden_Offsets != nil {
+			return *x.xxx_hidden_Offsets
+		}
 	}
 	return nil
 }
 
+func (x *StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset) SetOffsets(v []*OffsetsRange) {
+	x.xxx_hidden_Offsets = &v
+}
+
+type StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Identifier of partition session with data to commit.
+	PartitionSessionId int64
+	// Processed offsets ranges, repeated in case of disjoint ranges.
+	Offsets []*OffsetsRange
+}
+
+func (b0 StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset_builder) Build() *StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset {
+	m0 := &StreamReadMessage_CommitOffsetRequest_PartitionCommitOffset{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_Offsets = &b.Offsets
+	return m0
+}
+
 // Per-partition commit representation.
 type StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition session identifier.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Upper bound for committed offsets.
-	CommittedOffset int64 `protobuf:"varint,2,opt,name=committed_offset,json=committedOffset,proto3" json:"committed_offset,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_CommittedOffset    int64                  `protobuf:"varint,2,opt,name=committed_offset,json=committedOffset,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset) Reset() {
@@ -5994,23 +9927,44 @@ func (x *StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset) ProtoR
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset.ProtoReflect.Descriptor instead.
-func (*StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{7, 8, 0}
-}
-
 func (x *StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset) GetCommittedOffset() int64 {
 	if x != nil {
-		return x.CommittedOffset
+		return x.xxx_hidden_CommittedOffset
 	}
 	return 0
+}
+
+func (x *StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset) SetCommittedOffset(v int64) {
+	x.xxx_hidden_CommittedOffset = v
+}
+
+type StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition session identifier.
+	PartitionSessionId int64
+	// Upper bound for committed offsets.
+	CommittedOffset int64
+}
+
+func (b0 StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset_builder) Build() *StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset {
+	m0 := &StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_CommittedOffset = b.CommittedOffset
+	return m0
 }
 
 // Client-server message for direct read session.
@@ -6020,15 +9974,10 @@ func (x *StreamReadMessage_CommitOffsetResponse_PartitionCommittedOffset) GetCom
 //	    Client signals it is ready to get data from partition.
 //	UpdateTokenRequest - request to update auth token
 type StreamDirectReadMessage_FromClient struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to ClientMessage:
-	//
-	//	*StreamDirectReadMessage_FromClient_InitRequest
-	//	*StreamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest
-	//	*StreamDirectReadMessage_FromClient_UpdateTokenRequest
-	ClientMessage isStreamDirectReadMessage_FromClient_ClientMessage `protobuf_oneof:"client_message"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState                             `protogen:"opaque.v1"`
+	xxx_hidden_ClientMessage isStreamDirectReadMessage_FromClient_ClientMessage `protobuf_oneof:"client_message"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *StreamDirectReadMessage_FromClient) Reset() {
@@ -6056,21 +10005,9 @@ func (x *StreamDirectReadMessage_FromClient) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamDirectReadMessage_FromClient.ProtoReflect.Descriptor instead.
-func (*StreamDirectReadMessage_FromClient) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{8, 0}
-}
-
-func (x *StreamDirectReadMessage_FromClient) GetClientMessage() isStreamDirectReadMessage_FromClient_ClientMessage {
-	if x != nil {
-		return x.ClientMessage
-	}
-	return nil
-}
-
 func (x *StreamDirectReadMessage_FromClient) GetInitRequest() *StreamDirectReadMessage_InitRequest {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamDirectReadMessage_FromClient_InitRequest); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamDirectReadMessage_FromClient_InitRequest); ok {
 			return x.InitRequest
 		}
 	}
@@ -6079,7 +10016,7 @@ func (x *StreamDirectReadMessage_FromClient) GetInitRequest() *StreamDirectReadM
 
 func (x *StreamDirectReadMessage_FromClient) GetStartDirectReadPartitionSessionRequest() *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest); ok {
 			return x.StartDirectReadPartitionSessionRequest
 		}
 	}
@@ -6088,36 +10025,170 @@ func (x *StreamDirectReadMessage_FromClient) GetStartDirectReadPartitionSessionR
 
 func (x *StreamDirectReadMessage_FromClient) GetUpdateTokenRequest() *UpdateTokenRequest {
 	if x != nil {
-		if x, ok := x.ClientMessage.(*StreamDirectReadMessage_FromClient_UpdateTokenRequest); ok {
+		if x, ok := x.xxx_hidden_ClientMessage.(*streamDirectReadMessage_FromClient_UpdateTokenRequest); ok {
 			return x.UpdateTokenRequest
 		}
 	}
 	return nil
 }
 
+func (x *StreamDirectReadMessage_FromClient) SetInitRequest(v *StreamDirectReadMessage_InitRequest) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamDirectReadMessage_FromClient_InitRequest{v}
+}
+
+func (x *StreamDirectReadMessage_FromClient) SetStartDirectReadPartitionSessionRequest(v *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest{v}
+}
+
+func (x *StreamDirectReadMessage_FromClient) SetUpdateTokenRequest(v *UpdateTokenRequest) {
+	if v == nil {
+		x.xxx_hidden_ClientMessage = nil
+		return
+	}
+	x.xxx_hidden_ClientMessage = &streamDirectReadMessage_FromClient_UpdateTokenRequest{v}
+}
+
+func (x *StreamDirectReadMessage_FromClient) HasClientMessage() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ClientMessage != nil
+}
+
+func (x *StreamDirectReadMessage_FromClient) HasInitRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamDirectReadMessage_FromClient_InitRequest)
+	return ok
+}
+
+func (x *StreamDirectReadMessage_FromClient) HasStartDirectReadPartitionSessionRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest)
+	return ok
+}
+
+func (x *StreamDirectReadMessage_FromClient) HasUpdateTokenRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ClientMessage.(*streamDirectReadMessage_FromClient_UpdateTokenRequest)
+	return ok
+}
+
+func (x *StreamDirectReadMessage_FromClient) ClearClientMessage() {
+	x.xxx_hidden_ClientMessage = nil
+}
+
+func (x *StreamDirectReadMessage_FromClient) ClearInitRequest() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamDirectReadMessage_FromClient_InitRequest); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+func (x *StreamDirectReadMessage_FromClient) ClearStartDirectReadPartitionSessionRequest() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+func (x *StreamDirectReadMessage_FromClient) ClearUpdateTokenRequest() {
+	if _, ok := x.xxx_hidden_ClientMessage.(*streamDirectReadMessage_FromClient_UpdateTokenRequest); ok {
+		x.xxx_hidden_ClientMessage = nil
+	}
+}
+
+const StreamDirectReadMessage_FromClient_ClientMessage_not_set_case case_StreamDirectReadMessage_FromClient_ClientMessage = 0
+const StreamDirectReadMessage_FromClient_InitRequest_case case_StreamDirectReadMessage_FromClient_ClientMessage = 1
+const StreamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest_case case_StreamDirectReadMessage_FromClient_ClientMessage = 2
+const StreamDirectReadMessage_FromClient_UpdateTokenRequest_case case_StreamDirectReadMessage_FromClient_ClientMessage = 3
+
+func (x *StreamDirectReadMessage_FromClient) WhichClientMessage() case_StreamDirectReadMessage_FromClient_ClientMessage {
+	if x == nil {
+		return StreamDirectReadMessage_FromClient_ClientMessage_not_set_case
+	}
+	switch x.xxx_hidden_ClientMessage.(type) {
+	case *streamDirectReadMessage_FromClient_InitRequest:
+		return StreamDirectReadMessage_FromClient_InitRequest_case
+	case *streamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest:
+		return StreamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest_case
+	case *streamDirectReadMessage_FromClient_UpdateTokenRequest:
+		return StreamDirectReadMessage_FromClient_UpdateTokenRequest_case
+	default:
+		return StreamDirectReadMessage_FromClient_ClientMessage_not_set_case
+	}
+}
+
+type StreamDirectReadMessage_FromClient_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_ClientMessage:
+	InitRequest                            *StreamDirectReadMessage_InitRequest
+	StartDirectReadPartitionSessionRequest *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest
+	UpdateTokenRequest                     *UpdateTokenRequest
+	// -- end of xxx_hidden_ClientMessage
+}
+
+func (b0 StreamDirectReadMessage_FromClient_builder) Build() *StreamDirectReadMessage_FromClient {
+	m0 := &StreamDirectReadMessage_FromClient{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.InitRequest != nil {
+		x.xxx_hidden_ClientMessage = &streamDirectReadMessage_FromClient_InitRequest{b.InitRequest}
+	}
+	if b.StartDirectReadPartitionSessionRequest != nil {
+		x.xxx_hidden_ClientMessage = &streamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest{b.StartDirectReadPartitionSessionRequest}
+	}
+	if b.UpdateTokenRequest != nil {
+		x.xxx_hidden_ClientMessage = &streamDirectReadMessage_FromClient_UpdateTokenRequest{b.UpdateTokenRequest}
+	}
+	return m0
+}
+
+type case_StreamDirectReadMessage_FromClient_ClientMessage protoreflect.FieldNumber
+
+func (x case_StreamDirectReadMessage_FromClient_ClientMessage) String() string {
+	md := file_protos_ydb_topic_proto_msgTypes[84].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isStreamDirectReadMessage_FromClient_ClientMessage interface {
 	isStreamDirectReadMessage_FromClient_ClientMessage()
 }
 
-type StreamDirectReadMessage_FromClient_InitRequest struct {
+type streamDirectReadMessage_FromClient_InitRequest struct {
 	InitRequest *StreamDirectReadMessage_InitRequest `protobuf:"bytes,1,opt,name=init_request,json=initRequest,proto3,oneof"`
 }
 
-type StreamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest struct {
+type streamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest struct {
 	StartDirectReadPartitionSessionRequest *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest `protobuf:"bytes,2,opt,name=start_direct_read_partition_session_request,json=startDirectReadPartitionSessionRequest,proto3,oneof"`
 }
 
-type StreamDirectReadMessage_FromClient_UpdateTokenRequest struct {
+type streamDirectReadMessage_FromClient_UpdateTokenRequest struct {
 	UpdateTokenRequest *UpdateTokenRequest `protobuf:"bytes,3,opt,name=update_token_request,json=updateTokenRequest,proto3,oneof"`
 }
 
-func (*StreamDirectReadMessage_FromClient_InitRequest) isStreamDirectReadMessage_FromClient_ClientMessage() {
+func (*streamDirectReadMessage_FromClient_InitRequest) isStreamDirectReadMessage_FromClient_ClientMessage() {
 }
 
-func (*StreamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest) isStreamDirectReadMessage_FromClient_ClientMessage() {
+func (*streamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest) isStreamDirectReadMessage_FromClient_ClientMessage() {
 }
 
-func (*StreamDirectReadMessage_FromClient_UpdateTokenRequest) isStreamDirectReadMessage_FromClient_ClientMessage() {
+func (*streamDirectReadMessage_FromClient_UpdateTokenRequest) isStreamDirectReadMessage_FromClient_ClientMessage() {
 }
 
 // Server-client message for direct read session.
@@ -6128,21 +10199,12 @@ func (*StreamDirectReadMessage_FromClient_UpdateTokenRequest) isStreamDirectRead
 //	StopDirectReadPartitionSession - command from server to stop a direct read partition session.
 //	UpdateTokenResponse - acknowledgment of token update.
 type StreamDirectReadMessage_FromServer struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Server status of response.
-	Status Ydb.StatusIds_StatusCode `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	// Issues if any.
-	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	// Types that are valid to be assigned to ServerMessage:
-	//
-	//	*StreamDirectReadMessage_FromServer_InitResponse
-	//	*StreamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse
-	//	*StreamDirectReadMessage_FromServer_StopDirectReadPartitionSession
-	//	*StreamDirectReadMessage_FromServer_DirectReadResponse
-	//	*StreamDirectReadMessage_FromServer_UpdateTokenResponse
-	ServerMessage isStreamDirectReadMessage_FromServer_ServerMessage `protobuf_oneof:"server_message"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState                             `protogen:"opaque.v1"`
+	xxx_hidden_Status        Ydb.StatusIds_StatusCode                           `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues        *[]*Ydb_Issue.IssueMessage                         `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_ServerMessage isStreamDirectReadMessage_FromServer_ServerMessage `protobuf_oneof:"server_message"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *StreamDirectReadMessage_FromServer) Reset() {
@@ -6170,35 +10232,25 @@ func (x *StreamDirectReadMessage_FromServer) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamDirectReadMessage_FromServer.ProtoReflect.Descriptor instead.
-func (*StreamDirectReadMessage_FromServer) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{8, 1}
-}
-
 func (x *StreamDirectReadMessage_FromServer) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *StreamDirectReadMessage_FromServer) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
-	}
-	return nil
-}
-
-func (x *StreamDirectReadMessage_FromServer) GetServerMessage() isStreamDirectReadMessage_FromServer_ServerMessage {
-	if x != nil {
-		return x.ServerMessage
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *StreamDirectReadMessage_FromServer) GetInitResponse() *StreamDirectReadMessage_InitResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamDirectReadMessage_FromServer_InitResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_InitResponse); ok {
 			return x.InitResponse
 		}
 	}
@@ -6207,7 +10259,7 @@ func (x *StreamDirectReadMessage_FromServer) GetInitResponse() *StreamDirectRead
 
 func (x *StreamDirectReadMessage_FromServer) GetStartDirectReadPartitionSessionResponse() *StreamDirectReadMessage_StartDirectReadPartitionSessionResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse); ok {
 			return x.StartDirectReadPartitionSessionResponse
 		}
 	}
@@ -6216,7 +10268,7 @@ func (x *StreamDirectReadMessage_FromServer) GetStartDirectReadPartitionSessionR
 
 func (x *StreamDirectReadMessage_FromServer) GetStopDirectReadPartitionSession() *StreamDirectReadMessage_StopDirectReadPartitionSession {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamDirectReadMessage_FromServer_StopDirectReadPartitionSession); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_StopDirectReadPartitionSession); ok {
 			return x.StopDirectReadPartitionSession
 		}
 	}
@@ -6225,7 +10277,7 @@ func (x *StreamDirectReadMessage_FromServer) GetStopDirectReadPartitionSession()
 
 func (x *StreamDirectReadMessage_FromServer) GetDirectReadResponse() *StreamDirectReadMessage_DirectReadResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamDirectReadMessage_FromServer_DirectReadResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_DirectReadResponse); ok {
 			return x.DirectReadResponse
 		}
 	}
@@ -6234,64 +10286,267 @@ func (x *StreamDirectReadMessage_FromServer) GetDirectReadResponse() *StreamDire
 
 func (x *StreamDirectReadMessage_FromServer) GetUpdateTokenResponse() *UpdateTokenResponse {
 	if x != nil {
-		if x, ok := x.ServerMessage.(*StreamDirectReadMessage_FromServer_UpdateTokenResponse); ok {
+		if x, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_UpdateTokenResponse); ok {
 			return x.UpdateTokenResponse
 		}
 	}
 	return nil
 }
 
+func (x *StreamDirectReadMessage_FromServer) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *StreamDirectReadMessage_FromServer) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *StreamDirectReadMessage_FromServer) SetInitResponse(v *StreamDirectReadMessage_InitResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamDirectReadMessage_FromServer_InitResponse{v}
+}
+
+func (x *StreamDirectReadMessage_FromServer) SetStartDirectReadPartitionSessionResponse(v *StreamDirectReadMessage_StartDirectReadPartitionSessionResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse{v}
+}
+
+func (x *StreamDirectReadMessage_FromServer) SetStopDirectReadPartitionSession(v *StreamDirectReadMessage_StopDirectReadPartitionSession) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamDirectReadMessage_FromServer_StopDirectReadPartitionSession{v}
+}
+
+func (x *StreamDirectReadMessage_FromServer) SetDirectReadResponse(v *StreamDirectReadMessage_DirectReadResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamDirectReadMessage_FromServer_DirectReadResponse{v}
+}
+
+func (x *StreamDirectReadMessage_FromServer) SetUpdateTokenResponse(v *UpdateTokenResponse) {
+	if v == nil {
+		x.xxx_hidden_ServerMessage = nil
+		return
+	}
+	x.xxx_hidden_ServerMessage = &streamDirectReadMessage_FromServer_UpdateTokenResponse{v}
+}
+
+func (x *StreamDirectReadMessage_FromServer) HasServerMessage() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ServerMessage != nil
+}
+
+func (x *StreamDirectReadMessage_FromServer) HasInitResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_InitResponse)
+	return ok
+}
+
+func (x *StreamDirectReadMessage_FromServer) HasStartDirectReadPartitionSessionResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse)
+	return ok
+}
+
+func (x *StreamDirectReadMessage_FromServer) HasStopDirectReadPartitionSession() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_StopDirectReadPartitionSession)
+	return ok
+}
+
+func (x *StreamDirectReadMessage_FromServer) HasDirectReadResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_DirectReadResponse)
+	return ok
+}
+
+func (x *StreamDirectReadMessage_FromServer) HasUpdateTokenResponse() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_UpdateTokenResponse)
+	return ok
+}
+
+func (x *StreamDirectReadMessage_FromServer) ClearServerMessage() {
+	x.xxx_hidden_ServerMessage = nil
+}
+
+func (x *StreamDirectReadMessage_FromServer) ClearInitResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_InitResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamDirectReadMessage_FromServer) ClearStartDirectReadPartitionSessionResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamDirectReadMessage_FromServer) ClearStopDirectReadPartitionSession() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_StopDirectReadPartitionSession); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamDirectReadMessage_FromServer) ClearDirectReadResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_DirectReadResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+func (x *StreamDirectReadMessage_FromServer) ClearUpdateTokenResponse() {
+	if _, ok := x.xxx_hidden_ServerMessage.(*streamDirectReadMessage_FromServer_UpdateTokenResponse); ok {
+		x.xxx_hidden_ServerMessage = nil
+	}
+}
+
+const StreamDirectReadMessage_FromServer_ServerMessage_not_set_case case_StreamDirectReadMessage_FromServer_ServerMessage = 0
+const StreamDirectReadMessage_FromServer_InitResponse_case case_StreamDirectReadMessage_FromServer_ServerMessage = 6
+const StreamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse_case case_StreamDirectReadMessage_FromServer_ServerMessage = 7
+const StreamDirectReadMessage_FromServer_StopDirectReadPartitionSession_case case_StreamDirectReadMessage_FromServer_ServerMessage = 3
+const StreamDirectReadMessage_FromServer_DirectReadResponse_case case_StreamDirectReadMessage_FromServer_ServerMessage = 4
+const StreamDirectReadMessage_FromServer_UpdateTokenResponse_case case_StreamDirectReadMessage_FromServer_ServerMessage = 5
+
+func (x *StreamDirectReadMessage_FromServer) WhichServerMessage() case_StreamDirectReadMessage_FromServer_ServerMessage {
+	if x == nil {
+		return StreamDirectReadMessage_FromServer_ServerMessage_not_set_case
+	}
+	switch x.xxx_hidden_ServerMessage.(type) {
+	case *streamDirectReadMessage_FromServer_InitResponse:
+		return StreamDirectReadMessage_FromServer_InitResponse_case
+	case *streamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse:
+		return StreamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse_case
+	case *streamDirectReadMessage_FromServer_StopDirectReadPartitionSession:
+		return StreamDirectReadMessage_FromServer_StopDirectReadPartitionSession_case
+	case *streamDirectReadMessage_FromServer_DirectReadResponse:
+		return StreamDirectReadMessage_FromServer_DirectReadResponse_case
+	case *streamDirectReadMessage_FromServer_UpdateTokenResponse:
+		return StreamDirectReadMessage_FromServer_UpdateTokenResponse_case
+	default:
+		return StreamDirectReadMessage_FromServer_ServerMessage_not_set_case
+	}
+}
+
+type StreamDirectReadMessage_FromServer_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Server status of response.
+	Status Ydb.StatusIds_StatusCode
+	// Issues if any.
+	Issues []*Ydb_Issue.IssueMessage
+	// Fields of oneof xxx_hidden_ServerMessage:
+	InitResponse                            *StreamDirectReadMessage_InitResponse
+	StartDirectReadPartitionSessionResponse *StreamDirectReadMessage_StartDirectReadPartitionSessionResponse
+	StopDirectReadPartitionSession          *StreamDirectReadMessage_StopDirectReadPartitionSession
+	DirectReadResponse                      *StreamDirectReadMessage_DirectReadResponse
+	UpdateTokenResponse                     *UpdateTokenResponse
+	// -- end of xxx_hidden_ServerMessage
+}
+
+func (b0 StreamDirectReadMessage_FromServer_builder) Build() *StreamDirectReadMessage_FromServer {
+	m0 := &StreamDirectReadMessage_FromServer{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	if b.InitResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamDirectReadMessage_FromServer_InitResponse{b.InitResponse}
+	}
+	if b.StartDirectReadPartitionSessionResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse{b.StartDirectReadPartitionSessionResponse}
+	}
+	if b.StopDirectReadPartitionSession != nil {
+		x.xxx_hidden_ServerMessage = &streamDirectReadMessage_FromServer_StopDirectReadPartitionSession{b.StopDirectReadPartitionSession}
+	}
+	if b.DirectReadResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamDirectReadMessage_FromServer_DirectReadResponse{b.DirectReadResponse}
+	}
+	if b.UpdateTokenResponse != nil {
+		x.xxx_hidden_ServerMessage = &streamDirectReadMessage_FromServer_UpdateTokenResponse{b.UpdateTokenResponse}
+	}
+	return m0
+}
+
+type case_StreamDirectReadMessage_FromServer_ServerMessage protoreflect.FieldNumber
+
+func (x case_StreamDirectReadMessage_FromServer_ServerMessage) String() string {
+	md := file_protos_ydb_topic_proto_msgTypes[85].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isStreamDirectReadMessage_FromServer_ServerMessage interface {
 	isStreamDirectReadMessage_FromServer_ServerMessage()
 }
 
-type StreamDirectReadMessage_FromServer_InitResponse struct {
+type streamDirectReadMessage_FromServer_InitResponse struct {
 	InitResponse *StreamDirectReadMessage_InitResponse `protobuf:"bytes,6,opt,name=init_response,json=initResponse,proto3,oneof"`
 }
 
-type StreamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse struct {
+type streamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse struct {
 	StartDirectReadPartitionSessionResponse *StreamDirectReadMessage_StartDirectReadPartitionSessionResponse `protobuf:"bytes,7,opt,name=start_direct_read_partition_session_response,json=startDirectReadPartitionSessionResponse,proto3,oneof"`
 }
 
-type StreamDirectReadMessage_FromServer_StopDirectReadPartitionSession struct {
+type streamDirectReadMessage_FromServer_StopDirectReadPartitionSession struct {
 	StopDirectReadPartitionSession *StreamDirectReadMessage_StopDirectReadPartitionSession `protobuf:"bytes,3,opt,name=stop_direct_read_partition_session,json=stopDirectReadPartitionSession,proto3,oneof"`
 }
 
-type StreamDirectReadMessage_FromServer_DirectReadResponse struct {
+type streamDirectReadMessage_FromServer_DirectReadResponse struct {
 	DirectReadResponse *StreamDirectReadMessage_DirectReadResponse `protobuf:"bytes,4,opt,name=direct_read_response,json=directReadResponse,proto3,oneof"`
 }
 
-type StreamDirectReadMessage_FromServer_UpdateTokenResponse struct {
+type streamDirectReadMessage_FromServer_UpdateTokenResponse struct {
 	UpdateTokenResponse *UpdateTokenResponse `protobuf:"bytes,5,opt,name=update_token_response,json=updateTokenResponse,proto3,oneof"`
 }
 
-func (*StreamDirectReadMessage_FromServer_InitResponse) isStreamDirectReadMessage_FromServer_ServerMessage() {
+func (*streamDirectReadMessage_FromServer_InitResponse) isStreamDirectReadMessage_FromServer_ServerMessage() {
 }
 
-func (*StreamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse) isStreamDirectReadMessage_FromServer_ServerMessage() {
+func (*streamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse) isStreamDirectReadMessage_FromServer_ServerMessage() {
 }
 
-func (*StreamDirectReadMessage_FromServer_StopDirectReadPartitionSession) isStreamDirectReadMessage_FromServer_ServerMessage() {
+func (*streamDirectReadMessage_FromServer_StopDirectReadPartitionSession) isStreamDirectReadMessage_FromServer_ServerMessage() {
 }
 
-func (*StreamDirectReadMessage_FromServer_DirectReadResponse) isStreamDirectReadMessage_FromServer_ServerMessage() {
+func (*streamDirectReadMessage_FromServer_DirectReadResponse) isStreamDirectReadMessage_FromServer_ServerMessage() {
 }
 
-func (*StreamDirectReadMessage_FromServer_UpdateTokenResponse) isStreamDirectReadMessage_FromServer_ServerMessage() {
+func (*streamDirectReadMessage_FromServer_UpdateTokenResponse) isStreamDirectReadMessage_FromServer_ServerMessage() {
 }
 
 // Command from client to create and start a direct read session.
 // Server should not send a response to the command.
 type StreamDirectReadMessage_InitRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Read session identifier.
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Topics that will be read by this session.
-	TopicsReadSettings []*StreamDirectReadMessage_InitRequest_TopicReadSettings `protobuf:"bytes,2,rep,name=topics_read_settings,json=topicsReadSettings,proto3" json:"topics_read_settings,omitempty"`
-	// Path of consumer that is used for reading by this session.
-	Consumer      string `protobuf:"bytes,3,opt,name=consumer,proto3" json:"consumer,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState                                    `protogen:"opaque.v1"`
+	xxx_hidden_SessionId          string                                                    `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TopicsReadSettings *[]*StreamDirectReadMessage_InitRequest_TopicReadSettings `protobuf:"bytes,2,rep,name=topics_read_settings,json=topicsReadSettings,proto3"`
+	xxx_hidden_Consumer           string                                                    `protobuf:"bytes,3,opt,name=consumer,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamDirectReadMessage_InitRequest) Reset() {
@@ -6319,35 +10574,65 @@ func (x *StreamDirectReadMessage_InitRequest) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamDirectReadMessage_InitRequest.ProtoReflect.Descriptor instead.
-func (*StreamDirectReadMessage_InitRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{8, 2}
-}
-
 func (x *StreamDirectReadMessage_InitRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *StreamDirectReadMessage_InitRequest) GetTopicsReadSettings() []*StreamDirectReadMessage_InitRequest_TopicReadSettings {
 	if x != nil {
-		return x.TopicsReadSettings
+		if x.xxx_hidden_TopicsReadSettings != nil {
+			return *x.xxx_hidden_TopicsReadSettings
+		}
 	}
 	return nil
 }
 
 func (x *StreamDirectReadMessage_InitRequest) GetConsumer() string {
 	if x != nil {
-		return x.Consumer
+		return x.xxx_hidden_Consumer
 	}
 	return ""
 }
 
+func (x *StreamDirectReadMessage_InitRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *StreamDirectReadMessage_InitRequest) SetTopicsReadSettings(v []*StreamDirectReadMessage_InitRequest_TopicReadSettings) {
+	x.xxx_hidden_TopicsReadSettings = &v
+}
+
+func (x *StreamDirectReadMessage_InitRequest) SetConsumer(v string) {
+	x.xxx_hidden_Consumer = v
+}
+
+type StreamDirectReadMessage_InitRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Read session identifier.
+	SessionId string
+	// Topics that will be read by this session.
+	TopicsReadSettings []*StreamDirectReadMessage_InitRequest_TopicReadSettings
+	// Path of consumer that is used for reading by this session.
+	Consumer string
+}
+
+func (b0 StreamDirectReadMessage_InitRequest_builder) Build() *StreamDirectReadMessage_InitRequest {
+	m0 := &StreamDirectReadMessage_InitRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TopicsReadSettings = &b.TopicsReadSettings
+	x.xxx_hidden_Consumer = b.Consumer
+	return m0
+}
+
 // Response to the handshake.
 type StreamDirectReadMessage_InitResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6377,22 +10662,26 @@ func (x *StreamDirectReadMessage_InitResponse) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamDirectReadMessage_InitResponse.ProtoReflect.Descriptor instead.
-func (*StreamDirectReadMessage_InitResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{8, 3}
+type StreamDirectReadMessage_InitResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 StreamDirectReadMessage_InitResponse_builder) Build() *StreamDirectReadMessage_InitResponse {
+	m0 := &StreamDirectReadMessage_InitResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Command from client to create and start a direct read partition session.
 type StreamDirectReadMessage_StartDirectReadPartitionSessionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition session identifier.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Upper bound for read request identifiers.
-	LastDirectReadId int64 `protobuf:"varint,2,opt,name=last_direct_read_id,json=lastDirectReadId,proto3" json:"last_direct_read_id,omitempty"`
-	// Partition generation.
-	Generation    int64 `protobuf:"varint,3,opt,name=generation,proto3" json:"generation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_LastDirectReadId   int64                  `protobuf:"varint,2,opt,name=last_direct_read_id,json=lastDirectReadId,proto3"`
+	xxx_hidden_Generation         int64                  `protobuf:"varint,3,opt,name=generation,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest) Reset() {
@@ -6420,41 +10709,67 @@ func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest) ProtoRe
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamDirectReadMessage_StartDirectReadPartitionSessionRequest.ProtoReflect.Descriptor instead.
-func (*StreamDirectReadMessage_StartDirectReadPartitionSessionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{8, 4}
-}
-
 func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest) GetLastDirectReadId() int64 {
 	if x != nil {
-		return x.LastDirectReadId
+		return x.xxx_hidden_LastDirectReadId
 	}
 	return 0
 }
 
 func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest) GetGeneration() int64 {
 	if x != nil {
-		return x.Generation
+		return x.xxx_hidden_Generation
 	}
 	return 0
 }
 
+func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest) SetLastDirectReadId(v int64) {
+	x.xxx_hidden_LastDirectReadId = v
+}
+
+func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest) SetGeneration(v int64) {
+	x.xxx_hidden_Generation = v
+}
+
+type StreamDirectReadMessage_StartDirectReadPartitionSessionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition session identifier.
+	PartitionSessionId int64
+	// Upper bound for read request identifiers.
+	LastDirectReadId int64
+	// Partition generation.
+	Generation int64
+}
+
+func (b0 StreamDirectReadMessage_StartDirectReadPartitionSessionRequest_builder) Build() *StreamDirectReadMessage_StartDirectReadPartitionSessionRequest {
+	m0 := &StreamDirectReadMessage_StartDirectReadPartitionSessionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_LastDirectReadId = b.LastDirectReadId
+	x.xxx_hidden_Generation = b.Generation
+	return m0
+}
+
 // Signal for server that client is ready to receive data for partition.
 type StreamDirectReadMessage_StartDirectReadPartitionSessionResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition session identifier of partition to start read.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Partition generation.
-	Generation    int64 `protobuf:"varint,2,opt,name=generation,proto3" json:"generation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                  `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_Generation         int64                  `protobuf:"varint,2,opt,name=generation,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionResponse) Reset() {
@@ -6482,39 +10797,56 @@ func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionResponse) ProtoR
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamDirectReadMessage_StartDirectReadPartitionSessionResponse.ProtoReflect.Descriptor instead.
-func (*StreamDirectReadMessage_StartDirectReadPartitionSessionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{8, 5}
-}
-
 func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionResponse) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionResponse) GetGeneration() int64 {
 	if x != nil {
-		return x.Generation
+		return x.xxx_hidden_Generation
 	}
 	return 0
+}
+
+func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionResponse) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamDirectReadMessage_StartDirectReadPartitionSessionResponse) SetGeneration(v int64) {
+	x.xxx_hidden_Generation = v
+}
+
+type StreamDirectReadMessage_StartDirectReadPartitionSessionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition session identifier of partition to start read.
+	PartitionSessionId int64
+	// Partition generation.
+	Generation int64
+}
+
+func (b0 StreamDirectReadMessage_StartDirectReadPartitionSessionResponse_builder) Build() *StreamDirectReadMessage_StartDirectReadPartitionSessionResponse {
+	m0 := &StreamDirectReadMessage_StartDirectReadPartitionSessionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_Generation = b.Generation
+	return m0
 }
 
 // Command from server to stop a direct read partition session.
 // Client should not send a response to the command.
 type StreamDirectReadMessage_StopDirectReadPartitionSession struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The reason for the stop.
-	Status Ydb.StatusIds_StatusCode `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	// Issues if any.
-	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	// Partition session identifier.
-	PartitionSessionId int64 `protobuf:"varint,3,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Partition generation.
-	Generation    int64 `protobuf:"varint,4,opt,name=generation,proto3" json:"generation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status             Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues             *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_PartitionSessionId int64                      `protobuf:"varint,3,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_Generation         int64                      `protobuf:"varint,4,opt,name=generation,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamDirectReadMessage_StopDirectReadPartitionSession) Reset() {
@@ -6542,51 +10874,85 @@ func (x *StreamDirectReadMessage_StopDirectReadPartitionSession) ProtoReflect() 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamDirectReadMessage_StopDirectReadPartitionSession.ProtoReflect.Descriptor instead.
-func (*StreamDirectReadMessage_StopDirectReadPartitionSession) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{8, 6}
-}
-
 func (x *StreamDirectReadMessage_StopDirectReadPartitionSession) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *StreamDirectReadMessage_StopDirectReadPartitionSession) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *StreamDirectReadMessage_StopDirectReadPartitionSession) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamDirectReadMessage_StopDirectReadPartitionSession) GetGeneration() int64 {
 	if x != nil {
-		return x.Generation
+		return x.xxx_hidden_Generation
 	}
 	return 0
+}
+
+func (x *StreamDirectReadMessage_StopDirectReadPartitionSession) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *StreamDirectReadMessage_StopDirectReadPartitionSession) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *StreamDirectReadMessage_StopDirectReadPartitionSession) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamDirectReadMessage_StopDirectReadPartitionSession) SetGeneration(v int64) {
+	x.xxx_hidden_Generation = v
+}
+
+type StreamDirectReadMessage_StopDirectReadPartitionSession_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The reason for the stop.
+	Status Ydb.StatusIds_StatusCode
+	// Issues if any.
+	Issues []*Ydb_Issue.IssueMessage
+	// Partition session identifier.
+	PartitionSessionId int64
+	// Partition generation.
+	Generation int64
+}
+
+func (b0 StreamDirectReadMessage_StopDirectReadPartitionSession_builder) Build() *StreamDirectReadMessage_StopDirectReadPartitionSession {
+	m0 := &StreamDirectReadMessage_StopDirectReadPartitionSession{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_Generation = b.Generation
+	return m0
 }
 
 // Messages that have been read directly from the partition node.
 // It's a response to StreamRead.ReadRequest
 type StreamDirectReadMessage_DirectReadResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition session identifier.
-	PartitionSessionId int64 `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3" json:"partition_session_id,omitempty"`
-	// Read request identifier.
-	DirectReadId int64 `protobuf:"varint,2,opt,name=direct_read_id,json=directReadId,proto3" json:"direct_read_id,omitempty"`
-	// Messages data
-	PartitionData *StreamReadMessage_ReadResponse_PartitionData `protobuf:"bytes,3,opt,name=partition_data,json=partitionData,proto3" json:"partition_data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState                        `protogen:"opaque.v1"`
+	xxx_hidden_PartitionSessionId int64                                         `protobuf:"varint,1,opt,name=partition_session_id,json=partitionSessionId,proto3"`
+	xxx_hidden_DirectReadId       int64                                         `protobuf:"varint,2,opt,name=direct_read_id,json=directReadId,proto3"`
+	xxx_hidden_PartitionData      *StreamReadMessage_ReadResponse_PartitionData `protobuf:"bytes,3,opt,name=partition_data,json=partitionData,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StreamDirectReadMessage_DirectReadResponse) Reset() {
@@ -6614,38 +10980,76 @@ func (x *StreamDirectReadMessage_DirectReadResponse) ProtoReflect() protoreflect
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamDirectReadMessage_DirectReadResponse.ProtoReflect.Descriptor instead.
-func (*StreamDirectReadMessage_DirectReadResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{8, 7}
-}
-
 func (x *StreamDirectReadMessage_DirectReadResponse) GetPartitionSessionId() int64 {
 	if x != nil {
-		return x.PartitionSessionId
+		return x.xxx_hidden_PartitionSessionId
 	}
 	return 0
 }
 
 func (x *StreamDirectReadMessage_DirectReadResponse) GetDirectReadId() int64 {
 	if x != nil {
-		return x.DirectReadId
+		return x.xxx_hidden_DirectReadId
 	}
 	return 0
 }
 
 func (x *StreamDirectReadMessage_DirectReadResponse) GetPartitionData() *StreamReadMessage_ReadResponse_PartitionData {
 	if x != nil {
-		return x.PartitionData
+		return x.xxx_hidden_PartitionData
 	}
 	return nil
 }
 
+func (x *StreamDirectReadMessage_DirectReadResponse) SetPartitionSessionId(v int64) {
+	x.xxx_hidden_PartitionSessionId = v
+}
+
+func (x *StreamDirectReadMessage_DirectReadResponse) SetDirectReadId(v int64) {
+	x.xxx_hidden_DirectReadId = v
+}
+
+func (x *StreamDirectReadMessage_DirectReadResponse) SetPartitionData(v *StreamReadMessage_ReadResponse_PartitionData) {
+	x.xxx_hidden_PartitionData = v
+}
+
+func (x *StreamDirectReadMessage_DirectReadResponse) HasPartitionData() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionData != nil
+}
+
+func (x *StreamDirectReadMessage_DirectReadResponse) ClearPartitionData() {
+	x.xxx_hidden_PartitionData = nil
+}
+
+type StreamDirectReadMessage_DirectReadResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition session identifier.
+	PartitionSessionId int64
+	// Read request identifier.
+	DirectReadId int64
+	// Messages data
+	PartitionData *StreamReadMessage_ReadResponse_PartitionData
+}
+
+func (b0 StreamDirectReadMessage_DirectReadResponse_builder) Build() *StreamDirectReadMessage_DirectReadResponse {
+	m0 := &StreamDirectReadMessage_DirectReadResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionSessionId = b.PartitionSessionId
+	x.xxx_hidden_DirectReadId = b.DirectReadId
+	x.xxx_hidden_PartitionData = b.PartitionData
+	return m0
+}
+
 type StreamDirectReadMessage_InitRequest_TopicReadSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Topic path.
-	Path          string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Path string                 `protobuf:"bytes,1,opt,name=path,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *StreamDirectReadMessage_InitRequest_TopicReadSettings) Reset() {
@@ -6673,26 +11077,38 @@ func (x *StreamDirectReadMessage_InitRequest_TopicReadSettings) ProtoReflect() p
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamDirectReadMessage_InitRequest_TopicReadSettings.ProtoReflect.Descriptor instead.
-func (*StreamDirectReadMessage_InitRequest_TopicReadSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{8, 2, 0}
-}
-
 func (x *StreamDirectReadMessage_InitRequest_TopicReadSettings) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
-type UpdateOffsetsInTransactionRequest_TopicOffsets struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
+func (x *StreamDirectReadMessage_InitRequest_TopicReadSettings) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+type StreamDirectReadMessage_InitRequest_TopicReadSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
 	// Topic path.
-	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	// Ranges of offsets by partitions.
-	Partitions    []*UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets `protobuf:"bytes,2,rep,name=partitions,proto3" json:"partitions,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Path string
+}
+
+func (b0 StreamDirectReadMessage_InitRequest_TopicReadSettings_builder) Build() *StreamDirectReadMessage_InitRequest_TopicReadSettings {
+	m0 := &StreamDirectReadMessage_InitRequest_TopicReadSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Path = b.Path
+	return m0
+}
+
+type UpdateOffsetsInTransactionRequest_TopicOffsets struct {
+	state                 protoimpl.MessageState                                              `protogen:"opaque.v1"`
+	xxx_hidden_Path       string                                                              `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_Partitions *[]*UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets `protobuf:"bytes,2,rep,name=partitions,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *UpdateOffsetsInTransactionRequest_TopicOffsets) Reset() {
@@ -6720,33 +11136,54 @@ func (x *UpdateOffsetsInTransactionRequest_TopicOffsets) ProtoReflect() protoref
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateOffsetsInTransactionRequest_TopicOffsets.ProtoReflect.Descriptor instead.
-func (*UpdateOffsetsInTransactionRequest_TopicOffsets) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{10, 0}
-}
-
 func (x *UpdateOffsetsInTransactionRequest_TopicOffsets) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *UpdateOffsetsInTransactionRequest_TopicOffsets) GetPartitions() []*UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets {
 	if x != nil {
-		return x.Partitions
+		if x.xxx_hidden_Partitions != nil {
+			return *x.xxx_hidden_Partitions
+		}
 	}
 	return nil
 }
 
+func (x *UpdateOffsetsInTransactionRequest_TopicOffsets) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *UpdateOffsetsInTransactionRequest_TopicOffsets) SetPartitions(v []*UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets) {
+	x.xxx_hidden_Partitions = &v
+}
+
+type UpdateOffsetsInTransactionRequest_TopicOffsets_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Topic path.
+	Path string
+	// Ranges of offsets by partitions.
+	Partitions []*UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets
+}
+
+func (b0 UpdateOffsetsInTransactionRequest_TopicOffsets_builder) Build() *UpdateOffsetsInTransactionRequest_TopicOffsets {
+	m0 := &UpdateOffsetsInTransactionRequest_TopicOffsets{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_Partitions = &b.Partitions
+	return m0
+}
+
 type UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition identifier.
-	PartitionId int64 `protobuf:"varint,1,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
-	// List of offset ranges.
-	PartitionOffsets []*OffsetsRange `protobuf:"bytes,2,rep,name=partition_offsets,json=partitionOffsets,proto3" json:"partition_offsets,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionId      int64                  `protobuf:"varint,1,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_PartitionOffsets *[]*OffsetsRange       `protobuf:"bytes,2,rep,name=partition_offsets,json=partitionOffsets,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets) Reset() {
@@ -6774,37 +11211,56 @@ func (x *UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets) ProtoR
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets.ProtoReflect.Descriptor instead.
-func (*UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{10, 0, 0}
-}
-
 func (x *UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets) GetPartitionId() int64 {
 	if x != nil {
-		return x.PartitionId
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets) GetPartitionOffsets() []*OffsetsRange {
 	if x != nil {
-		return x.PartitionOffsets
+		if x.xxx_hidden_PartitionOffsets != nil {
+			return *x.xxx_hidden_PartitionOffsets
+		}
 	}
 	return nil
 }
 
+func (x *UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets) SetPartitionId(v int64) {
+	x.xxx_hidden_PartitionId = v
+}
+
+func (x *UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets) SetPartitionOffsets(v []*OffsetsRange) {
+	x.xxx_hidden_PartitionOffsets = &v
+}
+
+type UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition identifier.
+	PartitionId int64
+	// List of offset ranges.
+	PartitionOffsets []*OffsetsRange
+}
+
+func (b0 UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets_builder) Build() *UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets {
+	m0 := &UpdateOffsetsInTransactionRequest_TopicOffsets_PartitionOffsets{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionId = b.PartitionId
+	x.xxx_hidden_PartitionOffsets = &b.PartitionOffsets
+	return m0
+}
+
 type Consumer_ConsumerStats struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Minimal timestamp of last read from partitions.
-	MinPartitionsLastReadTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=min_partitions_last_read_time,json=minPartitionsLastReadTime,proto3" json:"min_partitions_last_read_time,omitempty"`
-	// Maximum of differences between timestamp of read and write timestamp for all messages, read during last minute.
-	MaxReadTimeLag *durationpb.Duration `protobuf:"bytes,2,opt,name=max_read_time_lag,json=maxReadTimeLag,proto3" json:"max_read_time_lag,omitempty"`
-	// Maximum of differences between write timestamp and create timestamp for all messages, read during last minute.
-	MaxWriteTimeLag *durationpb.Duration `protobuf:"bytes,3,opt,name=max_write_time_lag,json=maxWriteTimeLag,proto3" json:"max_write_time_lag,omitempty"`
-	// Bytes read statistics.
-	BytesRead     *MultipleWindowsStat `protobuf:"bytes,4,opt,name=bytes_read,json=bytesRead,proto3" json:"bytes_read,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_MinPartitionsLastReadTime *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=min_partitions_last_read_time,json=minPartitionsLastReadTime,proto3"`
+	xxx_hidden_MaxReadTimeLag            *durationpb.Duration   `protobuf:"bytes,2,opt,name=max_read_time_lag,json=maxReadTimeLag,proto3"`
+	xxx_hidden_MaxWriteTimeLag           *durationpb.Duration   `protobuf:"bytes,3,opt,name=max_write_time_lag,json=maxWriteTimeLag,proto3"`
+	xxx_hidden_BytesRead                 *MultipleWindowsStat   `protobuf:"bytes,4,opt,name=bytes_read,json=bytesRead,proto3"`
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *Consumer_ConsumerStats) Reset() {
@@ -6832,56 +11288,129 @@ func (x *Consumer_ConsumerStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Consumer_ConsumerStats.ProtoReflect.Descriptor instead.
-func (*Consumer_ConsumerStats) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{17, 1}
-}
-
 func (x *Consumer_ConsumerStats) GetMinPartitionsLastReadTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.MinPartitionsLastReadTime
+		return x.xxx_hidden_MinPartitionsLastReadTime
 	}
 	return nil
 }
 
 func (x *Consumer_ConsumerStats) GetMaxReadTimeLag() *durationpb.Duration {
 	if x != nil {
-		return x.MaxReadTimeLag
+		return x.xxx_hidden_MaxReadTimeLag
 	}
 	return nil
 }
 
 func (x *Consumer_ConsumerStats) GetMaxWriteTimeLag() *durationpb.Duration {
 	if x != nil {
-		return x.MaxWriteTimeLag
+		return x.xxx_hidden_MaxWriteTimeLag
 	}
 	return nil
 }
 
 func (x *Consumer_ConsumerStats) GetBytesRead() *MultipleWindowsStat {
 	if x != nil {
-		return x.BytesRead
+		return x.xxx_hidden_BytesRead
 	}
 	return nil
 }
 
+func (x *Consumer_ConsumerStats) SetMinPartitionsLastReadTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_MinPartitionsLastReadTime = v
+}
+
+func (x *Consumer_ConsumerStats) SetMaxReadTimeLag(v *durationpb.Duration) {
+	x.xxx_hidden_MaxReadTimeLag = v
+}
+
+func (x *Consumer_ConsumerStats) SetMaxWriteTimeLag(v *durationpb.Duration) {
+	x.xxx_hidden_MaxWriteTimeLag = v
+}
+
+func (x *Consumer_ConsumerStats) SetBytesRead(v *MultipleWindowsStat) {
+	x.xxx_hidden_BytesRead = v
+}
+
+func (x *Consumer_ConsumerStats) HasMinPartitionsLastReadTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MinPartitionsLastReadTime != nil
+}
+
+func (x *Consumer_ConsumerStats) HasMaxReadTimeLag() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MaxReadTimeLag != nil
+}
+
+func (x *Consumer_ConsumerStats) HasMaxWriteTimeLag() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MaxWriteTimeLag != nil
+}
+
+func (x *Consumer_ConsumerStats) HasBytesRead() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_BytesRead != nil
+}
+
+func (x *Consumer_ConsumerStats) ClearMinPartitionsLastReadTime() {
+	x.xxx_hidden_MinPartitionsLastReadTime = nil
+}
+
+func (x *Consumer_ConsumerStats) ClearMaxReadTimeLag() {
+	x.xxx_hidden_MaxReadTimeLag = nil
+}
+
+func (x *Consumer_ConsumerStats) ClearMaxWriteTimeLag() {
+	x.xxx_hidden_MaxWriteTimeLag = nil
+}
+
+func (x *Consumer_ConsumerStats) ClearBytesRead() {
+	x.xxx_hidden_BytesRead = nil
+}
+
+type Consumer_ConsumerStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Minimal timestamp of last read from partitions.
+	MinPartitionsLastReadTime *timestamppb.Timestamp
+	// Maximum of differences between timestamp of read and write timestamp for all messages, read during last minute.
+	MaxReadTimeLag *durationpb.Duration
+	// Maximum of differences between write timestamp and create timestamp for all messages, read during last minute.
+	MaxWriteTimeLag *durationpb.Duration
+	// Bytes read statistics.
+	BytesRead *MultipleWindowsStat
+}
+
+func (b0 Consumer_ConsumerStats_builder) Build() *Consumer_ConsumerStats {
+	m0 := &Consumer_ConsumerStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_MinPartitionsLastReadTime = b.MinPartitionsLastReadTime
+	x.xxx_hidden_MaxReadTimeLag = b.MaxReadTimeLag
+	x.xxx_hidden_MaxWriteTimeLag = b.MaxWriteTimeLag
+	x.xxx_hidden_BytesRead = b.BytesRead
+	return m0
+}
+
 type DescribeTopicResult_PartitionInfo struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition identifier.
-	PartitionId int64 `protobuf:"varint,1,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
-	// Is partition open for write.
-	Active bool `protobuf:"varint,2,opt,name=active,proto3" json:"active,omitempty"`
-	// Ids of partitions which was formed when this partition was split or merged.
-	ChildPartitionIds []int64 `protobuf:"varint,3,rep,packed,name=child_partition_ids,json=childPartitionIds,proto3" json:"child_partition_ids,omitempty"`
-	// Ids of partitions from which this partition was formed by split or merge.
-	ParentPartitionIds []int64 `protobuf:"varint,4,rep,packed,name=parent_partition_ids,json=parentPartitionIds,proto3" json:"parent_partition_ids,omitempty"`
-	// Stats for partition, filled only when include_stats in request is true.
-	PartitionStats *PartitionStats `protobuf:"bytes,5,opt,name=partition_stats,json=partitionStats,proto3" json:"partition_stats,omitempty"`
-	// Partition location, filled only when include_location in request is true.
-	PartitionLocation *PartitionLocation `protobuf:"bytes,6,opt,name=partition_location,json=partitionLocation,proto3" json:"partition_location,omitempty"`
-	KeyRange          *PartitionKeyRange `protobuf:"bytes,7,opt,name=key_range,json=keyRange,proto3" json:"key_range,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionId        int64                  `protobuf:"varint,1,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_Active             bool                   `protobuf:"varint,2,opt,name=active,proto3"`
+	xxx_hidden_ChildPartitionIds  []int64                `protobuf:"varint,3,rep,packed,name=child_partition_ids,json=childPartitionIds,proto3"`
+	xxx_hidden_ParentPartitionIds []int64                `protobuf:"varint,4,rep,packed,name=parent_partition_ids,json=parentPartitionIds,proto3"`
+	xxx_hidden_PartitionStats     *PartitionStats        `protobuf:"bytes,5,opt,name=partition_stats,json=partitionStats,proto3"`
+	xxx_hidden_PartitionLocation  *PartitionLocation     `protobuf:"bytes,6,opt,name=partition_location,json=partitionLocation,proto3"`
+	xxx_hidden_KeyRange           *PartitionKeyRange     `protobuf:"bytes,7,opt,name=key_range,json=keyRange,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *DescribeTopicResult_PartitionInfo) Reset() {
@@ -6909,72 +11438,156 @@ func (x *DescribeTopicResult_PartitionInfo) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeTopicResult_PartitionInfo.ProtoReflect.Descriptor instead.
-func (*DescribeTopicResult_PartitionInfo) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{32, 1}
-}
-
 func (x *DescribeTopicResult_PartitionInfo) GetPartitionId() int64 {
 	if x != nil {
-		return x.PartitionId
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *DescribeTopicResult_PartitionInfo) GetActive() bool {
 	if x != nil {
-		return x.Active
+		return x.xxx_hidden_Active
 	}
 	return false
 }
 
 func (x *DescribeTopicResult_PartitionInfo) GetChildPartitionIds() []int64 {
 	if x != nil {
-		return x.ChildPartitionIds
+		return x.xxx_hidden_ChildPartitionIds
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult_PartitionInfo) GetParentPartitionIds() []int64 {
 	if x != nil {
-		return x.ParentPartitionIds
+		return x.xxx_hidden_ParentPartitionIds
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult_PartitionInfo) GetPartitionStats() *PartitionStats {
 	if x != nil {
-		return x.PartitionStats
+		return x.xxx_hidden_PartitionStats
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult_PartitionInfo) GetPartitionLocation() *PartitionLocation {
 	if x != nil {
-		return x.PartitionLocation
+		return x.xxx_hidden_PartitionLocation
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult_PartitionInfo) GetKeyRange() *PartitionKeyRange {
 	if x != nil {
-		return x.KeyRange
+		return x.xxx_hidden_KeyRange
 	}
 	return nil
 }
 
+func (x *DescribeTopicResult_PartitionInfo) SetPartitionId(v int64) {
+	x.xxx_hidden_PartitionId = v
+}
+
+func (x *DescribeTopicResult_PartitionInfo) SetActive(v bool) {
+	x.xxx_hidden_Active = v
+}
+
+func (x *DescribeTopicResult_PartitionInfo) SetChildPartitionIds(v []int64) {
+	x.xxx_hidden_ChildPartitionIds = v
+}
+
+func (x *DescribeTopicResult_PartitionInfo) SetParentPartitionIds(v []int64) {
+	x.xxx_hidden_ParentPartitionIds = v
+}
+
+func (x *DescribeTopicResult_PartitionInfo) SetPartitionStats(v *PartitionStats) {
+	x.xxx_hidden_PartitionStats = v
+}
+
+func (x *DescribeTopicResult_PartitionInfo) SetPartitionLocation(v *PartitionLocation) {
+	x.xxx_hidden_PartitionLocation = v
+}
+
+func (x *DescribeTopicResult_PartitionInfo) SetKeyRange(v *PartitionKeyRange) {
+	x.xxx_hidden_KeyRange = v
+}
+
+func (x *DescribeTopicResult_PartitionInfo) HasPartitionStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionStats != nil
+}
+
+func (x *DescribeTopicResult_PartitionInfo) HasPartitionLocation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionLocation != nil
+}
+
+func (x *DescribeTopicResult_PartitionInfo) HasKeyRange() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_KeyRange != nil
+}
+
+func (x *DescribeTopicResult_PartitionInfo) ClearPartitionStats() {
+	x.xxx_hidden_PartitionStats = nil
+}
+
+func (x *DescribeTopicResult_PartitionInfo) ClearPartitionLocation() {
+	x.xxx_hidden_PartitionLocation = nil
+}
+
+func (x *DescribeTopicResult_PartitionInfo) ClearKeyRange() {
+	x.xxx_hidden_KeyRange = nil
+}
+
+type DescribeTopicResult_PartitionInfo_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition identifier.
+	PartitionId int64
+	// Is partition open for write.
+	Active bool
+	// Ids of partitions which was formed when this partition was split or merged.
+	ChildPartitionIds []int64
+	// Ids of partitions from which this partition was formed by split or merge.
+	ParentPartitionIds []int64
+	// Stats for partition, filled only when include_stats in request is true.
+	PartitionStats *PartitionStats
+	// Partition location, filled only when include_location in request is true.
+	PartitionLocation *PartitionLocation
+	KeyRange          *PartitionKeyRange
+}
+
+func (b0 DescribeTopicResult_PartitionInfo_builder) Build() *DescribeTopicResult_PartitionInfo {
+	m0 := &DescribeTopicResult_PartitionInfo{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionId = b.PartitionId
+	x.xxx_hidden_Active = b.Active
+	x.xxx_hidden_ChildPartitionIds = b.ChildPartitionIds
+	x.xxx_hidden_ParentPartitionIds = b.ParentPartitionIds
+	x.xxx_hidden_PartitionStats = b.PartitionStats
+	x.xxx_hidden_PartitionLocation = b.PartitionLocation
+	x.xxx_hidden_KeyRange = b.KeyRange
+	return m0
+}
+
 type DescribeTopicResult_TopicStats struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Approximate size of topic.
-	StoreSizeBytes int64 `protobuf:"varint,1,opt,name=store_size_bytes,json=storeSizeBytes,proto3" json:"store_size_bytes,omitempty"`
-	// Minimum of timestamps of last write among all partitions.
-	MinLastWriteTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=min_last_write_time,json=minLastWriteTime,proto3" json:"min_last_write_time,omitempty"`
-	// Maximum of differences between write timestamp and create timestamp for all messages, written during last minute.
-	MaxWriteTimeLag *durationpb.Duration `protobuf:"bytes,3,opt,name=max_write_time_lag,json=maxWriteTimeLag,proto3" json:"max_write_time_lag,omitempty"`
-	// How much bytes were written statistics.
-	BytesWritten  *MultipleWindowsStat `protobuf:"bytes,4,opt,name=bytes_written,json=bytesWritten,proto3" json:"bytes_written,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StoreSizeBytes   int64                  `protobuf:"varint,1,opt,name=store_size_bytes,json=storeSizeBytes,proto3"`
+	xxx_hidden_MinLastWriteTime *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=min_last_write_time,json=minLastWriteTime,proto3"`
+	xxx_hidden_MaxWriteTimeLag  *durationpb.Duration   `protobuf:"bytes,3,opt,name=max_write_time_lag,json=maxWriteTimeLag,proto3"`
+	xxx_hidden_BytesWritten     *MultipleWindowsStat   `protobuf:"bytes,4,opt,name=bytes_written,json=bytesWritten,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *DescribeTopicResult_TopicStats) Reset() {
@@ -7002,57 +11615,118 @@ func (x *DescribeTopicResult_TopicStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeTopicResult_TopicStats.ProtoReflect.Descriptor instead.
-func (*DescribeTopicResult_TopicStats) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{32, 2}
-}
-
 func (x *DescribeTopicResult_TopicStats) GetStoreSizeBytes() int64 {
 	if x != nil {
-		return x.StoreSizeBytes
+		return x.xxx_hidden_StoreSizeBytes
 	}
 	return 0
 }
 
 func (x *DescribeTopicResult_TopicStats) GetMinLastWriteTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.MinLastWriteTime
+		return x.xxx_hidden_MinLastWriteTime
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult_TopicStats) GetMaxWriteTimeLag() *durationpb.Duration {
 	if x != nil {
-		return x.MaxWriteTimeLag
+		return x.xxx_hidden_MaxWriteTimeLag
 	}
 	return nil
 }
 
 func (x *DescribeTopicResult_TopicStats) GetBytesWritten() *MultipleWindowsStat {
 	if x != nil {
-		return x.BytesWritten
+		return x.xxx_hidden_BytesWritten
 	}
 	return nil
 }
 
+func (x *DescribeTopicResult_TopicStats) SetStoreSizeBytes(v int64) {
+	x.xxx_hidden_StoreSizeBytes = v
+}
+
+func (x *DescribeTopicResult_TopicStats) SetMinLastWriteTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_MinLastWriteTime = v
+}
+
+func (x *DescribeTopicResult_TopicStats) SetMaxWriteTimeLag(v *durationpb.Duration) {
+	x.xxx_hidden_MaxWriteTimeLag = v
+}
+
+func (x *DescribeTopicResult_TopicStats) SetBytesWritten(v *MultipleWindowsStat) {
+	x.xxx_hidden_BytesWritten = v
+}
+
+func (x *DescribeTopicResult_TopicStats) HasMinLastWriteTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MinLastWriteTime != nil
+}
+
+func (x *DescribeTopicResult_TopicStats) HasMaxWriteTimeLag() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MaxWriteTimeLag != nil
+}
+
+func (x *DescribeTopicResult_TopicStats) HasBytesWritten() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_BytesWritten != nil
+}
+
+func (x *DescribeTopicResult_TopicStats) ClearMinLastWriteTime() {
+	x.xxx_hidden_MinLastWriteTime = nil
+}
+
+func (x *DescribeTopicResult_TopicStats) ClearMaxWriteTimeLag() {
+	x.xxx_hidden_MaxWriteTimeLag = nil
+}
+
+func (x *DescribeTopicResult_TopicStats) ClearBytesWritten() {
+	x.xxx_hidden_BytesWritten = nil
+}
+
+type DescribeTopicResult_TopicStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Approximate size of topic.
+	StoreSizeBytes int64
+	// Minimum of timestamps of last write among all partitions.
+	MinLastWriteTime *timestamppb.Timestamp
+	// Maximum of differences between write timestamp and create timestamp for all messages, written during last minute.
+	MaxWriteTimeLag *durationpb.Duration
+	// How much bytes were written statistics.
+	BytesWritten *MultipleWindowsStat
+}
+
+func (b0 DescribeTopicResult_TopicStats_builder) Build() *DescribeTopicResult_TopicStats {
+	m0 := &DescribeTopicResult_TopicStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_StoreSizeBytes = b.StoreSizeBytes
+	x.xxx_hidden_MinLastWriteTime = b.MinLastWriteTime
+	x.xxx_hidden_MaxWriteTimeLag = b.MaxWriteTimeLag
+	x.xxx_hidden_BytesWritten = b.BytesWritten
+	return m0
+}
+
 type DescribeConsumerResult_PartitionInfo struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Partition identifier.
-	PartitionId int64 `protobuf:"varint,1,opt,name=partition_id,json=partitionId,proto3" json:"partition_id,omitempty"`
-	// Is partition open for write.
-	Active bool `protobuf:"varint,2,opt,name=active,proto3" json:"active,omitempty"`
-	// Ids of partitions which was formed when this partition was split or merged.
-	ChildPartitionIds []int64 `protobuf:"varint,3,rep,packed,name=child_partition_ids,json=childPartitionIds,proto3" json:"child_partition_ids,omitempty"`
-	// Ids of partitions from which this partition was formed by split or merge.
-	ParentPartitionIds []int64 `protobuf:"varint,4,rep,packed,name=parent_partition_ids,json=parentPartitionIds,proto3" json:"parent_partition_ids,omitempty"`
-	// Stats for partition, filled only when include_stats in request is true.
-	PartitionStats *PartitionStats `protobuf:"bytes,5,opt,name=partition_stats,json=partitionStats,proto3" json:"partition_stats,omitempty"`
-	// Stats for consumer of this partition, filled only when include_stats in request is true.
-	PartitionConsumerStats *DescribeConsumerResult_PartitionConsumerStats `protobuf:"bytes,6,opt,name=partition_consumer_stats,json=partitionConsumerStats,proto3" json:"partition_consumer_stats,omitempty"`
-	// Partition location, filled only when include_location in request is true.
-	PartitionLocation *PartitionLocation `protobuf:"bytes,7,opt,name=partition_location,json=partitionLocation,proto3" json:"partition_location,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                             protoimpl.MessageState                         `protogen:"opaque.v1"`
+	xxx_hidden_PartitionId            int64                                          `protobuf:"varint,1,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_Active                 bool                                           `protobuf:"varint,2,opt,name=active,proto3"`
+	xxx_hidden_ChildPartitionIds      []int64                                        `protobuf:"varint,3,rep,packed,name=child_partition_ids,json=childPartitionIds,proto3"`
+	xxx_hidden_ParentPartitionIds     []int64                                        `protobuf:"varint,4,rep,packed,name=parent_partition_ids,json=parentPartitionIds,proto3"`
+	xxx_hidden_PartitionStats         *PartitionStats                                `protobuf:"bytes,5,opt,name=partition_stats,json=partitionStats,proto3"`
+	xxx_hidden_PartitionConsumerStats *DescribeConsumerResult_PartitionConsumerStats `protobuf:"bytes,6,opt,name=partition_consumer_stats,json=partitionConsumerStats,proto3"`
+	xxx_hidden_PartitionLocation      *PartitionLocation                             `protobuf:"bytes,7,opt,name=partition_location,json=partitionLocation,proto3"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *DescribeConsumerResult_PartitionInfo) Reset() {
@@ -7080,84 +11754,163 @@ func (x *DescribeConsumerResult_PartitionInfo) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeConsumerResult_PartitionInfo.ProtoReflect.Descriptor instead.
-func (*DescribeConsumerResult_PartitionInfo) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{38, 0}
-}
-
 func (x *DescribeConsumerResult_PartitionInfo) GetPartitionId() int64 {
 	if x != nil {
-		return x.PartitionId
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *DescribeConsumerResult_PartitionInfo) GetActive() bool {
 	if x != nil {
-		return x.Active
+		return x.xxx_hidden_Active
 	}
 	return false
 }
 
 func (x *DescribeConsumerResult_PartitionInfo) GetChildPartitionIds() []int64 {
 	if x != nil {
-		return x.ChildPartitionIds
+		return x.xxx_hidden_ChildPartitionIds
 	}
 	return nil
 }
 
 func (x *DescribeConsumerResult_PartitionInfo) GetParentPartitionIds() []int64 {
 	if x != nil {
-		return x.ParentPartitionIds
+		return x.xxx_hidden_ParentPartitionIds
 	}
 	return nil
 }
 
 func (x *DescribeConsumerResult_PartitionInfo) GetPartitionStats() *PartitionStats {
 	if x != nil {
-		return x.PartitionStats
+		return x.xxx_hidden_PartitionStats
 	}
 	return nil
 }
 
 func (x *DescribeConsumerResult_PartitionInfo) GetPartitionConsumerStats() *DescribeConsumerResult_PartitionConsumerStats {
 	if x != nil {
-		return x.PartitionConsumerStats
+		return x.xxx_hidden_PartitionConsumerStats
 	}
 	return nil
 }
 
 func (x *DescribeConsumerResult_PartitionInfo) GetPartitionLocation() *PartitionLocation {
 	if x != nil {
-		return x.PartitionLocation
+		return x.xxx_hidden_PartitionLocation
 	}
 	return nil
 }
 
+func (x *DescribeConsumerResult_PartitionInfo) SetPartitionId(v int64) {
+	x.xxx_hidden_PartitionId = v
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) SetActive(v bool) {
+	x.xxx_hidden_Active = v
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) SetChildPartitionIds(v []int64) {
+	x.xxx_hidden_ChildPartitionIds = v
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) SetParentPartitionIds(v []int64) {
+	x.xxx_hidden_ParentPartitionIds = v
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) SetPartitionStats(v *PartitionStats) {
+	x.xxx_hidden_PartitionStats = v
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) SetPartitionConsumerStats(v *DescribeConsumerResult_PartitionConsumerStats) {
+	x.xxx_hidden_PartitionConsumerStats = v
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) SetPartitionLocation(v *PartitionLocation) {
+	x.xxx_hidden_PartitionLocation = v
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) HasPartitionStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionStats != nil
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) HasPartitionConsumerStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionConsumerStats != nil
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) HasPartitionLocation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionLocation != nil
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) ClearPartitionStats() {
+	x.xxx_hidden_PartitionStats = nil
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) ClearPartitionConsumerStats() {
+	x.xxx_hidden_PartitionConsumerStats = nil
+}
+
+func (x *DescribeConsumerResult_PartitionInfo) ClearPartitionLocation() {
+	x.xxx_hidden_PartitionLocation = nil
+}
+
+type DescribeConsumerResult_PartitionInfo_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Partition identifier.
+	PartitionId int64
+	// Is partition open for write.
+	Active bool
+	// Ids of partitions which was formed when this partition was split or merged.
+	ChildPartitionIds []int64
+	// Ids of partitions from which this partition was formed by split or merge.
+	ParentPartitionIds []int64
+	// Stats for partition, filled only when include_stats in request is true.
+	PartitionStats *PartitionStats
+	// Stats for consumer of this partition, filled only when include_stats in request is true.
+	PartitionConsumerStats *DescribeConsumerResult_PartitionConsumerStats
+	// Partition location, filled only when include_location in request is true.
+	PartitionLocation *PartitionLocation
+}
+
+func (b0 DescribeConsumerResult_PartitionInfo_builder) Build() *DescribeConsumerResult_PartitionInfo {
+	m0 := &DescribeConsumerResult_PartitionInfo{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionId = b.PartitionId
+	x.xxx_hidden_Active = b.Active
+	x.xxx_hidden_ChildPartitionIds = b.ChildPartitionIds
+	x.xxx_hidden_ParentPartitionIds = b.ParentPartitionIds
+	x.xxx_hidden_PartitionStats = b.PartitionStats
+	x.xxx_hidden_PartitionConsumerStats = b.PartitionConsumerStats
+	x.xxx_hidden_PartitionLocation = b.PartitionLocation
+	return m0
+}
+
 type DescribeConsumerResult_PartitionConsumerStats struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Last read offset from this partition.
-	LastReadOffset int64 `protobuf:"varint,1,opt,name=last_read_offset,json=lastReadOffset,proto3" json:"last_read_offset,omitempty"`
-	// Committed offset for this partition.
-	CommittedOffset int64 `protobuf:"varint,2,opt,name=committed_offset,json=committedOffset,proto3" json:"committed_offset,omitempty"`
-	// Reading this partition read session identifier.
-	ReadSessionId string `protobuf:"bytes,3,opt,name=read_session_id,json=readSessionId,proto3" json:"read_session_id,omitempty"`
-	// Timestamp of providing this partition to this session by server.
-	PartitionReadSessionCreateTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=partition_read_session_create_time,json=partitionReadSessionCreateTime,proto3" json:"partition_read_session_create_time,omitempty"`
-	// Timestamp of last read from this partition.
-	LastReadTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=last_read_time,json=lastReadTime,proto3" json:"last_read_time,omitempty"`
-	// Maximum of differences between timestamp of read and write timestamp for all messages, read during last minute.
-	MaxReadTimeLag *durationpb.Duration `protobuf:"bytes,6,opt,name=max_read_time_lag,json=maxReadTimeLag,proto3" json:"max_read_time_lag,omitempty"`
-	// Maximum of differences between write timestamp and create timestamp for all messages, read during last minute.
-	MaxWriteTimeLag *durationpb.Duration `protobuf:"bytes,7,opt,name=max_write_time_lag,json=maxWriteTimeLag,proto3" json:"max_write_time_lag,omitempty"`
-	// How much bytes were read during several windows statistics from this partition.
-	BytesRead *MultipleWindowsStat `protobuf:"bytes,8,opt,name=bytes_read,json=bytesRead,proto3" json:"bytes_read,omitempty"`
-	// Read session name, provided by client.
-	ReaderName string `protobuf:"bytes,11,opt,name=reader_name,json=readerName,proto3" json:"reader_name,omitempty"`
-	// Host where read session connected.
-	ConnectionNodeId int32 `protobuf:"varint,12,opt,name=connection_node_id,json=connectionNodeId,proto3" json:"connection_node_id,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_LastReadOffset                 int64                  `protobuf:"varint,1,opt,name=last_read_offset,json=lastReadOffset,proto3"`
+	xxx_hidden_CommittedOffset                int64                  `protobuf:"varint,2,opt,name=committed_offset,json=committedOffset,proto3"`
+	xxx_hidden_ReadSessionId                  string                 `protobuf:"bytes,3,opt,name=read_session_id,json=readSessionId,proto3"`
+	xxx_hidden_PartitionReadSessionCreateTime *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=partition_read_session_create_time,json=partitionReadSessionCreateTime,proto3"`
+	xxx_hidden_LastReadTime                   *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=last_read_time,json=lastReadTime,proto3"`
+	xxx_hidden_MaxReadTimeLag                 *durationpb.Duration   `protobuf:"bytes,6,opt,name=max_read_time_lag,json=maxReadTimeLag,proto3"`
+	xxx_hidden_MaxWriteTimeLag                *durationpb.Duration   `protobuf:"bytes,7,opt,name=max_write_time_lag,json=maxWriteTimeLag,proto3"`
+	xxx_hidden_BytesRead                      *MultipleWindowsStat   `protobuf:"bytes,8,opt,name=bytes_read,json=bytesRead,proto3"`
+	xxx_hidden_ReaderName                     string                 `protobuf:"bytes,11,opt,name=reader_name,json=readerName,proto3"`
+	xxx_hidden_ConnectionNodeId               int32                  `protobuf:"varint,12,opt,name=connection_node_id,json=connectionNodeId,proto3"`
+	unknownFields                             protoimpl.UnknownFields
+	sizeCache                                 protoimpl.SizeCache
 }
 
 func (x *DescribeConsumerResult_PartitionConsumerStats) Reset() {
@@ -7185,79 +11938,211 @@ func (x *DescribeConsumerResult_PartitionConsumerStats) ProtoReflect() protorefl
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeConsumerResult_PartitionConsumerStats.ProtoReflect.Descriptor instead.
-func (*DescribeConsumerResult_PartitionConsumerStats) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_topic_proto_rawDescGZIP(), []int{38, 1}
-}
-
 func (x *DescribeConsumerResult_PartitionConsumerStats) GetLastReadOffset() int64 {
 	if x != nil {
-		return x.LastReadOffset
+		return x.xxx_hidden_LastReadOffset
 	}
 	return 0
 }
 
 func (x *DescribeConsumerResult_PartitionConsumerStats) GetCommittedOffset() int64 {
 	if x != nil {
-		return x.CommittedOffset
+		return x.xxx_hidden_CommittedOffset
 	}
 	return 0
 }
 
 func (x *DescribeConsumerResult_PartitionConsumerStats) GetReadSessionId() string {
 	if x != nil {
-		return x.ReadSessionId
+		return x.xxx_hidden_ReadSessionId
 	}
 	return ""
 }
 
 func (x *DescribeConsumerResult_PartitionConsumerStats) GetPartitionReadSessionCreateTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.PartitionReadSessionCreateTime
+		return x.xxx_hidden_PartitionReadSessionCreateTime
 	}
 	return nil
 }
 
 func (x *DescribeConsumerResult_PartitionConsumerStats) GetLastReadTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.LastReadTime
+		return x.xxx_hidden_LastReadTime
 	}
 	return nil
 }
 
 func (x *DescribeConsumerResult_PartitionConsumerStats) GetMaxReadTimeLag() *durationpb.Duration {
 	if x != nil {
-		return x.MaxReadTimeLag
+		return x.xxx_hidden_MaxReadTimeLag
 	}
 	return nil
 }
 
 func (x *DescribeConsumerResult_PartitionConsumerStats) GetMaxWriteTimeLag() *durationpb.Duration {
 	if x != nil {
-		return x.MaxWriteTimeLag
+		return x.xxx_hidden_MaxWriteTimeLag
 	}
 	return nil
 }
 
 func (x *DescribeConsumerResult_PartitionConsumerStats) GetBytesRead() *MultipleWindowsStat {
 	if x != nil {
-		return x.BytesRead
+		return x.xxx_hidden_BytesRead
 	}
 	return nil
 }
 
 func (x *DescribeConsumerResult_PartitionConsumerStats) GetReaderName() string {
 	if x != nil {
-		return x.ReaderName
+		return x.xxx_hidden_ReaderName
 	}
 	return ""
 }
 
 func (x *DescribeConsumerResult_PartitionConsumerStats) GetConnectionNodeId() int32 {
 	if x != nil {
-		return x.ConnectionNodeId
+		return x.xxx_hidden_ConnectionNodeId
 	}
 	return 0
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) SetLastReadOffset(v int64) {
+	x.xxx_hidden_LastReadOffset = v
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) SetCommittedOffset(v int64) {
+	x.xxx_hidden_CommittedOffset = v
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) SetReadSessionId(v string) {
+	x.xxx_hidden_ReadSessionId = v
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) SetPartitionReadSessionCreateTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_PartitionReadSessionCreateTime = v
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) SetLastReadTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_LastReadTime = v
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) SetMaxReadTimeLag(v *durationpb.Duration) {
+	x.xxx_hidden_MaxReadTimeLag = v
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) SetMaxWriteTimeLag(v *durationpb.Duration) {
+	x.xxx_hidden_MaxWriteTimeLag = v
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) SetBytesRead(v *MultipleWindowsStat) {
+	x.xxx_hidden_BytesRead = v
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) SetReaderName(v string) {
+	x.xxx_hidden_ReaderName = v
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) SetConnectionNodeId(v int32) {
+	x.xxx_hidden_ConnectionNodeId = v
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) HasPartitionReadSessionCreateTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitionReadSessionCreateTime != nil
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) HasLastReadTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_LastReadTime != nil
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) HasMaxReadTimeLag() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MaxReadTimeLag != nil
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) HasMaxWriteTimeLag() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MaxWriteTimeLag != nil
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) HasBytesRead() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_BytesRead != nil
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) ClearPartitionReadSessionCreateTime() {
+	x.xxx_hidden_PartitionReadSessionCreateTime = nil
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) ClearLastReadTime() {
+	x.xxx_hidden_LastReadTime = nil
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) ClearMaxReadTimeLag() {
+	x.xxx_hidden_MaxReadTimeLag = nil
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) ClearMaxWriteTimeLag() {
+	x.xxx_hidden_MaxWriteTimeLag = nil
+}
+
+func (x *DescribeConsumerResult_PartitionConsumerStats) ClearBytesRead() {
+	x.xxx_hidden_BytesRead = nil
+}
+
+type DescribeConsumerResult_PartitionConsumerStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Last read offset from this partition.
+	LastReadOffset int64
+	// Committed offset for this partition.
+	CommittedOffset int64
+	// Reading this partition read session identifier.
+	ReadSessionId string
+	// Timestamp of providing this partition to this session by server.
+	PartitionReadSessionCreateTime *timestamppb.Timestamp
+	// Timestamp of last read from this partition.
+	LastReadTime *timestamppb.Timestamp
+	// Maximum of differences between timestamp of read and write timestamp for all messages, read during last minute.
+	MaxReadTimeLag *durationpb.Duration
+	// Maximum of differences between write timestamp and create timestamp for all messages, read during last minute.
+	MaxWriteTimeLag *durationpb.Duration
+	// How much bytes were read during several windows statistics from this partition.
+	BytesRead *MultipleWindowsStat
+	// Read session name, provided by client.
+	ReaderName string
+	// Host where read session connected.
+	ConnectionNodeId int32
+}
+
+func (b0 DescribeConsumerResult_PartitionConsumerStats_builder) Build() *DescribeConsumerResult_PartitionConsumerStats {
+	m0 := &DescribeConsumerResult_PartitionConsumerStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_LastReadOffset = b.LastReadOffset
+	x.xxx_hidden_CommittedOffset = b.CommittedOffset
+	x.xxx_hidden_ReadSessionId = b.ReadSessionId
+	x.xxx_hidden_PartitionReadSessionCreateTime = b.PartitionReadSessionCreateTime
+	x.xxx_hidden_LastReadTime = b.LastReadTime
+	x.xxx_hidden_MaxReadTimeLag = b.MaxReadTimeLag
+	x.xxx_hidden_MaxWriteTimeLag = b.MaxWriteTimeLag
+	x.xxx_hidden_BytesRead = b.BytesRead
+	x.xxx_hidden_ReaderName = b.ReaderName
+	x.xxx_hidden_ConnectionNodeId = b.ConnectionNodeId
+	return m0
 }
 
 var File_protos_ydb_topic_proto protoreflect.FileDescriptor
@@ -7805,18 +12690,6 @@ const file_protos_ydb_topic_proto_rawDesc = "" +
 	"\x1bMETERING_MODE_REQUEST_UNITS\x10\x02BS\n" +
 	"\x14tech.ydb.proto.topicZ8github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Topic\xf8\x01\x01b\x06proto3"
 
-var (
-	file_protos_ydb_topic_proto_rawDescOnce sync.Once
-	file_protos_ydb_topic_proto_rawDescData []byte
-)
-
-func file_protos_ydb_topic_proto_rawDescGZIP() []byte {
-	file_protos_ydb_topic_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_topic_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_topic_proto_rawDesc), len(file_protos_ydb_topic_proto_rawDesc)))
-	})
-	return file_protos_ydb_topic_proto_rawDescData
-}
-
 var file_protos_ydb_topic_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_protos_ydb_topic_proto_msgTypes = make([]protoimpl.MessageInfo, 105)
 var file_protos_ydb_topic_proto_goTypes = []any{
@@ -8119,64 +12992,64 @@ func file_protos_ydb_topic_proto_init() {
 	file_protos_ydb_topic_proto_msgTypes[31].OneofWrappers = []any{}
 	file_protos_ydb_topic_proto_msgTypes[40].OneofWrappers = []any{}
 	file_protos_ydb_topic_proto_msgTypes[46].OneofWrappers = []any{
-		(*StreamWriteMessage_FromClient_InitRequest)(nil),
-		(*StreamWriteMessage_FromClient_WriteRequest)(nil),
-		(*StreamWriteMessage_FromClient_UpdateTokenRequest)(nil),
+		(*streamWriteMessage_FromClient_InitRequest)(nil),
+		(*streamWriteMessage_FromClient_WriteRequest)(nil),
+		(*streamWriteMessage_FromClient_UpdateTokenRequest)(nil),
 	}
 	file_protos_ydb_topic_proto_msgTypes[47].OneofWrappers = []any{
-		(*StreamWriteMessage_FromServer_InitResponse)(nil),
-		(*StreamWriteMessage_FromServer_WriteResponse)(nil),
-		(*StreamWriteMessage_FromServer_UpdateTokenResponse)(nil),
+		(*streamWriteMessage_FromServer_InitResponse)(nil),
+		(*streamWriteMessage_FromServer_WriteResponse)(nil),
+		(*streamWriteMessage_FromServer_UpdateTokenResponse)(nil),
 	}
 	file_protos_ydb_topic_proto_msgTypes[48].OneofWrappers = []any{
-		(*StreamWriteMessage_InitRequest_MessageGroupId)(nil),
-		(*StreamWriteMessage_InitRequest_PartitionId)(nil),
-		(*StreamWriteMessage_InitRequest_PartitionWithGeneration)(nil),
+		(*streamWriteMessage_InitRequest_MessageGroupId)(nil),
+		(*streamWriteMessage_InitRequest_PartitionId)(nil),
+		(*streamWriteMessage_InitRequest_PartitionWithGeneration)(nil),
 	}
 	file_protos_ydb_topic_proto_msgTypes[50].OneofWrappers = []any{}
 	file_protos_ydb_topic_proto_msgTypes[53].OneofWrappers = []any{
-		(*StreamWriteMessage_WriteRequest_MessageData_MessageGroupId)(nil),
-		(*StreamWriteMessage_WriteRequest_MessageData_PartitionId)(nil),
-		(*StreamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration)(nil),
+		(*streamWriteMessage_WriteRequest_MessageData_MessageGroupId)(nil),
+		(*streamWriteMessage_WriteRequest_MessageData_PartitionId)(nil),
+		(*streamWriteMessage_WriteRequest_MessageData_PartitionWithGeneration)(nil),
 	}
 	file_protos_ydb_topic_proto_msgTypes[54].OneofWrappers = []any{
-		(*StreamWriteMessage_WriteResponse_WriteAck_Written_)(nil),
-		(*StreamWriteMessage_WriteResponse_WriteAck_Skipped_)(nil),
-		(*StreamWriteMessage_WriteResponse_WriteAck_WrittenInTx_)(nil),
+		(*streamWriteMessage_WriteResponse_WriteAck_Written_)(nil),
+		(*streamWriteMessage_WriteResponse_WriteAck_Skipped_)(nil),
+		(*streamWriteMessage_WriteResponse_WriteAck_WrittenInTx_)(nil),
 	}
 	file_protos_ydb_topic_proto_msgTypes[60].OneofWrappers = []any{
-		(*StreamReadMessage_FromClient_InitRequest)(nil),
-		(*StreamReadMessage_FromClient_ReadRequest)(nil),
-		(*StreamReadMessage_FromClient_CommitOffsetRequest)(nil),
-		(*StreamReadMessage_FromClient_PartitionSessionStatusRequest)(nil),
-		(*StreamReadMessage_FromClient_UpdateTokenRequest)(nil),
-		(*StreamReadMessage_FromClient_DirectReadAck)(nil),
-		(*StreamReadMessage_FromClient_StartPartitionSessionResponse)(nil),
-		(*StreamReadMessage_FromClient_StopPartitionSessionResponse)(nil),
+		(*streamReadMessage_FromClient_InitRequest)(nil),
+		(*streamReadMessage_FromClient_ReadRequest)(nil),
+		(*streamReadMessage_FromClient_CommitOffsetRequest)(nil),
+		(*streamReadMessage_FromClient_PartitionSessionStatusRequest)(nil),
+		(*streamReadMessage_FromClient_UpdateTokenRequest)(nil),
+		(*streamReadMessage_FromClient_DirectReadAck)(nil),
+		(*streamReadMessage_FromClient_StartPartitionSessionResponse)(nil),
+		(*streamReadMessage_FromClient_StopPartitionSessionResponse)(nil),
 	}
 	file_protos_ydb_topic_proto_msgTypes[61].OneofWrappers = []any{
-		(*StreamReadMessage_FromServer_InitResponse)(nil),
-		(*StreamReadMessage_FromServer_ReadResponse)(nil),
-		(*StreamReadMessage_FromServer_CommitOffsetResponse)(nil),
-		(*StreamReadMessage_FromServer_PartitionSessionStatusResponse)(nil),
-		(*StreamReadMessage_FromServer_UpdateTokenResponse)(nil),
-		(*StreamReadMessage_FromServer_StartPartitionSessionRequest)(nil),
-		(*StreamReadMessage_FromServer_StopPartitionSessionRequest)(nil),
-		(*StreamReadMessage_FromServer_UpdatePartitionSession)(nil),
-		(*StreamReadMessage_FromServer_EndPartitionSession)(nil),
+		(*streamReadMessage_FromServer_InitResponse)(nil),
+		(*streamReadMessage_FromServer_ReadResponse)(nil),
+		(*streamReadMessage_FromServer_CommitOffsetResponse)(nil),
+		(*streamReadMessage_FromServer_PartitionSessionStatusResponse)(nil),
+		(*streamReadMessage_FromServer_UpdateTokenResponse)(nil),
+		(*streamReadMessage_FromServer_StartPartitionSessionRequest)(nil),
+		(*streamReadMessage_FromServer_StopPartitionSessionRequest)(nil),
+		(*streamReadMessage_FromServer_UpdatePartitionSession)(nil),
+		(*streamReadMessage_FromServer_EndPartitionSession)(nil),
 	}
 	file_protos_ydb_topic_proto_msgTypes[71].OneofWrappers = []any{}
 	file_protos_ydb_topic_proto_msgTypes[84].OneofWrappers = []any{
-		(*StreamDirectReadMessage_FromClient_InitRequest)(nil),
-		(*StreamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest)(nil),
-		(*StreamDirectReadMessage_FromClient_UpdateTokenRequest)(nil),
+		(*streamDirectReadMessage_FromClient_InitRequest)(nil),
+		(*streamDirectReadMessage_FromClient_StartDirectReadPartitionSessionRequest)(nil),
+		(*streamDirectReadMessage_FromClient_UpdateTokenRequest)(nil),
 	}
 	file_protos_ydb_topic_proto_msgTypes[85].OneofWrappers = []any{
-		(*StreamDirectReadMessage_FromServer_InitResponse)(nil),
-		(*StreamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse)(nil),
-		(*StreamDirectReadMessage_FromServer_StopDirectReadPartitionSession)(nil),
-		(*StreamDirectReadMessage_FromServer_DirectReadResponse)(nil),
-		(*StreamDirectReadMessage_FromServer_UpdateTokenResponse)(nil),
+		(*streamDirectReadMessage_FromServer_InitResponse)(nil),
+		(*streamDirectReadMessage_FromServer_StartDirectReadPartitionSessionResponse)(nil),
+		(*streamDirectReadMessage_FromServer_StopDirectReadPartitionSession)(nil),
+		(*streamDirectReadMessage_FromServer_DirectReadResponse)(nil),
+		(*streamDirectReadMessage_FromServer_UpdateTokenResponse)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

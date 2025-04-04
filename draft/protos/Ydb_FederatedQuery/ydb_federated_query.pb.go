@@ -16,7 +16,6 @@ import (
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -83,11 +82,6 @@ func (x ExecuteMode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ExecuteMode.Descriptor instead.
-func (ExecuteMode) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{0}
-}
-
 type QueryAction int32
 
 const (
@@ -141,11 +135,6 @@ func (x QueryAction) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use QueryAction.Descriptor instead.
-func (QueryAction) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{1}
-}
-
 type StateLoadMode int32
 
 const (
@@ -188,11 +177,6 @@ func (StateLoadMode) Type() protoreflect.EnumType {
 
 func (x StateLoadMode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use StateLoadMode.Descriptor instead.
-func (StateLoadMode) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{2}
 }
 
 type AutomaticType int32
@@ -239,11 +223,6 @@ func (x AutomaticType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use AutomaticType.Descriptor instead.
-func (AutomaticType) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{3}
-}
-
 type Acl_Visibility int32
 
 const (
@@ -286,11 +265,6 @@ func (Acl_Visibility) Type() protoreflect.EnumType {
 
 func (x Acl_Visibility) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Acl_Visibility.Descriptor instead.
-func (Acl_Visibility) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{0, 0}
 }
 
 type QueryContent_QueryType int32
@@ -337,11 +311,6 @@ func (x QueryContent_QueryType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use QueryContent_QueryType.Descriptor instead.
-func (QueryContent_QueryType) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{3, 0}
-}
-
 type QueryContent_QuerySyntax int32
 
 const (
@@ -384,11 +353,6 @@ func (QueryContent_QuerySyntax) Type() protoreflect.EnumType {
 
 func (x QueryContent_QuerySyntax) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use QueryContent_QuerySyntax.Descriptor instead.
-func (QueryContent_QuerySyntax) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{3, 1}
 }
 
 type QueryMeta_ComputeStatus int32
@@ -468,11 +432,6 @@ func (x QueryMeta_ComputeStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use QueryMeta_ComputeStatus.Descriptor instead.
-func (QueryMeta_ComputeStatus) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{5, 0}
-}
-
 type ConnectionSetting_ConnectionType int32
 
 const (
@@ -529,11 +488,6 @@ func (x ConnectionSetting_ConnectionType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ConnectionSetting_ConnectionType.Descriptor instead.
-func (ConnectionSetting_ConnectionType) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{51, 0}
-}
-
 type BindingSetting_BindingType int32
 
 const (
@@ -578,16 +532,11 @@ func (x BindingSetting_BindingType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use BindingSetting_BindingType.Descriptor instead.
-func (BindingSetting_BindingType) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{78, 0}
-}
-
 type Acl struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Visibility    Acl_Visibility         `protobuf:"varint,1,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Visibility Acl_Visibility         `protobuf:"varint,1,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Acl) Reset() {
@@ -615,36 +564,43 @@ func (x *Acl) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Acl.ProtoReflect.Descriptor instead.
-func (*Acl) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *Acl) GetVisibility() Acl_Visibility {
 	if x != nil {
-		return x.Visibility
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
+func (x *Acl) SetVisibility(v Acl_Visibility) {
+	x.xxx_hidden_Visibility = v
+}
+
+type Acl_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Visibility Acl_Visibility
+}
+
+func (b0 Acl_builder) Build() *Acl {
+	m0 := &Acl{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Visibility = b.Visibility
+	return m0
+}
+
 type Limits struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	VcpuRateLimit int64                  `protobuf:"varint,1,opt,name=vcpu_rate_limit,json=vcpuRateLimit,proto3" json:"vcpu_rate_limit,omitempty"` // 0.01 vcpu per second
-	FlowRateLimit int64                  `protobuf:"varint,2,opt,name=flow_rate_limit,json=flowRateLimit,proto3" json:"flow_rate_limit,omitempty"` // Bytes per second
-	VcpuTimeLimit int64                  `protobuf:"varint,3,opt,name=vcpu_time_limit,json=vcpuTimeLimit,proto3" json:"vcpu_time_limit,omitempty"` // Milliseconds per second
-	// Used only for analytics queries
-	MaxResultSize int64 `protobuf:"varint,4,opt,name=max_result_size,json=maxResultSize,proto3" json:"max_result_size,omitempty"` // Bytes
-	MaxResultRows int64 `protobuf:"varint,5,opt,name=max_result_rows,json=maxResultRows,proto3" json:"max_result_rows,omitempty"` // Count
-	// Common limits
-	MemoryLimit int64                `protobuf:"varint,6,opt,name=memory_limit,json=memoryLimit,proto3" json:"memory_limit,omitempty"` // Bytes
-	ResultTtl   *durationpb.Duration `protobuf:"bytes,7,opt,name=result_ttl,json=resultTtl,proto3" json:"result_ttl,omitempty"`
-	// Types that are valid to be assigned to Timeout:
-	//
-	//	*Limits_ExecutionTimeout
-	//	*Limits_ExecutionDeadline
-	Timeout       isLimits_Timeout `protobuf_oneof:"timeout"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_VcpuRateLimit int64                  `protobuf:"varint,1,opt,name=vcpu_rate_limit,json=vcpuRateLimit,proto3"`
+	xxx_hidden_FlowRateLimit int64                  `protobuf:"varint,2,opt,name=flow_rate_limit,json=flowRateLimit,proto3"`
+	xxx_hidden_VcpuTimeLimit int64                  `protobuf:"varint,3,opt,name=vcpu_time_limit,json=vcpuTimeLimit,proto3"`
+	xxx_hidden_MaxResultSize int64                  `protobuf:"varint,4,opt,name=max_result_size,json=maxResultSize,proto3"`
+	xxx_hidden_MaxResultRows int64                  `protobuf:"varint,5,opt,name=max_result_rows,json=maxResultRows,proto3"`
+	xxx_hidden_MemoryLimit   int64                  `protobuf:"varint,6,opt,name=memory_limit,json=memoryLimit,proto3"`
+	xxx_hidden_ResultTtl     *durationpb.Duration   `protobuf:"bytes,7,opt,name=result_ttl,json=resultTtl,proto3"`
+	xxx_hidden_Timeout       isLimits_Timeout       `protobuf_oneof:"timeout"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *Limits) Reset() {
@@ -672,70 +628,58 @@ func (x *Limits) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Limits.ProtoReflect.Descriptor instead.
-func (*Limits) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *Limits) GetVcpuRateLimit() int64 {
 	if x != nil {
-		return x.VcpuRateLimit
+		return x.xxx_hidden_VcpuRateLimit
 	}
 	return 0
 }
 
 func (x *Limits) GetFlowRateLimit() int64 {
 	if x != nil {
-		return x.FlowRateLimit
+		return x.xxx_hidden_FlowRateLimit
 	}
 	return 0
 }
 
 func (x *Limits) GetVcpuTimeLimit() int64 {
 	if x != nil {
-		return x.VcpuTimeLimit
+		return x.xxx_hidden_VcpuTimeLimit
 	}
 	return 0
 }
 
 func (x *Limits) GetMaxResultSize() int64 {
 	if x != nil {
-		return x.MaxResultSize
+		return x.xxx_hidden_MaxResultSize
 	}
 	return 0
 }
 
 func (x *Limits) GetMaxResultRows() int64 {
 	if x != nil {
-		return x.MaxResultRows
+		return x.xxx_hidden_MaxResultRows
 	}
 	return 0
 }
 
 func (x *Limits) GetMemoryLimit() int64 {
 	if x != nil {
-		return x.MemoryLimit
+		return x.xxx_hidden_MemoryLimit
 	}
 	return 0
 }
 
 func (x *Limits) GetResultTtl() *durationpb.Duration {
 	if x != nil {
-		return x.ResultTtl
-	}
-	return nil
-}
-
-func (x *Limits) GetTimeout() isLimits_Timeout {
-	if x != nil {
-		return x.Timeout
+		return x.xxx_hidden_ResultTtl
 	}
 	return nil
 }
 
 func (x *Limits) GetExecutionTimeout() *durationpb.Duration {
 	if x != nil {
-		if x, ok := x.Timeout.(*Limits_ExecutionTimeout); ok {
+		if x, ok := x.xxx_hidden_Timeout.(*limits_ExecutionTimeout); ok {
 			return x.ExecutionTimeout
 		}
 	}
@@ -744,42 +688,195 @@ func (x *Limits) GetExecutionTimeout() *durationpb.Duration {
 
 func (x *Limits) GetExecutionDeadline() *timestamppb.Timestamp {
 	if x != nil {
-		if x, ok := x.Timeout.(*Limits_ExecutionDeadline); ok {
+		if x, ok := x.xxx_hidden_Timeout.(*limits_ExecutionDeadline); ok {
 			return x.ExecutionDeadline
 		}
 	}
 	return nil
 }
 
+func (x *Limits) SetVcpuRateLimit(v int64) {
+	x.xxx_hidden_VcpuRateLimit = v
+}
+
+func (x *Limits) SetFlowRateLimit(v int64) {
+	x.xxx_hidden_FlowRateLimit = v
+}
+
+func (x *Limits) SetVcpuTimeLimit(v int64) {
+	x.xxx_hidden_VcpuTimeLimit = v
+}
+
+func (x *Limits) SetMaxResultSize(v int64) {
+	x.xxx_hidden_MaxResultSize = v
+}
+
+func (x *Limits) SetMaxResultRows(v int64) {
+	x.xxx_hidden_MaxResultRows = v
+}
+
+func (x *Limits) SetMemoryLimit(v int64) {
+	x.xxx_hidden_MemoryLimit = v
+}
+
+func (x *Limits) SetResultTtl(v *durationpb.Duration) {
+	x.xxx_hidden_ResultTtl = v
+}
+
+func (x *Limits) SetExecutionTimeout(v *durationpb.Duration) {
+	if v == nil {
+		x.xxx_hidden_Timeout = nil
+		return
+	}
+	x.xxx_hidden_Timeout = &limits_ExecutionTimeout{v}
+}
+
+func (x *Limits) SetExecutionDeadline(v *timestamppb.Timestamp) {
+	if v == nil {
+		x.xxx_hidden_Timeout = nil
+		return
+	}
+	x.xxx_hidden_Timeout = &limits_ExecutionDeadline{v}
+}
+
+func (x *Limits) HasResultTtl() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResultTtl != nil
+}
+
+func (x *Limits) HasTimeout() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Timeout != nil
+}
+
+func (x *Limits) HasExecutionTimeout() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Timeout.(*limits_ExecutionTimeout)
+	return ok
+}
+
+func (x *Limits) HasExecutionDeadline() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Timeout.(*limits_ExecutionDeadline)
+	return ok
+}
+
+func (x *Limits) ClearResultTtl() {
+	x.xxx_hidden_ResultTtl = nil
+}
+
+func (x *Limits) ClearTimeout() {
+	x.xxx_hidden_Timeout = nil
+}
+
+func (x *Limits) ClearExecutionTimeout() {
+	if _, ok := x.xxx_hidden_Timeout.(*limits_ExecutionTimeout); ok {
+		x.xxx_hidden_Timeout = nil
+	}
+}
+
+func (x *Limits) ClearExecutionDeadline() {
+	if _, ok := x.xxx_hidden_Timeout.(*limits_ExecutionDeadline); ok {
+		x.xxx_hidden_Timeout = nil
+	}
+}
+
+const Limits_Timeout_not_set_case case_Limits_Timeout = 0
+const Limits_ExecutionTimeout_case case_Limits_Timeout = 8
+const Limits_ExecutionDeadline_case case_Limits_Timeout = 9
+
+func (x *Limits) WhichTimeout() case_Limits_Timeout {
+	if x == nil {
+		return Limits_Timeout_not_set_case
+	}
+	switch x.xxx_hidden_Timeout.(type) {
+	case *limits_ExecutionTimeout:
+		return Limits_ExecutionTimeout_case
+	case *limits_ExecutionDeadline:
+		return Limits_ExecutionDeadline_case
+	default:
+		return Limits_Timeout_not_set_case
+	}
+}
+
+type Limits_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	VcpuRateLimit int64
+	FlowRateLimit int64
+	VcpuTimeLimit int64
+	// Used only for analytics queries
+	MaxResultSize int64
+	MaxResultRows int64
+	// Common limits
+	MemoryLimit int64
+	ResultTtl   *durationpb.Duration
+	// Fields of oneof xxx_hidden_Timeout:
+	ExecutionTimeout  *durationpb.Duration
+	ExecutionDeadline *timestamppb.Timestamp
+	// -- end of xxx_hidden_Timeout
+}
+
+func (b0 Limits_builder) Build() *Limits {
+	m0 := &Limits{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_VcpuRateLimit = b.VcpuRateLimit
+	x.xxx_hidden_FlowRateLimit = b.FlowRateLimit
+	x.xxx_hidden_VcpuTimeLimit = b.VcpuTimeLimit
+	x.xxx_hidden_MaxResultSize = b.MaxResultSize
+	x.xxx_hidden_MaxResultRows = b.MaxResultRows
+	x.xxx_hidden_MemoryLimit = b.MemoryLimit
+	x.xxx_hidden_ResultTtl = b.ResultTtl
+	if b.ExecutionTimeout != nil {
+		x.xxx_hidden_Timeout = &limits_ExecutionTimeout{b.ExecutionTimeout}
+	}
+	if b.ExecutionDeadline != nil {
+		x.xxx_hidden_Timeout = &limits_ExecutionDeadline{b.ExecutionDeadline}
+	}
+	return m0
+}
+
+type case_Limits_Timeout protoreflect.FieldNumber
+
+func (x case_Limits_Timeout) String() string {
+	md := file_draft_protos_ydb_federated_query_proto_msgTypes[1].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isLimits_Timeout interface {
 	isLimits_Timeout()
 }
 
-type Limits_ExecutionTimeout struct {
+type limits_ExecutionTimeout struct {
 	ExecutionTimeout *durationpb.Duration `protobuf:"bytes,8,opt,name=execution_timeout,json=executionTimeout,proto3,oneof"`
 }
 
-type Limits_ExecutionDeadline struct {
+type limits_ExecutionDeadline struct {
 	ExecutionDeadline *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=execution_deadline,json=executionDeadline,proto3,oneof"`
 }
 
-func (*Limits_ExecutionTimeout) isLimits_Timeout() {}
+func (*limits_ExecutionTimeout) isLimits_Timeout() {}
 
-func (*Limits_ExecutionDeadline) isLimits_Timeout() {}
+func (*limits_ExecutionDeadline) isLimits_Timeout() {}
 
 // For streaming queries only
 type StreamingDisposition struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Disposition:
-	//
-	//	*StreamingDisposition_Oldest
-	//	*StreamingDisposition_Fresh
-	//	*StreamingDisposition_FromTime_
-	//	*StreamingDisposition_TimeAgo_
-	//	*StreamingDisposition_FromLastCheckpoint_
-	Disposition   isStreamingDisposition_Disposition `protobuf_oneof:"disposition"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState             `protogen:"opaque.v1"`
+	xxx_hidden_Disposition isStreamingDisposition_Disposition `protobuf_oneof:"disposition"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *StreamingDisposition) Reset() {
@@ -807,21 +904,9 @@ func (x *StreamingDisposition) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamingDisposition.ProtoReflect.Descriptor instead.
-func (*StreamingDisposition) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *StreamingDisposition) GetDisposition() isStreamingDisposition_Disposition {
-	if x != nil {
-		return x.Disposition
-	}
-	return nil
-}
-
 func (x *StreamingDisposition) GetOldest() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.Disposition.(*StreamingDisposition_Oldest); ok {
+		if x, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Oldest); ok {
 			return x.Oldest
 		}
 	}
@@ -830,7 +915,7 @@ func (x *StreamingDisposition) GetOldest() *emptypb.Empty {
 
 func (x *StreamingDisposition) GetFresh() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.Disposition.(*StreamingDisposition_Fresh); ok {
+		if x, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Fresh); ok {
 			return x.Fresh
 		}
 	}
@@ -839,7 +924,7 @@ func (x *StreamingDisposition) GetFresh() *emptypb.Empty {
 
 func (x *StreamingDisposition) GetFromTime() *StreamingDisposition_FromTime {
 	if x != nil {
-		if x, ok := x.Disposition.(*StreamingDisposition_FromTime_); ok {
+		if x, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromTime_); ok {
 			return x.FromTime
 		}
 	}
@@ -848,7 +933,7 @@ func (x *StreamingDisposition) GetFromTime() *StreamingDisposition_FromTime {
 
 func (x *StreamingDisposition) GetTimeAgo() *StreamingDisposition_TimeAgo {
 	if x != nil {
-		if x, ok := x.Disposition.(*StreamingDisposition_TimeAgo_); ok {
+		if x, ok := x.xxx_hidden_Disposition.(*streamingDisposition_TimeAgo_); ok {
 			return x.TimeAgo
 		}
 	}
@@ -857,66 +942,253 @@ func (x *StreamingDisposition) GetTimeAgo() *StreamingDisposition_TimeAgo {
 
 func (x *StreamingDisposition) GetFromLastCheckpoint() *StreamingDisposition_FromLastCheckpoint {
 	if x != nil {
-		if x, ok := x.Disposition.(*StreamingDisposition_FromLastCheckpoint_); ok {
+		if x, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromLastCheckpoint_); ok {
 			return x.FromLastCheckpoint
 		}
 	}
 	return nil
 }
 
+func (x *StreamingDisposition) SetOldest(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Disposition = nil
+		return
+	}
+	x.xxx_hidden_Disposition = &streamingDisposition_Oldest{v}
+}
+
+func (x *StreamingDisposition) SetFresh(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Disposition = nil
+		return
+	}
+	x.xxx_hidden_Disposition = &streamingDisposition_Fresh{v}
+}
+
+func (x *StreamingDisposition) SetFromTime(v *StreamingDisposition_FromTime) {
+	if v == nil {
+		x.xxx_hidden_Disposition = nil
+		return
+	}
+	x.xxx_hidden_Disposition = &streamingDisposition_FromTime_{v}
+}
+
+func (x *StreamingDisposition) SetTimeAgo(v *StreamingDisposition_TimeAgo) {
+	if v == nil {
+		x.xxx_hidden_Disposition = nil
+		return
+	}
+	x.xxx_hidden_Disposition = &streamingDisposition_TimeAgo_{v}
+}
+
+func (x *StreamingDisposition) SetFromLastCheckpoint(v *StreamingDisposition_FromLastCheckpoint) {
+	if v == nil {
+		x.xxx_hidden_Disposition = nil
+		return
+	}
+	x.xxx_hidden_Disposition = &streamingDisposition_FromLastCheckpoint_{v}
+}
+
+func (x *StreamingDisposition) HasDisposition() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Disposition != nil
+}
+
+func (x *StreamingDisposition) HasOldest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Oldest)
+	return ok
+}
+
+func (x *StreamingDisposition) HasFresh() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Fresh)
+	return ok
+}
+
+func (x *StreamingDisposition) HasFromTime() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromTime_)
+	return ok
+}
+
+func (x *StreamingDisposition) HasTimeAgo() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Disposition.(*streamingDisposition_TimeAgo_)
+	return ok
+}
+
+func (x *StreamingDisposition) HasFromLastCheckpoint() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromLastCheckpoint_)
+	return ok
+}
+
+func (x *StreamingDisposition) ClearDisposition() {
+	x.xxx_hidden_Disposition = nil
+}
+
+func (x *StreamingDisposition) ClearOldest() {
+	if _, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Oldest); ok {
+		x.xxx_hidden_Disposition = nil
+	}
+}
+
+func (x *StreamingDisposition) ClearFresh() {
+	if _, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Fresh); ok {
+		x.xxx_hidden_Disposition = nil
+	}
+}
+
+func (x *StreamingDisposition) ClearFromTime() {
+	if _, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromTime_); ok {
+		x.xxx_hidden_Disposition = nil
+	}
+}
+
+func (x *StreamingDisposition) ClearTimeAgo() {
+	if _, ok := x.xxx_hidden_Disposition.(*streamingDisposition_TimeAgo_); ok {
+		x.xxx_hidden_Disposition = nil
+	}
+}
+
+func (x *StreamingDisposition) ClearFromLastCheckpoint() {
+	if _, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromLastCheckpoint_); ok {
+		x.xxx_hidden_Disposition = nil
+	}
+}
+
+const StreamingDisposition_Disposition_not_set_case case_StreamingDisposition_Disposition = 0
+const StreamingDisposition_Oldest_case case_StreamingDisposition_Disposition = 1
+const StreamingDisposition_Fresh_case case_StreamingDisposition_Disposition = 2
+const StreamingDisposition_FromTime_case case_StreamingDisposition_Disposition = 3
+const StreamingDisposition_TimeAgo_case case_StreamingDisposition_Disposition = 4
+const StreamingDisposition_FromLastCheckpoint_case case_StreamingDisposition_Disposition = 5
+
+func (x *StreamingDisposition) WhichDisposition() case_StreamingDisposition_Disposition {
+	if x == nil {
+		return StreamingDisposition_Disposition_not_set_case
+	}
+	switch x.xxx_hidden_Disposition.(type) {
+	case *streamingDisposition_Oldest:
+		return StreamingDisposition_Oldest_case
+	case *streamingDisposition_Fresh:
+		return StreamingDisposition_Fresh_case
+	case *streamingDisposition_FromTime_:
+		return StreamingDisposition_FromTime_case
+	case *streamingDisposition_TimeAgo_:
+		return StreamingDisposition_TimeAgo_case
+	case *streamingDisposition_FromLastCheckpoint_:
+		return StreamingDisposition_FromLastCheckpoint_case
+	default:
+		return StreamingDisposition_Disposition_not_set_case
+	}
+}
+
+type StreamingDisposition_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Disposition:
+	Oldest             *emptypb.Empty
+	Fresh              *emptypb.Empty
+	FromTime           *StreamingDisposition_FromTime
+	TimeAgo            *StreamingDisposition_TimeAgo
+	FromLastCheckpoint *StreamingDisposition_FromLastCheckpoint
+	// -- end of xxx_hidden_Disposition
+}
+
+func (b0 StreamingDisposition_builder) Build() *StreamingDisposition {
+	m0 := &StreamingDisposition{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Oldest != nil {
+		x.xxx_hidden_Disposition = &streamingDisposition_Oldest{b.Oldest}
+	}
+	if b.Fresh != nil {
+		x.xxx_hidden_Disposition = &streamingDisposition_Fresh{b.Fresh}
+	}
+	if b.FromTime != nil {
+		x.xxx_hidden_Disposition = &streamingDisposition_FromTime_{b.FromTime}
+	}
+	if b.TimeAgo != nil {
+		x.xxx_hidden_Disposition = &streamingDisposition_TimeAgo_{b.TimeAgo}
+	}
+	if b.FromLastCheckpoint != nil {
+		x.xxx_hidden_Disposition = &streamingDisposition_FromLastCheckpoint_{b.FromLastCheckpoint}
+	}
+	return m0
+}
+
+type case_StreamingDisposition_Disposition protoreflect.FieldNumber
+
+func (x case_StreamingDisposition_Disposition) String() string {
+	md := file_draft_protos_ydb_federated_query_proto_msgTypes[2].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isStreamingDisposition_Disposition interface {
 	isStreamingDisposition_Disposition()
 }
 
-type StreamingDisposition_Oldest struct {
+type streamingDisposition_Oldest struct {
 	Oldest *emptypb.Empty `protobuf:"bytes,1,opt,name=oldest,proto3,oneof"` // Start processing with the oldest offset
 }
 
-type StreamingDisposition_Fresh struct {
+type streamingDisposition_Fresh struct {
 	Fresh *emptypb.Empty `protobuf:"bytes,2,opt,name=fresh,proto3,oneof"` // Start processing with the fresh offset
 }
 
-type StreamingDisposition_FromTime_ struct {
+type streamingDisposition_FromTime_ struct {
 	FromTime *StreamingDisposition_FromTime `protobuf:"bytes,3,opt,name=from_time,json=fromTime,proto3,oneof"` // Start processing with offset from the specified time
 }
 
-type StreamingDisposition_TimeAgo_ struct {
+type streamingDisposition_TimeAgo_ struct {
 	TimeAgo *StreamingDisposition_TimeAgo `protobuf:"bytes,4,opt,name=time_ago,json=timeAgo,proto3,oneof"` // Start processing with offset some time ago
 }
 
-type StreamingDisposition_FromLastCheckpoint_ struct {
+type streamingDisposition_FromLastCheckpoint_ struct {
 	FromLastCheckpoint *StreamingDisposition_FromLastCheckpoint `protobuf:"bytes,5,opt,name=from_last_checkpoint,json=fromLastCheckpoint,proto3,oneof"` // Start processing with offset which corresponds to the last checkpoint
 }
 
-func (*StreamingDisposition_Oldest) isStreamingDisposition_Disposition() {}
+func (*streamingDisposition_Oldest) isStreamingDisposition_Disposition() {}
 
-func (*StreamingDisposition_Fresh) isStreamingDisposition_Disposition() {}
+func (*streamingDisposition_Fresh) isStreamingDisposition_Disposition() {}
 
-func (*StreamingDisposition_FromTime_) isStreamingDisposition_Disposition() {}
+func (*streamingDisposition_FromTime_) isStreamingDisposition_Disposition() {}
 
-func (*StreamingDisposition_TimeAgo_) isStreamingDisposition_Disposition() {}
+func (*streamingDisposition_TimeAgo_) isStreamingDisposition_Disposition() {}
 
-func (*StreamingDisposition_FromLastCheckpoint_) isStreamingDisposition_Disposition() {}
+func (*streamingDisposition_FromLastCheckpoint_) isStreamingDisposition_Disposition() {}
 
 // Query information that the subject can change
 type QueryContent struct {
-	state       protoimpl.MessageState `protogen:"open.v1"`
-	Type        QueryContent_QueryType `protobuf:"varint,1,opt,name=type,proto3,enum=FederatedQuery.QueryContent_QueryType" json:"type,omitempty"`
-	Name        string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Acl         *Acl                   `protobuf:"bytes,3,opt,name=acl,proto3" json:"acl,omitempty"`
-	Limits      *Limits                `protobuf:"bytes,4,opt,name=limits,proto3" json:"limits,omitempty"`
-	Text        string                 `protobuf:"bytes,5,opt,name=text,proto3" json:"text,omitempty"`               // The text of the query itself
-	Automatic   bool                   `protobuf:"varint,6,opt,name=automatic,proto3" json:"automatic,omitempty"`    // Is used for queries that are created by automatic systems (robots, jdbc driver, ...)
-	Description string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"` // Description of the query, there can be any text
-	// Specified settings for query's executor
-	// Well known settings are:
-	// "executor" - type of executor for this query
-	ExecutionSettings map[string]string `protobuf:"bytes,10,rep,name=execution_settings,json=executionSettings,proto3" json:"execution_settings,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Syntax of the text
-	// By default it is "yql", but additional syntax "pg" (PostreSQL SQL frontend) is supported as well
-	Syntax        QueryContent_QuerySyntax `protobuf:"varint,11,opt,name=syntax,proto3,enum=FederatedQuery.QueryContent_QuerySyntax" json:"syntax,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                        protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Type              QueryContent_QueryType   `protobuf:"varint,1,opt,name=type,proto3,enum=FederatedQuery.QueryContent_QueryType"`
+	xxx_hidden_Name              string                   `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_Acl               *Acl                     `protobuf:"bytes,3,opt,name=acl,proto3"`
+	xxx_hidden_Limits            *Limits                  `protobuf:"bytes,4,opt,name=limits,proto3"`
+	xxx_hidden_Text              string                   `protobuf:"bytes,5,opt,name=text,proto3"`
+	xxx_hidden_Automatic         bool                     `protobuf:"varint,6,opt,name=automatic,proto3"`
+	xxx_hidden_Description       string                   `protobuf:"bytes,7,opt,name=description,proto3"`
+	xxx_hidden_ExecutionSettings map[string]string        `protobuf:"bytes,10,rep,name=execution_settings,json=executionSettings,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_Syntax            QueryContent_QuerySyntax `protobuf:"varint,11,opt,name=syntax,proto3,enum=FederatedQuery.QueryContent_QuerySyntax"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *QueryContent) Reset() {
@@ -944,84 +1216,172 @@ func (x *QueryContent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryContent.ProtoReflect.Descriptor instead.
-func (*QueryContent) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *QueryContent) GetType() QueryContent_QueryType {
 	if x != nil {
-		return x.Type
+		return x.xxx_hidden_Type
 	}
 	return QueryContent_QUERY_TYPE_UNSPECIFIED
 }
 
 func (x *QueryContent) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *QueryContent) GetAcl() *Acl {
 	if x != nil {
-		return x.Acl
+		return x.xxx_hidden_Acl
 	}
 	return nil
 }
 
 func (x *QueryContent) GetLimits() *Limits {
 	if x != nil {
-		return x.Limits
+		return x.xxx_hidden_Limits
 	}
 	return nil
 }
 
 func (x *QueryContent) GetText() string {
 	if x != nil {
-		return x.Text
+		return x.xxx_hidden_Text
 	}
 	return ""
 }
 
 func (x *QueryContent) GetAutomatic() bool {
 	if x != nil {
-		return x.Automatic
+		return x.xxx_hidden_Automatic
 	}
 	return false
 }
 
 func (x *QueryContent) GetDescription() string {
 	if x != nil {
-		return x.Description
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
 func (x *QueryContent) GetExecutionSettings() map[string]string {
 	if x != nil {
-		return x.ExecutionSettings
+		return x.xxx_hidden_ExecutionSettings
 	}
 	return nil
 }
 
 func (x *QueryContent) GetSyntax() QueryContent_QuerySyntax {
 	if x != nil {
-		return x.Syntax
+		return x.xxx_hidden_Syntax
 	}
 	return QueryContent_QUERY_SYNTAX_UNSPECIFIED
 }
 
+func (x *QueryContent) SetType(v QueryContent_QueryType) {
+	x.xxx_hidden_Type = v
+}
+
+func (x *QueryContent) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *QueryContent) SetAcl(v *Acl) {
+	x.xxx_hidden_Acl = v
+}
+
+func (x *QueryContent) SetLimits(v *Limits) {
+	x.xxx_hidden_Limits = v
+}
+
+func (x *QueryContent) SetText(v string) {
+	x.xxx_hidden_Text = v
+}
+
+func (x *QueryContent) SetAutomatic(v bool) {
+	x.xxx_hidden_Automatic = v
+}
+
+func (x *QueryContent) SetDescription(v string) {
+	x.xxx_hidden_Description = v
+}
+
+func (x *QueryContent) SetExecutionSettings(v map[string]string) {
+	x.xxx_hidden_ExecutionSettings = v
+}
+
+func (x *QueryContent) SetSyntax(v QueryContent_QuerySyntax) {
+	x.xxx_hidden_Syntax = v
+}
+
+func (x *QueryContent) HasAcl() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Acl != nil
+}
+
+func (x *QueryContent) HasLimits() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Limits != nil
+}
+
+func (x *QueryContent) ClearAcl() {
+	x.xxx_hidden_Acl = nil
+}
+
+func (x *QueryContent) ClearLimits() {
+	x.xxx_hidden_Limits = nil
+}
+
+type QueryContent_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Type        QueryContent_QueryType
+	Name        string
+	Acl         *Acl
+	Limits      *Limits
+	Text        string
+	Automatic   bool
+	Description string
+	// Specified settings for query's executor
+	// Well known settings are:
+	// "executor" - type of executor for this query
+	ExecutionSettings map[string]string
+	// Syntax of the text
+	// By default it is "yql", but additional syntax "pg" (PostreSQL SQL frontend) is supported as well
+	Syntax QueryContent_QuerySyntax
+}
+
+func (b0 QueryContent_builder) Build() *QueryContent {
+	m0 := &QueryContent{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Acl = b.Acl
+	x.xxx_hidden_Limits = b.Limits
+	x.xxx_hidden_Text = b.Text
+	x.xxx_hidden_Automatic = b.Automatic
+	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_ExecutionSettings = b.ExecutionSettings
+	x.xxx_hidden_Syntax = b.Syntax
+	return m0
+}
+
 type CommonMeta struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	CreatedBy     string                 `protobuf:"bytes,2,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	ModifiedBy    string                 `protobuf:"bytes,3,opt,name=modified_by,json=modifiedBy,proto3" json:"modified_by,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	ModifiedAt    *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=modified_at,json=modifiedAt,proto3" json:"modified_at,omitempty"`
-	Revision      int64                  `protobuf:"varint,6,opt,name=revision,proto3" json:"revision,omitempty"` // Entity version, increases with each change
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id         string                 `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_CreatedBy  string                 `protobuf:"bytes,2,opt,name=created_by,json=createdBy,proto3"`
+	xxx_hidden_ModifiedBy string                 `protobuf:"bytes,3,opt,name=modified_by,json=modifiedBy,proto3"`
+	xxx_hidden_CreatedAt  *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3"`
+	xxx_hidden_ModifiedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=modified_at,json=modifiedAt,proto3"`
+	xxx_hidden_Revision   int64                  `protobuf:"varint,6,opt,name=revision,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CommonMeta) Reset() {
@@ -1049,81 +1409,135 @@ func (x *CommonMeta) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CommonMeta.ProtoReflect.Descriptor instead.
-func (*CommonMeta) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *CommonMeta) GetId() string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *CommonMeta) GetCreatedBy() string {
 	if x != nil {
-		return x.CreatedBy
+		return x.xxx_hidden_CreatedBy
 	}
 	return ""
 }
 
 func (x *CommonMeta) GetModifiedBy() string {
 	if x != nil {
-		return x.ModifiedBy
+		return x.xxx_hidden_ModifiedBy
 	}
 	return ""
 }
 
 func (x *CommonMeta) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.CreatedAt
+		return x.xxx_hidden_CreatedAt
 	}
 	return nil
 }
 
 func (x *CommonMeta) GetModifiedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ModifiedAt
+		return x.xxx_hidden_ModifiedAt
 	}
 	return nil
 }
 
 func (x *CommonMeta) GetRevision() int64 {
 	if x != nil {
-		return x.Revision
+		return x.xxx_hidden_Revision
 	}
 	return 0
 }
 
+func (x *CommonMeta) SetId(v string) {
+	x.xxx_hidden_Id = v
+}
+
+func (x *CommonMeta) SetCreatedBy(v string) {
+	x.xxx_hidden_CreatedBy = v
+}
+
+func (x *CommonMeta) SetModifiedBy(v string) {
+	x.xxx_hidden_ModifiedBy = v
+}
+
+func (x *CommonMeta) SetCreatedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CreatedAt = v
+}
+
+func (x *CommonMeta) SetModifiedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_ModifiedAt = v
+}
+
+func (x *CommonMeta) SetRevision(v int64) {
+	x.xxx_hidden_Revision = v
+}
+
+func (x *CommonMeta) HasCreatedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CreatedAt != nil
+}
+
+func (x *CommonMeta) HasModifiedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ModifiedAt != nil
+}
+
+func (x *CommonMeta) ClearCreatedAt() {
+	x.xxx_hidden_CreatedAt = nil
+}
+
+func (x *CommonMeta) ClearModifiedAt() {
+	x.xxx_hidden_ModifiedAt = nil
+}
+
+type CommonMeta_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id         string
+	CreatedBy  string
+	ModifiedBy string
+	CreatedAt  *timestamppb.Timestamp
+	ModifiedAt *timestamppb.Timestamp
+	Revision   int64
+}
+
+func (b0 CommonMeta_builder) Build() *CommonMeta {
+	m0 := &CommonMeta{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_CreatedBy = b.CreatedBy
+	x.xxx_hidden_ModifiedBy = b.ModifiedBy
+	x.xxx_hidden_CreatedAt = b.CreatedAt
+	x.xxx_hidden_ModifiedAt = b.ModifiedAt
+	x.xxx_hidden_Revision = b.Revision
+	return m0
+}
+
 type QueryMeta struct {
-	state  protoimpl.MessageState `protogen:"open.v1"`
-	Common *CommonMeta            `protobuf:"bytes,1,opt,name=common,proto3" json:"common,omitempty"`
-	// Timeline (submitted_at <= started_at <= finished_at)
-	//
-	//	sumbitted_at
-	//	           \ -> started_at
-	//	                            \ -> finished_at
-	SubmittedAt          *timestamppb.Timestamp  `protobuf:"bytes,14,opt,name=submitted_at,json=submittedAt,proto3" json:"submitted_at,omitempty"` // Time when the query was queued for execution
-	StartedAt            *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`        // Start time of query execution
-	FinishedAt           *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at,omitempty"`     // Query completition time
-	ExecuteMode          ExecuteMode             `protobuf:"varint,4,opt,name=execute_mode,json=executeMode,proto3,enum=FederatedQuery.ExecuteMode" json:"execute_mode,omitempty"`
-	Status               QueryMeta_ComputeStatus `protobuf:"varint,5,opt,name=status,proto3,enum=FederatedQuery.QueryMeta_ComputeStatus" json:"status,omitempty"`
-	LastJobQueryRevision int64                   `protobuf:"varint,6,opt,name=last_job_query_revision,json=lastJobQueryRevision,proto3" json:"last_job_query_revision,omitempty"`
-	LastJobId            string                  `protobuf:"bytes,7,opt,name=last_job_id,json=lastJobId,proto3" json:"last_job_id,omitempty"`
-	ExpireAt             *timestamppb.Timestamp  `protobuf:"bytes,8,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
-	ResultExpireAt       *timestamppb.Timestamp  `protobuf:"bytes,9,opt,name=result_expire_at,json=resultExpireAt,proto3" json:"result_expire_at,omitempty"`
-	StartedBy            string                  `protobuf:"bytes,10,opt,name=started_by,json=startedBy,proto3" json:"started_by,omitempty"`
-	// Types that are valid to be assigned to Action:
-	//
-	//	*QueryMeta_AbortedBy
-	//	*QueryMeta_PausedBy
-	Action isQueryMeta_Action `protobuf_oneof:"action"`
-	// One of the versions of this query has fully saved checkpoint.
-	// If this flag is not set streaming disposition mode "from last checkpoint" can't be used.
-	HasSavedCheckpoints bool `protobuf:"varint,13,opt,name=has_saved_checkpoints,json=hasSavedCheckpoints,proto3" json:"has_saved_checkpoints,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                           protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Common               *CommonMeta             `protobuf:"bytes,1,opt,name=common,proto3"`
+	xxx_hidden_SubmittedAt          *timestamppb.Timestamp  `protobuf:"bytes,14,opt,name=submitted_at,json=submittedAt,proto3"`
+	xxx_hidden_StartedAt            *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=started_at,json=startedAt,proto3"`
+	xxx_hidden_FinishedAt           *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=finished_at,json=finishedAt,proto3"`
+	xxx_hidden_ExecuteMode          ExecuteMode             `protobuf:"varint,4,opt,name=execute_mode,json=executeMode,proto3,enum=FederatedQuery.ExecuteMode"`
+	xxx_hidden_Status               QueryMeta_ComputeStatus `protobuf:"varint,5,opt,name=status,proto3,enum=FederatedQuery.QueryMeta_ComputeStatus"`
+	xxx_hidden_LastJobQueryRevision int64                   `protobuf:"varint,6,opt,name=last_job_query_revision,json=lastJobQueryRevision,proto3"`
+	xxx_hidden_LastJobId            string                  `protobuf:"bytes,7,opt,name=last_job_id,json=lastJobId,proto3"`
+	xxx_hidden_ExpireAt             *timestamppb.Timestamp  `protobuf:"bytes,8,opt,name=expire_at,json=expireAt,proto3"`
+	xxx_hidden_ResultExpireAt       *timestamppb.Timestamp  `protobuf:"bytes,9,opt,name=result_expire_at,json=resultExpireAt,proto3"`
+	xxx_hidden_StartedBy            string                  `protobuf:"bytes,10,opt,name=started_by,json=startedBy,proto3"`
+	xxx_hidden_Action               isQueryMeta_Action      `protobuf_oneof:"action"`
+	xxx_hidden_HasSavedCheckpoints  bool                    `protobuf:"varint,13,opt,name=has_saved_checkpoints,json=hasSavedCheckpoints,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *QueryMeta) Reset() {
@@ -1151,98 +1565,86 @@ func (x *QueryMeta) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryMeta.ProtoReflect.Descriptor instead.
-func (*QueryMeta) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *QueryMeta) GetCommon() *CommonMeta {
 	if x != nil {
-		return x.Common
+		return x.xxx_hidden_Common
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetSubmittedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.SubmittedAt
+		return x.xxx_hidden_SubmittedAt
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetStartedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.StartedAt
+		return x.xxx_hidden_StartedAt
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetFinishedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.FinishedAt
+		return x.xxx_hidden_FinishedAt
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetExecuteMode() ExecuteMode {
 	if x != nil {
-		return x.ExecuteMode
+		return x.xxx_hidden_ExecuteMode
 	}
 	return ExecuteMode_EXECUTE_MODE_UNSPECIFIED
 }
 
 func (x *QueryMeta) GetStatus() QueryMeta_ComputeStatus {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return QueryMeta_COMPUTE_STATUS_UNSPECIFIED
 }
 
 func (x *QueryMeta) GetLastJobQueryRevision() int64 {
 	if x != nil {
-		return x.LastJobQueryRevision
+		return x.xxx_hidden_LastJobQueryRevision
 	}
 	return 0
 }
 
 func (x *QueryMeta) GetLastJobId() string {
 	if x != nil {
-		return x.LastJobId
+		return x.xxx_hidden_LastJobId
 	}
 	return ""
 }
 
 func (x *QueryMeta) GetExpireAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ExpireAt
+		return x.xxx_hidden_ExpireAt
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetResultExpireAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ResultExpireAt
+		return x.xxx_hidden_ResultExpireAt
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetStartedBy() string {
 	if x != nil {
-		return x.StartedBy
+		return x.xxx_hidden_StartedBy
 	}
 	return ""
 }
 
-func (x *QueryMeta) GetAction() isQueryMeta_Action {
-	if x != nil {
-		return x.Action
-	}
-	return nil
-}
-
 func (x *QueryMeta) GetAbortedBy() string {
 	if x != nil {
-		if x, ok := x.Action.(*QueryMeta_AbortedBy); ok {
+		if x, ok := x.xxx_hidden_Action.(*queryMeta_AbortedBy); ok {
 			return x.AbortedBy
 		}
 	}
@@ -1251,7 +1653,7 @@ func (x *QueryMeta) GetAbortedBy() string {
 
 func (x *QueryMeta) GetPausedBy() string {
 	if x != nil {
-		if x, ok := x.Action.(*QueryMeta_PausedBy); ok {
+		if x, ok := x.xxx_hidden_Action.(*queryMeta_PausedBy); ok {
 			return x.PausedBy
 		}
 	}
@@ -1260,36 +1662,278 @@ func (x *QueryMeta) GetPausedBy() string {
 
 func (x *QueryMeta) GetHasSavedCheckpoints() bool {
 	if x != nil {
-		return x.HasSavedCheckpoints
+		return x.xxx_hidden_HasSavedCheckpoints
 	}
 	return false
+}
+
+func (x *QueryMeta) SetCommon(v *CommonMeta) {
+	x.xxx_hidden_Common = v
+}
+
+func (x *QueryMeta) SetSubmittedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_SubmittedAt = v
+}
+
+func (x *QueryMeta) SetStartedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_StartedAt = v
+}
+
+func (x *QueryMeta) SetFinishedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_FinishedAt = v
+}
+
+func (x *QueryMeta) SetExecuteMode(v ExecuteMode) {
+	x.xxx_hidden_ExecuteMode = v
+}
+
+func (x *QueryMeta) SetStatus(v QueryMeta_ComputeStatus) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *QueryMeta) SetLastJobQueryRevision(v int64) {
+	x.xxx_hidden_LastJobQueryRevision = v
+}
+
+func (x *QueryMeta) SetLastJobId(v string) {
+	x.xxx_hidden_LastJobId = v
+}
+
+func (x *QueryMeta) SetExpireAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_ExpireAt = v
+}
+
+func (x *QueryMeta) SetResultExpireAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_ResultExpireAt = v
+}
+
+func (x *QueryMeta) SetStartedBy(v string) {
+	x.xxx_hidden_StartedBy = v
+}
+
+func (x *QueryMeta) SetAbortedBy(v string) {
+	x.xxx_hidden_Action = &queryMeta_AbortedBy{v}
+}
+
+func (x *QueryMeta) SetPausedBy(v string) {
+	x.xxx_hidden_Action = &queryMeta_PausedBy{v}
+}
+
+func (x *QueryMeta) SetHasSavedCheckpoints(v bool) {
+	x.xxx_hidden_HasSavedCheckpoints = v
+}
+
+func (x *QueryMeta) HasCommon() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Common != nil
+}
+
+func (x *QueryMeta) HasSubmittedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SubmittedAt != nil
+}
+
+func (x *QueryMeta) HasStartedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StartedAt != nil
+}
+
+func (x *QueryMeta) HasFinishedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_FinishedAt != nil
+}
+
+func (x *QueryMeta) HasExpireAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ExpireAt != nil
+}
+
+func (x *QueryMeta) HasResultExpireAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResultExpireAt != nil
+}
+
+func (x *QueryMeta) HasAction() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Action != nil
+}
+
+func (x *QueryMeta) HasAbortedBy() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Action.(*queryMeta_AbortedBy)
+	return ok
+}
+
+func (x *QueryMeta) HasPausedBy() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Action.(*queryMeta_PausedBy)
+	return ok
+}
+
+func (x *QueryMeta) ClearCommon() {
+	x.xxx_hidden_Common = nil
+}
+
+func (x *QueryMeta) ClearSubmittedAt() {
+	x.xxx_hidden_SubmittedAt = nil
+}
+
+func (x *QueryMeta) ClearStartedAt() {
+	x.xxx_hidden_StartedAt = nil
+}
+
+func (x *QueryMeta) ClearFinishedAt() {
+	x.xxx_hidden_FinishedAt = nil
+}
+
+func (x *QueryMeta) ClearExpireAt() {
+	x.xxx_hidden_ExpireAt = nil
+}
+
+func (x *QueryMeta) ClearResultExpireAt() {
+	x.xxx_hidden_ResultExpireAt = nil
+}
+
+func (x *QueryMeta) ClearAction() {
+	x.xxx_hidden_Action = nil
+}
+
+func (x *QueryMeta) ClearAbortedBy() {
+	if _, ok := x.xxx_hidden_Action.(*queryMeta_AbortedBy); ok {
+		x.xxx_hidden_Action = nil
+	}
+}
+
+func (x *QueryMeta) ClearPausedBy() {
+	if _, ok := x.xxx_hidden_Action.(*queryMeta_PausedBy); ok {
+		x.xxx_hidden_Action = nil
+	}
+}
+
+const QueryMeta_Action_not_set_case case_QueryMeta_Action = 0
+const QueryMeta_AbortedBy_case case_QueryMeta_Action = 11
+const QueryMeta_PausedBy_case case_QueryMeta_Action = 12
+
+func (x *QueryMeta) WhichAction() case_QueryMeta_Action {
+	if x == nil {
+		return QueryMeta_Action_not_set_case
+	}
+	switch x.xxx_hidden_Action.(type) {
+	case *queryMeta_AbortedBy:
+		return QueryMeta_AbortedBy_case
+	case *queryMeta_PausedBy:
+		return QueryMeta_PausedBy_case
+	default:
+		return QueryMeta_Action_not_set_case
+	}
+}
+
+type QueryMeta_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Common *CommonMeta
+	// Timeline (submitted_at <= started_at <= finished_at)
+	//
+	//	sumbitted_at
+	//	           \ -> started_at
+	//	                            \ -> finished_at
+	SubmittedAt          *timestamppb.Timestamp
+	StartedAt            *timestamppb.Timestamp
+	FinishedAt           *timestamppb.Timestamp
+	ExecuteMode          ExecuteMode
+	Status               QueryMeta_ComputeStatus
+	LastJobQueryRevision int64
+	LastJobId            string
+	ExpireAt             *timestamppb.Timestamp
+	ResultExpireAt       *timestamppb.Timestamp
+	StartedBy            string
+	// Fields of oneof xxx_hidden_Action:
+	AbortedBy *string
+	PausedBy  *string
+	// -- end of xxx_hidden_Action
+	// One of the versions of this query has fully saved checkpoint.
+	// If this flag is not set streaming disposition mode "from last checkpoint" can't be used.
+	HasSavedCheckpoints bool
+}
+
+func (b0 QueryMeta_builder) Build() *QueryMeta {
+	m0 := &QueryMeta{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Common = b.Common
+	x.xxx_hidden_SubmittedAt = b.SubmittedAt
+	x.xxx_hidden_StartedAt = b.StartedAt
+	x.xxx_hidden_FinishedAt = b.FinishedAt
+	x.xxx_hidden_ExecuteMode = b.ExecuteMode
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_LastJobQueryRevision = b.LastJobQueryRevision
+	x.xxx_hidden_LastJobId = b.LastJobId
+	x.xxx_hidden_ExpireAt = b.ExpireAt
+	x.xxx_hidden_ResultExpireAt = b.ResultExpireAt
+	x.xxx_hidden_StartedBy = b.StartedBy
+	if b.AbortedBy != nil {
+		x.xxx_hidden_Action = &queryMeta_AbortedBy{*b.AbortedBy}
+	}
+	if b.PausedBy != nil {
+		x.xxx_hidden_Action = &queryMeta_PausedBy{*b.PausedBy}
+	}
+	x.xxx_hidden_HasSavedCheckpoints = b.HasSavedCheckpoints
+	return m0
+}
+
+type case_QueryMeta_Action protoreflect.FieldNumber
+
+func (x case_QueryMeta_Action) String() string {
+	md := file_draft_protos_ydb_federated_query_proto_msgTypes[5].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isQueryMeta_Action interface {
 	isQueryMeta_Action()
 }
 
-type QueryMeta_AbortedBy struct {
+type queryMeta_AbortedBy struct {
 	AbortedBy string `protobuf:"bytes,11,opt,name=aborted_by,json=abortedBy,proto3,oneof"`
 }
 
-type QueryMeta_PausedBy struct {
+type queryMeta_PausedBy struct {
 	PausedBy string `protobuf:"bytes,12,opt,name=paused_by,json=pausedBy,proto3,oneof"`
 }
 
-func (*QueryMeta_AbortedBy) isQueryMeta_Action() {}
+func (*queryMeta_AbortedBy) isQueryMeta_Action() {}
 
-func (*QueryMeta_PausedBy) isQueryMeta_Action() {}
+func (*queryMeta_PausedBy) isQueryMeta_Action() {}
 
 type BriefQuery struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          QueryContent_QueryType `protobuf:"varint,1,opt,name=type,proto3,enum=FederatedQuery.QueryContent_QueryType" json:"type,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Meta          *QueryMeta             `protobuf:"bytes,3,opt,name=meta,proto3" json:"meta,omitempty"`
-	Visibility    Acl_Visibility         `protobuf:"varint,4,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	Automatic     bool                   `protobuf:"varint,5,opt,name=automatic,proto3" json:"automatic,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Type       QueryContent_QueryType `protobuf:"varint,1,opt,name=type,proto3,enum=FederatedQuery.QueryContent_QueryType"`
+	xxx_hidden_Name       string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_Meta       *QueryMeta             `protobuf:"bytes,3,opt,name=meta,proto3"`
+	xxx_hidden_Visibility Acl_Visibility         `protobuf:"varint,4,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	xxx_hidden_Automatic  bool                   `protobuf:"varint,5,opt,name=automatic,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *BriefQuery) Reset() {
@@ -1317,51 +1961,99 @@ func (x *BriefQuery) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BriefQuery.ProtoReflect.Descriptor instead.
-func (*BriefQuery) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{6}
-}
-
 func (x *BriefQuery) GetType() QueryContent_QueryType {
 	if x != nil {
-		return x.Type
+		return x.xxx_hidden_Type
 	}
 	return QueryContent_QUERY_TYPE_UNSPECIFIED
 }
 
 func (x *BriefQuery) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *BriefQuery) GetMeta() *QueryMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *BriefQuery) GetVisibility() Acl_Visibility {
 	if x != nil {
-		return x.Visibility
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
 func (x *BriefQuery) GetAutomatic() bool {
 	if x != nil {
-		return x.Automatic
+		return x.xxx_hidden_Automatic
 	}
 	return false
 }
 
+func (x *BriefQuery) SetType(v QueryContent_QueryType) {
+	x.xxx_hidden_Type = v
+}
+
+func (x *BriefQuery) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *BriefQuery) SetMeta(v *QueryMeta) {
+	x.xxx_hidden_Meta = v
+}
+
+func (x *BriefQuery) SetVisibility(v Acl_Visibility) {
+	x.xxx_hidden_Visibility = v
+}
+
+func (x *BriefQuery) SetAutomatic(v bool) {
+	x.xxx_hidden_Automatic = v
+}
+
+func (x *BriefQuery) HasMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Meta != nil
+}
+
+func (x *BriefQuery) ClearMeta() {
+	x.xxx_hidden_Meta = nil
+}
+
+type BriefQuery_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Type       QueryContent_QueryType
+	Name       string
+	Meta       *QueryMeta
+	Visibility Acl_Visibility
+	Automatic  bool
+}
+
+func (b0 BriefQuery_builder) Build() *BriefQuery {
+	m0 := &BriefQuery{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Meta = b.Meta
+	x.xxx_hidden_Visibility = b.Visibility
+	x.xxx_hidden_Automatic = b.Automatic
+	return m0
+}
+
 type QueryPlan struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Json          string                 `protobuf:"bytes,1,opt,name=json,proto3" json:"json,omitempty"` // No validation because generated on server side
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Json string                 `protobuf:"bytes,1,opt,name=json,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *QueryPlan) Reset() {
@@ -1389,23 +2081,36 @@ func (x *QueryPlan) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryPlan.ProtoReflect.Descriptor instead.
-func (*QueryPlan) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{7}
-}
-
 func (x *QueryPlan) GetJson() string {
 	if x != nil {
-		return x.Json
+		return x.xxx_hidden_Json
 	}
 	return ""
 }
 
+func (x *QueryPlan) SetJson(v string) {
+	x.xxx_hidden_Json = v
+}
+
+type QueryPlan_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Json string
+}
+
+func (b0 QueryPlan_builder) Build() *QueryPlan {
+	m0 := &QueryPlan{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Json = b.Json
+	return m0
+}
+
 type QueryAst struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          string                 `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Data string                 `protobuf:"bytes,1,opt,name=data,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *QueryAst) Reset() {
@@ -1433,25 +2138,38 @@ func (x *QueryAst) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryAst.ProtoReflect.Descriptor instead.
-func (*QueryAst) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{8}
-}
-
 func (x *QueryAst) GetData() string {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return ""
 }
 
+func (x *QueryAst) SetData(v string) {
+	x.xxx_hidden_Data = v
+}
+
+type QueryAst_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Data string
+}
+
+func (b0 QueryAst_builder) Build() *QueryAst {
+	m0 := &QueryAst{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Data = b.Data
+	return m0
+}
+
 type ResultSetMeta struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Column        []*Ydb.Column          `protobuf:"bytes,1,rep,name=column,proto3" json:"column,omitempty"`
-	RowsCount     int64                  `protobuf:"varint,2,opt,name=rows_count,json=rowsCount,proto3" json:"rows_count,omitempty"`
-	Truncated     bool                   `protobuf:"varint,3,opt,name=truncated,proto3" json:"truncated,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Column    *[]*Ydb.Column         `protobuf:"bytes,1,rep,name=column,proto3"`
+	xxx_hidden_RowsCount int64                  `protobuf:"varint,2,opt,name=rows_count,json=rowsCount,proto3"`
+	xxx_hidden_Truncated bool                   `protobuf:"varint,3,opt,name=truncated,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ResultSetMeta) Reset() {
@@ -1479,44 +2197,71 @@ func (x *ResultSetMeta) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResultSetMeta.ProtoReflect.Descriptor instead.
-func (*ResultSetMeta) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *ResultSetMeta) GetColumn() []*Ydb.Column {
 	if x != nil {
-		return x.Column
+		if x.xxx_hidden_Column != nil {
+			return *x.xxx_hidden_Column
+		}
 	}
 	return nil
 }
 
 func (x *ResultSetMeta) GetRowsCount() int64 {
 	if x != nil {
-		return x.RowsCount
+		return x.xxx_hidden_RowsCount
 	}
 	return 0
 }
 
 func (x *ResultSetMeta) GetTruncated() bool {
 	if x != nil {
-		return x.Truncated
+		return x.xxx_hidden_Truncated
 	}
 	return false
 }
 
+func (x *ResultSetMeta) SetColumn(v []*Ydb.Column) {
+	x.xxx_hidden_Column = &v
+}
+
+func (x *ResultSetMeta) SetRowsCount(v int64) {
+	x.xxx_hidden_RowsCount = v
+}
+
+func (x *ResultSetMeta) SetTruncated(v bool) {
+	x.xxx_hidden_Truncated = v
+}
+
+type ResultSetMeta_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Column    []*Ydb.Column
+	RowsCount int64
+	Truncated bool
+}
+
+func (b0 ResultSetMeta_builder) Build() *ResultSetMeta {
+	m0 := &ResultSetMeta{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Column = &b.Column
+	x.xxx_hidden_RowsCount = b.RowsCount
+	x.xxx_hidden_Truncated = b.Truncated
+	return m0
+}
+
 type Query struct {
-	state          protoimpl.MessageState    `protogen:"open.v1"`
-	Meta           *QueryMeta                `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
-	Content        *QueryContent             `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	Plan           *QueryPlan                `protobuf:"bytes,3,opt,name=plan,proto3" json:"plan,omitempty"`
-	Issue          []*Ydb_Issue.IssueMessage `protobuf:"bytes,4,rep,name=issue,proto3" json:"issue,omitempty"`
-	TransientIssue []*Ydb_Issue.IssueMessage `protobuf:"bytes,5,rep,name=transient_issue,json=transientIssue,proto3" json:"transient_issue,omitempty"`
-	Statistics     *QueryStatistics          `protobuf:"bytes,6,opt,name=statistics,proto3" json:"statistics,omitempty"`
-	ResultSetMeta  []*ResultSetMeta          `protobuf:"bytes,7,rep,name=result_set_meta,json=resultSetMeta,proto3" json:"result_set_meta,omitempty"`
-	Ast            *QueryAst                 `protobuf:"bytes,8,opt,name=ast,proto3" json:"ast,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Meta           *QueryMeta                 `protobuf:"bytes,1,opt,name=meta,proto3"`
+	xxx_hidden_Content        *QueryContent              `protobuf:"bytes,2,opt,name=content,proto3"`
+	xxx_hidden_Plan           *QueryPlan                 `protobuf:"bytes,3,opt,name=plan,proto3"`
+	xxx_hidden_Issue          *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,4,rep,name=issue,proto3"`
+	xxx_hidden_TransientIssue *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,5,rep,name=transient_issue,json=transientIssue,proto3"`
+	xxx_hidden_Statistics     *QueryStatistics           `protobuf:"bytes,6,opt,name=statistics,proto3"`
+	xxx_hidden_ResultSetMeta  *[]*ResultSetMeta          `protobuf:"bytes,7,rep,name=result_set_meta,json=resultSetMeta,proto3"`
+	xxx_hidden_Ast            *QueryAst                  `protobuf:"bytes,8,opt,name=ast,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *Query) Reset() {
@@ -1544,72 +2289,188 @@ func (x *Query) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Query.ProtoReflect.Descriptor instead.
-func (*Query) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{10}
-}
-
 func (x *Query) GetMeta() *QueryMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *Query) GetContent() *QueryContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *Query) GetPlan() *QueryPlan {
 	if x != nil {
-		return x.Plan
+		return x.xxx_hidden_Plan
 	}
 	return nil
 }
 
 func (x *Query) GetIssue() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issue
+		if x.xxx_hidden_Issue != nil {
+			return *x.xxx_hidden_Issue
+		}
 	}
 	return nil
 }
 
 func (x *Query) GetTransientIssue() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.TransientIssue
+		if x.xxx_hidden_TransientIssue != nil {
+			return *x.xxx_hidden_TransientIssue
+		}
 	}
 	return nil
 }
 
 func (x *Query) GetStatistics() *QueryStatistics {
 	if x != nil {
-		return x.Statistics
+		return x.xxx_hidden_Statistics
 	}
 	return nil
 }
 
 func (x *Query) GetResultSetMeta() []*ResultSetMeta {
 	if x != nil {
-		return x.ResultSetMeta
+		if x.xxx_hidden_ResultSetMeta != nil {
+			return *x.xxx_hidden_ResultSetMeta
+		}
 	}
 	return nil
 }
 
 func (x *Query) GetAst() *QueryAst {
 	if x != nil {
-		return x.Ast
+		return x.xxx_hidden_Ast
 	}
 	return nil
 }
 
+func (x *Query) SetMeta(v *QueryMeta) {
+	x.xxx_hidden_Meta = v
+}
+
+func (x *Query) SetContent(v *QueryContent) {
+	x.xxx_hidden_Content = v
+}
+
+func (x *Query) SetPlan(v *QueryPlan) {
+	x.xxx_hidden_Plan = v
+}
+
+func (x *Query) SetIssue(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issue = &v
+}
+
+func (x *Query) SetTransientIssue(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_TransientIssue = &v
+}
+
+func (x *Query) SetStatistics(v *QueryStatistics) {
+	x.xxx_hidden_Statistics = v
+}
+
+func (x *Query) SetResultSetMeta(v []*ResultSetMeta) {
+	x.xxx_hidden_ResultSetMeta = &v
+}
+
+func (x *Query) SetAst(v *QueryAst) {
+	x.xxx_hidden_Ast = v
+}
+
+func (x *Query) HasMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Meta != nil
+}
+
+func (x *Query) HasContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Content != nil
+}
+
+func (x *Query) HasPlan() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Plan != nil
+}
+
+func (x *Query) HasStatistics() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Statistics != nil
+}
+
+func (x *Query) HasAst() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Ast != nil
+}
+
+func (x *Query) ClearMeta() {
+	x.xxx_hidden_Meta = nil
+}
+
+func (x *Query) ClearContent() {
+	x.xxx_hidden_Content = nil
+}
+
+func (x *Query) ClearPlan() {
+	x.xxx_hidden_Plan = nil
+}
+
+func (x *Query) ClearStatistics() {
+	x.xxx_hidden_Statistics = nil
+}
+
+func (x *Query) ClearAst() {
+	x.xxx_hidden_Ast = nil
+}
+
+type Query_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Meta           *QueryMeta
+	Content        *QueryContent
+	Plan           *QueryPlan
+	Issue          []*Ydb_Issue.IssueMessage
+	TransientIssue []*Ydb_Issue.IssueMessage
+	Statistics     *QueryStatistics
+	ResultSetMeta  []*ResultSetMeta
+	Ast            *QueryAst
+}
+
+func (b0 Query_builder) Build() *Query {
+	m0 := &Query{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Meta = b.Meta
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_Plan = b.Plan
+	x.xxx_hidden_Issue = &b.Issue
+	x.xxx_hidden_TransientIssue = &b.TransientIssue
+	x.xxx_hidden_Statistics = b.Statistics
+	x.xxx_hidden_ResultSetMeta = &b.ResultSetMeta
+	x.xxx_hidden_Ast = b.Ast
+	return m0
+}
+
 type QueryStatistics struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Json          string                 `protobuf:"bytes,1,opt,name=json,proto3" json:"json,omitempty"` // No validation because generated on server side
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Json string                 `protobuf:"bytes,1,opt,name=json,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *QueryStatistics) Reset() {
@@ -1637,28 +2498,41 @@ func (x *QueryStatistics) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryStatistics.ProtoReflect.Descriptor instead.
-func (*QueryStatistics) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{11}
-}
-
 func (x *QueryStatistics) GetJson() string {
 	if x != nil {
-		return x.Json
+		return x.xxx_hidden_Json
 	}
 	return ""
 }
 
+func (x *QueryStatistics) SetJson(v string) {
+	x.xxx_hidden_Json = v
+}
+
+type QueryStatistics_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Json string
+}
+
+func (b0 QueryStatistics_builder) Build() *QueryStatistics {
+	m0 := &QueryStatistics{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Json = b.Json
+	return m0
+}
+
 // Create a new query
 type CreateQueryRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	Content         *QueryContent                   `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	ExecuteMode     ExecuteMode                     `protobuf:"varint,3,opt,name=execute_mode,json=executeMode,proto3,enum=FederatedQuery.ExecuteMode" json:"execute_mode,omitempty"`
-	Disposition     *StreamingDisposition           `protobuf:"bytes,4,opt,name=disposition,proto3" json:"disposition,omitempty"`
-	IdempotencyKey  string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Content         *QueryContent                   `protobuf:"bytes,2,opt,name=content,proto3"`
+	xxx_hidden_ExecuteMode     ExecuteMode                     `protobuf:"varint,3,opt,name=execute_mode,json=executeMode,proto3,enum=FederatedQuery.ExecuteMode"`
+	xxx_hidden_Disposition     *StreamingDisposition           `protobuf:"bytes,4,opt,name=disposition,proto3"`
+	xxx_hidden_IdempotencyKey  string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateQueryRequest) Reset() {
@@ -1686,51 +2560,121 @@ func (x *CreateQueryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateQueryRequest.ProtoReflect.Descriptor instead.
-func (*CreateQueryRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{12}
-}
-
 func (x *CreateQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateQueryRequest) GetContent() *QueryContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *CreateQueryRequest) GetExecuteMode() ExecuteMode {
 	if x != nil {
-		return x.ExecuteMode
+		return x.xxx_hidden_ExecuteMode
 	}
 	return ExecuteMode_EXECUTE_MODE_UNSPECIFIED
 }
 
 func (x *CreateQueryRequest) GetDisposition() *StreamingDisposition {
 	if x != nil {
-		return x.Disposition
+		return x.xxx_hidden_Disposition
 	}
 	return nil
 }
 
 func (x *CreateQueryRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
+func (x *CreateQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CreateQueryRequest) SetContent(v *QueryContent) {
+	x.xxx_hidden_Content = v
+}
+
+func (x *CreateQueryRequest) SetExecuteMode(v ExecuteMode) {
+	x.xxx_hidden_ExecuteMode = v
+}
+
+func (x *CreateQueryRequest) SetDisposition(v *StreamingDisposition) {
+	x.xxx_hidden_Disposition = v
+}
+
+func (x *CreateQueryRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *CreateQueryRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CreateQueryRequest) HasContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Content != nil
+}
+
+func (x *CreateQueryRequest) HasDisposition() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Disposition != nil
+}
+
+func (x *CreateQueryRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *CreateQueryRequest) ClearContent() {
+	x.xxx_hidden_Content = nil
+}
+
+func (x *CreateQueryRequest) ClearDisposition() {
+	x.xxx_hidden_Disposition = nil
+}
+
+type CreateQueryRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	Content         *QueryContent
+	ExecuteMode     ExecuteMode
+	Disposition     *StreamingDisposition
+	IdempotencyKey  string
+}
+
+func (b0 CreateQueryRequest_builder) Build() *CreateQueryRequest {
+	m0 := &CreateQueryRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_ExecuteMode = b.ExecuteMode
+	x.xxx_hidden_Disposition = b.Disposition
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	return m0
+}
+
 type CreateQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // CreateQueryResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateQueryResponse) Reset() {
@@ -1758,23 +2702,47 @@ func (x *CreateQueryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateQueryResponse.ProtoReflect.Descriptor instead.
-func (*CreateQueryResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{13}
-}
-
 func (x *CreateQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CreateQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CreateQueryResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CreateQueryResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CreateQueryResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CreateQueryResponse_builder) Build() *CreateQueryResponse {
+	m0 := &CreateQueryResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type CreateQueryResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	QueryId       string                 `protobuf:"bytes,1,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_QueryId string                 `protobuf:"bytes,1,opt,name=query_id,json=queryId,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *CreateQueryResult) Reset() {
@@ -1802,27 +2770,40 @@ func (x *CreateQueryResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateQueryResult.ProtoReflect.Descriptor instead.
-func (*CreateQueryResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{14}
-}
-
 func (x *CreateQueryResult) GetQueryId() string {
 	if x != nil {
-		return x.QueryId
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
+func (x *CreateQueryResult) SetQueryId(v string) {
+	x.xxx_hidden_QueryId = v
+}
+
+type CreateQueryResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	QueryId string
+}
+
+func (b0 CreateQueryResult_builder) Build() *CreateQueryResult {
+	m0 := &CreateQueryResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_QueryId = b.QueryId
+	return m0
+}
+
 // Getting brief information about queries
 type ListQueriesRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
-	Filter          *ListQueriesRequest_Filter      `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3"`
+	xxx_hidden_Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3"`
+	xxx_hidden_Filter          *ListQueriesRequest_Filter      `protobuf:"bytes,4,opt,name=filter,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListQueriesRequest) Reset() {
@@ -1850,44 +2831,97 @@ func (x *ListQueriesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListQueriesRequest.ProtoReflect.Descriptor instead.
-func (*ListQueriesRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{15}
-}
-
 func (x *ListQueriesRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListQueriesRequest) GetPageToken() string {
 	if x != nil {
-		return x.PageToken
+		return x.xxx_hidden_PageToken
 	}
 	return ""
 }
 
 func (x *ListQueriesRequest) GetLimit() int32 {
 	if x != nil {
-		return x.Limit
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
 func (x *ListQueriesRequest) GetFilter() *ListQueriesRequest_Filter {
 	if x != nil {
-		return x.Filter
+		return x.xxx_hidden_Filter
 	}
 	return nil
 }
 
+func (x *ListQueriesRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ListQueriesRequest) SetPageToken(v string) {
+	x.xxx_hidden_PageToken = v
+}
+
+func (x *ListQueriesRequest) SetLimit(v int32) {
+	x.xxx_hidden_Limit = v
+}
+
+func (x *ListQueriesRequest) SetFilter(v *ListQueriesRequest_Filter) {
+	x.xxx_hidden_Filter = v
+}
+
+func (x *ListQueriesRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ListQueriesRequest) HasFilter() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Filter != nil
+}
+
+func (x *ListQueriesRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ListQueriesRequest) ClearFilter() {
+	x.xxx_hidden_Filter = nil
+}
+
+type ListQueriesRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	PageToken       string
+	Limit           int32
+	Filter          *ListQueriesRequest_Filter
+}
+
+func (b0 ListQueriesRequest_builder) Build() *ListQueriesRequest {
+	m0 := &ListQueriesRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_PageToken = b.PageToken
+	x.xxx_hidden_Limit = b.Limit
+	x.xxx_hidden_Filter = b.Filter
+	return m0
+}
+
 type ListQueriesResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // ListQueriesResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListQueriesResponse) Reset() {
@@ -1915,24 +2949,48 @@ func (x *ListQueriesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListQueriesResponse.ProtoReflect.Descriptor instead.
-func (*ListQueriesResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{16}
-}
-
 func (x *ListQueriesResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ListQueriesResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ListQueriesResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ListQueriesResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ListQueriesResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ListQueriesResponse_builder) Build() *ListQueriesResponse {
+	m0 := &ListQueriesResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ListQueriesResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Query         []*BriefQuery          `protobuf:"bytes,1,rep,name=query,proto3" json:"query,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Query         *[]*BriefQuery         `protobuf:"bytes,1,rep,name=query,proto3"`
+	xxx_hidden_NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListQueriesResult) Reset() {
@@ -1960,32 +3018,53 @@ func (x *ListQueriesResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListQueriesResult.ProtoReflect.Descriptor instead.
-func (*ListQueriesResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{17}
-}
-
 func (x *ListQueriesResult) GetQuery() []*BriefQuery {
 	if x != nil {
-		return x.Query
+		if x.xxx_hidden_Query != nil {
+			return *x.xxx_hidden_Query
+		}
 	}
 	return nil
 }
 
 func (x *ListQueriesResult) GetNextPageToken() string {
 	if x != nil {
-		return x.NextPageToken
+		return x.xxx_hidden_NextPageToken
 	}
 	return ""
 }
 
+func (x *ListQueriesResult) SetQuery(v []*BriefQuery) {
+	x.xxx_hidden_Query = &v
+}
+
+func (x *ListQueriesResult) SetNextPageToken(v string) {
+	x.xxx_hidden_NextPageToken = v
+}
+
+type ListQueriesResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Query         []*BriefQuery
+	NextPageToken string
+}
+
+func (b0 ListQueriesResult_builder) Build() *ListQueriesResult {
+	m0 := &ListQueriesResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Query = &b.Query
+	x.xxx_hidden_NextPageToken = b.NextPageToken
+	return m0
+}
+
 // Getting complete information about the query
 type DescribeQueryRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	QueryId         string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId         string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeQueryRequest) Reset() {
@@ -2013,30 +3092,60 @@ func (x *DescribeQueryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeQueryRequest.ProtoReflect.Descriptor instead.
-func (*DescribeQueryRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{18}
-}
-
 func (x *DescribeQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeQueryRequest) GetQueryId() string {
 	if x != nil {
-		return x.QueryId
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
+func (x *DescribeQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DescribeQueryRequest) SetQueryId(v string) {
+	x.xxx_hidden_QueryId = v
+}
+
+func (x *DescribeQueryRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DescribeQueryRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DescribeQueryRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	QueryId         string
+}
+
+func (b0 DescribeQueryRequest_builder) Build() *DescribeQueryRequest {
+	m0 := &DescribeQueryRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
+	return m0
+}
+
 type DescribeQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // DescribeQueryResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeQueryResponse) Reset() {
@@ -2064,23 +3173,47 @@ func (x *DescribeQueryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeQueryResponse.ProtoReflect.Descriptor instead.
-func (*DescribeQueryResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{19}
-}
-
 func (x *DescribeQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DescribeQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DescribeQueryResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DescribeQueryResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DescribeQueryResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DescribeQueryResponse_builder) Build() *DescribeQueryResponse {
+	m0 := &DescribeQueryResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DescribeQueryResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Query         *Query                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Query *Query                 `protobuf:"bytes,1,opt,name=query,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *DescribeQueryResult) Reset() {
@@ -2108,25 +3241,49 @@ func (x *DescribeQueryResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeQueryResult.ProtoReflect.Descriptor instead.
-func (*DescribeQueryResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{20}
-}
-
 func (x *DescribeQueryResult) GetQuery() *Query {
 	if x != nil {
-		return x.Query
+		return x.xxx_hidden_Query
 	}
 	return nil
 }
 
+func (x *DescribeQueryResult) SetQuery(v *Query) {
+	x.xxx_hidden_Query = v
+}
+
+func (x *DescribeQueryResult) HasQuery() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Query != nil
+}
+
+func (x *DescribeQueryResult) ClearQuery() {
+	x.xxx_hidden_Query = nil
+}
+
+type DescribeQueryResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Query *Query
+}
+
+func (b0 DescribeQueryResult_builder) Build() *DescribeQueryResult {
+	m0 := &DescribeQueryResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Query = b.Query
+	return m0
+}
+
 // Getting status of the query
 type GetQueryStatusRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	QueryId         string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId         string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetQueryStatusRequest) Reset() {
@@ -2154,30 +3311,60 @@ func (x *GetQueryStatusRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetQueryStatusRequest.ProtoReflect.Descriptor instead.
-func (*GetQueryStatusRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{21}
-}
-
 func (x *GetQueryStatusRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *GetQueryStatusRequest) GetQueryId() string {
 	if x != nil {
-		return x.QueryId
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
+func (x *GetQueryStatusRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *GetQueryStatusRequest) SetQueryId(v string) {
+	x.xxx_hidden_QueryId = v
+}
+
+func (x *GetQueryStatusRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *GetQueryStatusRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type GetQueryStatusRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	QueryId         string
+}
+
+func (b0 GetQueryStatusRequest_builder) Build() *GetQueryStatusRequest {
+	m0 := &GetQueryStatusRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
+	return m0
+}
+
 type GetQueryStatusResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // GetQueryStatusResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetQueryStatusResponse) Reset() {
@@ -2205,24 +3392,48 @@ func (x *GetQueryStatusResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetQueryStatusResponse.ProtoReflect.Descriptor instead.
-func (*GetQueryStatusResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{22}
-}
-
 func (x *GetQueryStatusResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *GetQueryStatusResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *GetQueryStatusResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *GetQueryStatusResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type GetQueryStatusResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 GetQueryStatusResponse_builder) Build() *GetQueryStatusResponse {
+	m0 := &GetQueryStatusResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type GetQueryStatusResult struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Status        QueryMeta_ComputeStatus `protobuf:"varint,1,opt,name=status,proto3,enum=FederatedQuery.QueryMeta_ComputeStatus" json:"status,omitempty"`
-	MetaRevision  int64                   `protobuf:"varint,2,opt,name=meta_revision,json=metaRevision,proto3" json:"meta_revision,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Status       QueryMeta_ComputeStatus `protobuf:"varint,1,opt,name=status,proto3,enum=FederatedQuery.QueryMeta_ComputeStatus"`
+	xxx_hidden_MetaRevision int64                   `protobuf:"varint,2,opt,name=meta_revision,json=metaRevision,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *GetQueryStatusResult) Reset() {
@@ -2250,34 +3461,53 @@ func (x *GetQueryStatusResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetQueryStatusResult.ProtoReflect.Descriptor instead.
-func (*GetQueryStatusResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{23}
-}
-
 func (x *GetQueryStatusResult) GetStatus() QueryMeta_ComputeStatus {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return QueryMeta_COMPUTE_STATUS_UNSPECIFIED
 }
 
 func (x *GetQueryStatusResult) GetMetaRevision() int64 {
 	if x != nil {
-		return x.MetaRevision
+		return x.xxx_hidden_MetaRevision
 	}
 	return 0
 }
 
+func (x *GetQueryStatusResult) SetStatus(v QueryMeta_ComputeStatus) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *GetQueryStatusResult) SetMetaRevision(v int64) {
+	x.xxx_hidden_MetaRevision = v
+}
+
+type GetQueryStatusResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status       QueryMeta_ComputeStatus
+	MetaRevision int64
+}
+
+func (b0 GetQueryStatusResult_builder) Build() *GetQueryStatusResult {
+	m0 := &GetQueryStatusResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_MetaRevision = b.MetaRevision
+	return m0
+}
+
 // Complete removal of query. Recovery of the query after this operation is not possible
 type DeleteQueryRequest struct {
-	state            protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	QueryId          string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
-	PreviousRevision int64                           `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision,proto3" json:"previous_revision,omitempty"`
-	IdempotencyKey   string                          `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId          string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *DeleteQueryRequest) Reset() {
@@ -2305,44 +3535,86 @@ func (x *DeleteQueryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteQueryRequest.ProtoReflect.Descriptor instead.
-func (*DeleteQueryRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{24}
-}
-
 func (x *DeleteQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DeleteQueryRequest) GetQueryId() string {
 	if x != nil {
-		return x.QueryId
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *DeleteQueryRequest) GetPreviousRevision() int64 {
 	if x != nil {
-		return x.PreviousRevision
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *DeleteQueryRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
+func (x *DeleteQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DeleteQueryRequest) SetQueryId(v string) {
+	x.xxx_hidden_QueryId = v
+}
+
+func (x *DeleteQueryRequest) SetPreviousRevision(v int64) {
+	x.xxx_hidden_PreviousRevision = v
+}
+
+func (x *DeleteQueryRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *DeleteQueryRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DeleteQueryRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DeleteQueryRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams  *Ydb_Operations.OperationParams
+	QueryId          string
+	PreviousRevision int64
+	IdempotencyKey   string
+}
+
+func (b0 DeleteQueryRequest_builder) Build() *DeleteQueryRequest {
+	m0 := &DeleteQueryRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	return m0
+}
+
 type DeleteQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // DeleteQueryResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DeleteQueryResponse) Reset() {
@@ -2370,20 +3642,44 @@ func (x *DeleteQueryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteQueryResponse.ProtoReflect.Descriptor instead.
-func (*DeleteQueryResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{25}
-}
-
 func (x *DeleteQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DeleteQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DeleteQueryResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DeleteQueryResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DeleteQueryResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DeleteQueryResponse_builder) Build() *DeleteQueryResponse {
+	m0 := &DeleteQueryResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DeleteQueryResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2413,24 +3709,31 @@ func (x *DeleteQueryResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteQueryResult.ProtoReflect.Descriptor instead.
-func (*DeleteQueryResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{26}
+type DeleteQueryResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 DeleteQueryResult_builder) Build() *DeleteQueryResult {
+	m0 := &DeleteQueryResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Change query information with launch policy option. All fields must be filled in the request. The query changes completely
 type ModifyQueryRequest struct {
-	state            protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	QueryId          string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
-	Content          *QueryContent                   `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
-	ExecuteMode      ExecuteMode                     `protobuf:"varint,4,opt,name=execute_mode,json=executeMode,proto3,enum=FederatedQuery.ExecuteMode" json:"execute_mode,omitempty"`
-	Disposition      *StreamingDisposition           `protobuf:"bytes,5,opt,name=disposition,proto3" json:"disposition,omitempty"`
-	StateLoadMode    StateLoadMode                   `protobuf:"varint,6,opt,name=state_load_mode,json=stateLoadMode,proto3,enum=FederatedQuery.StateLoadMode" json:"state_load_mode,omitempty"`
-	PreviousRevision int64                           `protobuf:"varint,7,opt,name=previous_revision,json=previousRevision,proto3" json:"previous_revision,omitempty"`
-	IdempotencyKey   string                          `protobuf:"bytes,8,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId          string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_Content          *QueryContent                   `protobuf:"bytes,3,opt,name=content,proto3"`
+	xxx_hidden_ExecuteMode      ExecuteMode                     `protobuf:"varint,4,opt,name=execute_mode,json=executeMode,proto3,enum=FederatedQuery.ExecuteMode"`
+	xxx_hidden_Disposition      *StreamingDisposition           `protobuf:"bytes,5,opt,name=disposition,proto3"`
+	xxx_hidden_StateLoadMode    StateLoadMode                   `protobuf:"varint,6,opt,name=state_load_mode,json=stateLoadMode,proto3,enum=FederatedQuery.StateLoadMode"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,7,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,8,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ModifyQueryRequest) Reset() {
@@ -2458,72 +3761,160 @@ func (x *ModifyQueryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModifyQueryRequest.ProtoReflect.Descriptor instead.
-func (*ModifyQueryRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{27}
-}
-
 func (x *ModifyQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ModifyQueryRequest) GetQueryId() string {
 	if x != nil {
-		return x.QueryId
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *ModifyQueryRequest) GetContent() *QueryContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *ModifyQueryRequest) GetExecuteMode() ExecuteMode {
 	if x != nil {
-		return x.ExecuteMode
+		return x.xxx_hidden_ExecuteMode
 	}
 	return ExecuteMode_EXECUTE_MODE_UNSPECIFIED
 }
 
 func (x *ModifyQueryRequest) GetDisposition() *StreamingDisposition {
 	if x != nil {
-		return x.Disposition
+		return x.xxx_hidden_Disposition
 	}
 	return nil
 }
 
 func (x *ModifyQueryRequest) GetStateLoadMode() StateLoadMode {
 	if x != nil {
-		return x.StateLoadMode
+		return x.xxx_hidden_StateLoadMode
 	}
 	return StateLoadMode_STATE_LOAD_MODE_UNSPECIFIED
 }
 
 func (x *ModifyQueryRequest) GetPreviousRevision() int64 {
 	if x != nil {
-		return x.PreviousRevision
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *ModifyQueryRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
+func (x *ModifyQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ModifyQueryRequest) SetQueryId(v string) {
+	x.xxx_hidden_QueryId = v
+}
+
+func (x *ModifyQueryRequest) SetContent(v *QueryContent) {
+	x.xxx_hidden_Content = v
+}
+
+func (x *ModifyQueryRequest) SetExecuteMode(v ExecuteMode) {
+	x.xxx_hidden_ExecuteMode = v
+}
+
+func (x *ModifyQueryRequest) SetDisposition(v *StreamingDisposition) {
+	x.xxx_hidden_Disposition = v
+}
+
+func (x *ModifyQueryRequest) SetStateLoadMode(v StateLoadMode) {
+	x.xxx_hidden_StateLoadMode = v
+}
+
+func (x *ModifyQueryRequest) SetPreviousRevision(v int64) {
+	x.xxx_hidden_PreviousRevision = v
+}
+
+func (x *ModifyQueryRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *ModifyQueryRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ModifyQueryRequest) HasContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Content != nil
+}
+
+func (x *ModifyQueryRequest) HasDisposition() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Disposition != nil
+}
+
+func (x *ModifyQueryRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ModifyQueryRequest) ClearContent() {
+	x.xxx_hidden_Content = nil
+}
+
+func (x *ModifyQueryRequest) ClearDisposition() {
+	x.xxx_hidden_Disposition = nil
+}
+
+type ModifyQueryRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams  *Ydb_Operations.OperationParams
+	QueryId          string
+	Content          *QueryContent
+	ExecuteMode      ExecuteMode
+	Disposition      *StreamingDisposition
+	StateLoadMode    StateLoadMode
+	PreviousRevision int64
+	IdempotencyKey   string
+}
+
+func (b0 ModifyQueryRequest_builder) Build() *ModifyQueryRequest {
+	m0 := &ModifyQueryRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_ExecuteMode = b.ExecuteMode
+	x.xxx_hidden_Disposition = b.Disposition
+	x.xxx_hidden_StateLoadMode = b.StateLoadMode
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	return m0
+}
+
 type ModifyQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // ModifyQueryResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ModifyQueryResponse) Reset() {
@@ -2551,20 +3942,44 @@ func (x *ModifyQueryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModifyQueryResponse.ProtoReflect.Descriptor instead.
-func (*ModifyQueryResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{28}
-}
-
 func (x *ModifyQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ModifyQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ModifyQueryResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ModifyQueryResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ModifyQueryResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ModifyQueryResponse_builder) Build() *ModifyQueryResponse {
+	m0 := &ModifyQueryResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ModifyQueryResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2594,21 +4009,28 @@ func (x *ModifyQueryResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModifyQueryResult.ProtoReflect.Descriptor instead.
-func (*ModifyQueryResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{29}
+type ModifyQueryResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ModifyQueryResult_builder) Build() *ModifyQueryResult {
+	m0 := &ModifyQueryResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Managing query status (pause, abort, resume, ...)
 type ControlQueryRequest struct {
-	state            protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	QueryId          string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
-	Action           QueryAction                     `protobuf:"varint,3,opt,name=action,proto3,enum=FederatedQuery.QueryAction" json:"action,omitempty"`
-	PreviousRevision int64                           `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision,proto3" json:"previous_revision,omitempty"`
-	IdempotencyKey   string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId          string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_Action           QueryAction                     `protobuf:"varint,3,opt,name=action,proto3,enum=FederatedQuery.QueryAction"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ControlQueryRequest) Reset() {
@@ -2636,51 +4058,99 @@ func (x *ControlQueryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ControlQueryRequest.ProtoReflect.Descriptor instead.
-func (*ControlQueryRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{30}
-}
-
 func (x *ControlQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ControlQueryRequest) GetQueryId() string {
 	if x != nil {
-		return x.QueryId
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *ControlQueryRequest) GetAction() QueryAction {
 	if x != nil {
-		return x.Action
+		return x.xxx_hidden_Action
 	}
 	return QueryAction_QUERY_ACTION_UNSPECIFIED
 }
 
 func (x *ControlQueryRequest) GetPreviousRevision() int64 {
 	if x != nil {
-		return x.PreviousRevision
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *ControlQueryRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
+func (x *ControlQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ControlQueryRequest) SetQueryId(v string) {
+	x.xxx_hidden_QueryId = v
+}
+
+func (x *ControlQueryRequest) SetAction(v QueryAction) {
+	x.xxx_hidden_Action = v
+}
+
+func (x *ControlQueryRequest) SetPreviousRevision(v int64) {
+	x.xxx_hidden_PreviousRevision = v
+}
+
+func (x *ControlQueryRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *ControlQueryRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ControlQueryRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ControlQueryRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams  *Ydb_Operations.OperationParams
+	QueryId          string
+	Action           QueryAction
+	PreviousRevision int64
+	IdempotencyKey   string
+}
+
+func (b0 ControlQueryRequest_builder) Build() *ControlQueryRequest {
+	m0 := &ControlQueryRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_Action = b.Action
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	return m0
+}
+
 type ControlQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // ControlQueryResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ControlQueryResponse) Reset() {
@@ -2708,20 +4178,44 @@ func (x *ControlQueryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ControlQueryResponse.ProtoReflect.Descriptor instead.
-func (*ControlQueryResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{31}
-}
-
 func (x *ControlQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ControlQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ControlQueryResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ControlQueryResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ControlQueryResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ControlQueryResponse_builder) Build() *ControlQueryResponse {
+	m0 := &ControlQueryResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ControlQueryResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2751,21 +4245,28 @@ func (x *ControlQueryResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ControlQueryResult.ProtoReflect.Descriptor instead.
-func (*ControlQueryResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{32}
+type ControlQueryResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ControlQueryResult_builder) Build() *ControlQueryResult {
+	m0 := &ControlQueryResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type BriefJob struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Meta          *CommonMeta            `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
-	QueryMeta     *QueryMeta             `protobuf:"bytes,3,opt,name=query_meta,json=queryMeta,proto3" json:"query_meta,omitempty"`
-	QueryName     string                 `protobuf:"bytes,9,opt,name=query_name,json=queryName,proto3" json:"query_name,omitempty"`
-	Visibility    Acl_Visibility         `protobuf:"varint,10,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	Automatic     bool                   `protobuf:"varint,11,opt,name=automatic,proto3" json:"automatic,omitempty"`
-	ExpireAt      *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Meta       *CommonMeta            `protobuf:"bytes,1,opt,name=meta,proto3"`
+	xxx_hidden_QueryMeta  *QueryMeta             `protobuf:"bytes,3,opt,name=query_meta,json=queryMeta,proto3"`
+	xxx_hidden_QueryName  string                 `protobuf:"bytes,9,opt,name=query_name,json=queryName,proto3"`
+	xxx_hidden_Visibility Acl_Visibility         `protobuf:"varint,10,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	xxx_hidden_Automatic  bool                   `protobuf:"varint,11,opt,name=automatic,proto3"`
+	xxx_hidden_ExpireAt   *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=expire_at,json=expireAt,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *BriefJob) Reset() {
@@ -2793,70 +4294,146 @@ func (x *BriefJob) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BriefJob.ProtoReflect.Descriptor instead.
-func (*BriefJob) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{33}
-}
-
 func (x *BriefJob) GetMeta() *CommonMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *BriefJob) GetQueryMeta() *QueryMeta {
 	if x != nil {
-		return x.QueryMeta
+		return x.xxx_hidden_QueryMeta
 	}
 	return nil
 }
 
 func (x *BriefJob) GetQueryName() string {
 	if x != nil {
-		return x.QueryName
+		return x.xxx_hidden_QueryName
 	}
 	return ""
 }
 
 func (x *BriefJob) GetVisibility() Acl_Visibility {
 	if x != nil {
-		return x.Visibility
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
 func (x *BriefJob) GetAutomatic() bool {
 	if x != nil {
-		return x.Automatic
+		return x.xxx_hidden_Automatic
 	}
 	return false
 }
 
 func (x *BriefJob) GetExpireAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ExpireAt
+		return x.xxx_hidden_ExpireAt
 	}
 	return nil
 }
 
+func (x *BriefJob) SetMeta(v *CommonMeta) {
+	x.xxx_hidden_Meta = v
+}
+
+func (x *BriefJob) SetQueryMeta(v *QueryMeta) {
+	x.xxx_hidden_QueryMeta = v
+}
+
+func (x *BriefJob) SetQueryName(v string) {
+	x.xxx_hidden_QueryName = v
+}
+
+func (x *BriefJob) SetVisibility(v Acl_Visibility) {
+	x.xxx_hidden_Visibility = v
+}
+
+func (x *BriefJob) SetAutomatic(v bool) {
+	x.xxx_hidden_Automatic = v
+}
+
+func (x *BriefJob) SetExpireAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_ExpireAt = v
+}
+
+func (x *BriefJob) HasMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Meta != nil
+}
+
+func (x *BriefJob) HasQueryMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_QueryMeta != nil
+}
+
+func (x *BriefJob) HasExpireAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ExpireAt != nil
+}
+
+func (x *BriefJob) ClearMeta() {
+	x.xxx_hidden_Meta = nil
+}
+
+func (x *BriefJob) ClearQueryMeta() {
+	x.xxx_hidden_QueryMeta = nil
+}
+
+func (x *BriefJob) ClearExpireAt() {
+	x.xxx_hidden_ExpireAt = nil
+}
+
+type BriefJob_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Meta       *CommonMeta
+	QueryMeta  *QueryMeta
+	QueryName  string
+	Visibility Acl_Visibility
+	Automatic  bool
+	ExpireAt   *timestamppb.Timestamp
+}
+
+func (b0 BriefJob_builder) Build() *BriefJob {
+	m0 := &BriefJob{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Meta = b.Meta
+	x.xxx_hidden_QueryMeta = b.QueryMeta
+	x.xxx_hidden_QueryName = b.QueryName
+	x.xxx_hidden_Visibility = b.Visibility
+	x.xxx_hidden_Automatic = b.Automatic
+	x.xxx_hidden_ExpireAt = b.ExpireAt
+	return m0
+}
+
 type Job struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Meta          *CommonMeta               `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
-	Text          string                    `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
-	QueryMeta     *QueryMeta                `protobuf:"bytes,3,opt,name=query_meta,json=queryMeta,proto3" json:"query_meta,omitempty"`
-	Plan          *QueryPlan                `protobuf:"bytes,4,opt,name=plan,proto3" json:"plan,omitempty"`
-	Issue         []*Ydb_Issue.IssueMessage `protobuf:"bytes,5,rep,name=issue,proto3" json:"issue,omitempty"`
-	Statistics    *QueryStatistics          `protobuf:"bytes,6,opt,name=statistics,proto3" json:"statistics,omitempty"`
-	ResultSetMeta []*ResultSetMeta          `protobuf:"bytes,7,rep,name=result_set_meta,json=resultSetMeta,proto3" json:"result_set_meta,omitempty"`
-	Ast           *QueryAst                 `protobuf:"bytes,8,opt,name=ast,proto3" json:"ast,omitempty"`
-	QueryName     string                    `protobuf:"bytes,9,opt,name=query_name,json=queryName,proto3" json:"query_name,omitempty"`
-	Acl           *Acl                      `protobuf:"bytes,10,opt,name=acl,proto3" json:"acl,omitempty"`
-	Automatic     bool                      `protobuf:"varint,11,opt,name=automatic,proto3" json:"automatic,omitempty"`
-	ExpireAt      *timestamppb.Timestamp    `protobuf:"bytes,12,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
-	Syntax        QueryContent_QuerySyntax  `protobuf:"varint,13,opt,name=syntax,proto3,enum=FederatedQuery.QueryContent_QuerySyntax" json:"syntax,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Meta          *CommonMeta                `protobuf:"bytes,1,opt,name=meta,proto3"`
+	xxx_hidden_Text          string                     `protobuf:"bytes,2,opt,name=text,proto3"`
+	xxx_hidden_QueryMeta     *QueryMeta                 `protobuf:"bytes,3,opt,name=query_meta,json=queryMeta,proto3"`
+	xxx_hidden_Plan          *QueryPlan                 `protobuf:"bytes,4,opt,name=plan,proto3"`
+	xxx_hidden_Issue         *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,5,rep,name=issue,proto3"`
+	xxx_hidden_Statistics    *QueryStatistics           `protobuf:"bytes,6,opt,name=statistics,proto3"`
+	xxx_hidden_ResultSetMeta *[]*ResultSetMeta          `protobuf:"bytes,7,rep,name=result_set_meta,json=resultSetMeta,proto3"`
+	xxx_hidden_Ast           *QueryAst                  `protobuf:"bytes,8,opt,name=ast,proto3"`
+	xxx_hidden_QueryName     string                     `protobuf:"bytes,9,opt,name=query_name,json=queryName,proto3"`
+	xxx_hidden_Acl           *Acl                       `protobuf:"bytes,10,opt,name=acl,proto3"`
+	xxx_hidden_Automatic     bool                       `protobuf:"varint,11,opt,name=automatic,proto3"`
+	xxx_hidden_ExpireAt      *timestamppb.Timestamp     `protobuf:"bytes,12,opt,name=expire_at,json=expireAt,proto3"`
+	xxx_hidden_Syntax        QueryContent_QuerySyntax   `protobuf:"varint,13,opt,name=syntax,proto3,enum=FederatedQuery.QueryContent_QuerySyntax"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *Job) Reset() {
@@ -2884,112 +4461,278 @@ func (x *Job) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Job.ProtoReflect.Descriptor instead.
-func (*Job) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{34}
-}
-
 func (x *Job) GetMeta() *CommonMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *Job) GetText() string {
 	if x != nil {
-		return x.Text
+		return x.xxx_hidden_Text
 	}
 	return ""
 }
 
 func (x *Job) GetQueryMeta() *QueryMeta {
 	if x != nil {
-		return x.QueryMeta
+		return x.xxx_hidden_QueryMeta
 	}
 	return nil
 }
 
 func (x *Job) GetPlan() *QueryPlan {
 	if x != nil {
-		return x.Plan
+		return x.xxx_hidden_Plan
 	}
 	return nil
 }
 
 func (x *Job) GetIssue() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issue
+		if x.xxx_hidden_Issue != nil {
+			return *x.xxx_hidden_Issue
+		}
 	}
 	return nil
 }
 
 func (x *Job) GetStatistics() *QueryStatistics {
 	if x != nil {
-		return x.Statistics
+		return x.xxx_hidden_Statistics
 	}
 	return nil
 }
 
 func (x *Job) GetResultSetMeta() []*ResultSetMeta {
 	if x != nil {
-		return x.ResultSetMeta
+		if x.xxx_hidden_ResultSetMeta != nil {
+			return *x.xxx_hidden_ResultSetMeta
+		}
 	}
 	return nil
 }
 
 func (x *Job) GetAst() *QueryAst {
 	if x != nil {
-		return x.Ast
+		return x.xxx_hidden_Ast
 	}
 	return nil
 }
 
 func (x *Job) GetQueryName() string {
 	if x != nil {
-		return x.QueryName
+		return x.xxx_hidden_QueryName
 	}
 	return ""
 }
 
 func (x *Job) GetAcl() *Acl {
 	if x != nil {
-		return x.Acl
+		return x.xxx_hidden_Acl
 	}
 	return nil
 }
 
 func (x *Job) GetAutomatic() bool {
 	if x != nil {
-		return x.Automatic
+		return x.xxx_hidden_Automatic
 	}
 	return false
 }
 
 func (x *Job) GetExpireAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ExpireAt
+		return x.xxx_hidden_ExpireAt
 	}
 	return nil
 }
 
 func (x *Job) GetSyntax() QueryContent_QuerySyntax {
 	if x != nil {
-		return x.Syntax
+		return x.xxx_hidden_Syntax
 	}
 	return QueryContent_QUERY_SYNTAX_UNSPECIFIED
 }
 
+func (x *Job) SetMeta(v *CommonMeta) {
+	x.xxx_hidden_Meta = v
+}
+
+func (x *Job) SetText(v string) {
+	x.xxx_hidden_Text = v
+}
+
+func (x *Job) SetQueryMeta(v *QueryMeta) {
+	x.xxx_hidden_QueryMeta = v
+}
+
+func (x *Job) SetPlan(v *QueryPlan) {
+	x.xxx_hidden_Plan = v
+}
+
+func (x *Job) SetIssue(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issue = &v
+}
+
+func (x *Job) SetStatistics(v *QueryStatistics) {
+	x.xxx_hidden_Statistics = v
+}
+
+func (x *Job) SetResultSetMeta(v []*ResultSetMeta) {
+	x.xxx_hidden_ResultSetMeta = &v
+}
+
+func (x *Job) SetAst(v *QueryAst) {
+	x.xxx_hidden_Ast = v
+}
+
+func (x *Job) SetQueryName(v string) {
+	x.xxx_hidden_QueryName = v
+}
+
+func (x *Job) SetAcl(v *Acl) {
+	x.xxx_hidden_Acl = v
+}
+
+func (x *Job) SetAutomatic(v bool) {
+	x.xxx_hidden_Automatic = v
+}
+
+func (x *Job) SetExpireAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_ExpireAt = v
+}
+
+func (x *Job) SetSyntax(v QueryContent_QuerySyntax) {
+	x.xxx_hidden_Syntax = v
+}
+
+func (x *Job) HasMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Meta != nil
+}
+
+func (x *Job) HasQueryMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_QueryMeta != nil
+}
+
+func (x *Job) HasPlan() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Plan != nil
+}
+
+func (x *Job) HasStatistics() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Statistics != nil
+}
+
+func (x *Job) HasAst() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Ast != nil
+}
+
+func (x *Job) HasAcl() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Acl != nil
+}
+
+func (x *Job) HasExpireAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ExpireAt != nil
+}
+
+func (x *Job) ClearMeta() {
+	x.xxx_hidden_Meta = nil
+}
+
+func (x *Job) ClearQueryMeta() {
+	x.xxx_hidden_QueryMeta = nil
+}
+
+func (x *Job) ClearPlan() {
+	x.xxx_hidden_Plan = nil
+}
+
+func (x *Job) ClearStatistics() {
+	x.xxx_hidden_Statistics = nil
+}
+
+func (x *Job) ClearAst() {
+	x.xxx_hidden_Ast = nil
+}
+
+func (x *Job) ClearAcl() {
+	x.xxx_hidden_Acl = nil
+}
+
+func (x *Job) ClearExpireAt() {
+	x.xxx_hidden_ExpireAt = nil
+}
+
+type Job_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Meta          *CommonMeta
+	Text          string
+	QueryMeta     *QueryMeta
+	Plan          *QueryPlan
+	Issue         []*Ydb_Issue.IssueMessage
+	Statistics    *QueryStatistics
+	ResultSetMeta []*ResultSetMeta
+	Ast           *QueryAst
+	QueryName     string
+	Acl           *Acl
+	Automatic     bool
+	ExpireAt      *timestamppb.Timestamp
+	Syntax        QueryContent_QuerySyntax
+}
+
+func (b0 Job_builder) Build() *Job {
+	m0 := &Job{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Meta = b.Meta
+	x.xxx_hidden_Text = b.Text
+	x.xxx_hidden_QueryMeta = b.QueryMeta
+	x.xxx_hidden_Plan = b.Plan
+	x.xxx_hidden_Issue = &b.Issue
+	x.xxx_hidden_Statistics = b.Statistics
+	x.xxx_hidden_ResultSetMeta = &b.ResultSetMeta
+	x.xxx_hidden_Ast = b.Ast
+	x.xxx_hidden_QueryName = b.QueryName
+	x.xxx_hidden_Acl = b.Acl
+	x.xxx_hidden_Automatic = b.Automatic
+	x.xxx_hidden_ExpireAt = b.ExpireAt
+	x.xxx_hidden_Syntax = b.Syntax
+	return m0
+}
+
 // Information about recent query runs
 type ListJobsRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
-	QueryId         string                          `protobuf:"bytes,5,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"` // deprecated
-	Filter          *ListJobsRequest_Filter         `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3"`
+	xxx_hidden_Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3"`
+	xxx_hidden_QueryId         string                          `protobuf:"bytes,5,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_Filter          *ListJobsRequest_Filter         `protobuf:"bytes,4,opt,name=filter,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListJobsRequest) Reset() {
@@ -3017,51 +4760,110 @@ func (x *ListJobsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListJobsRequest.ProtoReflect.Descriptor instead.
-func (*ListJobsRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{35}
-}
-
 func (x *ListJobsRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListJobsRequest) GetPageToken() string {
 	if x != nil {
-		return x.PageToken
+		return x.xxx_hidden_PageToken
 	}
 	return ""
 }
 
 func (x *ListJobsRequest) GetLimit() int32 {
 	if x != nil {
-		return x.Limit
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
 func (x *ListJobsRequest) GetQueryId() string {
 	if x != nil {
-		return x.QueryId
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *ListJobsRequest) GetFilter() *ListJobsRequest_Filter {
 	if x != nil {
-		return x.Filter
+		return x.xxx_hidden_Filter
 	}
 	return nil
 }
 
+func (x *ListJobsRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ListJobsRequest) SetPageToken(v string) {
+	x.xxx_hidden_PageToken = v
+}
+
+func (x *ListJobsRequest) SetLimit(v int32) {
+	x.xxx_hidden_Limit = v
+}
+
+func (x *ListJobsRequest) SetQueryId(v string) {
+	x.xxx_hidden_QueryId = v
+}
+
+func (x *ListJobsRequest) SetFilter(v *ListJobsRequest_Filter) {
+	x.xxx_hidden_Filter = v
+}
+
+func (x *ListJobsRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ListJobsRequest) HasFilter() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Filter != nil
+}
+
+func (x *ListJobsRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ListJobsRequest) ClearFilter() {
+	x.xxx_hidden_Filter = nil
+}
+
+type ListJobsRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	PageToken       string
+	Limit           int32
+	QueryId         string
+	Filter          *ListJobsRequest_Filter
+}
+
+func (b0 ListJobsRequest_builder) Build() *ListJobsRequest {
+	m0 := &ListJobsRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_PageToken = b.PageToken
+	x.xxx_hidden_Limit = b.Limit
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_Filter = b.Filter
+	return m0
+}
+
 type ListJobsResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // ListJobsResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListJobsResponse) Reset() {
@@ -3089,24 +4891,48 @@ func (x *ListJobsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListJobsResponse.ProtoReflect.Descriptor instead.
-func (*ListJobsResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{36}
-}
-
 func (x *ListJobsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ListJobsResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ListJobsResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ListJobsResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ListJobsResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ListJobsResponse_builder) Build() *ListJobsResponse {
+	m0 := &ListJobsResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ListJobsResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Job           []*BriefJob            `protobuf:"bytes,1,rep,name=job,proto3" json:"job,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Job           *[]*BriefJob           `protobuf:"bytes,1,rep,name=job,proto3"`
+	xxx_hidden_NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListJobsResult) Reset() {
@@ -3134,32 +4960,53 @@ func (x *ListJobsResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListJobsResult.ProtoReflect.Descriptor instead.
-func (*ListJobsResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{37}
-}
-
 func (x *ListJobsResult) GetJob() []*BriefJob {
 	if x != nil {
-		return x.Job
+		if x.xxx_hidden_Job != nil {
+			return *x.xxx_hidden_Job
+		}
 	}
 	return nil
 }
 
 func (x *ListJobsResult) GetNextPageToken() string {
 	if x != nil {
-		return x.NextPageToken
+		return x.xxx_hidden_NextPageToken
 	}
 	return ""
 }
 
+func (x *ListJobsResult) SetJob(v []*BriefJob) {
+	x.xxx_hidden_Job = &v
+}
+
+func (x *ListJobsResult) SetNextPageToken(v string) {
+	x.xxx_hidden_NextPageToken = v
+}
+
+type ListJobsResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Job           []*BriefJob
+	NextPageToken string
+}
+
+func (b0 ListJobsResult_builder) Build() *ListJobsResult {
+	m0 := &ListJobsResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Job = &b.Job
+	x.xxx_hidden_NextPageToken = b.NextPageToken
+	return m0
+}
+
 // Getting information about the job
 type DescribeJobRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	JobId           string                          `protobuf:"bytes,2,opt,name=job_id,json=jobId,proto3" json:"job_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_JobId           string                          `protobuf:"bytes,2,opt,name=job_id,json=jobId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeJobRequest) Reset() {
@@ -3187,30 +5034,60 @@ func (x *DescribeJobRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeJobRequest.ProtoReflect.Descriptor instead.
-func (*DescribeJobRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{38}
-}
-
 func (x *DescribeJobRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeJobRequest) GetJobId() string {
 	if x != nil {
-		return x.JobId
+		return x.xxx_hidden_JobId
 	}
 	return ""
 }
 
+func (x *DescribeJobRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DescribeJobRequest) SetJobId(v string) {
+	x.xxx_hidden_JobId = v
+}
+
+func (x *DescribeJobRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DescribeJobRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DescribeJobRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	JobId           string
+}
+
+func (b0 DescribeJobRequest_builder) Build() *DescribeJobRequest {
+	m0 := &DescribeJobRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_JobId = b.JobId
+	return m0
+}
+
 type DescribeJobResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // DescribeJobResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeJobResponse) Reset() {
@@ -3238,23 +5115,47 @@ func (x *DescribeJobResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeJobResponse.ProtoReflect.Descriptor instead.
-func (*DescribeJobResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{39}
-}
-
 func (x *DescribeJobResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DescribeJobResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DescribeJobResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DescribeJobResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DescribeJobResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DescribeJobResponse_builder) Build() *DescribeJobResponse {
+	m0 := &DescribeJobResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DescribeJobResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Job           *Job                   `protobuf:"bytes,1,opt,name=job,proto3" json:"job,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Job *Job                   `protobuf:"bytes,1,opt,name=job,proto3"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *DescribeJobResult) Reset() {
@@ -3282,20 +5183,44 @@ func (x *DescribeJobResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeJobResult.ProtoReflect.Descriptor instead.
-func (*DescribeJobResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{40}
-}
-
 func (x *DescribeJobResult) GetJob() *Job {
 	if x != nil {
-		return x.Job
+		return x.xxx_hidden_Job
 	}
 	return nil
 }
 
+func (x *DescribeJobResult) SetJob(v *Job) {
+	x.xxx_hidden_Job = v
+}
+
+func (x *DescribeJobResult) HasJob() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Job != nil
+}
+
+func (x *DescribeJobResult) ClearJob() {
+	x.xxx_hidden_Job = nil
+}
+
+type DescribeJobResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Job *Job
+}
+
+func (b0 DescribeJobResult_builder) Build() *DescribeJobResult {
+	m0 := &DescribeJobResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Job = b.Job
+	return m0
+}
+
 type CurrentIAMTokenAuth struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3325,13 +5250,20 @@ func (x *CurrentIAMTokenAuth) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CurrentIAMTokenAuth.ProtoReflect.Descriptor instead.
-func (*CurrentIAMTokenAuth) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{41}
+type CurrentIAMTokenAuth_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 CurrentIAMTokenAuth_builder) Build() *CurrentIAMTokenAuth {
+	m0 := &CurrentIAMTokenAuth{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type NoneAuth struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3361,14 +5293,21 @@ func (x *NoneAuth) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use NoneAuth.ProtoReflect.Descriptor instead.
-func (*NoneAuth) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{42}
+type NoneAuth_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 NoneAuth_builder) Build() *NoneAuth {
+	m0 := &NoneAuth{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ServiceAccountAuth struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id string                 `protobuf:"bytes,1,opt,name=id,proto3"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3398,28 +5337,36 @@ func (x *ServiceAccountAuth) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ServiceAccountAuth.ProtoReflect.Descriptor instead.
-func (*ServiceAccountAuth) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{43}
-}
-
 func (x *ServiceAccountAuth) GetId() string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
+func (x *ServiceAccountAuth) SetId(v string) {
+	x.xxx_hidden_Id = v
+}
+
+type ServiceAccountAuth_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id string
+}
+
+func (b0 ServiceAccountAuth_builder) Build() *ServiceAccountAuth {
+	m0 := &ServiceAccountAuth{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	return m0
+}
+
 type IamAuth struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Identity:
-	//
-	//	*IamAuth_CurrentIam
-	//	*IamAuth_ServiceAccount
-	//	*IamAuth_None
-	Identity      isIamAuth_Identity `protobuf_oneof:"identity"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Identity isIamAuth_Identity     `protobuf_oneof:"identity"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *IamAuth) Reset() {
@@ -3447,21 +5394,9 @@ func (x *IamAuth) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IamAuth.ProtoReflect.Descriptor instead.
-func (*IamAuth) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{44}
-}
-
-func (x *IamAuth) GetIdentity() isIamAuth_Identity {
-	if x != nil {
-		return x.Identity
-	}
-	return nil
-}
-
 func (x *IamAuth) GetCurrentIam() *CurrentIAMTokenAuth {
 	if x != nil {
-		if x, ok := x.Identity.(*IamAuth_CurrentIam); ok {
+		if x, ok := x.xxx_hidden_Identity.(*iamAuth_CurrentIam); ok {
 			return x.CurrentIam
 		}
 	}
@@ -3470,7 +5405,7 @@ func (x *IamAuth) GetCurrentIam() *CurrentIAMTokenAuth {
 
 func (x *IamAuth) GetServiceAccount() *ServiceAccountAuth {
 	if x != nil {
-		if x, ok := x.Identity.(*IamAuth_ServiceAccount); ok {
+		if x, ok := x.xxx_hidden_Identity.(*iamAuth_ServiceAccount); ok {
 			return x.ServiceAccount
 		}
 	}
@@ -3479,45 +5414,178 @@ func (x *IamAuth) GetServiceAccount() *ServiceAccountAuth {
 
 func (x *IamAuth) GetNone() *NoneAuth {
 	if x != nil {
-		if x, ok := x.Identity.(*IamAuth_None); ok {
+		if x, ok := x.xxx_hidden_Identity.(*iamAuth_None); ok {
 			return x.None
 		}
 	}
 	return nil
 }
 
+func (x *IamAuth) SetCurrentIam(v *CurrentIAMTokenAuth) {
+	if v == nil {
+		x.xxx_hidden_Identity = nil
+		return
+	}
+	x.xxx_hidden_Identity = &iamAuth_CurrentIam{v}
+}
+
+func (x *IamAuth) SetServiceAccount(v *ServiceAccountAuth) {
+	if v == nil {
+		x.xxx_hidden_Identity = nil
+		return
+	}
+	x.xxx_hidden_Identity = &iamAuth_ServiceAccount{v}
+}
+
+func (x *IamAuth) SetNone(v *NoneAuth) {
+	if v == nil {
+		x.xxx_hidden_Identity = nil
+		return
+	}
+	x.xxx_hidden_Identity = &iamAuth_None{v}
+}
+
+func (x *IamAuth) HasIdentity() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Identity != nil
+}
+
+func (x *IamAuth) HasCurrentIam() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Identity.(*iamAuth_CurrentIam)
+	return ok
+}
+
+func (x *IamAuth) HasServiceAccount() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Identity.(*iamAuth_ServiceAccount)
+	return ok
+}
+
+func (x *IamAuth) HasNone() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Identity.(*iamAuth_None)
+	return ok
+}
+
+func (x *IamAuth) ClearIdentity() {
+	x.xxx_hidden_Identity = nil
+}
+
+func (x *IamAuth) ClearCurrentIam() {
+	if _, ok := x.xxx_hidden_Identity.(*iamAuth_CurrentIam); ok {
+		x.xxx_hidden_Identity = nil
+	}
+}
+
+func (x *IamAuth) ClearServiceAccount() {
+	if _, ok := x.xxx_hidden_Identity.(*iamAuth_ServiceAccount); ok {
+		x.xxx_hidden_Identity = nil
+	}
+}
+
+func (x *IamAuth) ClearNone() {
+	if _, ok := x.xxx_hidden_Identity.(*iamAuth_None); ok {
+		x.xxx_hidden_Identity = nil
+	}
+}
+
+const IamAuth_Identity_not_set_case case_IamAuth_Identity = 0
+const IamAuth_CurrentIam_case case_IamAuth_Identity = 1
+const IamAuth_ServiceAccount_case case_IamAuth_Identity = 2
+const IamAuth_None_case case_IamAuth_Identity = 3
+
+func (x *IamAuth) WhichIdentity() case_IamAuth_Identity {
+	if x == nil {
+		return IamAuth_Identity_not_set_case
+	}
+	switch x.xxx_hidden_Identity.(type) {
+	case *iamAuth_CurrentIam:
+		return IamAuth_CurrentIam_case
+	case *iamAuth_ServiceAccount:
+		return IamAuth_ServiceAccount_case
+	case *iamAuth_None:
+		return IamAuth_None_case
+	default:
+		return IamAuth_Identity_not_set_case
+	}
+}
+
+type IamAuth_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Identity:
+	CurrentIam     *CurrentIAMTokenAuth
+	ServiceAccount *ServiceAccountAuth
+	None           *NoneAuth
+	// -- end of xxx_hidden_Identity
+}
+
+func (b0 IamAuth_builder) Build() *IamAuth {
+	m0 := &IamAuth{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.CurrentIam != nil {
+		x.xxx_hidden_Identity = &iamAuth_CurrentIam{b.CurrentIam}
+	}
+	if b.ServiceAccount != nil {
+		x.xxx_hidden_Identity = &iamAuth_ServiceAccount{b.ServiceAccount}
+	}
+	if b.None != nil {
+		x.xxx_hidden_Identity = &iamAuth_None{b.None}
+	}
+	return m0
+}
+
+type case_IamAuth_Identity protoreflect.FieldNumber
+
+func (x case_IamAuth_Identity) String() string {
+	md := file_draft_protos_ydb_federated_query_proto_msgTypes[44].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isIamAuth_Identity interface {
 	isIamAuth_Identity()
 }
 
-type IamAuth_CurrentIam struct {
+type iamAuth_CurrentIam struct {
 	CurrentIam *CurrentIAMTokenAuth `protobuf:"bytes,1,opt,name=current_iam,json=currentIam,proto3,oneof"`
 }
 
-type IamAuth_ServiceAccount struct {
+type iamAuth_ServiceAccount struct {
 	ServiceAccount *ServiceAccountAuth `protobuf:"bytes,2,opt,name=service_account,json=serviceAccount,proto3,oneof"`
 }
 
-type IamAuth_None struct {
+type iamAuth_None struct {
 	None *NoneAuth `protobuf:"bytes,3,opt,name=none,proto3,oneof"`
 }
 
-func (*IamAuth_CurrentIam) isIamAuth_Identity() {}
+func (*iamAuth_CurrentIam) isIamAuth_Identity() {}
 
-func (*IamAuth_ServiceAccount) isIamAuth_Identity() {}
+func (*iamAuth_ServiceAccount) isIamAuth_Identity() {}
 
-func (*IamAuth_None) isIamAuth_Identity() {}
+func (*iamAuth_None) isIamAuth_Identity() {}
 
 type DataStreams struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	DatabaseId string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
-	Auth       *IamAuth               `protobuf:"bytes,2,opt,name=auth,proto3" json:"auth,omitempty"`
-	// for internal usage
-	Endpoint      string `protobuf:"bytes,3,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	Database      string `protobuf:"bytes,4,opt,name=database,proto3" json:"database,omitempty"`
-	Secure        bool   `protobuf:"varint,5,opt,name=secure,proto3" json:"secure,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DatabaseId string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3"`
+	xxx_hidden_Auth       *IamAuth               `protobuf:"bytes,2,opt,name=auth,proto3"`
+	xxx_hidden_Endpoint   string                 `protobuf:"bytes,3,opt,name=endpoint,proto3"`
+	xxx_hidden_Database   string                 `protobuf:"bytes,4,opt,name=database,proto3"`
+	xxx_hidden_Secure     bool                   `protobuf:"varint,5,opt,name=secure,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *DataStreams) Reset() {
@@ -3545,53 +5613,102 @@ func (x *DataStreams) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DataStreams.ProtoReflect.Descriptor instead.
-func (*DataStreams) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{45}
-}
-
 func (x *DataStreams) GetDatabaseId() string {
 	if x != nil {
-		return x.DatabaseId
+		return x.xxx_hidden_DatabaseId
 	}
 	return ""
 }
 
 func (x *DataStreams) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
 func (x *DataStreams) GetEndpoint() string {
 	if x != nil {
-		return x.Endpoint
+		return x.xxx_hidden_Endpoint
 	}
 	return ""
 }
 
 func (x *DataStreams) GetDatabase() string {
 	if x != nil {
-		return x.Database
+		return x.xxx_hidden_Database
 	}
 	return ""
 }
 
 func (x *DataStreams) GetSecure() bool {
 	if x != nil {
-		return x.Secure
+		return x.xxx_hidden_Secure
 	}
 	return false
 }
 
+func (x *DataStreams) SetDatabaseId(v string) {
+	x.xxx_hidden_DatabaseId = v
+}
+
+func (x *DataStreams) SetAuth(v *IamAuth) {
+	x.xxx_hidden_Auth = v
+}
+
+func (x *DataStreams) SetEndpoint(v string) {
+	x.xxx_hidden_Endpoint = v
+}
+
+func (x *DataStreams) SetDatabase(v string) {
+	x.xxx_hidden_Database = v
+}
+
+func (x *DataStreams) SetSecure(v bool) {
+	x.xxx_hidden_Secure = v
+}
+
+func (x *DataStreams) HasAuth() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Auth != nil
+}
+
+func (x *DataStreams) ClearAuth() {
+	x.xxx_hidden_Auth = nil
+}
+
+type DataStreams_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	DatabaseId string
+	Auth       *IamAuth
+	// for internal usage
+	Endpoint string
+	Database string
+	Secure   bool
+}
+
+func (b0 DataStreams_builder) Build() *DataStreams {
+	m0 := &DataStreams{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_DatabaseId = b.DatabaseId
+	x.xxx_hidden_Auth = b.Auth
+	x.xxx_hidden_Endpoint = b.Endpoint
+	x.xxx_hidden_Database = b.Database
+	x.xxx_hidden_Secure = b.Secure
+	return m0
+}
+
 type Monitoring struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Project       string                 `protobuf:"bytes,1,opt,name=project,proto3" json:"project,omitempty"`
-	Cluster       string                 `protobuf:"bytes,2,opt,name=cluster,proto3" json:"cluster,omitempty"`
-	Auth          *IamAuth               `protobuf:"bytes,3,opt,name=auth,proto3" json:"auth,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Project string                 `protobuf:"bytes,1,opt,name=project,proto3"`
+	xxx_hidden_Cluster string                 `protobuf:"bytes,2,opt,name=cluster,proto3"`
+	xxx_hidden_Auth    *IamAuth               `protobuf:"bytes,3,opt,name=auth,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Monitoring) Reset() {
@@ -3619,42 +5736,77 @@ func (x *Monitoring) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Monitoring.ProtoReflect.Descriptor instead.
-func (*Monitoring) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{46}
-}
-
 func (x *Monitoring) GetProject() string {
 	if x != nil {
-		return x.Project
+		return x.xxx_hidden_Project
 	}
 	return ""
 }
 
 func (x *Monitoring) GetCluster() string {
 	if x != nil {
-		return x.Cluster
+		return x.xxx_hidden_Cluster
 	}
 	return ""
 }
 
 func (x *Monitoring) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
+func (x *Monitoring) SetProject(v string) {
+	x.xxx_hidden_Project = v
+}
+
+func (x *Monitoring) SetCluster(v string) {
+	x.xxx_hidden_Cluster = v
+}
+
+func (x *Monitoring) SetAuth(v *IamAuth) {
+	x.xxx_hidden_Auth = v
+}
+
+func (x *Monitoring) HasAuth() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Auth != nil
+}
+
+func (x *Monitoring) ClearAuth() {
+	x.xxx_hidden_Auth = nil
+}
+
+type Monitoring_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Project string
+	Cluster string
+	Auth    *IamAuth
+}
+
+func (b0 Monitoring_builder) Build() *Monitoring {
+	m0 := &Monitoring{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Project = b.Project
+	x.xxx_hidden_Cluster = b.Cluster
+	x.xxx_hidden_Auth = b.Auth
+	return m0
+}
+
 type YdbDatabase struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	DatabaseId string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
-	Auth       *IamAuth               `protobuf:"bytes,2,opt,name=auth,proto3" json:"auth,omitempty"`
-	// for internal usage
-	Endpoint      string `protobuf:"bytes,3,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	Database      string `protobuf:"bytes,4,opt,name=database,proto3" json:"database,omitempty"`
-	Secure        bool   `protobuf:"varint,5,opt,name=secure,proto3" json:"secure,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DatabaseId string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3"`
+	xxx_hidden_Auth       *IamAuth               `protobuf:"bytes,2,opt,name=auth,proto3"`
+	xxx_hidden_Endpoint   string                 `protobuf:"bytes,3,opt,name=endpoint,proto3"`
+	xxx_hidden_Database   string                 `protobuf:"bytes,4,opt,name=database,proto3"`
+	xxx_hidden_Secure     bool                   `protobuf:"varint,5,opt,name=secure,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *YdbDatabase) Reset() {
@@ -3682,59 +5834,107 @@ func (x *YdbDatabase) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use YdbDatabase.ProtoReflect.Descriptor instead.
-func (*YdbDatabase) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{47}
-}
-
 func (x *YdbDatabase) GetDatabaseId() string {
 	if x != nil {
-		return x.DatabaseId
+		return x.xxx_hidden_DatabaseId
 	}
 	return ""
 }
 
 func (x *YdbDatabase) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
 func (x *YdbDatabase) GetEndpoint() string {
 	if x != nil {
-		return x.Endpoint
+		return x.xxx_hidden_Endpoint
 	}
 	return ""
 }
 
 func (x *YdbDatabase) GetDatabase() string {
 	if x != nil {
-		return x.Database
+		return x.xxx_hidden_Database
 	}
 	return ""
 }
 
 func (x *YdbDatabase) GetSecure() bool {
 	if x != nil {
-		return x.Secure
+		return x.xxx_hidden_Secure
 	}
 	return false
 }
 
-type ClickHouseCluster struct {
-	state        protoimpl.MessageState `protogen:"open.v1"`
-	DatabaseId   string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
-	DatabaseName string                 `protobuf:"bytes,8,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
-	Login        string                 `protobuf:"bytes,2,opt,name=login,proto3" json:"login,omitempty"`
-	Password     string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	Auth         *IamAuth               `protobuf:"bytes,4,opt,name=auth,proto3" json:"auth,omitempty"`
+func (x *YdbDatabase) SetDatabaseId(v string) {
+	x.xxx_hidden_DatabaseId = v
+}
+
+func (x *YdbDatabase) SetAuth(v *IamAuth) {
+	x.xxx_hidden_Auth = v
+}
+
+func (x *YdbDatabase) SetEndpoint(v string) {
+	x.xxx_hidden_Endpoint = v
+}
+
+func (x *YdbDatabase) SetDatabase(v string) {
+	x.xxx_hidden_Database = v
+}
+
+func (x *YdbDatabase) SetSecure(v bool) {
+	x.xxx_hidden_Secure = v
+}
+
+func (x *YdbDatabase) HasAuth() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Auth != nil
+}
+
+func (x *YdbDatabase) ClearAuth() {
+	x.xxx_hidden_Auth = nil
+}
+
+type YdbDatabase_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	DatabaseId string
+	Auth       *IamAuth
 	// for internal usage
-	Host          string `protobuf:"bytes,5,opt,name=host,proto3" json:"host,omitempty"`
-	Port          int32  `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	Secure        bool   `protobuf:"varint,7,opt,name=secure,proto3" json:"secure,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Endpoint string
+	Database string
+	Secure   bool
+}
+
+func (b0 YdbDatabase_builder) Build() *YdbDatabase {
+	m0 := &YdbDatabase{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_DatabaseId = b.DatabaseId
+	x.xxx_hidden_Auth = b.Auth
+	x.xxx_hidden_Endpoint = b.Endpoint
+	x.xxx_hidden_Database = b.Database
+	x.xxx_hidden_Secure = b.Secure
+	return m0
+}
+
+type ClickHouseCluster struct {
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DatabaseId   string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3"`
+	xxx_hidden_DatabaseName string                 `protobuf:"bytes,8,opt,name=database_name,json=databaseName,proto3"`
+	xxx_hidden_Login        string                 `protobuf:"bytes,2,opt,name=login,proto3"`
+	xxx_hidden_Password     string                 `protobuf:"bytes,3,opt,name=password,proto3"`
+	xxx_hidden_Auth         *IamAuth               `protobuf:"bytes,4,opt,name=auth,proto3"`
+	xxx_hidden_Host         string                 `protobuf:"bytes,5,opt,name=host,proto3"`
+	xxx_hidden_Port         int32                  `protobuf:"varint,6,opt,name=port,proto3"`
+	xxx_hidden_Secure       bool                   `protobuf:"varint,7,opt,name=secure,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ClickHouseCluster) Reset() {
@@ -3762,73 +5962,140 @@ func (x *ClickHouseCluster) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ClickHouseCluster.ProtoReflect.Descriptor instead.
-func (*ClickHouseCluster) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{48}
-}
-
 func (x *ClickHouseCluster) GetDatabaseId() string {
 	if x != nil {
-		return x.DatabaseId
+		return x.xxx_hidden_DatabaseId
 	}
 	return ""
 }
 
 func (x *ClickHouseCluster) GetDatabaseName() string {
 	if x != nil {
-		return x.DatabaseName
+		return x.xxx_hidden_DatabaseName
 	}
 	return ""
 }
 
 func (x *ClickHouseCluster) GetLogin() string {
 	if x != nil {
-		return x.Login
+		return x.xxx_hidden_Login
 	}
 	return ""
 }
 
 func (x *ClickHouseCluster) GetPassword() string {
 	if x != nil {
-		return x.Password
+		return x.xxx_hidden_Password
 	}
 	return ""
 }
 
 func (x *ClickHouseCluster) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
 func (x *ClickHouseCluster) GetHost() string {
 	if x != nil {
-		return x.Host
+		return x.xxx_hidden_Host
 	}
 	return ""
 }
 
 func (x *ClickHouseCluster) GetPort() int32 {
 	if x != nil {
-		return x.Port
+		return x.xxx_hidden_Port
 	}
 	return 0
 }
 
 func (x *ClickHouseCluster) GetSecure() bool {
 	if x != nil {
-		return x.Secure
+		return x.xxx_hidden_Secure
 	}
 	return false
 }
 
+func (x *ClickHouseCluster) SetDatabaseId(v string) {
+	x.xxx_hidden_DatabaseId = v
+}
+
+func (x *ClickHouseCluster) SetDatabaseName(v string) {
+	x.xxx_hidden_DatabaseName = v
+}
+
+func (x *ClickHouseCluster) SetLogin(v string) {
+	x.xxx_hidden_Login = v
+}
+
+func (x *ClickHouseCluster) SetPassword(v string) {
+	x.xxx_hidden_Password = v
+}
+
+func (x *ClickHouseCluster) SetAuth(v *IamAuth) {
+	x.xxx_hidden_Auth = v
+}
+
+func (x *ClickHouseCluster) SetHost(v string) {
+	x.xxx_hidden_Host = v
+}
+
+func (x *ClickHouseCluster) SetPort(v int32) {
+	x.xxx_hidden_Port = v
+}
+
+func (x *ClickHouseCluster) SetSecure(v bool) {
+	x.xxx_hidden_Secure = v
+}
+
+func (x *ClickHouseCluster) HasAuth() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Auth != nil
+}
+
+func (x *ClickHouseCluster) ClearAuth() {
+	x.xxx_hidden_Auth = nil
+}
+
+type ClickHouseCluster_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	DatabaseId   string
+	DatabaseName string
+	Login        string
+	Password     string
+	Auth         *IamAuth
+	// for internal usage
+	Host   string
+	Port   int32
+	Secure bool
+}
+
+func (b0 ClickHouseCluster_builder) Build() *ClickHouseCluster {
+	m0 := &ClickHouseCluster{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_DatabaseId = b.DatabaseId
+	x.xxx_hidden_DatabaseName = b.DatabaseName
+	x.xxx_hidden_Login = b.Login
+	x.xxx_hidden_Password = b.Password
+	x.xxx_hidden_Auth = b.Auth
+	x.xxx_hidden_Host = b.Host
+	x.xxx_hidden_Port = b.Port
+	x.xxx_hidden_Secure = b.Secure
+	return m0
+}
+
 type ObjectStorageConnection struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Bucket        string                 `protobuf:"bytes,1,opt,name=bucket,proto3" json:"bucket,omitempty"`
-	Auth          *IamAuth               `protobuf:"bytes,2,opt,name=auth,proto3" json:"auth,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Bucket string                 `protobuf:"bytes,1,opt,name=bucket,proto3"`
+	xxx_hidden_Auth   *IamAuth               `protobuf:"bytes,2,opt,name=auth,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ObjectStorageConnection) Reset() {
@@ -3856,39 +6123,68 @@ func (x *ObjectStorageConnection) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ObjectStorageConnection.ProtoReflect.Descriptor instead.
-func (*ObjectStorageConnection) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{49}
-}
-
 func (x *ObjectStorageConnection) GetBucket() string {
 	if x != nil {
-		return x.Bucket
+		return x.xxx_hidden_Bucket
 	}
 	return ""
 }
 
 func (x *ObjectStorageConnection) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
+func (x *ObjectStorageConnection) SetBucket(v string) {
+	x.xxx_hidden_Bucket = v
+}
+
+func (x *ObjectStorageConnection) SetAuth(v *IamAuth) {
+	x.xxx_hidden_Auth = v
+}
+
+func (x *ObjectStorageConnection) HasAuth() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Auth != nil
+}
+
+func (x *ObjectStorageConnection) ClearAuth() {
+	x.xxx_hidden_Auth = nil
+}
+
+type ObjectStorageConnection_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Bucket string
+	Auth   *IamAuth
+}
+
+func (b0 ObjectStorageConnection_builder) Build() *ObjectStorageConnection {
+	m0 := &ObjectStorageConnection{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Bucket = b.Bucket
+	x.xxx_hidden_Auth = b.Auth
+	return m0
+}
+
 type PostgreSQLCluster struct {
-	state        protoimpl.MessageState `protogen:"open.v1"`
-	DatabaseId   string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3" json:"database_id,omitempty"`
-	DatabaseName string                 `protobuf:"bytes,8,opt,name=database_name,json=databaseName,proto3" json:"database_name,omitempty"`
-	Login        string                 `protobuf:"bytes,2,opt,name=login,proto3" json:"login,omitempty"`
-	Password     string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	Schema       string                 `protobuf:"bytes,9,opt,name=schema,proto3" json:"schema,omitempty"`
-	Auth         *IamAuth               `protobuf:"bytes,4,opt,name=auth,proto3" json:"auth,omitempty"`
-	// Just for the sake of simmetry with existing ClickHouse code
-	Host          string `protobuf:"bytes,5,opt,name=host,proto3" json:"host,omitempty"`
-	Port          int32  `protobuf:"varint,6,opt,name=port,proto3" json:"port,omitempty"`
-	Secure        bool   `protobuf:"varint,7,opt,name=secure,proto3" json:"secure,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DatabaseId   string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3"`
+	xxx_hidden_DatabaseName string                 `protobuf:"bytes,8,opt,name=database_name,json=databaseName,proto3"`
+	xxx_hidden_Login        string                 `protobuf:"bytes,2,opt,name=login,proto3"`
+	xxx_hidden_Password     string                 `protobuf:"bytes,3,opt,name=password,proto3"`
+	xxx_hidden_Schema       string                 `protobuf:"bytes,9,opt,name=schema,proto3"`
+	xxx_hidden_Auth         *IamAuth               `protobuf:"bytes,4,opt,name=auth,proto3"`
+	xxx_hidden_Host         string                 `protobuf:"bytes,5,opt,name=host,proto3"`
+	xxx_hidden_Port         int32                  `protobuf:"varint,6,opt,name=port,proto3"`
+	xxx_hidden_Secure       bool                   `protobuf:"varint,7,opt,name=secure,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *PostgreSQLCluster) Reset() {
@@ -3916,87 +6212,152 @@ func (x *PostgreSQLCluster) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PostgreSQLCluster.ProtoReflect.Descriptor instead.
-func (*PostgreSQLCluster) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{50}
-}
-
 func (x *PostgreSQLCluster) GetDatabaseId() string {
 	if x != nil {
-		return x.DatabaseId
+		return x.xxx_hidden_DatabaseId
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetDatabaseName() string {
 	if x != nil {
-		return x.DatabaseName
+		return x.xxx_hidden_DatabaseName
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetLogin() string {
 	if x != nil {
-		return x.Login
+		return x.xxx_hidden_Login
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetPassword() string {
 	if x != nil {
-		return x.Password
+		return x.xxx_hidden_Password
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetSchema() string {
 	if x != nil {
-		return x.Schema
+		return x.xxx_hidden_Schema
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
 func (x *PostgreSQLCluster) GetHost() string {
 	if x != nil {
-		return x.Host
+		return x.xxx_hidden_Host
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetPort() int32 {
 	if x != nil {
-		return x.Port
+		return x.xxx_hidden_Port
 	}
 	return 0
 }
 
 func (x *PostgreSQLCluster) GetSecure() bool {
 	if x != nil {
-		return x.Secure
+		return x.xxx_hidden_Secure
 	}
 	return false
 }
 
+func (x *PostgreSQLCluster) SetDatabaseId(v string) {
+	x.xxx_hidden_DatabaseId = v
+}
+
+func (x *PostgreSQLCluster) SetDatabaseName(v string) {
+	x.xxx_hidden_DatabaseName = v
+}
+
+func (x *PostgreSQLCluster) SetLogin(v string) {
+	x.xxx_hidden_Login = v
+}
+
+func (x *PostgreSQLCluster) SetPassword(v string) {
+	x.xxx_hidden_Password = v
+}
+
+func (x *PostgreSQLCluster) SetSchema(v string) {
+	x.xxx_hidden_Schema = v
+}
+
+func (x *PostgreSQLCluster) SetAuth(v *IamAuth) {
+	x.xxx_hidden_Auth = v
+}
+
+func (x *PostgreSQLCluster) SetHost(v string) {
+	x.xxx_hidden_Host = v
+}
+
+func (x *PostgreSQLCluster) SetPort(v int32) {
+	x.xxx_hidden_Port = v
+}
+
+func (x *PostgreSQLCluster) SetSecure(v bool) {
+	x.xxx_hidden_Secure = v
+}
+
+func (x *PostgreSQLCluster) HasAuth() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Auth != nil
+}
+
+func (x *PostgreSQLCluster) ClearAuth() {
+	x.xxx_hidden_Auth = nil
+}
+
+type PostgreSQLCluster_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	DatabaseId   string
+	DatabaseName string
+	Login        string
+	Password     string
+	Schema       string
+	Auth         *IamAuth
+	// Just for the sake of simmetry with existing ClickHouse code
+	Host   string
+	Port   int32
+	Secure bool
+}
+
+func (b0 PostgreSQLCluster_builder) Build() *PostgreSQLCluster {
+	m0 := &PostgreSQLCluster{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_DatabaseId = b.DatabaseId
+	x.xxx_hidden_DatabaseName = b.DatabaseName
+	x.xxx_hidden_Login = b.Login
+	x.xxx_hidden_Password = b.Password
+	x.xxx_hidden_Schema = b.Schema
+	x.xxx_hidden_Auth = b.Auth
+	x.xxx_hidden_Host = b.Host
+	x.xxx_hidden_Port = b.Port
+	x.xxx_hidden_Secure = b.Secure
+	return m0
+}
+
 type ConnectionSetting struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Connection:
-	//
-	//	*ConnectionSetting_YdbDatabase
-	//	*ConnectionSetting_ClickhouseCluster
-	//	*ConnectionSetting_DataStreams
-	//	*ConnectionSetting_ObjectStorage
-	//	*ConnectionSetting_Monitoring
-	//	*ConnectionSetting_PostgresqlCluster
-	Connection    isConnectionSetting_Connection `protobuf_oneof:"connection"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState         `protogen:"opaque.v1"`
+	xxx_hidden_Connection isConnectionSetting_Connection `protobuf_oneof:"connection"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ConnectionSetting) Reset() {
@@ -4024,21 +6385,9 @@ func (x *ConnectionSetting) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ConnectionSetting.ProtoReflect.Descriptor instead.
-func (*ConnectionSetting) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{51}
-}
-
-func (x *ConnectionSetting) GetConnection() isConnectionSetting_Connection {
-	if x != nil {
-		return x.Connection
-	}
-	return nil
-}
-
 func (x *ConnectionSetting) GetYdbDatabase() *YdbDatabase {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_YdbDatabase); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_YdbDatabase); ok {
 			return x.YdbDatabase
 		}
 	}
@@ -4047,7 +6396,7 @@ func (x *ConnectionSetting) GetYdbDatabase() *YdbDatabase {
 
 func (x *ConnectionSetting) GetClickhouseCluster() *ClickHouseCluster {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_ClickhouseCluster); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_ClickhouseCluster); ok {
 			return x.ClickhouseCluster
 		}
 	}
@@ -4056,7 +6405,7 @@ func (x *ConnectionSetting) GetClickhouseCluster() *ClickHouseCluster {
 
 func (x *ConnectionSetting) GetDataStreams() *DataStreams {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_DataStreams); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_DataStreams); ok {
 			return x.DataStreams
 		}
 	}
@@ -4065,7 +6414,7 @@ func (x *ConnectionSetting) GetDataStreams() *DataStreams {
 
 func (x *ConnectionSetting) GetObjectStorage() *ObjectStorageConnection {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_ObjectStorage); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_ObjectStorage); ok {
 			return x.ObjectStorage
 		}
 	}
@@ -4074,7 +6423,7 @@ func (x *ConnectionSetting) GetObjectStorage() *ObjectStorageConnection {
 
 func (x *ConnectionSetting) GetMonitoring() *Monitoring {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_Monitoring); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_Monitoring); ok {
 			return x.Monitoring
 		}
 	}
@@ -4083,61 +6432,282 @@ func (x *ConnectionSetting) GetMonitoring() *Monitoring {
 
 func (x *ConnectionSetting) GetPostgresqlCluster() *PostgreSQLCluster {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_PostgresqlCluster); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_PostgresqlCluster); ok {
 			return x.PostgresqlCluster
 		}
 	}
 	return nil
 }
 
+func (x *ConnectionSetting) SetYdbDatabase(v *YdbDatabase) {
+	if v == nil {
+		x.xxx_hidden_Connection = nil
+		return
+	}
+	x.xxx_hidden_Connection = &connectionSetting_YdbDatabase{v}
+}
+
+func (x *ConnectionSetting) SetClickhouseCluster(v *ClickHouseCluster) {
+	if v == nil {
+		x.xxx_hidden_Connection = nil
+		return
+	}
+	x.xxx_hidden_Connection = &connectionSetting_ClickhouseCluster{v}
+}
+
+func (x *ConnectionSetting) SetDataStreams(v *DataStreams) {
+	if v == nil {
+		x.xxx_hidden_Connection = nil
+		return
+	}
+	x.xxx_hidden_Connection = &connectionSetting_DataStreams{v}
+}
+
+func (x *ConnectionSetting) SetObjectStorage(v *ObjectStorageConnection) {
+	if v == nil {
+		x.xxx_hidden_Connection = nil
+		return
+	}
+	x.xxx_hidden_Connection = &connectionSetting_ObjectStorage{v}
+}
+
+func (x *ConnectionSetting) SetMonitoring(v *Monitoring) {
+	if v == nil {
+		x.xxx_hidden_Connection = nil
+		return
+	}
+	x.xxx_hidden_Connection = &connectionSetting_Monitoring{v}
+}
+
+func (x *ConnectionSetting) SetPostgresqlCluster(v *PostgreSQLCluster) {
+	if v == nil {
+		x.xxx_hidden_Connection = nil
+		return
+	}
+	x.xxx_hidden_Connection = &connectionSetting_PostgresqlCluster{v}
+}
+
+func (x *ConnectionSetting) HasConnection() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Connection != nil
+}
+
+func (x *ConnectionSetting) HasYdbDatabase() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_YdbDatabase)
+	return ok
+}
+
+func (x *ConnectionSetting) HasClickhouseCluster() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_ClickhouseCluster)
+	return ok
+}
+
+func (x *ConnectionSetting) HasDataStreams() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_DataStreams)
+	return ok
+}
+
+func (x *ConnectionSetting) HasObjectStorage() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_ObjectStorage)
+	return ok
+}
+
+func (x *ConnectionSetting) HasMonitoring() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_Monitoring)
+	return ok
+}
+
+func (x *ConnectionSetting) HasPostgresqlCluster() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_PostgresqlCluster)
+	return ok
+}
+
+func (x *ConnectionSetting) ClearConnection() {
+	x.xxx_hidden_Connection = nil
+}
+
+func (x *ConnectionSetting) ClearYdbDatabase() {
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_YdbDatabase); ok {
+		x.xxx_hidden_Connection = nil
+	}
+}
+
+func (x *ConnectionSetting) ClearClickhouseCluster() {
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_ClickhouseCluster); ok {
+		x.xxx_hidden_Connection = nil
+	}
+}
+
+func (x *ConnectionSetting) ClearDataStreams() {
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_DataStreams); ok {
+		x.xxx_hidden_Connection = nil
+	}
+}
+
+func (x *ConnectionSetting) ClearObjectStorage() {
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_ObjectStorage); ok {
+		x.xxx_hidden_Connection = nil
+	}
+}
+
+func (x *ConnectionSetting) ClearMonitoring() {
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_Monitoring); ok {
+		x.xxx_hidden_Connection = nil
+	}
+}
+
+func (x *ConnectionSetting) ClearPostgresqlCluster() {
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_PostgresqlCluster); ok {
+		x.xxx_hidden_Connection = nil
+	}
+}
+
+const ConnectionSetting_Connection_not_set_case case_ConnectionSetting_Connection = 0
+const ConnectionSetting_YdbDatabase_case case_ConnectionSetting_Connection = 1
+const ConnectionSetting_ClickhouseCluster_case case_ConnectionSetting_Connection = 2
+const ConnectionSetting_DataStreams_case case_ConnectionSetting_Connection = 3
+const ConnectionSetting_ObjectStorage_case case_ConnectionSetting_Connection = 4
+const ConnectionSetting_Monitoring_case case_ConnectionSetting_Connection = 5
+const ConnectionSetting_PostgresqlCluster_case case_ConnectionSetting_Connection = 6
+
+func (x *ConnectionSetting) WhichConnection() case_ConnectionSetting_Connection {
+	if x == nil {
+		return ConnectionSetting_Connection_not_set_case
+	}
+	switch x.xxx_hidden_Connection.(type) {
+	case *connectionSetting_YdbDatabase:
+		return ConnectionSetting_YdbDatabase_case
+	case *connectionSetting_ClickhouseCluster:
+		return ConnectionSetting_ClickhouseCluster_case
+	case *connectionSetting_DataStreams:
+		return ConnectionSetting_DataStreams_case
+	case *connectionSetting_ObjectStorage:
+		return ConnectionSetting_ObjectStorage_case
+	case *connectionSetting_Monitoring:
+		return ConnectionSetting_Monitoring_case
+	case *connectionSetting_PostgresqlCluster:
+		return ConnectionSetting_PostgresqlCluster_case
+	default:
+		return ConnectionSetting_Connection_not_set_case
+	}
+}
+
+type ConnectionSetting_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Connection:
+	YdbDatabase       *YdbDatabase
+	ClickhouseCluster *ClickHouseCluster
+	DataStreams       *DataStreams
+	ObjectStorage     *ObjectStorageConnection
+	Monitoring        *Monitoring
+	PostgresqlCluster *PostgreSQLCluster
+	// -- end of xxx_hidden_Connection
+}
+
+func (b0 ConnectionSetting_builder) Build() *ConnectionSetting {
+	m0 := &ConnectionSetting{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.YdbDatabase != nil {
+		x.xxx_hidden_Connection = &connectionSetting_YdbDatabase{b.YdbDatabase}
+	}
+	if b.ClickhouseCluster != nil {
+		x.xxx_hidden_Connection = &connectionSetting_ClickhouseCluster{b.ClickhouseCluster}
+	}
+	if b.DataStreams != nil {
+		x.xxx_hidden_Connection = &connectionSetting_DataStreams{b.DataStreams}
+	}
+	if b.ObjectStorage != nil {
+		x.xxx_hidden_Connection = &connectionSetting_ObjectStorage{b.ObjectStorage}
+	}
+	if b.Monitoring != nil {
+		x.xxx_hidden_Connection = &connectionSetting_Monitoring{b.Monitoring}
+	}
+	if b.PostgresqlCluster != nil {
+		x.xxx_hidden_Connection = &connectionSetting_PostgresqlCluster{b.PostgresqlCluster}
+	}
+	return m0
+}
+
+type case_ConnectionSetting_Connection protoreflect.FieldNumber
+
+func (x case_ConnectionSetting_Connection) String() string {
+	md := file_draft_protos_ydb_federated_query_proto_msgTypes[51].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isConnectionSetting_Connection interface {
 	isConnectionSetting_Connection()
 }
 
-type ConnectionSetting_YdbDatabase struct {
+type connectionSetting_YdbDatabase struct {
 	YdbDatabase *YdbDatabase `protobuf:"bytes,1,opt,name=ydb_database,json=ydbDatabase,proto3,oneof"`
 }
 
-type ConnectionSetting_ClickhouseCluster struct {
+type connectionSetting_ClickhouseCluster struct {
 	ClickhouseCluster *ClickHouseCluster `protobuf:"bytes,2,opt,name=clickhouse_cluster,json=clickhouseCluster,proto3,oneof"`
 }
 
-type ConnectionSetting_DataStreams struct {
+type connectionSetting_DataStreams struct {
 	DataStreams *DataStreams `protobuf:"bytes,3,opt,name=data_streams,json=dataStreams,proto3,oneof"`
 }
 
-type ConnectionSetting_ObjectStorage struct {
+type connectionSetting_ObjectStorage struct {
 	ObjectStorage *ObjectStorageConnection `protobuf:"bytes,4,opt,name=object_storage,json=objectStorage,proto3,oneof"`
 }
 
-type ConnectionSetting_Monitoring struct {
+type connectionSetting_Monitoring struct {
 	Monitoring *Monitoring `protobuf:"bytes,5,opt,name=monitoring,proto3,oneof"`
 }
 
-type ConnectionSetting_PostgresqlCluster struct {
+type connectionSetting_PostgresqlCluster struct {
 	PostgresqlCluster *PostgreSQLCluster `protobuf:"bytes,6,opt,name=postgresql_cluster,json=postgresqlCluster,proto3,oneof"`
 }
 
-func (*ConnectionSetting_YdbDatabase) isConnectionSetting_Connection() {}
+func (*connectionSetting_YdbDatabase) isConnectionSetting_Connection() {}
 
-func (*ConnectionSetting_ClickhouseCluster) isConnectionSetting_Connection() {}
+func (*connectionSetting_ClickhouseCluster) isConnectionSetting_Connection() {}
 
-func (*ConnectionSetting_DataStreams) isConnectionSetting_Connection() {}
+func (*connectionSetting_DataStreams) isConnectionSetting_Connection() {}
 
-func (*ConnectionSetting_ObjectStorage) isConnectionSetting_Connection() {}
+func (*connectionSetting_ObjectStorage) isConnectionSetting_Connection() {}
 
-func (*ConnectionSetting_Monitoring) isConnectionSetting_Connection() {}
+func (*connectionSetting_Monitoring) isConnectionSetting_Connection() {}
 
-func (*ConnectionSetting_PostgresqlCluster) isConnectionSetting_Connection() {}
+func (*connectionSetting_PostgresqlCluster) isConnectionSetting_Connection() {}
 
 type ConnectionContent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Setting       *ConnectionSetting     `protobuf:"bytes,2,opt,name=setting,proto3" json:"setting,omitempty"`
-	Acl           *Acl                   `protobuf:"bytes,3,opt,name=acl,proto3" json:"acl,omitempty"`
-	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name        string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Setting     *ConnectionSetting     `protobuf:"bytes,2,opt,name=setting,proto3"`
+	xxx_hidden_Acl         *Acl                   `protobuf:"bytes,3,opt,name=acl,proto3"`
+	xxx_hidden_Description string                 `protobuf:"bytes,4,opt,name=description,proto3"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ConnectionContent) Reset() {
@@ -4165,45 +6735,98 @@ func (x *ConnectionContent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ConnectionContent.ProtoReflect.Descriptor instead.
-func (*ConnectionContent) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{52}
-}
-
 func (x *ConnectionContent) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ConnectionContent) GetSetting() *ConnectionSetting {
 	if x != nil {
-		return x.Setting
+		return x.xxx_hidden_Setting
 	}
 	return nil
 }
 
 func (x *ConnectionContent) GetAcl() *Acl {
 	if x != nil {
-		return x.Acl
+		return x.xxx_hidden_Acl
 	}
 	return nil
 }
 
 func (x *ConnectionContent) GetDescription() string {
 	if x != nil {
-		return x.Description
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
+func (x *ConnectionContent) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *ConnectionContent) SetSetting(v *ConnectionSetting) {
+	x.xxx_hidden_Setting = v
+}
+
+func (x *ConnectionContent) SetAcl(v *Acl) {
+	x.xxx_hidden_Acl = v
+}
+
+func (x *ConnectionContent) SetDescription(v string) {
+	x.xxx_hidden_Description = v
+}
+
+func (x *ConnectionContent) HasSetting() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Setting != nil
+}
+
+func (x *ConnectionContent) HasAcl() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Acl != nil
+}
+
+func (x *ConnectionContent) ClearSetting() {
+	x.xxx_hidden_Setting = nil
+}
+
+func (x *ConnectionContent) ClearAcl() {
+	x.xxx_hidden_Acl = nil
+}
+
+type ConnectionContent_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name        string
+	Setting     *ConnectionSetting
+	Acl         *Acl
+	Description string
+}
+
+func (b0 ConnectionContent_builder) Build() *ConnectionContent {
+	m0 := &ConnectionContent{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Setting = b.Setting
+	x.xxx_hidden_Acl = b.Acl
+	x.xxx_hidden_Description = b.Description
+	return m0
+}
+
 type Connection struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Content       *ConnectionContent     `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
-	Meta          *CommonMeta            `protobuf:"bytes,2,opt,name=meta,proto3" json:"meta,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Content *ConnectionContent     `protobuf:"bytes,1,opt,name=content,proto3"`
+	xxx_hidden_Meta    *CommonMeta            `protobuf:"bytes,2,opt,name=meta,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Connection) Reset() {
@@ -4231,33 +6854,74 @@ func (x *Connection) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Connection.ProtoReflect.Descriptor instead.
-func (*Connection) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{53}
-}
-
 func (x *Connection) GetContent() *ConnectionContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *Connection) GetMeta() *CommonMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
+func (x *Connection) SetContent(v *ConnectionContent) {
+	x.xxx_hidden_Content = v
+}
+
+func (x *Connection) SetMeta(v *CommonMeta) {
+	x.xxx_hidden_Meta = v
+}
+
+func (x *Connection) HasContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Content != nil
+}
+
+func (x *Connection) HasMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Meta != nil
+}
+
+func (x *Connection) ClearContent() {
+	x.xxx_hidden_Content = nil
+}
+
+func (x *Connection) ClearMeta() {
+	x.xxx_hidden_Meta = nil
+}
+
+type Connection_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Content *ConnectionContent
+	Meta    *CommonMeta
+}
+
+func (b0 Connection_builder) Build() *Connection {
+	m0 := &Connection{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_Meta = b.Meta
+	return m0
+}
+
 // Create a new connection
 type CreateConnectionRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	Content         *ConnectionContent              `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	IdempotencyKey  string                          `protobuf:"bytes,3,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Content         *ConnectionContent              `protobuf:"bytes,2,opt,name=content,proto3"`
+	xxx_hidden_IdempotencyKey  string                          `protobuf:"bytes,3,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateConnectionRequest) Reset() {
@@ -4285,37 +6949,84 @@ func (x *CreateConnectionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateConnectionRequest.ProtoReflect.Descriptor instead.
-func (*CreateConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{54}
-}
-
 func (x *CreateConnectionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateConnectionRequest) GetContent() *ConnectionContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *CreateConnectionRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
+func (x *CreateConnectionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CreateConnectionRequest) SetContent(v *ConnectionContent) {
+	x.xxx_hidden_Content = v
+}
+
+func (x *CreateConnectionRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *CreateConnectionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CreateConnectionRequest) HasContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Content != nil
+}
+
+func (x *CreateConnectionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *CreateConnectionRequest) ClearContent() {
+	x.xxx_hidden_Content = nil
+}
+
+type CreateConnectionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	Content         *ConnectionContent
+	IdempotencyKey  string
+}
+
+func (b0 CreateConnectionRequest_builder) Build() *CreateConnectionRequest {
+	m0 := &CreateConnectionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	return m0
+}
+
 type CreateConnectionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // CreateConnectionResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateConnectionResponse) Reset() {
@@ -4343,23 +7054,47 @@ func (x *CreateConnectionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateConnectionResponse.ProtoReflect.Descriptor instead.
-func (*CreateConnectionResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{55}
-}
-
 func (x *CreateConnectionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CreateConnectionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CreateConnectionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CreateConnectionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CreateConnectionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CreateConnectionResponse_builder) Build() *CreateConnectionResponse {
+	m0 := &CreateConnectionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type CreateConnectionResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ConnectionId string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *CreateConnectionResult) Reset() {
@@ -4387,27 +7122,40 @@ func (x *CreateConnectionResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateConnectionResult.ProtoReflect.Descriptor instead.
-func (*CreateConnectionResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{56}
-}
-
 func (x *CreateConnectionResult) GetConnectionId() string {
 	if x != nil {
-		return x.ConnectionId
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
+func (x *CreateConnectionResult) SetConnectionId(v string) {
+	x.xxx_hidden_ConnectionId = v
+}
+
+type CreateConnectionResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ConnectionId string
+}
+
+func (b0 CreateConnectionResult_builder) Build() *CreateConnectionResult {
+	m0 := &CreateConnectionResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	return m0
+}
+
 // Getting information about connections
 type ListConnectionsRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
-	Filter          *ListConnectionsRequest_Filter  `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3"`
+	xxx_hidden_Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3"`
+	xxx_hidden_Filter          *ListConnectionsRequest_Filter  `protobuf:"bytes,4,opt,name=filter,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListConnectionsRequest) Reset() {
@@ -4435,44 +7183,97 @@ func (x *ListConnectionsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListConnectionsRequest.ProtoReflect.Descriptor instead.
-func (*ListConnectionsRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{57}
-}
-
 func (x *ListConnectionsRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListConnectionsRequest) GetPageToken() string {
 	if x != nil {
-		return x.PageToken
+		return x.xxx_hidden_PageToken
 	}
 	return ""
 }
 
 func (x *ListConnectionsRequest) GetLimit() int32 {
 	if x != nil {
-		return x.Limit
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
 func (x *ListConnectionsRequest) GetFilter() *ListConnectionsRequest_Filter {
 	if x != nil {
-		return x.Filter
+		return x.xxx_hidden_Filter
 	}
 	return nil
 }
 
+func (x *ListConnectionsRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ListConnectionsRequest) SetPageToken(v string) {
+	x.xxx_hidden_PageToken = v
+}
+
+func (x *ListConnectionsRequest) SetLimit(v int32) {
+	x.xxx_hidden_Limit = v
+}
+
+func (x *ListConnectionsRequest) SetFilter(v *ListConnectionsRequest_Filter) {
+	x.xxx_hidden_Filter = v
+}
+
+func (x *ListConnectionsRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ListConnectionsRequest) HasFilter() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Filter != nil
+}
+
+func (x *ListConnectionsRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ListConnectionsRequest) ClearFilter() {
+	x.xxx_hidden_Filter = nil
+}
+
+type ListConnectionsRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	PageToken       string
+	Limit           int32
+	Filter          *ListConnectionsRequest_Filter
+}
+
+func (b0 ListConnectionsRequest_builder) Build() *ListConnectionsRequest {
+	m0 := &ListConnectionsRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_PageToken = b.PageToken
+	x.xxx_hidden_Limit = b.Limit
+	x.xxx_hidden_Filter = b.Filter
+	return m0
+}
+
 type ListConnectionsResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // ListConnectionsResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListConnectionsResponse) Reset() {
@@ -4500,24 +7301,48 @@ func (x *ListConnectionsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListConnectionsResponse.ProtoReflect.Descriptor instead.
-func (*ListConnectionsResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{58}
-}
-
 func (x *ListConnectionsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ListConnectionsResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ListConnectionsResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ListConnectionsResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ListConnectionsResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ListConnectionsResponse_builder) Build() *ListConnectionsResponse {
+	m0 := &ListConnectionsResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ListConnectionsResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Connection    []*Connection          `protobuf:"bytes,1,rep,name=connection,proto3" json:"connection,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Connection    *[]*Connection         `protobuf:"bytes,1,rep,name=connection,proto3"`
+	xxx_hidden_NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListConnectionsResult) Reset() {
@@ -4545,32 +7370,53 @@ func (x *ListConnectionsResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListConnectionsResult.ProtoReflect.Descriptor instead.
-func (*ListConnectionsResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{59}
-}
-
 func (x *ListConnectionsResult) GetConnection() []*Connection {
 	if x != nil {
-		return x.Connection
+		if x.xxx_hidden_Connection != nil {
+			return *x.xxx_hidden_Connection
+		}
 	}
 	return nil
 }
 
 func (x *ListConnectionsResult) GetNextPageToken() string {
 	if x != nil {
-		return x.NextPageToken
+		return x.xxx_hidden_NextPageToken
 	}
 	return ""
 }
 
+func (x *ListConnectionsResult) SetConnection(v []*Connection) {
+	x.xxx_hidden_Connection = &v
+}
+
+func (x *ListConnectionsResult) SetNextPageToken(v string) {
+	x.xxx_hidden_NextPageToken = v
+}
+
+type ListConnectionsResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Connection    []*Connection
+	NextPageToken string
+}
+
+func (b0 ListConnectionsResult_builder) Build() *ListConnectionsResult {
+	m0 := &ListConnectionsResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Connection = &b.Connection
+	x.xxx_hidden_NextPageToken = b.NextPageToken
+	return m0
+}
+
 // Getting information about the connection
 type DescribeConnectionRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	ConnectionId    string                          `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_ConnectionId    string                          `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeConnectionRequest) Reset() {
@@ -4598,30 +7444,60 @@ func (x *DescribeConnectionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeConnectionRequest.ProtoReflect.Descriptor instead.
-func (*DescribeConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{60}
-}
-
 func (x *DescribeConnectionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeConnectionRequest) GetConnectionId() string {
 	if x != nil {
-		return x.ConnectionId
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
+func (x *DescribeConnectionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DescribeConnectionRequest) SetConnectionId(v string) {
+	x.xxx_hidden_ConnectionId = v
+}
+
+func (x *DescribeConnectionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DescribeConnectionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DescribeConnectionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	ConnectionId    string
+}
+
+func (b0 DescribeConnectionRequest_builder) Build() *DescribeConnectionRequest {
+	m0 := &DescribeConnectionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	return m0
+}
+
 type DescribeConnectionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // DescribeConnectionResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeConnectionResponse) Reset() {
@@ -4649,23 +7525,47 @@ func (x *DescribeConnectionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeConnectionResponse.ProtoReflect.Descriptor instead.
-func (*DescribeConnectionResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{61}
-}
-
 func (x *DescribeConnectionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DescribeConnectionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DescribeConnectionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DescribeConnectionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DescribeConnectionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DescribeConnectionResponse_builder) Build() *DescribeConnectionResponse {
+	m0 := &DescribeConnectionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DescribeConnectionResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Connection    *Connection            `protobuf:"bytes,1,opt,name=connection,proto3" json:"connection,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Connection *Connection            `protobuf:"bytes,1,opt,name=connection,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *DescribeConnectionResult) Reset() {
@@ -4693,28 +7593,52 @@ func (x *DescribeConnectionResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeConnectionResult.ProtoReflect.Descriptor instead.
-func (*DescribeConnectionResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{62}
-}
-
 func (x *DescribeConnectionResult) GetConnection() *Connection {
 	if x != nil {
-		return x.Connection
+		return x.xxx_hidden_Connection
 	}
 	return nil
 }
 
+func (x *DescribeConnectionResult) SetConnection(v *Connection) {
+	x.xxx_hidden_Connection = v
+}
+
+func (x *DescribeConnectionResult) HasConnection() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Connection != nil
+}
+
+func (x *DescribeConnectionResult) ClearConnection() {
+	x.xxx_hidden_Connection = nil
+}
+
+type DescribeConnectionResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Connection *Connection
+}
+
+func (b0 DescribeConnectionResult_builder) Build() *DescribeConnectionResult {
+	m0 := &DescribeConnectionResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Connection = b.Connection
+	return m0
+}
+
 // Change connection information. All fields must be filled in the request. The connection changes completely
 type ModifyConnectionRequest struct {
-	state            protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	ConnectionId     string                          `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	Content          *ConnectionContent              `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
-	PreviousRevision int64                           `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision,proto3" json:"previous_revision,omitempty"`
-	IdempotencyKey   string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_ConnectionId     string                          `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3"`
+	xxx_hidden_Content          *ConnectionContent              `protobuf:"bytes,3,opt,name=content,proto3"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ModifyConnectionRequest) Reset() {
@@ -4742,51 +7666,110 @@ func (x *ModifyConnectionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModifyConnectionRequest.ProtoReflect.Descriptor instead.
-func (*ModifyConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{63}
-}
-
 func (x *ModifyConnectionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ModifyConnectionRequest) GetConnectionId() string {
 	if x != nil {
-		return x.ConnectionId
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *ModifyConnectionRequest) GetContent() *ConnectionContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *ModifyConnectionRequest) GetPreviousRevision() int64 {
 	if x != nil {
-		return x.PreviousRevision
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *ModifyConnectionRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
+func (x *ModifyConnectionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ModifyConnectionRequest) SetConnectionId(v string) {
+	x.xxx_hidden_ConnectionId = v
+}
+
+func (x *ModifyConnectionRequest) SetContent(v *ConnectionContent) {
+	x.xxx_hidden_Content = v
+}
+
+func (x *ModifyConnectionRequest) SetPreviousRevision(v int64) {
+	x.xxx_hidden_PreviousRevision = v
+}
+
+func (x *ModifyConnectionRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *ModifyConnectionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ModifyConnectionRequest) HasContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Content != nil
+}
+
+func (x *ModifyConnectionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ModifyConnectionRequest) ClearContent() {
+	x.xxx_hidden_Content = nil
+}
+
+type ModifyConnectionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams  *Ydb_Operations.OperationParams
+	ConnectionId     string
+	Content          *ConnectionContent
+	PreviousRevision int64
+	IdempotencyKey   string
+}
+
+func (b0 ModifyConnectionRequest_builder) Build() *ModifyConnectionRequest {
+	m0 := &ModifyConnectionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	return m0
+}
+
 type ModifyConnectionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // ModifyConnectionResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ModifyConnectionResponse) Reset() {
@@ -4814,20 +7797,44 @@ func (x *ModifyConnectionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModifyConnectionResponse.ProtoReflect.Descriptor instead.
-func (*ModifyConnectionResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{64}
-}
-
 func (x *ModifyConnectionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ModifyConnectionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ModifyConnectionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ModifyConnectionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ModifyConnectionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ModifyConnectionResponse_builder) Build() *ModifyConnectionResponse {
+	m0 := &ModifyConnectionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ModifyConnectionResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -4857,20 +7864,27 @@ func (x *ModifyConnectionResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModifyConnectionResult.ProtoReflect.Descriptor instead.
-func (*ModifyConnectionResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{65}
+type ModifyConnectionResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ModifyConnectionResult_builder) Build() *ModifyConnectionResult {
+	m0 := &ModifyConnectionResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Complete removal of connection. Recovery of the connection after this operation is not possible
 type DeleteConnectionRequest struct {
-	state            protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	ConnectionId     string                          `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	PreviousRevision int64                           `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision,proto3" json:"previous_revision,omitempty"`
-	IdempotencyKey   string                          `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_ConnectionId     string                          `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *DeleteConnectionRequest) Reset() {
@@ -4898,44 +7912,86 @@ func (x *DeleteConnectionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteConnectionRequest.ProtoReflect.Descriptor instead.
-func (*DeleteConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{66}
-}
-
 func (x *DeleteConnectionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DeleteConnectionRequest) GetConnectionId() string {
 	if x != nil {
-		return x.ConnectionId
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *DeleteConnectionRequest) GetPreviousRevision() int64 {
 	if x != nil {
-		return x.PreviousRevision
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *DeleteConnectionRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
+func (x *DeleteConnectionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DeleteConnectionRequest) SetConnectionId(v string) {
+	x.xxx_hidden_ConnectionId = v
+}
+
+func (x *DeleteConnectionRequest) SetPreviousRevision(v int64) {
+	x.xxx_hidden_PreviousRevision = v
+}
+
+func (x *DeleteConnectionRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *DeleteConnectionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DeleteConnectionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DeleteConnectionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams  *Ydb_Operations.OperationParams
+	ConnectionId     string
+	PreviousRevision int64
+	IdempotencyKey   string
+}
+
+func (b0 DeleteConnectionRequest_builder) Build() *DeleteConnectionRequest {
+	m0 := &DeleteConnectionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	return m0
+}
+
 type DeleteConnectionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // DeleteConnectionResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DeleteConnectionResponse) Reset() {
@@ -4963,20 +8019,44 @@ func (x *DeleteConnectionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteConnectionResponse.ProtoReflect.Descriptor instead.
-func (*DeleteConnectionResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{67}
-}
-
 func (x *DeleteConnectionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DeleteConnectionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DeleteConnectionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DeleteConnectionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DeleteConnectionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DeleteConnectionResponse_builder) Build() *DeleteConnectionResponse {
+	m0 := &DeleteConnectionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DeleteConnectionResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5006,17 +8086,24 @@ func (x *DeleteConnectionResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteConnectionResult.ProtoReflect.Descriptor instead.
-func (*DeleteConnectionResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{68}
+type DeleteConnectionResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 DeleteConnectionResult_builder) Build() *DeleteConnectionResult {
+	m0 := &DeleteConnectionResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type TestConnectionRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	Setting         *ConnectionSetting              `protobuf:"bytes,2,opt,name=setting,proto3" json:"setting,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Setting         *ConnectionSetting              `protobuf:"bytes,2,opt,name=setting,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *TestConnectionRequest) Reset() {
@@ -5044,30 +8131,71 @@ func (x *TestConnectionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TestConnectionRequest.ProtoReflect.Descriptor instead.
-func (*TestConnectionRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{69}
-}
-
 func (x *TestConnectionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *TestConnectionRequest) GetSetting() *ConnectionSetting {
 	if x != nil {
-		return x.Setting
+		return x.xxx_hidden_Setting
 	}
 	return nil
 }
 
+func (x *TestConnectionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *TestConnectionRequest) SetSetting(v *ConnectionSetting) {
+	x.xxx_hidden_Setting = v
+}
+
+func (x *TestConnectionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *TestConnectionRequest) HasSetting() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Setting != nil
+}
+
+func (x *TestConnectionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *TestConnectionRequest) ClearSetting() {
+	x.xxx_hidden_Setting = nil
+}
+
+type TestConnectionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	Setting         *ConnectionSetting
+}
+
+func (b0 TestConnectionRequest_builder) Build() *TestConnectionRequest {
+	m0 := &TestConnectionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Setting = b.Setting
+	return m0
+}
+
 type TestConnectionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // TestConnectionResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *TestConnectionResponse) Reset() {
@@ -5095,20 +8223,44 @@ func (x *TestConnectionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TestConnectionResponse.ProtoReflect.Descriptor instead.
-func (*TestConnectionResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{70}
-}
-
 func (x *TestConnectionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *TestConnectionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *TestConnectionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *TestConnectionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type TestConnectionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 TestConnectionResponse_builder) Build() *TestConnectionResponse {
+	m0 := &TestConnectionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type TestConnectionResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5138,21 +8290,28 @@ func (x *TestConnectionResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TestConnectionResult.ProtoReflect.Descriptor instead.
-func (*TestConnectionResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{71}
+type TestConnectionResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 TestConnectionResult_builder) Build() *TestConnectionResult {
+	m0 := &TestConnectionResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Getting the result of the query execution
 type GetResultDataRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	QueryId         string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
-	ResultSetIndex  int32                           `protobuf:"varint,3,opt,name=result_set_index,json=resultSetIndex,proto3" json:"result_set_index,omitempty"`
-	Offset          int64                           `protobuf:"varint,4,opt,name=offset,proto3" json:"offset,omitempty"`
-	Limit           int64                           `protobuf:"varint,5,opt,name=limit,proto3" json:"limit,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId         string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_ResultSetIndex  int32                           `protobuf:"varint,3,opt,name=result_set_index,json=resultSetIndex,proto3"`
+	xxx_hidden_Offset          int64                           `protobuf:"varint,4,opt,name=offset,proto3"`
+	xxx_hidden_Limit           int64                           `protobuf:"varint,5,opt,name=limit,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetResultDataRequest) Reset() {
@@ -5180,51 +8339,99 @@ func (x *GetResultDataRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetResultDataRequest.ProtoReflect.Descriptor instead.
-func (*GetResultDataRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{72}
-}
-
 func (x *GetResultDataRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *GetResultDataRequest) GetQueryId() string {
 	if x != nil {
-		return x.QueryId
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *GetResultDataRequest) GetResultSetIndex() int32 {
 	if x != nil {
-		return x.ResultSetIndex
+		return x.xxx_hidden_ResultSetIndex
 	}
 	return 0
 }
 
 func (x *GetResultDataRequest) GetOffset() int64 {
 	if x != nil {
-		return x.Offset
+		return x.xxx_hidden_Offset
 	}
 	return 0
 }
 
 func (x *GetResultDataRequest) GetLimit() int64 {
 	if x != nil {
-		return x.Limit
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
+func (x *GetResultDataRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *GetResultDataRequest) SetQueryId(v string) {
+	x.xxx_hidden_QueryId = v
+}
+
+func (x *GetResultDataRequest) SetResultSetIndex(v int32) {
+	x.xxx_hidden_ResultSetIndex = v
+}
+
+func (x *GetResultDataRequest) SetOffset(v int64) {
+	x.xxx_hidden_Offset = v
+}
+
+func (x *GetResultDataRequest) SetLimit(v int64) {
+	x.xxx_hidden_Limit = v
+}
+
+func (x *GetResultDataRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *GetResultDataRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type GetResultDataRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	QueryId         string
+	ResultSetIndex  int32
+	Offset          int64
+	Limit           int64
+}
+
+func (b0 GetResultDataRequest_builder) Build() *GetResultDataRequest {
+	m0 := &GetResultDataRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_ResultSetIndex = b.ResultSetIndex
+	x.xxx_hidden_Offset = b.Offset
+	x.xxx_hidden_Limit = b.Limit
+	return m0
+}
+
 type GetResultDataResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // GetResultDataResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetResultDataResponse) Reset() {
@@ -5252,23 +8459,47 @@ func (x *GetResultDataResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetResultDataResponse.ProtoReflect.Descriptor instead.
-func (*GetResultDataResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{73}
-}
-
 func (x *GetResultDataResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *GetResultDataResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *GetResultDataResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *GetResultDataResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type GetResultDataResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 GetResultDataResponse_builder) Build() *GetResultDataResponse {
+	m0 := &GetResultDataResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type GetResultDataResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ResultSet     *Ydb.ResultSet         `protobuf:"bytes,1,opt,name=result_set,json=resultSet,proto3" json:"result_set,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ResultSet *Ydb.ResultSet         `protobuf:"bytes,1,opt,name=result_set,json=resultSet,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetResultDataResult) Reset() {
@@ -5296,23 +8527,47 @@ func (x *GetResultDataResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetResultDataResult.ProtoReflect.Descriptor instead.
-func (*GetResultDataResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{74}
-}
-
 func (x *GetResultDataResult) GetResultSet() *Ydb.ResultSet {
 	if x != nil {
-		return x.ResultSet
+		return x.xxx_hidden_ResultSet
 	}
 	return nil
 }
 
+func (x *GetResultDataResult) SetResultSet(v *Ydb.ResultSet) {
+	x.xxx_hidden_ResultSet = v
+}
+
+func (x *GetResultDataResult) HasResultSet() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResultSet != nil
+}
+
+func (x *GetResultDataResult) ClearResultSet() {
+	x.xxx_hidden_ResultSet = nil
+}
+
+type GetResultDataResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ResultSet *Ydb.ResultSet
+}
+
+func (b0 GetResultDataResult_builder) Build() *GetResultDataResult {
+	m0 := &GetResultDataResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ResultSet = b.ResultSet
+	return m0
+}
+
 type Schema struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Column        []*Ydb.Column          `protobuf:"bytes,1,rep,name=column,proto3" json:"column,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Column *[]*Ydb.Column         `protobuf:"bytes,1,rep,name=column,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *Schema) Reset() {
@@ -5340,27 +8595,42 @@ func (x *Schema) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Schema.ProtoReflect.Descriptor instead.
-func (*Schema) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{75}
-}
-
 func (x *Schema) GetColumn() []*Ydb.Column {
 	if x != nil {
-		return x.Column
+		if x.xxx_hidden_Column != nil {
+			return *x.xxx_hidden_Column
+		}
 	}
 	return nil
 }
 
+func (x *Schema) SetColumn(v []*Ydb.Column) {
+	x.xxx_hidden_Column = &v
+}
+
+type Schema_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Column []*Ydb.Column
+}
+
+func (b0 Schema_builder) Build() *Schema {
+	m0 := &Schema{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Column = &b.Column
+	return m0
+}
+
 type DataStreamsBinding struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	StreamName    string                 `protobuf:"bytes,1,opt,name=stream_name,json=streamName,proto3" json:"stream_name,omitempty"`
-	Format        string                 `protobuf:"bytes,2,opt,name=format,proto3" json:"format,omitempty"`
-	Compression   string                 `protobuf:"bytes,3,opt,name=compression,proto3" json:"compression,omitempty"`
-	Schema        *Schema                `protobuf:"bytes,4,opt,name=schema,proto3" json:"schema,omitempty"`
-	FormatSetting map[string]string      `protobuf:"bytes,5,rep,name=format_setting,json=formatSetting,proto3" json:"format_setting,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StreamName    string                 `protobuf:"bytes,1,opt,name=stream_name,json=streamName,proto3"`
+	xxx_hidden_Format        string                 `protobuf:"bytes,2,opt,name=format,proto3"`
+	xxx_hidden_Compression   string                 `protobuf:"bytes,3,opt,name=compression,proto3"`
+	xxx_hidden_Schema        *Schema                `protobuf:"bytes,4,opt,name=schema,proto3"`
+	xxx_hidden_FormatSetting map[string]string      `protobuf:"bytes,5,rep,name=format_setting,json=formatSetting,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *DataStreamsBinding) Reset() {
@@ -5388,51 +8658,99 @@ func (x *DataStreamsBinding) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DataStreamsBinding.ProtoReflect.Descriptor instead.
-func (*DataStreamsBinding) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{76}
-}
-
 func (x *DataStreamsBinding) GetStreamName() string {
 	if x != nil {
-		return x.StreamName
+		return x.xxx_hidden_StreamName
 	}
 	return ""
 }
 
 func (x *DataStreamsBinding) GetFormat() string {
 	if x != nil {
-		return x.Format
+		return x.xxx_hidden_Format
 	}
 	return ""
 }
 
 func (x *DataStreamsBinding) GetCompression() string {
 	if x != nil {
-		return x.Compression
+		return x.xxx_hidden_Compression
 	}
 	return ""
 }
 
 func (x *DataStreamsBinding) GetSchema() *Schema {
 	if x != nil {
-		return x.Schema
+		return x.xxx_hidden_Schema
 	}
 	return nil
 }
 
 func (x *DataStreamsBinding) GetFormatSetting() map[string]string {
 	if x != nil {
-		return x.FormatSetting
+		return x.xxx_hidden_FormatSetting
 	}
 	return nil
 }
 
+func (x *DataStreamsBinding) SetStreamName(v string) {
+	x.xxx_hidden_StreamName = v
+}
+
+func (x *DataStreamsBinding) SetFormat(v string) {
+	x.xxx_hidden_Format = v
+}
+
+func (x *DataStreamsBinding) SetCompression(v string) {
+	x.xxx_hidden_Compression = v
+}
+
+func (x *DataStreamsBinding) SetSchema(v *Schema) {
+	x.xxx_hidden_Schema = v
+}
+
+func (x *DataStreamsBinding) SetFormatSetting(v map[string]string) {
+	x.xxx_hidden_FormatSetting = v
+}
+
+func (x *DataStreamsBinding) HasSchema() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Schema != nil
+}
+
+func (x *DataStreamsBinding) ClearSchema() {
+	x.xxx_hidden_Schema = nil
+}
+
+type DataStreamsBinding_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	StreamName    string
+	Format        string
+	Compression   string
+	Schema        *Schema
+	FormatSetting map[string]string
+}
+
+func (b0 DataStreamsBinding_builder) Build() *DataStreamsBinding {
+	m0 := &DataStreamsBinding{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_StreamName = b.StreamName
+	x.xxx_hidden_Format = b.Format
+	x.xxx_hidden_Compression = b.Compression
+	x.xxx_hidden_Schema = b.Schema
+	x.xxx_hidden_FormatSetting = b.FormatSetting
+	return m0
+}
+
 type ObjectStorageBinding struct {
-	state         protoimpl.MessageState         `protogen:"open.v1"`
-	Subset        []*ObjectStorageBinding_Subset `protobuf:"bytes,1,rep,name=subset,proto3" json:"subset,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Subset *[]*ObjectStorageBinding_Subset `protobuf:"bytes,1,rep,name=subset,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ObjectStorageBinding) Reset() {
@@ -5460,27 +8778,38 @@ func (x *ObjectStorageBinding) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ObjectStorageBinding.ProtoReflect.Descriptor instead.
-func (*ObjectStorageBinding) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{77}
-}
-
 func (x *ObjectStorageBinding) GetSubset() []*ObjectStorageBinding_Subset {
 	if x != nil {
-		return x.Subset
+		if x.xxx_hidden_Subset != nil {
+			return *x.xxx_hidden_Subset
+		}
 	}
 	return nil
 }
 
+func (x *ObjectStorageBinding) SetSubset(v []*ObjectStorageBinding_Subset) {
+	x.xxx_hidden_Subset = &v
+}
+
+type ObjectStorageBinding_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Subset []*ObjectStorageBinding_Subset
+}
+
+func (b0 ObjectStorageBinding_builder) Build() *ObjectStorageBinding {
+	m0 := &ObjectStorageBinding{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Subset = &b.Subset
+	return m0
+}
+
 type BindingSetting struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Binding:
-	//
-	//	*BindingSetting_DataStreams
-	//	*BindingSetting_ObjectStorage
-	Binding       isBindingSetting_Binding `protobuf_oneof:"binding"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Binding isBindingSetting_Binding `protobuf_oneof:"binding"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *BindingSetting) Reset() {
@@ -5508,21 +8837,9 @@ func (x *BindingSetting) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BindingSetting.ProtoReflect.Descriptor instead.
-func (*BindingSetting) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{78}
-}
-
-func (x *BindingSetting) GetBinding() isBindingSetting_Binding {
-	if x != nil {
-		return x.Binding
-	}
-	return nil
-}
-
 func (x *BindingSetting) GetDataStreams() *DataStreamsBinding {
 	if x != nil {
-		if x, ok := x.Binding.(*BindingSetting_DataStreams); ok {
+		if x, ok := x.xxx_hidden_Binding.(*bindingSetting_DataStreams); ok {
 			return x.DataStreams
 		}
 	}
@@ -5531,38 +8848,143 @@ func (x *BindingSetting) GetDataStreams() *DataStreamsBinding {
 
 func (x *BindingSetting) GetObjectStorage() *ObjectStorageBinding {
 	if x != nil {
-		if x, ok := x.Binding.(*BindingSetting_ObjectStorage); ok {
+		if x, ok := x.xxx_hidden_Binding.(*bindingSetting_ObjectStorage); ok {
 			return x.ObjectStorage
 		}
 	}
 	return nil
 }
 
+func (x *BindingSetting) SetDataStreams(v *DataStreamsBinding) {
+	if v == nil {
+		x.xxx_hidden_Binding = nil
+		return
+	}
+	x.xxx_hidden_Binding = &bindingSetting_DataStreams{v}
+}
+
+func (x *BindingSetting) SetObjectStorage(v *ObjectStorageBinding) {
+	if v == nil {
+		x.xxx_hidden_Binding = nil
+		return
+	}
+	x.xxx_hidden_Binding = &bindingSetting_ObjectStorage{v}
+}
+
+func (x *BindingSetting) HasBinding() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Binding != nil
+}
+
+func (x *BindingSetting) HasDataStreams() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Binding.(*bindingSetting_DataStreams)
+	return ok
+}
+
+func (x *BindingSetting) HasObjectStorage() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Binding.(*bindingSetting_ObjectStorage)
+	return ok
+}
+
+func (x *BindingSetting) ClearBinding() {
+	x.xxx_hidden_Binding = nil
+}
+
+func (x *BindingSetting) ClearDataStreams() {
+	if _, ok := x.xxx_hidden_Binding.(*bindingSetting_DataStreams); ok {
+		x.xxx_hidden_Binding = nil
+	}
+}
+
+func (x *BindingSetting) ClearObjectStorage() {
+	if _, ok := x.xxx_hidden_Binding.(*bindingSetting_ObjectStorage); ok {
+		x.xxx_hidden_Binding = nil
+	}
+}
+
+const BindingSetting_Binding_not_set_case case_BindingSetting_Binding = 0
+const BindingSetting_DataStreams_case case_BindingSetting_Binding = 1
+const BindingSetting_ObjectStorage_case case_BindingSetting_Binding = 2
+
+func (x *BindingSetting) WhichBinding() case_BindingSetting_Binding {
+	if x == nil {
+		return BindingSetting_Binding_not_set_case
+	}
+	switch x.xxx_hidden_Binding.(type) {
+	case *bindingSetting_DataStreams:
+		return BindingSetting_DataStreams_case
+	case *bindingSetting_ObjectStorage:
+		return BindingSetting_ObjectStorage_case
+	default:
+		return BindingSetting_Binding_not_set_case
+	}
+}
+
+type BindingSetting_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Binding:
+	DataStreams   *DataStreamsBinding
+	ObjectStorage *ObjectStorageBinding
+	// -- end of xxx_hidden_Binding
+}
+
+func (b0 BindingSetting_builder) Build() *BindingSetting {
+	m0 := &BindingSetting{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.DataStreams != nil {
+		x.xxx_hidden_Binding = &bindingSetting_DataStreams{b.DataStreams}
+	}
+	if b.ObjectStorage != nil {
+		x.xxx_hidden_Binding = &bindingSetting_ObjectStorage{b.ObjectStorage}
+	}
+	return m0
+}
+
+type case_BindingSetting_Binding protoreflect.FieldNumber
+
+func (x case_BindingSetting_Binding) String() string {
+	md := file_draft_protos_ydb_federated_query_proto_msgTypes[78].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isBindingSetting_Binding interface {
 	isBindingSetting_Binding()
 }
 
-type BindingSetting_DataStreams struct {
+type bindingSetting_DataStreams struct {
 	DataStreams *DataStreamsBinding `protobuf:"bytes,1,opt,name=data_streams,json=dataStreams,proto3,oneof"`
 }
 
-type BindingSetting_ObjectStorage struct {
+type bindingSetting_ObjectStorage struct {
 	ObjectStorage *ObjectStorageBinding `protobuf:"bytes,2,opt,name=object_storage,json=objectStorage,proto3,oneof"`
 }
 
-func (*BindingSetting_DataStreams) isBindingSetting_Binding() {}
+func (*bindingSetting_DataStreams) isBindingSetting_Binding() {}
 
-func (*BindingSetting_ObjectStorage) isBindingSetting_Binding() {}
+func (*bindingSetting_ObjectStorage) isBindingSetting_Binding() {}
 
 type BriefBinding struct {
-	state         protoimpl.MessageState     `protogen:"open.v1"`
-	Name          string                     `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	ConnectionId  string                     `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	Meta          *CommonMeta                `protobuf:"bytes,3,opt,name=meta,proto3" json:"meta,omitempty"`
-	Type          BindingSetting_BindingType `protobuf:"varint,4,opt,name=type,proto3,enum=FederatedQuery.BindingSetting_BindingType" json:"type,omitempty"`
-	Visibility    Acl_Visibility             `protobuf:"varint,5,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Name         string                     `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_ConnectionId string                     `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3"`
+	xxx_hidden_Meta         *CommonMeta                `protobuf:"bytes,3,opt,name=meta,proto3"`
+	xxx_hidden_Type         BindingSetting_BindingType `protobuf:"varint,4,opt,name=type,proto3,enum=FederatedQuery.BindingSetting_BindingType"`
+	xxx_hidden_Visibility   Acl_Visibility             `protobuf:"varint,5,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *BriefBinding) Reset() {
@@ -5590,55 +9012,103 @@ func (x *BriefBinding) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BriefBinding.ProtoReflect.Descriptor instead.
-func (*BriefBinding) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{79}
-}
-
 func (x *BriefBinding) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *BriefBinding) GetConnectionId() string {
 	if x != nil {
-		return x.ConnectionId
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *BriefBinding) GetMeta() *CommonMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *BriefBinding) GetType() BindingSetting_BindingType {
 	if x != nil {
-		return x.Type
+		return x.xxx_hidden_Type
 	}
 	return BindingSetting_BINDING_TYPE_UNSPECIFIED
 }
 
 func (x *BriefBinding) GetVisibility() Acl_Visibility {
 	if x != nil {
-		return x.Visibility
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
+func (x *BriefBinding) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *BriefBinding) SetConnectionId(v string) {
+	x.xxx_hidden_ConnectionId = v
+}
+
+func (x *BriefBinding) SetMeta(v *CommonMeta) {
+	x.xxx_hidden_Meta = v
+}
+
+func (x *BriefBinding) SetType(v BindingSetting_BindingType) {
+	x.xxx_hidden_Type = v
+}
+
+func (x *BriefBinding) SetVisibility(v Acl_Visibility) {
+	x.xxx_hidden_Visibility = v
+}
+
+func (x *BriefBinding) HasMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Meta != nil
+}
+
+func (x *BriefBinding) ClearMeta() {
+	x.xxx_hidden_Meta = nil
+}
+
+type BriefBinding_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name         string
+	ConnectionId string
+	Meta         *CommonMeta
+	Type         BindingSetting_BindingType
+	Visibility   Acl_Visibility
+}
+
+func (b0 BriefBinding_builder) Build() *BriefBinding {
+	m0 := &BriefBinding{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	x.xxx_hidden_Meta = b.Meta
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_Visibility = b.Visibility
+	return m0
+}
+
 type BindingContent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	ConnectionId  string                 `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	Setting       *BindingSetting        `protobuf:"bytes,3,opt,name=setting,proto3" json:"setting,omitempty"`
-	Acl           *Acl                   `protobuf:"bytes,4,opt,name=acl,proto3" json:"acl,omitempty"`
-	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name         string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_ConnectionId string                 `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3"`
+	xxx_hidden_Setting      *BindingSetting        `protobuf:"bytes,3,opt,name=setting,proto3"`
+	xxx_hidden_Acl          *Acl                   `protobuf:"bytes,4,opt,name=acl,proto3"`
+	xxx_hidden_Description  string                 `protobuf:"bytes,5,opt,name=description,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *BindingContent) Reset() {
@@ -5666,52 +9136,111 @@ func (x *BindingContent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BindingContent.ProtoReflect.Descriptor instead.
-func (*BindingContent) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{80}
-}
-
 func (x *BindingContent) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *BindingContent) GetConnectionId() string {
 	if x != nil {
-		return x.ConnectionId
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *BindingContent) GetSetting() *BindingSetting {
 	if x != nil {
-		return x.Setting
+		return x.xxx_hidden_Setting
 	}
 	return nil
 }
 
 func (x *BindingContent) GetAcl() *Acl {
 	if x != nil {
-		return x.Acl
+		return x.xxx_hidden_Acl
 	}
 	return nil
 }
 
 func (x *BindingContent) GetDescription() string {
 	if x != nil {
-		return x.Description
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
+func (x *BindingContent) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *BindingContent) SetConnectionId(v string) {
+	x.xxx_hidden_ConnectionId = v
+}
+
+func (x *BindingContent) SetSetting(v *BindingSetting) {
+	x.xxx_hidden_Setting = v
+}
+
+func (x *BindingContent) SetAcl(v *Acl) {
+	x.xxx_hidden_Acl = v
+}
+
+func (x *BindingContent) SetDescription(v string) {
+	x.xxx_hidden_Description = v
+}
+
+func (x *BindingContent) HasSetting() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Setting != nil
+}
+
+func (x *BindingContent) HasAcl() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Acl != nil
+}
+
+func (x *BindingContent) ClearSetting() {
+	x.xxx_hidden_Setting = nil
+}
+
+func (x *BindingContent) ClearAcl() {
+	x.xxx_hidden_Acl = nil
+}
+
+type BindingContent_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name         string
+	ConnectionId string
+	Setting      *BindingSetting
+	Acl          *Acl
+	Description  string
+}
+
+func (b0 BindingContent_builder) Build() *BindingContent {
+	m0 := &BindingContent{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	x.xxx_hidden_Setting = b.Setting
+	x.xxx_hidden_Acl = b.Acl
+	x.xxx_hidden_Description = b.Description
+	return m0
+}
+
 type Binding struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Content       *BindingContent        `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
-	Meta          *CommonMeta            `protobuf:"bytes,2,opt,name=meta,proto3" json:"meta,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Content *BindingContent        `protobuf:"bytes,1,opt,name=content,proto3"`
+	xxx_hidden_Meta    *CommonMeta            `protobuf:"bytes,2,opt,name=meta,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Binding) Reset() {
@@ -5739,33 +9268,74 @@ func (x *Binding) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Binding.ProtoReflect.Descriptor instead.
-func (*Binding) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{81}
-}
-
 func (x *Binding) GetContent() *BindingContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *Binding) GetMeta() *CommonMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
+func (x *Binding) SetContent(v *BindingContent) {
+	x.xxx_hidden_Content = v
+}
+
+func (x *Binding) SetMeta(v *CommonMeta) {
+	x.xxx_hidden_Meta = v
+}
+
+func (x *Binding) HasContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Content != nil
+}
+
+func (x *Binding) HasMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Meta != nil
+}
+
+func (x *Binding) ClearContent() {
+	x.xxx_hidden_Content = nil
+}
+
+func (x *Binding) ClearMeta() {
+	x.xxx_hidden_Meta = nil
+}
+
+type Binding_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Content *BindingContent
+	Meta    *CommonMeta
+}
+
+func (b0 Binding_builder) Build() *Binding {
+	m0 := &Binding{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_Meta = b.Meta
+	return m0
+}
+
 // Create a new binding
 type CreateBindingRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	Content         *BindingContent                 `protobuf:"bytes,2,opt,name=content,proto3" json:"content,omitempty"`
-	IdempotencyKey  string                          `protobuf:"bytes,3,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Content         *BindingContent                 `protobuf:"bytes,2,opt,name=content,proto3"`
+	xxx_hidden_IdempotencyKey  string                          `protobuf:"bytes,3,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateBindingRequest) Reset() {
@@ -5793,37 +9363,84 @@ func (x *CreateBindingRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateBindingRequest.ProtoReflect.Descriptor instead.
-func (*CreateBindingRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{82}
-}
-
 func (x *CreateBindingRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateBindingRequest) GetContent() *BindingContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *CreateBindingRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
+func (x *CreateBindingRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CreateBindingRequest) SetContent(v *BindingContent) {
+	x.xxx_hidden_Content = v
+}
+
+func (x *CreateBindingRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *CreateBindingRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CreateBindingRequest) HasContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Content != nil
+}
+
+func (x *CreateBindingRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *CreateBindingRequest) ClearContent() {
+	x.xxx_hidden_Content = nil
+}
+
+type CreateBindingRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	Content         *BindingContent
+	IdempotencyKey  string
+}
+
+func (b0 CreateBindingRequest_builder) Build() *CreateBindingRequest {
+	m0 := &CreateBindingRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	return m0
+}
+
 type CreateBindingResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // CreateBindingResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateBindingResponse) Reset() {
@@ -5851,23 +9468,47 @@ func (x *CreateBindingResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateBindingResponse.ProtoReflect.Descriptor instead.
-func (*CreateBindingResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{83}
-}
-
 func (x *CreateBindingResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CreateBindingResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CreateBindingResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CreateBindingResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CreateBindingResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CreateBindingResponse_builder) Build() *CreateBindingResponse {
+	m0 := &CreateBindingResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type CreateBindingResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	BindingId     string                 `protobuf:"bytes,1,opt,name=binding_id,json=bindingId,proto3" json:"binding_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_BindingId string                 `protobuf:"bytes,1,opt,name=binding_id,json=bindingId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateBindingResult) Reset() {
@@ -5895,27 +9536,40 @@ func (x *CreateBindingResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateBindingResult.ProtoReflect.Descriptor instead.
-func (*CreateBindingResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{84}
-}
-
 func (x *CreateBindingResult) GetBindingId() string {
 	if x != nil {
-		return x.BindingId
+		return x.xxx_hidden_BindingId
 	}
 	return ""
 }
 
+func (x *CreateBindingResult) SetBindingId(v string) {
+	x.xxx_hidden_BindingId = v
+}
+
+type CreateBindingResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	BindingId string
+}
+
+func (b0 CreateBindingResult_builder) Build() *CreateBindingResult {
+	m0 := &CreateBindingResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_BindingId = b.BindingId
+	return m0
+}
+
 // Getting information about bindings
 type ListBindingsRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
-	Filter          *ListBindingsRequest_Filter     `protobuf:"bytes,4,opt,name=filter,proto3" json:"filter,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3"`
+	xxx_hidden_Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3"`
+	xxx_hidden_Filter          *ListBindingsRequest_Filter     `protobuf:"bytes,4,opt,name=filter,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListBindingsRequest) Reset() {
@@ -5943,44 +9597,97 @@ func (x *ListBindingsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListBindingsRequest.ProtoReflect.Descriptor instead.
-func (*ListBindingsRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{85}
-}
-
 func (x *ListBindingsRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListBindingsRequest) GetPageToken() string {
 	if x != nil {
-		return x.PageToken
+		return x.xxx_hidden_PageToken
 	}
 	return ""
 }
 
 func (x *ListBindingsRequest) GetLimit() int32 {
 	if x != nil {
-		return x.Limit
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
 func (x *ListBindingsRequest) GetFilter() *ListBindingsRequest_Filter {
 	if x != nil {
-		return x.Filter
+		return x.xxx_hidden_Filter
 	}
 	return nil
 }
 
+func (x *ListBindingsRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ListBindingsRequest) SetPageToken(v string) {
+	x.xxx_hidden_PageToken = v
+}
+
+func (x *ListBindingsRequest) SetLimit(v int32) {
+	x.xxx_hidden_Limit = v
+}
+
+func (x *ListBindingsRequest) SetFilter(v *ListBindingsRequest_Filter) {
+	x.xxx_hidden_Filter = v
+}
+
+func (x *ListBindingsRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ListBindingsRequest) HasFilter() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Filter != nil
+}
+
+func (x *ListBindingsRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ListBindingsRequest) ClearFilter() {
+	x.xxx_hidden_Filter = nil
+}
+
+type ListBindingsRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	PageToken       string
+	Limit           int32
+	Filter          *ListBindingsRequest_Filter
+}
+
+func (b0 ListBindingsRequest_builder) Build() *ListBindingsRequest {
+	m0 := &ListBindingsRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_PageToken = b.PageToken
+	x.xxx_hidden_Limit = b.Limit
+	x.xxx_hidden_Filter = b.Filter
+	return m0
+}
+
 type ListBindingsResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // ListBindingsResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListBindingsResponse) Reset() {
@@ -6008,24 +9715,48 @@ func (x *ListBindingsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListBindingsResponse.ProtoReflect.Descriptor instead.
-func (*ListBindingsResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{86}
-}
-
 func (x *ListBindingsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ListBindingsResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ListBindingsResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ListBindingsResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ListBindingsResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ListBindingsResponse_builder) Build() *ListBindingsResponse {
+	m0 := &ListBindingsResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ListBindingsResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Binding       []*BriefBinding        `protobuf:"bytes,1,rep,name=binding,proto3" json:"binding,omitempty"`
-	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Binding       *[]*BriefBinding       `protobuf:"bytes,1,rep,name=binding,proto3"`
+	xxx_hidden_NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListBindingsResult) Reset() {
@@ -6053,32 +9784,53 @@ func (x *ListBindingsResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListBindingsResult.ProtoReflect.Descriptor instead.
-func (*ListBindingsResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{87}
-}
-
 func (x *ListBindingsResult) GetBinding() []*BriefBinding {
 	if x != nil {
-		return x.Binding
+		if x.xxx_hidden_Binding != nil {
+			return *x.xxx_hidden_Binding
+		}
 	}
 	return nil
 }
 
 func (x *ListBindingsResult) GetNextPageToken() string {
 	if x != nil {
-		return x.NextPageToken
+		return x.xxx_hidden_NextPageToken
 	}
 	return ""
 }
 
+func (x *ListBindingsResult) SetBinding(v []*BriefBinding) {
+	x.xxx_hidden_Binding = &v
+}
+
+func (x *ListBindingsResult) SetNextPageToken(v string) {
+	x.xxx_hidden_NextPageToken = v
+}
+
+type ListBindingsResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Binding       []*BriefBinding
+	NextPageToken string
+}
+
+func (b0 ListBindingsResult_builder) Build() *ListBindingsResult {
+	m0 := &ListBindingsResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Binding = &b.Binding
+	x.xxx_hidden_NextPageToken = b.NextPageToken
+	return m0
+}
+
 // Getting information about the binding
 type DescribeBindingRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	BindingId       string                          `protobuf:"bytes,2,opt,name=binding_id,json=bindingId,proto3" json:"binding_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_BindingId       string                          `protobuf:"bytes,2,opt,name=binding_id,json=bindingId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeBindingRequest) Reset() {
@@ -6106,30 +9858,60 @@ func (x *DescribeBindingRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeBindingRequest.ProtoReflect.Descriptor instead.
-func (*DescribeBindingRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{88}
-}
-
 func (x *DescribeBindingRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeBindingRequest) GetBindingId() string {
 	if x != nil {
-		return x.BindingId
+		return x.xxx_hidden_BindingId
 	}
 	return ""
 }
 
+func (x *DescribeBindingRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DescribeBindingRequest) SetBindingId(v string) {
+	x.xxx_hidden_BindingId = v
+}
+
+func (x *DescribeBindingRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DescribeBindingRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DescribeBindingRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	BindingId       string
+}
+
+func (b0 DescribeBindingRequest_builder) Build() *DescribeBindingRequest {
+	m0 := &DescribeBindingRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_BindingId = b.BindingId
+	return m0
+}
+
 type DescribeBindingResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // DescribeBindingResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeBindingResponse) Reset() {
@@ -6157,23 +9939,47 @@ func (x *DescribeBindingResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeBindingResponse.ProtoReflect.Descriptor instead.
-func (*DescribeBindingResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{89}
-}
-
 func (x *DescribeBindingResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DescribeBindingResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DescribeBindingResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DescribeBindingResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DescribeBindingResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DescribeBindingResponse_builder) Build() *DescribeBindingResponse {
+	m0 := &DescribeBindingResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DescribeBindingResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Binding       *Binding               `protobuf:"bytes,1,opt,name=binding,proto3" json:"binding,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Binding *Binding               `protobuf:"bytes,1,opt,name=binding,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *DescribeBindingResult) Reset() {
@@ -6201,28 +10007,52 @@ func (x *DescribeBindingResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeBindingResult.ProtoReflect.Descriptor instead.
-func (*DescribeBindingResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{90}
-}
-
 func (x *DescribeBindingResult) GetBinding() *Binding {
 	if x != nil {
-		return x.Binding
+		return x.xxx_hidden_Binding
 	}
 	return nil
 }
 
+func (x *DescribeBindingResult) SetBinding(v *Binding) {
+	x.xxx_hidden_Binding = v
+}
+
+func (x *DescribeBindingResult) HasBinding() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Binding != nil
+}
+
+func (x *DescribeBindingResult) ClearBinding() {
+	x.xxx_hidden_Binding = nil
+}
+
+type DescribeBindingResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Binding *Binding
+}
+
+func (b0 DescribeBindingResult_builder) Build() *DescribeBindingResult {
+	m0 := &DescribeBindingResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Binding = b.Binding
+	return m0
+}
+
 // Change binding information. All fields must be filled in the request. The binding changes completely
 type ModifyBindingRequest struct {
-	state            protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	BindingId        string                          `protobuf:"bytes,2,opt,name=binding_id,json=bindingId,proto3" json:"binding_id,omitempty"`
-	Content          *BindingContent                 `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
-	PreviousRevision int64                           `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision,proto3" json:"previous_revision,omitempty"`
-	IdempotencyKey   string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_BindingId        string                          `protobuf:"bytes,2,opt,name=binding_id,json=bindingId,proto3"`
+	xxx_hidden_Content          *BindingContent                 `protobuf:"bytes,3,opt,name=content,proto3"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ModifyBindingRequest) Reset() {
@@ -6250,51 +10080,110 @@ func (x *ModifyBindingRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModifyBindingRequest.ProtoReflect.Descriptor instead.
-func (*ModifyBindingRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{91}
-}
-
 func (x *ModifyBindingRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ModifyBindingRequest) GetBindingId() string {
 	if x != nil {
-		return x.BindingId
+		return x.xxx_hidden_BindingId
 	}
 	return ""
 }
 
 func (x *ModifyBindingRequest) GetContent() *BindingContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *ModifyBindingRequest) GetPreviousRevision() int64 {
 	if x != nil {
-		return x.PreviousRevision
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *ModifyBindingRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
+func (x *ModifyBindingRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ModifyBindingRequest) SetBindingId(v string) {
+	x.xxx_hidden_BindingId = v
+}
+
+func (x *ModifyBindingRequest) SetContent(v *BindingContent) {
+	x.xxx_hidden_Content = v
+}
+
+func (x *ModifyBindingRequest) SetPreviousRevision(v int64) {
+	x.xxx_hidden_PreviousRevision = v
+}
+
+func (x *ModifyBindingRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *ModifyBindingRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ModifyBindingRequest) HasContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Content != nil
+}
+
+func (x *ModifyBindingRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ModifyBindingRequest) ClearContent() {
+	x.xxx_hidden_Content = nil
+}
+
+type ModifyBindingRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams  *Ydb_Operations.OperationParams
+	BindingId        string
+	Content          *BindingContent
+	PreviousRevision int64
+	IdempotencyKey   string
+}
+
+func (b0 ModifyBindingRequest_builder) Build() *ModifyBindingRequest {
+	m0 := &ModifyBindingRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_BindingId = b.BindingId
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	return m0
+}
+
 type ModifyBindingResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // ModifyBindingResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ModifyBindingResponse) Reset() {
@@ -6322,20 +10211,44 @@ func (x *ModifyBindingResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModifyBindingResponse.ProtoReflect.Descriptor instead.
-func (*ModifyBindingResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{92}
-}
-
 func (x *ModifyBindingResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ModifyBindingResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ModifyBindingResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ModifyBindingResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ModifyBindingResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ModifyBindingResponse_builder) Build() *ModifyBindingResponse {
+	m0 := &ModifyBindingResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ModifyBindingResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6365,20 +10278,27 @@ func (x *ModifyBindingResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ModifyBindingResult.ProtoReflect.Descriptor instead.
-func (*ModifyBindingResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{93}
+type ModifyBindingResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ModifyBindingResult_builder) Build() *ModifyBindingResult {
+	m0 := &ModifyBindingResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Complete removal of binding. Recovery of the binding after this operation is not possible
 type DeleteBindingRequest struct {
-	state            protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	BindingId        string                          `protobuf:"bytes,2,opt,name=binding_id,json=bindingId,proto3" json:"binding_id,omitempty"`
-	PreviousRevision int64                           `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision,proto3" json:"previous_revision,omitempty"`
-	IdempotencyKey   string                          `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_BindingId        string                          `protobuf:"bytes,2,opt,name=binding_id,json=bindingId,proto3"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *DeleteBindingRequest) Reset() {
@@ -6406,44 +10326,86 @@ func (x *DeleteBindingRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteBindingRequest.ProtoReflect.Descriptor instead.
-func (*DeleteBindingRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{94}
-}
-
 func (x *DeleteBindingRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DeleteBindingRequest) GetBindingId() string {
 	if x != nil {
-		return x.BindingId
+		return x.xxx_hidden_BindingId
 	}
 	return ""
 }
 
 func (x *DeleteBindingRequest) GetPreviousRevision() int64 {
 	if x != nil {
-		return x.PreviousRevision
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *DeleteBindingRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
+func (x *DeleteBindingRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DeleteBindingRequest) SetBindingId(v string) {
+	x.xxx_hidden_BindingId = v
+}
+
+func (x *DeleteBindingRequest) SetPreviousRevision(v int64) {
+	x.xxx_hidden_PreviousRevision = v
+}
+
+func (x *DeleteBindingRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *DeleteBindingRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DeleteBindingRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DeleteBindingRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams  *Ydb_Operations.OperationParams
+	BindingId        string
+	PreviousRevision int64
+	IdempotencyKey   string
+}
+
+func (b0 DeleteBindingRequest_builder) Build() *DeleteBindingRequest {
+	m0 := &DeleteBindingRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_BindingId = b.BindingId
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	return m0
+}
+
 type DeleteBindingResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"` // DeleteBindingResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DeleteBindingResponse) Reset() {
@@ -6471,20 +10433,44 @@ func (x *DeleteBindingResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteBindingResponse.ProtoReflect.Descriptor instead.
-func (*DeleteBindingResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{95}
-}
-
 func (x *DeleteBindingResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DeleteBindingResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DeleteBindingResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DeleteBindingResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DeleteBindingResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DeleteBindingResponse_builder) Build() *DeleteBindingResponse {
+	m0 := &DeleteBindingResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DeleteBindingResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -6514,16 +10500,23 @@ func (x *DeleteBindingResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteBindingResult.ProtoReflect.Descriptor instead.
-func (*DeleteBindingResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{96}
+type DeleteBindingResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 DeleteBindingResult_builder) Build() *DeleteBindingResult {
+	m0 := &DeleteBindingResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type StreamingDisposition_FromTime struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Timestamp *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *StreamingDisposition_FromTime) Reset() {
@@ -6551,23 +10544,47 @@ func (x *StreamingDisposition_FromTime) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamingDisposition_FromTime.ProtoReflect.Descriptor instead.
-func (*StreamingDisposition_FromTime) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{2, 0}
-}
-
 func (x *StreamingDisposition_FromTime) GetTimestamp() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Timestamp
+		return x.xxx_hidden_Timestamp
 	}
 	return nil
 }
 
+func (x *StreamingDisposition_FromTime) SetTimestamp(v *timestamppb.Timestamp) {
+	x.xxx_hidden_Timestamp = v
+}
+
+func (x *StreamingDisposition_FromTime) HasTimestamp() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Timestamp != nil
+}
+
+func (x *StreamingDisposition_FromTime) ClearTimestamp() {
+	x.xxx_hidden_Timestamp = nil
+}
+
+type StreamingDisposition_FromTime_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Timestamp *timestamppb.Timestamp
+}
+
+func (b0 StreamingDisposition_FromTime_builder) Build() *StreamingDisposition_FromTime {
+	m0 := &StreamingDisposition_FromTime{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Timestamp = b.Timestamp
+	return m0
+}
+
 type StreamingDisposition_TimeAgo struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Duration      *durationpb.Duration   `protobuf:"bytes,1,opt,name=duration,proto3" json:"duration,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Duration *durationpb.Duration   `protobuf:"bytes,1,opt,name=duration,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *StreamingDisposition_TimeAgo) Reset() {
@@ -6595,27 +10612,47 @@ func (x *StreamingDisposition_TimeAgo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamingDisposition_TimeAgo.ProtoReflect.Descriptor instead.
-func (*StreamingDisposition_TimeAgo) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{2, 1}
-}
-
 func (x *StreamingDisposition_TimeAgo) GetDuration() *durationpb.Duration {
 	if x != nil {
-		return x.Duration
+		return x.xxx_hidden_Duration
 	}
 	return nil
 }
 
+func (x *StreamingDisposition_TimeAgo) SetDuration(v *durationpb.Duration) {
+	x.xxx_hidden_Duration = v
+}
+
+func (x *StreamingDisposition_TimeAgo) HasDuration() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Duration != nil
+}
+
+func (x *StreamingDisposition_TimeAgo) ClearDuration() {
+	x.xxx_hidden_Duration = nil
+}
+
+type StreamingDisposition_TimeAgo_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Duration *durationpb.Duration
+}
+
+func (b0 StreamingDisposition_TimeAgo_builder) Build() *StreamingDisposition_TimeAgo {
+	m0 := &StreamingDisposition_TimeAgo{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Duration = b.Duration
+	return m0
+}
+
 type StreamingDisposition_FromLastCheckpoint struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// By default if new query streams set doesn't equal to old query streams set,
-	// error will occur and query won't be allowed to load offsets for streams for the last checkpoint.
-	// If this flag is set all offsets that can be matched with previous query checkpoint will be matched.
-	// Others will use "fresh" streaming disposition.
-	Force         bool `protobuf:"varint,1,opt,name=force,proto3" json:"force,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Force bool                   `protobuf:"varint,1,opt,name=force,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *StreamingDisposition_FromLastCheckpoint) Reset() {
@@ -6643,29 +10680,46 @@ func (x *StreamingDisposition_FromLastCheckpoint) ProtoReflect() protoreflect.Me
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StreamingDisposition_FromLastCheckpoint.ProtoReflect.Descriptor instead.
-func (*StreamingDisposition_FromLastCheckpoint) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{2, 2}
-}
-
 func (x *StreamingDisposition_FromLastCheckpoint) GetForce() bool {
 	if x != nil {
-		return x.Force
+		return x.xxx_hidden_Force
 	}
 	return false
 }
 
+func (x *StreamingDisposition_FromLastCheckpoint) SetForce(v bool) {
+	x.xxx_hidden_Force = v
+}
+
+type StreamingDisposition_FromLastCheckpoint_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// By default if new query streams set doesn't equal to old query streams set,
+	// error will occur and query won't be allowed to load offsets for streams for the last checkpoint.
+	// If this flag is set all offsets that can be matched with previous query checkpoint will be matched.
+	// Others will use "fresh" streaming disposition.
+	Force bool
+}
+
+func (b0 StreamingDisposition_FromLastCheckpoint_builder) Build() *StreamingDisposition_FromLastCheckpoint {
+	m0 := &StreamingDisposition_FromLastCheckpoint{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Force = b.Force
+	return m0
+}
+
 type ListQueriesRequest_Filter struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	QueryType     QueryContent_QueryType    `protobuf:"varint,1,opt,name=query_type,json=queryType,proto3,enum=FederatedQuery.QueryContent_QueryType" json:"query_type,omitempty"`
-	Status        []QueryMeta_ComputeStatus `protobuf:"varint,2,rep,packed,name=status,proto3,enum=FederatedQuery.QueryMeta_ComputeStatus" json:"status,omitempty"`
-	Mode          []ExecuteMode             `protobuf:"varint,3,rep,packed,name=mode,proto3,enum=FederatedQuery.ExecuteMode" json:"mode,omitempty"`
-	Name          string                    `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"` // queries whose name contains the filter.name substring
-	CreatedByMe   bool                      `protobuf:"varint,5,opt,name=created_by_me,json=createdByMe,proto3" json:"created_by_me,omitempty"`
-	Visibility    Acl_Visibility            `protobuf:"varint,6,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	Automatic     AutomaticType             `protobuf:"varint,7,opt,name=automatic,proto3,enum=FederatedQuery.AutomaticType" json:"automatic,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_QueryType   QueryContent_QueryType    `protobuf:"varint,1,opt,name=query_type,json=queryType,proto3,enum=FederatedQuery.QueryContent_QueryType"`
+	xxx_hidden_Status      []QueryMeta_ComputeStatus `protobuf:"varint,2,rep,packed,name=status,proto3,enum=FederatedQuery.QueryMeta_ComputeStatus"`
+	xxx_hidden_Mode        []ExecuteMode             `protobuf:"varint,3,rep,packed,name=mode,proto3,enum=FederatedQuery.ExecuteMode"`
+	xxx_hidden_Name        string                    `protobuf:"bytes,4,opt,name=name,proto3"`
+	xxx_hidden_CreatedByMe bool                      `protobuf:"varint,5,opt,name=created_by_me,json=createdByMe,proto3"`
+	xxx_hidden_Visibility  Acl_Visibility            `protobuf:"varint,6,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	xxx_hidden_Automatic   AutomaticType             `protobuf:"varint,7,opt,name=automatic,proto3,enum=FederatedQuery.AutomaticType"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListQueriesRequest_Filter) Reset() {
@@ -6693,66 +10747,115 @@ func (x *ListQueriesRequest_Filter) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListQueriesRequest_Filter.ProtoReflect.Descriptor instead.
-func (*ListQueriesRequest_Filter) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{15, 0}
-}
-
 func (x *ListQueriesRequest_Filter) GetQueryType() QueryContent_QueryType {
 	if x != nil {
-		return x.QueryType
+		return x.xxx_hidden_QueryType
 	}
 	return QueryContent_QUERY_TYPE_UNSPECIFIED
 }
 
 func (x *ListQueriesRequest_Filter) GetStatus() []QueryMeta_ComputeStatus {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return nil
 }
 
 func (x *ListQueriesRequest_Filter) GetMode() []ExecuteMode {
 	if x != nil {
-		return x.Mode
+		return x.xxx_hidden_Mode
 	}
 	return nil
 }
 
 func (x *ListQueriesRequest_Filter) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ListQueriesRequest_Filter) GetCreatedByMe() bool {
 	if x != nil {
-		return x.CreatedByMe
+		return x.xxx_hidden_CreatedByMe
 	}
 	return false
 }
 
 func (x *ListQueriesRequest_Filter) GetVisibility() Acl_Visibility {
 	if x != nil {
-		return x.Visibility
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
 func (x *ListQueriesRequest_Filter) GetAutomatic() AutomaticType {
 	if x != nil {
-		return x.Automatic
+		return x.xxx_hidden_Automatic
 	}
 	return AutomaticType_AUTOMATIC_TYPE_UNSPECIFIED
 }
 
+func (x *ListQueriesRequest_Filter) SetQueryType(v QueryContent_QueryType) {
+	x.xxx_hidden_QueryType = v
+}
+
+func (x *ListQueriesRequest_Filter) SetStatus(v []QueryMeta_ComputeStatus) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *ListQueriesRequest_Filter) SetMode(v []ExecuteMode) {
+	x.xxx_hidden_Mode = v
+}
+
+func (x *ListQueriesRequest_Filter) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *ListQueriesRequest_Filter) SetCreatedByMe(v bool) {
+	x.xxx_hidden_CreatedByMe = v
+}
+
+func (x *ListQueriesRequest_Filter) SetVisibility(v Acl_Visibility) {
+	x.xxx_hidden_Visibility = v
+}
+
+func (x *ListQueriesRequest_Filter) SetAutomatic(v AutomaticType) {
+	x.xxx_hidden_Automatic = v
+}
+
+type ListQueriesRequest_Filter_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	QueryType   QueryContent_QueryType
+	Status      []QueryMeta_ComputeStatus
+	Mode        []ExecuteMode
+	Name        string
+	CreatedByMe bool
+	Visibility  Acl_Visibility
+	Automatic   AutomaticType
+}
+
+func (b0 ListQueriesRequest_Filter_builder) Build() *ListQueriesRequest_Filter {
+	m0 := &ListQueriesRequest_Filter{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_QueryType = b.QueryType
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Mode = b.Mode
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_CreatedByMe = b.CreatedByMe
+	x.xxx_hidden_Visibility = b.Visibility
+	x.xxx_hidden_Automatic = b.Automatic
+	return m0
+}
+
 type ListJobsRequest_Filter struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	QueryId       string                 `protobuf:"bytes,1,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
-	CreatedByMe   bool                   `protobuf:"varint,2,opt,name=created_by_me,json=createdByMe,proto3" json:"created_by_me,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_QueryId     string                 `protobuf:"bytes,1,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_CreatedByMe bool                   `protobuf:"varint,2,opt,name=created_by_me,json=createdByMe,proto3"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListJobsRequest_Filter) Reset() {
@@ -6780,33 +10883,52 @@ func (x *ListJobsRequest_Filter) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListJobsRequest_Filter.ProtoReflect.Descriptor instead.
-func (*ListJobsRequest_Filter) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{35, 0}
-}
-
 func (x *ListJobsRequest_Filter) GetQueryId() string {
 	if x != nil {
-		return x.QueryId
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *ListJobsRequest_Filter) GetCreatedByMe() bool {
 	if x != nil {
-		return x.CreatedByMe
+		return x.xxx_hidden_CreatedByMe
 	}
 	return false
 }
 
+func (x *ListJobsRequest_Filter) SetQueryId(v string) {
+	x.xxx_hidden_QueryId = v
+}
+
+func (x *ListJobsRequest_Filter) SetCreatedByMe(v bool) {
+	x.xxx_hidden_CreatedByMe = v
+}
+
+type ListJobsRequest_Filter_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	QueryId     string
+	CreatedByMe bool
+}
+
+func (b0 ListJobsRequest_Filter_builder) Build() *ListJobsRequest_Filter {
+	m0 := &ListJobsRequest_Filter{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_CreatedByMe = b.CreatedByMe
+	return m0
+}
+
 type ListConnectionsRequest_Filter struct {
-	state          protoimpl.MessageState           `protogen:"open.v1"`
-	Name           string                           `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"` // connections whose name contains the filter.name substring
-	CreatedByMe    bool                             `protobuf:"varint,2,opt,name=created_by_me,json=createdByMe,proto3" json:"created_by_me,omitempty"`
-	ConnectionType ConnectionSetting_ConnectionType `protobuf:"varint,3,opt,name=connection_type,json=connectionType,proto3,enum=FederatedQuery.ConnectionSetting_ConnectionType" json:"connection_type,omitempty"`
-	Visibility     Acl_Visibility                   `protobuf:"varint,4,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState           `protogen:"opaque.v1"`
+	xxx_hidden_Name           string                           `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_CreatedByMe    bool                             `protobuf:"varint,2,opt,name=created_by_me,json=createdByMe,proto3"`
+	xxx_hidden_ConnectionType ConnectionSetting_ConnectionType `protobuf:"varint,3,opt,name=connection_type,json=connectionType,proto3,enum=FederatedQuery.ConnectionSetting_ConnectionType"`
+	xxx_hidden_Visibility     Acl_Visibility                   `protobuf:"varint,4,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ListConnectionsRequest_Filter) Reset() {
@@ -6834,84 +10956,81 @@ func (x *ListConnectionsRequest_Filter) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListConnectionsRequest_Filter.ProtoReflect.Descriptor instead.
-func (*ListConnectionsRequest_Filter) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{57, 0}
-}
-
 func (x *ListConnectionsRequest_Filter) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ListConnectionsRequest_Filter) GetCreatedByMe() bool {
 	if x != nil {
-		return x.CreatedByMe
+		return x.xxx_hidden_CreatedByMe
 	}
 	return false
 }
 
 func (x *ListConnectionsRequest_Filter) GetConnectionType() ConnectionSetting_ConnectionType {
 	if x != nil {
-		return x.ConnectionType
+		return x.xxx_hidden_ConnectionType
 	}
 	return ConnectionSetting_CONNECTION_TYPE_UNSPECIFIED
 }
 
 func (x *ListConnectionsRequest_Filter) GetVisibility() Acl_Visibility {
 	if x != nil {
-		return x.Visibility
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
+func (x *ListConnectionsRequest_Filter) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *ListConnectionsRequest_Filter) SetCreatedByMe(v bool) {
+	x.xxx_hidden_CreatedByMe = v
+}
+
+func (x *ListConnectionsRequest_Filter) SetConnectionType(v ConnectionSetting_ConnectionType) {
+	x.xxx_hidden_ConnectionType = v
+}
+
+func (x *ListConnectionsRequest_Filter) SetVisibility(v Acl_Visibility) {
+	x.xxx_hidden_Visibility = v
+}
+
+type ListConnectionsRequest_Filter_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name           string
+	CreatedByMe    bool
+	ConnectionType ConnectionSetting_ConnectionType
+	Visibility     Acl_Visibility
+}
+
+func (b0 ListConnectionsRequest_Filter_builder) Build() *ListConnectionsRequest_Filter {
+	m0 := &ListConnectionsRequest_Filter{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_CreatedByMe = b.CreatedByMe
+	x.xxx_hidden_ConnectionType = b.ConnectionType
+	x.xxx_hidden_Visibility = b.Visibility
+	return m0
+}
+
 type ObjectStorageBinding_Subset struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PathPattern   string                 `protobuf:"bytes,1,opt,name=path_pattern,json=pathPattern,proto3" json:"path_pattern,omitempty"`
-	Format        string                 `protobuf:"bytes,2,opt,name=format,proto3" json:"format,omitempty"`
-	FormatSetting map[string]string      `protobuf:"bytes,3,rep,name=format_setting,json=formatSetting,proto3" json:"format_setting,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Compression   string                 `protobuf:"bytes,4,opt,name=compression,proto3" json:"compression,omitempty"`
-	Schema        *Schema                `protobuf:"bytes,5,opt,name=schema,proto3" json:"schema,omitempty"`
-	// Partition projection is used to speed up the processing of highly partitioned
-	// storages and automate the management of partitions. In partition projection, partition values and
-	// locations are calculated from configuration rather than read from an object storage. Depending on the
-	// specific characteristics of the query and underlying data, partition projection can significantly
-	// reduce query execution time if it uses partitioning constraints on partition metadata retrieval. Similar
-	// functionality is implemented in Athena: https://docs.aws.amazon.com/athena/latest/ug/partition-projection.html
-	// Only enum, integer and date types are supported for path generation. When using projection, there must
-	// be at least one element in partitioned_by. This behavior is introduced for symmetric query usage and
-	// compatibility with Athena behavior.
-	//
-	// Example:
-	// projection = {
-	// "projection.enabled" : "true", // used to enable and disable partitioning
-	// "projection.city.type" : "enum", // to generate the city column, the enum type will be used (enumeration of objects separated by commas)
-	// "projection.city.values" : "Washington,Roma", // column values city Washington or Roma
-	// "projection.code.type" : "enum", // to generate the code column, the enum type will be used (enumeration of objects separated by commas)
-	// "projection.code.values" : "0,1", // column values code 0 or 1
-	// "storage.location.template" : "/${city}/${code}/${device_id}" // the template to which the generated values will be substituted
-	// }
-	// partitioned_by = [ "city", "device_id" ] // a subset of columns that are included in partitioning
-	// - If storage.location.template and partitioned_by are specified together, then the rule from storage.location.template will be used.
-	// - If only partitioned_by is specified, then the Hive Metastore format will be used for storage.location.template: "/city=${city}/device_id=${device_id}"
-	// The list of paths that correspond to described projection and partitioned_by values are:
-	// "/Washington/0/${device_id}", "/Washington/1/${device_id}", "/Roma/0/${device_id}", "/Roma/1/${device_id}"
-	Projection map[string]string `protobuf:"bytes,6,rep,name=projection,proto3" json:"projection,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// By separating the data, it is possible to limit the amount of data scanned by each query, thereby improving
-	// performance and reducing costs. Therefore, user data is partition by key (in practice, this is a partition by time).
-	// The partitioned_by defines the keys on which to partition data. The columns described in partitioned_by
-	// must be specified in the schema. If projection is not specified, the template will be generated according to
-	// partitioned_by. Similar functionality is implemented in Athena: https://docs.aws.amazon.com/athena/latest/ug/partitions.html
-	//
-	// Example:
-	// partitioned_by = [ "city", "code", "device_id" ]
-	// The corresponding storage.location.template will be as follows:
-	// "/city=${city}/code=${code}/device_id=${device_id}"
-	PartitionedBy []string `protobuf:"bytes,7,rep,name=partitioned_by,json=partitionedBy,proto3" json:"partitioned_by,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PathPattern   string                 `protobuf:"bytes,1,opt,name=path_pattern,json=pathPattern,proto3"`
+	xxx_hidden_Format        string                 `protobuf:"bytes,2,opt,name=format,proto3"`
+	xxx_hidden_FormatSetting map[string]string      `protobuf:"bytes,3,rep,name=format_setting,json=formatSetting,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_Compression   string                 `protobuf:"bytes,4,opt,name=compression,proto3"`
+	xxx_hidden_Schema        *Schema                `protobuf:"bytes,5,opt,name=schema,proto3"`
+	xxx_hidden_Projection    map[string]string      `protobuf:"bytes,6,rep,name=projection,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_PartitionedBy []string               `protobuf:"bytes,7,rep,name=partitioned_by,json=partitionedBy,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ObjectStorageBinding_Subset) Reset() {
@@ -6939,68 +11058,162 @@ func (x *ObjectStorageBinding_Subset) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ObjectStorageBinding_Subset.ProtoReflect.Descriptor instead.
-func (*ObjectStorageBinding_Subset) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{77, 0}
-}
-
 func (x *ObjectStorageBinding_Subset) GetPathPattern() string {
 	if x != nil {
-		return x.PathPattern
+		return x.xxx_hidden_PathPattern
 	}
 	return ""
 }
 
 func (x *ObjectStorageBinding_Subset) GetFormat() string {
 	if x != nil {
-		return x.Format
+		return x.xxx_hidden_Format
 	}
 	return ""
 }
 
 func (x *ObjectStorageBinding_Subset) GetFormatSetting() map[string]string {
 	if x != nil {
-		return x.FormatSetting
+		return x.xxx_hidden_FormatSetting
 	}
 	return nil
 }
 
 func (x *ObjectStorageBinding_Subset) GetCompression() string {
 	if x != nil {
-		return x.Compression
+		return x.xxx_hidden_Compression
 	}
 	return ""
 }
 
 func (x *ObjectStorageBinding_Subset) GetSchema() *Schema {
 	if x != nil {
-		return x.Schema
+		return x.xxx_hidden_Schema
 	}
 	return nil
 }
 
 func (x *ObjectStorageBinding_Subset) GetProjection() map[string]string {
 	if x != nil {
-		return x.Projection
+		return x.xxx_hidden_Projection
 	}
 	return nil
 }
 
 func (x *ObjectStorageBinding_Subset) GetPartitionedBy() []string {
 	if x != nil {
-		return x.PartitionedBy
+		return x.xxx_hidden_PartitionedBy
 	}
 	return nil
 }
 
+func (x *ObjectStorageBinding_Subset) SetPathPattern(v string) {
+	x.xxx_hidden_PathPattern = v
+}
+
+func (x *ObjectStorageBinding_Subset) SetFormat(v string) {
+	x.xxx_hidden_Format = v
+}
+
+func (x *ObjectStorageBinding_Subset) SetFormatSetting(v map[string]string) {
+	x.xxx_hidden_FormatSetting = v
+}
+
+func (x *ObjectStorageBinding_Subset) SetCompression(v string) {
+	x.xxx_hidden_Compression = v
+}
+
+func (x *ObjectStorageBinding_Subset) SetSchema(v *Schema) {
+	x.xxx_hidden_Schema = v
+}
+
+func (x *ObjectStorageBinding_Subset) SetProjection(v map[string]string) {
+	x.xxx_hidden_Projection = v
+}
+
+func (x *ObjectStorageBinding_Subset) SetPartitionedBy(v []string) {
+	x.xxx_hidden_PartitionedBy = v
+}
+
+func (x *ObjectStorageBinding_Subset) HasSchema() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Schema != nil
+}
+
+func (x *ObjectStorageBinding_Subset) ClearSchema() {
+	x.xxx_hidden_Schema = nil
+}
+
+type ObjectStorageBinding_Subset_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PathPattern   string
+	Format        string
+	FormatSetting map[string]string
+	Compression   string
+	Schema        *Schema
+	// Partition projection is used to speed up the processing of highly partitioned
+	// storages and automate the management of partitions. In partition projection, partition values and
+	// locations are calculated from configuration rather than read from an object storage. Depending on the
+	// specific characteristics of the query and underlying data, partition projection can significantly
+	// reduce query execution time if it uses partitioning constraints on partition metadata retrieval. Similar
+	// functionality is implemented in Athena: https://docs.aws.amazon.com/athena/latest/ug/partition-projection.html
+	// Only enum, integer and date types are supported for path generation. When using projection, there must
+	// be at least one element in partitioned_by. This behavior is introduced for symmetric query usage and
+	// compatibility with Athena behavior.
+	//
+	// Example:
+	// projection = {
+	// "projection.enabled" : "true", // used to enable and disable partitioning
+	// "projection.city.type" : "enum", // to generate the city column, the enum type will be used (enumeration of objects separated by commas)
+	// "projection.city.values" : "Washington,Roma", // column values city Washington or Roma
+	// "projection.code.type" : "enum", // to generate the code column, the enum type will be used (enumeration of objects separated by commas)
+	// "projection.code.values" : "0,1", // column values code 0 or 1
+	// "storage.location.template" : "/${city}/${code}/${device_id}" // the template to which the generated values will be substituted
+	// }
+	// partitioned_by = [ "city", "device_id" ] // a subset of columns that are included in partitioning
+	// - If storage.location.template and partitioned_by are specified together, then the rule from storage.location.template will be used.
+	// - If only partitioned_by is specified, then the Hive Metastore format will be used for storage.location.template: "/city=${city}/device_id=${device_id}"
+	// The list of paths that correspond to described projection and partitioned_by values are:
+	// "/Washington/0/${device_id}", "/Washington/1/${device_id}", "/Roma/0/${device_id}", "/Roma/1/${device_id}"
+	Projection map[string]string
+	// By separating the data, it is possible to limit the amount of data scanned by each query, thereby improving
+	// performance and reducing costs. Therefore, user data is partition by key (in practice, this is a partition by time).
+	// The partitioned_by defines the keys on which to partition data. The columns described in partitioned_by
+	// must be specified in the schema. If projection is not specified, the template will be generated according to
+	// partitioned_by. Similar functionality is implemented in Athena: https://docs.aws.amazon.com/athena/latest/ug/partitions.html
+	//
+	// Example:
+	// partitioned_by = [ "city", "code", "device_id" ]
+	// The corresponding storage.location.template will be as follows:
+	// "/city=${city}/code=${code}/device_id=${device_id}"
+	PartitionedBy []string
+}
+
+func (b0 ObjectStorageBinding_Subset_builder) Build() *ObjectStorageBinding_Subset {
+	m0 := &ObjectStorageBinding_Subset{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PathPattern = b.PathPattern
+	x.xxx_hidden_Format = b.Format
+	x.xxx_hidden_FormatSetting = b.FormatSetting
+	x.xxx_hidden_Compression = b.Compression
+	x.xxx_hidden_Schema = b.Schema
+	x.xxx_hidden_Projection = b.Projection
+	x.xxx_hidden_PartitionedBy = b.PartitionedBy
+	return m0
+}
+
 type ListBindingsRequest_Filter struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectionId  string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3" json:"connection_id,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"` // bindings whose name contains the filter.name substring
-	CreatedByMe   bool                   `protobuf:"varint,3,opt,name=created_by_me,json=createdByMe,proto3" json:"created_by_me,omitempty"`
-	Visibility    Acl_Visibility         `protobuf:"varint,4,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ConnectionId string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3"`
+	xxx_hidden_Name         string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_CreatedByMe  bool                   `protobuf:"varint,3,opt,name=created_by_me,json=createdByMe,proto3"`
+	xxx_hidden_Visibility   Acl_Visibility         `protobuf:"varint,4,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ListBindingsRequest_Filter) Reset() {
@@ -7028,37 +11241,68 @@ func (x *ListBindingsRequest_Filter) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListBindingsRequest_Filter.ProtoReflect.Descriptor instead.
-func (*ListBindingsRequest_Filter) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_federated_query_proto_rawDescGZIP(), []int{85, 0}
-}
-
 func (x *ListBindingsRequest_Filter) GetConnectionId() string {
 	if x != nil {
-		return x.ConnectionId
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *ListBindingsRequest_Filter) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ListBindingsRequest_Filter) GetCreatedByMe() bool {
 	if x != nil {
-		return x.CreatedByMe
+		return x.xxx_hidden_CreatedByMe
 	}
 	return false
 }
 
 func (x *ListBindingsRequest_Filter) GetVisibility() Acl_Visibility {
 	if x != nil {
-		return x.Visibility
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
+}
+
+func (x *ListBindingsRequest_Filter) SetConnectionId(v string) {
+	x.xxx_hidden_ConnectionId = v
+}
+
+func (x *ListBindingsRequest_Filter) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *ListBindingsRequest_Filter) SetCreatedByMe(v bool) {
+	x.xxx_hidden_CreatedByMe = v
+}
+
+func (x *ListBindingsRequest_Filter) SetVisibility(v Acl_Visibility) {
+	x.xxx_hidden_Visibility = v
+}
+
+type ListBindingsRequest_Filter_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ConnectionId string
+	Name         string
+	CreatedByMe  bool
+	Visibility   Acl_Visibility
+}
+
+func (b0 ListBindingsRequest_Filter_builder) Build() *ListBindingsRequest_Filter {
+	m0 := &ListBindingsRequest_Filter{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_CreatedByMe = b.CreatedByMe
+	x.xxx_hidden_Visibility = b.Visibility
+	return m0
 }
 
 var File_draft_protos_ydb_federated_query_proto protoreflect.FileDescriptor
@@ -7655,18 +11899,6 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	"\rNOT_AUTOMATIC\x10\x02Br\n" +
 	"$tech.ydb.proto.draft.federated.queryZGgithub.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_FederatedQuery\xf8\x01\x01b\x06proto3"
 
-var (
-	file_draft_protos_ydb_federated_query_proto_rawDescOnce sync.Once
-	file_draft_protos_ydb_federated_query_proto_rawDescData []byte
-)
-
-func file_draft_protos_ydb_federated_query_proto_rawDescGZIP() []byte {
-	file_draft_protos_ydb_federated_query_proto_rawDescOnce.Do(func() {
-		file_draft_protos_ydb_federated_query_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_draft_protos_ydb_federated_query_proto_rawDesc), len(file_draft_protos_ydb_federated_query_proto_rawDesc)))
-	})
-	return file_draft_protos_ydb_federated_query_proto_rawDescData
-}
-
 var file_draft_protos_ydb_federated_query_proto_enumTypes = make([]protoimpl.EnumInfo, 10)
 var file_draft_protos_ydb_federated_query_proto_msgTypes = make([]protoimpl.MessageInfo, 109)
 var file_draft_protos_ydb_federated_query_proto_goTypes = []any{
@@ -7976,36 +12208,36 @@ func file_draft_protos_ydb_federated_query_proto_init() {
 		return
 	}
 	file_draft_protos_ydb_federated_query_proto_msgTypes[1].OneofWrappers = []any{
-		(*Limits_ExecutionTimeout)(nil),
-		(*Limits_ExecutionDeadline)(nil),
+		(*limits_ExecutionTimeout)(nil),
+		(*limits_ExecutionDeadline)(nil),
 	}
 	file_draft_protos_ydb_federated_query_proto_msgTypes[2].OneofWrappers = []any{
-		(*StreamingDisposition_Oldest)(nil),
-		(*StreamingDisposition_Fresh)(nil),
-		(*StreamingDisposition_FromTime_)(nil),
-		(*StreamingDisposition_TimeAgo_)(nil),
-		(*StreamingDisposition_FromLastCheckpoint_)(nil),
+		(*streamingDisposition_Oldest)(nil),
+		(*streamingDisposition_Fresh)(nil),
+		(*streamingDisposition_FromTime_)(nil),
+		(*streamingDisposition_TimeAgo_)(nil),
+		(*streamingDisposition_FromLastCheckpoint_)(nil),
 	}
 	file_draft_protos_ydb_federated_query_proto_msgTypes[5].OneofWrappers = []any{
-		(*QueryMeta_AbortedBy)(nil),
-		(*QueryMeta_PausedBy)(nil),
+		(*queryMeta_AbortedBy)(nil),
+		(*queryMeta_PausedBy)(nil),
 	}
 	file_draft_protos_ydb_federated_query_proto_msgTypes[44].OneofWrappers = []any{
-		(*IamAuth_CurrentIam)(nil),
-		(*IamAuth_ServiceAccount)(nil),
-		(*IamAuth_None)(nil),
+		(*iamAuth_CurrentIam)(nil),
+		(*iamAuth_ServiceAccount)(nil),
+		(*iamAuth_None)(nil),
 	}
 	file_draft_protos_ydb_federated_query_proto_msgTypes[51].OneofWrappers = []any{
-		(*ConnectionSetting_YdbDatabase)(nil),
-		(*ConnectionSetting_ClickhouseCluster)(nil),
-		(*ConnectionSetting_DataStreams)(nil),
-		(*ConnectionSetting_ObjectStorage)(nil),
-		(*ConnectionSetting_Monitoring)(nil),
-		(*ConnectionSetting_PostgresqlCluster)(nil),
+		(*connectionSetting_YdbDatabase)(nil),
+		(*connectionSetting_ClickhouseCluster)(nil),
+		(*connectionSetting_DataStreams)(nil),
+		(*connectionSetting_ObjectStorage)(nil),
+		(*connectionSetting_Monitoring)(nil),
+		(*connectionSetting_PostgresqlCluster)(nil),
 	}
 	file_draft_protos_ydb_federated_query_proto_msgTypes[78].OneofWrappers = []any{
-		(*BindingSetting_DataStreams)(nil),
-		(*BindingSetting_ObjectStorage)(nil),
+		(*bindingSetting_DataStreams)(nil),
+		(*bindingSetting_ObjectStorage)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

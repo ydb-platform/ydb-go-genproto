@@ -10,7 +10,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -65,13 +64,8 @@ func (x FeatureFlag_Status) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use FeatureFlag_Status.Descriptor instead.
-func (FeatureFlag_Status) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_common_proto_rawDescGZIP(), []int{0, 0}
-}
-
 type FeatureFlag struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -101,17 +95,23 @@ func (x *FeatureFlag) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FeatureFlag.ProtoReflect.Descriptor instead.
-func (*FeatureFlag) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_common_proto_rawDescGZIP(), []int{0}
+type FeatureFlag_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 FeatureFlag_builder) Build() *FeatureFlag {
+	m0 := &FeatureFlag{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type CostInfo struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Total amount of request units (RU), consumed by the operation.
-	ConsumedUnits float64 `protobuf:"fixed64,1,opt,name=consumed_units,json=consumedUnits,proto3" json:"consumed_units,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ConsumedUnits float64                `protobuf:"fixed64,1,opt,name=consumed_units,json=consumedUnits,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *CostInfo) Reset() {
@@ -139,23 +139,37 @@ func (x *CostInfo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CostInfo.ProtoReflect.Descriptor instead.
-func (*CostInfo) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_common_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *CostInfo) GetConsumedUnits() float64 {
 	if x != nil {
-		return x.ConsumedUnits
+		return x.xxx_hidden_ConsumedUnits
 	}
 	return 0
 }
 
+func (x *CostInfo) SetConsumedUnits(v float64) {
+	x.xxx_hidden_ConsumedUnits = v
+}
+
+type CostInfo_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Total amount of request units (RU), consumed by the operation.
+	ConsumedUnits float64
+}
+
+func (b0 CostInfo_builder) Build() *CostInfo {
+	m0 := &CostInfo{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ConsumedUnits = b.ConsumedUnits
+	return m0
+}
+
 type QuotaExceeded struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Disk          bool                   `protobuf:"varint,1,opt,name=disk,proto3" json:"disk,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Disk bool                   `protobuf:"varint,1,opt,name=disk,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *QuotaExceeded) Reset() {
@@ -183,25 +197,38 @@ func (x *QuotaExceeded) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QuotaExceeded.ProtoReflect.Descriptor instead.
-func (*QuotaExceeded) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_common_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *QuotaExceeded) GetDisk() bool {
 	if x != nil {
-		return x.Disk
+		return x.xxx_hidden_Disk
 	}
 	return false
 }
 
+func (x *QuotaExceeded) SetDisk(v bool) {
+	x.xxx_hidden_Disk = v
+}
+
+type QuotaExceeded_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Disk bool
+}
+
+func (b0 QuotaExceeded_builder) Build() *QuotaExceeded {
+	m0 := &QuotaExceeded{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Disk = b.Disk
+	return m0
+}
+
 // Specifies a point in database time
 type VirtualTimestamp struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PlanStep      uint64                 `protobuf:"varint,1,opt,name=plan_step,json=planStep,proto3" json:"plan_step,omitempty"`
-	TxId          uint64                 `protobuf:"varint,2,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PlanStep uint64                 `protobuf:"varint,1,opt,name=plan_step,json=planStep,proto3"`
+	xxx_hidden_TxId     uint64                 `protobuf:"varint,2,opt,name=tx_id,json=txId,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *VirtualTimestamp) Reset() {
@@ -229,23 +256,42 @@ func (x *VirtualTimestamp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VirtualTimestamp.ProtoReflect.Descriptor instead.
-func (*VirtualTimestamp) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_common_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *VirtualTimestamp) GetPlanStep() uint64 {
 	if x != nil {
-		return x.PlanStep
+		return x.xxx_hidden_PlanStep
 	}
 	return 0
 }
 
 func (x *VirtualTimestamp) GetTxId() uint64 {
 	if x != nil {
-		return x.TxId
+		return x.xxx_hidden_TxId
 	}
 	return 0
+}
+
+func (x *VirtualTimestamp) SetPlanStep(v uint64) {
+	x.xxx_hidden_PlanStep = v
+}
+
+func (x *VirtualTimestamp) SetTxId(v uint64) {
+	x.xxx_hidden_TxId = v
+}
+
+type VirtualTimestamp_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PlanStep uint64
+	TxId     uint64
+}
+
+func (b0 VirtualTimestamp_builder) Build() *VirtualTimestamp {
+	m0 := &VirtualTimestamp{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PlanStep = b.PlanStep
+	x.xxx_hidden_TxId = b.TxId
+	return m0
 }
 
 var File_protos_ydb_common_proto protoreflect.FileDescriptor
@@ -266,18 +312,6 @@ const file_protos_ydb_common_proto_rawDesc = "" +
 	"\tplan_step\x18\x01 \x01(\x04R\bplanStep\x12\x13\n" +
 	"\x05tx_id\x18\x02 \x01(\x04R\x04txIdB\\\n" +
 	"\x15tech.ydb.proto.commonB\fCommonProtosZ2github.com/ydb-platform/ydb-go-genproto/protos/Ydb\xf8\x01\x01b\x06proto3"
-
-var (
-	file_protos_ydb_common_proto_rawDescOnce sync.Once
-	file_protos_ydb_common_proto_rawDescData []byte
-)
-
-func file_protos_ydb_common_proto_rawDescGZIP() []byte {
-	file_protos_ydb_common_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_common_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_common_proto_rawDesc), len(file_protos_ydb_common_proto_rawDesc)))
-	})
-	return file_protos_ydb_common_proto_rawDescData
-}
 
 var file_protos_ydb_common_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_protos_ydb_common_proto_msgTypes = make([]protoimpl.MessageInfo, 4)

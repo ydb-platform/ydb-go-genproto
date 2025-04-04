@@ -10,7 +10,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -22,10 +21,10 @@ const (
 )
 
 type ArrowBatchSettings struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Schema        []byte                 `protobuf:"bytes,1,opt,name=schema,proto3" json:"schema,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Schema []byte                 `protobuf:"bytes,1,opt,name=schema,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ArrowBatchSettings) Reset() {
@@ -53,31 +52,43 @@ func (x *ArrowBatchSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ArrowBatchSettings.ProtoReflect.Descriptor instead.
-func (*ArrowBatchSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_formats_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *ArrowBatchSettings) GetSchema() []byte {
 	if x != nil {
-		return x.Schema
+		return x.xxx_hidden_Schema
 	}
 	return nil
 }
 
+func (x *ArrowBatchSettings) SetSchema(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Schema = v
+}
+
+type ArrowBatchSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Schema []byte
+}
+
+func (b0 ArrowBatchSettings_builder) Build() *ArrowBatchSettings {
+	m0 := &ArrowBatchSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Schema = b.Schema
+	return m0
+}
+
 type CsvSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Number of rows to skip before CSV data. It should be present only in the first upsert of CSV file.
-	SkipRows uint32 `protobuf:"varint,1,opt,name=skip_rows,json=skipRows,proto3" json:"skip_rows,omitempty"`
-	// Fields delimiter in CSV file. It's "," if not set.
-	Delimiter []byte `protobuf:"bytes,2,opt,name=delimiter,proto3" json:"delimiter,omitempty"`
-	// String value that would be interpreted as NULL.
-	NullValue []byte `protobuf:"bytes,3,opt,name=null_value,json=nullValue,proto3" json:"null_value,omitempty"`
-	// First not skipped line is a CSV header (list of column names).
-	Header        bool                 `protobuf:"varint,4,opt,name=header,proto3" json:"header,omitempty"`
-	Quoting       *CsvSettings_Quoting `protobuf:"bytes,5,opt,name=quoting,proto3" json:"quoting,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SkipRows  uint32                 `protobuf:"varint,1,opt,name=skip_rows,json=skipRows,proto3"`
+	xxx_hidden_Delimiter []byte                 `protobuf:"bytes,2,opt,name=delimiter,proto3"`
+	xxx_hidden_NullValue []byte                 `protobuf:"bytes,3,opt,name=null_value,json=nullValue,proto3"`
+	xxx_hidden_Header    bool                   `protobuf:"varint,4,opt,name=header,proto3"`
+	xxx_hidden_Quoting   *CsvSettings_Quoting   `protobuf:"bytes,5,opt,name=quoting,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CsvSettings) Reset() {
@@ -105,53 +116,111 @@ func (x *CsvSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CsvSettings.ProtoReflect.Descriptor instead.
-func (*CsvSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_formats_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *CsvSettings) GetSkipRows() uint32 {
 	if x != nil {
-		return x.SkipRows
+		return x.xxx_hidden_SkipRows
 	}
 	return 0
 }
 
 func (x *CsvSettings) GetDelimiter() []byte {
 	if x != nil {
-		return x.Delimiter
+		return x.xxx_hidden_Delimiter
 	}
 	return nil
 }
 
 func (x *CsvSettings) GetNullValue() []byte {
 	if x != nil {
-		return x.NullValue
+		return x.xxx_hidden_NullValue
 	}
 	return nil
 }
 
 func (x *CsvSettings) GetHeader() bool {
 	if x != nil {
-		return x.Header
+		return x.xxx_hidden_Header
 	}
 	return false
 }
 
 func (x *CsvSettings) GetQuoting() *CsvSettings_Quoting {
 	if x != nil {
-		return x.Quoting
+		return x.xxx_hidden_Quoting
 	}
 	return nil
 }
 
+func (x *CsvSettings) SetSkipRows(v uint32) {
+	x.xxx_hidden_SkipRows = v
+}
+
+func (x *CsvSettings) SetDelimiter(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Delimiter = v
+}
+
+func (x *CsvSettings) SetNullValue(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_NullValue = v
+}
+
+func (x *CsvSettings) SetHeader(v bool) {
+	x.xxx_hidden_Header = v
+}
+
+func (x *CsvSettings) SetQuoting(v *CsvSettings_Quoting) {
+	x.xxx_hidden_Quoting = v
+}
+
+func (x *CsvSettings) HasQuoting() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Quoting != nil
+}
+
+func (x *CsvSettings) ClearQuoting() {
+	x.xxx_hidden_Quoting = nil
+}
+
+type CsvSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Number of rows to skip before CSV data. It should be present only in the first upsert of CSV file.
+	SkipRows uint32
+	// Fields delimiter in CSV file. It's "," if not set.
+	Delimiter []byte
+	// String value that would be interpreted as NULL.
+	NullValue []byte
+	// First not skipped line is a CSV header (list of column names).
+	Header  bool
+	Quoting *CsvSettings_Quoting
+}
+
+func (b0 CsvSettings_builder) Build() *CsvSettings {
+	m0 := &CsvSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SkipRows = b.SkipRows
+	x.xxx_hidden_Delimiter = b.Delimiter
+	x.xxx_hidden_NullValue = b.NullValue
+	x.xxx_hidden_Header = b.Header
+	x.xxx_hidden_Quoting = b.Quoting
+	return m0
+}
+
 type CsvSettings_Quoting struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Disabled            bool                   `protobuf:"varint,1,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	QuoteChar           []byte                 `protobuf:"bytes,2,opt,name=quote_char,json=quoteChar,proto3" json:"quote_char,omitempty"`
-	DoubleQuoteDisabled bool                   `protobuf:"varint,3,opt,name=double_quote_disabled,json=doubleQuoteDisabled,proto3" json:"double_quote_disabled,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Disabled            bool                   `protobuf:"varint,1,opt,name=disabled,proto3"`
+	xxx_hidden_QuoteChar           []byte                 `protobuf:"bytes,2,opt,name=quote_char,json=quoteChar,proto3"`
+	xxx_hidden_DoubleQuoteDisabled bool                   `protobuf:"varint,3,opt,name=double_quote_disabled,json=doubleQuoteDisabled,proto3"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *CsvSettings_Quoting) Reset() {
@@ -179,30 +248,58 @@ func (x *CsvSettings_Quoting) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CsvSettings_Quoting.ProtoReflect.Descriptor instead.
-func (*CsvSettings_Quoting) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_formats_proto_rawDescGZIP(), []int{1, 0}
-}
-
 func (x *CsvSettings_Quoting) GetDisabled() bool {
 	if x != nil {
-		return x.Disabled
+		return x.xxx_hidden_Disabled
 	}
 	return false
 }
 
 func (x *CsvSettings_Quoting) GetQuoteChar() []byte {
 	if x != nil {
-		return x.QuoteChar
+		return x.xxx_hidden_QuoteChar
 	}
 	return nil
 }
 
 func (x *CsvSettings_Quoting) GetDoubleQuoteDisabled() bool {
 	if x != nil {
-		return x.DoubleQuoteDisabled
+		return x.xxx_hidden_DoubleQuoteDisabled
 	}
 	return false
+}
+
+func (x *CsvSettings_Quoting) SetDisabled(v bool) {
+	x.xxx_hidden_Disabled = v
+}
+
+func (x *CsvSettings_Quoting) SetQuoteChar(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_QuoteChar = v
+}
+
+func (x *CsvSettings_Quoting) SetDoubleQuoteDisabled(v bool) {
+	x.xxx_hidden_DoubleQuoteDisabled = v
+}
+
+type CsvSettings_Quoting_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Disabled            bool
+	QuoteChar           []byte
+	DoubleQuoteDisabled bool
+}
+
+func (b0 CsvSettings_Quoting_builder) Build() *CsvSettings_Quoting {
+	m0 := &CsvSettings_Quoting{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Disabled = b.Disabled
+	x.xxx_hidden_QuoteChar = b.QuoteChar
+	x.xxx_hidden_DoubleQuoteDisabled = b.DoubleQuoteDisabled
+	return m0
 }
 
 var File_protos_ydb_formats_proto protoreflect.FileDescriptor
@@ -225,18 +322,6 @@ const file_protos_ydb_formats_proto_rawDesc = "" +
 	"quote_char\x18\x02 \x01(\fR\tquoteChar\x122\n" +
 	"\x15double_quote_disabled\x18\x03 \x01(\bR\x13doubleQuoteDisabledBW\n" +
 	"\x16tech.ydb.proto.formatsZ:github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Formats\xf8\x01\x01b\x06proto3"
-
-var (
-	file_protos_ydb_formats_proto_rawDescOnce sync.Once
-	file_protos_ydb_formats_proto_rawDescData []byte
-)
-
-func file_protos_ydb_formats_proto_rawDescGZIP() []byte {
-	file_protos_ydb_formats_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_formats_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_formats_proto_rawDesc), len(file_protos_ydb_formats_proto_rawDesc)))
-	})
-	return file_protos_ydb_formats_proto_rawDescData
-}
 
 var file_protos_ydb_formats_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_protos_ydb_formats_proto_goTypes = []any{

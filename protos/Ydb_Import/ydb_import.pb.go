@@ -13,7 +13,6 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -80,11 +79,6 @@ func (x ImportProgress_Progress) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ImportProgress_Progress.Descriptor instead.
-func (ImportProgress_Progress) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{0, 0}
-}
-
 type ImportFromS3Settings_Scheme int32
 
 const (
@@ -129,14 +123,9 @@ func (x ImportFromS3Settings_Scheme) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ImportFromS3Settings_Scheme.Descriptor instead.
-func (ImportFromS3Settings_Scheme) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{2, 0}
-}
-
 // / Common
 type ImportProgress struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -166,19 +155,26 @@ func (x *ImportProgress) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ImportProgress.ProtoReflect.Descriptor instead.
-func (*ImportProgress) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{0}
+type ImportProgress_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ImportProgress_builder) Build() *ImportProgress {
+	m0 := &ImportProgress{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ImportItemProgress struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	PartsTotal     uint32                 `protobuf:"varint,1,opt,name=parts_total,json=partsTotal,proto3" json:"parts_total,omitempty"`
-	PartsCompleted uint32                 `protobuf:"varint,2,opt,name=parts_completed,json=partsCompleted,proto3" json:"parts_completed,omitempty"`
-	StartTime      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartsTotal     uint32                 `protobuf:"varint,1,opt,name=parts_total,json=partsTotal,proto3"`
+	xxx_hidden_PartsCompleted uint32                 `protobuf:"varint,2,opt,name=parts_completed,json=partsCompleted,proto3"`
+	xxx_hidden_StartTime      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3"`
+	xxx_hidden_EndTime        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ImportItemProgress) Reset() {
@@ -206,59 +202,107 @@ func (x *ImportItemProgress) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ImportItemProgress.ProtoReflect.Descriptor instead.
-func (*ImportItemProgress) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *ImportItemProgress) GetPartsTotal() uint32 {
 	if x != nil {
-		return x.PartsTotal
+		return x.xxx_hidden_PartsTotal
 	}
 	return 0
 }
 
 func (x *ImportItemProgress) GetPartsCompleted() uint32 {
 	if x != nil {
-		return x.PartsCompleted
+		return x.xxx_hidden_PartsCompleted
 	}
 	return 0
 }
 
 func (x *ImportItemProgress) GetStartTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.StartTime
+		return x.xxx_hidden_StartTime
 	}
 	return nil
 }
 
 func (x *ImportItemProgress) GetEndTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.EndTime
+		return x.xxx_hidden_EndTime
 	}
 	return nil
 }
 
+func (x *ImportItemProgress) SetPartsTotal(v uint32) {
+	x.xxx_hidden_PartsTotal = v
+}
+
+func (x *ImportItemProgress) SetPartsCompleted(v uint32) {
+	x.xxx_hidden_PartsCompleted = v
+}
+
+func (x *ImportItemProgress) SetStartTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_StartTime = v
+}
+
+func (x *ImportItemProgress) SetEndTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_EndTime = v
+}
+
+func (x *ImportItemProgress) HasStartTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StartTime != nil
+}
+
+func (x *ImportItemProgress) HasEndTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_EndTime != nil
+}
+
+func (x *ImportItemProgress) ClearStartTime() {
+	x.xxx_hidden_StartTime = nil
+}
+
+func (x *ImportItemProgress) ClearEndTime() {
+	x.xxx_hidden_EndTime = nil
+}
+
+type ImportItemProgress_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PartsTotal     uint32
+	PartsCompleted uint32
+	StartTime      *timestamppb.Timestamp
+	EndTime        *timestamppb.Timestamp
+}
+
+func (b0 ImportItemProgress_builder) Build() *ImportItemProgress {
+	m0 := &ImportItemProgress{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartsTotal = b.PartsTotal
+	x.xxx_hidden_PartsCompleted = b.PartsCompleted
+	x.xxx_hidden_StartTime = b.StartTime
+	x.xxx_hidden_EndTime = b.EndTime
+	return m0
+}
+
 // / S3
 type ImportFromS3Settings struct {
-	state           protoimpl.MessageState       `protogen:"open.v1"`
-	Endpoint        string                       `protobuf:"bytes,1,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	Scheme          ImportFromS3Settings_Scheme  `protobuf:"varint,2,opt,name=scheme,proto3,enum=Ydb.Import.ImportFromS3Settings_Scheme" json:"scheme,omitempty"` // HTTPS if not specified
-	Bucket          string                       `protobuf:"bytes,3,opt,name=bucket,proto3" json:"bucket,omitempty"`
-	AccessKey       string                       `protobuf:"bytes,4,opt,name=access_key,json=accessKey,proto3" json:"access_key,omitempty"`
-	SecretKey       string                       `protobuf:"bytes,5,opt,name=secret_key,json=secretKey,proto3" json:"secret_key,omitempty"`
-	Items           []*ImportFromS3Settings_Item `protobuf:"bytes,6,rep,name=items,proto3" json:"items,omitempty"`
-	Description     string                       `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
-	NumberOfRetries uint32                       `protobuf:"varint,8,opt,name=number_of_retries,json=numberOfRetries,proto3" json:"number_of_retries,omitempty"`
-	// Region to use in requests
-	Region string `protobuf:"bytes,9,opt,name=region,proto3" json:"region,omitempty"`
-	// disables virtual hosting style buckets aws s3 feature
-	// it changes the way bucket appended to url. e.g. https//bucket_name.example.com/ vs https://example.com/bucket_name
-	// details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html
-	// it is especially useful for custom s3 implementations
-	DisableVirtualAddressing bool `protobuf:"varint,10,opt,name=disable_virtual_addressing,json=disableVirtualAddressing,proto3" json:"disable_virtual_addressing,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                               protoimpl.MessageState        `protogen:"opaque.v1"`
+	xxx_hidden_Endpoint                 string                        `protobuf:"bytes,1,opt,name=endpoint,proto3"`
+	xxx_hidden_Scheme                   ImportFromS3Settings_Scheme   `protobuf:"varint,2,opt,name=scheme,proto3,enum=Ydb.Import.ImportFromS3Settings_Scheme"`
+	xxx_hidden_Bucket                   string                        `protobuf:"bytes,3,opt,name=bucket,proto3"`
+	xxx_hidden_AccessKey                string                        `protobuf:"bytes,4,opt,name=access_key,json=accessKey,proto3"`
+	xxx_hidden_SecretKey                string                        `protobuf:"bytes,5,opt,name=secret_key,json=secretKey,proto3"`
+	xxx_hidden_Items                    *[]*ImportFromS3Settings_Item `protobuf:"bytes,6,rep,name=items,proto3"`
+	xxx_hidden_Description              string                        `protobuf:"bytes,7,opt,name=description,proto3"`
+	xxx_hidden_NumberOfRetries          uint32                        `protobuf:"varint,8,opt,name=number_of_retries,json=numberOfRetries,proto3"`
+	xxx_hidden_Region                   string                        `protobuf:"bytes,9,opt,name=region,proto3"`
+	xxx_hidden_DisableVirtualAddressing bool                          `protobuf:"varint,10,opt,name=disable_virtual_addressing,json=disableVirtualAddressing,proto3"`
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
 }
 
 func (x *ImportFromS3Settings) Reset() {
@@ -286,83 +330,157 @@ func (x *ImportFromS3Settings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ImportFromS3Settings.ProtoReflect.Descriptor instead.
-func (*ImportFromS3Settings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *ImportFromS3Settings) GetEndpoint() string {
 	if x != nil {
-		return x.Endpoint
+		return x.xxx_hidden_Endpoint
 	}
 	return ""
 }
 
 func (x *ImportFromS3Settings) GetScheme() ImportFromS3Settings_Scheme {
 	if x != nil {
-		return x.Scheme
+		return x.xxx_hidden_Scheme
 	}
 	return ImportFromS3Settings_UNSPECIFIED
 }
 
 func (x *ImportFromS3Settings) GetBucket() string {
 	if x != nil {
-		return x.Bucket
+		return x.xxx_hidden_Bucket
 	}
 	return ""
 }
 
 func (x *ImportFromS3Settings) GetAccessKey() string {
 	if x != nil {
-		return x.AccessKey
+		return x.xxx_hidden_AccessKey
 	}
 	return ""
 }
 
 func (x *ImportFromS3Settings) GetSecretKey() string {
 	if x != nil {
-		return x.SecretKey
+		return x.xxx_hidden_SecretKey
 	}
 	return ""
 }
 
 func (x *ImportFromS3Settings) GetItems() []*ImportFromS3Settings_Item {
 	if x != nil {
-		return x.Items
+		if x.xxx_hidden_Items != nil {
+			return *x.xxx_hidden_Items
+		}
 	}
 	return nil
 }
 
 func (x *ImportFromS3Settings) GetDescription() string {
 	if x != nil {
-		return x.Description
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
 func (x *ImportFromS3Settings) GetNumberOfRetries() uint32 {
 	if x != nil {
-		return x.NumberOfRetries
+		return x.xxx_hidden_NumberOfRetries
 	}
 	return 0
 }
 
 func (x *ImportFromS3Settings) GetRegion() string {
 	if x != nil {
-		return x.Region
+		return x.xxx_hidden_Region
 	}
 	return ""
 }
 
 func (x *ImportFromS3Settings) GetDisableVirtualAddressing() bool {
 	if x != nil {
-		return x.DisableVirtualAddressing
+		return x.xxx_hidden_DisableVirtualAddressing
 	}
 	return false
 }
 
+func (x *ImportFromS3Settings) SetEndpoint(v string) {
+	x.xxx_hidden_Endpoint = v
+}
+
+func (x *ImportFromS3Settings) SetScheme(v ImportFromS3Settings_Scheme) {
+	x.xxx_hidden_Scheme = v
+}
+
+func (x *ImportFromS3Settings) SetBucket(v string) {
+	x.xxx_hidden_Bucket = v
+}
+
+func (x *ImportFromS3Settings) SetAccessKey(v string) {
+	x.xxx_hidden_AccessKey = v
+}
+
+func (x *ImportFromS3Settings) SetSecretKey(v string) {
+	x.xxx_hidden_SecretKey = v
+}
+
+func (x *ImportFromS3Settings) SetItems(v []*ImportFromS3Settings_Item) {
+	x.xxx_hidden_Items = &v
+}
+
+func (x *ImportFromS3Settings) SetDescription(v string) {
+	x.xxx_hidden_Description = v
+}
+
+func (x *ImportFromS3Settings) SetNumberOfRetries(v uint32) {
+	x.xxx_hidden_NumberOfRetries = v
+}
+
+func (x *ImportFromS3Settings) SetRegion(v string) {
+	x.xxx_hidden_Region = v
+}
+
+func (x *ImportFromS3Settings) SetDisableVirtualAddressing(v bool) {
+	x.xxx_hidden_DisableVirtualAddressing = v
+}
+
+type ImportFromS3Settings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Endpoint        string
+	Scheme          ImportFromS3Settings_Scheme
+	Bucket          string
+	AccessKey       string
+	SecretKey       string
+	Items           []*ImportFromS3Settings_Item
+	Description     string
+	NumberOfRetries uint32
+	// Region to use in requests
+	Region string
+	// disables virtual hosting style buckets aws s3 feature
+	// it changes the way bucket appended to url. e.g. https//bucket_name.example.com/ vs https://example.com/bucket_name
+	// details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html
+	// it is especially useful for custom s3 implementations
+	DisableVirtualAddressing bool
+}
+
+func (b0 ImportFromS3Settings_builder) Build() *ImportFromS3Settings {
+	m0 := &ImportFromS3Settings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Endpoint = b.Endpoint
+	x.xxx_hidden_Scheme = b.Scheme
+	x.xxx_hidden_Bucket = b.Bucket
+	x.xxx_hidden_AccessKey = b.AccessKey
+	x.xxx_hidden_SecretKey = b.SecretKey
+	x.xxx_hidden_Items = &b.Items
+	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_NumberOfRetries = b.NumberOfRetries
+	x.xxx_hidden_Region = b.Region
+	x.xxx_hidden_DisableVirtualAddressing = b.DisableVirtualAddressing
+	return m0
+}
+
 type ImportFromS3Result struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -392,18 +510,25 @@ func (x *ImportFromS3Result) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ImportFromS3Result.ProtoReflect.Descriptor instead.
-func (*ImportFromS3Result) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{3}
+type ImportFromS3Result_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ImportFromS3Result_builder) Build() *ImportFromS3Result {
+	m0 := &ImportFromS3Result{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ImportFromS3Metadata struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Settings      *ImportFromS3Settings   `protobuf:"bytes,1,opt,name=settings,proto3" json:"settings,omitempty"`
-	Progress      ImportProgress_Progress `protobuf:"varint,2,opt,name=progress,proto3,enum=Ydb.Import.ImportProgress_Progress" json:"progress,omitempty"`
-	ItemsProgress []*ImportItemProgress   `protobuf:"bytes,3,rep,name=items_progress,json=itemsProgress,proto3" json:"items_progress,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Settings      *ImportFromS3Settings   `protobuf:"bytes,1,opt,name=settings,proto3"`
+	xxx_hidden_Progress      ImportProgress_Progress `protobuf:"varint,2,opt,name=progress,proto3,enum=Ydb.Import.ImportProgress_Progress"`
+	xxx_hidden_ItemsProgress *[]*ImportItemProgress  `protobuf:"bytes,3,rep,name=items_progress,json=itemsProgress,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ImportFromS3Metadata) Reset() {
@@ -431,38 +556,76 @@ func (x *ImportFromS3Metadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ImportFromS3Metadata.ProtoReflect.Descriptor instead.
-func (*ImportFromS3Metadata) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *ImportFromS3Metadata) GetSettings() *ImportFromS3Settings {
 	if x != nil {
-		return x.Settings
+		return x.xxx_hidden_Settings
 	}
 	return nil
 }
 
 func (x *ImportFromS3Metadata) GetProgress() ImportProgress_Progress {
 	if x != nil {
-		return x.Progress
+		return x.xxx_hidden_Progress
 	}
 	return ImportProgress_PROGRESS_UNSPECIFIED
 }
 
 func (x *ImportFromS3Metadata) GetItemsProgress() []*ImportItemProgress {
 	if x != nil {
-		return x.ItemsProgress
+		if x.xxx_hidden_ItemsProgress != nil {
+			return *x.xxx_hidden_ItemsProgress
+		}
 	}
 	return nil
 }
 
+func (x *ImportFromS3Metadata) SetSettings(v *ImportFromS3Settings) {
+	x.xxx_hidden_Settings = v
+}
+
+func (x *ImportFromS3Metadata) SetProgress(v ImportProgress_Progress) {
+	x.xxx_hidden_Progress = v
+}
+
+func (x *ImportFromS3Metadata) SetItemsProgress(v []*ImportItemProgress) {
+	x.xxx_hidden_ItemsProgress = &v
+}
+
+func (x *ImportFromS3Metadata) HasSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Settings != nil
+}
+
+func (x *ImportFromS3Metadata) ClearSettings() {
+	x.xxx_hidden_Settings = nil
+}
+
+type ImportFromS3Metadata_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Settings      *ImportFromS3Settings
+	Progress      ImportProgress_Progress
+	ItemsProgress []*ImportItemProgress
+}
+
+func (b0 ImportFromS3Metadata_builder) Build() *ImportFromS3Metadata {
+	m0 := &ImportFromS3Metadata{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Settings = b.Settings
+	x.xxx_hidden_Progress = b.Progress
+	x.xxx_hidden_ItemsProgress = &b.ItemsProgress
+	return m0
+}
+
 type ImportFromS3Request struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	Settings        *ImportFromS3Settings           `protobuf:"bytes,2,opt,name=settings,proto3" json:"settings,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Settings        *ImportFromS3Settings           `protobuf:"bytes,2,opt,name=settings,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ImportFromS3Request) Reset() {
@@ -490,32 +653,71 @@ func (x *ImportFromS3Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ImportFromS3Request.ProtoReflect.Descriptor instead.
-func (*ImportFromS3Request) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *ImportFromS3Request) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ImportFromS3Request) GetSettings() *ImportFromS3Settings {
 	if x != nil {
-		return x.Settings
+		return x.xxx_hidden_Settings
 	}
 	return nil
 }
 
+func (x *ImportFromS3Request) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ImportFromS3Request) SetSettings(v *ImportFromS3Settings) {
+	x.xxx_hidden_Settings = v
+}
+
+func (x *ImportFromS3Request) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ImportFromS3Request) HasSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Settings != nil
+}
+
+func (x *ImportFromS3Request) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ImportFromS3Request) ClearSettings() {
+	x.xxx_hidden_Settings = nil
+}
+
+type ImportFromS3Request_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	Settings        *ImportFromS3Settings
+}
+
+func (b0 ImportFromS3Request_builder) Build() *ImportFromS3Request {
+	m0 := &ImportFromS3Request{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Settings = b.Settings
+	return m0
+}
+
 type ImportFromS3Response struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result = ImportFromS3Result
-	// operation.metadata = ImportFromS3Metadata
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ImportFromS3Response) Reset() {
@@ -543,24 +745,50 @@ func (x *ImportFromS3Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ImportFromS3Response.ProtoReflect.Descriptor instead.
-func (*ImportFromS3Response) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{6}
-}
-
 func (x *ImportFromS3Response) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ImportFromS3Response) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ImportFromS3Response) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ImportFromS3Response) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ImportFromS3Response_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result = ImportFromS3Result
+	// operation.metadata = ImportFromS3Metadata
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ImportFromS3Response_builder) Build() *ImportFromS3Response {
+	m0 := &ImportFromS3Response{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // / Data
 type YdbDumpFormat struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Columns       []string               `protobuf:"bytes,1,rep,name=columns,proto3" json:"columns,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Columns []string               `protobuf:"bytes,1,rep,name=columns,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *YdbDumpFormat) Reset() {
@@ -588,20 +816,33 @@ func (x *YdbDumpFormat) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use YdbDumpFormat.ProtoReflect.Descriptor instead.
-func (*YdbDumpFormat) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{7}
-}
-
 func (x *YdbDumpFormat) GetColumns() []string {
 	if x != nil {
-		return x.Columns
+		return x.xxx_hidden_Columns
 	}
 	return nil
 }
 
+func (x *YdbDumpFormat) SetColumns(v []string) {
+	x.xxx_hidden_Columns = v
+}
+
+type YdbDumpFormat_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Columns []string
+}
+
+func (b0 YdbDumpFormat_builder) Build() *YdbDumpFormat {
+	m0 := &YdbDumpFormat{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Columns = b.Columns
+	return m0
+}
+
 type ImportDataResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -631,28 +872,26 @@ func (x *ImportDataResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ImportDataResult.ProtoReflect.Descriptor instead.
-func (*ImportDataResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{8}
+type ImportDataResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ImportDataResult_builder) Build() *ImportDataResult {
+	m0 := &ImportDataResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ImportDataRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Full path to table
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Data serialized in the selected format. Restrictions:
-	// - sorted by primary key;
-	// - all keys must be from the same partition;
-	// - table has no global secondary indexes;
-	// - size of serialized data is limited to 8 MB.
-	Data []byte `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
-	// Types that are valid to be assigned to Format:
-	//
-	//	*ImportDataRequest_YdbDump
-	Format        isImportDataRequest_Format `protobuf_oneof:"format"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_Data            []byte                          `protobuf:"bytes,3,opt,name=data,proto3"`
+	xxx_hidden_Format          isImportDataRequest_Format      `protobuf_oneof:"format"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ImportDataRequest) Reset() {
@@ -680,65 +919,167 @@ func (x *ImportDataRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ImportDataRequest.ProtoReflect.Descriptor instead.
-func (*ImportDataRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *ImportDataRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ImportDataRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *ImportDataRequest) GetData() []byte {
 	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-func (x *ImportDataRequest) GetFormat() isImportDataRequest_Format {
-	if x != nil {
-		return x.Format
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
 func (x *ImportDataRequest) GetYdbDump() *YdbDumpFormat {
 	if x != nil {
-		if x, ok := x.Format.(*ImportDataRequest_YdbDump); ok {
+		if x, ok := x.xxx_hidden_Format.(*importDataRequest_YdbDump); ok {
 			return x.YdbDump
 		}
 	}
 	return nil
 }
 
+func (x *ImportDataRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ImportDataRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *ImportDataRequest) SetData(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Data = v
+}
+
+func (x *ImportDataRequest) SetYdbDump(v *YdbDumpFormat) {
+	if v == nil {
+		x.xxx_hidden_Format = nil
+		return
+	}
+	x.xxx_hidden_Format = &importDataRequest_YdbDump{v}
+}
+
+func (x *ImportDataRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ImportDataRequest) HasFormat() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Format != nil
+}
+
+func (x *ImportDataRequest) HasYdbDump() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Format.(*importDataRequest_YdbDump)
+	return ok
+}
+
+func (x *ImportDataRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ImportDataRequest) ClearFormat() {
+	x.xxx_hidden_Format = nil
+}
+
+func (x *ImportDataRequest) ClearYdbDump() {
+	if _, ok := x.xxx_hidden_Format.(*importDataRequest_YdbDump); ok {
+		x.xxx_hidden_Format = nil
+	}
+}
+
+const ImportDataRequest_Format_not_set_case case_ImportDataRequest_Format = 0
+const ImportDataRequest_YdbDump_case case_ImportDataRequest_Format = 4
+
+func (x *ImportDataRequest) WhichFormat() case_ImportDataRequest_Format {
+	if x == nil {
+		return ImportDataRequest_Format_not_set_case
+	}
+	switch x.xxx_hidden_Format.(type) {
+	case *importDataRequest_YdbDump:
+		return ImportDataRequest_YdbDump_case
+	default:
+		return ImportDataRequest_Format_not_set_case
+	}
+}
+
+type ImportDataRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Full path to table
+	Path string
+	// Data serialized in the selected format. Restrictions:
+	// - sorted by primary key;
+	// - all keys must be from the same partition;
+	// - table has no global secondary indexes;
+	// - size of serialized data is limited to 8 MB.
+	Data []byte
+	// Fields of oneof xxx_hidden_Format:
+	// Result of `ydb tools dump`
+	YdbDump *YdbDumpFormat
+	// -- end of xxx_hidden_Format
+}
+
+func (b0 ImportDataRequest_builder) Build() *ImportDataRequest {
+	m0 := &ImportDataRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_Data = b.Data
+	if b.YdbDump != nil {
+		x.xxx_hidden_Format = &importDataRequest_YdbDump{b.YdbDump}
+	}
+	return m0
+}
+
+type case_ImportDataRequest_Format protoreflect.FieldNumber
+
+func (x case_ImportDataRequest_Format) String() string {
+	md := file_protos_ydb_import_proto_msgTypes[9].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isImportDataRequest_Format interface {
 	isImportDataRequest_Format()
 }
 
-type ImportDataRequest_YdbDump struct {
+type importDataRequest_YdbDump struct {
 	// Result of `ydb tools dump`
 	YdbDump *YdbDumpFormat `protobuf:"bytes,4,opt,name=ydb_dump,json=ydbDump,proto3,oneof"`
 }
 
-func (*ImportDataRequest_YdbDump) isImportDataRequest_Format() {}
+func (*importDataRequest_YdbDump) isImportDataRequest_Format() {}
 
 type ImportDataResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result = ImportDataResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ImportDataResponse) Reset() {
@@ -766,30 +1107,49 @@ func (x *ImportDataResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ImportDataResponse.ProtoReflect.Descriptor instead.
-func (*ImportDataResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{10}
-}
-
 func (x *ImportDataResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ImportDataResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ImportDataResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ImportDataResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ImportDataResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result = ImportDataResult
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ImportDataResponse_builder) Build() *ImportDataResponse {
+	m0 := &ImportDataResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ImportFromS3Settings_Item struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// YDB tables in S3 are stored in one or more objects (see ydb_export.proto).
-	// The object name begins with 'source_prefix'.
-	// This prefix is followed by:
-	// '/data_PartNumber', where 'PartNumber' represents the index of the part, starting at zero;
-	// '/scheme.pb' - object with information about scheme, indexes, etc.
-	SourcePrefix string `protobuf:"bytes,1,opt,name=source_prefix,json=sourcePrefix,proto3" json:"source_prefix,omitempty"`
-	// Database path to a table to import to.
-	DestinationPath string `protobuf:"bytes,2,opt,name=destination_path,json=destinationPath,proto3" json:"destination_path,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SourcePrefix    string                 `protobuf:"bytes,1,opt,name=source_prefix,json=sourcePrefix,proto3"`
+	xxx_hidden_DestinationPath string                 `protobuf:"bytes,2,opt,name=destination_path,json=destinationPath,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ImportFromS3Settings_Item) Reset() {
@@ -817,23 +1177,48 @@ func (x *ImportFromS3Settings_Item) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ImportFromS3Settings_Item.ProtoReflect.Descriptor instead.
-func (*ImportFromS3Settings_Item) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_import_proto_rawDescGZIP(), []int{2, 0}
-}
-
 func (x *ImportFromS3Settings_Item) GetSourcePrefix() string {
 	if x != nil {
-		return x.SourcePrefix
+		return x.xxx_hidden_SourcePrefix
 	}
 	return ""
 }
 
 func (x *ImportFromS3Settings_Item) GetDestinationPath() string {
 	if x != nil {
-		return x.DestinationPath
+		return x.xxx_hidden_DestinationPath
 	}
 	return ""
+}
+
+func (x *ImportFromS3Settings_Item) SetSourcePrefix(v string) {
+	x.xxx_hidden_SourcePrefix = v
+}
+
+func (x *ImportFromS3Settings_Item) SetDestinationPath(v string) {
+	x.xxx_hidden_DestinationPath = v
+}
+
+type ImportFromS3Settings_Item_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// YDB tables in S3 are stored in one or more objects (see ydb_export.proto).
+	// The object name begins with 'source_prefix'.
+	// This prefix is followed by:
+	// '/data_PartNumber', where 'PartNumber' represents the index of the part, starting at zero;
+	// '/scheme.pb' - object with information about scheme, indexes, etc.
+	SourcePrefix string
+	// Database path to a table to import to.
+	DestinationPath string
+}
+
+func (b0 ImportFromS3Settings_Item_builder) Build() *ImportFromS3Settings_Item {
+	m0 := &ImportFromS3Settings_Item{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SourcePrefix = b.SourcePrefix
+	x.xxx_hidden_DestinationPath = b.DestinationPath
+	return m0
 }
 
 var File_protos_ydb_import_proto protoreflect.FileDescriptor
@@ -902,18 +1287,6 @@ const file_protos_ydb_import_proto_rawDesc = "" +
 	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperationBV\n" +
 	"\x16tech.ydb.proto.import_Z9github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Import\xf8\x01\x01b\x06proto3"
 
-var (
-	file_protos_ydb_import_proto_rawDescOnce sync.Once
-	file_protos_ydb_import_proto_rawDescData []byte
-)
-
-func file_protos_ydb_import_proto_rawDescGZIP() []byte {
-	file_protos_ydb_import_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_import_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_import_proto_rawDesc), len(file_protos_ydb_import_proto_rawDesc)))
-	})
-	return file_protos_ydb_import_proto_rawDescData
-}
-
 var file_protos_ydb_import_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_protos_ydb_import_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_protos_ydb_import_proto_goTypes = []any{
@@ -962,7 +1335,7 @@ func file_protos_ydb_import_proto_init() {
 		return
 	}
 	file_protos_ydb_import_proto_msgTypes[9].OneofWrappers = []any{
-		(*ImportDataRequest_YdbDump)(nil),
+		(*importDataRequest_YdbDump)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

@@ -11,7 +11,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -69,19 +68,12 @@ func (x YamlLabelExt_LabelType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use YamlLabelExt_LabelType.Descriptor instead.
-func (YamlLabelExt_LabelType) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{27, 0}
-}
-
 type ConfigIdentity struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Current main config version
-	Version uint64 `protobuf:"varint,1,opt,name=version,proto3" json:"version,omitempty"`
-	// Cluster name (should be set on node with console tablet, unknown by default)
-	Cluster       string `protobuf:"bytes,2,opt,name=cluster,proto3" json:"cluster,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Version uint64                 `protobuf:"varint,1,opt,name=version,proto3"`
+	xxx_hidden_Cluster string                 `protobuf:"bytes,2,opt,name=cluster,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ConfigIdentity) Reset() {
@@ -109,34 +101,54 @@ func (x *ConfigIdentity) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ConfigIdentity.ProtoReflect.Descriptor instead.
-func (*ConfigIdentity) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *ConfigIdentity) GetVersion() uint64 {
 	if x != nil {
-		return x.Version
+		return x.xxx_hidden_Version
 	}
 	return 0
 }
 
 func (x *ConfigIdentity) GetCluster() string {
 	if x != nil {
-		return x.Cluster
+		return x.xxx_hidden_Cluster
 	}
 	return ""
 }
 
+func (x *ConfigIdentity) SetVersion(v uint64) {
+	x.xxx_hidden_Version = v
+}
+
+func (x *ConfigIdentity) SetCluster(v string) {
+	x.xxx_hidden_Cluster = v
+}
+
+type ConfigIdentity_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Current main config version
+	Version uint64
+	// Cluster name (should be set on node with console tablet, unknown by default)
+	Cluster string
+}
+
+func (b0 ConfigIdentity_builder) Build() *ConfigIdentity {
+	m0 := &ConfigIdentity{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Version = b.Version
+	x.xxx_hidden_Cluster = b.Cluster
+	return m0
+}
+
 type SetConfigRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Config in YAML format. metadata will be ignored
-	Config             string `protobuf:"bytes,2,opt,name=config,proto3" json:"config,omitempty"`
-	DryRun             bool   `protobuf:"varint,3,opt,name=dry_run,json=dryRun,proto3" json:"dry_run,omitempty"`
-	AllowUnknownFields bool   `protobuf:"varint,4,opt,name=allow_unknown_fields,json=allowUnknownFields,proto3" json:"allow_unknown_fields,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams    *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Config             string                          `protobuf:"bytes,2,opt,name=config,proto3"`
+	xxx_hidden_DryRun             bool                            `protobuf:"varint,3,opt,name=dry_run,json=dryRun,proto3"`
+	xxx_hidden_AllowUnknownFields bool                            `protobuf:"varint,4,opt,name=allow_unknown_fields,json=allowUnknownFields,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *SetConfigRequest) Reset() {
@@ -164,44 +176,87 @@ func (x *SetConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetConfigRequest.ProtoReflect.Descriptor instead.
-func (*SetConfigRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *SetConfigRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *SetConfigRequest) GetConfig() string {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return ""
 }
 
 func (x *SetConfigRequest) GetDryRun() bool {
 	if x != nil {
-		return x.DryRun
+		return x.xxx_hidden_DryRun
 	}
 	return false
 }
 
 func (x *SetConfigRequest) GetAllowUnknownFields() bool {
 	if x != nil {
-		return x.AllowUnknownFields
+		return x.xxx_hidden_AllowUnknownFields
 	}
 	return false
 }
 
+func (x *SetConfigRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *SetConfigRequest) SetConfig(v string) {
+	x.xxx_hidden_Config = v
+}
+
+func (x *SetConfigRequest) SetDryRun(v bool) {
+	x.xxx_hidden_DryRun = v
+}
+
+func (x *SetConfigRequest) SetAllowUnknownFields(v bool) {
+	x.xxx_hidden_AllowUnknownFields = v
+}
+
+func (x *SetConfigRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *SetConfigRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type SetConfigRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Config in YAML format. metadata will be ignored
+	Config             string
+	DryRun             bool
+	AllowUnknownFields bool
+}
+
+func (b0 SetConfigRequest_builder) Build() *SetConfigRequest {
+	m0 := &SetConfigRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Config = b.Config
+	x.xxx_hidden_DryRun = b.DryRun
+	x.xxx_hidden_AllowUnknownFields = b.AllowUnknownFields
+	return m0
+}
+
 type SetConfigResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *SetConfigResponse) Reset() {
@@ -229,27 +284,50 @@ func (x *SetConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetConfigResponse.ProtoReflect.Descriptor instead.
-func (*SetConfigResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *SetConfigResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *SetConfigResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *SetConfigResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *SetConfigResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type SetConfigResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 SetConfigResponse_builder) Build() *SetConfigResponse {
+	m0 := &SetConfigResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ReplaceConfigRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Config in YAML format
-	Config             string `protobuf:"bytes,2,opt,name=config,proto3" json:"config,omitempty"`
-	DryRun             bool   `protobuf:"varint,3,opt,name=dry_run,json=dryRun,proto3" json:"dry_run,omitempty"`
-	AllowUnknownFields bool   `protobuf:"varint,4,opt,name=allow_unknown_fields,json=allowUnknownFields,proto3" json:"allow_unknown_fields,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams    *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Config             string                          `protobuf:"bytes,2,opt,name=config,proto3"`
+	xxx_hidden_DryRun             bool                            `protobuf:"varint,3,opt,name=dry_run,json=dryRun,proto3"`
+	xxx_hidden_AllowUnknownFields bool                            `protobuf:"varint,4,opt,name=allow_unknown_fields,json=allowUnknownFields,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *ReplaceConfigRequest) Reset() {
@@ -277,44 +355,87 @@ func (x *ReplaceConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReplaceConfigRequest.ProtoReflect.Descriptor instead.
-func (*ReplaceConfigRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *ReplaceConfigRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ReplaceConfigRequest) GetConfig() string {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return ""
 }
 
 func (x *ReplaceConfigRequest) GetDryRun() bool {
 	if x != nil {
-		return x.DryRun
+		return x.xxx_hidden_DryRun
 	}
 	return false
 }
 
 func (x *ReplaceConfigRequest) GetAllowUnknownFields() bool {
 	if x != nil {
-		return x.AllowUnknownFields
+		return x.xxx_hidden_AllowUnknownFields
 	}
 	return false
 }
 
+func (x *ReplaceConfigRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ReplaceConfigRequest) SetConfig(v string) {
+	x.xxx_hidden_Config = v
+}
+
+func (x *ReplaceConfigRequest) SetDryRun(v bool) {
+	x.xxx_hidden_DryRun = v
+}
+
+func (x *ReplaceConfigRequest) SetAllowUnknownFields(v bool) {
+	x.xxx_hidden_AllowUnknownFields = v
+}
+
+func (x *ReplaceConfigRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ReplaceConfigRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ReplaceConfigRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Config in YAML format
+	Config             string
+	DryRun             bool
+	AllowUnknownFields bool
+}
+
+func (b0 ReplaceConfigRequest_builder) Build() *ReplaceConfigRequest {
+	m0 := &ReplaceConfigRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Config = b.Config
+	x.xxx_hidden_DryRun = b.DryRun
+	x.xxx_hidden_AllowUnknownFields = b.AllowUnknownFields
+	return m0
+}
+
 type ReplaceConfigResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ReplaceConfigResponse) Reset() {
@@ -342,24 +463,48 @@ func (x *ReplaceConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReplaceConfigResponse.ProtoReflect.Descriptor instead.
-func (*ReplaceConfigResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *ReplaceConfigResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ReplaceConfigResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ReplaceConfigResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ReplaceConfigResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ReplaceConfigResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ReplaceConfigResponse_builder) Build() *ReplaceConfigResponse {
+	m0 := &ReplaceConfigResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DropConfigRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	Identity        *ConfigIdentity                 `protobuf:"bytes,2,opt,name=identity,proto3" json:"identity,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Identity        *ConfigIdentity                 `protobuf:"bytes,2,opt,name=identity,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DropConfigRequest) Reset() {
@@ -387,30 +532,71 @@ func (x *DropConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DropConfigRequest.ProtoReflect.Descriptor instead.
-func (*DropConfigRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *DropConfigRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DropConfigRequest) GetIdentity() *ConfigIdentity {
 	if x != nil {
-		return x.Identity
+		return x.xxx_hidden_Identity
 	}
 	return nil
 }
 
+func (x *DropConfigRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DropConfigRequest) SetIdentity(v *ConfigIdentity) {
+	x.xxx_hidden_Identity = v
+}
+
+func (x *DropConfigRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DropConfigRequest) HasIdentity() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Identity != nil
+}
+
+func (x *DropConfigRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *DropConfigRequest) ClearIdentity() {
+	x.xxx_hidden_Identity = nil
+}
+
+type DropConfigRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	Identity        *ConfigIdentity
+}
+
+func (b0 DropConfigRequest_builder) Build() *DropConfigRequest {
+	m0 := &DropConfigRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Identity = b.Identity
+	return m0
+}
+
 type DropConfigResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DropConfigResponse) Reset() {
@@ -438,25 +624,48 @@ func (x *DropConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DropConfigResponse.ProtoReflect.Descriptor instead.
-func (*DropConfigResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{6}
-}
-
 func (x *DropConfigResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DropConfigResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DropConfigResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DropConfigResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DropConfigResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DropConfigResponse_builder) Build() *DropConfigResponse {
+	m0 := &DropConfigResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type AddVolatileConfigRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Config id must strictly be set to the current max config id increment by one.
-	Config        string `protobuf:"bytes,2,opt,name=config,proto3" json:"config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Config          string                          `protobuf:"bytes,2,opt,name=config,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *AddVolatileConfigRequest) Reset() {
@@ -484,30 +693,61 @@ func (x *AddVolatileConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddVolatileConfigRequest.ProtoReflect.Descriptor instead.
-func (*AddVolatileConfigRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{7}
-}
-
 func (x *AddVolatileConfigRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *AddVolatileConfigRequest) GetConfig() string {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return ""
 }
 
+func (x *AddVolatileConfigRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *AddVolatileConfigRequest) SetConfig(v string) {
+	x.xxx_hidden_Config = v
+}
+
+func (x *AddVolatileConfigRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *AddVolatileConfigRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type AddVolatileConfigRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Config id must strictly be set to the current max config id increment by one.
+	Config string
+}
+
+func (b0 AddVolatileConfigRequest_builder) Build() *AddVolatileConfigRequest {
+	m0 := &AddVolatileConfigRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Config = b.Config
+	return m0
+}
+
 type AddVolatileConfigResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AddVolatileConfigResponse) Reset() {
@@ -535,26 +775,48 @@ func (x *AddVolatileConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AddVolatileConfigResponse.ProtoReflect.Descriptor instead.
-func (*AddVolatileConfigResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{8}
-}
-
 func (x *AddVolatileConfigResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *AddVolatileConfigResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *AddVolatileConfigResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *AddVolatileConfigResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type AddVolatileConfigResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 AddVolatileConfigResponse_builder) Build() *AddVolatileConfigResponse {
+	m0 := &AddVolatileConfigResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type VolatileConfig struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Config id
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Volatile config YAML document
-	Config        string `protobuf:"bytes,2,opt,name=config,proto3" json:"config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id     uint64                 `protobuf:"varint,1,opt,name=id,proto3"`
+	xxx_hidden_Config string                 `protobuf:"bytes,2,opt,name=config,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *VolatileConfig) Reset() {
@@ -582,30 +844,51 @@ func (x *VolatileConfig) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VolatileConfig.ProtoReflect.Descriptor instead.
-func (*VolatileConfig) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *VolatileConfig) GetId() uint64 {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return 0
 }
 
 func (x *VolatileConfig) GetConfig() string {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return ""
 }
 
+func (x *VolatileConfig) SetId(v uint64) {
+	x.xxx_hidden_Id = v
+}
+
+func (x *VolatileConfig) SetConfig(v string) {
+	x.xxx_hidden_Config = v
+}
+
+type VolatileConfig_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Config id
+	Id uint64
+	// Volatile config YAML document
+	Config string
+}
+
+func (b0 VolatileConfig_builder) Build() *VolatileConfig {
+	m0 := &VolatileConfig{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Config = b.Config
+	return m0
+}
+
 type GetConfigRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetConfigRequest) Reset() {
@@ -633,24 +916,47 @@ func (x *GetConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetConfigRequest.ProtoReflect.Descriptor instead.
-func (*GetConfigRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{10}
-}
-
 func (x *GetConfigRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *GetConfigRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *GetConfigRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *GetConfigRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type GetConfigRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 GetConfigRequest_builder) Build() *GetConfigRequest {
+	m0 := &GetConfigRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type GetConfigResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetConfigResponse) Reset() {
@@ -678,27 +984,50 @@ func (x *GetConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetConfigResponse.ProtoReflect.Descriptor instead.
-func (*GetConfigResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{11}
-}
-
 func (x *GetConfigResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *GetConfigResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *GetConfigResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *GetConfigResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type GetConfigResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 GetConfigResponse_builder) Build() *GetConfigResponse {
+	m0 := &GetConfigResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type GetConfigResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Main dynamic config with metadata in YAML format
-	Config string `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
-	// All volatile configs
-	VolatileConfigs []*VolatileConfig `protobuf:"bytes,2,rep,name=volatile_configs,json=volatileConfigs,proto3" json:"volatile_configs,omitempty"`
-	Identity        *ConfigIdentity   `protobuf:"bytes,3,opt,name=identity,proto3" json:"identity,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Config          string                 `protobuf:"bytes,1,opt,name=config,proto3"`
+	xxx_hidden_VolatileConfigs *[]*VolatileConfig     `protobuf:"bytes,2,rep,name=volatile_configs,json=volatileConfigs,proto3"`
+	xxx_hidden_Identity        *ConfigIdentity        `protobuf:"bytes,3,opt,name=identity,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetConfigResult) Reset() {
@@ -726,40 +1055,78 @@ func (x *GetConfigResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetConfigResult.ProtoReflect.Descriptor instead.
-func (*GetConfigResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{12}
-}
-
 func (x *GetConfigResult) GetConfig() string {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return ""
 }
 
 func (x *GetConfigResult) GetVolatileConfigs() []*VolatileConfig {
 	if x != nil {
-		return x.VolatileConfigs
+		if x.xxx_hidden_VolatileConfigs != nil {
+			return *x.xxx_hidden_VolatileConfigs
+		}
 	}
 	return nil
 }
 
 func (x *GetConfigResult) GetIdentity() *ConfigIdentity {
 	if x != nil {
-		return x.Identity
+		return x.xxx_hidden_Identity
 	}
 	return nil
 }
 
+func (x *GetConfigResult) SetConfig(v string) {
+	x.xxx_hidden_Config = v
+}
+
+func (x *GetConfigResult) SetVolatileConfigs(v []*VolatileConfig) {
+	x.xxx_hidden_VolatileConfigs = &v
+}
+
+func (x *GetConfigResult) SetIdentity(v *ConfigIdentity) {
+	x.xxx_hidden_Identity = v
+}
+
+func (x *GetConfigResult) HasIdentity() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Identity != nil
+}
+
+func (x *GetConfigResult) ClearIdentity() {
+	x.xxx_hidden_Identity = nil
+}
+
+type GetConfigResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Main dynamic config with metadata in YAML format
+	Config string
+	// All volatile configs
+	VolatileConfigs []*VolatileConfig
+	Identity        *ConfigIdentity
+}
+
+func (b0 GetConfigResult_builder) Build() *GetConfigResult {
+	m0 := &GetConfigResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Config = b.Config
+	x.xxx_hidden_VolatileConfigs = &b.VolatileConfigs
+	x.xxx_hidden_Identity = b.Identity
+	return m0
+}
+
 type VolatileConfigMetadata struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Config id
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Volatile config YAML document
-	Metadata      string `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id       uint64                 `protobuf:"varint,1,opt,name=id,proto3"`
+	xxx_hidden_Metadata string                 `protobuf:"bytes,2,opt,name=metadata,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *VolatileConfigMetadata) Reset() {
@@ -787,30 +1154,51 @@ func (x *VolatileConfigMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VolatileConfigMetadata.ProtoReflect.Descriptor instead.
-func (*VolatileConfigMetadata) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{13}
-}
-
 func (x *VolatileConfigMetadata) GetId() uint64 {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return 0
 }
 
 func (x *VolatileConfigMetadata) GetMetadata() string {
 	if x != nil {
-		return x.Metadata
+		return x.xxx_hidden_Metadata
 	}
 	return ""
 }
 
+func (x *VolatileConfigMetadata) SetId(v uint64) {
+	x.xxx_hidden_Id = v
+}
+
+func (x *VolatileConfigMetadata) SetMetadata(v string) {
+	x.xxx_hidden_Metadata = v
+}
+
+type VolatileConfigMetadata_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Config id
+	Id uint64
+	// Volatile config YAML document
+	Metadata string
+}
+
+func (b0 VolatileConfigMetadata_builder) Build() *VolatileConfigMetadata {
+	m0 := &VolatileConfigMetadata{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Metadata = b.Metadata
+	return m0
+}
+
 type GetMetadataRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetMetadataRequest) Reset() {
@@ -838,24 +1226,47 @@ func (x *GetMetadataRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMetadataRequest.ProtoReflect.Descriptor instead.
-func (*GetMetadataRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{14}
-}
-
 func (x *GetMetadataRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *GetMetadataRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *GetMetadataRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *GetMetadataRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type GetMetadataRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 GetMetadataRequest_builder) Build() *GetMetadataRequest {
+	m0 := &GetMetadataRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type GetMetadataResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetMetadataResponse) Reset() {
@@ -883,26 +1294,49 @@ func (x *GetMetadataResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMetadataResponse.ProtoReflect.Descriptor instead.
-func (*GetMetadataResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{15}
-}
-
 func (x *GetMetadataResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *GetMetadataResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *GetMetadataResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *GetMetadataResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type GetMetadataResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 GetMetadataResponse_builder) Build() *GetMetadataResponse {
+	m0 := &GetMetadataResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type GetMetadataResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Main dynamic config metadata in YAML format
-	Metadata string `protobuf:"bytes,1,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	// All volatile configs
-	VolatileConfigs []*VolatileConfigMetadata `protobuf:"bytes,2,rep,name=volatile_configs,json=volatileConfigs,proto3" json:"volatile_configs,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Metadata        string                     `protobuf:"bytes,1,opt,name=metadata,proto3"`
+	xxx_hidden_VolatileConfigs *[]*VolatileConfigMetadata `protobuf:"bytes,2,rep,name=volatile_configs,json=volatileConfigs,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetMetadataResult) Reset() {
@@ -930,42 +1364,55 @@ func (x *GetMetadataResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMetadataResult.ProtoReflect.Descriptor instead.
-func (*GetMetadataResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{16}
-}
-
 func (x *GetMetadataResult) GetMetadata() string {
 	if x != nil {
-		return x.Metadata
+		return x.xxx_hidden_Metadata
 	}
 	return ""
 }
 
 func (x *GetMetadataResult) GetVolatileConfigs() []*VolatileConfigMetadata {
 	if x != nil {
-		return x.VolatileConfigs
+		if x.xxx_hidden_VolatileConfigs != nil {
+			return *x.xxx_hidden_VolatileConfigs
+		}
 	}
 	return nil
 }
 
+func (x *GetMetadataResult) SetMetadata(v string) {
+	x.xxx_hidden_Metadata = v
+}
+
+func (x *GetMetadataResult) SetVolatileConfigs(v []*VolatileConfigMetadata) {
+	x.xxx_hidden_VolatileConfigs = &v
+}
+
+type GetMetadataResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Main dynamic config metadata in YAML format
+	Metadata string
+	// All volatile configs
+	VolatileConfigs []*VolatileConfigMetadata
+}
+
+func (b0 GetMetadataResult_builder) Build() *GetMetadataResult {
+	m0 := &GetMetadataResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Metadata = b.Metadata
+	x.xxx_hidden_VolatileConfigs = &b.VolatileConfigs
+	return m0
+}
+
 type RemoveVolatileConfigRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Types that are valid to be assigned to ConsistencyCheck:
-	//
-	//	*RemoveVolatileConfigRequest_Identity
-	//	*RemoveVolatileConfigRequest_Force
-	ConsistencyCheck isRemoveVolatileConfigRequest_ConsistencyCheck `protobuf_oneof:"consistency_check"`
-	// Ids to delete
-	//
-	// Types that are valid to be assigned to Selector:
-	//
-	//	*RemoveVolatileConfigRequest_Ids
-	//	*RemoveVolatileConfigRequest_All
-	Selector      isRemoveVolatileConfigRequest_Selector `protobuf_oneof:"selector"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState                         `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams                `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_ConsistencyCheck isRemoveVolatileConfigRequest_ConsistencyCheck `protobuf_oneof:"consistency_check"`
+	xxx_hidden_Selector         isRemoveVolatileConfigRequest_Selector         `protobuf_oneof:"selector"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *RemoveVolatileConfigRequest) Reset() {
@@ -993,28 +1440,16 @@ func (x *RemoveVolatileConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RemoveVolatileConfigRequest.ProtoReflect.Descriptor instead.
-func (*RemoveVolatileConfigRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{17}
-}
-
 func (x *RemoveVolatileConfigRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
-	}
-	return nil
-}
-
-func (x *RemoveVolatileConfigRequest) GetConsistencyCheck() isRemoveVolatileConfigRequest_ConsistencyCheck {
-	if x != nil {
-		return x.ConsistencyCheck
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *RemoveVolatileConfigRequest) GetIdentity() *ConfigIdentity {
 	if x != nil {
-		if x, ok := x.ConsistencyCheck.(*RemoveVolatileConfigRequest_Identity); ok {
+		if x, ok := x.xxx_hidden_ConsistencyCheck.(*removeVolatileConfigRequest_Identity); ok {
 			return x.Identity
 		}
 	}
@@ -1023,23 +1458,16 @@ func (x *RemoveVolatileConfigRequest) GetIdentity() *ConfigIdentity {
 
 func (x *RemoveVolatileConfigRequest) GetForce() bool {
 	if x != nil {
-		if x, ok := x.ConsistencyCheck.(*RemoveVolatileConfigRequest_Force); ok {
+		if x, ok := x.xxx_hidden_ConsistencyCheck.(*removeVolatileConfigRequest_Force); ok {
 			return x.Force
 		}
 	}
 	return false
 }
 
-func (x *RemoveVolatileConfigRequest) GetSelector() isRemoveVolatileConfigRequest_Selector {
-	if x != nil {
-		return x.Selector
-	}
-	return nil
-}
-
 func (x *RemoveVolatileConfigRequest) GetIds() *RemoveVolatileConfigRequest_IdsToDelete {
 	if x != nil {
-		if x, ok := x.Selector.(*RemoveVolatileConfigRequest_Ids); ok {
+		if x, ok := x.xxx_hidden_Selector.(*removeVolatileConfigRequest_Ids); ok {
 			return x.Ids
 		}
 	}
@@ -1048,53 +1476,265 @@ func (x *RemoveVolatileConfigRequest) GetIds() *RemoveVolatileConfigRequest_IdsT
 
 func (x *RemoveVolatileConfigRequest) GetAll() bool {
 	if x != nil {
-		if x, ok := x.Selector.(*RemoveVolatileConfigRequest_All); ok {
+		if x, ok := x.xxx_hidden_Selector.(*removeVolatileConfigRequest_All); ok {
 			return x.All
 		}
 	}
 	return false
 }
 
+func (x *RemoveVolatileConfigRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *RemoveVolatileConfigRequest) SetIdentity(v *ConfigIdentity) {
+	if v == nil {
+		x.xxx_hidden_ConsistencyCheck = nil
+		return
+	}
+	x.xxx_hidden_ConsistencyCheck = &removeVolatileConfigRequest_Identity{v}
+}
+
+func (x *RemoveVolatileConfigRequest) SetForce(v bool) {
+	x.xxx_hidden_ConsistencyCheck = &removeVolatileConfigRequest_Force{v}
+}
+
+func (x *RemoveVolatileConfigRequest) SetIds(v *RemoveVolatileConfigRequest_IdsToDelete) {
+	if v == nil {
+		x.xxx_hidden_Selector = nil
+		return
+	}
+	x.xxx_hidden_Selector = &removeVolatileConfigRequest_Ids{v}
+}
+
+func (x *RemoveVolatileConfigRequest) SetAll(v bool) {
+	x.xxx_hidden_Selector = &removeVolatileConfigRequest_All{v}
+}
+
+func (x *RemoveVolatileConfigRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *RemoveVolatileConfigRequest) HasConsistencyCheck() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ConsistencyCheck != nil
+}
+
+func (x *RemoveVolatileConfigRequest) HasIdentity() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ConsistencyCheck.(*removeVolatileConfigRequest_Identity)
+	return ok
+}
+
+func (x *RemoveVolatileConfigRequest) HasForce() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ConsistencyCheck.(*removeVolatileConfigRequest_Force)
+	return ok
+}
+
+func (x *RemoveVolatileConfigRequest) HasSelector() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Selector != nil
+}
+
+func (x *RemoveVolatileConfigRequest) HasIds() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Selector.(*removeVolatileConfigRequest_Ids)
+	return ok
+}
+
+func (x *RemoveVolatileConfigRequest) HasAll() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Selector.(*removeVolatileConfigRequest_All)
+	return ok
+}
+
+func (x *RemoveVolatileConfigRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *RemoveVolatileConfigRequest) ClearConsistencyCheck() {
+	x.xxx_hidden_ConsistencyCheck = nil
+}
+
+func (x *RemoveVolatileConfigRequest) ClearIdentity() {
+	if _, ok := x.xxx_hidden_ConsistencyCheck.(*removeVolatileConfigRequest_Identity); ok {
+		x.xxx_hidden_ConsistencyCheck = nil
+	}
+}
+
+func (x *RemoveVolatileConfigRequest) ClearForce() {
+	if _, ok := x.xxx_hidden_ConsistencyCheck.(*removeVolatileConfigRequest_Force); ok {
+		x.xxx_hidden_ConsistencyCheck = nil
+	}
+}
+
+func (x *RemoveVolatileConfigRequest) ClearSelector() {
+	x.xxx_hidden_Selector = nil
+}
+
+func (x *RemoveVolatileConfigRequest) ClearIds() {
+	if _, ok := x.xxx_hidden_Selector.(*removeVolatileConfigRequest_Ids); ok {
+		x.xxx_hidden_Selector = nil
+	}
+}
+
+func (x *RemoveVolatileConfigRequest) ClearAll() {
+	if _, ok := x.xxx_hidden_Selector.(*removeVolatileConfigRequest_All); ok {
+		x.xxx_hidden_Selector = nil
+	}
+}
+
+const RemoveVolatileConfigRequest_ConsistencyCheck_not_set_case case_RemoveVolatileConfigRequest_ConsistencyCheck = 0
+const RemoveVolatileConfigRequest_Identity_case case_RemoveVolatileConfigRequest_ConsistencyCheck = 2
+const RemoveVolatileConfigRequest_Force_case case_RemoveVolatileConfigRequest_ConsistencyCheck = 3
+
+func (x *RemoveVolatileConfigRequest) WhichConsistencyCheck() case_RemoveVolatileConfigRequest_ConsistencyCheck {
+	if x == nil {
+		return RemoveVolatileConfigRequest_ConsistencyCheck_not_set_case
+	}
+	switch x.xxx_hidden_ConsistencyCheck.(type) {
+	case *removeVolatileConfigRequest_Identity:
+		return RemoveVolatileConfigRequest_Identity_case
+	case *removeVolatileConfigRequest_Force:
+		return RemoveVolatileConfigRequest_Force_case
+	default:
+		return RemoveVolatileConfigRequest_ConsistencyCheck_not_set_case
+	}
+}
+
+const RemoveVolatileConfigRequest_Selector_not_set_case case_RemoveVolatileConfigRequest_Selector = 0
+const RemoveVolatileConfigRequest_Ids_case case_RemoveVolatileConfigRequest_Selector = 4
+const RemoveVolatileConfigRequest_All_case case_RemoveVolatileConfigRequest_Selector = 5
+
+func (x *RemoveVolatileConfigRequest) WhichSelector() case_RemoveVolatileConfigRequest_Selector {
+	if x == nil {
+		return RemoveVolatileConfigRequest_Selector_not_set_case
+	}
+	switch x.xxx_hidden_Selector.(type) {
+	case *removeVolatileConfigRequest_Ids:
+		return RemoveVolatileConfigRequest_Ids_case
+	case *removeVolatileConfigRequest_All:
+		return RemoveVolatileConfigRequest_All_case
+	default:
+		return RemoveVolatileConfigRequest_Selector_not_set_case
+	}
+}
+
+type RemoveVolatileConfigRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Fields of oneof xxx_hidden_ConsistencyCheck:
+	Identity *ConfigIdentity
+	// Ignore version and cluster checks
+	Force *bool
+	// -- end of xxx_hidden_ConsistencyCheck
+	// Ids to delete
+
+	// Fields of oneof xxx_hidden_Selector:
+	// Explicit list of ids
+	Ids *RemoveVolatileConfigRequest_IdsToDelete
+	// Delete all
+	All *bool
+	// -- end of xxx_hidden_Selector
+}
+
+func (b0 RemoveVolatileConfigRequest_builder) Build() *RemoveVolatileConfigRequest {
+	m0 := &RemoveVolatileConfigRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	if b.Identity != nil {
+		x.xxx_hidden_ConsistencyCheck = &removeVolatileConfigRequest_Identity{b.Identity}
+	}
+	if b.Force != nil {
+		x.xxx_hidden_ConsistencyCheck = &removeVolatileConfigRequest_Force{*b.Force}
+	}
+	if b.Ids != nil {
+		x.xxx_hidden_Selector = &removeVolatileConfigRequest_Ids{b.Ids}
+	}
+	if b.All != nil {
+		x.xxx_hidden_Selector = &removeVolatileConfigRequest_All{*b.All}
+	}
+	return m0
+}
+
+type case_RemoveVolatileConfigRequest_ConsistencyCheck protoreflect.FieldNumber
+
+func (x case_RemoveVolatileConfigRequest_ConsistencyCheck) String() string {
+	md := file_draft_protos_ydb_dynamic_config_proto_msgTypes[17].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type case_RemoveVolatileConfigRequest_Selector protoreflect.FieldNumber
+
+func (x case_RemoveVolatileConfigRequest_Selector) String() string {
+	md := file_draft_protos_ydb_dynamic_config_proto_msgTypes[17].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isRemoveVolatileConfigRequest_ConsistencyCheck interface {
 	isRemoveVolatileConfigRequest_ConsistencyCheck()
 }
 
-type RemoveVolatileConfigRequest_Identity struct {
+type removeVolatileConfigRequest_Identity struct {
 	Identity *ConfigIdentity `protobuf:"bytes,2,opt,name=identity,proto3,oneof"`
 }
 
-type RemoveVolatileConfigRequest_Force struct {
+type removeVolatileConfigRequest_Force struct {
 	// Ignore version and cluster checks
 	Force bool `protobuf:"varint,3,opt,name=force,proto3,oneof"`
 }
 
-func (*RemoveVolatileConfigRequest_Identity) isRemoveVolatileConfigRequest_ConsistencyCheck() {}
+func (*removeVolatileConfigRequest_Identity) isRemoveVolatileConfigRequest_ConsistencyCheck() {}
 
-func (*RemoveVolatileConfigRequest_Force) isRemoveVolatileConfigRequest_ConsistencyCheck() {}
+func (*removeVolatileConfigRequest_Force) isRemoveVolatileConfigRequest_ConsistencyCheck() {}
 
 type isRemoveVolatileConfigRequest_Selector interface {
 	isRemoveVolatileConfigRequest_Selector()
 }
 
-type RemoveVolatileConfigRequest_Ids struct {
+type removeVolatileConfigRequest_Ids struct {
 	// Explicit list of ids
 	Ids *RemoveVolatileConfigRequest_IdsToDelete `protobuf:"bytes,4,opt,name=ids,proto3,oneof"`
 }
 
-type RemoveVolatileConfigRequest_All struct {
+type removeVolatileConfigRequest_All struct {
 	// Delete all
 	All bool `protobuf:"varint,5,opt,name=all,proto3,oneof"`
 }
 
-func (*RemoveVolatileConfigRequest_Ids) isRemoveVolatileConfigRequest_Selector() {}
+func (*removeVolatileConfigRequest_Ids) isRemoveVolatileConfigRequest_Selector() {}
 
-func (*RemoveVolatileConfigRequest_All) isRemoveVolatileConfigRequest_Selector() {}
+func (*removeVolatileConfigRequest_All) isRemoveVolatileConfigRequest_Selector() {}
 
 type RemoveVolatileConfigResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *RemoveVolatileConfigResponse) Reset() {
@@ -1122,24 +1762,48 @@ func (x *RemoveVolatileConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RemoveVolatileConfigResponse.ProtoReflect.Descriptor instead.
-func (*RemoveVolatileConfigResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{18}
-}
-
 func (x *RemoveVolatileConfigResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *RemoveVolatileConfigResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *RemoveVolatileConfigResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *RemoveVolatileConfigResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type RemoveVolatileConfigResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 RemoveVolatileConfigResponse_builder) Build() *RemoveVolatileConfigResponse {
+	m0 := &RemoveVolatileConfigResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type GetNodeLabelsRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	NodeId          uint32                          `protobuf:"varint,2,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_NodeId          uint32                          `protobuf:"varint,2,opt,name=node_id,json=nodeId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetNodeLabelsRequest) Reset() {
@@ -1167,33 +1831,61 @@ func (x *GetNodeLabelsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetNodeLabelsRequest.ProtoReflect.Descriptor instead.
-func (*GetNodeLabelsRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{19}
-}
-
 func (x *GetNodeLabelsRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *GetNodeLabelsRequest) GetNodeId() uint32 {
 	if x != nil {
-		return x.NodeId
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
+func (x *GetNodeLabelsRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *GetNodeLabelsRequest) SetNodeId(v uint32) {
+	x.xxx_hidden_NodeId = v
+}
+
+func (x *GetNodeLabelsRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *GetNodeLabelsRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type GetNodeLabelsRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	NodeId          uint32
+}
+
+func (b0 GetNodeLabelsRequest_builder) Build() *GetNodeLabelsRequest {
+	m0 := &GetNodeLabelsRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_NodeId = b.NodeId
+	return m0
+}
+
 type YamlLabel struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the label
-	Label string `protobuf:"bytes,1,opt,name=label,proto3" json:"label,omitempty"`
-	// Value of the label
-	Value         string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Label string                 `protobuf:"bytes,1,opt,name=label,proto3"`
+	xxx_hidden_Value string                 `protobuf:"bytes,2,opt,name=value,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *YamlLabel) Reset() {
@@ -1221,31 +1913,51 @@ func (x *YamlLabel) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use YamlLabel.ProtoReflect.Descriptor instead.
-func (*YamlLabel) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{20}
-}
-
 func (x *YamlLabel) GetLabel() string {
 	if x != nil {
-		return x.Label
+		return x.xxx_hidden_Label
 	}
 	return ""
 }
 
 func (x *YamlLabel) GetValue() string {
 	if x != nil {
-		return x.Value
+		return x.xxx_hidden_Value
 	}
 	return ""
 }
 
+func (x *YamlLabel) SetLabel(v string) {
+	x.xxx_hidden_Label = v
+}
+
+func (x *YamlLabel) SetValue(v string) {
+	x.xxx_hidden_Value = v
+}
+
+type YamlLabel_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Name of the label
+	Label string
+	// Value of the label
+	Value string
+}
+
+func (b0 YamlLabel_builder) Build() *YamlLabel {
+	m0 := &YamlLabel{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Label = b.Label
+	x.xxx_hidden_Value = b.Value
+	return m0
+}
+
 type GetNodeLabelsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetNodeLabelsResponse) Reset() {
@@ -1273,24 +1985,48 @@ func (x *GetNodeLabelsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetNodeLabelsResponse.ProtoReflect.Descriptor instead.
-func (*GetNodeLabelsResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{21}
-}
-
 func (x *GetNodeLabelsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *GetNodeLabelsResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *GetNodeLabelsResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *GetNodeLabelsResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type GetNodeLabelsResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 GetNodeLabelsResponse_builder) Build() *GetNodeLabelsResponse {
+	m0 := &GetNodeLabelsResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type GetNodeLabelsResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Labels of a node
-	Labels        []*YamlLabel `protobuf:"bytes,1,rep,name=labels,proto3" json:"labels,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Labels *[]*YamlLabel          `protobuf:"bytes,1,rep,name=labels,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *GetNodeLabelsResult) Reset() {
@@ -1318,29 +2054,42 @@ func (x *GetNodeLabelsResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetNodeLabelsResult.ProtoReflect.Descriptor instead.
-func (*GetNodeLabelsResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{22}
-}
-
 func (x *GetNodeLabelsResult) GetLabels() []*YamlLabel {
 	if x != nil {
-		return x.Labels
+		if x.xxx_hidden_Labels != nil {
+			return *x.xxx_hidden_Labels
+		}
 	}
 	return nil
 }
 
+func (x *GetNodeLabelsResult) SetLabels(v []*YamlLabel) {
+	x.xxx_hidden_Labels = &v
+}
+
+type GetNodeLabelsResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Labels of a node
+	Labels []*YamlLabel
+}
+
+func (b0 GetNodeLabelsResult_builder) Build() *GetNodeLabelsResult {
+	m0 := &GetNodeLabelsResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Labels = &b.Labels
+	return m0
+}
+
 type ResolveConfigRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Config to resolve
-	Config string `protobuf:"bytes,2,opt,name=config,proto3" json:"config,omitempty"`
-	// Additional configs which will be apended to selectors
-	VolatileConfigs []*VolatileConfig `protobuf:"bytes,3,rep,name=volatile_configs,json=volatileConfigs,proto3" json:"volatile_configs,omitempty"`
-	// Target labels
-	Labels        []*YamlLabel `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Config          string                          `protobuf:"bytes,2,opt,name=config,proto3"`
+	xxx_hidden_VolatileConfigs *[]*VolatileConfig              `protobuf:"bytes,3,rep,name=volatile_configs,json=volatileConfigs,proto3"`
+	xxx_hidden_Labels          *[]*YamlLabel                   `protobuf:"bytes,4,rep,name=labels,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ResolveConfigRequest) Reset() {
@@ -1368,45 +2117,93 @@ func (x *ResolveConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolveConfigRequest.ProtoReflect.Descriptor instead.
-func (*ResolveConfigRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{23}
-}
-
 func (x *ResolveConfigRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ResolveConfigRequest) GetConfig() string {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return ""
 }
 
 func (x *ResolveConfigRequest) GetVolatileConfigs() []*VolatileConfig {
 	if x != nil {
-		return x.VolatileConfigs
+		if x.xxx_hidden_VolatileConfigs != nil {
+			return *x.xxx_hidden_VolatileConfigs
+		}
 	}
 	return nil
 }
 
 func (x *ResolveConfigRequest) GetLabels() []*YamlLabel {
 	if x != nil {
-		return x.Labels
+		if x.xxx_hidden_Labels != nil {
+			return *x.xxx_hidden_Labels
+		}
 	}
 	return nil
 }
 
+func (x *ResolveConfigRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ResolveConfigRequest) SetConfig(v string) {
+	x.xxx_hidden_Config = v
+}
+
+func (x *ResolveConfigRequest) SetVolatileConfigs(v []*VolatileConfig) {
+	x.xxx_hidden_VolatileConfigs = &v
+}
+
+func (x *ResolveConfigRequest) SetLabels(v []*YamlLabel) {
+	x.xxx_hidden_Labels = &v
+}
+
+func (x *ResolveConfigRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ResolveConfigRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ResolveConfigRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Config to resolve
+	Config string
+	// Additional configs which will be apended to selectors
+	VolatileConfigs []*VolatileConfig
+	// Target labels
+	Labels []*YamlLabel
+}
+
+func (b0 ResolveConfigRequest_builder) Build() *ResolveConfigRequest {
+	m0 := &ResolveConfigRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Config = b.Config
+	x.xxx_hidden_VolatileConfigs = &b.VolatileConfigs
+	x.xxx_hidden_Labels = &b.Labels
+	return m0
+}
+
 type ResolveConfigResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ResolveConfigResponse) Reset() {
@@ -1434,24 +2231,48 @@ func (x *ResolveConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolveConfigResponse.ProtoReflect.Descriptor instead.
-func (*ResolveConfigResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{24}
-}
-
 func (x *ResolveConfigResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ResolveConfigResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ResolveConfigResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ResolveConfigResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ResolveConfigResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ResolveConfigResponse_builder) Build() *ResolveConfigResponse {
+	m0 := &ResolveConfigResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ResolveConfigResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// YAML document with resolved config
-	Config        string `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Config string                 `protobuf:"bytes,1,opt,name=config,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ResolveConfigResult) Reset() {
@@ -1479,29 +2300,40 @@ func (x *ResolveConfigResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolveConfigResult.ProtoReflect.Descriptor instead.
-func (*ResolveConfigResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{25}
-}
-
 func (x *ResolveConfigResult) GetConfig() string {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return ""
 }
 
+func (x *ResolveConfigResult) SetConfig(v string) {
+	x.xxx_hidden_Config = v
+}
+
+type ResolveConfigResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// YAML document with resolved config
+	Config string
+}
+
+func (b0 ResolveConfigResult_builder) Build() *ResolveConfigResult {
+	m0 := &ResolveConfigResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Config = b.Config
+	return m0
+}
+
 type ResolveAllConfigRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Config to resolve
-	Config string `protobuf:"bytes,2,opt,name=config,proto3" json:"config,omitempty"`
-	// Additional configs which will be apended to selectors
-	VolatileConfigs []*VolatileConfig `protobuf:"bytes,3,rep,name=volatile_configs,json=volatileConfigs,proto3" json:"volatile_configs,omitempty"`
-	// Either send YAML stream in config field or separate configs in configs field
-	VerboseResponse bool `protobuf:"varint,4,opt,name=verbose_response,json=verboseResponse,proto3" json:"verbose_response,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Config          string                          `protobuf:"bytes,2,opt,name=config,proto3"`
+	xxx_hidden_VolatileConfigs *[]*VolatileConfig              `protobuf:"bytes,3,rep,name=volatile_configs,json=volatileConfigs,proto3"`
+	xxx_hidden_VerboseResponse bool                            `protobuf:"varint,4,opt,name=verbose_response,json=verboseResponse,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ResolveAllConfigRequest) Reset() {
@@ -1529,49 +2361,95 @@ func (x *ResolveAllConfigRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolveAllConfigRequest.ProtoReflect.Descriptor instead.
-func (*ResolveAllConfigRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{26}
-}
-
 func (x *ResolveAllConfigRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ResolveAllConfigRequest) GetConfig() string {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return ""
 }
 
 func (x *ResolveAllConfigRequest) GetVolatileConfigs() []*VolatileConfig {
 	if x != nil {
-		return x.VolatileConfigs
+		if x.xxx_hidden_VolatileConfigs != nil {
+			return *x.xxx_hidden_VolatileConfigs
+		}
 	}
 	return nil
 }
 
 func (x *ResolveAllConfigRequest) GetVerboseResponse() bool {
 	if x != nil {
-		return x.VerboseResponse
+		return x.xxx_hidden_VerboseResponse
 	}
 	return false
 }
 
+func (x *ResolveAllConfigRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ResolveAllConfigRequest) SetConfig(v string) {
+	x.xxx_hidden_Config = v
+}
+
+func (x *ResolveAllConfigRequest) SetVolatileConfigs(v []*VolatileConfig) {
+	x.xxx_hidden_VolatileConfigs = &v
+}
+
+func (x *ResolveAllConfigRequest) SetVerboseResponse(v bool) {
+	x.xxx_hidden_VerboseResponse = v
+}
+
+func (x *ResolveAllConfigRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ResolveAllConfigRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ResolveAllConfigRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Config to resolve
+	Config string
+	// Additional configs which will be apended to selectors
+	VolatileConfigs []*VolatileConfig
+	// Either send YAML stream in config field or separate configs in configs field
+	VerboseResponse bool
+}
+
+func (b0 ResolveAllConfigRequest_builder) Build() *ResolveAllConfigRequest {
+	m0 := &ResolveAllConfigRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Config = b.Config
+	x.xxx_hidden_VolatileConfigs = &b.VolatileConfigs
+	x.xxx_hidden_VerboseResponse = b.VerboseResponse
+	return m0
+}
+
 type YamlLabelExt struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the label
-	Label string `protobuf:"bytes,1,opt,name=label,proto3" json:"label,omitempty"`
-	// Type of label value
-	Type YamlLabelExt_LabelType `protobuf:"varint,2,opt,name=type,proto3,enum=Ydb.DynamicConfig.YamlLabelExt_LabelType" json:"type,omitempty"`
-	// Value of the label
-	Value         *string `protobuf:"bytes,3,opt,name=value,proto3,oneof" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Label       string                 `protobuf:"bytes,1,opt,name=label,proto3"`
+	xxx_hidden_Type        YamlLabelExt_LabelType `protobuf:"varint,2,opt,name=type,proto3,enum=Ydb.DynamicConfig.YamlLabelExt_LabelType"`
+	xxx_hidden_Value       *string                `protobuf:"bytes,3,opt,name=value,proto3,oneof"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *YamlLabelExt) Reset() {
@@ -1599,38 +2477,84 @@ func (x *YamlLabelExt) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use YamlLabelExt.ProtoReflect.Descriptor instead.
-func (*YamlLabelExt) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{27}
-}
-
 func (x *YamlLabelExt) GetLabel() string {
 	if x != nil {
-		return x.Label
+		return x.xxx_hidden_Label
 	}
 	return ""
 }
 
 func (x *YamlLabelExt) GetType() YamlLabelExt_LabelType {
 	if x != nil {
-		return x.Type
+		return x.xxx_hidden_Type
 	}
 	return YamlLabelExt_UNSPECIFIED
 }
 
 func (x *YamlLabelExt) GetValue() string {
-	if x != nil && x.Value != nil {
-		return *x.Value
+	if x != nil {
+		if x.xxx_hidden_Value != nil {
+			return *x.xxx_hidden_Value
+		}
+		return ""
 	}
 	return ""
 }
 
+func (x *YamlLabelExt) SetLabel(v string) {
+	x.xxx_hidden_Label = v
+}
+
+func (x *YamlLabelExt) SetType(v YamlLabelExt_LabelType) {
+	x.xxx_hidden_Type = v
+}
+
+func (x *YamlLabelExt) SetValue(v string) {
+	x.xxx_hidden_Value = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *YamlLabelExt) HasValue() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *YamlLabelExt) ClearValue() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Value = nil
+}
+
+type YamlLabelExt_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Name of the label
+	Label string
+	// Type of label value
+	Type YamlLabelExt_LabelType
+	// Value of the label
+	Value *string
+}
+
+func (b0 YamlLabelExt_builder) Build() *YamlLabelExt {
+	m0 := &YamlLabelExt{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Label = b.Label
+	x.xxx_hidden_Type = b.Type
+	if b.Value != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_Value = b.Value
+	}
+	return m0
+}
+
 type LabelSet struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// labels for which the config are applicable
-	Labels        []*YamlLabelExt `protobuf:"bytes,1,rep,name=labels,proto3" json:"labels,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Labels *[]*YamlLabelExt       `protobuf:"bytes,1,rep,name=labels,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *LabelSet) Reset() {
@@ -1658,26 +2582,40 @@ func (x *LabelSet) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LabelSet.ProtoReflect.Descriptor instead.
-func (*LabelSet) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{28}
-}
-
 func (x *LabelSet) GetLabels() []*YamlLabelExt {
 	if x != nil {
-		return x.Labels
+		if x.xxx_hidden_Labels != nil {
+			return *x.xxx_hidden_Labels
+		}
 	}
 	return nil
 }
 
+func (x *LabelSet) SetLabels(v []*YamlLabelExt) {
+	x.xxx_hidden_Labels = &v
+}
+
+type LabelSet_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// labels for which the config are applicable
+	Labels []*YamlLabelExt
+}
+
+func (b0 LabelSet_builder) Build() *LabelSet {
+	m0 := &LabelSet{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Labels = &b.Labels
+	return m0
+}
+
 type ResolvedConfig struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// label sets for which the config are applicable
-	LabelSets []*LabelSet `protobuf:"bytes,1,rep,name=label_sets,json=labelSets,proto3" json:"label_sets,omitempty"`
-	// resolved YAML config
-	Config        string `protobuf:"bytes,2,opt,name=config,proto3" json:"config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_LabelSets *[]*LabelSet           `protobuf:"bytes,1,rep,name=label_sets,json=labelSets,proto3"`
+	xxx_hidden_Config    string                 `protobuf:"bytes,2,opt,name=config,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ResolvedConfig) Reset() {
@@ -1705,31 +2643,53 @@ func (x *ResolvedConfig) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolvedConfig.ProtoReflect.Descriptor instead.
-func (*ResolvedConfig) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{29}
-}
-
 func (x *ResolvedConfig) GetLabelSets() []*LabelSet {
 	if x != nil {
-		return x.LabelSets
+		if x.xxx_hidden_LabelSets != nil {
+			return *x.xxx_hidden_LabelSets
+		}
 	}
 	return nil
 }
 
 func (x *ResolvedConfig) GetConfig() string {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return ""
 }
 
+func (x *ResolvedConfig) SetLabelSets(v []*LabelSet) {
+	x.xxx_hidden_LabelSets = &v
+}
+
+func (x *ResolvedConfig) SetConfig(v string) {
+	x.xxx_hidden_Config = v
+}
+
+type ResolvedConfig_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// label sets for which the config are applicable
+	LabelSets []*LabelSet
+	// resolved YAML config
+	Config string
+}
+
+func (b0 ResolvedConfig_builder) Build() *ResolvedConfig {
+	m0 := &ResolvedConfig{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_LabelSets = &b.LabelSets
+	x.xxx_hidden_Config = b.Config
+	return m0
+}
+
 type ResolveAllConfigResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result of request will be inside operation.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ResolveAllConfigResponse) Reset() {
@@ -1757,27 +2717,49 @@ func (x *ResolveAllConfigResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolveAllConfigResponse.ProtoReflect.Descriptor instead.
-func (*ResolveAllConfigResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{30}
-}
-
 func (x *ResolveAllConfigResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ResolveAllConfigResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ResolveAllConfigResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ResolveAllConfigResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ResolveAllConfigResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result of request will be inside operation.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ResolveAllConfigResponse_builder) Build() *ResolveAllConfigResponse {
+	m0 := &ResolveAllConfigResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ResolveAllConfigResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// YAML stream with resolved configs
-	// Label combinations shown in comments
-	Config string `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
-	// Verbose resolved configs
-	Configs       []*ResolvedConfig `protobuf:"bytes,2,rep,name=configs,proto3" json:"configs,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Config  string                 `protobuf:"bytes,1,opt,name=config,proto3"`
+	xxx_hidden_Configs *[]*ResolvedConfig     `protobuf:"bytes,2,rep,name=configs,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ResolveAllConfigResult) Reset() {
@@ -1805,30 +2787,54 @@ func (x *ResolveAllConfigResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResolveAllConfigResult.ProtoReflect.Descriptor instead.
-func (*ResolveAllConfigResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{31}
-}
-
 func (x *ResolveAllConfigResult) GetConfig() string {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return ""
 }
 
 func (x *ResolveAllConfigResult) GetConfigs() []*ResolvedConfig {
 	if x != nil {
-		return x.Configs
+		if x.xxx_hidden_Configs != nil {
+			return *x.xxx_hidden_Configs
+		}
 	}
 	return nil
 }
 
+func (x *ResolveAllConfigResult) SetConfig(v string) {
+	x.xxx_hidden_Config = v
+}
+
+func (x *ResolveAllConfigResult) SetConfigs(v []*ResolvedConfig) {
+	x.xxx_hidden_Configs = &v
+}
+
+type ResolveAllConfigResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// YAML stream with resolved configs
+	// Label combinations shown in comments
+	Config string
+	// Verbose resolved configs
+	Configs []*ResolvedConfig
+}
+
+func (b0 ResolveAllConfigResult_builder) Build() *ResolveAllConfigResult {
+	m0 := &ResolveAllConfigResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Config = b.Config
+	x.xxx_hidden_Configs = &b.Configs
+	return m0
+}
+
 type RemoveVolatileConfigRequest_IdsToDelete struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ids           []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Ids []uint64               `protobuf:"varint,1,rep,packed,name=ids,proto3"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *RemoveVolatileConfigRequest_IdsToDelete) Reset() {
@@ -1856,16 +2862,29 @@ func (x *RemoveVolatileConfigRequest_IdsToDelete) ProtoReflect() protoreflect.Me
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RemoveVolatileConfigRequest_IdsToDelete.ProtoReflect.Descriptor instead.
-func (*RemoveVolatileConfigRequest_IdsToDelete) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP(), []int{17, 0}
-}
-
 func (x *RemoveVolatileConfigRequest_IdsToDelete) GetIds() []uint64 {
 	if x != nil {
-		return x.Ids
+		return x.xxx_hidden_Ids
 	}
 	return nil
+}
+
+func (x *RemoveVolatileConfigRequest_IdsToDelete) SetIds(v []uint64) {
+	x.xxx_hidden_Ids = v
+}
+
+type RemoveVolatileConfigRequest_IdsToDelete_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Ids []uint64
+}
+
+func (b0 RemoveVolatileConfigRequest_IdsToDelete_builder) Build() *RemoveVolatileConfigRequest_IdsToDelete {
+	m0 := &RemoveVolatileConfigRequest_IdsToDelete{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Ids = b.Ids
+	return m0
 }
 
 var File_draft_protos_ydb_dynamic_config_proto protoreflect.FileDescriptor
@@ -1982,18 +3001,6 @@ const file_draft_protos_ydb_dynamic_config_proto_rawDesc = "" +
 	"\aconfigs\x18\x02 \x03(\v2!.Ydb.DynamicConfig.ResolvedConfigR\aconfigsBo\n" +
 	"\"tech.ydb.proto.draft.dynamicconfigZFgithub.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_DynamicConfig\xf8\x01\x01b\x06proto3"
 
-var (
-	file_draft_protos_ydb_dynamic_config_proto_rawDescOnce sync.Once
-	file_draft_protos_ydb_dynamic_config_proto_rawDescData []byte
-)
-
-func file_draft_protos_ydb_dynamic_config_proto_rawDescGZIP() []byte {
-	file_draft_protos_ydb_dynamic_config_proto_rawDescOnce.Do(func() {
-		file_draft_protos_ydb_dynamic_config_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_draft_protos_ydb_dynamic_config_proto_rawDesc), len(file_draft_protos_ydb_dynamic_config_proto_rawDesc)))
-	})
-	return file_draft_protos_ydb_dynamic_config_proto_rawDescData
-}
-
 var file_draft_protos_ydb_dynamic_config_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_draft_protos_ydb_dynamic_config_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_draft_protos_ydb_dynamic_config_proto_goTypes = []any{
@@ -2082,10 +3089,10 @@ func file_draft_protos_ydb_dynamic_config_proto_init() {
 		return
 	}
 	file_draft_protos_ydb_dynamic_config_proto_msgTypes[17].OneofWrappers = []any{
-		(*RemoveVolatileConfigRequest_Identity)(nil),
-		(*RemoveVolatileConfigRequest_Force)(nil),
-		(*RemoveVolatileConfigRequest_Ids)(nil),
-		(*RemoveVolatileConfigRequest_All)(nil),
+		(*removeVolatileConfigRequest_Identity)(nil),
+		(*removeVolatileConfigRequest_Force)(nil),
+		(*removeVolatileConfigRequest_Ids)(nil),
+		(*removeVolatileConfigRequest_All)(nil),
 	}
 	file_draft_protos_ydb_dynamic_config_proto_msgTypes[27].OneofWrappers = []any{}
 	type x struct{}

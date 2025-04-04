@@ -15,7 +15,6 @@ import (
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -78,11 +77,6 @@ func (x ItemState) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ItemState.Descriptor instead.
-func (ItemState) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{0}
-}
-
 type AvailabilityMode int32
 
 const (
@@ -142,11 +136,6 @@ func (x AvailabilityMode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use AvailabilityMode.Descriptor instead.
-func (AvailabilityMode) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{1}
-}
-
 type ActionState_ActionStatus int32
 
 const (
@@ -191,11 +180,6 @@ func (ActionState_ActionStatus) Type() protoreflect.EnumType {
 
 func (x ActionState_ActionStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ActionState_ActionStatus.Descriptor instead.
-func (ActionState_ActionStatus) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{12, 0}
 }
 
 type ActionState_ActionReason int32
@@ -268,30 +252,18 @@ func (x ActionState_ActionReason) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ActionState_ActionReason.Descriptor instead.
-func (ActionState_ActionReason) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{12, 1}
-}
-
 type Node struct {
-	state    protoimpl.MessageState      `protogen:"open.v1"`
-	NodeId   uint32                      `protobuf:"varint,1,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
-	Host     string                      `protobuf:"bytes,2,opt,name=host,proto3" json:"host,omitempty"`
-	Port     uint32                      `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	Location *Ydb_Discovery.NodeLocation `protobuf:"bytes,4,opt,name=location,proto3" json:"location,omitempty"`
-	State    ItemState                   `protobuf:"varint,5,opt,name=state,proto3,enum=Ydb.Maintenance.ItemState" json:"state,omitempty"`
-	// Types that are valid to be assigned to Type:
-	//
-	//	*Node_Storage
-	//	*Node_Dynamic
-	Type isNode_Type `protobuf_oneof:"type"`
-	// start_time defines time when node was registered in cms.
-	StartTime *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	// version defines YDB version for current Node.
-	// For example, 'ydb-stable-24-1'.
-	Version       string `protobuf:"bytes,9,opt,name=version,proto3" json:"version,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState      `protogen:"opaque.v1"`
+	xxx_hidden_NodeId    uint32                      `protobuf:"varint,1,opt,name=node_id,json=nodeId,proto3"`
+	xxx_hidden_Host      string                      `protobuf:"bytes,2,opt,name=host,proto3"`
+	xxx_hidden_Port      uint32                      `protobuf:"varint,3,opt,name=port,proto3"`
+	xxx_hidden_Location  *Ydb_Discovery.NodeLocation `protobuf:"bytes,4,opt,name=location,proto3"`
+	xxx_hidden_State     ItemState                   `protobuf:"varint,5,opt,name=state,proto3,enum=Ydb.Maintenance.ItemState"`
+	xxx_hidden_Type      isNode_Type                 `protobuf_oneof:"type"`
+	xxx_hidden_StartTime *timestamppb.Timestamp      `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3"`
+	xxx_hidden_Version   string                      `protobuf:"bytes,9,opt,name=version,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Node) Reset() {
@@ -319,56 +291,44 @@ func (x *Node) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Node.ProtoReflect.Descriptor instead.
-func (*Node) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *Node) GetNodeId() uint32 {
 	if x != nil {
-		return x.NodeId
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *Node) GetHost() string {
 	if x != nil {
-		return x.Host
+		return x.xxx_hidden_Host
 	}
 	return ""
 }
 
 func (x *Node) GetPort() uint32 {
 	if x != nil {
-		return x.Port
+		return x.xxx_hidden_Port
 	}
 	return 0
 }
 
 func (x *Node) GetLocation() *Ydb_Discovery.NodeLocation {
 	if x != nil {
-		return x.Location
+		return x.xxx_hidden_Location
 	}
 	return nil
 }
 
 func (x *Node) GetState() ItemState {
 	if x != nil {
-		return x.State
+		return x.xxx_hidden_State
 	}
 	return ItemState_ITEM_STATE_UNSPECIFIED
 }
 
-func (x *Node) GetType() isNode_Type {
-	if x != nil {
-		return x.Type
-	}
-	return nil
-}
-
 func (x *Node) GetStorage() *Node_StorageNode {
 	if x != nil {
-		if x, ok := x.Type.(*Node_Storage); ok {
+		if x, ok := x.xxx_hidden_Type.(*node_Storage); ok {
 			return x.Storage
 		}
 	}
@@ -377,7 +337,7 @@ func (x *Node) GetStorage() *Node_StorageNode {
 
 func (x *Node) GetDynamic() *Node_DynamicNode {
 	if x != nil {
-		if x, ok := x.Type.(*Node_Dynamic); ok {
+		if x, ok := x.xxx_hidden_Type.(*node_Dynamic); ok {
 			return x.Dynamic
 		}
 	}
@@ -386,39 +346,211 @@ func (x *Node) GetDynamic() *Node_DynamicNode {
 
 func (x *Node) GetStartTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.StartTime
+		return x.xxx_hidden_StartTime
 	}
 	return nil
 }
 
 func (x *Node) GetVersion() string {
 	if x != nil {
-		return x.Version
+		return x.xxx_hidden_Version
 	}
 	return ""
+}
+
+func (x *Node) SetNodeId(v uint32) {
+	x.xxx_hidden_NodeId = v
+}
+
+func (x *Node) SetHost(v string) {
+	x.xxx_hidden_Host = v
+}
+
+func (x *Node) SetPort(v uint32) {
+	x.xxx_hidden_Port = v
+}
+
+func (x *Node) SetLocation(v *Ydb_Discovery.NodeLocation) {
+	x.xxx_hidden_Location = v
+}
+
+func (x *Node) SetState(v ItemState) {
+	x.xxx_hidden_State = v
+}
+
+func (x *Node) SetStorage(v *Node_StorageNode) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &node_Storage{v}
+}
+
+func (x *Node) SetDynamic(v *Node_DynamicNode) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &node_Dynamic{v}
+}
+
+func (x *Node) SetStartTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_StartTime = v
+}
+
+func (x *Node) SetVersion(v string) {
+	x.xxx_hidden_Version = v
+}
+
+func (x *Node) HasLocation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Location != nil
+}
+
+func (x *Node) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *Node) HasStorage() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*node_Storage)
+	return ok
+}
+
+func (x *Node) HasDynamic() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*node_Dynamic)
+	return ok
+}
+
+func (x *Node) HasStartTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StartTime != nil
+}
+
+func (x *Node) ClearLocation() {
+	x.xxx_hidden_Location = nil
+}
+
+func (x *Node) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *Node) ClearStorage() {
+	if _, ok := x.xxx_hidden_Type.(*node_Storage); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Node) ClearDynamic() {
+	if _, ok := x.xxx_hidden_Type.(*node_Dynamic); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Node) ClearStartTime() {
+	x.xxx_hidden_StartTime = nil
+}
+
+const Node_Type_not_set_case case_Node_Type = 0
+const Node_Storage_case case_Node_Type = 6
+const Node_Dynamic_case case_Node_Type = 7
+
+func (x *Node) WhichType() case_Node_Type {
+	if x == nil {
+		return Node_Type_not_set_case
+	}
+	switch x.xxx_hidden_Type.(type) {
+	case *node_Storage:
+		return Node_Storage_case
+	case *node_Dynamic:
+		return Node_Dynamic_case
+	default:
+		return Node_Type_not_set_case
+	}
+}
+
+type Node_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	NodeId   uint32
+	Host     string
+	Port     uint32
+	Location *Ydb_Discovery.NodeLocation
+	State    ItemState
+	// Fields of oneof xxx_hidden_Type:
+	Storage *Node_StorageNode
+	Dynamic *Node_DynamicNode
+	// -- end of xxx_hidden_Type
+	// start_time defines time when node was registered in cms.
+	StartTime *timestamppb.Timestamp
+	// version defines YDB version for current Node.
+	// For example, 'ydb-stable-24-1'.
+	Version string
+}
+
+func (b0 Node_builder) Build() *Node {
+	m0 := &Node{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_NodeId = b.NodeId
+	x.xxx_hidden_Host = b.Host
+	x.xxx_hidden_Port = b.Port
+	x.xxx_hidden_Location = b.Location
+	x.xxx_hidden_State = b.State
+	if b.Storage != nil {
+		x.xxx_hidden_Type = &node_Storage{b.Storage}
+	}
+	if b.Dynamic != nil {
+		x.xxx_hidden_Type = &node_Dynamic{b.Dynamic}
+	}
+	x.xxx_hidden_StartTime = b.StartTime
+	x.xxx_hidden_Version = b.Version
+	return m0
+}
+
+type case_Node_Type protoreflect.FieldNumber
+
+func (x case_Node_Type) String() string {
+	md := file_draft_protos_ydb_maintenance_proto_msgTypes[0].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isNode_Type interface {
 	isNode_Type()
 }
 
-type Node_Storage struct {
+type node_Storage struct {
 	Storage *Node_StorageNode `protobuf:"bytes,6,opt,name=storage,proto3,oneof"`
 }
 
-type Node_Dynamic struct {
+type node_Dynamic struct {
 	Dynamic *Node_DynamicNode `protobuf:"bytes,7,opt,name=dynamic,proto3,oneof"`
 }
 
-func (*Node_Storage) isNode_Type() {}
+func (*node_Storage) isNode_Type() {}
 
-func (*Node_Dynamic) isNode_Type() {}
+func (*node_Dynamic) isNode_Type() {}
 
 type ListClusterNodesRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListClusterNodesRequest) Reset() {
@@ -446,23 +578,47 @@ func (x *ListClusterNodesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListClusterNodesRequest.ProtoReflect.Descriptor instead.
-func (*ListClusterNodesRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *ListClusterNodesRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *ListClusterNodesRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ListClusterNodesRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ListClusterNodesRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ListClusterNodesRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 ListClusterNodesRequest_builder) Build() *ListClusterNodesRequest {
+	m0 := &ListClusterNodesRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type ListClusterNodesResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Nodes         []*Node                `protobuf:"bytes,1,rep,name=nodes,proto3" json:"nodes,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Nodes *[]*Node               `protobuf:"bytes,1,rep,name=nodes,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ListClusterNodesResult) Reset() {
@@ -490,24 +646,38 @@ func (x *ListClusterNodesResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListClusterNodesResult.ProtoReflect.Descriptor instead.
-func (*ListClusterNodesResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *ListClusterNodesResult) GetNodes() []*Node {
 	if x != nil {
-		return x.Nodes
+		if x.xxx_hidden_Nodes != nil {
+			return *x.xxx_hidden_Nodes
+		}
 	}
 	return nil
 }
 
+func (x *ListClusterNodesResult) SetNodes(v []*Node) {
+	x.xxx_hidden_Nodes = &v
+}
+
+type ListClusterNodesResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Nodes []*Node
+}
+
+func (b0 ListClusterNodesResult_builder) Build() *ListClusterNodesResult {
+	m0 := &ListClusterNodesResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Nodes = &b.Nodes
+	return m0
+}
+
 type ListClusterNodesResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result = ListClusterNodesResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListClusterNodesResponse) Reset() {
@@ -535,31 +705,52 @@ func (x *ListClusterNodesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListClusterNodesResponse.ProtoReflect.Descriptor instead.
-func (*ListClusterNodesResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *ListClusterNodesResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ListClusterNodesResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ListClusterNodesResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ListClusterNodesResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ListClusterNodesResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result = ListClusterNodesResult
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ListClusterNodesResponse_builder) Build() *ListClusterNodesResponse {
+	m0 := &ListClusterNodesResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type MaintenanceTaskOptions struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// User-defined _unique_ task identifier.
-	TaskUid string `protobuf:"bytes,1,opt,name=task_uid,json=taskUid,proto3" json:"task_uid,omitempty"`
-	// User-defined description.
-	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
-	// Availability mode.
-	AvailabilityMode AvailabilityMode `protobuf:"varint,3,opt,name=availability_mode,json=availabilityMode,proto3,enum=Ydb.Maintenance.AvailabilityMode" json:"availability_mode,omitempty"`
-	DryRun           bool             `protobuf:"varint,4,opt,name=dry_run,json=dryRun,proto3" json:"dry_run,omitempty"`
-	// Priority of the task. Lower value indicates higher priority.
-	Priority      int32 `protobuf:"varint,5,opt,name=priority,proto3" json:"priority,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskUid          string                 `protobuf:"bytes,1,opt,name=task_uid,json=taskUid,proto3"`
+	xxx_hidden_Description      string                 `protobuf:"bytes,2,opt,name=description,proto3"`
+	xxx_hidden_AvailabilityMode AvailabilityMode       `protobuf:"varint,3,opt,name=availability_mode,json=availabilityMode,proto3,enum=Ydb.Maintenance.AvailabilityMode"`
+	xxx_hidden_DryRun           bool                   `protobuf:"varint,4,opt,name=dry_run,json=dryRun,proto3"`
+	xxx_hidden_Priority         int32                  `protobuf:"varint,5,opt,name=priority,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *MaintenanceTaskOptions) Reset() {
@@ -587,56 +778,93 @@ func (x *MaintenanceTaskOptions) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MaintenanceTaskOptions.ProtoReflect.Descriptor instead.
-func (*MaintenanceTaskOptions) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *MaintenanceTaskOptions) GetTaskUid() string {
 	if x != nil {
-		return x.TaskUid
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
 func (x *MaintenanceTaskOptions) GetDescription() string {
 	if x != nil {
-		return x.Description
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
 func (x *MaintenanceTaskOptions) GetAvailabilityMode() AvailabilityMode {
 	if x != nil {
-		return x.AvailabilityMode
+		return x.xxx_hidden_AvailabilityMode
 	}
 	return AvailabilityMode_AVAILABILITY_MODE_UNSPECIFIED
 }
 
 func (x *MaintenanceTaskOptions) GetDryRun() bool {
 	if x != nil {
-		return x.DryRun
+		return x.xxx_hidden_DryRun
 	}
 	return false
 }
 
 func (x *MaintenanceTaskOptions) GetPriority() int32 {
 	if x != nil {
-		return x.Priority
+		return x.xxx_hidden_Priority
 	}
 	return 0
 }
 
+func (x *MaintenanceTaskOptions) SetTaskUid(v string) {
+	x.xxx_hidden_TaskUid = v
+}
+
+func (x *MaintenanceTaskOptions) SetDescription(v string) {
+	x.xxx_hidden_Description = v
+}
+
+func (x *MaintenanceTaskOptions) SetAvailabilityMode(v AvailabilityMode) {
+	x.xxx_hidden_AvailabilityMode = v
+}
+
+func (x *MaintenanceTaskOptions) SetDryRun(v bool) {
+	x.xxx_hidden_DryRun = v
+}
+
+func (x *MaintenanceTaskOptions) SetPriority(v int32) {
+	x.xxx_hidden_Priority = v
+}
+
+type MaintenanceTaskOptions_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// User-defined _unique_ task identifier.
+	TaskUid string
+	// User-defined description.
+	Description string
+	// Availability mode.
+	AvailabilityMode AvailabilityMode
+	DryRun           bool
+	// Priority of the task. Lower value indicates higher priority.
+	Priority int32
+}
+
+func (b0 MaintenanceTaskOptions_builder) Build() *MaintenanceTaskOptions {
+	m0 := &MaintenanceTaskOptions{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TaskUid = b.TaskUid
+	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_AvailabilityMode = b.AvailabilityMode
+	x.xxx_hidden_DryRun = b.DryRun
+	x.xxx_hidden_Priority = b.Priority
+	return m0
+}
+
 // Used to describe the scope of a single action.
 type ActionScope struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Scope:
-	//
-	//	*ActionScope_NodeId
-	//	*ActionScope_Host
-	Scope         isActionScope_Scope `protobuf_oneof:"scope"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Scope isActionScope_Scope    `protobuf_oneof:"scope"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ActionScope) Reset() {
@@ -664,21 +892,9 @@ func (x *ActionScope) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ActionScope.ProtoReflect.Descriptor instead.
-func (*ActionScope) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *ActionScope) GetScope() isActionScope_Scope {
-	if x != nil {
-		return x.Scope
-	}
-	return nil
-}
-
 func (x *ActionScope) GetNodeId() uint32 {
 	if x != nil {
-		if x, ok := x.Scope.(*ActionScope_NodeId); ok {
+		if x, ok := x.xxx_hidden_Scope.(*actionScope_NodeId); ok {
 			return x.NodeId
 		}
 	}
@@ -687,36 +903,133 @@ func (x *ActionScope) GetNodeId() uint32 {
 
 func (x *ActionScope) GetHost() string {
 	if x != nil {
-		if x, ok := x.Scope.(*ActionScope_Host); ok {
+		if x, ok := x.xxx_hidden_Scope.(*actionScope_Host); ok {
 			return x.Host
 		}
 	}
 	return ""
 }
 
+func (x *ActionScope) SetNodeId(v uint32) {
+	x.xxx_hidden_Scope = &actionScope_NodeId{v}
+}
+
+func (x *ActionScope) SetHost(v string) {
+	x.xxx_hidden_Scope = &actionScope_Host{v}
+}
+
+func (x *ActionScope) HasScope() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Scope != nil
+}
+
+func (x *ActionScope) HasNodeId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Scope.(*actionScope_NodeId)
+	return ok
+}
+
+func (x *ActionScope) HasHost() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Scope.(*actionScope_Host)
+	return ok
+}
+
+func (x *ActionScope) ClearScope() {
+	x.xxx_hidden_Scope = nil
+}
+
+func (x *ActionScope) ClearNodeId() {
+	if _, ok := x.xxx_hidden_Scope.(*actionScope_NodeId); ok {
+		x.xxx_hidden_Scope = nil
+	}
+}
+
+func (x *ActionScope) ClearHost() {
+	if _, ok := x.xxx_hidden_Scope.(*actionScope_Host); ok {
+		x.xxx_hidden_Scope = nil
+	}
+}
+
+const ActionScope_Scope_not_set_case case_ActionScope_Scope = 0
+const ActionScope_NodeId_case case_ActionScope_Scope = 1
+const ActionScope_Host_case case_ActionScope_Scope = 2
+
+func (x *ActionScope) WhichScope() case_ActionScope_Scope {
+	if x == nil {
+		return ActionScope_Scope_not_set_case
+	}
+	switch x.xxx_hidden_Scope.(type) {
+	case *actionScope_NodeId:
+		return ActionScope_NodeId_case
+	case *actionScope_Host:
+		return ActionScope_Host_case
+	default:
+		return ActionScope_Scope_not_set_case
+	}
+}
+
+type ActionScope_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Scope:
+	NodeId *uint32
+	Host   *string
+	// -- end of xxx_hidden_Scope
+}
+
+func (b0 ActionScope_builder) Build() *ActionScope {
+	m0 := &ActionScope{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.NodeId != nil {
+		x.xxx_hidden_Scope = &actionScope_NodeId{*b.NodeId}
+	}
+	if b.Host != nil {
+		x.xxx_hidden_Scope = &actionScope_Host{*b.Host}
+	}
+	return m0
+}
+
+type case_ActionScope_Scope protoreflect.FieldNumber
+
+func (x case_ActionScope_Scope) String() string {
+	md := file_draft_protos_ydb_maintenance_proto_msgTypes[5].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isActionScope_Scope interface {
 	isActionScope_Scope()
 }
 
-type ActionScope_NodeId struct {
+type actionScope_NodeId struct {
 	NodeId uint32 `protobuf:"varint,1,opt,name=node_id,json=nodeId,proto3,oneof"`
 }
 
-type ActionScope_Host struct {
+type actionScope_Host struct {
 	Host string `protobuf:"bytes,2,opt,name=host,proto3,oneof"`
 }
 
-func (*ActionScope_NodeId) isActionScope_Scope() {}
+func (*actionScope_NodeId) isActionScope_Scope() {}
 
-func (*ActionScope_Host) isActionScope_Scope() {}
+func (*actionScope_Host) isActionScope_Scope() {}
 
 // Taking an exclusive lock to perform maintenance.
 type LockAction struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Scope         *ActionScope           `protobuf:"bytes,1,opt,name=scope,proto3" json:"scope,omitempty"`
-	Duration      *durationpb.Duration   `protobuf:"bytes,2,opt,name=duration,proto3" json:"duration,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Scope    *ActionScope           `protobuf:"bytes,1,opt,name=scope,proto3"`
+	xxx_hidden_Duration *durationpb.Duration   `protobuf:"bytes,2,opt,name=duration,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *LockAction) Reset() {
@@ -744,33 +1057,71 @@ func (x *LockAction) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use LockAction.ProtoReflect.Descriptor instead.
-func (*LockAction) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{6}
-}
-
 func (x *LockAction) GetScope() *ActionScope {
 	if x != nil {
-		return x.Scope
+		return x.xxx_hidden_Scope
 	}
 	return nil
 }
 
 func (x *LockAction) GetDuration() *durationpb.Duration {
 	if x != nil {
-		return x.Duration
+		return x.xxx_hidden_Duration
 	}
 	return nil
 }
 
+func (x *LockAction) SetScope(v *ActionScope) {
+	x.xxx_hidden_Scope = v
+}
+
+func (x *LockAction) SetDuration(v *durationpb.Duration) {
+	x.xxx_hidden_Duration = v
+}
+
+func (x *LockAction) HasScope() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Scope != nil
+}
+
+func (x *LockAction) HasDuration() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Duration != nil
+}
+
+func (x *LockAction) ClearScope() {
+	x.xxx_hidden_Scope = nil
+}
+
+func (x *LockAction) ClearDuration() {
+	x.xxx_hidden_Duration = nil
+}
+
+type LockAction_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Scope    *ActionScope
+	Duration *durationpb.Duration
+}
+
+func (b0 LockAction_builder) Build() *LockAction {
+	m0 := &LockAction{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Scope = b.Scope
+	x.xxx_hidden_Duration = b.Duration
+	return m0
+}
+
 type Action struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Action:
-	//
-	//	*Action_LockAction
-	Action        isAction_Action `protobuf_oneof:"action"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Action isAction_Action        `protobuf_oneof:"action"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *Action) Reset() {
@@ -798,42 +1149,106 @@ func (x *Action) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Action.ProtoReflect.Descriptor instead.
-func (*Action) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *Action) GetAction() isAction_Action {
-	if x != nil {
-		return x.Action
-	}
-	return nil
-}
-
 func (x *Action) GetLockAction() *LockAction {
 	if x != nil {
-		if x, ok := x.Action.(*Action_LockAction); ok {
+		if x, ok := x.xxx_hidden_Action.(*action_LockAction); ok {
 			return x.LockAction
 		}
 	}
 	return nil
 }
 
+func (x *Action) SetLockAction(v *LockAction) {
+	if v == nil {
+		x.xxx_hidden_Action = nil
+		return
+	}
+	x.xxx_hidden_Action = &action_LockAction{v}
+}
+
+func (x *Action) HasAction() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Action != nil
+}
+
+func (x *Action) HasLockAction() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Action.(*action_LockAction)
+	return ok
+}
+
+func (x *Action) ClearAction() {
+	x.xxx_hidden_Action = nil
+}
+
+func (x *Action) ClearLockAction() {
+	if _, ok := x.xxx_hidden_Action.(*action_LockAction); ok {
+		x.xxx_hidden_Action = nil
+	}
+}
+
+const Action_Action_not_set_case case_Action_Action = 0
+const Action_LockAction_case case_Action_Action = 1
+
+func (x *Action) WhichAction() case_Action_Action {
+	if x == nil {
+		return Action_Action_not_set_case
+	}
+	switch x.xxx_hidden_Action.(type) {
+	case *action_LockAction:
+		return Action_LockAction_case
+	default:
+		return Action_Action_not_set_case
+	}
+}
+
+type Action_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Action:
+	LockAction *LockAction
+	// -- end of xxx_hidden_Action
+}
+
+func (b0 Action_builder) Build() *Action {
+	m0 := &Action{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.LockAction != nil {
+		x.xxx_hidden_Action = &action_LockAction{b.LockAction}
+	}
+	return m0
+}
+
+type case_Action_Action protoreflect.FieldNumber
+
+func (x case_Action_Action) String() string {
+	md := file_draft_protos_ydb_maintenance_proto_msgTypes[7].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isAction_Action interface {
 	isAction_Action()
 }
 
-type Action_LockAction struct {
+type action_LockAction struct {
 	LockAction *LockAction `protobuf:"bytes,1,opt,name=lock_action,json=lockAction,proto3,oneof"`
 }
 
-func (*Action_LockAction) isAction_Action() {}
+func (*action_LockAction) isAction_Action() {}
 
 type ActionGroup struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Actions       []*Action              `protobuf:"bytes,1,rep,name=actions,proto3" json:"actions,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Actions *[]*Action             `protobuf:"bytes,1,rep,name=actions,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ActionGroup) Reset() {
@@ -861,25 +1276,40 @@ func (x *ActionGroup) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ActionGroup.ProtoReflect.Descriptor instead.
-func (*ActionGroup) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{8}
-}
-
 func (x *ActionGroup) GetActions() []*Action {
 	if x != nil {
-		return x.Actions
+		if x.xxx_hidden_Actions != nil {
+			return *x.xxx_hidden_Actions
+		}
 	}
 	return nil
 }
 
+func (x *ActionGroup) SetActions(v []*Action) {
+	x.xxx_hidden_Actions = &v
+}
+
+type ActionGroup_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Actions []*Action
+}
+
+func (b0 ActionGroup_builder) Build() *ActionGroup {
+	m0 := &ActionGroup{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Actions = &b.Actions
+	return m0
+}
+
 type CreateMaintenanceTaskRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	TaskOptions     *MaintenanceTaskOptions         `protobuf:"bytes,2,opt,name=task_options,json=taskOptions,proto3" json:"task_options,omitempty"`
-	ActionGroups    []*ActionGroup                  `protobuf:"bytes,3,rep,name=action_groups,json=actionGroups,proto3" json:"action_groups,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_TaskOptions     *MaintenanceTaskOptions         `protobuf:"bytes,2,opt,name=task_options,json=taskOptions,proto3"`
+	xxx_hidden_ActionGroups    *[]*ActionGroup                 `protobuf:"bytes,3,rep,name=action_groups,json=actionGroups,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateMaintenanceTaskRequest) Reset() {
@@ -907,38 +1337,87 @@ func (x *CreateMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateMaintenanceTaskRequest.ProtoReflect.Descriptor instead.
-func (*CreateMaintenanceTaskRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *CreateMaintenanceTaskRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateMaintenanceTaskRequest) GetTaskOptions() *MaintenanceTaskOptions {
 	if x != nil {
-		return x.TaskOptions
+		return x.xxx_hidden_TaskOptions
 	}
 	return nil
 }
 
 func (x *CreateMaintenanceTaskRequest) GetActionGroups() []*ActionGroup {
 	if x != nil {
-		return x.ActionGroups
+		if x.xxx_hidden_ActionGroups != nil {
+			return *x.xxx_hidden_ActionGroups
+		}
 	}
 	return nil
 }
 
+func (x *CreateMaintenanceTaskRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CreateMaintenanceTaskRequest) SetTaskOptions(v *MaintenanceTaskOptions) {
+	x.xxx_hidden_TaskOptions = v
+}
+
+func (x *CreateMaintenanceTaskRequest) SetActionGroups(v []*ActionGroup) {
+	x.xxx_hidden_ActionGroups = &v
+}
+
+func (x *CreateMaintenanceTaskRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CreateMaintenanceTaskRequest) HasTaskOptions() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TaskOptions != nil
+}
+
+func (x *CreateMaintenanceTaskRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *CreateMaintenanceTaskRequest) ClearTaskOptions() {
+	x.xxx_hidden_TaskOptions = nil
+}
+
+type CreateMaintenanceTaskRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	TaskOptions     *MaintenanceTaskOptions
+	ActionGroups    []*ActionGroup
+}
+
+func (b0 CreateMaintenanceTaskRequest_builder) Build() *CreateMaintenanceTaskRequest {
+	m0 := &CreateMaintenanceTaskRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_TaskOptions = b.TaskOptions
+	x.xxx_hidden_ActionGroups = &b.ActionGroups
+	return m0
+}
+
 type RefreshMaintenanceTaskRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	TaskUid         string                          `protobuf:"bytes,2,opt,name=task_uid,json=taskUid,proto3" json:"task_uid,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_TaskUid         string                          `protobuf:"bytes,2,opt,name=task_uid,json=taskUid,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *RefreshMaintenanceTaskRequest) Reset() {
@@ -966,33 +1445,62 @@ func (x *RefreshMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RefreshMaintenanceTaskRequest.ProtoReflect.Descriptor instead.
-func (*RefreshMaintenanceTaskRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{10}
-}
-
 func (x *RefreshMaintenanceTaskRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *RefreshMaintenanceTaskRequest) GetTaskUid() string {
 	if x != nil {
-		return x.TaskUid
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
+func (x *RefreshMaintenanceTaskRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *RefreshMaintenanceTaskRequest) SetTaskUid(v string) {
+	x.xxx_hidden_TaskUid = v
+}
+
+func (x *RefreshMaintenanceTaskRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *RefreshMaintenanceTaskRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type RefreshMaintenanceTaskRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	TaskUid         string
+}
+
+func (b0 RefreshMaintenanceTaskRequest_builder) Build() *RefreshMaintenanceTaskRequest {
+	m0 := &RefreshMaintenanceTaskRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_TaskUid = b.TaskUid
+	return m0
+}
+
 type ActionUid struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	TaskUid string                 `protobuf:"bytes,1,opt,name=task_uid,json=taskUid,proto3" json:"task_uid,omitempty"`
-	// Unique ids within a single task, assigned by the server.
-	GroupId       string `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3" json:"group_id,omitempty"`
-	ActionId      string `protobuf:"bytes,3,opt,name=action_id,json=actionId,proto3" json:"action_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskUid  string                 `protobuf:"bytes,1,opt,name=task_uid,json=taskUid,proto3"`
+	xxx_hidden_GroupId  string                 `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3"`
+	xxx_hidden_ActionId string                 `protobuf:"bytes,3,opt,name=action_id,json=actionId,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ActionUid) Reset() {
@@ -1020,42 +1528,68 @@ func (x *ActionUid) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ActionUid.ProtoReflect.Descriptor instead.
-func (*ActionUid) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{11}
-}
-
 func (x *ActionUid) GetTaskUid() string {
 	if x != nil {
-		return x.TaskUid
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
 func (x *ActionUid) GetGroupId() string {
 	if x != nil {
-		return x.GroupId
+		return x.xxx_hidden_GroupId
 	}
 	return ""
 }
 
 func (x *ActionUid) GetActionId() string {
 	if x != nil {
-		return x.ActionId
+		return x.xxx_hidden_ActionId
 	}
 	return ""
 }
 
+func (x *ActionUid) SetTaskUid(v string) {
+	x.xxx_hidden_TaskUid = v
+}
+
+func (x *ActionUid) SetGroupId(v string) {
+	x.xxx_hidden_GroupId = v
+}
+
+func (x *ActionUid) SetActionId(v string) {
+	x.xxx_hidden_ActionId = v
+}
+
+type ActionUid_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TaskUid string
+	// Unique ids within a single task, assigned by the server.
+	GroupId  string
+	ActionId string
+}
+
+func (b0 ActionUid_builder) Build() *ActionUid {
+	m0 := &ActionUid{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TaskUid = b.TaskUid
+	x.xxx_hidden_GroupId = b.GroupId
+	x.xxx_hidden_ActionId = b.ActionId
+	return m0
+}
+
 type ActionState struct {
-	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Action        *Action                  `protobuf:"bytes,1,opt,name=action,proto3" json:"action,omitempty"`
-	ActionUid     *ActionUid               `protobuf:"bytes,2,opt,name=action_uid,json=actionUid,proto3" json:"action_uid,omitempty"`
-	Status        ActionState_ActionStatus `protobuf:"varint,3,opt,name=status,proto3,enum=Ydb.Maintenance.ActionState_ActionStatus" json:"status,omitempty"`
-	Reason        ActionState_ActionReason `protobuf:"varint,4,opt,name=reason,proto3,enum=Ydb.Maintenance.ActionState_ActionReason" json:"reason,omitempty"`
-	ReasonDetails string                   `protobuf:"bytes,6,opt,name=reason_details,json=reasonDetails,proto3" json:"reason_details,omitempty"`
-	Deadline      *timestamppb.Timestamp   `protobuf:"bytes,5,opt,name=deadline,proto3" json:"deadline,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Action        *Action                  `protobuf:"bytes,1,opt,name=action,proto3"`
+	xxx_hidden_ActionUid     *ActionUid               `protobuf:"bytes,2,opt,name=action_uid,json=actionUid,proto3"`
+	xxx_hidden_Status        ActionState_ActionStatus `protobuf:"varint,3,opt,name=status,proto3,enum=Ydb.Maintenance.ActionState_ActionStatus"`
+	xxx_hidden_Reason        ActionState_ActionReason `protobuf:"varint,4,opt,name=reason,proto3,enum=Ydb.Maintenance.ActionState_ActionReason"`
+	xxx_hidden_ReasonDetails string                   `protobuf:"bytes,6,opt,name=reason_details,json=reasonDetails,proto3"`
+	xxx_hidden_Deadline      *timestamppb.Timestamp   `protobuf:"bytes,5,opt,name=deadline,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ActionState) Reset() {
@@ -1083,58 +1617,134 @@ func (x *ActionState) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ActionState.ProtoReflect.Descriptor instead.
-func (*ActionState) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{12}
-}
-
 func (x *ActionState) GetAction() *Action {
 	if x != nil {
-		return x.Action
+		return x.xxx_hidden_Action
 	}
 	return nil
 }
 
 func (x *ActionState) GetActionUid() *ActionUid {
 	if x != nil {
-		return x.ActionUid
+		return x.xxx_hidden_ActionUid
 	}
 	return nil
 }
 
 func (x *ActionState) GetStatus() ActionState_ActionStatus {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return ActionState_ACTION_STATUS_UNSPECIFIED
 }
 
 func (x *ActionState) GetReason() ActionState_ActionReason {
 	if x != nil {
-		return x.Reason
+		return x.xxx_hidden_Reason
 	}
 	return ActionState_ACTION_REASON_UNSPECIFIED
 }
 
 func (x *ActionState) GetReasonDetails() string {
 	if x != nil {
-		return x.ReasonDetails
+		return x.xxx_hidden_ReasonDetails
 	}
 	return ""
 }
 
 func (x *ActionState) GetDeadline() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Deadline
+		return x.xxx_hidden_Deadline
 	}
 	return nil
 }
 
+func (x *ActionState) SetAction(v *Action) {
+	x.xxx_hidden_Action = v
+}
+
+func (x *ActionState) SetActionUid(v *ActionUid) {
+	x.xxx_hidden_ActionUid = v
+}
+
+func (x *ActionState) SetStatus(v ActionState_ActionStatus) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *ActionState) SetReason(v ActionState_ActionReason) {
+	x.xxx_hidden_Reason = v
+}
+
+func (x *ActionState) SetReasonDetails(v string) {
+	x.xxx_hidden_ReasonDetails = v
+}
+
+func (x *ActionState) SetDeadline(v *timestamppb.Timestamp) {
+	x.xxx_hidden_Deadline = v
+}
+
+func (x *ActionState) HasAction() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Action != nil
+}
+
+func (x *ActionState) HasActionUid() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ActionUid != nil
+}
+
+func (x *ActionState) HasDeadline() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Deadline != nil
+}
+
+func (x *ActionState) ClearAction() {
+	x.xxx_hidden_Action = nil
+}
+
+func (x *ActionState) ClearActionUid() {
+	x.xxx_hidden_ActionUid = nil
+}
+
+func (x *ActionState) ClearDeadline() {
+	x.xxx_hidden_Deadline = nil
+}
+
+type ActionState_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Action        *Action
+	ActionUid     *ActionUid
+	Status        ActionState_ActionStatus
+	Reason        ActionState_ActionReason
+	ReasonDetails string
+	Deadline      *timestamppb.Timestamp
+}
+
+func (b0 ActionState_builder) Build() *ActionState {
+	m0 := &ActionState{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Action = b.Action
+	x.xxx_hidden_ActionUid = b.ActionUid
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Reason = b.Reason
+	x.xxx_hidden_ReasonDetails = b.ReasonDetails
+	x.xxx_hidden_Deadline = b.Deadline
+	return m0
+}
+
 type ActionGroupStates struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ActionStates  []*ActionState         `protobuf:"bytes,1,rep,name=action_states,json=actionStates,proto3" json:"action_states,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ActionStates *[]*ActionState        `protobuf:"bytes,1,rep,name=action_states,json=actionStates,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ActionGroupStates) Reset() {
@@ -1162,26 +1772,40 @@ func (x *ActionGroupStates) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ActionGroupStates.ProtoReflect.Descriptor instead.
-func (*ActionGroupStates) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{13}
-}
-
 func (x *ActionGroupStates) GetActionStates() []*ActionState {
 	if x != nil {
-		return x.ActionStates
+		if x.xxx_hidden_ActionStates != nil {
+			return *x.xxx_hidden_ActionStates
+		}
 	}
 	return nil
 }
 
+func (x *ActionGroupStates) SetActionStates(v []*ActionState) {
+	x.xxx_hidden_ActionStates = &v
+}
+
+type ActionGroupStates_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ActionStates []*ActionState
+}
+
+func (b0 ActionGroupStates_builder) Build() *ActionGroupStates {
+	m0 := &ActionGroupStates{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ActionStates = &b.ActionStates
+	return m0
+}
+
 type MaintenanceTaskResult struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	TaskUid           string                 `protobuf:"bytes,1,opt,name=task_uid,json=taskUid,proto3" json:"task_uid,omitempty"`
-	ActionGroupStates []*ActionGroupStates   `protobuf:"bytes,2,rep,name=action_group_states,json=actionGroupStates,proto3" json:"action_group_states,omitempty"`
-	// Try again after this deadline. Specified if there are no performed actions.
-	RetryAfter    *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=retry_after,json=retryAfter,proto3,oneof" json:"retry_after,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskUid           string                 `protobuf:"bytes,1,opt,name=task_uid,json=taskUid,proto3"`
+	xxx_hidden_ActionGroupStates *[]*ActionGroupStates  `protobuf:"bytes,2,rep,name=action_group_states,json=actionGroupStates,proto3"`
+	xxx_hidden_RetryAfter        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=retry_after,json=retryAfter,proto3,oneof"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *MaintenanceTaskResult) Reset() {
@@ -1209,38 +1833,76 @@ func (x *MaintenanceTaskResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MaintenanceTaskResult.ProtoReflect.Descriptor instead.
-func (*MaintenanceTaskResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{14}
-}
-
 func (x *MaintenanceTaskResult) GetTaskUid() string {
 	if x != nil {
-		return x.TaskUid
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
 func (x *MaintenanceTaskResult) GetActionGroupStates() []*ActionGroupStates {
 	if x != nil {
-		return x.ActionGroupStates
+		if x.xxx_hidden_ActionGroupStates != nil {
+			return *x.xxx_hidden_ActionGroupStates
+		}
 	}
 	return nil
 }
 
 func (x *MaintenanceTaskResult) GetRetryAfter() *timestamppb.Timestamp {
 	if x != nil {
-		return x.RetryAfter
+		return x.xxx_hidden_RetryAfter
 	}
 	return nil
 }
 
+func (x *MaintenanceTaskResult) SetTaskUid(v string) {
+	x.xxx_hidden_TaskUid = v
+}
+
+func (x *MaintenanceTaskResult) SetActionGroupStates(v []*ActionGroupStates) {
+	x.xxx_hidden_ActionGroupStates = &v
+}
+
+func (x *MaintenanceTaskResult) SetRetryAfter(v *timestamppb.Timestamp) {
+	x.xxx_hidden_RetryAfter = v
+}
+
+func (x *MaintenanceTaskResult) HasRetryAfter() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_RetryAfter != nil
+}
+
+func (x *MaintenanceTaskResult) ClearRetryAfter() {
+	x.xxx_hidden_RetryAfter = nil
+}
+
+type MaintenanceTaskResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TaskUid           string
+	ActionGroupStates []*ActionGroupStates
+	// Try again after this deadline. Specified if there are no performed actions.
+	RetryAfter *timestamppb.Timestamp
+}
+
+func (b0 MaintenanceTaskResult_builder) Build() *MaintenanceTaskResult {
+	m0 := &MaintenanceTaskResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TaskUid = b.TaskUid
+	x.xxx_hidden_ActionGroupStates = &b.ActionGroupStates
+	x.xxx_hidden_RetryAfter = b.RetryAfter
+	return m0
+}
+
 type MaintenanceTaskResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result = MaintenanceTaskResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *MaintenanceTaskResponse) Reset() {
@@ -1268,24 +1930,49 @@ func (x *MaintenanceTaskResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MaintenanceTaskResponse.ProtoReflect.Descriptor instead.
-func (*MaintenanceTaskResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{15}
-}
-
 func (x *MaintenanceTaskResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *MaintenanceTaskResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *MaintenanceTaskResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *MaintenanceTaskResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type MaintenanceTaskResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result = MaintenanceTaskResult
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 MaintenanceTaskResponse_builder) Build() *MaintenanceTaskResponse {
+	m0 := &MaintenanceTaskResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type GetMaintenanceTaskRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	TaskUid         string                          `protobuf:"bytes,2,opt,name=task_uid,json=taskUid,proto3" json:"task_uid,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_TaskUid         string                          `protobuf:"bytes,2,opt,name=task_uid,json=taskUid,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetMaintenanceTaskRequest) Reset() {
@@ -1313,31 +2000,61 @@ func (x *GetMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMaintenanceTaskRequest.ProtoReflect.Descriptor instead.
-func (*GetMaintenanceTaskRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{16}
-}
-
 func (x *GetMaintenanceTaskRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *GetMaintenanceTaskRequest) GetTaskUid() string {
 	if x != nil {
-		return x.TaskUid
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
+func (x *GetMaintenanceTaskRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *GetMaintenanceTaskRequest) SetTaskUid(v string) {
+	x.xxx_hidden_TaskUid = v
+}
+
+func (x *GetMaintenanceTaskRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *GetMaintenanceTaskRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type GetMaintenanceTaskRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	TaskUid         string
+}
+
+func (b0 GetMaintenanceTaskRequest_builder) Build() *GetMaintenanceTaskRequest {
+	m0 := &GetMaintenanceTaskRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_TaskUid = b.TaskUid
+	return m0
+}
+
 type GetMaintenanceTaskResult struct {
-	state             protoimpl.MessageState  `protogen:"open.v1"`
-	TaskOptions       *MaintenanceTaskOptions `protobuf:"bytes,1,opt,name=task_options,json=taskOptions,proto3" json:"task_options,omitempty"`
-	ActionGroupStates []*ActionGroupStates    `protobuf:"bytes,2,rep,name=action_group_states,json=actionGroupStates,proto3" json:"action_group_states,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                        protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_TaskOptions       *MaintenanceTaskOptions `protobuf:"bytes,1,opt,name=task_options,json=taskOptions,proto3"`
+	xxx_hidden_ActionGroupStates *[]*ActionGroupStates   `protobuf:"bytes,2,rep,name=action_group_states,json=actionGroupStates,proto3"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *GetMaintenanceTaskResult) Reset() {
@@ -1365,31 +2082,62 @@ func (x *GetMaintenanceTaskResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMaintenanceTaskResult.ProtoReflect.Descriptor instead.
-func (*GetMaintenanceTaskResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{17}
-}
-
 func (x *GetMaintenanceTaskResult) GetTaskOptions() *MaintenanceTaskOptions {
 	if x != nil {
-		return x.TaskOptions
+		return x.xxx_hidden_TaskOptions
 	}
 	return nil
 }
 
 func (x *GetMaintenanceTaskResult) GetActionGroupStates() []*ActionGroupStates {
 	if x != nil {
-		return x.ActionGroupStates
+		if x.xxx_hidden_ActionGroupStates != nil {
+			return *x.xxx_hidden_ActionGroupStates
+		}
 	}
 	return nil
 }
 
+func (x *GetMaintenanceTaskResult) SetTaskOptions(v *MaintenanceTaskOptions) {
+	x.xxx_hidden_TaskOptions = v
+}
+
+func (x *GetMaintenanceTaskResult) SetActionGroupStates(v []*ActionGroupStates) {
+	x.xxx_hidden_ActionGroupStates = &v
+}
+
+func (x *GetMaintenanceTaskResult) HasTaskOptions() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TaskOptions != nil
+}
+
+func (x *GetMaintenanceTaskResult) ClearTaskOptions() {
+	x.xxx_hidden_TaskOptions = nil
+}
+
+type GetMaintenanceTaskResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TaskOptions       *MaintenanceTaskOptions
+	ActionGroupStates []*ActionGroupStates
+}
+
+func (b0 GetMaintenanceTaskResult_builder) Build() *GetMaintenanceTaskResult {
+	m0 := &GetMaintenanceTaskResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TaskOptions = b.TaskOptions
+	x.xxx_hidden_ActionGroupStates = &b.ActionGroupStates
+	return m0
+}
+
 type GetMaintenanceTaskResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result = GetMaintenanceTaskResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetMaintenanceTaskResponse) Reset() {
@@ -1417,27 +2165,51 @@ func (x *GetMaintenanceTaskResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetMaintenanceTaskResponse.ProtoReflect.Descriptor instead.
-func (*GetMaintenanceTaskResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{18}
-}
-
 func (x *GetMaintenanceTaskResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *GetMaintenanceTaskResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *GetMaintenanceTaskResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *GetMaintenanceTaskResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type GetMaintenanceTaskResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result = GetMaintenanceTaskResult
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 GetMaintenanceTaskResponse_builder) Build() *GetMaintenanceTaskResponse {
+	m0 := &GetMaintenanceTaskResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ListMaintenanceTasksRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// User SID (Security ID).
-	// If specified, it will return the tasks created by this user.
-	// Otherwise all tasks will be returned.
-	User          *string `protobuf:"bytes,2,opt,name=user,proto3,oneof" json:"user,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_User            *string                         `protobuf:"bytes,2,opt,name=user,proto3,oneof"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListMaintenanceTasksRequest) Reset() {
@@ -1465,30 +2237,82 @@ func (x *ListMaintenanceTasksRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListMaintenanceTasksRequest.ProtoReflect.Descriptor instead.
-func (*ListMaintenanceTasksRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{19}
-}
-
 func (x *ListMaintenanceTasksRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListMaintenanceTasksRequest) GetUser() string {
-	if x != nil && x.User != nil {
-		return *x.User
+	if x != nil {
+		if x.xxx_hidden_User != nil {
+			return *x.xxx_hidden_User
+		}
+		return ""
 	}
 	return ""
 }
 
+func (x *ListMaintenanceTasksRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ListMaintenanceTasksRequest) SetUser(v string) {
+	x.xxx_hidden_User = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *ListMaintenanceTasksRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ListMaintenanceTasksRequest) HasUser() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *ListMaintenanceTasksRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ListMaintenanceTasksRequest) ClearUser() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_User = nil
+}
+
+type ListMaintenanceTasksRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// User SID (Security ID).
+	// If specified, it will return the tasks created by this user.
+	// Otherwise all tasks will be returned.
+	User *string
+}
+
+func (b0 ListMaintenanceTasksRequest_builder) Build() *ListMaintenanceTasksRequest {
+	m0 := &ListMaintenanceTasksRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	if b.User != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_User = b.User
+	}
+	return m0
+}
+
 type ListMaintenanceTasksResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TasksUids     []string               `protobuf:"bytes,1,rep,name=tasks_uids,json=tasksUids,proto3" json:"tasks_uids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TasksUids []string               `protobuf:"bytes,1,rep,name=tasks_uids,json=tasksUids,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListMaintenanceTasksResult) Reset() {
@@ -1516,24 +2340,36 @@ func (x *ListMaintenanceTasksResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListMaintenanceTasksResult.ProtoReflect.Descriptor instead.
-func (*ListMaintenanceTasksResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{20}
-}
-
 func (x *ListMaintenanceTasksResult) GetTasksUids() []string {
 	if x != nil {
-		return x.TasksUids
+		return x.xxx_hidden_TasksUids
 	}
 	return nil
 }
 
+func (x *ListMaintenanceTasksResult) SetTasksUids(v []string) {
+	x.xxx_hidden_TasksUids = v
+}
+
+type ListMaintenanceTasksResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TasksUids []string
+}
+
+func (b0 ListMaintenanceTasksResult_builder) Build() *ListMaintenanceTasksResult {
+	m0 := &ListMaintenanceTasksResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TasksUids = b.TasksUids
+	return m0
+}
+
 type ListMaintenanceTasksResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result = ListMaintenanceTasksResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListMaintenanceTasksResponse) Reset() {
@@ -1561,24 +2397,49 @@ func (x *ListMaintenanceTasksResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListMaintenanceTasksResponse.ProtoReflect.Descriptor instead.
-func (*ListMaintenanceTasksResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{21}
-}
-
 func (x *ListMaintenanceTasksResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ListMaintenanceTasksResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ListMaintenanceTasksResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ListMaintenanceTasksResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ListMaintenanceTasksResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result = ListMaintenanceTasksResult
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ListMaintenanceTasksResponse_builder) Build() *ListMaintenanceTasksResponse {
+	m0 := &ListMaintenanceTasksResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DropMaintenanceTaskRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	TaskUid         string                          `protobuf:"bytes,2,opt,name=task_uid,json=taskUid,proto3" json:"task_uid,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_TaskUid         string                          `protobuf:"bytes,2,opt,name=task_uid,json=taskUid,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DropMaintenanceTaskRequest) Reset() {
@@ -1606,30 +2467,60 @@ func (x *DropMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DropMaintenanceTaskRequest.ProtoReflect.Descriptor instead.
-func (*DropMaintenanceTaskRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{22}
-}
-
 func (x *DropMaintenanceTaskRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DropMaintenanceTaskRequest) GetTaskUid() string {
 	if x != nil {
-		return x.TaskUid
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
+func (x *DropMaintenanceTaskRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DropMaintenanceTaskRequest) SetTaskUid(v string) {
+	x.xxx_hidden_TaskUid = v
+}
+
+func (x *DropMaintenanceTaskRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DropMaintenanceTaskRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DropMaintenanceTaskRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	TaskUid         string
+}
+
+func (b0 DropMaintenanceTaskRequest_builder) Build() *DropMaintenanceTaskRequest {
+	m0 := &DropMaintenanceTaskRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_TaskUid = b.TaskUid
+	return m0
+}
+
 type ManageMaintenanceTaskResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ManageMaintenanceTaskResponse) Reset() {
@@ -1657,24 +2548,48 @@ func (x *ManageMaintenanceTaskResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ManageMaintenanceTaskResponse.ProtoReflect.Descriptor instead.
-func (*ManageMaintenanceTaskResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{23}
-}
-
 func (x *ManageMaintenanceTaskResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ManageMaintenanceTaskResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ManageMaintenanceTaskResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ManageMaintenanceTaskResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ManageMaintenanceTaskResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ManageMaintenanceTaskResponse_builder) Build() *ManageMaintenanceTaskResponse {
+	m0 := &ManageMaintenanceTaskResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type CompleteActionRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	ActionUids      []*ActionUid                    `protobuf:"bytes,2,rep,name=action_uids,json=actionUids,proto3" json:"action_uids,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_ActionUids      *[]*ActionUid                   `protobuf:"bytes,2,rep,name=action_uids,json=actionUids,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CompleteActionRequest) Reset() {
@@ -1702,30 +2617,62 @@ func (x *CompleteActionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CompleteActionRequest.ProtoReflect.Descriptor instead.
-func (*CompleteActionRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{24}
-}
-
 func (x *CompleteActionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CompleteActionRequest) GetActionUids() []*ActionUid {
 	if x != nil {
-		return x.ActionUids
+		if x.xxx_hidden_ActionUids != nil {
+			return *x.xxx_hidden_ActionUids
+		}
 	}
 	return nil
 }
 
+func (x *CompleteActionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CompleteActionRequest) SetActionUids(v []*ActionUid) {
+	x.xxx_hidden_ActionUids = &v
+}
+
+func (x *CompleteActionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CompleteActionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type CompleteActionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	ActionUids      []*ActionUid
+}
+
+func (b0 CompleteActionRequest_builder) Build() *CompleteActionRequest {
+	m0 := &CompleteActionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_ActionUids = &b.ActionUids
+	return m0
+}
+
 type ManageActionResult struct {
-	state          protoimpl.MessageState       `protogen:"open.v1"`
-	ActionStatuses []*ManageActionResult_Status `protobuf:"bytes,1,rep,name=action_statuses,json=actionStatuses,proto3" json:"action_statuses,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState        `protogen:"opaque.v1"`
+	xxx_hidden_ActionStatuses *[]*ManageActionResult_Status `protobuf:"bytes,1,rep,name=action_statuses,json=actionStatuses,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ManageActionResult) Reset() {
@@ -1753,24 +2700,38 @@ func (x *ManageActionResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ManageActionResult.ProtoReflect.Descriptor instead.
-func (*ManageActionResult) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{25}
-}
-
 func (x *ManageActionResult) GetActionStatuses() []*ManageActionResult_Status {
 	if x != nil {
-		return x.ActionStatuses
+		if x.xxx_hidden_ActionStatuses != nil {
+			return *x.xxx_hidden_ActionStatuses
+		}
 	}
 	return nil
 }
 
+func (x *ManageActionResult) SetActionStatuses(v []*ManageActionResult_Status) {
+	x.xxx_hidden_ActionStatuses = &v
+}
+
+type ManageActionResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ActionStatuses []*ManageActionResult_Status
+}
+
+func (b0 ManageActionResult_builder) Build() *ManageActionResult {
+	m0 := &ManageActionResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ActionStatuses = &b.ActionStatuses
+	return m0
+}
+
 type ManageActionResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result = ManageActionResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ManageActionResponse) Reset() {
@@ -1798,20 +2759,45 @@ func (x *ManageActionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ManageActionResponse.ProtoReflect.Descriptor instead.
-func (*ManageActionResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{26}
-}
-
 func (x *ManageActionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ManageActionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ManageActionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ManageActionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ManageActionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result = ManageActionResult
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ManageActionResponse_builder) Build() *ManageActionResponse {
+	m0 := &ManageActionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type Node_StorageNode struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1841,16 +2827,23 @@ func (x *Node_StorageNode) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Node_StorageNode.ProtoReflect.Descriptor instead.
-func (*Node_StorageNode) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{0, 0}
+type Node_StorageNode_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 Node_StorageNode_builder) Build() *Node_StorageNode {
+	m0 := &Node_StorageNode{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type Node_DynamicNode struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Tenant        string                 `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Tenant string                 `protobuf:"bytes,1,opt,name=tenant,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *Node_DynamicNode) Reset() {
@@ -1878,24 +2871,37 @@ func (x *Node_DynamicNode) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Node_DynamicNode.ProtoReflect.Descriptor instead.
-func (*Node_DynamicNode) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{0, 1}
-}
-
 func (x *Node_DynamicNode) GetTenant() string {
 	if x != nil {
-		return x.Tenant
+		return x.xxx_hidden_Tenant
 	}
 	return ""
 }
 
+func (x *Node_DynamicNode) SetTenant(v string) {
+	x.xxx_hidden_Tenant = v
+}
+
+type Node_DynamicNode_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Tenant string
+}
+
+func (b0 Node_DynamicNode_builder) Build() *Node_DynamicNode {
+	m0 := &Node_DynamicNode{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Tenant = b.Tenant
+	return m0
+}
+
 type ManageActionResult_Status struct {
-	state         protoimpl.MessageState   `protogen:"open.v1"`
-	ActionUid     *ActionUid               `protobuf:"bytes,1,opt,name=action_uid,json=actionUid,proto3" json:"action_uid,omitempty"`
-	Status        Ydb.StatusIds_StatusCode `protobuf:"varint,2,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_ActionUid *ActionUid               `protobuf:"bytes,1,opt,name=action_uid,json=actionUid,proto3"`
+	xxx_hidden_Status    Ydb.StatusIds_StatusCode `protobuf:"varint,2,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ManageActionResult_Status) Reset() {
@@ -1923,23 +2929,53 @@ func (x *ManageActionResult_Status) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ManageActionResult_Status.ProtoReflect.Descriptor instead.
-func (*ManageActionResult_Status) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_maintenance_proto_rawDescGZIP(), []int{25, 0}
-}
-
 func (x *ManageActionResult_Status) GetActionUid() *ActionUid {
 	if x != nil {
-		return x.ActionUid
+		return x.xxx_hidden_ActionUid
 	}
 	return nil
 }
 
 func (x *ManageActionResult_Status) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
+}
+
+func (x *ManageActionResult_Status) SetActionUid(v *ActionUid) {
+	x.xxx_hidden_ActionUid = v
+}
+
+func (x *ManageActionResult_Status) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *ManageActionResult_Status) HasActionUid() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ActionUid != nil
+}
+
+func (x *ManageActionResult_Status) ClearActionUid() {
+	x.xxx_hidden_ActionUid = nil
+}
+
+type ManageActionResult_Status_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ActionUid *ActionUid
+	Status    Ydb.StatusIds_StatusCode
+}
+
+func (b0 ManageActionResult_Status_builder) Build() *ManageActionResult_Status {
+	m0 := &ManageActionResult_Status{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ActionUid = b.ActionUid
+	x.xxx_hidden_Status = b.Status
+	return m0
 }
 
 var File_draft_protos_ydb_maintenance_proto protoreflect.FileDescriptor
@@ -2077,18 +3113,6 @@ const file_draft_protos_ydb_maintenance_proto_rawDesc = "" +
 	"\x17AVAILABILITY_MODE_FORCE\x10\x03Bn\n" +
 	"#tech.ydb.proto.draft.maintenance.v1ZDgithub.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Maintenance\xf8\x01\x01b\x06proto3"
 
-var (
-	file_draft_protos_ydb_maintenance_proto_rawDescOnce sync.Once
-	file_draft_protos_ydb_maintenance_proto_rawDescData []byte
-)
-
-func file_draft_protos_ydb_maintenance_proto_rawDescGZIP() []byte {
-	file_draft_protos_ydb_maintenance_proto_rawDescOnce.Do(func() {
-		file_draft_protos_ydb_maintenance_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_draft_protos_ydb_maintenance_proto_rawDesc), len(file_draft_protos_ydb_maintenance_proto_rawDesc)))
-	})
-	return file_draft_protos_ydb_maintenance_proto_rawDescData
-}
-
 var file_draft_protos_ydb_maintenance_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_draft_protos_ydb_maintenance_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_draft_protos_ydb_maintenance_proto_goTypes = []any{
@@ -2187,15 +3211,15 @@ func file_draft_protos_ydb_maintenance_proto_init() {
 		return
 	}
 	file_draft_protos_ydb_maintenance_proto_msgTypes[0].OneofWrappers = []any{
-		(*Node_Storage)(nil),
-		(*Node_Dynamic)(nil),
+		(*node_Storage)(nil),
+		(*node_Dynamic)(nil),
 	}
 	file_draft_protos_ydb_maintenance_proto_msgTypes[5].OneofWrappers = []any{
-		(*ActionScope_NodeId)(nil),
-		(*ActionScope_Host)(nil),
+		(*actionScope_NodeId)(nil),
+		(*actionScope_Host)(nil),
 	}
 	file_draft_protos_ydb_maintenance_proto_msgTypes[7].OneofWrappers = []any{
-		(*Action_LockAction)(nil),
+		(*action_LockAction)(nil),
 	}
 	file_draft_protos_ydb_maintenance_proto_msgTypes[14].OneofWrappers = []any{}
 	file_draft_protos_ydb_maintenance_proto_msgTypes[19].OneofWrappers = []any{}

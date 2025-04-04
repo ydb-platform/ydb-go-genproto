@@ -10,7 +10,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -23,20 +22,15 @@ const (
 
 // IssueMessage is a transport format for ydb/library/yql/public/issue library
 type IssueMessage struct {
-	state       protoimpl.MessageState `protogen:"open.v1"`
-	Position    *IssueMessage_Position `protobuf:"bytes,1,opt,name=position,proto3" json:"position,omitempty"`
-	Message     string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	EndPosition *IssueMessage_Position `protobuf:"bytes,3,opt,name=end_position,json=endPosition,proto3" json:"end_position,omitempty"`
-	IssueCode   uint32                 `protobuf:"varint,4,opt,name=issue_code,json=issueCode,proto3" json:"issue_code,omitempty"`
-	// Severity values from ydb/library/yql/public/issue/protos/issue_severity.proto
-	// FATAL = 0;
-	// ERROR = 1;
-	// WARNING = 2;
-	// INFO = 3;
-	Severity      uint32          `protobuf:"varint,5,opt,name=severity,proto3" json:"severity,omitempty"`
-	Issues        []*IssueMessage `protobuf:"bytes,6,rep,name=issues,proto3" json:"issues,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Position    *IssueMessage_Position `protobuf:"bytes,1,opt,name=position,proto3"`
+	xxx_hidden_Message     string                 `protobuf:"bytes,2,opt,name=message,proto3"`
+	xxx_hidden_EndPosition *IssueMessage_Position `protobuf:"bytes,3,opt,name=end_position,json=endPosition,proto3"`
+	xxx_hidden_IssueCode   uint32                 `protobuf:"varint,4,opt,name=issue_code,json=issueCode,proto3"`
+	xxx_hidden_Severity    uint32                 `protobuf:"varint,5,opt,name=severity,proto3"`
+	xxx_hidden_Issues      *[]*IssueMessage       `protobuf:"bytes,6,rep,name=issues,proto3"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *IssueMessage) Reset() {
@@ -64,60 +58,132 @@ func (x *IssueMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IssueMessage.ProtoReflect.Descriptor instead.
-func (*IssueMessage) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_issue_message_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *IssueMessage) GetPosition() *IssueMessage_Position {
 	if x != nil {
-		return x.Position
+		return x.xxx_hidden_Position
 	}
 	return nil
 }
 
 func (x *IssueMessage) GetMessage() string {
 	if x != nil {
-		return x.Message
+		return x.xxx_hidden_Message
 	}
 	return ""
 }
 
 func (x *IssueMessage) GetEndPosition() *IssueMessage_Position {
 	if x != nil {
-		return x.EndPosition
+		return x.xxx_hidden_EndPosition
 	}
 	return nil
 }
 
 func (x *IssueMessage) GetIssueCode() uint32 {
 	if x != nil {
-		return x.IssueCode
+		return x.xxx_hidden_IssueCode
 	}
 	return 0
 }
 
 func (x *IssueMessage) GetSeverity() uint32 {
 	if x != nil {
-		return x.Severity
+		return x.xxx_hidden_Severity
 	}
 	return 0
 }
 
 func (x *IssueMessage) GetIssues() []*IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
+func (x *IssueMessage) SetPosition(v *IssueMessage_Position) {
+	x.xxx_hidden_Position = v
+}
+
+func (x *IssueMessage) SetMessage(v string) {
+	x.xxx_hidden_Message = v
+}
+
+func (x *IssueMessage) SetEndPosition(v *IssueMessage_Position) {
+	x.xxx_hidden_EndPosition = v
+}
+
+func (x *IssueMessage) SetIssueCode(v uint32) {
+	x.xxx_hidden_IssueCode = v
+}
+
+func (x *IssueMessage) SetSeverity(v uint32) {
+	x.xxx_hidden_Severity = v
+}
+
+func (x *IssueMessage) SetIssues(v []*IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *IssueMessage) HasPosition() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Position != nil
+}
+
+func (x *IssueMessage) HasEndPosition() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_EndPosition != nil
+}
+
+func (x *IssueMessage) ClearPosition() {
+	x.xxx_hidden_Position = nil
+}
+
+func (x *IssueMessage) ClearEndPosition() {
+	x.xxx_hidden_EndPosition = nil
+}
+
+type IssueMessage_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Position    *IssueMessage_Position
+	Message     string
+	EndPosition *IssueMessage_Position
+	IssueCode   uint32
+	// Severity values from ydb/library/yql/public/issue/protos/issue_severity.proto
+	// FATAL = 0;
+	// ERROR = 1;
+	// WARNING = 2;
+	// INFO = 3;
+	Severity uint32
+	Issues   []*IssueMessage
+}
+
+func (b0 IssueMessage_builder) Build() *IssueMessage {
+	m0 := &IssueMessage{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Position = b.Position
+	x.xxx_hidden_Message = b.Message
+	x.xxx_hidden_EndPosition = b.EndPosition
+	x.xxx_hidden_IssueCode = b.IssueCode
+	x.xxx_hidden_Severity = b.Severity
+	x.xxx_hidden_Issues = &b.Issues
+	return m0
+}
+
 type IssueMessage_Position struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Row           uint32                 `protobuf:"varint,1,opt,name=row,proto3" json:"row,omitempty"`
-	Column        uint32                 `protobuf:"varint,2,opt,name=column,proto3" json:"column,omitempty"`
-	File          string                 `protobuf:"bytes,3,opt,name=file,proto3" json:"file,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Row    uint32                 `protobuf:"varint,1,opt,name=row,proto3"`
+	xxx_hidden_Column uint32                 `protobuf:"varint,2,opt,name=column,proto3"`
+	xxx_hidden_File   string                 `protobuf:"bytes,3,opt,name=file,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *IssueMessage_Position) Reset() {
@@ -145,30 +211,55 @@ func (x *IssueMessage_Position) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IssueMessage_Position.ProtoReflect.Descriptor instead.
-func (*IssueMessage_Position) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_issue_message_proto_rawDescGZIP(), []int{0, 0}
-}
-
 func (x *IssueMessage_Position) GetRow() uint32 {
 	if x != nil {
-		return x.Row
+		return x.xxx_hidden_Row
 	}
 	return 0
 }
 
 func (x *IssueMessage_Position) GetColumn() uint32 {
 	if x != nil {
-		return x.Column
+		return x.xxx_hidden_Column
 	}
 	return 0
 }
 
 func (x *IssueMessage_Position) GetFile() string {
 	if x != nil {
-		return x.File
+		return x.xxx_hidden_File
 	}
 	return ""
+}
+
+func (x *IssueMessage_Position) SetRow(v uint32) {
+	x.xxx_hidden_Row = v
+}
+
+func (x *IssueMessage_Position) SetColumn(v uint32) {
+	x.xxx_hidden_Column = v
+}
+
+func (x *IssueMessage_Position) SetFile(v string) {
+	x.xxx_hidden_File = v
+}
+
+type IssueMessage_Position_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Row    uint32
+	Column uint32
+	File   string
+}
+
+func (b0 IssueMessage_Position_builder) Build() *IssueMessage_Position {
+	m0 := &IssueMessage_Position{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Row = b.Row
+	x.xxx_hidden_Column = b.Column
+	x.xxx_hidden_File = b.File
+	return m0
 }
 
 var File_protos_ydb_issue_message_proto protoreflect.FileDescriptor
@@ -189,18 +280,6 @@ const file_protos_ydb_issue_message_proto_rawDesc = "" +
 	"\x06column\x18\x02 \x01(\rR\x06column\x12\x12\n" +
 	"\x04file\x18\x03 \x01(\tR\x04fileBM\n" +
 	"\x0etech.ydb.protoZ8github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Issue\xf8\x01\x01b\x06proto3"
-
-var (
-	file_protos_ydb_issue_message_proto_rawDescOnce sync.Once
-	file_protos_ydb_issue_message_proto_rawDescData []byte
-)
-
-func file_protos_ydb_issue_message_proto_rawDescGZIP() []byte {
-	file_protos_ydb_issue_message_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_issue_message_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_issue_message_proto_rawDesc), len(file_protos_ydb_issue_message_proto_rawDesc)))
-	})
-	return file_protos_ydb_issue_message_proto_rawDescData
-}
 
 var file_protos_ydb_issue_message_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_protos_ydb_issue_message_proto_goTypes = []any{

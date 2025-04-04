@@ -14,7 +14,6 @@ import (
 	anypb "google.golang.org/protobuf/types/known/anypb"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -71,34 +70,15 @@ func (x OperationParams_OperationMode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use OperationParams_OperationMode.Descriptor instead.
-func (OperationParams_OperationMode) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_operation_proto_rawDescGZIP(), []int{0, 0}
-}
-
 type OperationParams struct {
-	state         protoimpl.MessageState        `protogen:"open.v1"`
-	OperationMode OperationParams_OperationMode `protobuf:"varint,1,opt,name=operation_mode,json=operationMode,proto3,enum=Ydb.Operations.OperationParams_OperationMode" json:"operation_mode,omitempty"`
-	// Indicates that client is no longer interested in the result of operation after the specified duration
-	// starting from the time operation arrives at the server.
-	// Server will try to stop the execution of operation and if no result is currently available the operation
-	// will receive TIMEOUT status code, which will be sent back to client if it was waiting for the operation result.
-	// Timeout of operation does not tell anything about its result, it might be completed successfully
-	// or cancelled on server.
-	OperationTimeout *durationpb.Duration `protobuf:"bytes,2,opt,name=operation_timeout,json=operationTimeout,proto3" json:"operation_timeout,omitempty"`
-	// Server will try to cancel the operation after the specified duration starting from the time
-	// the operation arrives at server.
-	// In case of successful cancellation operation will receive CANCELLED status code, which will be
-	// sent back to client if it was waiting for the operation result.
-	// In case when cancellation isn't possible, no action will be performed.
-	CancelAfter *durationpb.Duration `protobuf:"bytes,3,opt,name=cancel_after,json=cancelAfter,proto3" json:"cancel_after,omitempty"`
-	// User-defined labels of operation.
-	Labels map[string]string `protobuf:"bytes,4,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// If enabled, server will report cost information, if supported by the operation.
-	// This flag is mostly useful for SYNC operations, to get the cost information in the response.
-	ReportCostInfo Ydb.FeatureFlag_Status `protobuf:"varint,5,opt,name=report_cost_info,json=reportCostInfo,proto3,enum=Ydb.FeatureFlag_Status" json:"report_cost_info,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                       protoimpl.MessageState        `protogen:"opaque.v1"`
+	xxx_hidden_OperationMode    OperationParams_OperationMode `protobuf:"varint,1,opt,name=operation_mode,json=operationMode,proto3,enum=Ydb.Operations.OperationParams_OperationMode"`
+	xxx_hidden_OperationTimeout *durationpb.Duration          `protobuf:"bytes,2,opt,name=operation_timeout,json=operationTimeout,proto3"`
+	xxx_hidden_CancelAfter      *durationpb.Duration          `protobuf:"bytes,3,opt,name=cancel_after,json=cancelAfter,proto3"`
+	xxx_hidden_Labels           map[string]string             `protobuf:"bytes,4,rep,name=labels,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_ReportCostInfo   Ydb.FeatureFlag_Status        `protobuf:"varint,5,opt,name=report_cost_info,json=reportCostInfo,proto3,enum=Ydb.FeatureFlag_Status"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *OperationParams) Reset() {
@@ -126,49 +106,122 @@ func (x *OperationParams) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OperationParams.ProtoReflect.Descriptor instead.
-func (*OperationParams) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_operation_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *OperationParams) GetOperationMode() OperationParams_OperationMode {
 	if x != nil {
-		return x.OperationMode
+		return x.xxx_hidden_OperationMode
 	}
 	return OperationParams_OPERATION_MODE_UNSPECIFIED
 }
 
 func (x *OperationParams) GetOperationTimeout() *durationpb.Duration {
 	if x != nil {
-		return x.OperationTimeout
+		return x.xxx_hidden_OperationTimeout
 	}
 	return nil
 }
 
 func (x *OperationParams) GetCancelAfter() *durationpb.Duration {
 	if x != nil {
-		return x.CancelAfter
+		return x.xxx_hidden_CancelAfter
 	}
 	return nil
 }
 
 func (x *OperationParams) GetLabels() map[string]string {
 	if x != nil {
-		return x.Labels
+		return x.xxx_hidden_Labels
 	}
 	return nil
 }
 
 func (x *OperationParams) GetReportCostInfo() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.ReportCostInfo
+		return x.xxx_hidden_ReportCostInfo
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
+func (x *OperationParams) SetOperationMode(v OperationParams_OperationMode) {
+	x.xxx_hidden_OperationMode = v
+}
+
+func (x *OperationParams) SetOperationTimeout(v *durationpb.Duration) {
+	x.xxx_hidden_OperationTimeout = v
+}
+
+func (x *OperationParams) SetCancelAfter(v *durationpb.Duration) {
+	x.xxx_hidden_CancelAfter = v
+}
+
+func (x *OperationParams) SetLabels(v map[string]string) {
+	x.xxx_hidden_Labels = v
+}
+
+func (x *OperationParams) SetReportCostInfo(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_ReportCostInfo = v
+}
+
+func (x *OperationParams) HasOperationTimeout() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationTimeout != nil
+}
+
+func (x *OperationParams) HasCancelAfter() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CancelAfter != nil
+}
+
+func (x *OperationParams) ClearOperationTimeout() {
+	x.xxx_hidden_OperationTimeout = nil
+}
+
+func (x *OperationParams) ClearCancelAfter() {
+	x.xxx_hidden_CancelAfter = nil
+}
+
+type OperationParams_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationMode OperationParams_OperationMode
+	// Indicates that client is no longer interested in the result of operation after the specified duration
+	// starting from the time operation arrives at the server.
+	// Server will try to stop the execution of operation and if no result is currently available the operation
+	// will receive TIMEOUT status code, which will be sent back to client if it was waiting for the operation result.
+	// Timeout of operation does not tell anything about its result, it might be completed successfully
+	// or cancelled on server.
+	OperationTimeout *durationpb.Duration
+	// Server will try to cancel the operation after the specified duration starting from the time
+	// the operation arrives at server.
+	// In case of successful cancellation operation will receive CANCELLED status code, which will be
+	// sent back to client if it was waiting for the operation result.
+	// In case when cancellation isn't possible, no action will be performed.
+	CancelAfter *durationpb.Duration
+	// User-defined labels of operation.
+	Labels map[string]string
+	// If enabled, server will report cost information, if supported by the operation.
+	// This flag is mostly useful for SYNC operations, to get the cost information in the response.
+	ReportCostInfo Ydb.FeatureFlag_Status
+}
+
+func (b0 OperationParams_builder) Build() *OperationParams {
+	m0 := &OperationParams{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationMode = b.OperationMode
+	x.xxx_hidden_OperationTimeout = b.OperationTimeout
+	x.xxx_hidden_CancelAfter = b.CancelAfter
+	x.xxx_hidden_Labels = b.Labels
+	x.xxx_hidden_ReportCostInfo = b.ReportCostInfo
+	return m0
+}
+
 type GetOperationRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id string                 `protobuf:"bytes,1,opt,name=id,proto3"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -198,23 +251,36 @@ func (x *GetOperationRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperationRequest.ProtoReflect.Descriptor instead.
-func (*GetOperationRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_operation_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *GetOperationRequest) GetId() string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
+func (x *GetOperationRequest) SetId(v string) {
+	x.xxx_hidden_Id = v
+}
+
+type GetOperationRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id string
+}
+
+func (b0 GetOperationRequest_builder) Build() *GetOperationRequest {
+	m0 := &GetOperationRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	return m0
+}
+
 type GetOperationResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Operation     *Operation             `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Operation             `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetOperationResponse) Reset() {
@@ -242,21 +308,45 @@ func (x *GetOperationResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetOperationResponse.ProtoReflect.Descriptor instead.
-func (*GetOperationResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_operation_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *GetOperationResponse) GetOperation() *Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *GetOperationResponse) SetOperation(v *Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *GetOperationResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *GetOperationResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type GetOperationResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Operation
+}
+
+func (b0 GetOperationResponse_builder) Build() *GetOperationResponse {
+	m0 := &GetOperationResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type CancelOperationRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id string                 `protobuf:"bytes,1,opt,name=id,proto3"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -286,24 +376,37 @@ func (x *CancelOperationRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CancelOperationRequest.ProtoReflect.Descriptor instead.
-func (*CancelOperationRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_operation_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *CancelOperationRequest) GetId() string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
+func (x *CancelOperationRequest) SetId(v string) {
+	x.xxx_hidden_Id = v
+}
+
+type CancelOperationRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id string
+}
+
+func (b0 CancelOperationRequest_builder) Build() *CancelOperationRequest {
+	m0 := &CancelOperationRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	return m0
+}
+
 type CancelOperationResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Status        Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CancelOperationResponse) Reset() {
@@ -331,28 +434,49 @@ func (x *CancelOperationResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CancelOperationResponse.ProtoReflect.Descriptor instead.
-func (*CancelOperationResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_operation_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *CancelOperationResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *CancelOperationResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
+func (x *CancelOperationResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *CancelOperationResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+type CancelOperationResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+}
+
+func (b0 CancelOperationResponse_builder) Build() *CancelOperationResponse {
+	m0 := &CancelOperationResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	return m0
+}
+
 type ForgetOperationRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id string                 `protobuf:"bytes,1,opt,name=id,proto3"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -382,24 +506,37 @@ func (x *ForgetOperationRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ForgetOperationRequest.ProtoReflect.Descriptor instead.
-func (*ForgetOperationRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_operation_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *ForgetOperationRequest) GetId() string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
+func (x *ForgetOperationRequest) SetId(v string) {
+	x.xxx_hidden_Id = v
+}
+
+type ForgetOperationRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id string
+}
+
+func (b0 ForgetOperationRequest_builder) Build() *ForgetOperationRequest {
+	m0 := &ForgetOperationRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	return m0
+}
+
 type ForgetOperationResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Status        Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ForgetOperationResponse) Reset() {
@@ -427,32 +564,53 @@ func (x *ForgetOperationResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ForgetOperationResponse.ProtoReflect.Descriptor instead.
-func (*ForgetOperationResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_operation_proto_rawDescGZIP(), []int{6}
-}
-
 func (x *ForgetOperationResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *ForgetOperationResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
+func (x *ForgetOperationResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *ForgetOperationResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+type ForgetOperationResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+}
+
+func (b0 ForgetOperationResponse_builder) Build() *ForgetOperationResponse {
+	m0 := &ForgetOperationResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	return m0
+}
+
 type ListOperationsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Kind          string                 `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
-	PageSize      uint64                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken     string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Kind      string                 `protobuf:"bytes,1,opt,name=kind,proto3"`
+	xxx_hidden_PageSize  uint64                 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3"`
+	xxx_hidden_PageToken string                 `protobuf:"bytes,3,opt,name=page_token,json=pageToken,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListOperationsRequest) Reset() {
@@ -480,40 +638,65 @@ func (x *ListOperationsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListOperationsRequest.ProtoReflect.Descriptor instead.
-func (*ListOperationsRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_operation_proto_rawDescGZIP(), []int{7}
-}
-
 func (x *ListOperationsRequest) GetKind() string {
 	if x != nil {
-		return x.Kind
+		return x.xxx_hidden_Kind
 	}
 	return ""
 }
 
 func (x *ListOperationsRequest) GetPageSize() uint64 {
 	if x != nil {
-		return x.PageSize
+		return x.xxx_hidden_PageSize
 	}
 	return 0
 }
 
 func (x *ListOperationsRequest) GetPageToken() string {
 	if x != nil {
-		return x.PageToken
+		return x.xxx_hidden_PageToken
 	}
 	return ""
 }
 
+func (x *ListOperationsRequest) SetKind(v string) {
+	x.xxx_hidden_Kind = v
+}
+
+func (x *ListOperationsRequest) SetPageSize(v uint64) {
+	x.xxx_hidden_PageSize = v
+}
+
+func (x *ListOperationsRequest) SetPageToken(v string) {
+	x.xxx_hidden_PageToken = v
+}
+
+type ListOperationsRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Kind      string
+	PageSize  uint64
+	PageToken string
+}
+
+func (b0 ListOperationsRequest_builder) Build() *ListOperationsRequest {
+	m0 := &ListOperationsRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Kind = b.Kind
+	x.xxx_hidden_PageSize = b.PageSize
+	x.xxx_hidden_PageToken = b.PageToken
+	return m0
+}
+
 type ListOperationsResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Status        Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	Operations    []*Operation              `protobuf:"bytes,3,rep,name=operations,proto3" json:"operations,omitempty"`
-	NextPageToken string                    `protobuf:"bytes,4,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status        Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues        *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_Operations    *[]*Operation              `protobuf:"bytes,3,rep,name=operations,proto3"`
+	xxx_hidden_NextPageToken string                     `protobuf:"bytes,4,opt,name=next_page_token,json=nextPageToken,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListOperationsResponse) Reset() {
@@ -541,59 +724,85 @@ func (x *ListOperationsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListOperationsResponse.ProtoReflect.Descriptor instead.
-func (*ListOperationsResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_operation_proto_rawDescGZIP(), []int{8}
-}
-
 func (x *ListOperationsResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *ListOperationsResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *ListOperationsResponse) GetOperations() []*Operation {
 	if x != nil {
-		return x.Operations
+		if x.xxx_hidden_Operations != nil {
+			return *x.xxx_hidden_Operations
+		}
 	}
 	return nil
 }
 
 func (x *ListOperationsResponse) GetNextPageToken() string {
 	if x != nil {
-		return x.NextPageToken
+		return x.xxx_hidden_NextPageToken
 	}
 	return ""
 }
 
+func (x *ListOperationsResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *ListOperationsResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *ListOperationsResponse) SetOperations(v []*Operation) {
+	x.xxx_hidden_Operations = &v
+}
+
+func (x *ListOperationsResponse) SetNextPageToken(v string) {
+	x.xxx_hidden_NextPageToken = v
+}
+
+type ListOperationsResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status        Ydb.StatusIds_StatusCode
+	Issues        []*Ydb_Issue.IssueMessage
+	Operations    []*Operation
+	NextPageToken string
+}
+
+func (b0 ListOperationsResponse_builder) Build() *ListOperationsResponse {
+	m0 := &ListOperationsResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_Operations = &b.Operations
+	x.xxx_hidden_NextPageToken = b.NextPageToken
+	return m0
+}
+
 type Operation struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Identifier of the operation, empty value means no active operation object is present (it was forgotten or
-	// not created in the first place, as in SYNC operation mode).
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// true - this operation has beed finished (doesn't matter successful or not),
-	// so Status field has status code, and Result field can contains result data.
-	// false - this operation still running. You can repeat request using operation Id.
-	Ready  bool                      `protobuf:"varint,2,opt,name=ready,proto3" json:"ready,omitempty"`
-	Status Ydb.StatusIds_StatusCode  `protobuf:"varint,3,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,4,rep,name=issues,proto3" json:"issues,omitempty"`
-	// Result data
-	Result   *anypb.Any `protobuf:"bytes,5,opt,name=result,proto3" json:"result,omitempty"`
-	Metadata *anypb.Any `protobuf:"bytes,6,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	// Contains information about the cost of the operation.
-	// For completed operations, it shows the final cost of the operation.
-	// For operations in progress, it might indicate the current cost of the operation (if supported).
-	CostInfo      *Ydb.CostInfo `protobuf:"bytes,7,opt,name=cost_info,json=costInfo,proto3" json:"cost_info,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Id       string                     `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_Ready    bool                       `protobuf:"varint,2,opt,name=ready,proto3"`
+	xxx_hidden_Status   Ydb.StatusIds_StatusCode   `protobuf:"varint,3,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues   *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,4,rep,name=issues,proto3"`
+	xxx_hidden_Result   *anypb.Any                 `protobuf:"bytes,5,opt,name=result,proto3"`
+	xxx_hidden_Metadata *anypb.Any                 `protobuf:"bytes,6,opt,name=metadata,proto3"`
+	xxx_hidden_CostInfo *Ydb.CostInfo              `protobuf:"bytes,7,opt,name=cost_info,json=costInfo,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *Operation) Reset() {
@@ -621,58 +830,151 @@ func (x *Operation) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Operation.ProtoReflect.Descriptor instead.
-func (*Operation) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_operation_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *Operation) GetId() string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *Operation) GetReady() bool {
 	if x != nil {
-		return x.Ready
+		return x.xxx_hidden_Ready
 	}
 	return false
 }
 
 func (x *Operation) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *Operation) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *Operation) GetResult() *anypb.Any {
 	if x != nil {
-		return x.Result
+		return x.xxx_hidden_Result
 	}
 	return nil
 }
 
 func (x *Operation) GetMetadata() *anypb.Any {
 	if x != nil {
-		return x.Metadata
+		return x.xxx_hidden_Metadata
 	}
 	return nil
 }
 
 func (x *Operation) GetCostInfo() *Ydb.CostInfo {
 	if x != nil {
-		return x.CostInfo
+		return x.xxx_hidden_CostInfo
 	}
 	return nil
+}
+
+func (x *Operation) SetId(v string) {
+	x.xxx_hidden_Id = v
+}
+
+func (x *Operation) SetReady(v bool) {
+	x.xxx_hidden_Ready = v
+}
+
+func (x *Operation) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *Operation) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *Operation) SetResult(v *anypb.Any) {
+	x.xxx_hidden_Result = v
+}
+
+func (x *Operation) SetMetadata(v *anypb.Any) {
+	x.xxx_hidden_Metadata = v
+}
+
+func (x *Operation) SetCostInfo(v *Ydb.CostInfo) {
+	x.xxx_hidden_CostInfo = v
+}
+
+func (x *Operation) HasResult() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Result != nil
+}
+
+func (x *Operation) HasMetadata() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Metadata != nil
+}
+
+func (x *Operation) HasCostInfo() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CostInfo != nil
+}
+
+func (x *Operation) ClearResult() {
+	x.xxx_hidden_Result = nil
+}
+
+func (x *Operation) ClearMetadata() {
+	x.xxx_hidden_Metadata = nil
+}
+
+func (x *Operation) ClearCostInfo() {
+	x.xxx_hidden_CostInfo = nil
+}
+
+type Operation_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Identifier of the operation, empty value means no active operation object is present (it was forgotten or
+	// not created in the first place, as in SYNC operation mode).
+	Id string
+	// true - this operation has beed finished (doesn't matter successful or not),
+	// so Status field has status code, and Result field can contains result data.
+	// false - this operation still running. You can repeat request using operation Id.
+	Ready  bool
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+	// Result data
+	Result   *anypb.Any
+	Metadata *anypb.Any
+	// Contains information about the cost of the operation.
+	// For completed operations, it shows the final cost of the operation.
+	// For operations in progress, it might indicate the current cost of the operation (if supported).
+	CostInfo *Ydb.CostInfo
+}
+
+func (b0 Operation_builder) Build() *Operation {
+	m0 := &Operation{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Ready = b.Ready
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_Result = b.Result
+	x.xxx_hidden_Metadata = b.Metadata
+	x.xxx_hidden_CostInfo = b.CostInfo
+	return m0
 }
 
 var File_protos_ydb_operation_proto protoreflect.FileDescriptor
@@ -729,18 +1031,6 @@ const file_protos_ydb_operation_proto_rawDesc = "" +
 	"\bmetadata\x18\x06 \x01(\v2\x14.google.protobuf.AnyR\bmetadata\x12*\n" +
 	"\tcost_info\x18\a \x01(\v2\r.Ydb.CostInfoR\bcostInfoBc\n" +
 	"\x0etech.ydb.protoB\x0fOperationProtosZ=github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations\xf8\x01\x01b\x06proto3"
-
-var (
-	file_protos_ydb_operation_proto_rawDescOnce sync.Once
-	file_protos_ydb_operation_proto_rawDescData []byte
-)
-
-func file_protos_ydb_operation_proto_rawDescGZIP() []byte {
-	file_protos_ydb_operation_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_operation_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_operation_proto_rawDesc), len(file_protos_ydb_operation_proto_rawDesc)))
-	})
-	return file_protos_ydb_operation_proto_rawDescData
-}
 
 var file_protos_ydb_operation_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_protos_ydb_operation_proto_msgTypes = make([]protoimpl.MessageInfo, 11)

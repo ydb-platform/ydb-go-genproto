@@ -11,7 +11,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -69,24 +68,17 @@ func (x DatabaseInfo_Status) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use DatabaseInfo_Status.Descriptor instead.
-func (DatabaseInfo_Status) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_federation_discovery_proto_rawDescGZIP(), []int{0, 0}
-}
-
 type DatabaseInfo struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	Name     string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Path     string                 `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	Id       string                 `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	Endpoint string                 `protobuf:"bytes,4,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	// for single datacenter databases
-	Location string              `protobuf:"bytes,5,opt,name=location,proto3" json:"location,omitempty"`
-	Status   DatabaseInfo_Status `protobuf:"varint,6,opt,name=status,proto3,enum=Ydb.FederationDiscovery.DatabaseInfo_Status" json:"status,omitempty"`
-	// to determine this database priority on the client side
-	Weight        int64 `protobuf:"varint,7,opt,name=weight,proto3" json:"weight,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name     string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Path     string                 `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_Id       string                 `protobuf:"bytes,3,opt,name=id,proto3"`
+	xxx_hidden_Endpoint string                 `protobuf:"bytes,4,opt,name=endpoint,proto3"`
+	xxx_hidden_Location string                 `protobuf:"bytes,5,opt,name=location,proto3"`
+	xxx_hidden_Status   DatabaseInfo_Status    `protobuf:"varint,6,opt,name=status,proto3,enum=Ydb.FederationDiscovery.DatabaseInfo_Status"`
+	xxx_hidden_Weight   int64                  `protobuf:"varint,7,opt,name=weight,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *DatabaseInfo) Reset() {
@@ -114,62 +106,113 @@ func (x *DatabaseInfo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DatabaseInfo.ProtoReflect.Descriptor instead.
-func (*DatabaseInfo) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_federation_discovery_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *DatabaseInfo) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *DatabaseInfo) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DatabaseInfo) GetId() string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *DatabaseInfo) GetEndpoint() string {
 	if x != nil {
-		return x.Endpoint
+		return x.xxx_hidden_Endpoint
 	}
 	return ""
 }
 
 func (x *DatabaseInfo) GetLocation() string {
 	if x != nil {
-		return x.Location
+		return x.xxx_hidden_Location
 	}
 	return ""
 }
 
 func (x *DatabaseInfo) GetStatus() DatabaseInfo_Status {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return DatabaseInfo_STATUS_UNSPECIFIED
 }
 
 func (x *DatabaseInfo) GetWeight() int64 {
 	if x != nil {
-		return x.Weight
+		return x.xxx_hidden_Weight
 	}
 	return 0
 }
 
+func (x *DatabaseInfo) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *DatabaseInfo) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *DatabaseInfo) SetId(v string) {
+	x.xxx_hidden_Id = v
+}
+
+func (x *DatabaseInfo) SetEndpoint(v string) {
+	x.xxx_hidden_Endpoint = v
+}
+
+func (x *DatabaseInfo) SetLocation(v string) {
+	x.xxx_hidden_Location = v
+}
+
+func (x *DatabaseInfo) SetStatus(v DatabaseInfo_Status) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *DatabaseInfo) SetWeight(v int64) {
+	x.xxx_hidden_Weight = v
+}
+
+type DatabaseInfo_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name     string
+	Path     string
+	Id       string
+	Endpoint string
+	// for single datacenter databases
+	Location string
+	Status   DatabaseInfo_Status
+	// to determine this database priority on the client side
+	Weight int64
+}
+
+func (b0 DatabaseInfo_builder) Build() *DatabaseInfo {
+	m0 := &DatabaseInfo{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Endpoint = b.Endpoint
+	x.xxx_hidden_Location = b.Location
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Weight = b.Weight
+	return m0
+}
+
 type ListFederationDatabasesRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -199,17 +242,23 @@ func (x *ListFederationDatabasesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListFederationDatabasesRequest.ProtoReflect.Descriptor instead.
-func (*ListFederationDatabasesRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_federation_discovery_proto_rawDescGZIP(), []int{1}
+type ListFederationDatabasesRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ListFederationDatabasesRequest_builder) Build() *ListFederationDatabasesRequest {
+	m0 := &ListFederationDatabasesRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ListFederationDatabasesResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListFederationDatabasesResponse) Reset() {
@@ -237,25 +286,50 @@ func (x *ListFederationDatabasesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListFederationDatabasesResponse.ProtoReflect.Descriptor instead.
-func (*ListFederationDatabasesResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_federation_discovery_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *ListFederationDatabasesResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ListFederationDatabasesResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ListFederationDatabasesResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ListFederationDatabasesResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ListFederationDatabasesResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Operation contains the result of the request. Check the ydb_operation.proto.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ListFederationDatabasesResponse_builder) Build() *ListFederationDatabasesResponse {
+	m0 := &ListFederationDatabasesResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ListFederationDatabasesResult struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	ControlPlaneEndpoint string                 `protobuf:"bytes,1,opt,name=control_plane_endpoint,json=controlPlaneEndpoint,proto3" json:"control_plane_endpoint,omitempty"`
-	FederationDatabases  []*DatabaseInfo        `protobuf:"bytes,2,rep,name=federation_databases,json=federationDatabases,proto3" json:"federation_databases,omitempty"`
-	SelfLocation         string                 `protobuf:"bytes,3,opt,name=self_location,json=selfLocation,proto3" json:"self_location,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ControlPlaneEndpoint string                 `protobuf:"bytes,1,opt,name=control_plane_endpoint,json=controlPlaneEndpoint,proto3"`
+	xxx_hidden_FederationDatabases  *[]*DatabaseInfo       `protobuf:"bytes,2,rep,name=federation_databases,json=federationDatabases,proto3"`
+	xxx_hidden_SelfLocation         string                 `protobuf:"bytes,3,opt,name=self_location,json=selfLocation,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *ListFederationDatabasesResult) Reset() {
@@ -283,30 +357,57 @@ func (x *ListFederationDatabasesResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListFederationDatabasesResult.ProtoReflect.Descriptor instead.
-func (*ListFederationDatabasesResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_federation_discovery_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *ListFederationDatabasesResult) GetControlPlaneEndpoint() string {
 	if x != nil {
-		return x.ControlPlaneEndpoint
+		return x.xxx_hidden_ControlPlaneEndpoint
 	}
 	return ""
 }
 
 func (x *ListFederationDatabasesResult) GetFederationDatabases() []*DatabaseInfo {
 	if x != nil {
-		return x.FederationDatabases
+		if x.xxx_hidden_FederationDatabases != nil {
+			return *x.xxx_hidden_FederationDatabases
+		}
 	}
 	return nil
 }
 
 func (x *ListFederationDatabasesResult) GetSelfLocation() string {
 	if x != nil {
-		return x.SelfLocation
+		return x.xxx_hidden_SelfLocation
 	}
 	return ""
+}
+
+func (x *ListFederationDatabasesResult) SetControlPlaneEndpoint(v string) {
+	x.xxx_hidden_ControlPlaneEndpoint = v
+}
+
+func (x *ListFederationDatabasesResult) SetFederationDatabases(v []*DatabaseInfo) {
+	x.xxx_hidden_FederationDatabases = &v
+}
+
+func (x *ListFederationDatabasesResult) SetSelfLocation(v string) {
+	x.xxx_hidden_SelfLocation = v
+}
+
+type ListFederationDatabasesResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ControlPlaneEndpoint string
+	FederationDatabases  []*DatabaseInfo
+	SelfLocation         string
+}
+
+func (b0 ListFederationDatabasesResult_builder) Build() *ListFederationDatabasesResult {
+	m0 := &ListFederationDatabasesResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ControlPlaneEndpoint = b.ControlPlaneEndpoint
+	x.xxx_hidden_FederationDatabases = &b.FederationDatabases
+	x.xxx_hidden_SelfLocation = b.SelfLocation
+	return m0
 }
 
 var File_protos_ydb_federation_discovery_proto protoreflect.FileDescriptor
@@ -335,18 +436,6 @@ const file_protos_ydb_federation_discovery_proto_rawDesc = "" +
 	"\x14federation_databases\x18\x02 \x03(\v2%.Ydb.FederationDiscovery.DatabaseInfoR\x13federationDatabases\x12#\n" +
 	"\rself_location\x18\x03 \x01(\tR\fselfLocationB\x8b\x01\n" +
 	"#tech.ydb.proto.federation.discoveryB\x19FederationDiscoveryProtosZFgithub.com/ydb-platform/ydb-go-genproto/protos/Ydb_FederationDiscovery\xf8\x01\x01b\x06proto3"
-
-var (
-	file_protos_ydb_federation_discovery_proto_rawDescOnce sync.Once
-	file_protos_ydb_federation_discovery_proto_rawDescData []byte
-)
-
-func file_protos_ydb_federation_discovery_proto_rawDescGZIP() []byte {
-	file_protos_ydb_federation_discovery_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_federation_discovery_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_federation_discovery_proto_rawDesc), len(file_protos_ydb_federation_discovery_proto_rawDesc)))
-	})
-	return file_protos_ydb_federation_discovery_proto_rawDescData
-}
 
 var file_protos_ydb_federation_discovery_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_protos_ydb_federation_discovery_proto_msgTypes = make([]protoimpl.MessageInfo, 4)

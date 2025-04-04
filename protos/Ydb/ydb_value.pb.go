@@ -11,7 +11,6 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -147,17 +146,12 @@ func (x Type_PrimitiveTypeId) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use Type_PrimitiveTypeId.Descriptor instead.
-func (Type_PrimitiveTypeId) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{10, 0}
-}
-
 type DecimalType struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Precision     uint32                 `protobuf:"varint,1,opt,name=precision,proto3" json:"precision,omitempty"`
-	Scale         uint32                 `protobuf:"varint,2,opt,name=scale,proto3" json:"scale,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Precision uint32                 `protobuf:"varint,1,opt,name=precision,proto3"`
+	xxx_hidden_Scale     uint32                 `protobuf:"varint,2,opt,name=scale,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DecimalType) Reset() {
@@ -185,30 +179,49 @@ func (x *DecimalType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DecimalType.ProtoReflect.Descriptor instead.
-func (*DecimalType) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *DecimalType) GetPrecision() uint32 {
 	if x != nil {
-		return x.Precision
+		return x.xxx_hidden_Precision
 	}
 	return 0
 }
 
 func (x *DecimalType) GetScale() uint32 {
 	if x != nil {
-		return x.Scale
+		return x.xxx_hidden_Scale
 	}
 	return 0
 }
 
+func (x *DecimalType) SetPrecision(v uint32) {
+	x.xxx_hidden_Precision = v
+}
+
+func (x *DecimalType) SetScale(v uint32) {
+	x.xxx_hidden_Scale = v
+}
+
+type DecimalType_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Precision uint32
+	Scale     uint32
+}
+
+func (b0 DecimalType_builder) Build() *DecimalType {
+	m0 := &DecimalType{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Precision = b.Precision
+	x.xxx_hidden_Scale = b.Scale
+	return m0
+}
+
 type OptionalType struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Item          *Type                  `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Item *Type                  `protobuf:"bytes,1,opt,name=item,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *OptionalType) Reset() {
@@ -236,23 +249,47 @@ func (x *OptionalType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OptionalType.ProtoReflect.Descriptor instead.
-func (*OptionalType) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *OptionalType) GetItem() *Type {
 	if x != nil {
-		return x.Item
+		return x.xxx_hidden_Item
 	}
 	return nil
 }
 
+func (x *OptionalType) SetItem(v *Type) {
+	x.xxx_hidden_Item = v
+}
+
+func (x *OptionalType) HasItem() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Item != nil
+}
+
+func (x *OptionalType) ClearItem() {
+	x.xxx_hidden_Item = nil
+}
+
+type OptionalType_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Item *Type
+}
+
+func (b0 OptionalType_builder) Build() *OptionalType {
+	m0 := &OptionalType{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Item = b.Item
+	return m0
+}
+
 type ListType struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Item          *Type                  `protobuf:"bytes,1,opt,name=item,proto3" json:"item,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Item *Type                  `protobuf:"bytes,1,opt,name=item,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *ListType) Reset() {
@@ -280,27 +317,47 @@ func (x *ListType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListType.ProtoReflect.Descriptor instead.
-func (*ListType) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *ListType) GetItem() *Type {
 	if x != nil {
-		return x.Item
+		return x.xxx_hidden_Item
 	}
 	return nil
 }
 
+func (x *ListType) SetItem(v *Type) {
+	x.xxx_hidden_Item = v
+}
+
+func (x *ListType) HasItem() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Item != nil
+}
+
+func (x *ListType) ClearItem() {
+	x.xxx_hidden_Item = nil
+}
+
+type ListType_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Item *Type
+}
+
+func (b0 ListType_builder) Build() *ListType {
+	m0 := &ListType{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Item = b.Item
+	return m0
+}
+
 type VariantType struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Type:
-	//
-	//	*VariantType_TupleItems
-	//	*VariantType_StructItems
-	Type          isVariantType_Type `protobuf_oneof:"type"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Type isVariantType_Type     `protobuf_oneof:"type"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *VariantType) Reset() {
@@ -328,21 +385,9 @@ func (x *VariantType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VariantType.ProtoReflect.Descriptor instead.
-func (*VariantType) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *VariantType) GetType() isVariantType_Type {
-	if x != nil {
-		return x.Type
-	}
-	return nil
-}
-
 func (x *VariantType) GetTupleItems() *TupleType {
 	if x != nil {
-		if x, ok := x.Type.(*VariantType_TupleItems); ok {
+		if x, ok := x.xxx_hidden_Type.(*variantType_TupleItems); ok {
 			return x.TupleItems
 		}
 	}
@@ -351,34 +396,139 @@ func (x *VariantType) GetTupleItems() *TupleType {
 
 func (x *VariantType) GetStructItems() *StructType {
 	if x != nil {
-		if x, ok := x.Type.(*VariantType_StructItems); ok {
+		if x, ok := x.xxx_hidden_Type.(*variantType_StructItems); ok {
 			return x.StructItems
 		}
 	}
 	return nil
 }
 
+func (x *VariantType) SetTupleItems(v *TupleType) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &variantType_TupleItems{v}
+}
+
+func (x *VariantType) SetStructItems(v *StructType) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &variantType_StructItems{v}
+}
+
+func (x *VariantType) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *VariantType) HasTupleItems() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*variantType_TupleItems)
+	return ok
+}
+
+func (x *VariantType) HasStructItems() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*variantType_StructItems)
+	return ok
+}
+
+func (x *VariantType) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *VariantType) ClearTupleItems() {
+	if _, ok := x.xxx_hidden_Type.(*variantType_TupleItems); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *VariantType) ClearStructItems() {
+	if _, ok := x.xxx_hidden_Type.(*variantType_StructItems); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+const VariantType_Type_not_set_case case_VariantType_Type = 0
+const VariantType_TupleItems_case case_VariantType_Type = 1
+const VariantType_StructItems_case case_VariantType_Type = 2
+
+func (x *VariantType) WhichType() case_VariantType_Type {
+	if x == nil {
+		return VariantType_Type_not_set_case
+	}
+	switch x.xxx_hidden_Type.(type) {
+	case *variantType_TupleItems:
+		return VariantType_TupleItems_case
+	case *variantType_StructItems:
+		return VariantType_StructItems_case
+	default:
+		return VariantType_Type_not_set_case
+	}
+}
+
+type VariantType_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Type:
+	TupleItems  *TupleType
+	StructItems *StructType
+	// -- end of xxx_hidden_Type
+}
+
+func (b0 VariantType_builder) Build() *VariantType {
+	m0 := &VariantType{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.TupleItems != nil {
+		x.xxx_hidden_Type = &variantType_TupleItems{b.TupleItems}
+	}
+	if b.StructItems != nil {
+		x.xxx_hidden_Type = &variantType_StructItems{b.StructItems}
+	}
+	return m0
+}
+
+type case_VariantType_Type protoreflect.FieldNumber
+
+func (x case_VariantType_Type) String() string {
+	md := file_protos_ydb_value_proto_msgTypes[3].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isVariantType_Type interface {
 	isVariantType_Type()
 }
 
-type VariantType_TupleItems struct {
+type variantType_TupleItems struct {
 	TupleItems *TupleType `protobuf:"bytes,1,opt,name=tuple_items,json=tupleItems,proto3,oneof"`
 }
 
-type VariantType_StructItems struct {
+type variantType_StructItems struct {
 	StructItems *StructType `protobuf:"bytes,2,opt,name=struct_items,json=structItems,proto3,oneof"`
 }
 
-func (*VariantType_TupleItems) isVariantType_Type() {}
+func (*variantType_TupleItems) isVariantType_Type() {}
 
-func (*VariantType_StructItems) isVariantType_Type() {}
+func (*variantType_StructItems) isVariantType_Type() {}
 
 type TupleType struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Elements      []*Type                `protobuf:"bytes,1,rep,name=elements,proto3" json:"elements,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Elements *[]*Type               `protobuf:"bytes,1,rep,name=elements,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *TupleType) Reset() {
@@ -406,24 +556,39 @@ func (x *TupleType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TupleType.ProtoReflect.Descriptor instead.
-func (*TupleType) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *TupleType) GetElements() []*Type {
 	if x != nil {
-		return x.Elements
+		if x.xxx_hidden_Elements != nil {
+			return *x.xxx_hidden_Elements
+		}
 	}
 	return nil
 }
 
+func (x *TupleType) SetElements(v []*Type) {
+	x.xxx_hidden_Elements = &v
+}
+
+type TupleType_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Elements []*Type
+}
+
+func (b0 TupleType_builder) Build() *TupleType {
+	m0 := &TupleType{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Elements = &b.Elements
+	return m0
+}
+
 type StructMember struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Type          *Type                  `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Type *Type                  `protobuf:"bytes,2,opt,name=type,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *StructMember) Reset() {
@@ -451,30 +616,60 @@ func (x *StructMember) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StructMember.ProtoReflect.Descriptor instead.
-func (*StructMember) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *StructMember) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *StructMember) GetType() *Type {
 	if x != nil {
-		return x.Type
+		return x.xxx_hidden_Type
 	}
 	return nil
 }
 
+func (x *StructMember) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *StructMember) SetType(v *Type) {
+	x.xxx_hidden_Type = v
+}
+
+func (x *StructMember) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *StructMember) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+type StructMember_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name string
+	Type *Type
+}
+
+func (b0 StructMember_builder) Build() *StructMember {
+	m0 := &StructMember{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Type = b.Type
+	return m0
+}
+
 type StructType struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Members       []*StructMember        `protobuf:"bytes,1,rep,name=members,proto3" json:"members,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Members *[]*StructMember       `protobuf:"bytes,1,rep,name=members,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *StructType) Reset() {
@@ -502,24 +697,39 @@ func (x *StructType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StructType.ProtoReflect.Descriptor instead.
-func (*StructType) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{6}
-}
-
 func (x *StructType) GetMembers() []*StructMember {
 	if x != nil {
-		return x.Members
+		if x.xxx_hidden_Members != nil {
+			return *x.xxx_hidden_Members
+		}
 	}
 	return nil
 }
 
+func (x *StructType) SetMembers(v []*StructMember) {
+	x.xxx_hidden_Members = &v
+}
+
+type StructType_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Members []*StructMember
+}
+
+func (b0 StructType_builder) Build() *StructType {
+	m0 := &StructType{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Members = &b.Members
+	return m0
+}
+
 type DictType struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           *Type                  `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Payload       *Type                  `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Key     *Type                  `protobuf:"bytes,1,opt,name=key,proto3"`
+	xxx_hidden_Payload *Type                  `protobuf:"bytes,2,opt,name=payload,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *DictType) Reset() {
@@ -547,31 +757,72 @@ func (x *DictType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DictType.ProtoReflect.Descriptor instead.
-func (*DictType) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{7}
-}
-
 func (x *DictType) GetKey() *Type {
 	if x != nil {
-		return x.Key
+		return x.xxx_hidden_Key
 	}
 	return nil
 }
 
 func (x *DictType) GetPayload() *Type {
 	if x != nil {
-		return x.Payload
+		return x.xxx_hidden_Payload
 	}
 	return nil
 }
 
+func (x *DictType) SetKey(v *Type) {
+	x.xxx_hidden_Key = v
+}
+
+func (x *DictType) SetPayload(v *Type) {
+	x.xxx_hidden_Payload = v
+}
+
+func (x *DictType) HasKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Key != nil
+}
+
+func (x *DictType) HasPayload() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Payload != nil
+}
+
+func (x *DictType) ClearKey() {
+	x.xxx_hidden_Key = nil
+}
+
+func (x *DictType) ClearPayload() {
+	x.xxx_hidden_Payload = nil
+}
+
+type DictType_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Key     *Type
+	Payload *Type
+}
+
+func (b0 DictType_builder) Build() *DictType {
+	m0 := &DictType{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Key = b.Key
+	x.xxx_hidden_Payload = b.Payload
+	return m0
+}
+
 type TaggedType struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Tag           string                 `protobuf:"bytes,1,opt,name=tag,proto3" json:"tag,omitempty"`
-	Type          *Type                  `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Tag  string                 `protobuf:"bytes,1,opt,name=tag,proto3"`
+	xxx_hidden_Type *Type                  `protobuf:"bytes,2,opt,name=type,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *TaggedType) Reset() {
@@ -599,37 +850,64 @@ func (x *TaggedType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TaggedType.ProtoReflect.Descriptor instead.
-func (*TaggedType) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{8}
-}
-
 func (x *TaggedType) GetTag() string {
 	if x != nil {
-		return x.Tag
+		return x.xxx_hidden_Tag
 	}
 	return ""
 }
 
 func (x *TaggedType) GetType() *Type {
 	if x != nil {
-		return x.Type
+		return x.xxx_hidden_Type
 	}
 	return nil
 }
 
+func (x *TaggedType) SetTag(v string) {
+	x.xxx_hidden_Tag = v
+}
+
+func (x *TaggedType) SetType(v *Type) {
+	x.xxx_hidden_Type = v
+}
+
+func (x *TaggedType) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *TaggedType) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+type TaggedType_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Tag  string
+	Type *Type
+}
+
+func (b0 TaggedType_builder) Build() *TaggedType {
+	m0 := &TaggedType{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Tag = b.Tag
+	x.xxx_hidden_Type = b.Type
+	return m0
+}
+
 type PgType struct {
-	state        protoimpl.MessageState `protogen:"open.v1"`
-	TypeName     string                 `protobuf:"bytes,10,opt,name=type_name,json=typeName,proto3" json:"type_name,omitempty"`
-	TypeModifier string                 `protobuf:"bytes,11,opt,name=type_modifier,json=typeModifier,proto3" json:"type_modifier,omitempty"`
-	// pg object id of the type
-	// full registry could be found here: https://github.com/postgres/postgres/blob/master/src/include/catalog/pg_type.dat
-	Oid uint32 `protobuf:"varint,1,opt,name=oid,proto3" json:"oid,omitempty"`
-	// advanced type details useful for pg wire format proxying
-	Typlen        int32 `protobuf:"varint,2,opt,name=typlen,proto3" json:"typlen,omitempty"`
-	Typmod        int32 `protobuf:"varint,3,opt,name=typmod,proto3" json:"typmod,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TypeName     string                 `protobuf:"bytes,10,opt,name=type_name,json=typeName,proto3"`
+	xxx_hidden_TypeModifier string                 `protobuf:"bytes,11,opt,name=type_modifier,json=typeModifier,proto3"`
+	xxx_hidden_Oid          uint32                 `protobuf:"varint,1,opt,name=oid,proto3"`
+	xxx_hidden_Typlen       int32                  `protobuf:"varint,2,opt,name=typlen,proto3"`
+	xxx_hidden_Typmod       int32                  `protobuf:"varint,3,opt,name=typmod,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *PgType) Reset() {
@@ -657,67 +935,91 @@ func (x *PgType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PgType.ProtoReflect.Descriptor instead.
-func (*PgType) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *PgType) GetTypeName() string {
 	if x != nil {
-		return x.TypeName
+		return x.xxx_hidden_TypeName
 	}
 	return ""
 }
 
 func (x *PgType) GetTypeModifier() string {
 	if x != nil {
-		return x.TypeModifier
+		return x.xxx_hidden_TypeModifier
 	}
 	return ""
 }
 
 func (x *PgType) GetOid() uint32 {
 	if x != nil {
-		return x.Oid
+		return x.xxx_hidden_Oid
 	}
 	return 0
 }
 
 func (x *PgType) GetTyplen() int32 {
 	if x != nil {
-		return x.Typlen
+		return x.xxx_hidden_Typlen
 	}
 	return 0
 }
 
 func (x *PgType) GetTypmod() int32 {
 	if x != nil {
-		return x.Typmod
+		return x.xxx_hidden_Typmod
 	}
 	return 0
 }
 
+func (x *PgType) SetTypeName(v string) {
+	x.xxx_hidden_TypeName = v
+}
+
+func (x *PgType) SetTypeModifier(v string) {
+	x.xxx_hidden_TypeModifier = v
+}
+
+func (x *PgType) SetOid(v uint32) {
+	x.xxx_hidden_Oid = v
+}
+
+func (x *PgType) SetTyplen(v int32) {
+	x.xxx_hidden_Typlen = v
+}
+
+func (x *PgType) SetTypmod(v int32) {
+	x.xxx_hidden_Typmod = v
+}
+
+type PgType_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TypeName     string
+	TypeModifier string
+	// pg object id of the type
+	// full registry could be found here: https://github.com/postgres/postgres/blob/master/src/include/catalog/pg_type.dat
+	Oid uint32
+	// advanced type details useful for pg wire format proxying
+	Typlen int32
+	Typmod int32
+}
+
+func (b0 PgType_builder) Build() *PgType {
+	m0 := &PgType{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TypeName = b.TypeName
+	x.xxx_hidden_TypeModifier = b.TypeModifier
+	x.xxx_hidden_Oid = b.Oid
+	x.xxx_hidden_Typlen = b.Typlen
+	x.xxx_hidden_Typmod = b.Typmod
+	return m0
+}
+
 type Type struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Type:
-	//
-	//	*Type_TypeId
-	//	*Type_DecimalType
-	//	*Type_OptionalType
-	//	*Type_ListType
-	//	*Type_TupleType
-	//	*Type_StructType
-	//	*Type_DictType
-	//	*Type_VariantType
-	//	*Type_TaggedType
-	//	*Type_VoidType
-	//	*Type_NullType
-	//	*Type_EmptyListType
-	//	*Type_EmptyDictType
-	//	*Type_PgType
-	Type          isType_Type `protobuf_oneof:"type"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Type isType_Type            `protobuf_oneof:"type"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Type) Reset() {
@@ -745,21 +1047,9 @@ func (x *Type) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Type.ProtoReflect.Descriptor instead.
-func (*Type) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *Type) GetType() isType_Type {
-	if x != nil {
-		return x.Type
-	}
-	return nil
-}
-
 func (x *Type) GetTypeId() Type_PrimitiveTypeId {
 	if x != nil {
-		if x, ok := x.Type.(*Type_TypeId); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_TypeId); ok {
 			return x.TypeId
 		}
 	}
@@ -768,7 +1058,7 @@ func (x *Type) GetTypeId() Type_PrimitiveTypeId {
 
 func (x *Type) GetDecimalType() *DecimalType {
 	if x != nil {
-		if x, ok := x.Type.(*Type_DecimalType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_DecimalType); ok {
 			return x.DecimalType
 		}
 	}
@@ -777,7 +1067,7 @@ func (x *Type) GetDecimalType() *DecimalType {
 
 func (x *Type) GetOptionalType() *OptionalType {
 	if x != nil {
-		if x, ok := x.Type.(*Type_OptionalType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_OptionalType); ok {
 			return x.OptionalType
 		}
 	}
@@ -786,7 +1076,7 @@ func (x *Type) GetOptionalType() *OptionalType {
 
 func (x *Type) GetListType() *ListType {
 	if x != nil {
-		if x, ok := x.Type.(*Type_ListType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_ListType); ok {
 			return x.ListType
 		}
 	}
@@ -795,7 +1085,7 @@ func (x *Type) GetListType() *ListType {
 
 func (x *Type) GetTupleType() *TupleType {
 	if x != nil {
-		if x, ok := x.Type.(*Type_TupleType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_TupleType); ok {
 			return x.TupleType
 		}
 	}
@@ -804,7 +1094,7 @@ func (x *Type) GetTupleType() *TupleType {
 
 func (x *Type) GetStructType() *StructType {
 	if x != nil {
-		if x, ok := x.Type.(*Type_StructType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_StructType); ok {
 			return x.StructType
 		}
 	}
@@ -813,7 +1103,7 @@ func (x *Type) GetStructType() *StructType {
 
 func (x *Type) GetDictType() *DictType {
 	if x != nil {
-		if x, ok := x.Type.(*Type_DictType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_DictType); ok {
 			return x.DictType
 		}
 	}
@@ -822,7 +1112,7 @@ func (x *Type) GetDictType() *DictType {
 
 func (x *Type) GetVariantType() *VariantType {
 	if x != nil {
-		if x, ok := x.Type.(*Type_VariantType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_VariantType); ok {
 			return x.VariantType
 		}
 	}
@@ -831,7 +1121,7 @@ func (x *Type) GetVariantType() *VariantType {
 
 func (x *Type) GetTaggedType() *TaggedType {
 	if x != nil {
-		if x, ok := x.Type.(*Type_TaggedType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_TaggedType); ok {
 			return x.TaggedType
 		}
 	}
@@ -840,7 +1130,7 @@ func (x *Type) GetTaggedType() *TaggedType {
 
 func (x *Type) GetVoidType() structpb.NullValue {
 	if x != nil {
-		if x, ok := x.Type.(*Type_VoidType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_VoidType); ok {
 			return x.VoidType
 		}
 	}
@@ -849,7 +1139,7 @@ func (x *Type) GetVoidType() structpb.NullValue {
 
 func (x *Type) GetNullType() structpb.NullValue {
 	if x != nil {
-		if x, ok := x.Type.(*Type_NullType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_NullType); ok {
 			return x.NullType
 		}
 	}
@@ -858,7 +1148,7 @@ func (x *Type) GetNullType() structpb.NullValue {
 
 func (x *Type) GetEmptyListType() structpb.NullValue {
 	if x != nil {
-		if x, ok := x.Type.(*Type_EmptyListType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_EmptyListType); ok {
 			return x.EmptyListType
 		}
 	}
@@ -867,7 +1157,7 @@ func (x *Type) GetEmptyListType() structpb.NullValue {
 
 func (x *Type) GetEmptyDictType() structpb.NullValue {
 	if x != nil {
-		if x, ok := x.Type.(*Type_EmptyDictType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_EmptyDictType); ok {
 			return x.EmptyDictType
 		}
 	}
@@ -876,110 +1166,546 @@ func (x *Type) GetEmptyDictType() structpb.NullValue {
 
 func (x *Type) GetPgType() *PgType {
 	if x != nil {
-		if x, ok := x.Type.(*Type_PgType); ok {
+		if x, ok := x.xxx_hidden_Type.(*type_PgType); ok {
 			return x.PgType
 		}
 	}
 	return nil
 }
 
+func (x *Type) SetTypeId(v Type_PrimitiveTypeId) {
+	x.xxx_hidden_Type = &type_TypeId{v}
+}
+
+func (x *Type) SetDecimalType(v *DecimalType) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &type_DecimalType{v}
+}
+
+func (x *Type) SetOptionalType(v *OptionalType) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &type_OptionalType{v}
+}
+
+func (x *Type) SetListType(v *ListType) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &type_ListType{v}
+}
+
+func (x *Type) SetTupleType(v *TupleType) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &type_TupleType{v}
+}
+
+func (x *Type) SetStructType(v *StructType) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &type_StructType{v}
+}
+
+func (x *Type) SetDictType(v *DictType) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &type_DictType{v}
+}
+
+func (x *Type) SetVariantType(v *VariantType) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &type_VariantType{v}
+}
+
+func (x *Type) SetTaggedType(v *TaggedType) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &type_TaggedType{v}
+}
+
+func (x *Type) SetVoidType(v structpb.NullValue) {
+	x.xxx_hidden_Type = &type_VoidType{v}
+}
+
+func (x *Type) SetNullType(v structpb.NullValue) {
+	x.xxx_hidden_Type = &type_NullType{v}
+}
+
+func (x *Type) SetEmptyListType(v structpb.NullValue) {
+	x.xxx_hidden_Type = &type_EmptyListType{v}
+}
+
+func (x *Type) SetEmptyDictType(v structpb.NullValue) {
+	x.xxx_hidden_Type = &type_EmptyDictType{v}
+}
+
+func (x *Type) SetPgType(v *PgType) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &type_PgType{v}
+}
+
+func (x *Type) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *Type) HasTypeId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_TypeId)
+	return ok
+}
+
+func (x *Type) HasDecimalType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_DecimalType)
+	return ok
+}
+
+func (x *Type) HasOptionalType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_OptionalType)
+	return ok
+}
+
+func (x *Type) HasListType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_ListType)
+	return ok
+}
+
+func (x *Type) HasTupleType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_TupleType)
+	return ok
+}
+
+func (x *Type) HasStructType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_StructType)
+	return ok
+}
+
+func (x *Type) HasDictType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_DictType)
+	return ok
+}
+
+func (x *Type) HasVariantType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_VariantType)
+	return ok
+}
+
+func (x *Type) HasTaggedType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_TaggedType)
+	return ok
+}
+
+func (x *Type) HasVoidType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_VoidType)
+	return ok
+}
+
+func (x *Type) HasNullType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_NullType)
+	return ok
+}
+
+func (x *Type) HasEmptyListType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_EmptyListType)
+	return ok
+}
+
+func (x *Type) HasEmptyDictType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_EmptyDictType)
+	return ok
+}
+
+func (x *Type) HasPgType() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*type_PgType)
+	return ok
+}
+
+func (x *Type) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *Type) ClearTypeId() {
+	if _, ok := x.xxx_hidden_Type.(*type_TypeId); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearDecimalType() {
+	if _, ok := x.xxx_hidden_Type.(*type_DecimalType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearOptionalType() {
+	if _, ok := x.xxx_hidden_Type.(*type_OptionalType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearListType() {
+	if _, ok := x.xxx_hidden_Type.(*type_ListType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearTupleType() {
+	if _, ok := x.xxx_hidden_Type.(*type_TupleType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearStructType() {
+	if _, ok := x.xxx_hidden_Type.(*type_StructType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearDictType() {
+	if _, ok := x.xxx_hidden_Type.(*type_DictType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearVariantType() {
+	if _, ok := x.xxx_hidden_Type.(*type_VariantType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearTaggedType() {
+	if _, ok := x.xxx_hidden_Type.(*type_TaggedType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearVoidType() {
+	if _, ok := x.xxx_hidden_Type.(*type_VoidType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearNullType() {
+	if _, ok := x.xxx_hidden_Type.(*type_NullType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearEmptyListType() {
+	if _, ok := x.xxx_hidden_Type.(*type_EmptyListType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearEmptyDictType() {
+	if _, ok := x.xxx_hidden_Type.(*type_EmptyDictType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Type) ClearPgType() {
+	if _, ok := x.xxx_hidden_Type.(*type_PgType); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+const Type_Type_not_set_case case_Type_Type = 0
+const Type_TypeId_case case_Type_Type = 1
+const Type_DecimalType_case case_Type_Type = 2
+const Type_OptionalType_case case_Type_Type = 101
+const Type_ListType_case case_Type_Type = 102
+const Type_TupleType_case case_Type_Type = 103
+const Type_StructType_case case_Type_Type = 104
+const Type_DictType_case case_Type_Type = 105
+const Type_VariantType_case case_Type_Type = 106
+const Type_TaggedType_case case_Type_Type = 107
+const Type_VoidType_case case_Type_Type = 201
+const Type_NullType_case case_Type_Type = 202
+const Type_EmptyListType_case case_Type_Type = 203
+const Type_EmptyDictType_case case_Type_Type = 204
+const Type_PgType_case case_Type_Type = 205
+
+func (x *Type) WhichType() case_Type_Type {
+	if x == nil {
+		return Type_Type_not_set_case
+	}
+	switch x.xxx_hidden_Type.(type) {
+	case *type_TypeId:
+		return Type_TypeId_case
+	case *type_DecimalType:
+		return Type_DecimalType_case
+	case *type_OptionalType:
+		return Type_OptionalType_case
+	case *type_ListType:
+		return Type_ListType_case
+	case *type_TupleType:
+		return Type_TupleType_case
+	case *type_StructType:
+		return Type_StructType_case
+	case *type_DictType:
+		return Type_DictType_case
+	case *type_VariantType:
+		return Type_VariantType_case
+	case *type_TaggedType:
+		return Type_TaggedType_case
+	case *type_VoidType:
+		return Type_VoidType_case
+	case *type_NullType:
+		return Type_NullType_case
+	case *type_EmptyListType:
+		return Type_EmptyListType_case
+	case *type_EmptyDictType:
+		return Type_EmptyDictType_case
+	case *type_PgType:
+		return Type_PgType_case
+	default:
+		return Type_Type_not_set_case
+	}
+}
+
+type Type_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Type:
+	// Data types
+	TypeId      *Type_PrimitiveTypeId
+	DecimalType *DecimalType
+	// Container types
+	OptionalType *OptionalType
+	ListType     *ListType
+	TupleType    *TupleType
+	StructType   *StructType
+	DictType     *DictType
+	VariantType  *VariantType
+	TaggedType   *TaggedType
+	// Special types
+	VoidType      *structpb.NullValue
+	NullType      *structpb.NullValue
+	EmptyListType *structpb.NullValue
+	EmptyDictType *structpb.NullValue
+	PgType        *PgType
+	// -- end of xxx_hidden_Type
+}
+
+func (b0 Type_builder) Build() *Type {
+	m0 := &Type{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.TypeId != nil {
+		x.xxx_hidden_Type = &type_TypeId{*b.TypeId}
+	}
+	if b.DecimalType != nil {
+		x.xxx_hidden_Type = &type_DecimalType{b.DecimalType}
+	}
+	if b.OptionalType != nil {
+		x.xxx_hidden_Type = &type_OptionalType{b.OptionalType}
+	}
+	if b.ListType != nil {
+		x.xxx_hidden_Type = &type_ListType{b.ListType}
+	}
+	if b.TupleType != nil {
+		x.xxx_hidden_Type = &type_TupleType{b.TupleType}
+	}
+	if b.StructType != nil {
+		x.xxx_hidden_Type = &type_StructType{b.StructType}
+	}
+	if b.DictType != nil {
+		x.xxx_hidden_Type = &type_DictType{b.DictType}
+	}
+	if b.VariantType != nil {
+		x.xxx_hidden_Type = &type_VariantType{b.VariantType}
+	}
+	if b.TaggedType != nil {
+		x.xxx_hidden_Type = &type_TaggedType{b.TaggedType}
+	}
+	if b.VoidType != nil {
+		x.xxx_hidden_Type = &type_VoidType{*b.VoidType}
+	}
+	if b.NullType != nil {
+		x.xxx_hidden_Type = &type_NullType{*b.NullType}
+	}
+	if b.EmptyListType != nil {
+		x.xxx_hidden_Type = &type_EmptyListType{*b.EmptyListType}
+	}
+	if b.EmptyDictType != nil {
+		x.xxx_hidden_Type = &type_EmptyDictType{*b.EmptyDictType}
+	}
+	if b.PgType != nil {
+		x.xxx_hidden_Type = &type_PgType{b.PgType}
+	}
+	return m0
+}
+
+type case_Type_Type protoreflect.FieldNumber
+
+func (x case_Type_Type) String() string {
+	md := file_protos_ydb_value_proto_msgTypes[10].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isType_Type interface {
 	isType_Type()
 }
 
-type Type_TypeId struct {
+type type_TypeId struct {
 	// Data types
 	TypeId Type_PrimitiveTypeId `protobuf:"varint,1,opt,name=type_id,json=typeId,proto3,enum=Ydb.Type_PrimitiveTypeId,oneof"`
 }
 
-type Type_DecimalType struct {
+type type_DecimalType struct {
 	DecimalType *DecimalType `protobuf:"bytes,2,opt,name=decimal_type,json=decimalType,proto3,oneof"`
 }
 
-type Type_OptionalType struct {
+type type_OptionalType struct {
 	// Container types
 	OptionalType *OptionalType `protobuf:"bytes,101,opt,name=optional_type,json=optionalType,proto3,oneof"`
 }
 
-type Type_ListType struct {
+type type_ListType struct {
 	ListType *ListType `protobuf:"bytes,102,opt,name=list_type,json=listType,proto3,oneof"`
 }
 
-type Type_TupleType struct {
+type type_TupleType struct {
 	TupleType *TupleType `protobuf:"bytes,103,opt,name=tuple_type,json=tupleType,proto3,oneof"`
 }
 
-type Type_StructType struct {
+type type_StructType struct {
 	StructType *StructType `protobuf:"bytes,104,opt,name=struct_type,json=structType,proto3,oneof"`
 }
 
-type Type_DictType struct {
+type type_DictType struct {
 	DictType *DictType `protobuf:"bytes,105,opt,name=dict_type,json=dictType,proto3,oneof"`
 }
 
-type Type_VariantType struct {
+type type_VariantType struct {
 	VariantType *VariantType `protobuf:"bytes,106,opt,name=variant_type,json=variantType,proto3,oneof"`
 }
 
-type Type_TaggedType struct {
+type type_TaggedType struct {
 	TaggedType *TaggedType `protobuf:"bytes,107,opt,name=tagged_type,json=taggedType,proto3,oneof"`
 }
 
-type Type_VoidType struct {
+type type_VoidType struct {
 	// Special types
 	VoidType structpb.NullValue `protobuf:"varint,201,opt,name=void_type,json=voidType,proto3,enum=google.protobuf.NullValue,oneof"`
 }
 
-type Type_NullType struct {
+type type_NullType struct {
 	NullType structpb.NullValue `protobuf:"varint,202,opt,name=null_type,json=nullType,proto3,enum=google.protobuf.NullValue,oneof"`
 }
 
-type Type_EmptyListType struct {
+type type_EmptyListType struct {
 	EmptyListType structpb.NullValue `protobuf:"varint,203,opt,name=empty_list_type,json=emptyListType,proto3,enum=google.protobuf.NullValue,oneof"`
 }
 
-type Type_EmptyDictType struct {
+type type_EmptyDictType struct {
 	EmptyDictType structpb.NullValue `protobuf:"varint,204,opt,name=empty_dict_type,json=emptyDictType,proto3,enum=google.protobuf.NullValue,oneof"`
 }
 
-type Type_PgType struct {
+type type_PgType struct {
 	PgType *PgType `protobuf:"bytes,205,opt,name=pg_type,json=pgType,proto3,oneof"`
 }
 
-func (*Type_TypeId) isType_Type() {}
+func (*type_TypeId) isType_Type() {}
 
-func (*Type_DecimalType) isType_Type() {}
+func (*type_DecimalType) isType_Type() {}
 
-func (*Type_OptionalType) isType_Type() {}
+func (*type_OptionalType) isType_Type() {}
 
-func (*Type_ListType) isType_Type() {}
+func (*type_ListType) isType_Type() {}
 
-func (*Type_TupleType) isType_Type() {}
+func (*type_TupleType) isType_Type() {}
 
-func (*Type_StructType) isType_Type() {}
+func (*type_StructType) isType_Type() {}
 
-func (*Type_DictType) isType_Type() {}
+func (*type_DictType) isType_Type() {}
 
-func (*Type_VariantType) isType_Type() {}
+func (*type_VariantType) isType_Type() {}
 
-func (*Type_TaggedType) isType_Type() {}
+func (*type_TaggedType) isType_Type() {}
 
-func (*Type_VoidType) isType_Type() {}
+func (*type_VoidType) isType_Type() {}
 
-func (*Type_NullType) isType_Type() {}
+func (*type_NullType) isType_Type() {}
 
-func (*Type_EmptyListType) isType_Type() {}
+func (*type_EmptyListType) isType_Type() {}
 
-func (*Type_EmptyDictType) isType_Type() {}
+func (*type_EmptyDictType) isType_Type() {}
 
-func (*Type_PgType) isType_Type() {}
+func (*type_PgType) isType_Type() {}
 
 type ValuePair struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           *Value                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Payload       *Value                 `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Key     *Value                 `protobuf:"bytes,1,opt,name=key,proto3"`
+	xxx_hidden_Payload *Value                 `protobuf:"bytes,2,opt,name=payload,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ValuePair) Reset() {
@@ -1007,48 +1733,75 @@ func (x *ValuePair) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ValuePair.ProtoReflect.Descriptor instead.
-func (*ValuePair) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{11}
-}
-
 func (x *ValuePair) GetKey() *Value {
 	if x != nil {
-		return x.Key
+		return x.xxx_hidden_Key
 	}
 	return nil
 }
 
 func (x *ValuePair) GetPayload() *Value {
 	if x != nil {
-		return x.Payload
+		return x.xxx_hidden_Payload
 	}
 	return nil
 }
 
+func (x *ValuePair) SetKey(v *Value) {
+	x.xxx_hidden_Key = v
+}
+
+func (x *ValuePair) SetPayload(v *Value) {
+	x.xxx_hidden_Payload = v
+}
+
+func (x *ValuePair) HasKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Key != nil
+}
+
+func (x *ValuePair) HasPayload() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Payload != nil
+}
+
+func (x *ValuePair) ClearKey() {
+	x.xxx_hidden_Key = nil
+}
+
+func (x *ValuePair) ClearPayload() {
+	x.xxx_hidden_Payload = nil
+}
+
+type ValuePair_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Key     *Value
+	Payload *Value
+}
+
+func (b0 ValuePair_builder) Build() *ValuePair {
+	m0 := &ValuePair{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Key = b.Key
+	x.xxx_hidden_Payload = b.Payload
+	return m0
+}
+
 type Value struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Value:
-	//
-	//	*Value_BoolValue
-	//	*Value_Int32Value
-	//	*Value_Uint32Value
-	//	*Value_Int64Value
-	//	*Value_Uint64Value
-	//	*Value_FloatValue
-	//	*Value_DoubleValue
-	//	*Value_BytesValue
-	//	*Value_TextValue
-	//	*Value_NullFlagValue
-	//	*Value_NestedValue
-	//	*Value_Low_128
-	Value         isValue_Value `protobuf_oneof:"value"`
-	Items         []*Value      `protobuf:"bytes,12,rep,name=items,proto3" json:"items,omitempty"`                                    // Used for List, Tuple, Struct types
-	Pairs         []*ValuePair  `protobuf:"bytes,13,rep,name=pairs,proto3" json:"pairs,omitempty"`                                    // Used for Dict type
-	VariantIndex  uint32        `protobuf:"varint,14,opt,name=variant_index,json=variantIndex,proto3" json:"variant_index,omitempty"` // Used for Variant type
-	High_128      uint64        `protobuf:"fixed64,16,opt,name=high_128,json=high128,proto3" json:"high_128,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Value        isValue_Value          `protobuf_oneof:"value"`
+	xxx_hidden_Items        *[]*Value              `protobuf:"bytes,12,rep,name=items,proto3"`
+	xxx_hidden_Pairs        *[]*ValuePair          `protobuf:"bytes,13,rep,name=pairs,proto3"`
+	xxx_hidden_VariantIndex uint32                 `protobuf:"varint,14,opt,name=variant_index,json=variantIndex,proto3"`
+	xxx_hidden_High_128     uint64                 `protobuf:"fixed64,16,opt,name=high_128,json=high128,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *Value) Reset() {
@@ -1076,21 +1829,9 @@ func (x *Value) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Value.ProtoReflect.Descriptor instead.
-func (*Value) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *Value) GetValue() isValue_Value {
-	if x != nil {
-		return x.Value
-	}
-	return nil
-}
-
 func (x *Value) GetBoolValue() bool {
 	if x != nil {
-		if x, ok := x.Value.(*Value_BoolValue); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_BoolValue); ok {
 			return x.BoolValue
 		}
 	}
@@ -1099,7 +1840,7 @@ func (x *Value) GetBoolValue() bool {
 
 func (x *Value) GetInt32Value() int32 {
 	if x != nil {
-		if x, ok := x.Value.(*Value_Int32Value); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_Int32Value); ok {
 			return x.Int32Value
 		}
 	}
@@ -1108,7 +1849,7 @@ func (x *Value) GetInt32Value() int32 {
 
 func (x *Value) GetUint32Value() uint32 {
 	if x != nil {
-		if x, ok := x.Value.(*Value_Uint32Value); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_Uint32Value); ok {
 			return x.Uint32Value
 		}
 	}
@@ -1117,7 +1858,7 @@ func (x *Value) GetUint32Value() uint32 {
 
 func (x *Value) GetInt64Value() int64 {
 	if x != nil {
-		if x, ok := x.Value.(*Value_Int64Value); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_Int64Value); ok {
 			return x.Int64Value
 		}
 	}
@@ -1126,7 +1867,7 @@ func (x *Value) GetInt64Value() int64 {
 
 func (x *Value) GetUint64Value() uint64 {
 	if x != nil {
-		if x, ok := x.Value.(*Value_Uint64Value); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_Uint64Value); ok {
 			return x.Uint64Value
 		}
 	}
@@ -1135,7 +1876,7 @@ func (x *Value) GetUint64Value() uint64 {
 
 func (x *Value) GetFloatValue() float32 {
 	if x != nil {
-		if x, ok := x.Value.(*Value_FloatValue); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_FloatValue); ok {
 			return x.FloatValue
 		}
 	}
@@ -1144,7 +1885,7 @@ func (x *Value) GetFloatValue() float32 {
 
 func (x *Value) GetDoubleValue() float64 {
 	if x != nil {
-		if x, ok := x.Value.(*Value_DoubleValue); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_DoubleValue); ok {
 			return x.DoubleValue
 		}
 	}
@@ -1153,7 +1894,7 @@ func (x *Value) GetDoubleValue() float64 {
 
 func (x *Value) GetBytesValue() []byte {
 	if x != nil {
-		if x, ok := x.Value.(*Value_BytesValue); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_BytesValue); ok {
 			return x.BytesValue
 		}
 	}
@@ -1162,7 +1903,7 @@ func (x *Value) GetBytesValue() []byte {
 
 func (x *Value) GetTextValue() string {
 	if x != nil {
-		if x, ok := x.Value.(*Value_TextValue); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_TextValue); ok {
 			return x.TextValue
 		}
 	}
@@ -1171,7 +1912,7 @@ func (x *Value) GetTextValue() string {
 
 func (x *Value) GetNullFlagValue() structpb.NullValue {
 	if x != nil {
-		if x, ok := x.Value.(*Value_NullFlagValue); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_NullFlagValue); ok {
 			return x.NullFlagValue
 		}
 	}
@@ -1180,7 +1921,7 @@ func (x *Value) GetNullFlagValue() structpb.NullValue {
 
 func (x *Value) GetNestedValue() *Value {
 	if x != nil {
-		if x, ok := x.Value.(*Value_NestedValue); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_NestedValue); ok {
 			return x.NestedValue
 		}
 	}
@@ -1189,7 +1930,7 @@ func (x *Value) GetNestedValue() *Value {
 
 func (x *Value) GetLow_128() uint64 {
 	if x != nil {
-		if x, ok := x.Value.(*Value_Low_128); ok {
+		if x, ok := x.xxx_hidden_Value.(*value_Low_128); ok {
 			return x.Low_128
 		}
 	}
@@ -1198,114 +1939,496 @@ func (x *Value) GetLow_128() uint64 {
 
 func (x *Value) GetItems() []*Value {
 	if x != nil {
-		return x.Items
+		if x.xxx_hidden_Items != nil {
+			return *x.xxx_hidden_Items
+		}
 	}
 	return nil
 }
 
 func (x *Value) GetPairs() []*ValuePair {
 	if x != nil {
-		return x.Pairs
+		if x.xxx_hidden_Pairs != nil {
+			return *x.xxx_hidden_Pairs
+		}
 	}
 	return nil
 }
 
 func (x *Value) GetVariantIndex() uint32 {
 	if x != nil {
-		return x.VariantIndex
+		return x.xxx_hidden_VariantIndex
 	}
 	return 0
 }
 
 func (x *Value) GetHigh_128() uint64 {
 	if x != nil {
-		return x.High_128
+		return x.xxx_hidden_High_128
 	}
 	return 0
+}
+
+func (x *Value) SetBoolValue(v bool) {
+	x.xxx_hidden_Value = &value_BoolValue{v}
+}
+
+func (x *Value) SetInt32Value(v int32) {
+	x.xxx_hidden_Value = &value_Int32Value{v}
+}
+
+func (x *Value) SetUint32Value(v uint32) {
+	x.xxx_hidden_Value = &value_Uint32Value{v}
+}
+
+func (x *Value) SetInt64Value(v int64) {
+	x.xxx_hidden_Value = &value_Int64Value{v}
+}
+
+func (x *Value) SetUint64Value(v uint64) {
+	x.xxx_hidden_Value = &value_Uint64Value{v}
+}
+
+func (x *Value) SetFloatValue(v float32) {
+	x.xxx_hidden_Value = &value_FloatValue{v}
+}
+
+func (x *Value) SetDoubleValue(v float64) {
+	x.xxx_hidden_Value = &value_DoubleValue{v}
+}
+
+func (x *Value) SetBytesValue(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Value = &value_BytesValue{v}
+}
+
+func (x *Value) SetTextValue(v string) {
+	x.xxx_hidden_Value = &value_TextValue{v}
+}
+
+func (x *Value) SetNullFlagValue(v structpb.NullValue) {
+	x.xxx_hidden_Value = &value_NullFlagValue{v}
+}
+
+func (x *Value) SetNestedValue(v *Value) {
+	if v == nil {
+		x.xxx_hidden_Value = nil
+		return
+	}
+	x.xxx_hidden_Value = &value_NestedValue{v}
+}
+
+func (x *Value) SetLow_128(v uint64) {
+	x.xxx_hidden_Value = &value_Low_128{v}
+}
+
+func (x *Value) SetItems(v []*Value) {
+	x.xxx_hidden_Items = &v
+}
+
+func (x *Value) SetPairs(v []*ValuePair) {
+	x.xxx_hidden_Pairs = &v
+}
+
+func (x *Value) SetVariantIndex(v uint32) {
+	x.xxx_hidden_VariantIndex = v
+}
+
+func (x *Value) SetHigh_128(v uint64) {
+	x.xxx_hidden_High_128 = v
+}
+
+func (x *Value) HasValue() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Value != nil
+}
+
+func (x *Value) HasBoolValue() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_BoolValue)
+	return ok
+}
+
+func (x *Value) HasInt32Value() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_Int32Value)
+	return ok
+}
+
+func (x *Value) HasUint32Value() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_Uint32Value)
+	return ok
+}
+
+func (x *Value) HasInt64Value() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_Int64Value)
+	return ok
+}
+
+func (x *Value) HasUint64Value() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_Uint64Value)
+	return ok
+}
+
+func (x *Value) HasFloatValue() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_FloatValue)
+	return ok
+}
+
+func (x *Value) HasDoubleValue() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_DoubleValue)
+	return ok
+}
+
+func (x *Value) HasBytesValue() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_BytesValue)
+	return ok
+}
+
+func (x *Value) HasTextValue() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_TextValue)
+	return ok
+}
+
+func (x *Value) HasNullFlagValue() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_NullFlagValue)
+	return ok
+}
+
+func (x *Value) HasNestedValue() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_NestedValue)
+	return ok
+}
+
+func (x *Value) HasLow_128() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*value_Low_128)
+	return ok
+}
+
+func (x *Value) ClearValue() {
+	x.xxx_hidden_Value = nil
+}
+
+func (x *Value) ClearBoolValue() {
+	if _, ok := x.xxx_hidden_Value.(*value_BoolValue); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Value) ClearInt32Value() {
+	if _, ok := x.xxx_hidden_Value.(*value_Int32Value); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Value) ClearUint32Value() {
+	if _, ok := x.xxx_hidden_Value.(*value_Uint32Value); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Value) ClearInt64Value() {
+	if _, ok := x.xxx_hidden_Value.(*value_Int64Value); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Value) ClearUint64Value() {
+	if _, ok := x.xxx_hidden_Value.(*value_Uint64Value); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Value) ClearFloatValue() {
+	if _, ok := x.xxx_hidden_Value.(*value_FloatValue); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Value) ClearDoubleValue() {
+	if _, ok := x.xxx_hidden_Value.(*value_DoubleValue); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Value) ClearBytesValue() {
+	if _, ok := x.xxx_hidden_Value.(*value_BytesValue); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Value) ClearTextValue() {
+	if _, ok := x.xxx_hidden_Value.(*value_TextValue); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Value) ClearNullFlagValue() {
+	if _, ok := x.xxx_hidden_Value.(*value_NullFlagValue); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Value) ClearNestedValue() {
+	if _, ok := x.xxx_hidden_Value.(*value_NestedValue); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Value) ClearLow_128() {
+	if _, ok := x.xxx_hidden_Value.(*value_Low_128); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+const Value_Value_not_set_case case_Value_Value = 0
+const Value_BoolValue_case case_Value_Value = 1
+const Value_Int32Value_case case_Value_Value = 2
+const Value_Uint32Value_case case_Value_Value = 3
+const Value_Int64Value_case case_Value_Value = 4
+const Value_Uint64Value_case case_Value_Value = 5
+const Value_FloatValue_case case_Value_Value = 6
+const Value_DoubleValue_case case_Value_Value = 7
+const Value_BytesValue_case case_Value_Value = 8
+const Value_TextValue_case case_Value_Value = 9
+const Value_NullFlagValue_case case_Value_Value = 10
+const Value_NestedValue_case case_Value_Value = 11
+const Value_Low_128_case case_Value_Value = 15
+
+func (x *Value) WhichValue() case_Value_Value {
+	if x == nil {
+		return Value_Value_not_set_case
+	}
+	switch x.xxx_hidden_Value.(type) {
+	case *value_BoolValue:
+		return Value_BoolValue_case
+	case *value_Int32Value:
+		return Value_Int32Value_case
+	case *value_Uint32Value:
+		return Value_Uint32Value_case
+	case *value_Int64Value:
+		return Value_Int64Value_case
+	case *value_Uint64Value:
+		return Value_Uint64Value_case
+	case *value_FloatValue:
+		return Value_FloatValue_case
+	case *value_DoubleValue:
+		return Value_DoubleValue_case
+	case *value_BytesValue:
+		return Value_BytesValue_case
+	case *value_TextValue:
+		return Value_TextValue_case
+	case *value_NullFlagValue:
+		return Value_NullFlagValue_case
+	case *value_NestedValue:
+		return Value_NestedValue_case
+	case *value_Low_128:
+		return Value_Low_128_case
+	default:
+		return Value_Value_not_set_case
+	}
+}
+
+type Value_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Value:
+	BoolValue     *bool
+	Int32Value    *int32
+	Uint32Value   *uint32
+	Int64Value    *int64
+	Uint64Value   *uint64
+	FloatValue    *float32
+	DoubleValue   *float64
+	BytesValue    []byte
+	TextValue     *string
+	NullFlagValue *structpb.NullValue
+	NestedValue   *Value
+	Low_128       *uint64
+	// -- end of xxx_hidden_Value
+	Items        []*Value
+	Pairs        []*ValuePair
+	VariantIndex uint32
+	High_128     uint64
+}
+
+func (b0 Value_builder) Build() *Value {
+	m0 := &Value{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.BoolValue != nil {
+		x.xxx_hidden_Value = &value_BoolValue{*b.BoolValue}
+	}
+	if b.Int32Value != nil {
+		x.xxx_hidden_Value = &value_Int32Value{*b.Int32Value}
+	}
+	if b.Uint32Value != nil {
+		x.xxx_hidden_Value = &value_Uint32Value{*b.Uint32Value}
+	}
+	if b.Int64Value != nil {
+		x.xxx_hidden_Value = &value_Int64Value{*b.Int64Value}
+	}
+	if b.Uint64Value != nil {
+		x.xxx_hidden_Value = &value_Uint64Value{*b.Uint64Value}
+	}
+	if b.FloatValue != nil {
+		x.xxx_hidden_Value = &value_FloatValue{*b.FloatValue}
+	}
+	if b.DoubleValue != nil {
+		x.xxx_hidden_Value = &value_DoubleValue{*b.DoubleValue}
+	}
+	if b.BytesValue != nil {
+		x.xxx_hidden_Value = &value_BytesValue{b.BytesValue}
+	}
+	if b.TextValue != nil {
+		x.xxx_hidden_Value = &value_TextValue{*b.TextValue}
+	}
+	if b.NullFlagValue != nil {
+		x.xxx_hidden_Value = &value_NullFlagValue{*b.NullFlagValue}
+	}
+	if b.NestedValue != nil {
+		x.xxx_hidden_Value = &value_NestedValue{b.NestedValue}
+	}
+	if b.Low_128 != nil {
+		x.xxx_hidden_Value = &value_Low_128{*b.Low_128}
+	}
+	x.xxx_hidden_Items = &b.Items
+	x.xxx_hidden_Pairs = &b.Pairs
+	x.xxx_hidden_VariantIndex = b.VariantIndex
+	x.xxx_hidden_High_128 = b.High_128
+	return m0
+}
+
+type case_Value_Value protoreflect.FieldNumber
+
+func (x case_Value_Value) String() string {
+	md := file_protos_ydb_value_proto_msgTypes[12].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isValue_Value interface {
 	isValue_Value()
 }
 
-type Value_BoolValue struct {
+type value_BoolValue struct {
 	BoolValue bool `protobuf:"varint,1,opt,name=bool_value,json=boolValue,proto3,oneof"`
 }
 
-type Value_Int32Value struct {
+type value_Int32Value struct {
 	Int32Value int32 `protobuf:"fixed32,2,opt,name=int32_value,json=int32Value,proto3,oneof"`
 }
 
-type Value_Uint32Value struct {
+type value_Uint32Value struct {
 	Uint32Value uint32 `protobuf:"fixed32,3,opt,name=uint32_value,json=uint32Value,proto3,oneof"`
 }
 
-type Value_Int64Value struct {
+type value_Int64Value struct {
 	Int64Value int64 `protobuf:"fixed64,4,opt,name=int64_value,json=int64Value,proto3,oneof"`
 }
 
-type Value_Uint64Value struct {
+type value_Uint64Value struct {
 	Uint64Value uint64 `protobuf:"fixed64,5,opt,name=uint64_value,json=uint64Value,proto3,oneof"`
 }
 
-type Value_FloatValue struct {
+type value_FloatValue struct {
 	FloatValue float32 `protobuf:"fixed32,6,opt,name=float_value,json=floatValue,proto3,oneof"`
 }
 
-type Value_DoubleValue struct {
+type value_DoubleValue struct {
 	DoubleValue float64 `protobuf:"fixed64,7,opt,name=double_value,json=doubleValue,proto3,oneof"`
 }
 
-type Value_BytesValue struct {
+type value_BytesValue struct {
 	BytesValue []byte `protobuf:"bytes,8,opt,name=bytes_value,json=bytesValue,proto3,oneof"`
 }
 
-type Value_TextValue struct {
+type value_TextValue struct {
 	TextValue string `protobuf:"bytes,9,opt,name=text_value,json=textValue,proto3,oneof"`
 }
 
-type Value_NullFlagValue struct {
+type value_NullFlagValue struct {
 	NullFlagValue structpb.NullValue `protobuf:"varint,10,opt,name=null_flag_value,json=nullFlagValue,proto3,enum=google.protobuf.NullValue,oneof"` // Set if current TValue is terminal Null
 }
 
-type Value_NestedValue struct {
+type value_NestedValue struct {
 	NestedValue *Value `protobuf:"bytes,11,opt,name=nested_value,json=nestedValue,proto3,oneof"` // Represents nested TValue for Optional<Optional<T>>(Null), or Variant<T> types
 }
 
-type Value_Low_128 struct {
+type value_Low_128 struct {
 	Low_128 uint64 `protobuf:"fixed64,15,opt,name=low_128,json=low128,proto3,oneof"`
 }
 
-func (*Value_BoolValue) isValue_Value() {}
+func (*value_BoolValue) isValue_Value() {}
 
-func (*Value_Int32Value) isValue_Value() {}
+func (*value_Int32Value) isValue_Value() {}
 
-func (*Value_Uint32Value) isValue_Value() {}
+func (*value_Uint32Value) isValue_Value() {}
 
-func (*Value_Int64Value) isValue_Value() {}
+func (*value_Int64Value) isValue_Value() {}
 
-func (*Value_Uint64Value) isValue_Value() {}
+func (*value_Uint64Value) isValue_Value() {}
 
-func (*Value_FloatValue) isValue_Value() {}
+func (*value_FloatValue) isValue_Value() {}
 
-func (*Value_DoubleValue) isValue_Value() {}
+func (*value_DoubleValue) isValue_Value() {}
 
-func (*Value_BytesValue) isValue_Value() {}
+func (*value_BytesValue) isValue_Value() {}
 
-func (*Value_TextValue) isValue_Value() {}
+func (*value_TextValue) isValue_Value() {}
 
-func (*Value_NullFlagValue) isValue_Value() {}
+func (*value_NullFlagValue) isValue_Value() {}
 
-func (*Value_NestedValue) isValue_Value() {}
+func (*value_NestedValue) isValue_Value() {}
 
-func (*Value_Low_128) isValue_Value() {}
+func (*value_Low_128) isValue_Value() {}
 
 type TypedValue struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          *Type                  `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	Value         *Value                 `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Type  *Type                  `protobuf:"bytes,1,opt,name=type,proto3"`
+	xxx_hidden_Value *Value                 `protobuf:"bytes,2,opt,name=value,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *TypedValue) Reset() {
@@ -1333,33 +2456,72 @@ func (x *TypedValue) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TypedValue.ProtoReflect.Descriptor instead.
-func (*TypedValue) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{13}
-}
-
 func (x *TypedValue) GetType() *Type {
 	if x != nil {
-		return x.Type
+		return x.xxx_hidden_Type
 	}
 	return nil
 }
 
 func (x *TypedValue) GetValue() *Value {
 	if x != nil {
-		return x.Value
+		return x.xxx_hidden_Value
 	}
 	return nil
 }
 
+func (x *TypedValue) SetType(v *Type) {
+	x.xxx_hidden_Type = v
+}
+
+func (x *TypedValue) SetValue(v *Value) {
+	x.xxx_hidden_Value = v
+}
+
+func (x *TypedValue) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *TypedValue) HasValue() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Value != nil
+}
+
+func (x *TypedValue) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *TypedValue) ClearValue() {
+	x.xxx_hidden_Value = nil
+}
+
+type TypedValue_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Type  *Type
+	Value *Value
+}
+
+func (b0 TypedValue_builder) Build() *TypedValue {
+	m0 := &TypedValue{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_Value = b.Value
+	return m0
+}
+
 type Column struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of column
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Type of column
-	Type          *Type `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Type *Type                  `protobuf:"bytes,2,opt,name=type,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Column) Reset() {
@@ -1387,36 +2549,65 @@ func (x *Column) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Column.ProtoReflect.Descriptor instead.
-func (*Column) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{14}
-}
-
 func (x *Column) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *Column) GetType() *Type {
 	if x != nil {
-		return x.Type
+		return x.xxx_hidden_Type
 	}
 	return nil
 }
 
+func (x *Column) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *Column) SetType(v *Type) {
+	x.xxx_hidden_Type = v
+}
+
+func (x *Column) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *Column) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+type Column_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Name of column
+	Name string
+	// Type of column
+	Type *Type
+}
+
+func (b0 Column_builder) Build() *Column {
+	m0 := &Column{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Type = b.Type
+	return m0
+}
+
 // Represents table-like structure with ordered set of rows and columns
 type ResultSet struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Metadata of columns
-	Columns []*Column `protobuf:"bytes,1,rep,name=columns,proto3" json:"columns,omitempty"`
-	// Rows of table
-	Rows []*Value `protobuf:"bytes,2,rep,name=rows,proto3" json:"rows,omitempty"`
-	// Flag indicates the result was truncated
-	Truncated     bool `protobuf:"varint,3,opt,name=truncated,proto3" json:"truncated,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Columns   *[]*Column             `protobuf:"bytes,1,rep,name=columns,proto3"`
+	xxx_hidden_Rows      *[]*Value              `protobuf:"bytes,2,rep,name=rows,proto3"`
+	xxx_hidden_Truncated bool                   `protobuf:"varint,3,opt,name=truncated,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ResultSet) Reset() {
@@ -1444,30 +2635,62 @@ func (x *ResultSet) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResultSet.ProtoReflect.Descriptor instead.
-func (*ResultSet) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_value_proto_rawDescGZIP(), []int{15}
-}
-
 func (x *ResultSet) GetColumns() []*Column {
 	if x != nil {
-		return x.Columns
+		if x.xxx_hidden_Columns != nil {
+			return *x.xxx_hidden_Columns
+		}
 	}
 	return nil
 }
 
 func (x *ResultSet) GetRows() []*Value {
 	if x != nil {
-		return x.Rows
+		if x.xxx_hidden_Rows != nil {
+			return *x.xxx_hidden_Rows
+		}
 	}
 	return nil
 }
 
 func (x *ResultSet) GetTruncated() bool {
 	if x != nil {
-		return x.Truncated
+		return x.xxx_hidden_Truncated
 	}
 	return false
+}
+
+func (x *ResultSet) SetColumns(v []*Column) {
+	x.xxx_hidden_Columns = &v
+}
+
+func (x *ResultSet) SetRows(v []*Value) {
+	x.xxx_hidden_Rows = &v
+}
+
+func (x *ResultSet) SetTruncated(v bool) {
+	x.xxx_hidden_Truncated = v
+}
+
+type ResultSet_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Metadata of columns
+	Columns []*Column
+	// Rows of table
+	Rows []*Value
+	// Flag indicates the result was truncated
+	Truncated bool
+}
+
+func (b0 ResultSet_builder) Build() *ResultSet {
+	m0 := &ResultSet{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Columns = &b.Columns
+	x.xxx_hidden_Rows = &b.Rows
+	x.xxx_hidden_Truncated = b.Truncated
+	return m0
 }
 
 var File_protos_ydb_value_proto protoreflect.FileDescriptor
@@ -1613,18 +2836,6 @@ const file_protos_ydb_value_proto_rawDesc = "" +
 	"\ttruncated\x18\x03 \x01(\bR\ttruncatedBT\n" +
 	"\x0etech.ydb.protoB\vValueProtosZ2github.com/ydb-platform/ydb-go-genproto/protos/Ydb\xf8\x01\x01b\x06proto3"
 
-var (
-	file_protos_ydb_value_proto_rawDescOnce sync.Once
-	file_protos_ydb_value_proto_rawDescData []byte
-)
-
-func file_protos_ydb_value_proto_rawDescGZIP() []byte {
-	file_protos_ydb_value_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_value_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_value_proto_rawDesc), len(file_protos_ydb_value_proto_rawDesc)))
-	})
-	return file_protos_ydb_value_proto_rawDescData
-}
-
 var file_protos_ydb_value_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_protos_ydb_value_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_protos_ydb_value_proto_goTypes = []any{
@@ -1696,38 +2907,38 @@ func file_protos_ydb_value_proto_init() {
 		return
 	}
 	file_protos_ydb_value_proto_msgTypes[3].OneofWrappers = []any{
-		(*VariantType_TupleItems)(nil),
-		(*VariantType_StructItems)(nil),
+		(*variantType_TupleItems)(nil),
+		(*variantType_StructItems)(nil),
 	}
 	file_protos_ydb_value_proto_msgTypes[10].OneofWrappers = []any{
-		(*Type_TypeId)(nil),
-		(*Type_DecimalType)(nil),
-		(*Type_OptionalType)(nil),
-		(*Type_ListType)(nil),
-		(*Type_TupleType)(nil),
-		(*Type_StructType)(nil),
-		(*Type_DictType)(nil),
-		(*Type_VariantType)(nil),
-		(*Type_TaggedType)(nil),
-		(*Type_VoidType)(nil),
-		(*Type_NullType)(nil),
-		(*Type_EmptyListType)(nil),
-		(*Type_EmptyDictType)(nil),
-		(*Type_PgType)(nil),
+		(*type_TypeId)(nil),
+		(*type_DecimalType)(nil),
+		(*type_OptionalType)(nil),
+		(*type_ListType)(nil),
+		(*type_TupleType)(nil),
+		(*type_StructType)(nil),
+		(*type_DictType)(nil),
+		(*type_VariantType)(nil),
+		(*type_TaggedType)(nil),
+		(*type_VoidType)(nil),
+		(*type_NullType)(nil),
+		(*type_EmptyListType)(nil),
+		(*type_EmptyDictType)(nil),
+		(*type_PgType)(nil),
 	}
 	file_protos_ydb_value_proto_msgTypes[12].OneofWrappers = []any{
-		(*Value_BoolValue)(nil),
-		(*Value_Int32Value)(nil),
-		(*Value_Uint32Value)(nil),
-		(*Value_Int64Value)(nil),
-		(*Value_Uint64Value)(nil),
-		(*Value_FloatValue)(nil),
-		(*Value_DoubleValue)(nil),
-		(*Value_BytesValue)(nil),
-		(*Value_TextValue)(nil),
-		(*Value_NullFlagValue)(nil),
-		(*Value_NestedValue)(nil),
-		(*Value_Low_128)(nil),
+		(*value_BoolValue)(nil),
+		(*value_Int32Value)(nil),
+		(*value_Uint32Value)(nil),
+		(*value_Int64Value)(nil),
+		(*value_Uint64Value)(nil),
+		(*value_FloatValue)(nil),
+		(*value_DoubleValue)(nil),
+		(*value_BytesValue)(nil),
+		(*value_TextValue)(nil),
+		(*value_NullFlagValue)(nil),
+		(*value_NestedValue)(nil),
+		(*value_Low_128)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

@@ -15,7 +15,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -71,19 +70,14 @@ func (x ExplainYqlRequest_Mode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ExplainYqlRequest_Mode.Descriptor instead.
-func (ExplainYqlRequest_Mode) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_scripting_proto_rawDescGZIP(), []int{5, 0}
-}
-
 type ExecuteYqlRequest struct {
-	state           protoimpl.MessageState              `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams     `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	Script          string                              `protobuf:"bytes,2,opt,name=script,proto3" json:"script,omitempty"`
-	Parameters      map[string]*Ydb.TypedValue          `protobuf:"bytes,3,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	CollectStats    Ydb_Table.QueryStatsCollection_Mode `protobuf:"varint,4,opt,name=collect_stats,json=collectStats,proto3,enum=Ydb.Table.QueryStatsCollection_Mode" json:"collect_stats,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState              `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams     `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Script          string                              `protobuf:"bytes,2,opt,name=script,proto3"`
+	xxx_hidden_Parameters      map[string]*Ydb.TypedValue          `protobuf:"bytes,3,rep,name=parameters,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_CollectStats    Ydb_Table.QueryStatsCollection_Mode `protobuf:"varint,4,opt,name=collect_stats,json=collectStats,proto3,enum=Ydb.Table.QueryStatsCollection_Mode"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ExecuteYqlRequest) Reset() {
@@ -111,44 +105,86 @@ func (x *ExecuteYqlRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteYqlRequest.ProtoReflect.Descriptor instead.
-func (*ExecuteYqlRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_scripting_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *ExecuteYqlRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ExecuteYqlRequest) GetScript() string {
 	if x != nil {
-		return x.Script
+		return x.xxx_hidden_Script
 	}
 	return ""
 }
 
 func (x *ExecuteYqlRequest) GetParameters() map[string]*Ydb.TypedValue {
 	if x != nil {
-		return x.Parameters
+		return x.xxx_hidden_Parameters
 	}
 	return nil
 }
 
 func (x *ExecuteYqlRequest) GetCollectStats() Ydb_Table.QueryStatsCollection_Mode {
 	if x != nil {
-		return x.CollectStats
+		return x.xxx_hidden_CollectStats
 	}
 	return Ydb_Table.QueryStatsCollection_Mode(0)
 }
 
+func (x *ExecuteYqlRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ExecuteYqlRequest) SetScript(v string) {
+	x.xxx_hidden_Script = v
+}
+
+func (x *ExecuteYqlRequest) SetParameters(v map[string]*Ydb.TypedValue) {
+	x.xxx_hidden_Parameters = v
+}
+
+func (x *ExecuteYqlRequest) SetCollectStats(v Ydb_Table.QueryStatsCollection_Mode) {
+	x.xxx_hidden_CollectStats = v
+}
+
+func (x *ExecuteYqlRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ExecuteYqlRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ExecuteYqlRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	Script          string
+	Parameters      map[string]*Ydb.TypedValue
+	CollectStats    Ydb_Table.QueryStatsCollection_Mode
+}
+
+func (b0 ExecuteYqlRequest_builder) Build() *ExecuteYqlRequest {
+	m0 := &ExecuteYqlRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Script = b.Script
+	x.xxx_hidden_Parameters = b.Parameters
+	x.xxx_hidden_CollectStats = b.CollectStats
+	return m0
+}
+
 type ExecuteYqlResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ExecuteYqlResponse) Reset() {
@@ -176,24 +212,48 @@ func (x *ExecuteYqlResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteYqlResponse.ProtoReflect.Descriptor instead.
-func (*ExecuteYqlResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_scripting_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *ExecuteYqlResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ExecuteYqlResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ExecuteYqlResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ExecuteYqlResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ExecuteYqlResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ExecuteYqlResponse_builder) Build() *ExecuteYqlResponse {
+	m0 := &ExecuteYqlResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ExecuteYqlResult struct {
-	state         protoimpl.MessageState     `protogen:"open.v1"`
-	ResultSets    []*Ydb.ResultSet           `protobuf:"bytes,1,rep,name=result_sets,json=resultSets,proto3" json:"result_sets,omitempty"`
-	QueryStats    *Ydb_TableStats.QueryStats `protobuf:"bytes,2,opt,name=query_stats,json=queryStats,proto3" json:"query_stats,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ResultSets *[]*Ydb.ResultSet          `protobuf:"bytes,1,rep,name=result_sets,json=resultSets,proto3"`
+	xxx_hidden_QueryStats *Ydb_TableStats.QueryStats `protobuf:"bytes,2,opt,name=query_stats,json=queryStats,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ExecuteYqlResult) Reset() {
@@ -221,23 +281,55 @@ func (x *ExecuteYqlResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteYqlResult.ProtoReflect.Descriptor instead.
-func (*ExecuteYqlResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_scripting_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *ExecuteYqlResult) GetResultSets() []*Ydb.ResultSet {
 	if x != nil {
-		return x.ResultSets
+		if x.xxx_hidden_ResultSets != nil {
+			return *x.xxx_hidden_ResultSets
+		}
 	}
 	return nil
 }
 
 func (x *ExecuteYqlResult) GetQueryStats() *Ydb_TableStats.QueryStats {
 	if x != nil {
-		return x.QueryStats
+		return x.xxx_hidden_QueryStats
 	}
 	return nil
+}
+
+func (x *ExecuteYqlResult) SetResultSets(v []*Ydb.ResultSet) {
+	x.xxx_hidden_ResultSets = &v
+}
+
+func (x *ExecuteYqlResult) SetQueryStats(v *Ydb_TableStats.QueryStats) {
+	x.xxx_hidden_QueryStats = v
+}
+
+func (x *ExecuteYqlResult) HasQueryStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_QueryStats != nil
+}
+
+func (x *ExecuteYqlResult) ClearQueryStats() {
+	x.xxx_hidden_QueryStats = nil
+}
+
+type ExecuteYqlResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ResultSets []*Ydb.ResultSet
+	QueryStats *Ydb_TableStats.QueryStats
+}
+
+func (b0 ExecuteYqlResult_builder) Build() *ExecuteYqlResult {
+	m0 := &ExecuteYqlResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ResultSets = &b.ResultSets
+	x.xxx_hidden_QueryStats = b.QueryStats
+	return m0
 }
 
 // Response for StreamExecuteYql is a stream of ExecuteYqlPartialResponse messages.
@@ -246,12 +338,12 @@ func (x *ExecuteYqlResult) GetQueryStats() *Ydb_TableStats.QueryStats {
 // YqlScript can have multiple results (result sets).
 // Each result set has an index (starting at 0).
 type ExecuteYqlPartialResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Status        Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	Result        *ExecuteYqlPartialResult  `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_Result *ExecuteYqlPartialResult   `protobuf:"bytes,3,opt,name=result,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ExecuteYqlPartialResponse) Reset() {
@@ -279,44 +371,80 @@ func (x *ExecuteYqlPartialResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteYqlPartialResponse.ProtoReflect.Descriptor instead.
-func (*ExecuteYqlPartialResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_scripting_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *ExecuteYqlPartialResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *ExecuteYqlPartialResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *ExecuteYqlPartialResponse) GetResult() *ExecuteYqlPartialResult {
 	if x != nil {
-		return x.Result
+		return x.xxx_hidden_Result
 	}
 	return nil
+}
+
+func (x *ExecuteYqlPartialResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *ExecuteYqlPartialResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *ExecuteYqlPartialResponse) SetResult(v *ExecuteYqlPartialResult) {
+	x.xxx_hidden_Result = v
+}
+
+func (x *ExecuteYqlPartialResponse) HasResult() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Result != nil
+}
+
+func (x *ExecuteYqlPartialResponse) ClearResult() {
+	x.xxx_hidden_Result = nil
+}
+
+type ExecuteYqlPartialResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+	Result *ExecuteYqlPartialResult
+}
+
+func (b0 ExecuteYqlPartialResponse_builder) Build() *ExecuteYqlPartialResponse {
+	m0 := &ExecuteYqlPartialResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_Result = b.Result
+	return m0
 }
 
 // Contains result set (or a result set part) for one data or scan query in the script.
 // One result set can be split into several responses with same result_index.
 // Only the final response can contain query stats.
 type ExecuteYqlPartialResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Index of current result
-	ResultSetIndex uint32 `protobuf:"varint,1,opt,name=result_set_index,json=resultSetIndex,proto3" json:"result_set_index,omitempty"`
-	// Result set (or a result set part) for one data or scan query
-	ResultSet     *Ydb.ResultSet             `protobuf:"bytes,2,opt,name=result_set,json=resultSet,proto3" json:"result_set,omitempty"`
-	QueryStats    *Ydb_TableStats.QueryStats `protobuf:"bytes,3,opt,name=query_stats,json=queryStats,proto3" json:"query_stats,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ResultSetIndex uint32                     `protobuf:"varint,1,opt,name=result_set_index,json=resultSetIndex,proto3"`
+	xxx_hidden_ResultSet      *Ydb.ResultSet             `protobuf:"bytes,2,opt,name=result_set,json=resultSet,proto3"`
+	xxx_hidden_QueryStats     *Ydb_TableStats.QueryStats `protobuf:"bytes,3,opt,name=query_stats,json=queryStats,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ExecuteYqlPartialResult) Reset() {
@@ -344,39 +472,88 @@ func (x *ExecuteYqlPartialResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteYqlPartialResult.ProtoReflect.Descriptor instead.
-func (*ExecuteYqlPartialResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_scripting_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *ExecuteYqlPartialResult) GetResultSetIndex() uint32 {
 	if x != nil {
-		return x.ResultSetIndex
+		return x.xxx_hidden_ResultSetIndex
 	}
 	return 0
 }
 
 func (x *ExecuteYqlPartialResult) GetResultSet() *Ydb.ResultSet {
 	if x != nil {
-		return x.ResultSet
+		return x.xxx_hidden_ResultSet
 	}
 	return nil
 }
 
 func (x *ExecuteYqlPartialResult) GetQueryStats() *Ydb_TableStats.QueryStats {
 	if x != nil {
-		return x.QueryStats
+		return x.xxx_hidden_QueryStats
 	}
 	return nil
 }
 
+func (x *ExecuteYqlPartialResult) SetResultSetIndex(v uint32) {
+	x.xxx_hidden_ResultSetIndex = v
+}
+
+func (x *ExecuteYqlPartialResult) SetResultSet(v *Ydb.ResultSet) {
+	x.xxx_hidden_ResultSet = v
+}
+
+func (x *ExecuteYqlPartialResult) SetQueryStats(v *Ydb_TableStats.QueryStats) {
+	x.xxx_hidden_QueryStats = v
+}
+
+func (x *ExecuteYqlPartialResult) HasResultSet() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResultSet != nil
+}
+
+func (x *ExecuteYqlPartialResult) HasQueryStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_QueryStats != nil
+}
+
+func (x *ExecuteYqlPartialResult) ClearResultSet() {
+	x.xxx_hidden_ResultSet = nil
+}
+
+func (x *ExecuteYqlPartialResult) ClearQueryStats() {
+	x.xxx_hidden_QueryStats = nil
+}
+
+type ExecuteYqlPartialResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Index of current result
+	ResultSetIndex uint32
+	// Result set (or a result set part) for one data or scan query
+	ResultSet  *Ydb.ResultSet
+	QueryStats *Ydb_TableStats.QueryStats
+}
+
+func (b0 ExecuteYqlPartialResult_builder) Build() *ExecuteYqlPartialResult {
+	m0 := &ExecuteYqlPartialResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ResultSetIndex = b.ResultSetIndex
+	x.xxx_hidden_ResultSet = b.ResultSet
+	x.xxx_hidden_QueryStats = b.QueryStats
+	return m0
+}
+
 type ExplainYqlRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	Script          string                          `protobuf:"bytes,2,opt,name=script,proto3" json:"script,omitempty"`
-	Mode            ExplainYqlRequest_Mode          `protobuf:"varint,3,opt,name=mode,proto3,enum=Ydb.Scripting.ExplainYqlRequest_Mode" json:"mode,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Script          string                          `protobuf:"bytes,2,opt,name=script,proto3"`
+	xxx_hidden_Mode            ExplainYqlRequest_Mode          `protobuf:"varint,3,opt,name=mode,proto3,enum=Ydb.Scripting.ExplainYqlRequest_Mode"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ExplainYqlRequest) Reset() {
@@ -404,37 +581,73 @@ func (x *ExplainYqlRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExplainYqlRequest.ProtoReflect.Descriptor instead.
-func (*ExplainYqlRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_scripting_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *ExplainYqlRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ExplainYqlRequest) GetScript() string {
 	if x != nil {
-		return x.Script
+		return x.xxx_hidden_Script
 	}
 	return ""
 }
 
 func (x *ExplainYqlRequest) GetMode() ExplainYqlRequest_Mode {
 	if x != nil {
-		return x.Mode
+		return x.xxx_hidden_Mode
 	}
 	return ExplainYqlRequest_MODE_UNSPECIFIED
 }
 
+func (x *ExplainYqlRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ExplainYqlRequest) SetScript(v string) {
+	x.xxx_hidden_Script = v
+}
+
+func (x *ExplainYqlRequest) SetMode(v ExplainYqlRequest_Mode) {
+	x.xxx_hidden_Mode = v
+}
+
+func (x *ExplainYqlRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ExplainYqlRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ExplainYqlRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	Script          string
+	Mode            ExplainYqlRequest_Mode
+}
+
+func (b0 ExplainYqlRequest_builder) Build() *ExplainYqlRequest {
+	m0 := &ExplainYqlRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Script = b.Script
+	x.xxx_hidden_Mode = b.Mode
+	return m0
+}
+
 type ExplainYqlResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ExplainYqlResponse) Reset() {
@@ -462,24 +675,48 @@ func (x *ExplainYqlResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExplainYqlResponse.ProtoReflect.Descriptor instead.
-func (*ExplainYqlResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_scripting_proto_rawDescGZIP(), []int{6}
-}
-
 func (x *ExplainYqlResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ExplainYqlResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ExplainYqlResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ExplainYqlResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ExplainYqlResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ExplainYqlResponse_builder) Build() *ExplainYqlResponse {
+	m0 := &ExplainYqlResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ExplainYqlResult struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	ParametersTypes map[string]*Ydb.Type   `protobuf:"bytes,1,rep,name=parameters_types,json=parametersTypes,proto3" json:"parameters_types,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Plan            string                 `protobuf:"bytes,2,opt,name=plan,proto3" json:"plan,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ParametersTypes map[string]*Ydb.Type   `protobuf:"bytes,1,rep,name=parameters_types,json=parametersTypes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_Plan            string                 `protobuf:"bytes,2,opt,name=plan,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ExplainYqlResult) Reset() {
@@ -507,23 +744,42 @@ func (x *ExplainYqlResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExplainYqlResult.ProtoReflect.Descriptor instead.
-func (*ExplainYqlResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_scripting_proto_rawDescGZIP(), []int{7}
-}
-
 func (x *ExplainYqlResult) GetParametersTypes() map[string]*Ydb.Type {
 	if x != nil {
-		return x.ParametersTypes
+		return x.xxx_hidden_ParametersTypes
 	}
 	return nil
 }
 
 func (x *ExplainYqlResult) GetPlan() string {
 	if x != nil {
-		return x.Plan
+		return x.xxx_hidden_Plan
 	}
 	return ""
+}
+
+func (x *ExplainYqlResult) SetParametersTypes(v map[string]*Ydb.Type) {
+	x.xxx_hidden_ParametersTypes = v
+}
+
+func (x *ExplainYqlResult) SetPlan(v string) {
+	x.xxx_hidden_Plan = v
+}
+
+type ExplainYqlResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ParametersTypes map[string]*Ydb.Type
+	Plan            string
+}
+
+func (b0 ExplainYqlResult_builder) Build() *ExplainYqlResult {
+	m0 := &ExplainYqlResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ParametersTypes = b.ParametersTypes
+	x.xxx_hidden_Plan = b.Plan
+	return m0
 }
 
 var File_protos_ydb_scripting_proto protoreflect.FileDescriptor
@@ -575,18 +831,6 @@ const file_protos_ydb_scripting_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x1f\n" +
 	"\x05value\x18\x02 \x01(\v2\t.Ydb.TypeR\x05value:\x028\x01Bl\n" +
 	"\x18tech.ydb.proto.scriptingB\x0fScriptingProtosZ<github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Scripting\xf8\x01\x01b\x06proto3"
-
-var (
-	file_protos_ydb_scripting_proto_rawDescOnce sync.Once
-	file_protos_ydb_scripting_proto_rawDescData []byte
-)
-
-func file_protos_ydb_scripting_proto_rawDescGZIP() []byte {
-	file_protos_ydb_scripting_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_scripting_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_scripting_proto_rawDesc), len(file_protos_ydb_scripting_proto_rawDesc)))
-	})
-	return file_protos_ydb_scripting_proto_rawDescData
-}
 
 var file_protos_ydb_scripting_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_protos_ydb_scripting_proto_msgTypes = make([]protoimpl.MessageInfo, 10)

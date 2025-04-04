@@ -11,7 +11,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -24,30 +23,13 @@ const (
 
 // Settings for hierarchical deficit round robin (HDRR) algorithm.
 type HierarchicalDrrSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Resource consumption speed limit.
-	// Value is required for root resource.
-	// 0 is equivalent to not set.
-	// Must be nonnegative.
-	MaxUnitsPerSecond float64 `protobuf:"fixed64,1,opt,name=max_units_per_second,json=maxUnitsPerSecond,proto3" json:"max_units_per_second,omitempty"`
-	// Maximum burst size of resource consumption across the whole cluster
-	// divided by max_units_per_second.
-	// Default value is 1.
-	// This means that maximum burst size might be equal to max_units_per_second.
-	// 0 is equivalent to not set.
-	// Must be nonnegative.
-	MaxBurstSizeCoefficient float64 `protobuf:"fixed64,2,opt,name=max_burst_size_coefficient,json=maxBurstSizeCoefficient,proto3" json:"max_burst_size_coefficient,omitempty"`
-	// Prefetch in local bucket up to prefetch_coefficient*max_units_per_second units (full size).
-	// Default value is inherited from parent or 0.2 for root.
-	// Disables prefetching if any negative value is set
-	// (It is useful to avoid bursts in case of large number of local buckets).
-	PrefetchCoefficient float64 `protobuf:"fixed64,3,opt,name=prefetch_coefficient,json=prefetchCoefficient,proto3" json:"prefetch_coefficient,omitempty"`
-	// Prefetching starts if there is less than prefetch_watermark fraction of full local bucket left.
-	// Default value is inherited from parent or 0.75 for root.
-	// Must be nonnegative and less than or equal to 1.
-	PrefetchWatermark float64 `protobuf:"fixed64,4,opt,name=prefetch_watermark,json=prefetchWatermark,proto3" json:"prefetch_watermark,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_MaxUnitsPerSecond       float64                `protobuf:"fixed64,1,opt,name=max_units_per_second,json=maxUnitsPerSecond,proto3"`
+	xxx_hidden_MaxBurstSizeCoefficient float64                `protobuf:"fixed64,2,opt,name=max_burst_size_coefficient,json=maxBurstSizeCoefficient,proto3"`
+	xxx_hidden_PrefetchCoefficient     float64                `protobuf:"fixed64,3,opt,name=prefetch_coefficient,json=prefetchCoefficient,proto3"`
+	xxx_hidden_PrefetchWatermark       float64                `protobuf:"fixed64,4,opt,name=prefetch_watermark,json=prefetchWatermark,proto3"`
+	unknownFields                      protoimpl.UnknownFields
+	sizeCache                          protoimpl.SizeCache
 }
 
 func (x *HierarchicalDrrSettings) Reset() {
@@ -75,53 +57,94 @@ func (x *HierarchicalDrrSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use HierarchicalDrrSettings.ProtoReflect.Descriptor instead.
-func (*HierarchicalDrrSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *HierarchicalDrrSettings) GetMaxUnitsPerSecond() float64 {
 	if x != nil {
-		return x.MaxUnitsPerSecond
+		return x.xxx_hidden_MaxUnitsPerSecond
 	}
 	return 0
 }
 
 func (x *HierarchicalDrrSettings) GetMaxBurstSizeCoefficient() float64 {
 	if x != nil {
-		return x.MaxBurstSizeCoefficient
+		return x.xxx_hidden_MaxBurstSizeCoefficient
 	}
 	return 0
 }
 
 func (x *HierarchicalDrrSettings) GetPrefetchCoefficient() float64 {
 	if x != nil {
-		return x.PrefetchCoefficient
+		return x.xxx_hidden_PrefetchCoefficient
 	}
 	return 0
 }
 
 func (x *HierarchicalDrrSettings) GetPrefetchWatermark() float64 {
 	if x != nil {
-		return x.PrefetchWatermark
+		return x.xxx_hidden_PrefetchWatermark
 	}
 	return 0
 }
 
+func (x *HierarchicalDrrSettings) SetMaxUnitsPerSecond(v float64) {
+	x.xxx_hidden_MaxUnitsPerSecond = v
+}
+
+func (x *HierarchicalDrrSettings) SetMaxBurstSizeCoefficient(v float64) {
+	x.xxx_hidden_MaxBurstSizeCoefficient = v
+}
+
+func (x *HierarchicalDrrSettings) SetPrefetchCoefficient(v float64) {
+	x.xxx_hidden_PrefetchCoefficient = v
+}
+
+func (x *HierarchicalDrrSettings) SetPrefetchWatermark(v float64) {
+	x.xxx_hidden_PrefetchWatermark = v
+}
+
+type HierarchicalDrrSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Resource consumption speed limit.
+	// Value is required for root resource.
+	// 0 is equivalent to not set.
+	// Must be nonnegative.
+	MaxUnitsPerSecond float64
+	// Maximum burst size of resource consumption across the whole cluster
+	// divided by max_units_per_second.
+	// Default value is 1.
+	// This means that maximum burst size might be equal to max_units_per_second.
+	// 0 is equivalent to not set.
+	// Must be nonnegative.
+	MaxBurstSizeCoefficient float64
+	// Prefetch in local bucket up to prefetch_coefficient*max_units_per_second units (full size).
+	// Default value is inherited from parent or 0.2 for root.
+	// Disables prefetching if any negative value is set
+	// (It is useful to avoid bursts in case of large number of local buckets).
+	PrefetchCoefficient float64
+	// Prefetching starts if there is less than prefetch_watermark fraction of full local bucket left.
+	// Default value is inherited from parent or 0.75 for root.
+	// Must be nonnegative and less than or equal to 1.
+	PrefetchWatermark float64
+}
+
+func (b0 HierarchicalDrrSettings_builder) Build() *HierarchicalDrrSettings {
+	m0 := &HierarchicalDrrSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_MaxUnitsPerSecond = b.MaxUnitsPerSecond
+	x.xxx_hidden_MaxBurstSizeCoefficient = b.MaxBurstSizeCoefficient
+	x.xxx_hidden_PrefetchCoefficient = b.PrefetchCoefficient
+	x.xxx_hidden_PrefetchWatermark = b.PrefetchWatermark
+	return m0
+}
+
 // Rate limiter resource description.
 type Resource struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Resource path. Elements are separated by slash.
-	// The first symbol is not slash.
-	// The first element is root resource name.
-	// Resource path is the path of resource inside coordination node.
-	ResourcePath string `protobuf:"bytes,1,opt,name=resource_path,json=resourcePath,proto3" json:"resource_path,omitempty"`
-	// Types that are valid to be assigned to Type:
-	//
-	//	*Resource_HierarchicalDrr
-	Type          isResource_Type `protobuf_oneof:"type"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ResourcePath string                 `protobuf:"bytes,1,opt,name=resource_path,json=resourcePath,proto3"`
+	xxx_hidden_Type         isResource_Type        `protobuf_oneof:"type"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *Resource) Reset() {
@@ -149,54 +172,127 @@ func (x *Resource) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Resource.ProtoReflect.Descriptor instead.
-func (*Resource) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *Resource) GetResourcePath() string {
 	if x != nil {
-		return x.ResourcePath
+		return x.xxx_hidden_ResourcePath
 	}
 	return ""
 }
 
-func (x *Resource) GetType() isResource_Type {
-	if x != nil {
-		return x.Type
-	}
-	return nil
-}
-
 func (x *Resource) GetHierarchicalDrr() *HierarchicalDrrSettings {
 	if x != nil {
-		if x, ok := x.Type.(*Resource_HierarchicalDrr); ok {
+		if x, ok := x.xxx_hidden_Type.(*resource_HierarchicalDrr); ok {
 			return x.HierarchicalDrr
 		}
 	}
 	return nil
 }
 
+func (x *Resource) SetResourcePath(v string) {
+	x.xxx_hidden_ResourcePath = v
+}
+
+func (x *Resource) SetHierarchicalDrr(v *HierarchicalDrrSettings) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &resource_HierarchicalDrr{v}
+}
+
+func (x *Resource) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *Resource) HasHierarchicalDrr() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*resource_HierarchicalDrr)
+	return ok
+}
+
+func (x *Resource) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *Resource) ClearHierarchicalDrr() {
+	if _, ok := x.xxx_hidden_Type.(*resource_HierarchicalDrr); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+const Resource_Type_not_set_case case_Resource_Type = 0
+const Resource_HierarchicalDrr_case case_Resource_Type = 2
+
+func (x *Resource) WhichType() case_Resource_Type {
+	if x == nil {
+		return Resource_Type_not_set_case
+	}
+	switch x.xxx_hidden_Type.(type) {
+	case *resource_HierarchicalDrr:
+		return Resource_HierarchicalDrr_case
+	default:
+		return Resource_Type_not_set_case
+	}
+}
+
+type Resource_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Resource path. Elements are separated by slash.
+	// The first symbol is not slash.
+	// The first element is root resource name.
+	// Resource path is the path of resource inside coordination node.
+	ResourcePath string
+	// Fields of oneof xxx_hidden_Type:
+	// Settings for Hierarchical DRR algorithm.
+	HierarchicalDrr *HierarchicalDrrSettings
+	// -- end of xxx_hidden_Type
+}
+
+func (b0 Resource_builder) Build() *Resource {
+	m0 := &Resource{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ResourcePath = b.ResourcePath
+	if b.HierarchicalDrr != nil {
+		x.xxx_hidden_Type = &resource_HierarchicalDrr{b.HierarchicalDrr}
+	}
+	return m0
+}
+
+type case_Resource_Type protoreflect.FieldNumber
+
+func (x case_Resource_Type) String() string {
+	md := file_protos_ydb_rate_limiter_proto_msgTypes[1].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isResource_Type interface {
 	isResource_Type()
 }
 
-type Resource_HierarchicalDrr struct {
+type resource_HierarchicalDrr struct {
 	// Settings for Hierarchical DRR algorithm.
 	HierarchicalDrr *HierarchicalDrrSettings `protobuf:"bytes,2,opt,name=hierarchical_drr,json=hierarchicalDrr,proto3,oneof"`
 }
 
-func (*Resource_HierarchicalDrr) isResource_Type() {}
+func (*resource_HierarchicalDrr) isResource_Type() {}
 
 type CreateResourceRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Path of a coordination node.
-	CoordinationNodePath string `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3" json:"coordination_node_path,omitempty"`
-	// Resource properties.
-	Resource      *Resource `protobuf:"bytes,3,opt,name=resource,proto3" json:"resource,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                           protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams      *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_CoordinationNodePath string                          `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3"`
+	xxx_hidden_Resource             *Resource                       `protobuf:"bytes,3,opt,name=resource,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *CreateResourceRequest) Reset() {
@@ -224,38 +320,86 @@ func (x *CreateResourceRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateResourceRequest.ProtoReflect.Descriptor instead.
-func (*CreateResourceRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *CreateResourceRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateResourceRequest) GetCoordinationNodePath() string {
 	if x != nil {
-		return x.CoordinationNodePath
+		return x.xxx_hidden_CoordinationNodePath
 	}
 	return ""
 }
 
 func (x *CreateResourceRequest) GetResource() *Resource {
 	if x != nil {
-		return x.Resource
+		return x.xxx_hidden_Resource
 	}
 	return nil
 }
 
+func (x *CreateResourceRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CreateResourceRequest) SetCoordinationNodePath(v string) {
+	x.xxx_hidden_CoordinationNodePath = v
+}
+
+func (x *CreateResourceRequest) SetResource(v *Resource) {
+	x.xxx_hidden_Resource = v
+}
+
+func (x *CreateResourceRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CreateResourceRequest) HasResource() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Resource != nil
+}
+
+func (x *CreateResourceRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *CreateResourceRequest) ClearResource() {
+	x.xxx_hidden_Resource = nil
+}
+
+type CreateResourceRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Path of a coordination node.
+	CoordinationNodePath string
+	// Resource properties.
+	Resource *Resource
+}
+
+func (b0 CreateResourceRequest_builder) Build() *CreateResourceRequest {
+	m0 := &CreateResourceRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_CoordinationNodePath = b.CoordinationNodePath
+	x.xxx_hidden_Resource = b.Resource
+	return m0
+}
+
 type CreateResourceResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Holds CreateResourceResult in case of successful call.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateResourceResponse) Reset() {
@@ -283,20 +427,45 @@ func (x *CreateResourceResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateResourceResponse.ProtoReflect.Descriptor instead.
-func (*CreateResourceResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *CreateResourceResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CreateResourceResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CreateResourceResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CreateResourceResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CreateResourceResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Holds CreateResourceResult in case of successful call.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CreateResourceResponse_builder) Build() *CreateResourceResponse {
+	m0 := &CreateResourceResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type CreateResourceResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -326,20 +495,25 @@ func (x *CreateResourceResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateResourceResult.ProtoReflect.Descriptor instead.
-func (*CreateResourceResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{4}
+type CreateResourceResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 CreateResourceResult_builder) Build() *CreateResourceResult {
+	m0 := &CreateResourceResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type AlterResourceRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Path of a coordination node.
-	CoordinationNodePath string `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3" json:"coordination_node_path,omitempty"`
-	// New resource properties.
-	Resource      *Resource `protobuf:"bytes,3,opt,name=resource,proto3" json:"resource,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                           protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams      *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_CoordinationNodePath string                          `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3"`
+	xxx_hidden_Resource             *Resource                       `protobuf:"bytes,3,opt,name=resource,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *AlterResourceRequest) Reset() {
@@ -367,38 +541,86 @@ func (x *AlterResourceRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterResourceRequest.ProtoReflect.Descriptor instead.
-func (*AlterResourceRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *AlterResourceRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *AlterResourceRequest) GetCoordinationNodePath() string {
 	if x != nil {
-		return x.CoordinationNodePath
+		return x.xxx_hidden_CoordinationNodePath
 	}
 	return ""
 }
 
 func (x *AlterResourceRequest) GetResource() *Resource {
 	if x != nil {
-		return x.Resource
+		return x.xxx_hidden_Resource
 	}
 	return nil
 }
 
+func (x *AlterResourceRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *AlterResourceRequest) SetCoordinationNodePath(v string) {
+	x.xxx_hidden_CoordinationNodePath = v
+}
+
+func (x *AlterResourceRequest) SetResource(v *Resource) {
+	x.xxx_hidden_Resource = v
+}
+
+func (x *AlterResourceRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *AlterResourceRequest) HasResource() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Resource != nil
+}
+
+func (x *AlterResourceRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *AlterResourceRequest) ClearResource() {
+	x.xxx_hidden_Resource = nil
+}
+
+type AlterResourceRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Path of a coordination node.
+	CoordinationNodePath string
+	// New resource properties.
+	Resource *Resource
+}
+
+func (b0 AlterResourceRequest_builder) Build() *AlterResourceRequest {
+	m0 := &AlterResourceRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_CoordinationNodePath = b.CoordinationNodePath
+	x.xxx_hidden_Resource = b.Resource
+	return m0
+}
+
 type AlterResourceResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Holds AlterResourceResult in case of successful call.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AlterResourceResponse) Reset() {
@@ -426,20 +648,45 @@ func (x *AlterResourceResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterResourceResponse.ProtoReflect.Descriptor instead.
-func (*AlterResourceResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{6}
-}
-
 func (x *AlterResourceResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *AlterResourceResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *AlterResourceResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *AlterResourceResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type AlterResourceResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Holds AlterResourceResult in case of successful call.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 AlterResourceResponse_builder) Build() *AlterResourceResponse {
+	m0 := &AlterResourceResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type AlterResourceResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -469,20 +716,25 @@ func (x *AlterResourceResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterResourceResult.ProtoReflect.Descriptor instead.
-func (*AlterResourceResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{7}
+type AlterResourceResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 AlterResourceResult_builder) Build() *AlterResourceResult {
+	m0 := &AlterResourceResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type DropResourceRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Path of a coordination node.
-	CoordinationNodePath string `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3" json:"coordination_node_path,omitempty"`
-	// Path of resource inside a coordination node.
-	ResourcePath  string `protobuf:"bytes,3,opt,name=resource_path,json=resourcePath,proto3" json:"resource_path,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                           protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams      *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_CoordinationNodePath string                          `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3"`
+	xxx_hidden_ResourcePath         string                          `protobuf:"bytes,3,opt,name=resource_path,json=resourcePath,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *DropResourceRequest) Reset() {
@@ -510,38 +762,75 @@ func (x *DropResourceRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DropResourceRequest.ProtoReflect.Descriptor instead.
-func (*DropResourceRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{8}
-}
-
 func (x *DropResourceRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DropResourceRequest) GetCoordinationNodePath() string {
 	if x != nil {
-		return x.CoordinationNodePath
+		return x.xxx_hidden_CoordinationNodePath
 	}
 	return ""
 }
 
 func (x *DropResourceRequest) GetResourcePath() string {
 	if x != nil {
-		return x.ResourcePath
+		return x.xxx_hidden_ResourcePath
 	}
 	return ""
 }
 
+func (x *DropResourceRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DropResourceRequest) SetCoordinationNodePath(v string) {
+	x.xxx_hidden_CoordinationNodePath = v
+}
+
+func (x *DropResourceRequest) SetResourcePath(v string) {
+	x.xxx_hidden_ResourcePath = v
+}
+
+func (x *DropResourceRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DropResourceRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DropResourceRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Path of a coordination node.
+	CoordinationNodePath string
+	// Path of resource inside a coordination node.
+	ResourcePath string
+}
+
+func (b0 DropResourceRequest_builder) Build() *DropResourceRequest {
+	m0 := &DropResourceRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_CoordinationNodePath = b.CoordinationNodePath
+	x.xxx_hidden_ResourcePath = b.ResourcePath
+	return m0
+}
+
 type DropResourceResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Holds DropResourceResult in case of successful call.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DropResourceResponse) Reset() {
@@ -569,20 +858,45 @@ func (x *DropResourceResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DropResourceResponse.ProtoReflect.Descriptor instead.
-func (*DropResourceResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *DropResourceResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DropResourceResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DropResourceResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DropResourceResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DropResourceResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Holds DropResourceResult in case of successful call.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DropResourceResponse_builder) Build() *DropResourceResponse {
+	m0 := &DropResourceResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DropResourceResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -612,24 +926,26 @@ func (x *DropResourceResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DropResourceResult.ProtoReflect.Descriptor instead.
-func (*DropResourceResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{10}
+type DropResourceResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 DropResourceResult_builder) Build() *DropResourceResult {
+	m0 := &DropResourceResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ListResourcesRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Path of a coordination node.
-	CoordinationNodePath string `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3" json:"coordination_node_path,omitempty"`
-	// Path of resource inside a coordination node.
-	// May be empty.
-	// In that case all root resources will be listed.
-	ResourcePath string `protobuf:"bytes,3,opt,name=resource_path,json=resourcePath,proto3" json:"resource_path,omitempty"`
-	// List resources recursively.
-	Recursive     bool `protobuf:"varint,4,opt,name=recursive,proto3" json:"recursive,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                           protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams      *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_CoordinationNodePath string                          `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3"`
+	xxx_hidden_ResourcePath         string                          `protobuf:"bytes,3,opt,name=resource_path,json=resourcePath,proto3"`
+	xxx_hidden_Recursive            bool                            `protobuf:"varint,4,opt,name=recursive,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *ListResourcesRequest) Reset() {
@@ -657,45 +973,91 @@ func (x *ListResourcesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListResourcesRequest.ProtoReflect.Descriptor instead.
-func (*ListResourcesRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{11}
-}
-
 func (x *ListResourcesRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListResourcesRequest) GetCoordinationNodePath() string {
 	if x != nil {
-		return x.CoordinationNodePath
+		return x.xxx_hidden_CoordinationNodePath
 	}
 	return ""
 }
 
 func (x *ListResourcesRequest) GetResourcePath() string {
 	if x != nil {
-		return x.ResourcePath
+		return x.xxx_hidden_ResourcePath
 	}
 	return ""
 }
 
 func (x *ListResourcesRequest) GetRecursive() bool {
 	if x != nil {
-		return x.Recursive
+		return x.xxx_hidden_Recursive
 	}
 	return false
 }
 
+func (x *ListResourcesRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ListResourcesRequest) SetCoordinationNodePath(v string) {
+	x.xxx_hidden_CoordinationNodePath = v
+}
+
+func (x *ListResourcesRequest) SetResourcePath(v string) {
+	x.xxx_hidden_ResourcePath = v
+}
+
+func (x *ListResourcesRequest) SetRecursive(v bool) {
+	x.xxx_hidden_Recursive = v
+}
+
+func (x *ListResourcesRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ListResourcesRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ListResourcesRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Path of a coordination node.
+	CoordinationNodePath string
+	// Path of resource inside a coordination node.
+	// May be empty.
+	// In that case all root resources will be listed.
+	ResourcePath string
+	// List resources recursively.
+	Recursive bool
+}
+
+func (b0 ListResourcesRequest_builder) Build() *ListResourcesRequest {
+	m0 := &ListResourcesRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_CoordinationNodePath = b.CoordinationNodePath
+	x.xxx_hidden_ResourcePath = b.ResourcePath
+	x.xxx_hidden_Recursive = b.Recursive
+	return m0
+}
+
 type ListResourcesResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Holds ListResourcesResult in case of successful call.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListResourcesResponse) Reset() {
@@ -723,23 +1085,48 @@ func (x *ListResourcesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListResourcesResponse.ProtoReflect.Descriptor instead.
-func (*ListResourcesResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{12}
-}
-
 func (x *ListResourcesResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ListResourcesResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ListResourcesResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ListResourcesResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ListResourcesResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Holds ListResourcesResult in case of successful call.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ListResourcesResponse_builder) Build() *ListResourcesResponse {
+	m0 := &ListResourcesResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ListResourcesResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ResourcePaths []string               `protobuf:"bytes,1,rep,name=resource_paths,json=resourcePaths,proto3" json:"resource_paths,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ResourcePaths []string               `protobuf:"bytes,1,rep,name=resource_paths,json=resourcePaths,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListResourcesResult) Reset() {
@@ -767,27 +1154,38 @@ func (x *ListResourcesResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListResourcesResult.ProtoReflect.Descriptor instead.
-func (*ListResourcesResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{13}
-}
-
 func (x *ListResourcesResult) GetResourcePaths() []string {
 	if x != nil {
-		return x.ResourcePaths
+		return x.xxx_hidden_ResourcePaths
 	}
 	return nil
 }
 
+func (x *ListResourcesResult) SetResourcePaths(v []string) {
+	x.xxx_hidden_ResourcePaths = v
+}
+
+type ListResourcesResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ResourcePaths []string
+}
+
+func (b0 ListResourcesResult_builder) Build() *ListResourcesResult {
+	m0 := &ListResourcesResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ResourcePaths = b.ResourcePaths
+	return m0
+}
+
 type DescribeResourceRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Path of a coordination node.
-	CoordinationNodePath string `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3" json:"coordination_node_path,omitempty"`
-	// Path of resource inside a coordination node.
-	ResourcePath  string `protobuf:"bytes,3,opt,name=resource_path,json=resourcePath,proto3" json:"resource_path,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                           protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams      *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_CoordinationNodePath string                          `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3"`
+	xxx_hidden_ResourcePath         string                          `protobuf:"bytes,3,opt,name=resource_path,json=resourcePath,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *DescribeResourceRequest) Reset() {
@@ -815,38 +1213,75 @@ func (x *DescribeResourceRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeResourceRequest.ProtoReflect.Descriptor instead.
-func (*DescribeResourceRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{14}
-}
-
 func (x *DescribeResourceRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeResourceRequest) GetCoordinationNodePath() string {
 	if x != nil {
-		return x.CoordinationNodePath
+		return x.xxx_hidden_CoordinationNodePath
 	}
 	return ""
 }
 
 func (x *DescribeResourceRequest) GetResourcePath() string {
 	if x != nil {
-		return x.ResourcePath
+		return x.xxx_hidden_ResourcePath
 	}
 	return ""
 }
 
+func (x *DescribeResourceRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DescribeResourceRequest) SetCoordinationNodePath(v string) {
+	x.xxx_hidden_CoordinationNodePath = v
+}
+
+func (x *DescribeResourceRequest) SetResourcePath(v string) {
+	x.xxx_hidden_ResourcePath = v
+}
+
+func (x *DescribeResourceRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DescribeResourceRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DescribeResourceRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Path of a coordination node.
+	CoordinationNodePath string
+	// Path of resource inside a coordination node.
+	ResourcePath string
+}
+
+func (b0 DescribeResourceRequest_builder) Build() *DescribeResourceRequest {
+	m0 := &DescribeResourceRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_CoordinationNodePath = b.CoordinationNodePath
+	x.xxx_hidden_ResourcePath = b.ResourcePath
+	return m0
+}
+
 type DescribeResourceResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Holds DescribeResourceResult in case of successful call.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeResourceResponse) Reset() {
@@ -874,23 +1309,48 @@ func (x *DescribeResourceResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeResourceResponse.ProtoReflect.Descriptor instead.
-func (*DescribeResourceResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{15}
-}
-
 func (x *DescribeResourceResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DescribeResourceResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DescribeResourceResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DescribeResourceResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DescribeResourceResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Holds DescribeResourceResult in case of successful call.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DescribeResourceResponse_builder) Build() *DescribeResourceResponse {
+	m0 := &DescribeResourceResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DescribeResourceResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Resource      *Resource              `protobuf:"bytes,1,opt,name=resource,proto3" json:"resource,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Resource *Resource              `protobuf:"bytes,1,opt,name=resource,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *DescribeResourceResult) Reset() {
@@ -918,32 +1378,50 @@ func (x *DescribeResourceResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeResourceResult.ProtoReflect.Descriptor instead.
-func (*DescribeResourceResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{16}
-}
-
 func (x *DescribeResourceResult) GetResource() *Resource {
 	if x != nil {
-		return x.Resource
+		return x.xxx_hidden_Resource
 	}
 	return nil
 }
 
+func (x *DescribeResourceResult) SetResource(v *Resource) {
+	x.xxx_hidden_Resource = v
+}
+
+func (x *DescribeResourceResult) HasResource() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Resource != nil
+}
+
+func (x *DescribeResourceResult) ClearResource() {
+	x.xxx_hidden_Resource = nil
+}
+
+type DescribeResourceResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Resource *Resource
+}
+
+func (b0 DescribeResourceResult_builder) Build() *DescribeResourceResult {
+	m0 := &DescribeResourceResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Resource = b.Resource
+	return m0
+}
+
 type AcquireResourceRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Path of a coordination node.
-	CoordinationNodePath string `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3" json:"coordination_node_path,omitempty"`
-	// Path of resource inside a coordination node.
-	ResourcePath string `protobuf:"bytes,3,opt,name=resource_path,json=resourcePath,proto3" json:"resource_path,omitempty"`
-	// Types that are valid to be assigned to Units:
-	//
-	//	*AcquireResourceRequest_Required
-	//	*AcquireResourceRequest_Used
-	Units         isAcquireResourceRequest_Units `protobuf_oneof:"units"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                           protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams      *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_CoordinationNodePath string                          `protobuf:"bytes,2,opt,name=coordination_node_path,json=coordinationNodePath,proto3"`
+	xxx_hidden_ResourcePath         string                          `protobuf:"bytes,3,opt,name=resource_path,json=resourcePath,proto3"`
+	xxx_hidden_Units                isAcquireResourceRequest_Units  `protobuf_oneof:"units"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *AcquireResourceRequest) Reset() {
@@ -971,42 +1449,30 @@ func (x *AcquireResourceRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AcquireResourceRequest.ProtoReflect.Descriptor instead.
-func (*AcquireResourceRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{17}
-}
-
 func (x *AcquireResourceRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *AcquireResourceRequest) GetCoordinationNodePath() string {
 	if x != nil {
-		return x.CoordinationNodePath
+		return x.xxx_hidden_CoordinationNodePath
 	}
 	return ""
 }
 
 func (x *AcquireResourceRequest) GetResourcePath() string {
 	if x != nil {
-		return x.ResourcePath
+		return x.xxx_hidden_ResourcePath
 	}
 	return ""
 }
 
-func (x *AcquireResourceRequest) GetUnits() isAcquireResourceRequest_Units {
-	if x != nil {
-		return x.Units
-	}
-	return nil
-}
-
 func (x *AcquireResourceRequest) GetRequired() uint64 {
 	if x != nil {
-		if x, ok := x.Units.(*AcquireResourceRequest_Required); ok {
+		if x, ok := x.xxx_hidden_Units.(*acquireResourceRequest_Required); ok {
 			return x.Required
 		}
 	}
@@ -1015,37 +1481,166 @@ func (x *AcquireResourceRequest) GetRequired() uint64 {
 
 func (x *AcquireResourceRequest) GetUsed() uint64 {
 	if x != nil {
-		if x, ok := x.Units.(*AcquireResourceRequest_Used); ok {
+		if x, ok := x.xxx_hidden_Units.(*acquireResourceRequest_Used); ok {
 			return x.Used
 		}
 	}
 	return 0
 }
 
+func (x *AcquireResourceRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *AcquireResourceRequest) SetCoordinationNodePath(v string) {
+	x.xxx_hidden_CoordinationNodePath = v
+}
+
+func (x *AcquireResourceRequest) SetResourcePath(v string) {
+	x.xxx_hidden_ResourcePath = v
+}
+
+func (x *AcquireResourceRequest) SetRequired(v uint64) {
+	x.xxx_hidden_Units = &acquireResourceRequest_Required{v}
+}
+
+func (x *AcquireResourceRequest) SetUsed(v uint64) {
+	x.xxx_hidden_Units = &acquireResourceRequest_Used{v}
+}
+
+func (x *AcquireResourceRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *AcquireResourceRequest) HasUnits() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Units != nil
+}
+
+func (x *AcquireResourceRequest) HasRequired() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Units.(*acquireResourceRequest_Required)
+	return ok
+}
+
+func (x *AcquireResourceRequest) HasUsed() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Units.(*acquireResourceRequest_Used)
+	return ok
+}
+
+func (x *AcquireResourceRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *AcquireResourceRequest) ClearUnits() {
+	x.xxx_hidden_Units = nil
+}
+
+func (x *AcquireResourceRequest) ClearRequired() {
+	if _, ok := x.xxx_hidden_Units.(*acquireResourceRequest_Required); ok {
+		x.xxx_hidden_Units = nil
+	}
+}
+
+func (x *AcquireResourceRequest) ClearUsed() {
+	if _, ok := x.xxx_hidden_Units.(*acquireResourceRequest_Used); ok {
+		x.xxx_hidden_Units = nil
+	}
+}
+
+const AcquireResourceRequest_Units_not_set_case case_AcquireResourceRequest_Units = 0
+const AcquireResourceRequest_Required_case case_AcquireResourceRequest_Units = 4
+const AcquireResourceRequest_Used_case case_AcquireResourceRequest_Units = 5
+
+func (x *AcquireResourceRequest) WhichUnits() case_AcquireResourceRequest_Units {
+	if x == nil {
+		return AcquireResourceRequest_Units_not_set_case
+	}
+	switch x.xxx_hidden_Units.(type) {
+	case *acquireResourceRequest_Required:
+		return AcquireResourceRequest_Required_case
+	case *acquireResourceRequest_Used:
+		return AcquireResourceRequest_Used_case
+	default:
+		return AcquireResourceRequest_Units_not_set_case
+	}
+}
+
+type AcquireResourceRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Path of a coordination node.
+	CoordinationNodePath string
+	// Path of resource inside a coordination node.
+	ResourcePath string
+	// Fields of oneof xxx_hidden_Units:
+	// Request resource's units for usage.
+	Required *uint64
+	// Actually used resource's units by client.
+	Used *uint64
+	// -- end of xxx_hidden_Units
+}
+
+func (b0 AcquireResourceRequest_builder) Build() *AcquireResourceRequest {
+	m0 := &AcquireResourceRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_CoordinationNodePath = b.CoordinationNodePath
+	x.xxx_hidden_ResourcePath = b.ResourcePath
+	if b.Required != nil {
+		x.xxx_hidden_Units = &acquireResourceRequest_Required{*b.Required}
+	}
+	if b.Used != nil {
+		x.xxx_hidden_Units = &acquireResourceRequest_Used{*b.Used}
+	}
+	return m0
+}
+
+type case_AcquireResourceRequest_Units protoreflect.FieldNumber
+
+func (x case_AcquireResourceRequest_Units) String() string {
+	md := file_protos_ydb_rate_limiter_proto_msgTypes[17].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isAcquireResourceRequest_Units interface {
 	isAcquireResourceRequest_Units()
 }
 
-type AcquireResourceRequest_Required struct {
+type acquireResourceRequest_Required struct {
 	// Request resource's units for usage.
 	Required uint64 `protobuf:"varint,4,opt,name=required,proto3,oneof"`
 }
 
-type AcquireResourceRequest_Used struct {
+type acquireResourceRequest_Used struct {
 	// Actually used resource's units by client.
 	Used uint64 `protobuf:"varint,5,opt,name=used,proto3,oneof"`
 }
 
-func (*AcquireResourceRequest_Required) isAcquireResourceRequest_Units() {}
+func (*acquireResourceRequest_Required) isAcquireResourceRequest_Units() {}
 
-func (*AcquireResourceRequest_Used) isAcquireResourceRequest_Units() {}
+func (*acquireResourceRequest_Used) isAcquireResourceRequest_Units() {}
 
 type AcquireResourceResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Holds AcquireResourceResult in case of successful call.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AcquireResourceResponse) Reset() {
@@ -1073,20 +1668,45 @@ func (x *AcquireResourceResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AcquireResourceResponse.ProtoReflect.Descriptor instead.
-func (*AcquireResourceResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{18}
-}
-
 func (x *AcquireResourceResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *AcquireResourceResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *AcquireResourceResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *AcquireResourceResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type AcquireResourceResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Holds AcquireResourceResult in case of successful call.
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 AcquireResourceResponse_builder) Build() *AcquireResourceResponse {
+	m0 := &AcquireResourceResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type AcquireResourceResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1116,9 +1736,16 @@ func (x *AcquireResourceResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AcquireResourceResult.ProtoReflect.Descriptor instead.
-func (*AcquireResourceResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_rate_limiter_proto_rawDescGZIP(), []int{19}
+type AcquireResourceResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 AcquireResourceResult_builder) Build() *AcquireResourceResult {
+	m0 := &AcquireResourceResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 var File_protos_ydb_rate_limiter_proto protoreflect.FileDescriptor
@@ -1185,18 +1812,6 @@ const file_protos_ydb_rate_limiter_proto_rawDesc = "" +
 	"\x15AcquireResourceResultBu\n" +
 	"\x1btech.ydb.proto.rate_limiterB\x11RateLimiterProtosP\x01Z>github.com/ydb-platform/ydb-go-genproto/protos/Ydb_RateLimiter\xf8\x01\x01b\x06proto3"
 
-var (
-	file_protos_ydb_rate_limiter_proto_rawDescOnce sync.Once
-	file_protos_ydb_rate_limiter_proto_rawDescData []byte
-)
-
-func file_protos_ydb_rate_limiter_proto_rawDescGZIP() []byte {
-	file_protos_ydb_rate_limiter_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_rate_limiter_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_rate_limiter_proto_rawDesc), len(file_protos_ydb_rate_limiter_proto_rawDesc)))
-	})
-	return file_protos_ydb_rate_limiter_proto_rawDescData
-}
-
 var file_protos_ydb_rate_limiter_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_protos_ydb_rate_limiter_proto_goTypes = []any{
 	(*HierarchicalDrrSettings)(nil),        // 0: Ydb.RateLimiter.HierarchicalDrrSettings
@@ -1252,11 +1867,11 @@ func file_protos_ydb_rate_limiter_proto_init() {
 		return
 	}
 	file_protos_ydb_rate_limiter_proto_msgTypes[1].OneofWrappers = []any{
-		(*Resource_HierarchicalDrr)(nil),
+		(*resource_HierarchicalDrr)(nil),
 	}
 	file_protos_ydb_rate_limiter_proto_msgTypes[17].OneofWrappers = []any{
-		(*AcquireResourceRequest_Required)(nil),
-		(*AcquireResourceRequest_Used)(nil),
+		(*acquireResourceRequest_Required)(nil),
+		(*acquireResourceRequest_Used)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

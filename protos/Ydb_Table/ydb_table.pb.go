@@ -20,7 +20,6 @@ import (
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -75,11 +74,6 @@ func (x StoreType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use StoreType.Descriptor instead.
-func (StoreType) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{0}
-}
-
 type TableIndexDescription_Status int32
 
 const (
@@ -124,11 +118,6 @@ func (TableIndexDescription_Status) Type() protoreflect.EnumType {
 
 func (x TableIndexDescription_Status) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use TableIndexDescription_Status.Descriptor instead.
-func (TableIndexDescription_Status) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{9, 0}
 }
 
 type IndexBuildState_State int32
@@ -193,11 +182,6 @@ func (x IndexBuildState_State) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use IndexBuildState_State.Descriptor instead.
-func (IndexBuildState_State) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{10, 0}
-}
-
 type ChangefeedMode_Mode int32
 
 const (
@@ -256,11 +240,6 @@ func (x ChangefeedMode_Mode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ChangefeedMode_Mode.Descriptor instead.
-func (ChangefeedMode_Mode) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{13, 0}
-}
-
 type ChangefeedFormat_Format int32
 
 const (
@@ -309,11 +288,6 @@ func (ChangefeedFormat_Format) Type() protoreflect.EnumType {
 
 func (x ChangefeedFormat_Format) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ChangefeedFormat_Format.Descriptor instead.
-func (ChangefeedFormat_Format) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{14, 0}
 }
 
 type ChangefeedDescription_State int32
@@ -368,11 +342,6 @@ func (x ChangefeedDescription_State) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ChangefeedDescription_State.Descriptor instead.
-func (ChangefeedDescription_State) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{16, 0}
-}
-
 type ColumnFamilyPolicy_Compression int32
 
 const (
@@ -415,11 +384,6 @@ func (ColumnFamilyPolicy_Compression) Type() protoreflect.EnumType {
 
 func (x ColumnFamilyPolicy_Compression) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ColumnFamilyPolicy_Compression.Descriptor instead.
-func (ColumnFamilyPolicy_Compression) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{19, 0}
 }
 
 type PartitioningPolicy_AutoPartitioningPolicy int32
@@ -467,11 +431,6 @@ func (PartitioningPolicy_AutoPartitioningPolicy) Type() protoreflect.EnumType {
 
 func (x PartitioningPolicy_AutoPartitioningPolicy) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use PartitioningPolicy_AutoPartitioningPolicy.Descriptor instead.
-func (PartitioningPolicy_AutoPartitioningPolicy) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{24, 0}
 }
 
 type ValueSinceUnixEpochModeSettings_Unit int32
@@ -524,11 +483,6 @@ func (x ValueSinceUnixEpochModeSettings_Unit) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ValueSinceUnixEpochModeSettings_Unit.Descriptor instead.
-func (ValueSinceUnixEpochModeSettings_Unit) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{32, 0}
-}
-
 type ColumnFamily_Compression int32
 
 const (
@@ -571,11 +525,6 @@ func (ColumnFamily_Compression) Type() protoreflect.EnumType {
 
 func (x ColumnFamily_Compression) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ColumnFamily_Compression.Descriptor instead.
-func (ColumnFamily_Compression) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{35, 0}
 }
 
 type QueryStatsCollection_Mode int32
@@ -628,11 +577,6 @@ func (x QueryStatsCollection_Mode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use QueryStatsCollection_Mode.Descriptor instead.
-func (QueryStatsCollection_Mode) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{66, 0}
-}
-
 type KeepAliveResult_SessionStatus int32
 
 const (
@@ -675,11 +619,6 @@ func (KeepAliveResult_SessionStatus) Type() protoreflect.EnumType {
 
 func (x KeepAliveResult_SessionStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use KeepAliveResult_SessionStatus.Descriptor instead.
-func (KeepAliveResult_SessionStatus) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{82, 0}
 }
 
 type ExecuteScanQueryRequest_Mode int32
@@ -727,17 +666,12 @@ func (x ExecuteScanQueryRequest_Mode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ExecuteScanQueryRequest_Mode.Descriptor instead.
-func (ExecuteScanQueryRequest_Mode) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{110, 0}
-}
-
 // Create new session
 type CreateSessionRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateSessionRequest) Reset() {
@@ -765,25 +699,48 @@ func (x *CreateSessionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateSessionRequest.ProtoReflect.Descriptor instead.
-func (*CreateSessionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *CreateSessionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *CreateSessionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CreateSessionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CreateSessionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type CreateSessionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 CreateSessionRequest_builder) Build() *CreateSessionRequest {
+	m0 := &CreateSessionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 // Create new session
 type CreateSessionResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Holds CreateSessionResult in case of CreateSessionResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateSessionResponse) Reset() {
@@ -811,24 +768,48 @@ func (x *CreateSessionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateSessionResponse.ProtoReflect.Descriptor instead.
-func (*CreateSessionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *CreateSessionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CreateSessionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CreateSessionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CreateSessionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CreateSessionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Holds CreateSessionResult in case of CreateSessionResult
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CreateSessionResponse_builder) Build() *CreateSessionResponse {
+	m0 := &CreateSessionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type CreateSessionResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId     string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateSessionResult) Reset() {
@@ -856,26 +837,39 @@ func (x *CreateSessionResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateSessionResult.ProtoReflect.Descriptor instead.
-func (*CreateSessionResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *CreateSessionResult) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
+func (x *CreateSessionResult) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+type CreateSessionResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+}
+
+func (b0 CreateSessionResult_builder) Build() *CreateSessionResult {
+	m0 := &CreateSessionResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	return m0
+}
+
 // Delete session with given id string
 type DeleteSessionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DeleteSessionRequest) Reset() {
@@ -903,30 +897,61 @@ func (x *DeleteSessionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteSessionRequest.ProtoReflect.Descriptor instead.
-func (*DeleteSessionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *DeleteSessionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *DeleteSessionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *DeleteSessionRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *DeleteSessionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DeleteSessionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DeleteSessionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DeleteSessionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId       string
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 DeleteSessionRequest_builder) Build() *DeleteSessionRequest {
+	m0 := &DeleteSessionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type DeleteSessionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DeleteSessionResponse) Reset() {
@@ -954,20 +979,44 @@ func (x *DeleteSessionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteSessionResponse.ProtoReflect.Descriptor instead.
-func (*DeleteSessionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *DeleteSessionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DeleteSessionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DeleteSessionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DeleteSessionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DeleteSessionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DeleteSessionResponse_builder) Build() *DeleteSessionResponse {
+	m0 := &DeleteSessionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type GlobalIndex struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -997,13 +1046,20 @@ func (x *GlobalIndex) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GlobalIndex.ProtoReflect.Descriptor instead.
-func (*GlobalIndex) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{5}
+type GlobalIndex_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 GlobalIndex_builder) Build() *GlobalIndex {
+	m0 := &GlobalIndex{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type GlobalAsyncIndex struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1033,13 +1089,20 @@ func (x *GlobalAsyncIndex) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GlobalAsyncIndex.ProtoReflect.Descriptor instead.
-func (*GlobalAsyncIndex) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{6}
+type GlobalAsyncIndex_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 GlobalAsyncIndex_builder) Build() *GlobalAsyncIndex {
+	m0 := &GlobalAsyncIndex{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type GlobalUniqueIndex struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1069,30 +1132,27 @@ func (x *GlobalUniqueIndex) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GlobalUniqueIndex.ProtoReflect.Descriptor instead.
-func (*GlobalUniqueIndex) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{7}
+type GlobalUniqueIndex_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 GlobalUniqueIndex_builder) Build() *GlobalUniqueIndex {
+	m0 := &GlobalUniqueIndex{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Represent secondary index
 type TableIndex struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of index
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// list of columns
-	IndexColumns []string `protobuf:"bytes,2,rep,name=index_columns,json=indexColumns,proto3" json:"index_columns,omitempty"`
-	// Type of index
-	//
-	// Types that are valid to be assigned to Type:
-	//
-	//	*TableIndex_GlobalIndex
-	//	*TableIndex_GlobalAsyncIndex
-	//	*TableIndex_GlobalUniqueIndex
-	Type isTableIndex_Type `protobuf_oneof:"type"`
-	// list of columns content to be copied in to index table
-	DataColumns   []string `protobuf:"bytes,5,rep,name=data_columns,json=dataColumns,proto3" json:"data_columns,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name         string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_IndexColumns []string               `protobuf:"bytes,2,rep,name=index_columns,json=indexColumns,proto3"`
+	xxx_hidden_Type         isTableIndex_Type      `protobuf_oneof:"type"`
+	xxx_hidden_DataColumns  []string               `protobuf:"bytes,5,rep,name=data_columns,json=dataColumns,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *TableIndex) Reset() {
@@ -1120,35 +1180,23 @@ func (x *TableIndex) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TableIndex.ProtoReflect.Descriptor instead.
-func (*TableIndex) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{8}
-}
-
 func (x *TableIndex) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *TableIndex) GetIndexColumns() []string {
 	if x != nil {
-		return x.IndexColumns
-	}
-	return nil
-}
-
-func (x *TableIndex) GetType() isTableIndex_Type {
-	if x != nil {
-		return x.Type
+		return x.xxx_hidden_IndexColumns
 	}
 	return nil
 }
 
 func (x *TableIndex) GetGlobalIndex() *GlobalIndex {
 	if x != nil {
-		if x, ok := x.Type.(*TableIndex_GlobalIndex); ok {
+		if x, ok := x.xxx_hidden_Type.(*tableIndex_GlobalIndex); ok {
 			return x.GlobalIndex
 		}
 	}
@@ -1157,7 +1205,7 @@ func (x *TableIndex) GetGlobalIndex() *GlobalIndex {
 
 func (x *TableIndex) GetGlobalAsyncIndex() *GlobalAsyncIndex {
 	if x != nil {
-		if x, ok := x.Type.(*TableIndex_GlobalAsyncIndex); ok {
+		if x, ok := x.xxx_hidden_Type.(*tableIndex_GlobalAsyncIndex); ok {
 			return x.GlobalAsyncIndex
 		}
 	}
@@ -1166,7 +1214,7 @@ func (x *TableIndex) GetGlobalAsyncIndex() *GlobalAsyncIndex {
 
 func (x *TableIndex) GetGlobalUniqueIndex() *GlobalUniqueIndex {
 	if x != nil {
-		if x, ok := x.Type.(*TableIndex_GlobalUniqueIndex); ok {
+		if x, ok := x.xxx_hidden_Type.(*tableIndex_GlobalUniqueIndex); ok {
 			return x.GlobalUniqueIndex
 		}
 	}
@@ -1175,55 +1223,201 @@ func (x *TableIndex) GetGlobalUniqueIndex() *GlobalUniqueIndex {
 
 func (x *TableIndex) GetDataColumns() []string {
 	if x != nil {
-		return x.DataColumns
+		return x.xxx_hidden_DataColumns
 	}
 	return nil
+}
+
+func (x *TableIndex) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *TableIndex) SetIndexColumns(v []string) {
+	x.xxx_hidden_IndexColumns = v
+}
+
+func (x *TableIndex) SetGlobalIndex(v *GlobalIndex) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &tableIndex_GlobalIndex{v}
+}
+
+func (x *TableIndex) SetGlobalAsyncIndex(v *GlobalAsyncIndex) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &tableIndex_GlobalAsyncIndex{v}
+}
+
+func (x *TableIndex) SetGlobalUniqueIndex(v *GlobalUniqueIndex) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &tableIndex_GlobalUniqueIndex{v}
+}
+
+func (x *TableIndex) SetDataColumns(v []string) {
+	x.xxx_hidden_DataColumns = v
+}
+
+func (x *TableIndex) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *TableIndex) HasGlobalIndex() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*tableIndex_GlobalIndex)
+	return ok
+}
+
+func (x *TableIndex) HasGlobalAsyncIndex() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*tableIndex_GlobalAsyncIndex)
+	return ok
+}
+
+func (x *TableIndex) HasGlobalUniqueIndex() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*tableIndex_GlobalUniqueIndex)
+	return ok
+}
+
+func (x *TableIndex) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *TableIndex) ClearGlobalIndex() {
+	if _, ok := x.xxx_hidden_Type.(*tableIndex_GlobalIndex); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *TableIndex) ClearGlobalAsyncIndex() {
+	if _, ok := x.xxx_hidden_Type.(*tableIndex_GlobalAsyncIndex); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *TableIndex) ClearGlobalUniqueIndex() {
+	if _, ok := x.xxx_hidden_Type.(*tableIndex_GlobalUniqueIndex); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+const TableIndex_Type_not_set_case case_TableIndex_Type = 0
+const TableIndex_GlobalIndex_case case_TableIndex_Type = 3
+const TableIndex_GlobalAsyncIndex_case case_TableIndex_Type = 4
+const TableIndex_GlobalUniqueIndex_case case_TableIndex_Type = 6
+
+func (x *TableIndex) WhichType() case_TableIndex_Type {
+	if x == nil {
+		return TableIndex_Type_not_set_case
+	}
+	switch x.xxx_hidden_Type.(type) {
+	case *tableIndex_GlobalIndex:
+		return TableIndex_GlobalIndex_case
+	case *tableIndex_GlobalAsyncIndex:
+		return TableIndex_GlobalAsyncIndex_case
+	case *tableIndex_GlobalUniqueIndex:
+		return TableIndex_GlobalUniqueIndex_case
+	default:
+		return TableIndex_Type_not_set_case
+	}
+}
+
+type TableIndex_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Name of index
+	Name string
+	// list of columns
+	IndexColumns []string
+	// Type of index
+
+	// Fields of oneof xxx_hidden_Type:
+	GlobalIndex       *GlobalIndex
+	GlobalAsyncIndex  *GlobalAsyncIndex
+	GlobalUniqueIndex *GlobalUniqueIndex
+	// -- end of xxx_hidden_Type
+	// list of columns content to be copied in to index table
+	DataColumns []string
+}
+
+func (b0 TableIndex_builder) Build() *TableIndex {
+	m0 := &TableIndex{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_IndexColumns = b.IndexColumns
+	if b.GlobalIndex != nil {
+		x.xxx_hidden_Type = &tableIndex_GlobalIndex{b.GlobalIndex}
+	}
+	if b.GlobalAsyncIndex != nil {
+		x.xxx_hidden_Type = &tableIndex_GlobalAsyncIndex{b.GlobalAsyncIndex}
+	}
+	if b.GlobalUniqueIndex != nil {
+		x.xxx_hidden_Type = &tableIndex_GlobalUniqueIndex{b.GlobalUniqueIndex}
+	}
+	x.xxx_hidden_DataColumns = b.DataColumns
+	return m0
+}
+
+type case_TableIndex_Type protoreflect.FieldNumber
+
+func (x case_TableIndex_Type) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[8].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isTableIndex_Type interface {
 	isTableIndex_Type()
 }
 
-type TableIndex_GlobalIndex struct {
+type tableIndex_GlobalIndex struct {
 	GlobalIndex *GlobalIndex `protobuf:"bytes,3,opt,name=global_index,json=globalIndex,proto3,oneof"`
 }
 
-type TableIndex_GlobalAsyncIndex struct {
+type tableIndex_GlobalAsyncIndex struct {
 	GlobalAsyncIndex *GlobalAsyncIndex `protobuf:"bytes,4,opt,name=global_async_index,json=globalAsyncIndex,proto3,oneof"`
 }
 
-type TableIndex_GlobalUniqueIndex struct {
+type tableIndex_GlobalUniqueIndex struct {
 	GlobalUniqueIndex *GlobalUniqueIndex `protobuf:"bytes,6,opt,name=global_unique_index,json=globalUniqueIndex,proto3,oneof"`
 }
 
-func (*TableIndex_GlobalIndex) isTableIndex_Type() {}
+func (*tableIndex_GlobalIndex) isTableIndex_Type() {}
 
-func (*TableIndex_GlobalAsyncIndex) isTableIndex_Type() {}
+func (*tableIndex_GlobalAsyncIndex) isTableIndex_Type() {}
 
-func (*TableIndex_GlobalUniqueIndex) isTableIndex_Type() {}
+func (*tableIndex_GlobalUniqueIndex) isTableIndex_Type() {}
 
 // Represent secondary index with index state
 type TableIndexDescription struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of index
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// list of columns
-	IndexColumns []string `protobuf:"bytes,2,rep,name=index_columns,json=indexColumns,proto3" json:"index_columns,omitempty"`
-	// Type of index
-	//
-	// Types that are valid to be assigned to Type:
-	//
-	//	*TableIndexDescription_GlobalIndex
-	//	*TableIndexDescription_GlobalAsyncIndex
-	//	*TableIndexDescription_GlobalUniqueIndex
-	Type   isTableIndexDescription_Type `protobuf_oneof:"type"`
-	Status TableIndexDescription_Status `protobuf:"varint,4,opt,name=status,proto3,enum=Ydb.Table.TableIndexDescription_Status" json:"status,omitempty"`
-	// list of columns content to be copied in to index table
-	DataColumns []string `protobuf:"bytes,6,rep,name=data_columns,json=dataColumns,proto3" json:"data_columns,omitempty"`
-	// Size of index data in bytes
-	SizeBytes     uint64 `protobuf:"varint,7,opt,name=size_bytes,json=sizeBytes,proto3" json:"size_bytes,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState       `protogen:"opaque.v1"`
+	xxx_hidden_Name         string                       `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_IndexColumns []string                     `protobuf:"bytes,2,rep,name=index_columns,json=indexColumns,proto3"`
+	xxx_hidden_Type         isTableIndexDescription_Type `protobuf_oneof:"type"`
+	xxx_hidden_Status       TableIndexDescription_Status `protobuf:"varint,4,opt,name=status,proto3,enum=Ydb.Table.TableIndexDescription_Status"`
+	xxx_hidden_DataColumns  []string                     `protobuf:"bytes,6,rep,name=data_columns,json=dataColumns,proto3"`
+	xxx_hidden_SizeBytes    uint64                       `protobuf:"varint,7,opt,name=size_bytes,json=sizeBytes,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *TableIndexDescription) Reset() {
@@ -1251,35 +1445,23 @@ func (x *TableIndexDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TableIndexDescription.ProtoReflect.Descriptor instead.
-func (*TableIndexDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *TableIndexDescription) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *TableIndexDescription) GetIndexColumns() []string {
 	if x != nil {
-		return x.IndexColumns
-	}
-	return nil
-}
-
-func (x *TableIndexDescription) GetType() isTableIndexDescription_Type {
-	if x != nil {
-		return x.Type
+		return x.xxx_hidden_IndexColumns
 	}
 	return nil
 }
 
 func (x *TableIndexDescription) GetGlobalIndex() *GlobalIndex {
 	if x != nil {
-		if x, ok := x.Type.(*TableIndexDescription_GlobalIndex); ok {
+		if x, ok := x.xxx_hidden_Type.(*tableIndexDescription_GlobalIndex); ok {
 			return x.GlobalIndex
 		}
 	}
@@ -1288,7 +1470,7 @@ func (x *TableIndexDescription) GetGlobalIndex() *GlobalIndex {
 
 func (x *TableIndexDescription) GetGlobalAsyncIndex() *GlobalAsyncIndex {
 	if x != nil {
-		if x, ok := x.Type.(*TableIndexDescription_GlobalAsyncIndex); ok {
+		if x, ok := x.xxx_hidden_Type.(*tableIndexDescription_GlobalAsyncIndex); ok {
 			return x.GlobalAsyncIndex
 		}
 	}
@@ -1297,7 +1479,7 @@ func (x *TableIndexDescription) GetGlobalAsyncIndex() *GlobalAsyncIndex {
 
 func (x *TableIndexDescription) GetGlobalUniqueIndex() *GlobalUniqueIndex {
 	if x != nil {
-		if x, ok := x.Type.(*TableIndexDescription_GlobalUniqueIndex); ok {
+		if x, ok := x.xxx_hidden_Type.(*tableIndexDescription_GlobalUniqueIndex); ok {
 			return x.GlobalUniqueIndex
 		}
 	}
@@ -1306,50 +1488,220 @@ func (x *TableIndexDescription) GetGlobalUniqueIndex() *GlobalUniqueIndex {
 
 func (x *TableIndexDescription) GetStatus() TableIndexDescription_Status {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return TableIndexDescription_STATUS_UNSPECIFIED
 }
 
 func (x *TableIndexDescription) GetDataColumns() []string {
 	if x != nil {
-		return x.DataColumns
+		return x.xxx_hidden_DataColumns
 	}
 	return nil
 }
 
 func (x *TableIndexDescription) GetSizeBytes() uint64 {
 	if x != nil {
-		return x.SizeBytes
+		return x.xxx_hidden_SizeBytes
 	}
 	return 0
+}
+
+func (x *TableIndexDescription) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *TableIndexDescription) SetIndexColumns(v []string) {
+	x.xxx_hidden_IndexColumns = v
+}
+
+func (x *TableIndexDescription) SetGlobalIndex(v *GlobalIndex) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &tableIndexDescription_GlobalIndex{v}
+}
+
+func (x *TableIndexDescription) SetGlobalAsyncIndex(v *GlobalAsyncIndex) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &tableIndexDescription_GlobalAsyncIndex{v}
+}
+
+func (x *TableIndexDescription) SetGlobalUniqueIndex(v *GlobalUniqueIndex) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &tableIndexDescription_GlobalUniqueIndex{v}
+}
+
+func (x *TableIndexDescription) SetStatus(v TableIndexDescription_Status) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *TableIndexDescription) SetDataColumns(v []string) {
+	x.xxx_hidden_DataColumns = v
+}
+
+func (x *TableIndexDescription) SetSizeBytes(v uint64) {
+	x.xxx_hidden_SizeBytes = v
+}
+
+func (x *TableIndexDescription) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *TableIndexDescription) HasGlobalIndex() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*tableIndexDescription_GlobalIndex)
+	return ok
+}
+
+func (x *TableIndexDescription) HasGlobalAsyncIndex() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*tableIndexDescription_GlobalAsyncIndex)
+	return ok
+}
+
+func (x *TableIndexDescription) HasGlobalUniqueIndex() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*tableIndexDescription_GlobalUniqueIndex)
+	return ok
+}
+
+func (x *TableIndexDescription) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *TableIndexDescription) ClearGlobalIndex() {
+	if _, ok := x.xxx_hidden_Type.(*tableIndexDescription_GlobalIndex); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *TableIndexDescription) ClearGlobalAsyncIndex() {
+	if _, ok := x.xxx_hidden_Type.(*tableIndexDescription_GlobalAsyncIndex); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *TableIndexDescription) ClearGlobalUniqueIndex() {
+	if _, ok := x.xxx_hidden_Type.(*tableIndexDescription_GlobalUniqueIndex); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+const TableIndexDescription_Type_not_set_case case_TableIndexDescription_Type = 0
+const TableIndexDescription_GlobalIndex_case case_TableIndexDescription_Type = 3
+const TableIndexDescription_GlobalAsyncIndex_case case_TableIndexDescription_Type = 5
+const TableIndexDescription_GlobalUniqueIndex_case case_TableIndexDescription_Type = 8
+
+func (x *TableIndexDescription) WhichType() case_TableIndexDescription_Type {
+	if x == nil {
+		return TableIndexDescription_Type_not_set_case
+	}
+	switch x.xxx_hidden_Type.(type) {
+	case *tableIndexDescription_GlobalIndex:
+		return TableIndexDescription_GlobalIndex_case
+	case *tableIndexDescription_GlobalAsyncIndex:
+		return TableIndexDescription_GlobalAsyncIndex_case
+	case *tableIndexDescription_GlobalUniqueIndex:
+		return TableIndexDescription_GlobalUniqueIndex_case
+	default:
+		return TableIndexDescription_Type_not_set_case
+	}
+}
+
+type TableIndexDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Name of index
+	Name string
+	// list of columns
+	IndexColumns []string
+	// Type of index
+
+	// Fields of oneof xxx_hidden_Type:
+	GlobalIndex       *GlobalIndex
+	GlobalAsyncIndex  *GlobalAsyncIndex
+	GlobalUniqueIndex *GlobalUniqueIndex
+	// -- end of xxx_hidden_Type
+	Status TableIndexDescription_Status
+	// list of columns content to be copied in to index table
+	DataColumns []string
+	// Size of index data in bytes
+	SizeBytes uint64
+}
+
+func (b0 TableIndexDescription_builder) Build() *TableIndexDescription {
+	m0 := &TableIndexDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_IndexColumns = b.IndexColumns
+	if b.GlobalIndex != nil {
+		x.xxx_hidden_Type = &tableIndexDescription_GlobalIndex{b.GlobalIndex}
+	}
+	if b.GlobalAsyncIndex != nil {
+		x.xxx_hidden_Type = &tableIndexDescription_GlobalAsyncIndex{b.GlobalAsyncIndex}
+	}
+	if b.GlobalUniqueIndex != nil {
+		x.xxx_hidden_Type = &tableIndexDescription_GlobalUniqueIndex{b.GlobalUniqueIndex}
+	}
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_DataColumns = b.DataColumns
+	x.xxx_hidden_SizeBytes = b.SizeBytes
+	return m0
+}
+
+type case_TableIndexDescription_Type protoreflect.FieldNumber
+
+func (x case_TableIndexDescription_Type) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[9].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isTableIndexDescription_Type interface {
 	isTableIndexDescription_Type()
 }
 
-type TableIndexDescription_GlobalIndex struct {
+type tableIndexDescription_GlobalIndex struct {
 	GlobalIndex *GlobalIndex `protobuf:"bytes,3,opt,name=global_index,json=globalIndex,proto3,oneof"`
 }
 
-type TableIndexDescription_GlobalAsyncIndex struct {
+type tableIndexDescription_GlobalAsyncIndex struct {
 	GlobalAsyncIndex *GlobalAsyncIndex `protobuf:"bytes,5,opt,name=global_async_index,json=globalAsyncIndex,proto3,oneof"`
 }
 
-type TableIndexDescription_GlobalUniqueIndex struct {
+type tableIndexDescription_GlobalUniqueIndex struct {
 	GlobalUniqueIndex *GlobalUniqueIndex `protobuf:"bytes,8,opt,name=global_unique_index,json=globalUniqueIndex,proto3,oneof"`
 }
 
-func (*TableIndexDescription_GlobalIndex) isTableIndexDescription_Type() {}
+func (*tableIndexDescription_GlobalIndex) isTableIndexDescription_Type() {}
 
-func (*TableIndexDescription_GlobalAsyncIndex) isTableIndexDescription_Type() {}
+func (*tableIndexDescription_GlobalAsyncIndex) isTableIndexDescription_Type() {}
 
-func (*TableIndexDescription_GlobalUniqueIndex) isTableIndexDescription_Type() {}
+func (*tableIndexDescription_GlobalUniqueIndex) isTableIndexDescription_Type() {}
 
 // State of index building operation
 type IndexBuildState struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1379,18 +1731,25 @@ func (x *IndexBuildState) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IndexBuildState.ProtoReflect.Descriptor instead.
-func (*IndexBuildState) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{10}
+type IndexBuildState_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 IndexBuildState_builder) Build() *IndexBuildState {
+	m0 := &IndexBuildState{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 // Description of index building operation
 type IndexBuildDescription struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Path          string                 `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	Index         *TableIndex            `protobuf:"bytes,2,opt,name=index,proto3" json:"index,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Path  string                 `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_Index *TableIndex            `protobuf:"bytes,2,opt,name=index,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *IndexBuildDescription) Reset() {
@@ -1418,32 +1777,62 @@ func (x *IndexBuildDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IndexBuildDescription.ProtoReflect.Descriptor instead.
-func (*IndexBuildDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{11}
-}
-
 func (x *IndexBuildDescription) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *IndexBuildDescription) GetIndex() *TableIndex {
 	if x != nil {
-		return x.Index
+		return x.xxx_hidden_Index
 	}
 	return nil
 }
 
+func (x *IndexBuildDescription) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *IndexBuildDescription) SetIndex(v *TableIndex) {
+	x.xxx_hidden_Index = v
+}
+
+func (x *IndexBuildDescription) HasIndex() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Index != nil
+}
+
+func (x *IndexBuildDescription) ClearIndex() {
+	x.xxx_hidden_Index = nil
+}
+
+type IndexBuildDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Path  string
+	Index *TableIndex
+}
+
+func (b0 IndexBuildDescription_builder) Build() *IndexBuildDescription {
+	m0 := &IndexBuildDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_Index = b.Index
+	return m0
+}
+
 type IndexBuildMetadata struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Description   *IndexBuildDescription `protobuf:"bytes,1,opt,name=description,proto3" json:"description,omitempty"`
-	State         IndexBuildState_State  `protobuf:"varint,2,opt,name=state,proto3,enum=Ydb.Table.IndexBuildState_State" json:"state,omitempty"`
-	Progress      float32                `protobuf:"fixed32,3,opt,name=progress,proto3" json:"progress,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Description *IndexBuildDescription `protobuf:"bytes,1,opt,name=description,proto3"`
+	xxx_hidden_State       IndexBuildState_State  `protobuf:"varint,2,opt,name=state,proto3,enum=Ydb.Table.IndexBuildState_State"`
+	xxx_hidden_Progress    float32                `protobuf:"fixed32,3,opt,name=progress,proto3"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *IndexBuildMetadata) Reset() {
@@ -1471,34 +1860,70 @@ func (x *IndexBuildMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use IndexBuildMetadata.ProtoReflect.Descriptor instead.
-func (*IndexBuildMetadata) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{12}
-}
-
 func (x *IndexBuildMetadata) GetDescription() *IndexBuildDescription {
 	if x != nil {
-		return x.Description
+		return x.xxx_hidden_Description
 	}
 	return nil
 }
 
 func (x *IndexBuildMetadata) GetState() IndexBuildState_State {
 	if x != nil {
-		return x.State
+		return x.xxx_hidden_State
 	}
 	return IndexBuildState_STATE_UNSPECIFIED
 }
 
 func (x *IndexBuildMetadata) GetProgress() float32 {
 	if x != nil {
-		return x.Progress
+		return x.xxx_hidden_Progress
 	}
 	return 0
 }
 
+func (x *IndexBuildMetadata) SetDescription(v *IndexBuildDescription) {
+	x.xxx_hidden_Description = v
+}
+
+func (x *IndexBuildMetadata) SetState(v IndexBuildState_State) {
+	x.xxx_hidden_State = v
+}
+
+func (x *IndexBuildMetadata) SetProgress(v float32) {
+	x.xxx_hidden_Progress = v
+}
+
+func (x *IndexBuildMetadata) HasDescription() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Description != nil
+}
+
+func (x *IndexBuildMetadata) ClearDescription() {
+	x.xxx_hidden_Description = nil
+}
+
+type IndexBuildMetadata_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Description *IndexBuildDescription
+	State       IndexBuildState_State
+	Progress    float32
+}
+
+func (b0 IndexBuildMetadata_builder) Build() *IndexBuildMetadata {
+	m0 := &IndexBuildMetadata{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_State = b.State
+	x.xxx_hidden_Progress = b.Progress
+	return m0
+}
+
 type ChangefeedMode struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1528,13 +1953,20 @@ func (x *ChangefeedMode) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ChangefeedMode.ProtoReflect.Descriptor instead.
-func (*ChangefeedMode) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{13}
+type ChangefeedMode_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ChangefeedMode_builder) Build() *ChangefeedMode {
+	m0 := &ChangefeedMode{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ChangefeedFormat struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1564,35 +1996,32 @@ func (x *ChangefeedFormat) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ChangefeedFormat.ProtoReflect.Descriptor instead.
-func (*ChangefeedFormat) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{14}
+type ChangefeedFormat_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ChangefeedFormat_builder) Build() *ChangefeedFormat {
+	m0 := &ChangefeedFormat{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type Changefeed struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the feed
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Mode specifies the information that will be written to the feed
-	Mode ChangefeedMode_Mode `protobuf:"varint,2,opt,name=mode,proto3,enum=Ydb.Table.ChangefeedMode_Mode" json:"mode,omitempty"`
-	// Format of the data
-	Format ChangefeedFormat_Format `protobuf:"varint,3,opt,name=format,proto3,enum=Ydb.Table.ChangefeedFormat_Format" json:"format,omitempty"`
-	// How long data in changefeed's underlying topic should be stored
-	RetentionPeriod *durationpb.Duration `protobuf:"bytes,4,opt,name=retention_period,json=retentionPeriod,proto3" json:"retention_period,omitempty"`
-	// Emit virtual timestamps of changes along with data or not
-	VirtualTimestamps bool `protobuf:"varint,5,opt,name=virtual_timestamps,json=virtualTimestamps,proto3" json:"virtual_timestamps,omitempty"`
-	// Initial scan will output the current state of the table first
-	InitialScan bool `protobuf:"varint,6,opt,name=initial_scan,json=initialScan,proto3" json:"initial_scan,omitempty"`
-	// Attributes. Total size is limited to 10 KB.
-	Attributes map[string]string `protobuf:"bytes,7,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Value that will be emitted in the `awsRegion` field of the record in DYNAMODB_STREAMS_JSON format
-	AwsRegion string `protobuf:"bytes,8,opt,name=aws_region,json=awsRegion,proto3" json:"aws_region,omitempty"`
-	// Periodically emit resolved timestamps. If unspecified, resolved timestamps are not emitted.
-	ResolvedTimestampsInterval *durationpb.Duration `protobuf:"bytes,9,opt,name=resolved_timestamps_interval,json=resolvedTimestampsInterval,proto3" json:"resolved_timestamps_interval,omitempty"`
-	// Partitioning settings of underlying topic.
-	TopicPartitioningSettings *Ydb_Topic.PartitioningSettings `protobuf:"bytes,10,opt,name=topic_partitioning_settings,json=topicPartitioningSettings,proto3" json:"topic_partitioning_settings,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state                                 protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Name                       string                          `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Mode                       ChangefeedMode_Mode             `protobuf:"varint,2,opt,name=mode,proto3,enum=Ydb.Table.ChangefeedMode_Mode"`
+	xxx_hidden_Format                     ChangefeedFormat_Format         `protobuf:"varint,3,opt,name=format,proto3,enum=Ydb.Table.ChangefeedFormat_Format"`
+	xxx_hidden_RetentionPeriod            *durationpb.Duration            `protobuf:"bytes,4,opt,name=retention_period,json=retentionPeriod,proto3"`
+	xxx_hidden_VirtualTimestamps          bool                            `protobuf:"varint,5,opt,name=virtual_timestamps,json=virtualTimestamps,proto3"`
+	xxx_hidden_InitialScan                bool                            `protobuf:"varint,6,opt,name=initial_scan,json=initialScan,proto3"`
+	xxx_hidden_Attributes                 map[string]string               `protobuf:"bytes,7,rep,name=attributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_AwsRegion                  string                          `protobuf:"bytes,8,opt,name=aws_region,json=awsRegion,proto3"`
+	xxx_hidden_ResolvedTimestampsInterval *durationpb.Duration            `protobuf:"bytes,9,opt,name=resolved_timestamps_interval,json=resolvedTimestampsInterval,proto3"`
+	xxx_hidden_TopicPartitioningSettings  *Ydb_Topic.PartitioningSettings `protobuf:"bytes,10,opt,name=topic_partitioning_settings,json=topicPartitioningSettings,proto3"`
+	unknownFields                         protoimpl.UnknownFields
+	sizeCache                             protoimpl.SizeCache
 }
 
 func (x *Changefeed) Reset() {
@@ -1620,101 +2049,203 @@ func (x *Changefeed) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Changefeed.ProtoReflect.Descriptor instead.
-func (*Changefeed) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{15}
-}
-
 func (x *Changefeed) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *Changefeed) GetMode() ChangefeedMode_Mode {
 	if x != nil {
-		return x.Mode
+		return x.xxx_hidden_Mode
 	}
 	return ChangefeedMode_MODE_UNSPECIFIED
 }
 
 func (x *Changefeed) GetFormat() ChangefeedFormat_Format {
 	if x != nil {
-		return x.Format
+		return x.xxx_hidden_Format
 	}
 	return ChangefeedFormat_FORMAT_UNSPECIFIED
 }
 
 func (x *Changefeed) GetRetentionPeriod() *durationpb.Duration {
 	if x != nil {
-		return x.RetentionPeriod
+		return x.xxx_hidden_RetentionPeriod
 	}
 	return nil
 }
 
 func (x *Changefeed) GetVirtualTimestamps() bool {
 	if x != nil {
-		return x.VirtualTimestamps
+		return x.xxx_hidden_VirtualTimestamps
 	}
 	return false
 }
 
 func (x *Changefeed) GetInitialScan() bool {
 	if x != nil {
-		return x.InitialScan
+		return x.xxx_hidden_InitialScan
 	}
 	return false
 }
 
 func (x *Changefeed) GetAttributes() map[string]string {
 	if x != nil {
-		return x.Attributes
+		return x.xxx_hidden_Attributes
 	}
 	return nil
 }
 
 func (x *Changefeed) GetAwsRegion() string {
 	if x != nil {
-		return x.AwsRegion
+		return x.xxx_hidden_AwsRegion
 	}
 	return ""
 }
 
 func (x *Changefeed) GetResolvedTimestampsInterval() *durationpb.Duration {
 	if x != nil {
-		return x.ResolvedTimestampsInterval
+		return x.xxx_hidden_ResolvedTimestampsInterval
 	}
 	return nil
 }
 
 func (x *Changefeed) GetTopicPartitioningSettings() *Ydb_Topic.PartitioningSettings {
 	if x != nil {
-		return x.TopicPartitioningSettings
+		return x.xxx_hidden_TopicPartitioningSettings
 	}
 	return nil
 }
 
-type ChangefeedDescription struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
+func (x *Changefeed) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *Changefeed) SetMode(v ChangefeedMode_Mode) {
+	x.xxx_hidden_Mode = v
+}
+
+func (x *Changefeed) SetFormat(v ChangefeedFormat_Format) {
+	x.xxx_hidden_Format = v
+}
+
+func (x *Changefeed) SetRetentionPeriod(v *durationpb.Duration) {
+	x.xxx_hidden_RetentionPeriod = v
+}
+
+func (x *Changefeed) SetVirtualTimestamps(v bool) {
+	x.xxx_hidden_VirtualTimestamps = v
+}
+
+func (x *Changefeed) SetInitialScan(v bool) {
+	x.xxx_hidden_InitialScan = v
+}
+
+func (x *Changefeed) SetAttributes(v map[string]string) {
+	x.xxx_hidden_Attributes = v
+}
+
+func (x *Changefeed) SetAwsRegion(v string) {
+	x.xxx_hidden_AwsRegion = v
+}
+
+func (x *Changefeed) SetResolvedTimestampsInterval(v *durationpb.Duration) {
+	x.xxx_hidden_ResolvedTimestampsInterval = v
+}
+
+func (x *Changefeed) SetTopicPartitioningSettings(v *Ydb_Topic.PartitioningSettings) {
+	x.xxx_hidden_TopicPartitioningSettings = v
+}
+
+func (x *Changefeed) HasRetentionPeriod() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_RetentionPeriod != nil
+}
+
+func (x *Changefeed) HasResolvedTimestampsInterval() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResolvedTimestampsInterval != nil
+}
+
+func (x *Changefeed) HasTopicPartitioningSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TopicPartitioningSettings != nil
+}
+
+func (x *Changefeed) ClearRetentionPeriod() {
+	x.xxx_hidden_RetentionPeriod = nil
+}
+
+func (x *Changefeed) ClearResolvedTimestampsInterval() {
+	x.xxx_hidden_ResolvedTimestampsInterval = nil
+}
+
+func (x *Changefeed) ClearTopicPartitioningSettings() {
+	x.xxx_hidden_TopicPartitioningSettings = nil
+}
+
+type Changefeed_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
 	// Name of the feed
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string
 	// Mode specifies the information that will be written to the feed
-	Mode ChangefeedMode_Mode `protobuf:"varint,2,opt,name=mode,proto3,enum=Ydb.Table.ChangefeedMode_Mode" json:"mode,omitempty"`
+	Mode ChangefeedMode_Mode
 	// Format of the data
-	Format ChangefeedFormat_Format `protobuf:"varint,3,opt,name=format,proto3,enum=Ydb.Table.ChangefeedFormat_Format" json:"format,omitempty"`
-	// State of the feed
-	State ChangefeedDescription_State `protobuf:"varint,4,opt,name=state,proto3,enum=Ydb.Table.ChangefeedDescription_State" json:"state,omitempty"`
-	// State of emitting of virtual timestamps along with data
-	VirtualTimestamps bool `protobuf:"varint,5,opt,name=virtual_timestamps,json=virtualTimestamps,proto3" json:"virtual_timestamps,omitempty"`
-	// Attributes
-	Attributes map[string]string `protobuf:"bytes,6,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Format ChangefeedFormat_Format
+	// How long data in changefeed's underlying topic should be stored
+	RetentionPeriod *durationpb.Duration
+	// Emit virtual timestamps of changes along with data or not
+	VirtualTimestamps bool
+	// Initial scan will output the current state of the table first
+	InitialScan bool
+	// Attributes. Total size is limited to 10 KB.
+	Attributes map[string]string
 	// Value that will be emitted in the `awsRegion` field of the record in DYNAMODB_STREAMS_JSON format
-	AwsRegion string `protobuf:"bytes,7,opt,name=aws_region,json=awsRegion,proto3" json:"aws_region,omitempty"`
-	// Interval of emitting of resolved timestamps. If unspecified, resolved timestamps are not emitted.
-	ResolvedTimestampsInterval *durationpb.Duration `protobuf:"bytes,8,opt,name=resolved_timestamps_interval,json=resolvedTimestampsInterval,proto3" json:"resolved_timestamps_interval,omitempty"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	AwsRegion string
+	// Periodically emit resolved timestamps. If unspecified, resolved timestamps are not emitted.
+	ResolvedTimestampsInterval *durationpb.Duration
+	// Partitioning settings of underlying topic.
+	TopicPartitioningSettings *Ydb_Topic.PartitioningSettings
+}
+
+func (b0 Changefeed_builder) Build() *Changefeed {
+	m0 := &Changefeed{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Mode = b.Mode
+	x.xxx_hidden_Format = b.Format
+	x.xxx_hidden_RetentionPeriod = b.RetentionPeriod
+	x.xxx_hidden_VirtualTimestamps = b.VirtualTimestamps
+	x.xxx_hidden_InitialScan = b.InitialScan
+	x.xxx_hidden_Attributes = b.Attributes
+	x.xxx_hidden_AwsRegion = b.AwsRegion
+	x.xxx_hidden_ResolvedTimestampsInterval = b.ResolvedTimestampsInterval
+	x.xxx_hidden_TopicPartitioningSettings = b.TopicPartitioningSettings
+	return m0
+}
+
+type ChangefeedDescription struct {
+	state                                 protoimpl.MessageState      `protogen:"opaque.v1"`
+	xxx_hidden_Name                       string                      `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Mode                       ChangefeedMode_Mode         `protobuf:"varint,2,opt,name=mode,proto3,enum=Ydb.Table.ChangefeedMode_Mode"`
+	xxx_hidden_Format                     ChangefeedFormat_Format     `protobuf:"varint,3,opt,name=format,proto3,enum=Ydb.Table.ChangefeedFormat_Format"`
+	xxx_hidden_State                      ChangefeedDescription_State `protobuf:"varint,4,opt,name=state,proto3,enum=Ydb.Table.ChangefeedDescription_State"`
+	xxx_hidden_VirtualTimestamps          bool                        `protobuf:"varint,5,opt,name=virtual_timestamps,json=virtualTimestamps,proto3"`
+	xxx_hidden_Attributes                 map[string]string           `protobuf:"bytes,6,rep,name=attributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_AwsRegion                  string                      `protobuf:"bytes,7,opt,name=aws_region,json=awsRegion,proto3"`
+	xxx_hidden_ResolvedTimestampsInterval *durationpb.Duration        `protobuf:"bytes,8,opt,name=resolved_timestamps_interval,json=resolvedTimestampsInterval,proto3"`
+	unknownFields                         protoimpl.UnknownFields
+	sizeCache                             protoimpl.SizeCache
 }
 
 func (x *ChangefeedDescription) Reset() {
@@ -1742,72 +2273,146 @@ func (x *ChangefeedDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ChangefeedDescription.ProtoReflect.Descriptor instead.
-func (*ChangefeedDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{16}
-}
-
 func (x *ChangefeedDescription) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ChangefeedDescription) GetMode() ChangefeedMode_Mode {
 	if x != nil {
-		return x.Mode
+		return x.xxx_hidden_Mode
 	}
 	return ChangefeedMode_MODE_UNSPECIFIED
 }
 
 func (x *ChangefeedDescription) GetFormat() ChangefeedFormat_Format {
 	if x != nil {
-		return x.Format
+		return x.xxx_hidden_Format
 	}
 	return ChangefeedFormat_FORMAT_UNSPECIFIED
 }
 
 func (x *ChangefeedDescription) GetState() ChangefeedDescription_State {
 	if x != nil {
-		return x.State
+		return x.xxx_hidden_State
 	}
 	return ChangefeedDescription_STATE_UNSPECIFIED
 }
 
 func (x *ChangefeedDescription) GetVirtualTimestamps() bool {
 	if x != nil {
-		return x.VirtualTimestamps
+		return x.xxx_hidden_VirtualTimestamps
 	}
 	return false
 }
 
 func (x *ChangefeedDescription) GetAttributes() map[string]string {
 	if x != nil {
-		return x.Attributes
+		return x.xxx_hidden_Attributes
 	}
 	return nil
 }
 
 func (x *ChangefeedDescription) GetAwsRegion() string {
 	if x != nil {
-		return x.AwsRegion
+		return x.xxx_hidden_AwsRegion
 	}
 	return ""
 }
 
 func (x *ChangefeedDescription) GetResolvedTimestampsInterval() *durationpb.Duration {
 	if x != nil {
-		return x.ResolvedTimestampsInterval
+		return x.xxx_hidden_ResolvedTimestampsInterval
 	}
 	return nil
 }
 
+func (x *ChangefeedDescription) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *ChangefeedDescription) SetMode(v ChangefeedMode_Mode) {
+	x.xxx_hidden_Mode = v
+}
+
+func (x *ChangefeedDescription) SetFormat(v ChangefeedFormat_Format) {
+	x.xxx_hidden_Format = v
+}
+
+func (x *ChangefeedDescription) SetState(v ChangefeedDescription_State) {
+	x.xxx_hidden_State = v
+}
+
+func (x *ChangefeedDescription) SetVirtualTimestamps(v bool) {
+	x.xxx_hidden_VirtualTimestamps = v
+}
+
+func (x *ChangefeedDescription) SetAttributes(v map[string]string) {
+	x.xxx_hidden_Attributes = v
+}
+
+func (x *ChangefeedDescription) SetAwsRegion(v string) {
+	x.xxx_hidden_AwsRegion = v
+}
+
+func (x *ChangefeedDescription) SetResolvedTimestampsInterval(v *durationpb.Duration) {
+	x.xxx_hidden_ResolvedTimestampsInterval = v
+}
+
+func (x *ChangefeedDescription) HasResolvedTimestampsInterval() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResolvedTimestampsInterval != nil
+}
+
+func (x *ChangefeedDescription) ClearResolvedTimestampsInterval() {
+	x.xxx_hidden_ResolvedTimestampsInterval = nil
+}
+
+type ChangefeedDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Name of the feed
+	Name string
+	// Mode specifies the information that will be written to the feed
+	Mode ChangefeedMode_Mode
+	// Format of the data
+	Format ChangefeedFormat_Format
+	// State of the feed
+	State ChangefeedDescription_State
+	// State of emitting of virtual timestamps along with data
+	VirtualTimestamps bool
+	// Attributes
+	Attributes map[string]string
+	// Value that will be emitted in the `awsRegion` field of the record in DYNAMODB_STREAMS_JSON format
+	AwsRegion string
+	// Interval of emitting of resolved timestamps. If unspecified, resolved timestamps are not emitted.
+	ResolvedTimestampsInterval *durationpb.Duration
+}
+
+func (b0 ChangefeedDescription_builder) Build() *ChangefeedDescription {
+	m0 := &ChangefeedDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Mode = b.Mode
+	x.xxx_hidden_Format = b.Format
+	x.xxx_hidden_State = b.State
+	x.xxx_hidden_VirtualTimestamps = b.VirtualTimestamps
+	x.xxx_hidden_Attributes = b.Attributes
+	x.xxx_hidden_AwsRegion = b.AwsRegion
+	x.xxx_hidden_ResolvedTimestampsInterval = b.ResolvedTimestampsInterval
+	return m0
+}
+
 type StoragePool struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Media         string                 `protobuf:"bytes,1,opt,name=media,proto3" json:"media,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Media string                 `protobuf:"bytes,1,opt,name=media,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *StoragePool) Reset() {
@@ -1835,29 +2440,42 @@ func (x *StoragePool) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StoragePool.ProtoReflect.Descriptor instead.
-func (*StoragePool) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{17}
-}
-
 func (x *StoragePool) GetMedia() string {
 	if x != nil {
-		return x.Media
+		return x.xxx_hidden_Media
 	}
 	return ""
 }
 
+func (x *StoragePool) SetMedia(v string) {
+	x.xxx_hidden_Media = v
+}
+
+type StoragePool_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Media string
+}
+
+func (b0 StoragePool_builder) Build() *StoragePool {
+	m0 := &StoragePool{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Media = b.Media
+	return m0
+}
+
 type StoragePolicy struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	PresetName     string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3" json:"preset_name,omitempty"`
-	Syslog         *StoragePool           `protobuf:"bytes,2,opt,name=syslog,proto3" json:"syslog,omitempty"`
-	Log            *StoragePool           `protobuf:"bytes,3,opt,name=log,proto3" json:"log,omitempty"`
-	Data           *StoragePool           `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
-	External       *StoragePool           `protobuf:"bytes,5,opt,name=external,proto3" json:"external,omitempty"`
-	KeepInMemory   Ydb.FeatureFlag_Status `protobuf:"varint,6,opt,name=keep_in_memory,json=keepInMemory,proto3,enum=Ydb.FeatureFlag_Status" json:"keep_in_memory,omitempty"`
-	ColumnFamilies []*ColumnFamilyPolicy  `protobuf:"bytes,7,rep,name=column_families,json=columnFamilies,proto3" json:"column_families,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PresetName     string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3"`
+	xxx_hidden_Syslog         *StoragePool           `protobuf:"bytes,2,opt,name=syslog,proto3"`
+	xxx_hidden_Log            *StoragePool           `protobuf:"bytes,3,opt,name=log,proto3"`
+	xxx_hidden_Data           *StoragePool           `protobuf:"bytes,4,opt,name=data,proto3"`
+	xxx_hidden_External       *StoragePool           `protobuf:"bytes,5,opt,name=external,proto3"`
+	xxx_hidden_KeepInMemory   Ydb.FeatureFlag_Status `protobuf:"varint,6,opt,name=keep_in_memory,json=keepInMemory,proto3,enum=Ydb.FeatureFlag_Status"`
+	xxx_hidden_ColumnFamilies *[]*ColumnFamilyPolicy `protobuf:"bytes,7,rep,name=column_families,json=columnFamilies,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *StoragePolicy) Reset() {
@@ -1885,75 +2503,164 @@ func (x *StoragePolicy) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StoragePolicy.ProtoReflect.Descriptor instead.
-func (*StoragePolicy) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{18}
-}
-
 func (x *StoragePolicy) GetPresetName() string {
 	if x != nil {
-		return x.PresetName
+		return x.xxx_hidden_PresetName
 	}
 	return ""
 }
 
 func (x *StoragePolicy) GetSyslog() *StoragePool {
 	if x != nil {
-		return x.Syslog
+		return x.xxx_hidden_Syslog
 	}
 	return nil
 }
 
 func (x *StoragePolicy) GetLog() *StoragePool {
 	if x != nil {
-		return x.Log
+		return x.xxx_hidden_Log
 	}
 	return nil
 }
 
 func (x *StoragePolicy) GetData() *StoragePool {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
 func (x *StoragePolicy) GetExternal() *StoragePool {
 	if x != nil {
-		return x.External
+		return x.xxx_hidden_External
 	}
 	return nil
 }
 
 func (x *StoragePolicy) GetKeepInMemory() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.KeepInMemory
+		return x.xxx_hidden_KeepInMemory
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
 func (x *StoragePolicy) GetColumnFamilies() []*ColumnFamilyPolicy {
 	if x != nil {
-		return x.ColumnFamilies
+		if x.xxx_hidden_ColumnFamilies != nil {
+			return *x.xxx_hidden_ColumnFamilies
+		}
 	}
 	return nil
 }
 
+func (x *StoragePolicy) SetPresetName(v string) {
+	x.xxx_hidden_PresetName = v
+}
+
+func (x *StoragePolicy) SetSyslog(v *StoragePool) {
+	x.xxx_hidden_Syslog = v
+}
+
+func (x *StoragePolicy) SetLog(v *StoragePool) {
+	x.xxx_hidden_Log = v
+}
+
+func (x *StoragePolicy) SetData(v *StoragePool) {
+	x.xxx_hidden_Data = v
+}
+
+func (x *StoragePolicy) SetExternal(v *StoragePool) {
+	x.xxx_hidden_External = v
+}
+
+func (x *StoragePolicy) SetKeepInMemory(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_KeepInMemory = v
+}
+
+func (x *StoragePolicy) SetColumnFamilies(v []*ColumnFamilyPolicy) {
+	x.xxx_hidden_ColumnFamilies = &v
+}
+
+func (x *StoragePolicy) HasSyslog() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Syslog != nil
+}
+
+func (x *StoragePolicy) HasLog() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Log != nil
+}
+
+func (x *StoragePolicy) HasData() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Data != nil
+}
+
+func (x *StoragePolicy) HasExternal() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_External != nil
+}
+
+func (x *StoragePolicy) ClearSyslog() {
+	x.xxx_hidden_Syslog = nil
+}
+
+func (x *StoragePolicy) ClearLog() {
+	x.xxx_hidden_Log = nil
+}
+
+func (x *StoragePolicy) ClearData() {
+	x.xxx_hidden_Data = nil
+}
+
+func (x *StoragePolicy) ClearExternal() {
+	x.xxx_hidden_External = nil
+}
+
+type StoragePolicy_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PresetName     string
+	Syslog         *StoragePool
+	Log            *StoragePool
+	Data           *StoragePool
+	External       *StoragePool
+	KeepInMemory   Ydb.FeatureFlag_Status
+	ColumnFamilies []*ColumnFamilyPolicy
+}
+
+func (b0 StoragePolicy_builder) Build() *StoragePolicy {
+	m0 := &StoragePolicy{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PresetName = b.PresetName
+	x.xxx_hidden_Syslog = b.Syslog
+	x.xxx_hidden_Log = b.Log
+	x.xxx_hidden_Data = b.Data
+	x.xxx_hidden_External = b.External
+	x.xxx_hidden_KeepInMemory = b.KeepInMemory
+	x.xxx_hidden_ColumnFamilies = &b.ColumnFamilies
+	return m0
+}
+
 type ColumnFamilyPolicy struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the column family, the name "default" must be used for the
-	// primary column family that contains as least primary key columns
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Storage settings for the column group (default to values in storage policy)
-	Data     *StoragePool `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	External *StoragePool `protobuf:"bytes,3,opt,name=external,proto3" json:"external,omitempty"`
-	// When enabled table data will be kept in memory
-	// WARNING: DO NOT USE
-	KeepInMemory Ydb.FeatureFlag_Status `protobuf:"varint,4,opt,name=keep_in_memory,json=keepInMemory,proto3,enum=Ydb.FeatureFlag_Status" json:"keep_in_memory,omitempty"`
-	// Optionally specify whether data should be compressed
-	Compression   ColumnFamilyPolicy_Compression `protobuf:"varint,5,opt,name=compression,proto3,enum=Ydb.Table.ColumnFamilyPolicy_Compression" json:"compression,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState         `protogen:"opaque.v1"`
+	xxx_hidden_Name         string                         `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Data         *StoragePool                   `protobuf:"bytes,2,opt,name=data,proto3"`
+	xxx_hidden_External     *StoragePool                   `protobuf:"bytes,3,opt,name=external,proto3"`
+	xxx_hidden_KeepInMemory Ydb.FeatureFlag_Status         `protobuf:"varint,4,opt,name=keep_in_memory,json=keepInMemory,proto3,enum=Ydb.FeatureFlag_Status"`
+	xxx_hidden_Compression  ColumnFamilyPolicy_Compression `protobuf:"varint,5,opt,name=compression,proto3,enum=Ydb.Table.ColumnFamilyPolicy_Compression"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ColumnFamilyPolicy) Reset() {
@@ -1981,51 +2688,116 @@ func (x *ColumnFamilyPolicy) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ColumnFamilyPolicy.ProtoReflect.Descriptor instead.
-func (*ColumnFamilyPolicy) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{19}
-}
-
 func (x *ColumnFamilyPolicy) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ColumnFamilyPolicy) GetData() *StoragePool {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
 func (x *ColumnFamilyPolicy) GetExternal() *StoragePool {
 	if x != nil {
-		return x.External
+		return x.xxx_hidden_External
 	}
 	return nil
 }
 
 func (x *ColumnFamilyPolicy) GetKeepInMemory() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.KeepInMemory
+		return x.xxx_hidden_KeepInMemory
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
 func (x *ColumnFamilyPolicy) GetCompression() ColumnFamilyPolicy_Compression {
 	if x != nil {
-		return x.Compression
+		return x.xxx_hidden_Compression
 	}
 	return ColumnFamilyPolicy_COMPRESSION_UNSPECIFIED
 }
 
+func (x *ColumnFamilyPolicy) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *ColumnFamilyPolicy) SetData(v *StoragePool) {
+	x.xxx_hidden_Data = v
+}
+
+func (x *ColumnFamilyPolicy) SetExternal(v *StoragePool) {
+	x.xxx_hidden_External = v
+}
+
+func (x *ColumnFamilyPolicy) SetKeepInMemory(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_KeepInMemory = v
+}
+
+func (x *ColumnFamilyPolicy) SetCompression(v ColumnFamilyPolicy_Compression) {
+	x.xxx_hidden_Compression = v
+}
+
+func (x *ColumnFamilyPolicy) HasData() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Data != nil
+}
+
+func (x *ColumnFamilyPolicy) HasExternal() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_External != nil
+}
+
+func (x *ColumnFamilyPolicy) ClearData() {
+	x.xxx_hidden_Data = nil
+}
+
+func (x *ColumnFamilyPolicy) ClearExternal() {
+	x.xxx_hidden_External = nil
+}
+
+type ColumnFamilyPolicy_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Name of the column family, the name "default" must be used for the
+	// primary column family that contains as least primary key columns
+	Name string
+	// Storage settings for the column group (default to values in storage policy)
+	Data     *StoragePool
+	External *StoragePool
+	// When enabled table data will be kept in memory
+	// WARNING: DO NOT USE
+	KeepInMemory Ydb.FeatureFlag_Status
+	// Optionally specify whether data should be compressed
+	Compression ColumnFamilyPolicy_Compression
+}
+
+func (b0 ColumnFamilyPolicy_builder) Build() *ColumnFamilyPolicy {
+	m0 := &ColumnFamilyPolicy{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Data = b.Data
+	x.xxx_hidden_External = b.External
+	x.xxx_hidden_KeepInMemory = b.KeepInMemory
+	x.xxx_hidden_Compression = b.Compression
+	return m0
+}
+
 type CompactionPolicy struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PresetName    string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3" json:"preset_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PresetName string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CompactionPolicy) Reset() {
@@ -2053,28 +2825,36 @@ func (x *CompactionPolicy) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CompactionPolicy.ProtoReflect.Descriptor instead.
-func (*CompactionPolicy) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{20}
-}
-
 func (x *CompactionPolicy) GetPresetName() string {
 	if x != nil {
-		return x.PresetName
+		return x.xxx_hidden_PresetName
 	}
 	return ""
 }
 
+func (x *CompactionPolicy) SetPresetName(v string) {
+	x.xxx_hidden_PresetName = v
+}
+
+type CompactionPolicy_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PresetName string
+}
+
+func (b0 CompactionPolicy_builder) Build() *CompactionPolicy {
+	m0 := &CompactionPolicy{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PresetName = b.PresetName
+	return m0
+}
+
 type ExplicitPartitions struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Specify key values used to split table into partitions.
-	// Each value becomes the first key of a new partition.
-	// Key values should go in ascending order.
-	// Total number of created partitions is number of specified
-	// keys + 1.
-	SplitPoints   []*Ydb.TypedValue `protobuf:"bytes,1,rep,name=split_points,json=splitPoints,proto3" json:"split_points,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SplitPoints *[]*Ydb.TypedValue     `protobuf:"bytes,1,rep,name=split_points,json=splitPoints,proto3"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ExplicitPartitions) Reset() {
@@ -2102,28 +2882,45 @@ func (x *ExplicitPartitions) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExplicitPartitions.ProtoReflect.Descriptor instead.
-func (*ExplicitPartitions) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{21}
-}
-
 func (x *ExplicitPartitions) GetSplitPoints() []*Ydb.TypedValue {
 	if x != nil {
-		return x.SplitPoints
+		if x.xxx_hidden_SplitPoints != nil {
+			return *x.xxx_hidden_SplitPoints
+		}
 	}
 	return nil
 }
 
+func (x *ExplicitPartitions) SetSplitPoints(v []*Ydb.TypedValue) {
+	x.xxx_hidden_SplitPoints = &v
+}
+
+type ExplicitPartitions_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Specify key values used to split table into partitions.
+	// Each value becomes the first key of a new partition.
+	// Key values should go in ascending order.
+	// Total number of created partitions is number of specified
+	// keys + 1.
+	SplitPoints []*Ydb.TypedValue
+}
+
+func (b0 ExplicitPartitions_builder) Build() *ExplicitPartitions {
+	m0 := &ExplicitPartitions{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SplitPoints = &b.SplitPoints
+	return m0
+}
+
 type PartitionStats struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Approximate number of rows in shard
-	RowsEstimate uint64 `protobuf:"varint,1,opt,name=rows_estimate,json=rowsEstimate,proto3" json:"rows_estimate,omitempty"`
-	// Approximate size of shard (bytes)
-	StoreSize uint64 `protobuf:"varint,2,opt,name=store_size,json=storeSize,proto3" json:"store_size,omitempty"`
-	// id of node that serve shard key range
-	LeaderNodeId  uint32 `protobuf:"varint,3,opt,name=leader_node_id,json=leaderNodeId,proto3" json:"leader_node_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_RowsEstimate uint64                 `protobuf:"varint,1,opt,name=rows_estimate,json=rowsEstimate,proto3"`
+	xxx_hidden_StoreSize    uint64                 `protobuf:"varint,2,opt,name=store_size,json=storeSize,proto3"`
+	xxx_hidden_LeaderNodeId uint32                 `protobuf:"varint,3,opt,name=leader_node_id,json=leaderNodeId,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *PartitionStats) Reset() {
@@ -2151,48 +2948,70 @@ func (x *PartitionStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PartitionStats.ProtoReflect.Descriptor instead.
-func (*PartitionStats) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{22}
-}
-
 func (x *PartitionStats) GetRowsEstimate() uint64 {
 	if x != nil {
-		return x.RowsEstimate
+		return x.xxx_hidden_RowsEstimate
 	}
 	return 0
 }
 
 func (x *PartitionStats) GetStoreSize() uint64 {
 	if x != nil {
-		return x.StoreSize
+		return x.xxx_hidden_StoreSize
 	}
 	return 0
 }
 
 func (x *PartitionStats) GetLeaderNodeId() uint32 {
 	if x != nil {
-		return x.LeaderNodeId
+		return x.xxx_hidden_LeaderNodeId
 	}
 	return 0
 }
 
+func (x *PartitionStats) SetRowsEstimate(v uint64) {
+	x.xxx_hidden_RowsEstimate = v
+}
+
+func (x *PartitionStats) SetStoreSize(v uint64) {
+	x.xxx_hidden_StoreSize = v
+}
+
+func (x *PartitionStats) SetLeaderNodeId(v uint32) {
+	x.xxx_hidden_LeaderNodeId = v
+}
+
+type PartitionStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Approximate number of rows in shard
+	RowsEstimate uint64
+	// Approximate size of shard (bytes)
+	StoreSize uint64
+	// id of node that serve shard key range
+	LeaderNodeId uint32
+}
+
+func (b0 PartitionStats_builder) Build() *PartitionStats {
+	m0 := &PartitionStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_RowsEstimate = b.RowsEstimate
+	x.xxx_hidden_StoreSize = b.StoreSize
+	x.xxx_hidden_LeaderNodeId = b.LeaderNodeId
+	return m0
+}
+
 type TableStats struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Stats for each partition
-	PartitionStats []*PartitionStats `protobuf:"bytes,1,rep,name=partition_stats,json=partitionStats,proto3" json:"partition_stats,omitempty"`
-	// Approximate number of rows in table
-	RowsEstimate uint64 `protobuf:"varint,2,opt,name=rows_estimate,json=rowsEstimate,proto3" json:"rows_estimate,omitempty"`
-	// Approximate size of table (bytes)
-	StoreSize uint64 `protobuf:"varint,3,opt,name=store_size,json=storeSize,proto3" json:"store_size,omitempty"`
-	// Number of partitions in table
-	Partitions uint64 `protobuf:"varint,4,opt,name=partitions,proto3" json:"partitions,omitempty"`
-	// Timestamp of table creation
-	CreationTime *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=creation_time,json=creationTime,proto3" json:"creation_time,omitempty"`
-	// Timestamp of last modification
-	ModificationTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=modification_time,json=modificationTime,proto3" json:"modification_time,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionStats   *[]*PartitionStats     `protobuf:"bytes,1,rep,name=partition_stats,json=partitionStats,proto3"`
+	xxx_hidden_RowsEstimate     uint64                 `protobuf:"varint,2,opt,name=rows_estimate,json=rowsEstimate,proto3"`
+	xxx_hidden_StoreSize        uint64                 `protobuf:"varint,3,opt,name=store_size,json=storeSize,proto3"`
+	xxx_hidden_Partitions       uint64                 `protobuf:"varint,4,opt,name=partitions,proto3"`
+	xxx_hidden_CreationTime     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=creation_time,json=creationTime,proto3"`
+	xxx_hidden_ModificationTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=modification_time,json=modificationTime,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *TableStats) Reset() {
@@ -2220,64 +3039,133 @@ func (x *TableStats) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TableStats.ProtoReflect.Descriptor instead.
-func (*TableStats) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{23}
-}
-
 func (x *TableStats) GetPartitionStats() []*PartitionStats {
 	if x != nil {
-		return x.PartitionStats
+		if x.xxx_hidden_PartitionStats != nil {
+			return *x.xxx_hidden_PartitionStats
+		}
 	}
 	return nil
 }
 
 func (x *TableStats) GetRowsEstimate() uint64 {
 	if x != nil {
-		return x.RowsEstimate
+		return x.xxx_hidden_RowsEstimate
 	}
 	return 0
 }
 
 func (x *TableStats) GetStoreSize() uint64 {
 	if x != nil {
-		return x.StoreSize
+		return x.xxx_hidden_StoreSize
 	}
 	return 0
 }
 
 func (x *TableStats) GetPartitions() uint64 {
 	if x != nil {
-		return x.Partitions
+		return x.xxx_hidden_Partitions
 	}
 	return 0
 }
 
 func (x *TableStats) GetCreationTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.CreationTime
+		return x.xxx_hidden_CreationTime
 	}
 	return nil
 }
 
 func (x *TableStats) GetModificationTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ModificationTime
+		return x.xxx_hidden_ModificationTime
 	}
 	return nil
 }
 
+func (x *TableStats) SetPartitionStats(v []*PartitionStats) {
+	x.xxx_hidden_PartitionStats = &v
+}
+
+func (x *TableStats) SetRowsEstimate(v uint64) {
+	x.xxx_hidden_RowsEstimate = v
+}
+
+func (x *TableStats) SetStoreSize(v uint64) {
+	x.xxx_hidden_StoreSize = v
+}
+
+func (x *TableStats) SetPartitions(v uint64) {
+	x.xxx_hidden_Partitions = v
+}
+
+func (x *TableStats) SetCreationTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CreationTime = v
+}
+
+func (x *TableStats) SetModificationTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_ModificationTime = v
+}
+
+func (x *TableStats) HasCreationTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CreationTime != nil
+}
+
+func (x *TableStats) HasModificationTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ModificationTime != nil
+}
+
+func (x *TableStats) ClearCreationTime() {
+	x.xxx_hidden_CreationTime = nil
+}
+
+func (x *TableStats) ClearModificationTime() {
+	x.xxx_hidden_ModificationTime = nil
+}
+
+type TableStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Stats for each partition
+	PartitionStats []*PartitionStats
+	// Approximate number of rows in table
+	RowsEstimate uint64
+	// Approximate size of table (bytes)
+	StoreSize uint64
+	// Number of partitions in table
+	Partitions uint64
+	// Timestamp of table creation
+	CreationTime *timestamppb.Timestamp
+	// Timestamp of last modification
+	ModificationTime *timestamppb.Timestamp
+}
+
+func (b0 TableStats_builder) Build() *TableStats {
+	m0 := &TableStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionStats = &b.PartitionStats
+	x.xxx_hidden_RowsEstimate = b.RowsEstimate
+	x.xxx_hidden_StoreSize = b.StoreSize
+	x.xxx_hidden_Partitions = b.Partitions
+	x.xxx_hidden_CreationTime = b.CreationTime
+	x.xxx_hidden_ModificationTime = b.ModificationTime
+	return m0
+}
+
 type PartitioningPolicy struct {
-	state            protoimpl.MessageState                    `protogen:"open.v1"`
-	PresetName       string                                    `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3" json:"preset_name,omitempty"`
-	AutoPartitioning PartitioningPolicy_AutoPartitioningPolicy `protobuf:"varint,2,opt,name=auto_partitioning,json=autoPartitioning,proto3,enum=Ydb.Table.PartitioningPolicy_AutoPartitioningPolicy" json:"auto_partitioning,omitempty"`
-	// Types that are valid to be assigned to Partitions:
-	//
-	//	*PartitioningPolicy_UniformPartitions
-	//	*PartitioningPolicy_ExplicitPartitions
-	Partitions    isPartitioningPolicy_Partitions `protobuf_oneof:"partitions"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState                    `protogen:"opaque.v1"`
+	xxx_hidden_PresetName       string                                    `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3"`
+	xxx_hidden_AutoPartitioning PartitioningPolicy_AutoPartitioningPolicy `protobuf:"varint,2,opt,name=auto_partitioning,json=autoPartitioning,proto3,enum=Ydb.Table.PartitioningPolicy_AutoPartitioningPolicy"`
+	xxx_hidden_Partitions       isPartitioningPolicy_Partitions           `protobuf_oneof:"partitions"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *PartitioningPolicy) Reset() {
@@ -2305,35 +3193,23 @@ func (x *PartitioningPolicy) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PartitioningPolicy.ProtoReflect.Descriptor instead.
-func (*PartitioningPolicy) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{24}
-}
-
 func (x *PartitioningPolicy) GetPresetName() string {
 	if x != nil {
-		return x.PresetName
+		return x.xxx_hidden_PresetName
 	}
 	return ""
 }
 
 func (x *PartitioningPolicy) GetAutoPartitioning() PartitioningPolicy_AutoPartitioningPolicy {
 	if x != nil {
-		return x.AutoPartitioning
+		return x.xxx_hidden_AutoPartitioning
 	}
 	return PartitioningPolicy_AUTO_PARTITIONING_POLICY_UNSPECIFIED
 }
 
-func (x *PartitioningPolicy) GetPartitions() isPartitioningPolicy_Partitions {
-	if x != nil {
-		return x.Partitions
-	}
-	return nil
-}
-
 func (x *PartitioningPolicy) GetUniformPartitions() uint64 {
 	if x != nil {
-		if x, ok := x.Partitions.(*PartitioningPolicy_UniformPartitions); ok {
+		if x, ok := x.xxx_hidden_Partitions.(*partitioningPolicy_UniformPartitions); ok {
 			return x.UniformPartitions
 		}
 	}
@@ -2342,38 +3218,155 @@ func (x *PartitioningPolicy) GetUniformPartitions() uint64 {
 
 func (x *PartitioningPolicy) GetExplicitPartitions() *ExplicitPartitions {
 	if x != nil {
-		if x, ok := x.Partitions.(*PartitioningPolicy_ExplicitPartitions); ok {
+		if x, ok := x.xxx_hidden_Partitions.(*partitioningPolicy_ExplicitPartitions); ok {
 			return x.ExplicitPartitions
 		}
 	}
 	return nil
 }
 
+func (x *PartitioningPolicy) SetPresetName(v string) {
+	x.xxx_hidden_PresetName = v
+}
+
+func (x *PartitioningPolicy) SetAutoPartitioning(v PartitioningPolicy_AutoPartitioningPolicy) {
+	x.xxx_hidden_AutoPartitioning = v
+}
+
+func (x *PartitioningPolicy) SetUniformPartitions(v uint64) {
+	x.xxx_hidden_Partitions = &partitioningPolicy_UniformPartitions{v}
+}
+
+func (x *PartitioningPolicy) SetExplicitPartitions(v *ExplicitPartitions) {
+	if v == nil {
+		x.xxx_hidden_Partitions = nil
+		return
+	}
+	x.xxx_hidden_Partitions = &partitioningPolicy_ExplicitPartitions{v}
+}
+
+func (x *PartitioningPolicy) HasPartitions() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Partitions != nil
+}
+
+func (x *PartitioningPolicy) HasUniformPartitions() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Partitions.(*partitioningPolicy_UniformPartitions)
+	return ok
+}
+
+func (x *PartitioningPolicy) HasExplicitPartitions() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Partitions.(*partitioningPolicy_ExplicitPartitions)
+	return ok
+}
+
+func (x *PartitioningPolicy) ClearPartitions() {
+	x.xxx_hidden_Partitions = nil
+}
+
+func (x *PartitioningPolicy) ClearUniformPartitions() {
+	if _, ok := x.xxx_hidden_Partitions.(*partitioningPolicy_UniformPartitions); ok {
+		x.xxx_hidden_Partitions = nil
+	}
+}
+
+func (x *PartitioningPolicy) ClearExplicitPartitions() {
+	if _, ok := x.xxx_hidden_Partitions.(*partitioningPolicy_ExplicitPartitions); ok {
+		x.xxx_hidden_Partitions = nil
+	}
+}
+
+const PartitioningPolicy_Partitions_not_set_case case_PartitioningPolicy_Partitions = 0
+const PartitioningPolicy_UniformPartitions_case case_PartitioningPolicy_Partitions = 3
+const PartitioningPolicy_ExplicitPartitions_case case_PartitioningPolicy_Partitions = 4
+
+func (x *PartitioningPolicy) WhichPartitions() case_PartitioningPolicy_Partitions {
+	if x == nil {
+		return PartitioningPolicy_Partitions_not_set_case
+	}
+	switch x.xxx_hidden_Partitions.(type) {
+	case *partitioningPolicy_UniformPartitions:
+		return PartitioningPolicy_UniformPartitions_case
+	case *partitioningPolicy_ExplicitPartitions:
+		return PartitioningPolicy_ExplicitPartitions_case
+	default:
+		return PartitioningPolicy_Partitions_not_set_case
+	}
+}
+
+type PartitioningPolicy_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PresetName       string
+	AutoPartitioning PartitioningPolicy_AutoPartitioningPolicy
+	// Fields of oneof xxx_hidden_Partitions:
+	// Allows to enable uniform sharding using given shards number.
+	// The first components of primary key must have Uint32/Uint64 type.
+	UniformPartitions *uint64
+	// Explicitly specify key values which are used as borders for
+	// created partitions.
+	ExplicitPartitions *ExplicitPartitions
+	// -- end of xxx_hidden_Partitions
+}
+
+func (b0 PartitioningPolicy_builder) Build() *PartitioningPolicy {
+	m0 := &PartitioningPolicy{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PresetName = b.PresetName
+	x.xxx_hidden_AutoPartitioning = b.AutoPartitioning
+	if b.UniformPartitions != nil {
+		x.xxx_hidden_Partitions = &partitioningPolicy_UniformPartitions{*b.UniformPartitions}
+	}
+	if b.ExplicitPartitions != nil {
+		x.xxx_hidden_Partitions = &partitioningPolicy_ExplicitPartitions{b.ExplicitPartitions}
+	}
+	return m0
+}
+
+type case_PartitioningPolicy_Partitions protoreflect.FieldNumber
+
+func (x case_PartitioningPolicy_Partitions) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[24].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isPartitioningPolicy_Partitions interface {
 	isPartitioningPolicy_Partitions()
 }
 
-type PartitioningPolicy_UniformPartitions struct {
+type partitioningPolicy_UniformPartitions struct {
 	// Allows to enable uniform sharding using given shards number.
 	// The first components of primary key must have Uint32/Uint64 type.
 	UniformPartitions uint64 `protobuf:"varint,3,opt,name=uniform_partitions,json=uniformPartitions,proto3,oneof"`
 }
 
-type PartitioningPolicy_ExplicitPartitions struct {
+type partitioningPolicy_ExplicitPartitions struct {
 	// Explicitly specify key values which are used as borders for
 	// created partitions.
 	ExplicitPartitions *ExplicitPartitions `protobuf:"bytes,4,opt,name=explicit_partitions,json=explicitPartitions,proto3,oneof"`
 }
 
-func (*PartitioningPolicy_UniformPartitions) isPartitioningPolicy_Partitions() {}
+func (*partitioningPolicy_UniformPartitions) isPartitioningPolicy_Partitions() {}
 
-func (*PartitioningPolicy_ExplicitPartitions) isPartitioningPolicy_Partitions() {}
+func (*partitioningPolicy_ExplicitPartitions) isPartitioningPolicy_Partitions() {}
 
 type ExecutionPolicy struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PresetName    string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3" json:"preset_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PresetName string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ExecutionPolicy) Reset() {
@@ -2401,33 +3394,39 @@ func (x *ExecutionPolicy) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecutionPolicy.ProtoReflect.Descriptor instead.
-func (*ExecutionPolicy) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{25}
-}
-
 func (x *ExecutionPolicy) GetPresetName() string {
 	if x != nil {
-		return x.PresetName
+		return x.xxx_hidden_PresetName
 	}
 	return ""
 }
 
+func (x *ExecutionPolicy) SetPresetName(v string) {
+	x.xxx_hidden_PresetName = v
+}
+
+type ExecutionPolicy_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PresetName string
+}
+
+func (b0 ExecutionPolicy_builder) Build() *ExecutionPolicy {
+	m0 := &ExecutionPolicy{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PresetName = b.PresetName
+	return m0
+}
+
 type ReplicationPolicy struct {
-	state      protoimpl.MessageState `protogen:"open.v1"`
-	PresetName string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3" json:"preset_name,omitempty"`
-	// If value is non-zero then it specifies a number of read-only
-	// replicas to create for a table. Zero value means preset
-	// setting usage.
-	ReplicasCount uint32 `protobuf:"varint,2,opt,name=replicas_count,json=replicasCount,proto3" json:"replicas_count,omitempty"`
-	// If this feature in enabled then requested number of replicas
-	// will be created in each availability zone.
-	CreatePerAvailabilityZone Ydb.FeatureFlag_Status `protobuf:"varint,3,opt,name=create_per_availability_zone,json=createPerAvailabilityZone,proto3,enum=Ydb.FeatureFlag_Status" json:"create_per_availability_zone,omitempty"`
-	// If this feature in enabled then read-only replicas can be promoted
-	// to leader.
-	AllowPromotion Ydb.FeatureFlag_Status `protobuf:"varint,4,opt,name=allow_promotion,json=allowPromotion,proto3,enum=Ydb.FeatureFlag_Status" json:"allow_promotion,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PresetName                string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3"`
+	xxx_hidden_ReplicasCount             uint32                 `protobuf:"varint,2,opt,name=replicas_count,json=replicasCount,proto3"`
+	xxx_hidden_CreatePerAvailabilityZone Ydb.FeatureFlag_Status `protobuf:"varint,3,opt,name=create_per_availability_zone,json=createPerAvailabilityZone,proto3,enum=Ydb.FeatureFlag_Status"`
+	xxx_hidden_AllowPromotion            Ydb.FeatureFlag_Status `protobuf:"varint,4,opt,name=allow_promotion,json=allowPromotion,proto3,enum=Ydb.FeatureFlag_Status"`
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *ReplicationPolicy) Reset() {
@@ -2455,44 +3454,82 @@ func (x *ReplicationPolicy) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReplicationPolicy.ProtoReflect.Descriptor instead.
-func (*ReplicationPolicy) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{26}
-}
-
 func (x *ReplicationPolicy) GetPresetName() string {
 	if x != nil {
-		return x.PresetName
+		return x.xxx_hidden_PresetName
 	}
 	return ""
 }
 
 func (x *ReplicationPolicy) GetReplicasCount() uint32 {
 	if x != nil {
-		return x.ReplicasCount
+		return x.xxx_hidden_ReplicasCount
 	}
 	return 0
 }
 
 func (x *ReplicationPolicy) GetCreatePerAvailabilityZone() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.CreatePerAvailabilityZone
+		return x.xxx_hidden_CreatePerAvailabilityZone
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
 func (x *ReplicationPolicy) GetAllowPromotion() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.AllowPromotion
+		return x.xxx_hidden_AllowPromotion
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
+func (x *ReplicationPolicy) SetPresetName(v string) {
+	x.xxx_hidden_PresetName = v
+}
+
+func (x *ReplicationPolicy) SetReplicasCount(v uint32) {
+	x.xxx_hidden_ReplicasCount = v
+}
+
+func (x *ReplicationPolicy) SetCreatePerAvailabilityZone(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_CreatePerAvailabilityZone = v
+}
+
+func (x *ReplicationPolicy) SetAllowPromotion(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_AllowPromotion = v
+}
+
+type ReplicationPolicy_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PresetName string
+	// If value is non-zero then it specifies a number of read-only
+	// replicas to create for a table. Zero value means preset
+	// setting usage.
+	ReplicasCount uint32
+	// If this feature in enabled then requested number of replicas
+	// will be created in each availability zone.
+	CreatePerAvailabilityZone Ydb.FeatureFlag_Status
+	// If this feature in enabled then read-only replicas can be promoted
+	// to leader.
+	AllowPromotion Ydb.FeatureFlag_Status
+}
+
+func (b0 ReplicationPolicy_builder) Build() *ReplicationPolicy {
+	m0 := &ReplicationPolicy{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PresetName = b.PresetName
+	x.xxx_hidden_ReplicasCount = b.ReplicasCount
+	x.xxx_hidden_CreatePerAvailabilityZone = b.CreatePerAvailabilityZone
+	x.xxx_hidden_AllowPromotion = b.AllowPromotion
+	return m0
+}
+
 type CachingPolicy struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	PresetName    string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3" json:"preset_name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PresetName string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CachingPolicy) Reset() {
@@ -2520,29 +3557,42 @@ func (x *CachingPolicy) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CachingPolicy.ProtoReflect.Descriptor instead.
-func (*CachingPolicy) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{27}
-}
-
 func (x *CachingPolicy) GetPresetName() string {
 	if x != nil {
-		return x.PresetName
+		return x.xxx_hidden_PresetName
 	}
 	return ""
 }
 
+func (x *CachingPolicy) SetPresetName(v string) {
+	x.xxx_hidden_PresetName = v
+}
+
+type CachingPolicy_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PresetName string
+}
+
+func (b0 CachingPolicy_builder) Build() *CachingPolicy {
+	m0 := &CachingPolicy{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PresetName = b.PresetName
+	return m0
+}
+
 type TableProfile struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	PresetName         string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3" json:"preset_name,omitempty"`
-	StoragePolicy      *StoragePolicy         `protobuf:"bytes,2,opt,name=storage_policy,json=storagePolicy,proto3" json:"storage_policy,omitempty"`
-	CompactionPolicy   *CompactionPolicy      `protobuf:"bytes,3,opt,name=compaction_policy,json=compactionPolicy,proto3" json:"compaction_policy,omitempty"`
-	PartitioningPolicy *PartitioningPolicy    `protobuf:"bytes,4,opt,name=partitioning_policy,json=partitioningPolicy,proto3" json:"partitioning_policy,omitempty"`
-	ExecutionPolicy    *ExecutionPolicy       `protobuf:"bytes,5,opt,name=execution_policy,json=executionPolicy,proto3" json:"execution_policy,omitempty"`
-	ReplicationPolicy  *ReplicationPolicy     `protobuf:"bytes,6,opt,name=replication_policy,json=replicationPolicy,proto3" json:"replication_policy,omitempty"`
-	CachingPolicy      *CachingPolicy         `protobuf:"bytes,7,opt,name=caching_policy,json=cachingPolicy,proto3" json:"caching_policy,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PresetName         string                 `protobuf:"bytes,1,opt,name=preset_name,json=presetName,proto3"`
+	xxx_hidden_StoragePolicy      *StoragePolicy         `protobuf:"bytes,2,opt,name=storage_policy,json=storagePolicy,proto3"`
+	xxx_hidden_CompactionPolicy   *CompactionPolicy      `protobuf:"bytes,3,opt,name=compaction_policy,json=compactionPolicy,proto3"`
+	xxx_hidden_PartitioningPolicy *PartitioningPolicy    `protobuf:"bytes,4,opt,name=partitioning_policy,json=partitioningPolicy,proto3"`
+	xxx_hidden_ExecutionPolicy    *ExecutionPolicy       `protobuf:"bytes,5,opt,name=execution_policy,json=executionPolicy,proto3"`
+	xxx_hidden_ReplicationPolicy  *ReplicationPolicy     `protobuf:"bytes,6,opt,name=replication_policy,json=replicationPolicy,proto3"`
+	xxx_hidden_CachingPolicy      *CachingPolicy         `protobuf:"bytes,7,opt,name=caching_policy,json=cachingPolicy,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *TableProfile) Reset() {
@@ -2570,72 +3620,189 @@ func (x *TableProfile) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TableProfile.ProtoReflect.Descriptor instead.
-func (*TableProfile) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{28}
-}
-
 func (x *TableProfile) GetPresetName() string {
 	if x != nil {
-		return x.PresetName
+		return x.xxx_hidden_PresetName
 	}
 	return ""
 }
 
 func (x *TableProfile) GetStoragePolicy() *StoragePolicy {
 	if x != nil {
-		return x.StoragePolicy
+		return x.xxx_hidden_StoragePolicy
 	}
 	return nil
 }
 
 func (x *TableProfile) GetCompactionPolicy() *CompactionPolicy {
 	if x != nil {
-		return x.CompactionPolicy
+		return x.xxx_hidden_CompactionPolicy
 	}
 	return nil
 }
 
 func (x *TableProfile) GetPartitioningPolicy() *PartitioningPolicy {
 	if x != nil {
-		return x.PartitioningPolicy
+		return x.xxx_hidden_PartitioningPolicy
 	}
 	return nil
 }
 
 func (x *TableProfile) GetExecutionPolicy() *ExecutionPolicy {
 	if x != nil {
-		return x.ExecutionPolicy
+		return x.xxx_hidden_ExecutionPolicy
 	}
 	return nil
 }
 
 func (x *TableProfile) GetReplicationPolicy() *ReplicationPolicy {
 	if x != nil {
-		return x.ReplicationPolicy
+		return x.xxx_hidden_ReplicationPolicy
 	}
 	return nil
 }
 
 func (x *TableProfile) GetCachingPolicy() *CachingPolicy {
 	if x != nil {
-		return x.CachingPolicy
+		return x.xxx_hidden_CachingPolicy
 	}
 	return nil
 }
 
+func (x *TableProfile) SetPresetName(v string) {
+	x.xxx_hidden_PresetName = v
+}
+
+func (x *TableProfile) SetStoragePolicy(v *StoragePolicy) {
+	x.xxx_hidden_StoragePolicy = v
+}
+
+func (x *TableProfile) SetCompactionPolicy(v *CompactionPolicy) {
+	x.xxx_hidden_CompactionPolicy = v
+}
+
+func (x *TableProfile) SetPartitioningPolicy(v *PartitioningPolicy) {
+	x.xxx_hidden_PartitioningPolicy = v
+}
+
+func (x *TableProfile) SetExecutionPolicy(v *ExecutionPolicy) {
+	x.xxx_hidden_ExecutionPolicy = v
+}
+
+func (x *TableProfile) SetReplicationPolicy(v *ReplicationPolicy) {
+	x.xxx_hidden_ReplicationPolicy = v
+}
+
+func (x *TableProfile) SetCachingPolicy(v *CachingPolicy) {
+	x.xxx_hidden_CachingPolicy = v
+}
+
+func (x *TableProfile) HasStoragePolicy() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StoragePolicy != nil
+}
+
+func (x *TableProfile) HasCompactionPolicy() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CompactionPolicy != nil
+}
+
+func (x *TableProfile) HasPartitioningPolicy() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitioningPolicy != nil
+}
+
+func (x *TableProfile) HasExecutionPolicy() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ExecutionPolicy != nil
+}
+
+func (x *TableProfile) HasReplicationPolicy() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ReplicationPolicy != nil
+}
+
+func (x *TableProfile) HasCachingPolicy() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CachingPolicy != nil
+}
+
+func (x *TableProfile) ClearStoragePolicy() {
+	x.xxx_hidden_StoragePolicy = nil
+}
+
+func (x *TableProfile) ClearCompactionPolicy() {
+	x.xxx_hidden_CompactionPolicy = nil
+}
+
+func (x *TableProfile) ClearPartitioningPolicy() {
+	x.xxx_hidden_PartitioningPolicy = nil
+}
+
+func (x *TableProfile) ClearExecutionPolicy() {
+	x.xxx_hidden_ExecutionPolicy = nil
+}
+
+func (x *TableProfile) ClearReplicationPolicy() {
+	x.xxx_hidden_ReplicationPolicy = nil
+}
+
+func (x *TableProfile) ClearCachingPolicy() {
+	x.xxx_hidden_CachingPolicy = nil
+}
+
+type TableProfile_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PresetName         string
+	StoragePolicy      *StoragePolicy
+	CompactionPolicy   *CompactionPolicy
+	PartitioningPolicy *PartitioningPolicy
+	ExecutionPolicy    *ExecutionPolicy
+	ReplicationPolicy  *ReplicationPolicy
+	CachingPolicy      *CachingPolicy
+}
+
+func (b0 TableProfile_builder) Build() *TableProfile {
+	m0 := &TableProfile{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PresetName = b.PresetName
+	x.xxx_hidden_StoragePolicy = b.StoragePolicy
+	x.xxx_hidden_CompactionPolicy = b.CompactionPolicy
+	x.xxx_hidden_PartitioningPolicy = b.PartitioningPolicy
+	x.xxx_hidden_ExecutionPolicy = b.ExecutionPolicy
+	x.xxx_hidden_ReplicationPolicy = b.ReplicationPolicy
+	x.xxx_hidden_CachingPolicy = b.CachingPolicy
+	return m0
+}
+
 type SequenceDescription struct {
-	state         protoimpl.MessageState      `protogen:"open.v1"`
-	Name          *string                     `protobuf:"bytes,1,opt,name=name,proto3,oneof" json:"name,omitempty"`                                  // mandatorys
-	MinValue      *int64                      `protobuf:"zigzag64,2,opt,name=min_value,json=minValue,proto3,oneof" json:"min_value,omitempty"`       // minimum value, defaults to 1 or Min<i64>
-	MaxValue      *int64                      `protobuf:"zigzag64,3,opt,name=max_value,json=maxValue,proto3,oneof" json:"max_value,omitempty"`       // maximum value, defaults to Max<i64> or -1
-	StartValue    *int64                      `protobuf:"zigzag64,4,opt,name=start_value,json=startValue,proto3,oneof" json:"start_value,omitempty"` // start value, defaults to min_value
-	Cache         *uint64                     `protobuf:"varint,5,opt,name=cache,proto3,oneof" json:"cache,omitempty"`                               // number of items to cache, defaults to 1
-	Increment     *int64                      `protobuf:"zigzag64,6,opt,name=increment,proto3,oneof" json:"increment,omitempty"`                     // increment at each call, defaults to 1
-	Cycle         *bool                       `protobuf:"varint,7,opt,name=cycle,proto3,oneof" json:"cycle,omitempty"`                               // true when cycle on overflow is allowed
-	SetVal        *SequenceDescription_SetVal `protobuf:"bytes,8,opt,name=set_val,json=setVal,proto3,oneof" json:"set_val,omitempty"`                // set_val(next_value, next_used) is executed atomically when creating
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState      `protogen:"opaque.v1"`
+	xxx_hidden_Name        *string                     `protobuf:"bytes,1,opt,name=name,proto3,oneof"`
+	xxx_hidden_MinValue    int64                       `protobuf:"zigzag64,2,opt,name=min_value,json=minValue,proto3,oneof"`
+	xxx_hidden_MaxValue    int64                       `protobuf:"zigzag64,3,opt,name=max_value,json=maxValue,proto3,oneof"`
+	xxx_hidden_StartValue  int64                       `protobuf:"zigzag64,4,opt,name=start_value,json=startValue,proto3,oneof"`
+	xxx_hidden_Cache       uint64                      `protobuf:"varint,5,opt,name=cache,proto3,oneof"`
+	xxx_hidden_Increment   int64                       `protobuf:"zigzag64,6,opt,name=increment,proto3,oneof"`
+	xxx_hidden_Cycle       bool                        `protobuf:"varint,7,opt,name=cycle,proto3,oneof"`
+	xxx_hidden_SetVal      *SequenceDescription_SetVal `protobuf:"bytes,8,opt,name=set_val,json=setVal,proto3,oneof"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *SequenceDescription) Reset() {
@@ -2663,86 +3830,259 @@ func (x *SequenceDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SequenceDescription.ProtoReflect.Descriptor instead.
-func (*SequenceDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{29}
-}
-
 func (x *SequenceDescription) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *SequenceDescription) GetMinValue() int64 {
-	if x != nil && x.MinValue != nil {
-		return *x.MinValue
+	if x != nil {
+		return x.xxx_hidden_MinValue
 	}
 	return 0
 }
 
 func (x *SequenceDescription) GetMaxValue() int64 {
-	if x != nil && x.MaxValue != nil {
-		return *x.MaxValue
+	if x != nil {
+		return x.xxx_hidden_MaxValue
 	}
 	return 0
 }
 
 func (x *SequenceDescription) GetStartValue() int64 {
-	if x != nil && x.StartValue != nil {
-		return *x.StartValue
+	if x != nil {
+		return x.xxx_hidden_StartValue
 	}
 	return 0
 }
 
 func (x *SequenceDescription) GetCache() uint64 {
-	if x != nil && x.Cache != nil {
-		return *x.Cache
+	if x != nil {
+		return x.xxx_hidden_Cache
 	}
 	return 0
 }
 
 func (x *SequenceDescription) GetIncrement() int64 {
-	if x != nil && x.Increment != nil {
-		return *x.Increment
+	if x != nil {
+		return x.xxx_hidden_Increment
 	}
 	return 0
 }
 
 func (x *SequenceDescription) GetCycle() bool {
-	if x != nil && x.Cycle != nil {
-		return *x.Cycle
+	if x != nil {
+		return x.xxx_hidden_Cycle
 	}
 	return false
 }
 
 func (x *SequenceDescription) GetSetVal() *SequenceDescription_SetVal {
 	if x != nil {
-		return x.SetVal
+		return x.xxx_hidden_SetVal
 	}
 	return nil
 }
 
+func (x *SequenceDescription) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
+}
+
+func (x *SequenceDescription) SetMinValue(v int64) {
+	x.xxx_hidden_MinValue = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 8)
+}
+
+func (x *SequenceDescription) SetMaxValue(v int64) {
+	x.xxx_hidden_MaxValue = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 8)
+}
+
+func (x *SequenceDescription) SetStartValue(v int64) {
+	x.xxx_hidden_StartValue = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
+}
+
+func (x *SequenceDescription) SetCache(v uint64) {
+	x.xxx_hidden_Cache = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 8)
+}
+
+func (x *SequenceDescription) SetIncrement(v int64) {
+	x.xxx_hidden_Increment = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 8)
+}
+
+func (x *SequenceDescription) SetCycle(v bool) {
+	x.xxx_hidden_Cycle = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 8)
+}
+
+func (x *SequenceDescription) SetSetVal(v *SequenceDescription_SetVal) {
+	x.xxx_hidden_SetVal = v
+}
+
+func (x *SequenceDescription) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *SequenceDescription) HasMinValue() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *SequenceDescription) HasMaxValue() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *SequenceDescription) HasStartValue() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *SequenceDescription) HasCache() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *SequenceDescription) HasIncrement() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
+func (x *SequenceDescription) HasCycle() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
+func (x *SequenceDescription) HasSetVal() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SetVal != nil
+}
+
+func (x *SequenceDescription) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Name = nil
+}
+
+func (x *SequenceDescription) ClearMinValue() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_MinValue = 0
+}
+
+func (x *SequenceDescription) ClearMaxValue() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_MaxValue = 0
+}
+
+func (x *SequenceDescription) ClearStartValue() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_StartValue = 0
+}
+
+func (x *SequenceDescription) ClearCache() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_Cache = 0
+}
+
+func (x *SequenceDescription) ClearIncrement() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_Increment = 0
+}
+
+func (x *SequenceDescription) ClearCycle() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_Cycle = false
+}
+
+func (x *SequenceDescription) ClearSetVal() {
+	x.xxx_hidden_SetVal = nil
+}
+
+type SequenceDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name       *string
+	MinValue   *int64
+	MaxValue   *int64
+	StartValue *int64
+	Cache      *uint64
+	Increment  *int64
+	Cycle      *bool
+	SetVal     *SequenceDescription_SetVal
+}
+
+func (b0 SequenceDescription_builder) Build() *SequenceDescription {
+	m0 := &SequenceDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
+		x.xxx_hidden_Name = b.Name
+	}
+	if b.MinValue != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 8)
+		x.xxx_hidden_MinValue = *b.MinValue
+	}
+	if b.MaxValue != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 8)
+		x.xxx_hidden_MaxValue = *b.MaxValue
+	}
+	if b.StartValue != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
+		x.xxx_hidden_StartValue = *b.StartValue
+	}
+	if b.Cache != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 8)
+		x.xxx_hidden_Cache = *b.Cache
+	}
+	if b.Increment != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 8)
+		x.xxx_hidden_Increment = *b.Increment
+	}
+	if b.Cycle != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 8)
+		x.xxx_hidden_Cycle = *b.Cycle
+	}
+	x.xxx_hidden_SetVal = b.SetVal
+	return m0
+}
+
 type ColumnMeta struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of column
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Type of column
-	Type *Ydb.Type `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	// Column family name of the column
-	Family string `protobuf:"bytes,3,opt,name=family,proto3" json:"family,omitempty"`
-	// Column nullability
-	NotNull *bool `protobuf:"varint,4,opt,name=not_null,json=notNull,proto3,oneof" json:"not_null,omitempty"`
-	// Column default value option
-	//
-	// Types that are valid to be assigned to DefaultValue:
-	//
-	//	*ColumnMeta_FromLiteral
-	//	*ColumnMeta_FromSequence
-	DefaultValue  isColumnMeta_DefaultValue `protobuf_oneof:"default_value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Name         string                    `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Type         *Ydb.Type                 `protobuf:"bytes,2,opt,name=type,proto3"`
+	xxx_hidden_Family       string                    `protobuf:"bytes,3,opt,name=family,proto3"`
+	xxx_hidden_NotNull      bool                      `protobuf:"varint,4,opt,name=not_null,json=notNull,proto3,oneof"`
+	xxx_hidden_DefaultValue isColumnMeta_DefaultValue `protobuf_oneof:"default_value"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ColumnMeta) Reset() {
@@ -2770,49 +4110,37 @@ func (x *ColumnMeta) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ColumnMeta.ProtoReflect.Descriptor instead.
-func (*ColumnMeta) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{30}
-}
-
 func (x *ColumnMeta) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ColumnMeta) GetType() *Ydb.Type {
 	if x != nil {
-		return x.Type
+		return x.xxx_hidden_Type
 	}
 	return nil
 }
 
 func (x *ColumnMeta) GetFamily() string {
 	if x != nil {
-		return x.Family
+		return x.xxx_hidden_Family
 	}
 	return ""
 }
 
 func (x *ColumnMeta) GetNotNull() bool {
-	if x != nil && x.NotNull != nil {
-		return *x.NotNull
+	if x != nil {
+		return x.xxx_hidden_NotNull
 	}
 	return false
 }
 
-func (x *ColumnMeta) GetDefaultValue() isColumnMeta_DefaultValue {
-	if x != nil {
-		return x.DefaultValue
-	}
-	return nil
-}
-
 func (x *ColumnMeta) GetFromLiteral() *Ydb.TypedValue {
 	if x != nil {
-		if x, ok := x.DefaultValue.(*ColumnMeta_FromLiteral); ok {
+		if x, ok := x.xxx_hidden_DefaultValue.(*columnMeta_FromLiteral); ok {
 			return x.FromLiteral
 		}
 	}
@@ -2821,36 +4149,197 @@ func (x *ColumnMeta) GetFromLiteral() *Ydb.TypedValue {
 
 func (x *ColumnMeta) GetFromSequence() *SequenceDescription {
 	if x != nil {
-		if x, ok := x.DefaultValue.(*ColumnMeta_FromSequence); ok {
+		if x, ok := x.xxx_hidden_DefaultValue.(*columnMeta_FromSequence); ok {
 			return x.FromSequence
 		}
 	}
 	return nil
 }
 
+func (x *ColumnMeta) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *ColumnMeta) SetType(v *Ydb.Type) {
+	x.xxx_hidden_Type = v
+}
+
+func (x *ColumnMeta) SetFamily(v string) {
+	x.xxx_hidden_Family = v
+}
+
+func (x *ColumnMeta) SetNotNull(v bool) {
+	x.xxx_hidden_NotNull = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+}
+
+func (x *ColumnMeta) SetFromLiteral(v *Ydb.TypedValue) {
+	if v == nil {
+		x.xxx_hidden_DefaultValue = nil
+		return
+	}
+	x.xxx_hidden_DefaultValue = &columnMeta_FromLiteral{v}
+}
+
+func (x *ColumnMeta) SetFromSequence(v *SequenceDescription) {
+	if v == nil {
+		x.xxx_hidden_DefaultValue = nil
+		return
+	}
+	x.xxx_hidden_DefaultValue = &columnMeta_FromSequence{v}
+}
+
+func (x *ColumnMeta) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *ColumnMeta) HasNotNull() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *ColumnMeta) HasDefaultValue() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_DefaultValue != nil
+}
+
+func (x *ColumnMeta) HasFromLiteral() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_DefaultValue.(*columnMeta_FromLiteral)
+	return ok
+}
+
+func (x *ColumnMeta) HasFromSequence() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_DefaultValue.(*columnMeta_FromSequence)
+	return ok
+}
+
+func (x *ColumnMeta) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *ColumnMeta) ClearNotNull() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_NotNull = false
+}
+
+func (x *ColumnMeta) ClearDefaultValue() {
+	x.xxx_hidden_DefaultValue = nil
+}
+
+func (x *ColumnMeta) ClearFromLiteral() {
+	if _, ok := x.xxx_hidden_DefaultValue.(*columnMeta_FromLiteral); ok {
+		x.xxx_hidden_DefaultValue = nil
+	}
+}
+
+func (x *ColumnMeta) ClearFromSequence() {
+	if _, ok := x.xxx_hidden_DefaultValue.(*columnMeta_FromSequence); ok {
+		x.xxx_hidden_DefaultValue = nil
+	}
+}
+
+const ColumnMeta_DefaultValue_not_set_case case_ColumnMeta_DefaultValue = 0
+const ColumnMeta_FromLiteral_case case_ColumnMeta_DefaultValue = 5
+const ColumnMeta_FromSequence_case case_ColumnMeta_DefaultValue = 6
+
+func (x *ColumnMeta) WhichDefaultValue() case_ColumnMeta_DefaultValue {
+	if x == nil {
+		return ColumnMeta_DefaultValue_not_set_case
+	}
+	switch x.xxx_hidden_DefaultValue.(type) {
+	case *columnMeta_FromLiteral:
+		return ColumnMeta_FromLiteral_case
+	case *columnMeta_FromSequence:
+		return ColumnMeta_FromSequence_case
+	default:
+		return ColumnMeta_DefaultValue_not_set_case
+	}
+}
+
+type ColumnMeta_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Name of column
+	Name string
+	// Type of column
+	Type *Ydb.Type
+	// Column family name of the column
+	Family string
+	// Column nullability
+	NotNull *bool
+	// Column default value option
+
+	// Fields of oneof xxx_hidden_DefaultValue:
+	FromLiteral  *Ydb.TypedValue
+	FromSequence *SequenceDescription
+	// -- end of xxx_hidden_DefaultValue
+}
+
+func (b0 ColumnMeta_builder) Build() *ColumnMeta {
+	m0 := &ColumnMeta{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_Family = b.Family
+	if b.NotNull != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		x.xxx_hidden_NotNull = *b.NotNull
+	}
+	if b.FromLiteral != nil {
+		x.xxx_hidden_DefaultValue = &columnMeta_FromLiteral{b.FromLiteral}
+	}
+	if b.FromSequence != nil {
+		x.xxx_hidden_DefaultValue = &columnMeta_FromSequence{b.FromSequence}
+	}
+	return m0
+}
+
+type case_ColumnMeta_DefaultValue protoreflect.FieldNumber
+
+func (x case_ColumnMeta_DefaultValue) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[30].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isColumnMeta_DefaultValue interface {
 	isColumnMeta_DefaultValue()
 }
 
-type ColumnMeta_FromLiteral struct {
+type columnMeta_FromLiteral struct {
 	FromLiteral *Ydb.TypedValue `protobuf:"bytes,5,opt,name=from_literal,json=fromLiteral,proto3,oneof"`
 }
 
-type ColumnMeta_FromSequence struct {
+type columnMeta_FromSequence struct {
 	FromSequence *SequenceDescription `protobuf:"bytes,6,opt,name=from_sequence,json=fromSequence,proto3,oneof"`
 }
 
-func (*ColumnMeta_FromLiteral) isColumnMeta_DefaultValue() {}
+func (*columnMeta_FromLiteral) isColumnMeta_DefaultValue() {}
 
-func (*ColumnMeta_FromSequence) isColumnMeta_DefaultValue() {}
+func (*columnMeta_FromSequence) isColumnMeta_DefaultValue() {}
 
 type DateTypeColumnModeSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The column type must be a date type
-	ColumnName         string `protobuf:"bytes,1,opt,name=column_name,json=columnName,proto3" json:"column_name,omitempty"`
-	ExpireAfterSeconds uint32 `protobuf:"varint,2,opt,name=expire_after_seconds,json=expireAfterSeconds,proto3" json:"expire_after_seconds,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ColumnName         string                 `protobuf:"bytes,1,opt,name=column_name,json=columnName,proto3"`
+	xxx_hidden_ExpireAfterSeconds uint32                 `protobuf:"varint,2,opt,name=expire_after_seconds,json=expireAfterSeconds,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *DateTypeColumnModeSettings) Reset() {
@@ -2878,39 +4367,52 @@ func (x *DateTypeColumnModeSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DateTypeColumnModeSettings.ProtoReflect.Descriptor instead.
-func (*DateTypeColumnModeSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{31}
-}
-
 func (x *DateTypeColumnModeSettings) GetColumnName() string {
 	if x != nil {
-		return x.ColumnName
+		return x.xxx_hidden_ColumnName
 	}
 	return ""
 }
 
 func (x *DateTypeColumnModeSettings) GetExpireAfterSeconds() uint32 {
 	if x != nil {
-		return x.ExpireAfterSeconds
+		return x.xxx_hidden_ExpireAfterSeconds
 	}
 	return 0
 }
 
+func (x *DateTypeColumnModeSettings) SetColumnName(v string) {
+	x.xxx_hidden_ColumnName = v
+}
+
+func (x *DateTypeColumnModeSettings) SetExpireAfterSeconds(v uint32) {
+	x.xxx_hidden_ExpireAfterSeconds = v
+}
+
+type DateTypeColumnModeSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The column type must be a date type
+	ColumnName         string
+	ExpireAfterSeconds uint32
+}
+
+func (b0 DateTypeColumnModeSettings_builder) Build() *DateTypeColumnModeSettings {
+	m0 := &DateTypeColumnModeSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ColumnName = b.ColumnName
+	x.xxx_hidden_ExpireAfterSeconds = b.ExpireAfterSeconds
+	return m0
+}
+
 type ValueSinceUnixEpochModeSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The column type must be one of:
-	// - Uint32
-	// - Uint64
-	// - DyNumber
-	ColumnName string `protobuf:"bytes,1,opt,name=column_name,json=columnName,proto3" json:"column_name,omitempty"`
-	// Interpretation of the value stored in <column_name>
-	ColumnUnit ValueSinceUnixEpochModeSettings_Unit `protobuf:"varint,2,opt,name=column_unit,json=columnUnit,proto3,enum=Ydb.Table.ValueSinceUnixEpochModeSettings_Unit" json:"column_unit,omitempty"`
-	// This option is always interpreted as seconds regardless of the
-	// <column_unit> value.
-	ExpireAfterSeconds uint32 `protobuf:"varint,3,opt,name=expire_after_seconds,json=expireAfterSeconds,proto3" json:"expire_after_seconds,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState               `protogen:"opaque.v1"`
+	xxx_hidden_ColumnName         string                               `protobuf:"bytes,1,opt,name=column_name,json=columnName,proto3"`
+	xxx_hidden_ColumnUnit         ValueSinceUnixEpochModeSettings_Unit `protobuf:"varint,2,opt,name=column_unit,json=columnUnit,proto3,enum=Ydb.Table.ValueSinceUnixEpochModeSettings_Unit"`
+	xxx_hidden_ExpireAfterSeconds uint32                               `protobuf:"varint,3,opt,name=expire_after_seconds,json=expireAfterSeconds,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *ValueSinceUnixEpochModeSettings) Reset() {
@@ -2938,44 +4440,70 @@ func (x *ValueSinceUnixEpochModeSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ValueSinceUnixEpochModeSettings.ProtoReflect.Descriptor instead.
-func (*ValueSinceUnixEpochModeSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{32}
-}
-
 func (x *ValueSinceUnixEpochModeSettings) GetColumnName() string {
 	if x != nil {
-		return x.ColumnName
+		return x.xxx_hidden_ColumnName
 	}
 	return ""
 }
 
 func (x *ValueSinceUnixEpochModeSettings) GetColumnUnit() ValueSinceUnixEpochModeSettings_Unit {
 	if x != nil {
-		return x.ColumnUnit
+		return x.xxx_hidden_ColumnUnit
 	}
 	return ValueSinceUnixEpochModeSettings_UNIT_UNSPECIFIED
 }
 
 func (x *ValueSinceUnixEpochModeSettings) GetExpireAfterSeconds() uint32 {
 	if x != nil {
-		return x.ExpireAfterSeconds
+		return x.xxx_hidden_ExpireAfterSeconds
 	}
 	return 0
 }
 
+func (x *ValueSinceUnixEpochModeSettings) SetColumnName(v string) {
+	x.xxx_hidden_ColumnName = v
+}
+
+func (x *ValueSinceUnixEpochModeSettings) SetColumnUnit(v ValueSinceUnixEpochModeSettings_Unit) {
+	x.xxx_hidden_ColumnUnit = v
+}
+
+func (x *ValueSinceUnixEpochModeSettings) SetExpireAfterSeconds(v uint32) {
+	x.xxx_hidden_ExpireAfterSeconds = v
+}
+
+type ValueSinceUnixEpochModeSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The column type must be one of:
+	// - Uint32
+	// - Uint64
+	// - DyNumber
+	ColumnName string
+	// Interpretation of the value stored in <column_name>
+	ColumnUnit ValueSinceUnixEpochModeSettings_Unit
+	// This option is always interpreted as seconds regardless of the
+	// <column_unit> value.
+	ExpireAfterSeconds uint32
+}
+
+func (b0 ValueSinceUnixEpochModeSettings_builder) Build() *ValueSinceUnixEpochModeSettings {
+	m0 := &ValueSinceUnixEpochModeSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ColumnName = b.ColumnName
+	x.xxx_hidden_ColumnUnit = b.ColumnUnit
+	x.xxx_hidden_ExpireAfterSeconds = b.ExpireAfterSeconds
+	return m0
+}
+
 type TtlSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Mode:
-	//
-	//	*TtlSettings_DateTypeColumn
-	//	*TtlSettings_ValueSinceUnixEpoch
-	Mode isTtlSettings_Mode `protobuf_oneof:"mode"`
-	// How often to run BRO on the same partition.
-	// BRO will not be started more often, but may be started less often.
-	RunIntervalSeconds uint32 `protobuf:"varint,3,opt,name=run_interval_seconds,json=runIntervalSeconds,proto3" json:"run_interval_seconds,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Mode               isTtlSettings_Mode     `protobuf_oneof:"mode"`
+	xxx_hidden_RunIntervalSeconds uint32                 `protobuf:"varint,3,opt,name=run_interval_seconds,json=runIntervalSeconds,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *TtlSettings) Reset() {
@@ -3003,21 +4531,9 @@ func (x *TtlSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TtlSettings.ProtoReflect.Descriptor instead.
-func (*TtlSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{33}
-}
-
-func (x *TtlSettings) GetMode() isTtlSettings_Mode {
-	if x != nil {
-		return x.Mode
-	}
-	return nil
-}
-
 func (x *TtlSettings) GetDateTypeColumn() *DateTypeColumnModeSettings {
 	if x != nil {
-		if x, ok := x.Mode.(*TtlSettings_DateTypeColumn); ok {
+		if x, ok := x.xxx_hidden_Mode.(*ttlSettings_DateTypeColumn); ok {
 			return x.DateTypeColumn
 		}
 	}
@@ -3026,7 +4542,7 @@ func (x *TtlSettings) GetDateTypeColumn() *DateTypeColumnModeSettings {
 
 func (x *TtlSettings) GetValueSinceUnixEpoch() *ValueSinceUnixEpochModeSettings {
 	if x != nil {
-		if x, ok := x.Mode.(*TtlSettings_ValueSinceUnixEpoch); ok {
+		if x, ok := x.xxx_hidden_Mode.(*ttlSettings_ValueSinceUnixEpoch); ok {
 			return x.ValueSinceUnixEpoch
 		}
 	}
@@ -3035,46 +4551,148 @@ func (x *TtlSettings) GetValueSinceUnixEpoch() *ValueSinceUnixEpochModeSettings 
 
 func (x *TtlSettings) GetRunIntervalSeconds() uint32 {
 	if x != nil {
-		return x.RunIntervalSeconds
+		return x.xxx_hidden_RunIntervalSeconds
 	}
 	return 0
+}
+
+func (x *TtlSettings) SetDateTypeColumn(v *DateTypeColumnModeSettings) {
+	if v == nil {
+		x.xxx_hidden_Mode = nil
+		return
+	}
+	x.xxx_hidden_Mode = &ttlSettings_DateTypeColumn{v}
+}
+
+func (x *TtlSettings) SetValueSinceUnixEpoch(v *ValueSinceUnixEpochModeSettings) {
+	if v == nil {
+		x.xxx_hidden_Mode = nil
+		return
+	}
+	x.xxx_hidden_Mode = &ttlSettings_ValueSinceUnixEpoch{v}
+}
+
+func (x *TtlSettings) SetRunIntervalSeconds(v uint32) {
+	x.xxx_hidden_RunIntervalSeconds = v
+}
+
+func (x *TtlSettings) HasMode() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Mode != nil
+}
+
+func (x *TtlSettings) HasDateTypeColumn() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Mode.(*ttlSettings_DateTypeColumn)
+	return ok
+}
+
+func (x *TtlSettings) HasValueSinceUnixEpoch() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Mode.(*ttlSettings_ValueSinceUnixEpoch)
+	return ok
+}
+
+func (x *TtlSettings) ClearMode() {
+	x.xxx_hidden_Mode = nil
+}
+
+func (x *TtlSettings) ClearDateTypeColumn() {
+	if _, ok := x.xxx_hidden_Mode.(*ttlSettings_DateTypeColumn); ok {
+		x.xxx_hidden_Mode = nil
+	}
+}
+
+func (x *TtlSettings) ClearValueSinceUnixEpoch() {
+	if _, ok := x.xxx_hidden_Mode.(*ttlSettings_ValueSinceUnixEpoch); ok {
+		x.xxx_hidden_Mode = nil
+	}
+}
+
+const TtlSettings_Mode_not_set_case case_TtlSettings_Mode = 0
+const TtlSettings_DateTypeColumn_case case_TtlSettings_Mode = 1
+const TtlSettings_ValueSinceUnixEpoch_case case_TtlSettings_Mode = 2
+
+func (x *TtlSettings) WhichMode() case_TtlSettings_Mode {
+	if x == nil {
+		return TtlSettings_Mode_not_set_case
+	}
+	switch x.xxx_hidden_Mode.(type) {
+	case *ttlSettings_DateTypeColumn:
+		return TtlSettings_DateTypeColumn_case
+	case *ttlSettings_ValueSinceUnixEpoch:
+		return TtlSettings_ValueSinceUnixEpoch_case
+	default:
+		return TtlSettings_Mode_not_set_case
+	}
+}
+
+type TtlSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Mode:
+	DateTypeColumn      *DateTypeColumnModeSettings
+	ValueSinceUnixEpoch *ValueSinceUnixEpochModeSettings
+	// -- end of xxx_hidden_Mode
+	// How often to run BRO on the same partition.
+	// BRO will not be started more often, but may be started less often.
+	RunIntervalSeconds uint32
+}
+
+func (b0 TtlSettings_builder) Build() *TtlSettings {
+	m0 := &TtlSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.DateTypeColumn != nil {
+		x.xxx_hidden_Mode = &ttlSettings_DateTypeColumn{b.DateTypeColumn}
+	}
+	if b.ValueSinceUnixEpoch != nil {
+		x.xxx_hidden_Mode = &ttlSettings_ValueSinceUnixEpoch{b.ValueSinceUnixEpoch}
+	}
+	x.xxx_hidden_RunIntervalSeconds = b.RunIntervalSeconds
+	return m0
+}
+
+type case_TtlSettings_Mode protoreflect.FieldNumber
+
+func (x case_TtlSettings_Mode) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[33].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isTtlSettings_Mode interface {
 	isTtlSettings_Mode()
 }
 
-type TtlSettings_DateTypeColumn struct {
+type ttlSettings_DateTypeColumn struct {
 	DateTypeColumn *DateTypeColumnModeSettings `protobuf:"bytes,1,opt,name=date_type_column,json=dateTypeColumn,proto3,oneof"`
 }
 
-type TtlSettings_ValueSinceUnixEpoch struct {
+type ttlSettings_ValueSinceUnixEpoch struct {
 	ValueSinceUnixEpoch *ValueSinceUnixEpochModeSettings `protobuf:"bytes,2,opt,name=value_since_unix_epoch,json=valueSinceUnixEpoch,proto3,oneof"`
 }
 
-func (*TtlSettings_DateTypeColumn) isTtlSettings_Mode() {}
+func (*ttlSettings_DateTypeColumn) isTtlSettings_Mode() {}
 
-func (*TtlSettings_ValueSinceUnixEpoch) isTtlSettings_Mode() {}
+func (*ttlSettings_ValueSinceUnixEpoch) isTtlSettings_Mode() {}
 
 type StorageSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// This specifies internal channel 0 commit log storage pool
-	// Fastest available storage recommended, negligible amounts of short-lived data
-	TabletCommitLog0 *StoragePool `protobuf:"bytes,1,opt,name=tablet_commit_log0,json=tabletCommitLog0,proto3" json:"tablet_commit_log0,omitempty"`
-	// This specifies internal channel 1 commit log storage pool
-	// Fastest available storage recommended, small amounts of short-lived data
-	TabletCommitLog1 *StoragePool `protobuf:"bytes,2,opt,name=tablet_commit_log1,json=tabletCommitLog1,proto3" json:"tablet_commit_log1,omitempty"`
-	// This specifies external blobs storage pool
-	External *StoragePool `protobuf:"bytes,4,opt,name=external,proto3" json:"external,omitempty"`
-	// Optionally store large values in "external blobs"
-	// WARNING: DO NOT USE
-	// This feature is experimental and should not be used, restrictions apply:
-	// * Table cannot split/merge when this is enabled
-	// * Table cannot be copied or backed up when this is enabled
-	// * This feature cannot be disabled once enabled for a table
-	StoreExternalBlobs Ydb.FeatureFlag_Status `protobuf:"varint,5,opt,name=store_external_blobs,json=storeExternalBlobs,proto3,enum=Ydb.FeatureFlag_Status" json:"store_external_blobs,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TabletCommitLog0   *StoragePool           `protobuf:"bytes,1,opt,name=tablet_commit_log0,json=tabletCommitLog0,proto3"`
+	xxx_hidden_TabletCommitLog1   *StoragePool           `protobuf:"bytes,2,opt,name=tablet_commit_log1,json=tabletCommitLog1,proto3"`
+	xxx_hidden_External           *StoragePool           `protobuf:"bytes,4,opt,name=external,proto3"`
+	xxx_hidden_StoreExternalBlobs Ydb.FeatureFlag_Status `protobuf:"varint,5,opt,name=store_external_blobs,json=storeExternalBlobs,proto3,enum=Ydb.FeatureFlag_Status"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *StorageSettings) Reset() {
@@ -3102,53 +4720,122 @@ func (x *StorageSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StorageSettings.ProtoReflect.Descriptor instead.
-func (*StorageSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{34}
-}
-
 func (x *StorageSettings) GetTabletCommitLog0() *StoragePool {
 	if x != nil {
-		return x.TabletCommitLog0
+		return x.xxx_hidden_TabletCommitLog0
 	}
 	return nil
 }
 
 func (x *StorageSettings) GetTabletCommitLog1() *StoragePool {
 	if x != nil {
-		return x.TabletCommitLog1
+		return x.xxx_hidden_TabletCommitLog1
 	}
 	return nil
 }
 
 func (x *StorageSettings) GetExternal() *StoragePool {
 	if x != nil {
-		return x.External
+		return x.xxx_hidden_External
 	}
 	return nil
 }
 
 func (x *StorageSettings) GetStoreExternalBlobs() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.StoreExternalBlobs
+		return x.xxx_hidden_StoreExternalBlobs
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
-type ColumnFamily struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Name of the column family, the name "default" must be used for the
-	// primary column family that contains at least primary key columns
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// This specifies data storage settings for column family
-	Data *StoragePool `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
-	// Optionally specify how data should be compressed
-	Compression ColumnFamily_Compression `protobuf:"varint,3,opt,name=compression,proto3,enum=Ydb.Table.ColumnFamily_Compression" json:"compression,omitempty"`
-	// When enabled table data will be kept in memory
+func (x *StorageSettings) SetTabletCommitLog0(v *StoragePool) {
+	x.xxx_hidden_TabletCommitLog0 = v
+}
+
+func (x *StorageSettings) SetTabletCommitLog1(v *StoragePool) {
+	x.xxx_hidden_TabletCommitLog1 = v
+}
+
+func (x *StorageSettings) SetExternal(v *StoragePool) {
+	x.xxx_hidden_External = v
+}
+
+func (x *StorageSettings) SetStoreExternalBlobs(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_StoreExternalBlobs = v
+}
+
+func (x *StorageSettings) HasTabletCommitLog0() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TabletCommitLog0 != nil
+}
+
+func (x *StorageSettings) HasTabletCommitLog1() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TabletCommitLog1 != nil
+}
+
+func (x *StorageSettings) HasExternal() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_External != nil
+}
+
+func (x *StorageSettings) ClearTabletCommitLog0() {
+	x.xxx_hidden_TabletCommitLog0 = nil
+}
+
+func (x *StorageSettings) ClearTabletCommitLog1() {
+	x.xxx_hidden_TabletCommitLog1 = nil
+}
+
+func (x *StorageSettings) ClearExternal() {
+	x.xxx_hidden_External = nil
+}
+
+type StorageSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// This specifies internal channel 0 commit log storage pool
+	// Fastest available storage recommended, negligible amounts of short-lived data
+	TabletCommitLog0 *StoragePool
+	// This specifies internal channel 1 commit log storage pool
+	// Fastest available storage recommended, small amounts of short-lived data
+	TabletCommitLog1 *StoragePool
+	// This specifies external blobs storage pool
+	External *StoragePool
+	// Optionally store large values in "external blobs"
 	// WARNING: DO NOT USE
-	KeepInMemory  Ydb.FeatureFlag_Status `protobuf:"varint,4,opt,name=keep_in_memory,json=keepInMemory,proto3,enum=Ydb.FeatureFlag_Status" json:"keep_in_memory,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// This feature is experimental and should not be used, restrictions apply:
+	// * Table cannot split/merge when this is enabled
+	// * Table cannot be copied or backed up when this is enabled
+	// * This feature cannot be disabled once enabled for a table
+	StoreExternalBlobs Ydb.FeatureFlag_Status
+}
+
+func (b0 StorageSettings_builder) Build() *StorageSettings {
+	m0 := &StorageSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TabletCommitLog0 = b.TabletCommitLog0
+	x.xxx_hidden_TabletCommitLog1 = b.TabletCommitLog1
+	x.xxx_hidden_External = b.External
+	x.xxx_hidden_StoreExternalBlobs = b.StoreExternalBlobs
+	return m0
+}
+
+type ColumnFamily struct {
+	state                   protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Name         string                   `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Data         *StoragePool             `protobuf:"bytes,2,opt,name=data,proto3"`
+	xxx_hidden_Compression  ColumnFamily_Compression `protobuf:"varint,3,opt,name=compression,proto3,enum=Ydb.Table.ColumnFamily_Compression"`
+	xxx_hidden_KeepInMemory Ydb.FeatureFlag_Status   `protobuf:"varint,4,opt,name=keep_in_memory,json=keepInMemory,proto3,enum=Ydb.FeatureFlag_Status"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ColumnFamily) Reset() {
@@ -3176,55 +4863,97 @@ func (x *ColumnFamily) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ColumnFamily.ProtoReflect.Descriptor instead.
-func (*ColumnFamily) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{35}
-}
-
 func (x *ColumnFamily) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ColumnFamily) GetData() *StoragePool {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
 func (x *ColumnFamily) GetCompression() ColumnFamily_Compression {
 	if x != nil {
-		return x.Compression
+		return x.xxx_hidden_Compression
 	}
 	return ColumnFamily_COMPRESSION_UNSPECIFIED
 }
 
 func (x *ColumnFamily) GetKeepInMemory() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.KeepInMemory
+		return x.xxx_hidden_KeepInMemory
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
+func (x *ColumnFamily) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *ColumnFamily) SetData(v *StoragePool) {
+	x.xxx_hidden_Data = v
+}
+
+func (x *ColumnFamily) SetCompression(v ColumnFamily_Compression) {
+	x.xxx_hidden_Compression = v
+}
+
+func (x *ColumnFamily) SetKeepInMemory(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_KeepInMemory = v
+}
+
+func (x *ColumnFamily) HasData() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Data != nil
+}
+
+func (x *ColumnFamily) ClearData() {
+	x.xxx_hidden_Data = nil
+}
+
+type ColumnFamily_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Name of the column family, the name "default" must be used for the
+	// primary column family that contains at least primary key columns
+	Name string
+	// This specifies data storage settings for column family
+	Data *StoragePool
+	// Optionally specify how data should be compressed
+	Compression ColumnFamily_Compression
+	// When enabled table data will be kept in memory
+	// WARNING: DO NOT USE
+	KeepInMemory Ydb.FeatureFlag_Status
+}
+
+func (b0 ColumnFamily_builder) Build() *ColumnFamily {
+	m0 := &ColumnFamily{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Data = b.Data
+	x.xxx_hidden_Compression = b.Compression
+	x.xxx_hidden_KeepInMemory = b.KeepInMemory
+	return m0
+}
+
 type PartitioningSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of columns to partition by
-	PartitionBy []string `protobuf:"bytes,1,rep,name=partition_by,json=partitionBy,proto3" json:"partition_by,omitempty"`
-	// Enable auto partitioning on reaching upper or lower partition size bound
-	PartitioningBySize Ydb.FeatureFlag_Status `protobuf:"varint,2,opt,name=partitioning_by_size,json=partitioningBySize,proto3,enum=Ydb.FeatureFlag_Status" json:"partitioning_by_size,omitempty"`
-	// Preferred partition size for auto partitioning by size, Mb
-	PartitionSizeMb uint64 `protobuf:"varint,3,opt,name=partition_size_mb,json=partitionSizeMb,proto3" json:"partition_size_mb,omitempty"`
-	// Enable auto partitioning based on load on each partition
-	PartitioningByLoad Ydb.FeatureFlag_Status `protobuf:"varint,4,opt,name=partitioning_by_load,json=partitioningByLoad,proto3,enum=Ydb.FeatureFlag_Status" json:"partitioning_by_load,omitempty"`
-	// Minimum partitions count auto merge would stop working at
-	MinPartitionsCount uint64 `protobuf:"varint,6,opt,name=min_partitions_count,json=minPartitionsCount,proto3" json:"min_partitions_count,omitempty"`
-	// Maximum partitions count auto split would stop working at
-	MaxPartitionsCount uint64 `protobuf:"varint,7,opt,name=max_partitions_count,json=maxPartitionsCount,proto3" json:"max_partitions_count,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartitionBy        []string               `protobuf:"bytes,1,rep,name=partition_by,json=partitionBy,proto3"`
+	xxx_hidden_PartitioningBySize Ydb.FeatureFlag_Status `protobuf:"varint,2,opt,name=partitioning_by_size,json=partitioningBySize,proto3,enum=Ydb.FeatureFlag_Status"`
+	xxx_hidden_PartitionSizeMb    uint64                 `protobuf:"varint,3,opt,name=partition_size_mb,json=partitionSizeMb,proto3"`
+	xxx_hidden_PartitioningByLoad Ydb.FeatureFlag_Status `protobuf:"varint,4,opt,name=partitioning_by_load,json=partitioningByLoad,proto3,enum=Ydb.FeatureFlag_Status"`
+	xxx_hidden_MinPartitionsCount uint64                 `protobuf:"varint,6,opt,name=min_partitions_count,json=minPartitionsCount,proto3"`
+	xxx_hidden_MaxPartitionsCount uint64                 `protobuf:"varint,7,opt,name=max_partitions_count,json=maxPartitionsCount,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *PartitioningSettings) Reset() {
@@ -3252,61 +4981,108 @@ func (x *PartitioningSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PartitioningSettings.ProtoReflect.Descriptor instead.
-func (*PartitioningSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{36}
-}
-
 func (x *PartitioningSettings) GetPartitionBy() []string {
 	if x != nil {
-		return x.PartitionBy
+		return x.xxx_hidden_PartitionBy
 	}
 	return nil
 }
 
 func (x *PartitioningSettings) GetPartitioningBySize() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.PartitioningBySize
+		return x.xxx_hidden_PartitioningBySize
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
 func (x *PartitioningSettings) GetPartitionSizeMb() uint64 {
 	if x != nil {
-		return x.PartitionSizeMb
+		return x.xxx_hidden_PartitionSizeMb
 	}
 	return 0
 }
 
 func (x *PartitioningSettings) GetPartitioningByLoad() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.PartitioningByLoad
+		return x.xxx_hidden_PartitioningByLoad
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
 func (x *PartitioningSettings) GetMinPartitionsCount() uint64 {
 	if x != nil {
-		return x.MinPartitionsCount
+		return x.xxx_hidden_MinPartitionsCount
 	}
 	return 0
 }
 
 func (x *PartitioningSettings) GetMaxPartitionsCount() uint64 {
 	if x != nil {
-		return x.MaxPartitionsCount
+		return x.xxx_hidden_MaxPartitionsCount
 	}
 	return 0
 }
 
+func (x *PartitioningSettings) SetPartitionBy(v []string) {
+	x.xxx_hidden_PartitionBy = v
+}
+
+func (x *PartitioningSettings) SetPartitioningBySize(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_PartitioningBySize = v
+}
+
+func (x *PartitioningSettings) SetPartitionSizeMb(v uint64) {
+	x.xxx_hidden_PartitionSizeMb = v
+}
+
+func (x *PartitioningSettings) SetPartitioningByLoad(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_PartitioningByLoad = v
+}
+
+func (x *PartitioningSettings) SetMinPartitionsCount(v uint64) {
+	x.xxx_hidden_MinPartitionsCount = v
+}
+
+func (x *PartitioningSettings) SetMaxPartitionsCount(v uint64) {
+	x.xxx_hidden_MaxPartitionsCount = v
+}
+
+type PartitioningSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// List of columns to partition by
+	PartitionBy []string
+	// Enable auto partitioning on reaching upper or lower partition size bound
+	PartitioningBySize Ydb.FeatureFlag_Status
+	// Preferred partition size for auto partitioning by size, Mb
+	PartitionSizeMb uint64
+	// Enable auto partitioning based on load on each partition
+	PartitioningByLoad Ydb.FeatureFlag_Status
+	// Minimum partitions count auto merge would stop working at
+	MinPartitionsCount uint64
+	// Maximum partitions count auto split would stop working at
+	MaxPartitionsCount uint64
+}
+
+func (b0 PartitioningSettings_builder) Build() *PartitioningSettings {
+	m0 := &PartitioningSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartitionBy = b.PartitionBy
+	x.xxx_hidden_PartitioningBySize = b.PartitioningBySize
+	x.xxx_hidden_PartitionSizeMb = b.PartitionSizeMb
+	x.xxx_hidden_PartitioningByLoad = b.PartitioningByLoad
+	x.xxx_hidden_MinPartitionsCount = b.MinPartitionsCount
+	x.xxx_hidden_MaxPartitionsCount = b.MaxPartitionsCount
+	return m0
+}
+
 type AzReadReplicasSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// AZ name
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Read replicas count in this AZ
-	ReadReplicasCount uint64 `protobuf:"varint,2,opt,name=read_replicas_count,json=readReplicasCount,proto3" json:"read_replicas_count,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name              string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_ReadReplicasCount uint64                 `protobuf:"varint,2,opt,name=read_replicas_count,json=readReplicasCount,proto3"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *AzReadReplicasSettings) Reset() {
@@ -3334,31 +5110,51 @@ func (x *AzReadReplicasSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AzReadReplicasSettings.ProtoReflect.Descriptor instead.
-func (*AzReadReplicasSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{37}
-}
-
 func (x *AzReadReplicasSettings) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *AzReadReplicasSettings) GetReadReplicasCount() uint64 {
 	if x != nil {
-		return x.ReadReplicasCount
+		return x.xxx_hidden_ReadReplicasCount
 	}
 	return 0
 }
 
+func (x *AzReadReplicasSettings) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *AzReadReplicasSettings) SetReadReplicasCount(v uint64) {
+	x.xxx_hidden_ReadReplicasCount = v
+}
+
+type AzReadReplicasSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// AZ name
+	Name string
+	// Read replicas count in this AZ
+	ReadReplicasCount uint64
+}
+
+func (b0 AzReadReplicasSettings_builder) Build() *AzReadReplicasSettings {
+	m0 := &AzReadReplicasSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_ReadReplicasCount = b.ReadReplicasCount
+	return m0
+}
+
 type ClusterReplicasSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// List of read replicas settings for each AZ
-	AzReadReplicasSettings []*AzReadReplicasSettings `protobuf:"bytes,2,rep,name=az_read_replicas_settings,json=azReadReplicasSettings,proto3" json:"az_read_replicas_settings,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_AzReadReplicasSettings *[]*AzReadReplicasSettings `protobuf:"bytes,2,rep,name=az_read_replicas_settings,json=azReadReplicasSettings,proto3"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *ClusterReplicasSettings) Reset() {
@@ -3386,27 +5182,39 @@ func (x *ClusterReplicasSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ClusterReplicasSettings.ProtoReflect.Descriptor instead.
-func (*ClusterReplicasSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{38}
-}
-
 func (x *ClusterReplicasSettings) GetAzReadReplicasSettings() []*AzReadReplicasSettings {
 	if x != nil {
-		return x.AzReadReplicasSettings
+		if x.xxx_hidden_AzReadReplicasSettings != nil {
+			return *x.xxx_hidden_AzReadReplicasSettings
+		}
 	}
 	return nil
 }
 
+func (x *ClusterReplicasSettings) SetAzReadReplicasSettings(v []*AzReadReplicasSettings) {
+	x.xxx_hidden_AzReadReplicasSettings = &v
+}
+
+type ClusterReplicasSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// List of read replicas settings for each AZ
+	AzReadReplicasSettings []*AzReadReplicasSettings
+}
+
+func (b0 ClusterReplicasSettings_builder) Build() *ClusterReplicasSettings {
+	m0 := &ClusterReplicasSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_AzReadReplicasSettings = &b.AzReadReplicasSettings
+	return m0
+}
+
 type ReadReplicasSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Settings:
-	//
-	//	*ReadReplicasSettings_PerAzReadReplicasCount
-	//	*ReadReplicasSettings_AnyAzReadReplicasCount
-	Settings      isReadReplicasSettings_Settings `protobuf_oneof:"settings"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Settings isReadReplicasSettings_Settings `protobuf_oneof:"settings"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ReadReplicasSettings) Reset() {
@@ -3434,21 +5242,9 @@ func (x *ReadReplicasSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadReplicasSettings.ProtoReflect.Descriptor instead.
-func (*ReadReplicasSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{39}
-}
-
-func (x *ReadReplicasSettings) GetSettings() isReadReplicasSettings_Settings {
-	if x != nil {
-		return x.Settings
-	}
-	return nil
-}
-
 func (x *ReadReplicasSettings) GetPerAzReadReplicasCount() uint64 {
 	if x != nil {
-		if x, ok := x.Settings.(*ReadReplicasSettings_PerAzReadReplicasCount); ok {
+		if x, ok := x.xxx_hidden_Settings.(*readReplicasSettings_PerAzReadReplicasCount); ok {
 			return x.PerAzReadReplicasCount
 		}
 	}
@@ -3457,77 +5253,153 @@ func (x *ReadReplicasSettings) GetPerAzReadReplicasCount() uint64 {
 
 func (x *ReadReplicasSettings) GetAnyAzReadReplicasCount() uint64 {
 	if x != nil {
-		if x, ok := x.Settings.(*ReadReplicasSettings_AnyAzReadReplicasCount); ok {
+		if x, ok := x.xxx_hidden_Settings.(*readReplicasSettings_AnyAzReadReplicasCount); ok {
 			return x.AnyAzReadReplicasCount
 		}
 	}
 	return 0
 }
 
+func (x *ReadReplicasSettings) SetPerAzReadReplicasCount(v uint64) {
+	x.xxx_hidden_Settings = &readReplicasSettings_PerAzReadReplicasCount{v}
+}
+
+func (x *ReadReplicasSettings) SetAnyAzReadReplicasCount(v uint64) {
+	x.xxx_hidden_Settings = &readReplicasSettings_AnyAzReadReplicasCount{v}
+}
+
+func (x *ReadReplicasSettings) HasSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Settings != nil
+}
+
+func (x *ReadReplicasSettings) HasPerAzReadReplicasCount() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Settings.(*readReplicasSettings_PerAzReadReplicasCount)
+	return ok
+}
+
+func (x *ReadReplicasSettings) HasAnyAzReadReplicasCount() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Settings.(*readReplicasSettings_AnyAzReadReplicasCount)
+	return ok
+}
+
+func (x *ReadReplicasSettings) ClearSettings() {
+	x.xxx_hidden_Settings = nil
+}
+
+func (x *ReadReplicasSettings) ClearPerAzReadReplicasCount() {
+	if _, ok := x.xxx_hidden_Settings.(*readReplicasSettings_PerAzReadReplicasCount); ok {
+		x.xxx_hidden_Settings = nil
+	}
+}
+
+func (x *ReadReplicasSettings) ClearAnyAzReadReplicasCount() {
+	if _, ok := x.xxx_hidden_Settings.(*readReplicasSettings_AnyAzReadReplicasCount); ok {
+		x.xxx_hidden_Settings = nil
+	}
+}
+
+const ReadReplicasSettings_Settings_not_set_case case_ReadReplicasSettings_Settings = 0
+const ReadReplicasSettings_PerAzReadReplicasCount_case case_ReadReplicasSettings_Settings = 1
+const ReadReplicasSettings_AnyAzReadReplicasCount_case case_ReadReplicasSettings_Settings = 2
+
+func (x *ReadReplicasSettings) WhichSettings() case_ReadReplicasSettings_Settings {
+	if x == nil {
+		return ReadReplicasSettings_Settings_not_set_case
+	}
+	switch x.xxx_hidden_Settings.(type) {
+	case *readReplicasSettings_PerAzReadReplicasCount:
+		return ReadReplicasSettings_PerAzReadReplicasCount_case
+	case *readReplicasSettings_AnyAzReadReplicasCount:
+		return ReadReplicasSettings_AnyAzReadReplicasCount_case
+	default:
+		return ReadReplicasSettings_Settings_not_set_case
+	}
+}
+
+type ReadReplicasSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Settings:
+	// Set equal read replicas count for every AZ
+	PerAzReadReplicasCount *uint64
+	// Set total replicas count between all AZs
+	AnyAzReadReplicasCount *uint64
+	// -- end of xxx_hidden_Settings
+}
+
+func (b0 ReadReplicasSettings_builder) Build() *ReadReplicasSettings {
+	m0 := &ReadReplicasSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.PerAzReadReplicasCount != nil {
+		x.xxx_hidden_Settings = &readReplicasSettings_PerAzReadReplicasCount{*b.PerAzReadReplicasCount}
+	}
+	if b.AnyAzReadReplicasCount != nil {
+		x.xxx_hidden_Settings = &readReplicasSettings_AnyAzReadReplicasCount{*b.AnyAzReadReplicasCount}
+	}
+	return m0
+}
+
+type case_ReadReplicasSettings_Settings protoreflect.FieldNumber
+
+func (x case_ReadReplicasSettings_Settings) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[39].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isReadReplicasSettings_Settings interface {
 	isReadReplicasSettings_Settings()
 }
 
-type ReadReplicasSettings_PerAzReadReplicasCount struct {
+type readReplicasSettings_PerAzReadReplicasCount struct {
 	// Set equal read replicas count for every AZ
 	PerAzReadReplicasCount uint64 `protobuf:"varint,1,opt,name=per_az_read_replicas_count,json=perAzReadReplicasCount,proto3,oneof"`
 }
 
-type ReadReplicasSettings_AnyAzReadReplicasCount struct {
+type readReplicasSettings_AnyAzReadReplicasCount struct {
 	// Set total replicas count between all AZs
 	AnyAzReadReplicasCount uint64 `protobuf:"varint,2,opt,name=any_az_read_replicas_count,json=anyAzReadReplicasCount,proto3,oneof"`
 }
 
-func (*ReadReplicasSettings_PerAzReadReplicasCount) isReadReplicasSettings_Settings() {}
+func (*readReplicasSettings_PerAzReadReplicasCount) isReadReplicasSettings_Settings() {}
 
-func (*ReadReplicasSettings_AnyAzReadReplicasCount) isReadReplicasSettings_Settings() {}
+func (*readReplicasSettings_AnyAzReadReplicasCount) isReadReplicasSettings_Settings() {}
 
 type CreateTableRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Full path
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Columns (name, type)
-	Columns []*ColumnMeta `protobuf:"bytes,3,rep,name=columns,proto3" json:"columns,omitempty"`
-	// List of columns used as primary key
-	PrimaryKey []string `protobuf:"bytes,4,rep,name=primary_key,json=primaryKey,proto3" json:"primary_key,omitempty"`
-	// Table profile
-	Profile         *TableProfile                   `protobuf:"bytes,5,opt,name=profile,proto3" json:"profile,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,6,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// List of secondary indexes
-	Indexes []*TableIndex `protobuf:"bytes,7,rep,name=indexes,proto3" json:"indexes,omitempty"`
-	// Table rows time to live settings
-	TtlSettings *TtlSettings `protobuf:"bytes,8,opt,name=ttl_settings,json=ttlSettings,proto3" json:"ttl_settings,omitempty"`
-	// Storage settings for table
-	StorageSettings *StorageSettings `protobuf:"bytes,9,opt,name=storage_settings,json=storageSettings,proto3" json:"storage_settings,omitempty"`
-	// Column families
-	ColumnFamilies []*ColumnFamily `protobuf:"bytes,10,rep,name=column_families,json=columnFamilies,proto3" json:"column_families,omitempty"`
-	// Attributes. Total size is limited to 10 KB.
-	Attributes map[string]string `protobuf:"bytes,11,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Predefined named set of settings for table compaction ["default", "small_table", "log_table"].
-	CompactionPolicy string `protobuf:"bytes,12,opt,name=compaction_policy,json=compactionPolicy,proto3" json:"compaction_policy,omitempty"`
-	// Either one of the following partitions options can be specified
-	//
-	// Types that are valid to be assigned to Partitions:
-	//
-	//	*CreateTableRequest_UniformPartitions
-	//	*CreateTableRequest_PartitionAtKeys
-	Partitions isCreateTableRequest_Partitions `protobuf_oneof:"partitions"`
-	// Partitioning settings for table
-	PartitioningSettings *PartitioningSettings `protobuf:"bytes,15,opt,name=partitioning_settings,json=partitioningSettings,proto3" json:"partitioning_settings,omitempty"`
-	// Bloom filter by key
-	KeyBloomFilter Ydb.FeatureFlag_Status `protobuf:"varint,16,opt,name=key_bloom_filter,json=keyBloomFilter,proto3,enum=Ydb.FeatureFlag_Status" json:"key_bloom_filter,omitempty"`
-	// Read replicas settings for table
-	ReadReplicasSettings *ReadReplicasSettings `protobuf:"bytes,17,opt,name=read_replicas_settings,json=readReplicasSettings,proto3" json:"read_replicas_settings,omitempty"`
-	// Tiering rules name. It specifies how data migrates from one tier (logical storage) to another.
-	Tiering string `protobuf:"bytes,18,opt,name=tiering,proto3" json:"tiering,omitempty"`
-	// Is temporary table
-	Temporary bool `protobuf:"varint,19,opt,name=temporary,proto3" json:"temporary,omitempty"`
-	// Is table column or row oriented
-	StoreType     StoreType `protobuf:"varint,20,opt,name=store_type,json=storeType,proto3,enum=Ydb.Table.StoreType" json:"store_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                           protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId            string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_Path                 string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_Columns              *[]*ColumnMeta                  `protobuf:"bytes,3,rep,name=columns,proto3"`
+	xxx_hidden_PrimaryKey           []string                        `protobuf:"bytes,4,rep,name=primary_key,json=primaryKey,proto3"`
+	xxx_hidden_Profile              *TableProfile                   `protobuf:"bytes,5,opt,name=profile,proto3"`
+	xxx_hidden_OperationParams      *Ydb_Operations.OperationParams `protobuf:"bytes,6,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Indexes              *[]*TableIndex                  `protobuf:"bytes,7,rep,name=indexes,proto3"`
+	xxx_hidden_TtlSettings          *TtlSettings                    `protobuf:"bytes,8,opt,name=ttl_settings,json=ttlSettings,proto3"`
+	xxx_hidden_StorageSettings      *StorageSettings                `protobuf:"bytes,9,opt,name=storage_settings,json=storageSettings,proto3"`
+	xxx_hidden_ColumnFamilies       *[]*ColumnFamily                `protobuf:"bytes,10,rep,name=column_families,json=columnFamilies,proto3"`
+	xxx_hidden_Attributes           map[string]string               `protobuf:"bytes,11,rep,name=attributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_CompactionPolicy     string                          `protobuf:"bytes,12,opt,name=compaction_policy,json=compactionPolicy,proto3"`
+	xxx_hidden_Partitions           isCreateTableRequest_Partitions `protobuf_oneof:"partitions"`
+	xxx_hidden_PartitioningSettings *PartitioningSettings           `protobuf:"bytes,15,opt,name=partitioning_settings,json=partitioningSettings,proto3"`
+	xxx_hidden_KeyBloomFilter       Ydb.FeatureFlag_Status          `protobuf:"varint,16,opt,name=key_bloom_filter,json=keyBloomFilter,proto3,enum=Ydb.FeatureFlag_Status"`
+	xxx_hidden_ReadReplicasSettings *ReadReplicasSettings           `protobuf:"bytes,17,opt,name=read_replicas_settings,json=readReplicasSettings,proto3"`
+	xxx_hidden_Tiering              string                          `protobuf:"bytes,18,opt,name=tiering,proto3"`
+	xxx_hidden_Temporary            bool                            `protobuf:"varint,19,opt,name=temporary,proto3"`
+	xxx_hidden_StoreType            StoreType                       `protobuf:"varint,20,opt,name=store_type,json=storeType,proto3,enum=Ydb.Table.StoreType"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *CreateTableRequest) Reset() {
@@ -3555,105 +5427,99 @@ func (x *CreateTableRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateTableRequest.ProtoReflect.Descriptor instead.
-func (*CreateTableRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{40}
-}
-
 func (x *CreateTableRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *CreateTableRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *CreateTableRequest) GetColumns() []*ColumnMeta {
 	if x != nil {
-		return x.Columns
+		if x.xxx_hidden_Columns != nil {
+			return *x.xxx_hidden_Columns
+		}
 	}
 	return nil
 }
 
 func (x *CreateTableRequest) GetPrimaryKey() []string {
 	if x != nil {
-		return x.PrimaryKey
+		return x.xxx_hidden_PrimaryKey
 	}
 	return nil
 }
 
 func (x *CreateTableRequest) GetProfile() *TableProfile {
 	if x != nil {
-		return x.Profile
+		return x.xxx_hidden_Profile
 	}
 	return nil
 }
 
 func (x *CreateTableRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateTableRequest) GetIndexes() []*TableIndex {
 	if x != nil {
-		return x.Indexes
+		if x.xxx_hidden_Indexes != nil {
+			return *x.xxx_hidden_Indexes
+		}
 	}
 	return nil
 }
 
 func (x *CreateTableRequest) GetTtlSettings() *TtlSettings {
 	if x != nil {
-		return x.TtlSettings
+		return x.xxx_hidden_TtlSettings
 	}
 	return nil
 }
 
 func (x *CreateTableRequest) GetStorageSettings() *StorageSettings {
 	if x != nil {
-		return x.StorageSettings
+		return x.xxx_hidden_StorageSettings
 	}
 	return nil
 }
 
 func (x *CreateTableRequest) GetColumnFamilies() []*ColumnFamily {
 	if x != nil {
-		return x.ColumnFamilies
+		if x.xxx_hidden_ColumnFamilies != nil {
+			return *x.xxx_hidden_ColumnFamilies
+		}
 	}
 	return nil
 }
 
 func (x *CreateTableRequest) GetAttributes() map[string]string {
 	if x != nil {
-		return x.Attributes
+		return x.xxx_hidden_Attributes
 	}
 	return nil
 }
 
 func (x *CreateTableRequest) GetCompactionPolicy() string {
 	if x != nil {
-		return x.CompactionPolicy
+		return x.xxx_hidden_CompactionPolicy
 	}
 	return ""
 }
 
-func (x *CreateTableRequest) GetPartitions() isCreateTableRequest_Partitions {
-	if x != nil {
-		return x.Partitions
-	}
-	return nil
-}
-
 func (x *CreateTableRequest) GetUniformPartitions() uint64 {
 	if x != nil {
-		if x, ok := x.Partitions.(*CreateTableRequest_UniformPartitions); ok {
+		if x, ok := x.xxx_hidden_Partitions.(*createTableRequest_UniformPartitions); ok {
 			return x.UniformPartitions
 		}
 	}
@@ -3662,7 +5528,7 @@ func (x *CreateTableRequest) GetUniformPartitions() uint64 {
 
 func (x *CreateTableRequest) GetPartitionAtKeys() *ExplicitPartitions {
 	if x != nil {
-		if x, ok := x.Partitions.(*CreateTableRequest_PartitionAtKeys); ok {
+		if x, ok := x.xxx_hidden_Partitions.(*createTableRequest_PartitionAtKeys); ok {
 			return x.PartitionAtKeys
 		}
 	}
@@ -3671,70 +5537,367 @@ func (x *CreateTableRequest) GetPartitionAtKeys() *ExplicitPartitions {
 
 func (x *CreateTableRequest) GetPartitioningSettings() *PartitioningSettings {
 	if x != nil {
-		return x.PartitioningSettings
+		return x.xxx_hidden_PartitioningSettings
 	}
 	return nil
 }
 
 func (x *CreateTableRequest) GetKeyBloomFilter() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.KeyBloomFilter
+		return x.xxx_hidden_KeyBloomFilter
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
 func (x *CreateTableRequest) GetReadReplicasSettings() *ReadReplicasSettings {
 	if x != nil {
-		return x.ReadReplicasSettings
+		return x.xxx_hidden_ReadReplicasSettings
 	}
 	return nil
 }
 
 func (x *CreateTableRequest) GetTiering() string {
 	if x != nil {
-		return x.Tiering
+		return x.xxx_hidden_Tiering
 	}
 	return ""
 }
 
 func (x *CreateTableRequest) GetTemporary() bool {
 	if x != nil {
-		return x.Temporary
+		return x.xxx_hidden_Temporary
 	}
 	return false
 }
 
 func (x *CreateTableRequest) GetStoreType() StoreType {
 	if x != nil {
-		return x.StoreType
+		return x.xxx_hidden_StoreType
 	}
 	return StoreType_STORE_TYPE_UNSPECIFIED
+}
+
+func (x *CreateTableRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *CreateTableRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *CreateTableRequest) SetColumns(v []*ColumnMeta) {
+	x.xxx_hidden_Columns = &v
+}
+
+func (x *CreateTableRequest) SetPrimaryKey(v []string) {
+	x.xxx_hidden_PrimaryKey = v
+}
+
+func (x *CreateTableRequest) SetProfile(v *TableProfile) {
+	x.xxx_hidden_Profile = v
+}
+
+func (x *CreateTableRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CreateTableRequest) SetIndexes(v []*TableIndex) {
+	x.xxx_hidden_Indexes = &v
+}
+
+func (x *CreateTableRequest) SetTtlSettings(v *TtlSettings) {
+	x.xxx_hidden_TtlSettings = v
+}
+
+func (x *CreateTableRequest) SetStorageSettings(v *StorageSettings) {
+	x.xxx_hidden_StorageSettings = v
+}
+
+func (x *CreateTableRequest) SetColumnFamilies(v []*ColumnFamily) {
+	x.xxx_hidden_ColumnFamilies = &v
+}
+
+func (x *CreateTableRequest) SetAttributes(v map[string]string) {
+	x.xxx_hidden_Attributes = v
+}
+
+func (x *CreateTableRequest) SetCompactionPolicy(v string) {
+	x.xxx_hidden_CompactionPolicy = v
+}
+
+func (x *CreateTableRequest) SetUniformPartitions(v uint64) {
+	x.xxx_hidden_Partitions = &createTableRequest_UniformPartitions{v}
+}
+
+func (x *CreateTableRequest) SetPartitionAtKeys(v *ExplicitPartitions) {
+	if v == nil {
+		x.xxx_hidden_Partitions = nil
+		return
+	}
+	x.xxx_hidden_Partitions = &createTableRequest_PartitionAtKeys{v}
+}
+
+func (x *CreateTableRequest) SetPartitioningSettings(v *PartitioningSettings) {
+	x.xxx_hidden_PartitioningSettings = v
+}
+
+func (x *CreateTableRequest) SetKeyBloomFilter(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_KeyBloomFilter = v
+}
+
+func (x *CreateTableRequest) SetReadReplicasSettings(v *ReadReplicasSettings) {
+	x.xxx_hidden_ReadReplicasSettings = v
+}
+
+func (x *CreateTableRequest) SetTiering(v string) {
+	x.xxx_hidden_Tiering = v
+}
+
+func (x *CreateTableRequest) SetTemporary(v bool) {
+	x.xxx_hidden_Temporary = v
+}
+
+func (x *CreateTableRequest) SetStoreType(v StoreType) {
+	x.xxx_hidden_StoreType = v
+}
+
+func (x *CreateTableRequest) HasProfile() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Profile != nil
+}
+
+func (x *CreateTableRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CreateTableRequest) HasTtlSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TtlSettings != nil
+}
+
+func (x *CreateTableRequest) HasStorageSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StorageSettings != nil
+}
+
+func (x *CreateTableRequest) HasPartitions() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Partitions != nil
+}
+
+func (x *CreateTableRequest) HasUniformPartitions() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Partitions.(*createTableRequest_UniformPartitions)
+	return ok
+}
+
+func (x *CreateTableRequest) HasPartitionAtKeys() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Partitions.(*createTableRequest_PartitionAtKeys)
+	return ok
+}
+
+func (x *CreateTableRequest) HasPartitioningSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitioningSettings != nil
+}
+
+func (x *CreateTableRequest) HasReadReplicasSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ReadReplicasSettings != nil
+}
+
+func (x *CreateTableRequest) ClearProfile() {
+	x.xxx_hidden_Profile = nil
+}
+
+func (x *CreateTableRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *CreateTableRequest) ClearTtlSettings() {
+	x.xxx_hidden_TtlSettings = nil
+}
+
+func (x *CreateTableRequest) ClearStorageSettings() {
+	x.xxx_hidden_StorageSettings = nil
+}
+
+func (x *CreateTableRequest) ClearPartitions() {
+	x.xxx_hidden_Partitions = nil
+}
+
+func (x *CreateTableRequest) ClearUniformPartitions() {
+	if _, ok := x.xxx_hidden_Partitions.(*createTableRequest_UniformPartitions); ok {
+		x.xxx_hidden_Partitions = nil
+	}
+}
+
+func (x *CreateTableRequest) ClearPartitionAtKeys() {
+	if _, ok := x.xxx_hidden_Partitions.(*createTableRequest_PartitionAtKeys); ok {
+		x.xxx_hidden_Partitions = nil
+	}
+}
+
+func (x *CreateTableRequest) ClearPartitioningSettings() {
+	x.xxx_hidden_PartitioningSettings = nil
+}
+
+func (x *CreateTableRequest) ClearReadReplicasSettings() {
+	x.xxx_hidden_ReadReplicasSettings = nil
+}
+
+const CreateTableRequest_Partitions_not_set_case case_CreateTableRequest_Partitions = 0
+const CreateTableRequest_UniformPartitions_case case_CreateTableRequest_Partitions = 13
+const CreateTableRequest_PartitionAtKeys_case case_CreateTableRequest_Partitions = 14
+
+func (x *CreateTableRequest) WhichPartitions() case_CreateTableRequest_Partitions {
+	if x == nil {
+		return CreateTableRequest_Partitions_not_set_case
+	}
+	switch x.xxx_hidden_Partitions.(type) {
+	case *createTableRequest_UniformPartitions:
+		return CreateTableRequest_UniformPartitions_case
+	case *createTableRequest_PartitionAtKeys:
+		return CreateTableRequest_PartitionAtKeys_case
+	default:
+		return CreateTableRequest_Partitions_not_set_case
+	}
+}
+
+type CreateTableRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// Full path
+	Path string
+	// Columns (name, type)
+	Columns []*ColumnMeta
+	// List of columns used as primary key
+	PrimaryKey []string
+	// Table profile
+	Profile         *TableProfile
+	OperationParams *Ydb_Operations.OperationParams
+	// List of secondary indexes
+	Indexes []*TableIndex
+	// Table rows time to live settings
+	TtlSettings *TtlSettings
+	// Storage settings for table
+	StorageSettings *StorageSettings
+	// Column families
+	ColumnFamilies []*ColumnFamily
+	// Attributes. Total size is limited to 10 KB.
+	Attributes map[string]string
+	// Predefined named set of settings for table compaction ["default", "small_table", "log_table"].
+	CompactionPolicy string
+	// Either one of the following partitions options can be specified
+
+	// Fields of oneof xxx_hidden_Partitions:
+	// Enable uniform partitioning using given partitions count.
+	// The first components of primary key must have Uint32/Uint64 type.
+	UniformPartitions *uint64
+	// Explicitly specify key values which are used as borders for created partitions.
+	PartitionAtKeys *ExplicitPartitions
+	// -- end of xxx_hidden_Partitions
+	// Partitioning settings for table
+	PartitioningSettings *PartitioningSettings
+	// Bloom filter by key
+	KeyBloomFilter Ydb.FeatureFlag_Status
+	// Read replicas settings for table
+	ReadReplicasSettings *ReadReplicasSettings
+	// Tiering rules name. It specifies how data migrates from one tier (logical storage) to another.
+	Tiering string
+	// Is temporary table
+	Temporary bool
+	// Is table column or row oriented
+	StoreType StoreType
+}
+
+func (b0 CreateTableRequest_builder) Build() *CreateTableRequest {
+	m0 := &CreateTableRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_Columns = &b.Columns
+	x.xxx_hidden_PrimaryKey = b.PrimaryKey
+	x.xxx_hidden_Profile = b.Profile
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Indexes = &b.Indexes
+	x.xxx_hidden_TtlSettings = b.TtlSettings
+	x.xxx_hidden_StorageSettings = b.StorageSettings
+	x.xxx_hidden_ColumnFamilies = &b.ColumnFamilies
+	x.xxx_hidden_Attributes = b.Attributes
+	x.xxx_hidden_CompactionPolicy = b.CompactionPolicy
+	if b.UniformPartitions != nil {
+		x.xxx_hidden_Partitions = &createTableRequest_UniformPartitions{*b.UniformPartitions}
+	}
+	if b.PartitionAtKeys != nil {
+		x.xxx_hidden_Partitions = &createTableRequest_PartitionAtKeys{b.PartitionAtKeys}
+	}
+	x.xxx_hidden_PartitioningSettings = b.PartitioningSettings
+	x.xxx_hidden_KeyBloomFilter = b.KeyBloomFilter
+	x.xxx_hidden_ReadReplicasSettings = b.ReadReplicasSettings
+	x.xxx_hidden_Tiering = b.Tiering
+	x.xxx_hidden_Temporary = b.Temporary
+	x.xxx_hidden_StoreType = b.StoreType
+	return m0
+}
+
+type case_CreateTableRequest_Partitions protoreflect.FieldNumber
+
+func (x case_CreateTableRequest_Partitions) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[40].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isCreateTableRequest_Partitions interface {
 	isCreateTableRequest_Partitions()
 }
 
-type CreateTableRequest_UniformPartitions struct {
+type createTableRequest_UniformPartitions struct {
 	// Enable uniform partitioning using given partitions count.
 	// The first components of primary key must have Uint32/Uint64 type.
 	UniformPartitions uint64 `protobuf:"varint,13,opt,name=uniform_partitions,json=uniformPartitions,proto3,oneof"`
 }
 
-type CreateTableRequest_PartitionAtKeys struct {
+type createTableRequest_PartitionAtKeys struct {
 	// Explicitly specify key values which are used as borders for created partitions.
 	PartitionAtKeys *ExplicitPartitions `protobuf:"bytes,14,opt,name=partition_at_keys,json=partitionAtKeys,proto3,oneof"`
 }
 
-func (*CreateTableRequest_UniformPartitions) isCreateTableRequest_Partitions() {}
+func (*createTableRequest_UniformPartitions) isCreateTableRequest_Partitions() {}
 
-func (*CreateTableRequest_PartitionAtKeys) isCreateTableRequest_Partitions() {}
+func (*createTableRequest_PartitionAtKeys) isCreateTableRequest_Partitions() {}
 
 type CreateTableResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateTableResponse) Reset() {
@@ -3762,28 +5925,50 @@ func (x *CreateTableResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateTableResponse.ProtoReflect.Descriptor instead.
-func (*CreateTableResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{41}
-}
-
 func (x *CreateTableResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CreateTableResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CreateTableResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CreateTableResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CreateTableResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CreateTableResponse_builder) Build() *CreateTableResponse {
+	m0 := &CreateTableResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Drop table with given path
 type DropTableRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Full path
-	Path            string                          `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,4,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,4,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DropTableRequest) Reset() {
@@ -3811,37 +5996,75 @@ func (x *DropTableRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DropTableRequest.ProtoReflect.Descriptor instead.
-func (*DropTableRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{42}
-}
-
 func (x *DropTableRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *DropTableRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DropTableRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *DropTableRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *DropTableRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *DropTableRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DropTableRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DropTableRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DropTableRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// Full path
+	Path            string
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 DropTableRequest_builder) Build() *DropTableRequest {
+	m0 := &DropTableRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type DropTableResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DropTableResponse) Reset() {
@@ -3869,28 +6092,49 @@ func (x *DropTableResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DropTableResponse.ProtoReflect.Descriptor instead.
-func (*DropTableResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{43}
-}
-
 func (x *DropTableResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DropTableResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DropTableResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DropTableResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DropTableResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DropTableResponse_builder) Build() *DropTableResponse {
+	m0 := &DropTableResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type RenameIndexItem struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Index name to rename
-	SourceName string `protobuf:"bytes,1,opt,name=source_name,json=sourceName,proto3" json:"source_name,omitempty"`
-	// Target index name
-	DestinationName string `protobuf:"bytes,2,opt,name=destination_name,json=destinationName,proto3" json:"destination_name,omitempty"`
-	// Move options
-	ReplaceDestination bool `protobuf:"varint,3,opt,name=replace_destination,json=replaceDestination,proto3" json:"replace_destination,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SourceName         string                 `protobuf:"bytes,1,opt,name=source_name,json=sourceName,proto3"`
+	xxx_hidden_DestinationName    string                 `protobuf:"bytes,2,opt,name=destination_name,json=destinationName,proto3"`
+	xxx_hidden_ReplaceDestination bool                   `protobuf:"varint,3,opt,name=replace_destination,json=replaceDestination,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *RenameIndexItem) Reset() {
@@ -3918,89 +6162,86 @@ func (x *RenameIndexItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RenameIndexItem.ProtoReflect.Descriptor instead.
-func (*RenameIndexItem) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{44}
-}
-
 func (x *RenameIndexItem) GetSourceName() string {
 	if x != nil {
-		return x.SourceName
+		return x.xxx_hidden_SourceName
 	}
 	return ""
 }
 
 func (x *RenameIndexItem) GetDestinationName() string {
 	if x != nil {
-		return x.DestinationName
+		return x.xxx_hidden_DestinationName
 	}
 	return ""
 }
 
 func (x *RenameIndexItem) GetReplaceDestination() bool {
 	if x != nil {
-		return x.ReplaceDestination
+		return x.xxx_hidden_ReplaceDestination
 	}
 	return false
 }
 
+func (x *RenameIndexItem) SetSourceName(v string) {
+	x.xxx_hidden_SourceName = v
+}
+
+func (x *RenameIndexItem) SetDestinationName(v string) {
+	x.xxx_hidden_DestinationName = v
+}
+
+func (x *RenameIndexItem) SetReplaceDestination(v bool) {
+	x.xxx_hidden_ReplaceDestination = v
+}
+
+type RenameIndexItem_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Index name to rename
+	SourceName string
+	// Target index name
+	DestinationName string
+	// Move options
+	ReplaceDestination bool
+}
+
+func (b0 RenameIndexItem_builder) Build() *RenameIndexItem {
+	m0 := &RenameIndexItem{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SourceName = b.SourceName
+	x.xxx_hidden_DestinationName = b.DestinationName
+	x.xxx_hidden_ReplaceDestination = b.ReplaceDestination
+	return m0
+}
+
 // Alter table with given path
 type AlterTableRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Full path
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Columns (name, type) to add
-	AddColumns []*ColumnMeta `protobuf:"bytes,3,rep,name=add_columns,json=addColumns,proto3" json:"add_columns,omitempty"`
-	// Columns to remove
-	DropColumns     []string                        `protobuf:"bytes,4,rep,name=drop_columns,json=dropColumns,proto3" json:"drop_columns,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,5,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Columns to alter
-	AlterColumns []*ColumnMeta `protobuf:"bytes,6,rep,name=alter_columns,json=alterColumns,proto3" json:"alter_columns,omitempty"`
-	// Setup or remove time to live settings
-	//
-	// Types that are valid to be assigned to TtlAction:
-	//
-	//	*AlterTableRequest_SetTtlSettings
-	//	*AlterTableRequest_DropTtlSettings
-	TtlAction isAlterTableRequest_TtlAction `protobuf_oneof:"ttl_action"`
-	// Add secondary indexes
-	AddIndexes []*TableIndex `protobuf:"bytes,9,rep,name=add_indexes,json=addIndexes,proto3" json:"add_indexes,omitempty"`
-	// Remove secondary indexes
-	DropIndexes []string `protobuf:"bytes,10,rep,name=drop_indexes,json=dropIndexes,proto3" json:"drop_indexes,omitempty"`
-	// Change table storage settings
-	AlterStorageSettings *StorageSettings `protobuf:"bytes,11,opt,name=alter_storage_settings,json=alterStorageSettings,proto3" json:"alter_storage_settings,omitempty"`
-	// Add/alter column families
-	AddColumnFamilies   []*ColumnFamily `protobuf:"bytes,12,rep,name=add_column_families,json=addColumnFamilies,proto3" json:"add_column_families,omitempty"`
-	AlterColumnFamilies []*ColumnFamily `protobuf:"bytes,13,rep,name=alter_column_families,json=alterColumnFamilies,proto3" json:"alter_column_families,omitempty"`
-	// Alter attributes. Leave the value blank to drop an attribute.
-	// Cannot be used in combination with other fields (except session_id and path) at the moment.
-	AlterAttributes map[string]string `protobuf:"bytes,14,rep,name=alter_attributes,json=alterAttributes,proto3" json:"alter_attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Set predefined named set of settings for table compaction ["default", "small_table", "log_table"].
-	// Set "default" to use default preset.
-	SetCompactionPolicy string `protobuf:"bytes,15,opt,name=set_compaction_policy,json=setCompactionPolicy,proto3" json:"set_compaction_policy,omitempty"`
-	// Change table partitioning settings
-	AlterPartitioningSettings *PartitioningSettings `protobuf:"bytes,16,opt,name=alter_partitioning_settings,json=alterPartitioningSettings,proto3" json:"alter_partitioning_settings,omitempty"`
-	// Enable/disable bloom filter by key
-	SetKeyBloomFilter Ydb.FeatureFlag_Status `protobuf:"varint,17,opt,name=set_key_bloom_filter,json=setKeyBloomFilter,proto3,enum=Ydb.FeatureFlag_Status" json:"set_key_bloom_filter,omitempty"`
-	// Set read replicas settings for table
-	SetReadReplicasSettings *ReadReplicasSettings `protobuf:"bytes,18,opt,name=set_read_replicas_settings,json=setReadReplicasSettings,proto3" json:"set_read_replicas_settings,omitempty"`
-	// Add change feeds
-	AddChangefeeds []*Changefeed `protobuf:"bytes,19,rep,name=add_changefeeds,json=addChangefeeds,proto3" json:"add_changefeeds,omitempty"`
-	// Remove change feeds (by its names)
-	DropChangefeeds []string `protobuf:"bytes,20,rep,name=drop_changefeeds,json=dropChangefeeds,proto3" json:"drop_changefeeds,omitempty"`
-	// Rename existed index
-	RenameIndexes []*RenameIndexItem `protobuf:"bytes,21,rep,name=rename_indexes,json=renameIndexes,proto3" json:"rename_indexes,omitempty"`
-	// Setup or remove tiering
-	//
-	// Types that are valid to be assigned to TieringAction:
-	//
-	//	*AlterTableRequest_SetTiering
-	//	*AlterTableRequest_DropTiering
-	TieringAction isAlterTableRequest_TieringAction `protobuf_oneof:"tiering_action"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                                protoimpl.MessageState            `protogen:"opaque.v1"`
+	xxx_hidden_SessionId                 string                            `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_Path                      string                            `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_AddColumns                *[]*ColumnMeta                    `protobuf:"bytes,3,rep,name=add_columns,json=addColumns,proto3"`
+	xxx_hidden_DropColumns               []string                          `protobuf:"bytes,4,rep,name=drop_columns,json=dropColumns,proto3"`
+	xxx_hidden_OperationParams           *Ydb_Operations.OperationParams   `protobuf:"bytes,5,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_AlterColumns              *[]*ColumnMeta                    `protobuf:"bytes,6,rep,name=alter_columns,json=alterColumns,proto3"`
+	xxx_hidden_TtlAction                 isAlterTableRequest_TtlAction     `protobuf_oneof:"ttl_action"`
+	xxx_hidden_AddIndexes                *[]*TableIndex                    `protobuf:"bytes,9,rep,name=add_indexes,json=addIndexes,proto3"`
+	xxx_hidden_DropIndexes               []string                          `protobuf:"bytes,10,rep,name=drop_indexes,json=dropIndexes,proto3"`
+	xxx_hidden_AlterStorageSettings      *StorageSettings                  `protobuf:"bytes,11,opt,name=alter_storage_settings,json=alterStorageSettings,proto3"`
+	xxx_hidden_AddColumnFamilies         *[]*ColumnFamily                  `protobuf:"bytes,12,rep,name=add_column_families,json=addColumnFamilies,proto3"`
+	xxx_hidden_AlterColumnFamilies       *[]*ColumnFamily                  `protobuf:"bytes,13,rep,name=alter_column_families,json=alterColumnFamilies,proto3"`
+	xxx_hidden_AlterAttributes           map[string]string                 `protobuf:"bytes,14,rep,name=alter_attributes,json=alterAttributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_SetCompactionPolicy       string                            `protobuf:"bytes,15,opt,name=set_compaction_policy,json=setCompactionPolicy,proto3"`
+	xxx_hidden_AlterPartitioningSettings *PartitioningSettings             `protobuf:"bytes,16,opt,name=alter_partitioning_settings,json=alterPartitioningSettings,proto3"`
+	xxx_hidden_SetKeyBloomFilter         Ydb.FeatureFlag_Status            `protobuf:"varint,17,opt,name=set_key_bloom_filter,json=setKeyBloomFilter,proto3,enum=Ydb.FeatureFlag_Status"`
+	xxx_hidden_SetReadReplicasSettings   *ReadReplicasSettings             `protobuf:"bytes,18,opt,name=set_read_replicas_settings,json=setReadReplicasSettings,proto3"`
+	xxx_hidden_AddChangefeeds            *[]*Changefeed                    `protobuf:"bytes,19,rep,name=add_changefeeds,json=addChangefeeds,proto3"`
+	xxx_hidden_DropChangefeeds           []string                          `protobuf:"bytes,20,rep,name=drop_changefeeds,json=dropChangefeeds,proto3"`
+	xxx_hidden_RenameIndexes             *[]*RenameIndexItem               `protobuf:"bytes,21,rep,name=rename_indexes,json=renameIndexes,proto3"`
+	xxx_hidden_TieringAction             isAlterTableRequest_TieringAction `protobuf_oneof:"tiering_action"`
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *AlterTableRequest) Reset() {
@@ -4028,63 +6269,55 @@ func (x *AlterTableRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterTableRequest.ProtoReflect.Descriptor instead.
-func (*AlterTableRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{45}
-}
-
 func (x *AlterTableRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *AlterTableRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *AlterTableRequest) GetAddColumns() []*ColumnMeta {
 	if x != nil {
-		return x.AddColumns
+		if x.xxx_hidden_AddColumns != nil {
+			return *x.xxx_hidden_AddColumns
+		}
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetDropColumns() []string {
 	if x != nil {
-		return x.DropColumns
+		return x.xxx_hidden_DropColumns
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetAlterColumns() []*ColumnMeta {
 	if x != nil {
-		return x.AlterColumns
-	}
-	return nil
-}
-
-func (x *AlterTableRequest) GetTtlAction() isAlterTableRequest_TtlAction {
-	if x != nil {
-		return x.TtlAction
+		if x.xxx_hidden_AlterColumns != nil {
+			return *x.xxx_hidden_AlterColumns
+		}
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetSetTtlSettings() *TtlSettings {
 	if x != nil {
-		if x, ok := x.TtlAction.(*AlterTableRequest_SetTtlSettings); ok {
+		if x, ok := x.xxx_hidden_TtlAction.(*alterTableRequest_SetTtlSettings); ok {
 			return x.SetTtlSettings
 		}
 	}
@@ -4093,7 +6326,7 @@ func (x *AlterTableRequest) GetSetTtlSettings() *TtlSettings {
 
 func (x *AlterTableRequest) GetDropTtlSettings() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.TtlAction.(*AlterTableRequest_DropTtlSettings); ok {
+		if x, ok := x.xxx_hidden_TtlAction.(*alterTableRequest_DropTtlSettings); ok {
 			return x.DropTtlSettings
 		}
 	}
@@ -4102,105 +6335,108 @@ func (x *AlterTableRequest) GetDropTtlSettings() *emptypb.Empty {
 
 func (x *AlterTableRequest) GetAddIndexes() []*TableIndex {
 	if x != nil {
-		return x.AddIndexes
+		if x.xxx_hidden_AddIndexes != nil {
+			return *x.xxx_hidden_AddIndexes
+		}
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetDropIndexes() []string {
 	if x != nil {
-		return x.DropIndexes
+		return x.xxx_hidden_DropIndexes
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetAlterStorageSettings() *StorageSettings {
 	if x != nil {
-		return x.AlterStorageSettings
+		return x.xxx_hidden_AlterStorageSettings
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetAddColumnFamilies() []*ColumnFamily {
 	if x != nil {
-		return x.AddColumnFamilies
+		if x.xxx_hidden_AddColumnFamilies != nil {
+			return *x.xxx_hidden_AddColumnFamilies
+		}
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetAlterColumnFamilies() []*ColumnFamily {
 	if x != nil {
-		return x.AlterColumnFamilies
+		if x.xxx_hidden_AlterColumnFamilies != nil {
+			return *x.xxx_hidden_AlterColumnFamilies
+		}
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetAlterAttributes() map[string]string {
 	if x != nil {
-		return x.AlterAttributes
+		return x.xxx_hidden_AlterAttributes
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetSetCompactionPolicy() string {
 	if x != nil {
-		return x.SetCompactionPolicy
+		return x.xxx_hidden_SetCompactionPolicy
 	}
 	return ""
 }
 
 func (x *AlterTableRequest) GetAlterPartitioningSettings() *PartitioningSettings {
 	if x != nil {
-		return x.AlterPartitioningSettings
+		return x.xxx_hidden_AlterPartitioningSettings
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetSetKeyBloomFilter() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.SetKeyBloomFilter
+		return x.xxx_hidden_SetKeyBloomFilter
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
 func (x *AlterTableRequest) GetSetReadReplicasSettings() *ReadReplicasSettings {
 	if x != nil {
-		return x.SetReadReplicasSettings
+		return x.xxx_hidden_SetReadReplicasSettings
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetAddChangefeeds() []*Changefeed {
 	if x != nil {
-		return x.AddChangefeeds
+		if x.xxx_hidden_AddChangefeeds != nil {
+			return *x.xxx_hidden_AddChangefeeds
+		}
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetDropChangefeeds() []string {
 	if x != nil {
-		return x.DropChangefeeds
+		return x.xxx_hidden_DropChangefeeds
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetRenameIndexes() []*RenameIndexItem {
 	if x != nil {
-		return x.RenameIndexes
-	}
-	return nil
-}
-
-func (x *AlterTableRequest) GetTieringAction() isAlterTableRequest_TieringAction {
-	if x != nil {
-		return x.TieringAction
+		if x.xxx_hidden_RenameIndexes != nil {
+			return *x.xxx_hidden_RenameIndexes
+		}
 	}
 	return nil
 }
 
 func (x *AlterTableRequest) GetSetTiering() string {
 	if x != nil {
-		if x, ok := x.TieringAction.(*AlterTableRequest_SetTiering); ok {
+		if x, ok := x.xxx_hidden_TieringAction.(*alterTableRequest_SetTiering); ok {
 			return x.SetTiering
 		}
 	}
@@ -4209,50 +6445,425 @@ func (x *AlterTableRequest) GetSetTiering() string {
 
 func (x *AlterTableRequest) GetDropTiering() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.TieringAction.(*AlterTableRequest_DropTiering); ok {
+		if x, ok := x.xxx_hidden_TieringAction.(*alterTableRequest_DropTiering); ok {
 			return x.DropTiering
 		}
 	}
 	return nil
 }
 
+func (x *AlterTableRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *AlterTableRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *AlterTableRequest) SetAddColumns(v []*ColumnMeta) {
+	x.xxx_hidden_AddColumns = &v
+}
+
+func (x *AlterTableRequest) SetDropColumns(v []string) {
+	x.xxx_hidden_DropColumns = v
+}
+
+func (x *AlterTableRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *AlterTableRequest) SetAlterColumns(v []*ColumnMeta) {
+	x.xxx_hidden_AlterColumns = &v
+}
+
+func (x *AlterTableRequest) SetSetTtlSettings(v *TtlSettings) {
+	if v == nil {
+		x.xxx_hidden_TtlAction = nil
+		return
+	}
+	x.xxx_hidden_TtlAction = &alterTableRequest_SetTtlSettings{v}
+}
+
+func (x *AlterTableRequest) SetDropTtlSettings(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_TtlAction = nil
+		return
+	}
+	x.xxx_hidden_TtlAction = &alterTableRequest_DropTtlSettings{v}
+}
+
+func (x *AlterTableRequest) SetAddIndexes(v []*TableIndex) {
+	x.xxx_hidden_AddIndexes = &v
+}
+
+func (x *AlterTableRequest) SetDropIndexes(v []string) {
+	x.xxx_hidden_DropIndexes = v
+}
+
+func (x *AlterTableRequest) SetAlterStorageSettings(v *StorageSettings) {
+	x.xxx_hidden_AlterStorageSettings = v
+}
+
+func (x *AlterTableRequest) SetAddColumnFamilies(v []*ColumnFamily) {
+	x.xxx_hidden_AddColumnFamilies = &v
+}
+
+func (x *AlterTableRequest) SetAlterColumnFamilies(v []*ColumnFamily) {
+	x.xxx_hidden_AlterColumnFamilies = &v
+}
+
+func (x *AlterTableRequest) SetAlterAttributes(v map[string]string) {
+	x.xxx_hidden_AlterAttributes = v
+}
+
+func (x *AlterTableRequest) SetSetCompactionPolicy(v string) {
+	x.xxx_hidden_SetCompactionPolicy = v
+}
+
+func (x *AlterTableRequest) SetAlterPartitioningSettings(v *PartitioningSettings) {
+	x.xxx_hidden_AlterPartitioningSettings = v
+}
+
+func (x *AlterTableRequest) SetSetKeyBloomFilter(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_SetKeyBloomFilter = v
+}
+
+func (x *AlterTableRequest) SetSetReadReplicasSettings(v *ReadReplicasSettings) {
+	x.xxx_hidden_SetReadReplicasSettings = v
+}
+
+func (x *AlterTableRequest) SetAddChangefeeds(v []*Changefeed) {
+	x.xxx_hidden_AddChangefeeds = &v
+}
+
+func (x *AlterTableRequest) SetDropChangefeeds(v []string) {
+	x.xxx_hidden_DropChangefeeds = v
+}
+
+func (x *AlterTableRequest) SetRenameIndexes(v []*RenameIndexItem) {
+	x.xxx_hidden_RenameIndexes = &v
+}
+
+func (x *AlterTableRequest) SetSetTiering(v string) {
+	x.xxx_hidden_TieringAction = &alterTableRequest_SetTiering{v}
+}
+
+func (x *AlterTableRequest) SetDropTiering(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_TieringAction = nil
+		return
+	}
+	x.xxx_hidden_TieringAction = &alterTableRequest_DropTiering{v}
+}
+
+func (x *AlterTableRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *AlterTableRequest) HasTtlAction() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TtlAction != nil
+}
+
+func (x *AlterTableRequest) HasSetTtlSettings() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TtlAction.(*alterTableRequest_SetTtlSettings)
+	return ok
+}
+
+func (x *AlterTableRequest) HasDropTtlSettings() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TtlAction.(*alterTableRequest_DropTtlSettings)
+	return ok
+}
+
+func (x *AlterTableRequest) HasAlterStorageSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_AlterStorageSettings != nil
+}
+
+func (x *AlterTableRequest) HasAlterPartitioningSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_AlterPartitioningSettings != nil
+}
+
+func (x *AlterTableRequest) HasSetReadReplicasSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SetReadReplicasSettings != nil
+}
+
+func (x *AlterTableRequest) HasTieringAction() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TieringAction != nil
+}
+
+func (x *AlterTableRequest) HasSetTiering() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TieringAction.(*alterTableRequest_SetTiering)
+	return ok
+}
+
+func (x *AlterTableRequest) HasDropTiering() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TieringAction.(*alterTableRequest_DropTiering)
+	return ok
+}
+
+func (x *AlterTableRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *AlterTableRequest) ClearTtlAction() {
+	x.xxx_hidden_TtlAction = nil
+}
+
+func (x *AlterTableRequest) ClearSetTtlSettings() {
+	if _, ok := x.xxx_hidden_TtlAction.(*alterTableRequest_SetTtlSettings); ok {
+		x.xxx_hidden_TtlAction = nil
+	}
+}
+
+func (x *AlterTableRequest) ClearDropTtlSettings() {
+	if _, ok := x.xxx_hidden_TtlAction.(*alterTableRequest_DropTtlSettings); ok {
+		x.xxx_hidden_TtlAction = nil
+	}
+}
+
+func (x *AlterTableRequest) ClearAlterStorageSettings() {
+	x.xxx_hidden_AlterStorageSettings = nil
+}
+
+func (x *AlterTableRequest) ClearAlterPartitioningSettings() {
+	x.xxx_hidden_AlterPartitioningSettings = nil
+}
+
+func (x *AlterTableRequest) ClearSetReadReplicasSettings() {
+	x.xxx_hidden_SetReadReplicasSettings = nil
+}
+
+func (x *AlterTableRequest) ClearTieringAction() {
+	x.xxx_hidden_TieringAction = nil
+}
+
+func (x *AlterTableRequest) ClearSetTiering() {
+	if _, ok := x.xxx_hidden_TieringAction.(*alterTableRequest_SetTiering); ok {
+		x.xxx_hidden_TieringAction = nil
+	}
+}
+
+func (x *AlterTableRequest) ClearDropTiering() {
+	if _, ok := x.xxx_hidden_TieringAction.(*alterTableRequest_DropTiering); ok {
+		x.xxx_hidden_TieringAction = nil
+	}
+}
+
+const AlterTableRequest_TtlAction_not_set_case case_AlterTableRequest_TtlAction = 0
+const AlterTableRequest_SetTtlSettings_case case_AlterTableRequest_TtlAction = 7
+const AlterTableRequest_DropTtlSettings_case case_AlterTableRequest_TtlAction = 8
+
+func (x *AlterTableRequest) WhichTtlAction() case_AlterTableRequest_TtlAction {
+	if x == nil {
+		return AlterTableRequest_TtlAction_not_set_case
+	}
+	switch x.xxx_hidden_TtlAction.(type) {
+	case *alterTableRequest_SetTtlSettings:
+		return AlterTableRequest_SetTtlSettings_case
+	case *alterTableRequest_DropTtlSettings:
+		return AlterTableRequest_DropTtlSettings_case
+	default:
+		return AlterTableRequest_TtlAction_not_set_case
+	}
+}
+
+const AlterTableRequest_TieringAction_not_set_case case_AlterTableRequest_TieringAction = 0
+const AlterTableRequest_SetTiering_case case_AlterTableRequest_TieringAction = 22
+const AlterTableRequest_DropTiering_case case_AlterTableRequest_TieringAction = 23
+
+func (x *AlterTableRequest) WhichTieringAction() case_AlterTableRequest_TieringAction {
+	if x == nil {
+		return AlterTableRequest_TieringAction_not_set_case
+	}
+	switch x.xxx_hidden_TieringAction.(type) {
+	case *alterTableRequest_SetTiering:
+		return AlterTableRequest_SetTiering_case
+	case *alterTableRequest_DropTiering:
+		return AlterTableRequest_DropTiering_case
+	default:
+		return AlterTableRequest_TieringAction_not_set_case
+	}
+}
+
+type AlterTableRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// Full path
+	Path string
+	// Columns (name, type) to add
+	AddColumns []*ColumnMeta
+	// Columns to remove
+	DropColumns     []string
+	OperationParams *Ydb_Operations.OperationParams
+	// Columns to alter
+	AlterColumns []*ColumnMeta
+	// Setup or remove time to live settings
+
+	// Fields of oneof xxx_hidden_TtlAction:
+	SetTtlSettings  *TtlSettings
+	DropTtlSettings *emptypb.Empty
+	// -- end of xxx_hidden_TtlAction
+	// Add secondary indexes
+	AddIndexes []*TableIndex
+	// Remove secondary indexes
+	DropIndexes []string
+	// Change table storage settings
+	AlterStorageSettings *StorageSettings
+	// Add/alter column families
+	AddColumnFamilies   []*ColumnFamily
+	AlterColumnFamilies []*ColumnFamily
+	// Alter attributes. Leave the value blank to drop an attribute.
+	// Cannot be used in combination with other fields (except session_id and path) at the moment.
+	AlterAttributes map[string]string
+	// Set predefined named set of settings for table compaction ["default", "small_table", "log_table"].
+	// Set "default" to use default preset.
+	SetCompactionPolicy string
+	// Change table partitioning settings
+	AlterPartitioningSettings *PartitioningSettings
+	// Enable/disable bloom filter by key
+	SetKeyBloomFilter Ydb.FeatureFlag_Status
+	// Set read replicas settings for table
+	SetReadReplicasSettings *ReadReplicasSettings
+	// Add change feeds
+	AddChangefeeds []*Changefeed
+	// Remove change feeds (by its names)
+	DropChangefeeds []string
+	// Rename existed index
+	RenameIndexes []*RenameIndexItem
+	// Setup or remove tiering
+
+	// Fields of oneof xxx_hidden_TieringAction:
+	SetTiering  *string
+	DropTiering *emptypb.Empty
+	// -- end of xxx_hidden_TieringAction
+}
+
+func (b0 AlterTableRequest_builder) Build() *AlterTableRequest {
+	m0 := &AlterTableRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_AddColumns = &b.AddColumns
+	x.xxx_hidden_DropColumns = b.DropColumns
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_AlterColumns = &b.AlterColumns
+	if b.SetTtlSettings != nil {
+		x.xxx_hidden_TtlAction = &alterTableRequest_SetTtlSettings{b.SetTtlSettings}
+	}
+	if b.DropTtlSettings != nil {
+		x.xxx_hidden_TtlAction = &alterTableRequest_DropTtlSettings{b.DropTtlSettings}
+	}
+	x.xxx_hidden_AddIndexes = &b.AddIndexes
+	x.xxx_hidden_DropIndexes = b.DropIndexes
+	x.xxx_hidden_AlterStorageSettings = b.AlterStorageSettings
+	x.xxx_hidden_AddColumnFamilies = &b.AddColumnFamilies
+	x.xxx_hidden_AlterColumnFamilies = &b.AlterColumnFamilies
+	x.xxx_hidden_AlterAttributes = b.AlterAttributes
+	x.xxx_hidden_SetCompactionPolicy = b.SetCompactionPolicy
+	x.xxx_hidden_AlterPartitioningSettings = b.AlterPartitioningSettings
+	x.xxx_hidden_SetKeyBloomFilter = b.SetKeyBloomFilter
+	x.xxx_hidden_SetReadReplicasSettings = b.SetReadReplicasSettings
+	x.xxx_hidden_AddChangefeeds = &b.AddChangefeeds
+	x.xxx_hidden_DropChangefeeds = b.DropChangefeeds
+	x.xxx_hidden_RenameIndexes = &b.RenameIndexes
+	if b.SetTiering != nil {
+		x.xxx_hidden_TieringAction = &alterTableRequest_SetTiering{*b.SetTiering}
+	}
+	if b.DropTiering != nil {
+		x.xxx_hidden_TieringAction = &alterTableRequest_DropTiering{b.DropTiering}
+	}
+	return m0
+}
+
+type case_AlterTableRequest_TtlAction protoreflect.FieldNumber
+
+func (x case_AlterTableRequest_TtlAction) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[45].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type case_AlterTableRequest_TieringAction protoreflect.FieldNumber
+
+func (x case_AlterTableRequest_TieringAction) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[45].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isAlterTableRequest_TtlAction interface {
 	isAlterTableRequest_TtlAction()
 }
 
-type AlterTableRequest_SetTtlSettings struct {
+type alterTableRequest_SetTtlSettings struct {
 	SetTtlSettings *TtlSettings `protobuf:"bytes,7,opt,name=set_ttl_settings,json=setTtlSettings,proto3,oneof"`
 }
 
-type AlterTableRequest_DropTtlSettings struct {
+type alterTableRequest_DropTtlSettings struct {
 	DropTtlSettings *emptypb.Empty `protobuf:"bytes,8,opt,name=drop_ttl_settings,json=dropTtlSettings,proto3,oneof"`
 }
 
-func (*AlterTableRequest_SetTtlSettings) isAlterTableRequest_TtlAction() {}
+func (*alterTableRequest_SetTtlSettings) isAlterTableRequest_TtlAction() {}
 
-func (*AlterTableRequest_DropTtlSettings) isAlterTableRequest_TtlAction() {}
+func (*alterTableRequest_DropTtlSettings) isAlterTableRequest_TtlAction() {}
 
 type isAlterTableRequest_TieringAction interface {
 	isAlterTableRequest_TieringAction()
 }
 
-type AlterTableRequest_SetTiering struct {
+type alterTableRequest_SetTiering struct {
 	SetTiering string `protobuf:"bytes,22,opt,name=set_tiering,json=setTiering,proto3,oneof"`
 }
 
-type AlterTableRequest_DropTiering struct {
+type alterTableRequest_DropTiering struct {
 	DropTiering *emptypb.Empty `protobuf:"bytes,23,opt,name=drop_tiering,json=dropTiering,proto3,oneof"`
 }
 
-func (*AlterTableRequest_SetTiering) isAlterTableRequest_TieringAction() {}
+func (*alterTableRequest_SetTiering) isAlterTableRequest_TieringAction() {}
 
-func (*AlterTableRequest_DropTiering) isAlterTableRequest_TieringAction() {}
+func (*alterTableRequest_DropTiering) isAlterTableRequest_TieringAction() {}
 
 type AlterTableResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AlterTableResponse) Reset() {
@@ -4280,30 +6891,51 @@ func (x *AlterTableResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterTableResponse.ProtoReflect.Descriptor instead.
-func (*AlterTableResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{46}
-}
-
 func (x *AlterTableResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *AlterTableResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *AlterTableResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *AlterTableResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type AlterTableResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 AlterTableResponse_builder) Build() *AlterTableResponse {
+	m0 := &AlterTableResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Copy table with given path
 type CopyTableRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Copy from path
-	SourcePath string `protobuf:"bytes,2,opt,name=source_path,json=sourcePath,proto3" json:"source_path,omitempty"`
-	// Copy to path
-	DestinationPath string                          `protobuf:"bytes,3,opt,name=destination_path,json=destinationPath,proto3" json:"destination_path,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,4,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_SourcePath      string                          `protobuf:"bytes,2,opt,name=source_path,json=sourcePath,proto3"`
+	xxx_hidden_DestinationPath string                          `protobuf:"bytes,3,opt,name=destination_path,json=destinationPath,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,4,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CopyTableRequest) Reset() {
@@ -4331,44 +6963,89 @@ func (x *CopyTableRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CopyTableRequest.ProtoReflect.Descriptor instead.
-func (*CopyTableRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{47}
-}
-
 func (x *CopyTableRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *CopyTableRequest) GetSourcePath() string {
 	if x != nil {
-		return x.SourcePath
+		return x.xxx_hidden_SourcePath
 	}
 	return ""
 }
 
 func (x *CopyTableRequest) GetDestinationPath() string {
 	if x != nil {
-		return x.DestinationPath
+		return x.xxx_hidden_DestinationPath
 	}
 	return ""
 }
 
 func (x *CopyTableRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *CopyTableRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *CopyTableRequest) SetSourcePath(v string) {
+	x.xxx_hidden_SourcePath = v
+}
+
+func (x *CopyTableRequest) SetDestinationPath(v string) {
+	x.xxx_hidden_DestinationPath = v
+}
+
+func (x *CopyTableRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CopyTableRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CopyTableRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type CopyTableRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// Copy from path
+	SourcePath string
+	// Copy to path
+	DestinationPath string
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 CopyTableRequest_builder) Build() *CopyTableRequest {
+	m0 := &CopyTableRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_SourcePath = b.SourcePath
+	x.xxx_hidden_DestinationPath = b.DestinationPath
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type CopyTableResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CopyTableResponse) Reset() {
@@ -4396,28 +7073,49 @@ func (x *CopyTableResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CopyTableResponse.ProtoReflect.Descriptor instead.
-func (*CopyTableResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{48}
-}
-
 func (x *CopyTableResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CopyTableResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CopyTableResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CopyTableResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CopyTableResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CopyTableResponse_builder) Build() *CopyTableResponse {
+	m0 := &CopyTableResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type CopyTableItem struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Copy from path
-	SourcePath string `protobuf:"bytes,1,opt,name=source_path,json=sourcePath,proto3" json:"source_path,omitempty"`
-	// Copy to path
-	DestinationPath string `protobuf:"bytes,2,opt,name=destination_path,json=destinationPath,proto3" json:"destination_path,omitempty"`
-	// Copy options
-	OmitIndexes   bool `protobuf:"varint,3,opt,name=omit_indexes,json=omitIndexes,proto3" json:"omit_indexes,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SourcePath      string                 `protobuf:"bytes,1,opt,name=source_path,json=sourcePath,proto3"`
+	xxx_hidden_DestinationPath string                 `protobuf:"bytes,2,opt,name=destination_path,json=destinationPath,proto3"`
+	xxx_hidden_OmitIndexes     bool                   `protobuf:"varint,3,opt,name=omit_indexes,json=omitIndexes,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CopyTableItem) Reset() {
@@ -4445,42 +7143,68 @@ func (x *CopyTableItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CopyTableItem.ProtoReflect.Descriptor instead.
-func (*CopyTableItem) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{49}
-}
-
 func (x *CopyTableItem) GetSourcePath() string {
 	if x != nil {
-		return x.SourcePath
+		return x.xxx_hidden_SourcePath
 	}
 	return ""
 }
 
 func (x *CopyTableItem) GetDestinationPath() string {
 	if x != nil {
-		return x.DestinationPath
+		return x.xxx_hidden_DestinationPath
 	}
 	return ""
 }
 
 func (x *CopyTableItem) GetOmitIndexes() bool {
 	if x != nil {
-		return x.OmitIndexes
+		return x.xxx_hidden_OmitIndexes
 	}
 	return false
 }
 
+func (x *CopyTableItem) SetSourcePath(v string) {
+	x.xxx_hidden_SourcePath = v
+}
+
+func (x *CopyTableItem) SetDestinationPath(v string) {
+	x.xxx_hidden_DestinationPath = v
+}
+
+func (x *CopyTableItem) SetOmitIndexes(v bool) {
+	x.xxx_hidden_OmitIndexes = v
+}
+
+type CopyTableItem_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Copy from path
+	SourcePath string
+	// Copy to path
+	DestinationPath string
+	// Copy options
+	OmitIndexes bool
+}
+
+func (b0 CopyTableItem_builder) Build() *CopyTableItem {
+	m0 := &CopyTableItem{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SourcePath = b.SourcePath
+	x.xxx_hidden_DestinationPath = b.DestinationPath
+	x.xxx_hidden_OmitIndexes = b.OmitIndexes
+	return m0
+}
+
 // Creates consistent copy of given tables.
 type CopyTablesRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Source and destination paths which describe copies
-	Tables        []*CopyTableItem `protobuf:"bytes,3,rep,name=tables,proto3" json:"tables,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_SessionId       string                          `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_Tables          *[]*CopyTableItem               `protobuf:"bytes,3,rep,name=tables,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CopyTablesRequest) Reset() {
@@ -4508,37 +7232,77 @@ func (x *CopyTablesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CopyTablesRequest.ProtoReflect.Descriptor instead.
-func (*CopyTablesRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{50}
-}
-
 func (x *CopyTablesRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CopyTablesRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *CopyTablesRequest) GetTables() []*CopyTableItem {
 	if x != nil {
-		return x.Tables
+		if x.xxx_hidden_Tables != nil {
+			return *x.xxx_hidden_Tables
+		}
 	}
 	return nil
 }
 
+func (x *CopyTablesRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CopyTablesRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *CopyTablesRequest) SetTables(v []*CopyTableItem) {
+	x.xxx_hidden_Tables = &v
+}
+
+func (x *CopyTablesRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CopyTablesRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type CopyTablesRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Session identifier
+	SessionId string
+	// Source and destination paths which describe copies
+	Tables []*CopyTableItem
+}
+
+func (b0 CopyTablesRequest_builder) Build() *CopyTablesRequest {
+	m0 := &CopyTablesRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_Tables = &b.Tables
+	return m0
+}
+
 type CopyTablesResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CopyTablesResponse) Reset() {
@@ -4566,28 +7330,49 @@ func (x *CopyTablesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CopyTablesResponse.ProtoReflect.Descriptor instead.
-func (*CopyTablesResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{51}
-}
-
 func (x *CopyTablesResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CopyTablesResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CopyTablesResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CopyTablesResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CopyTablesResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CopyTablesResponse_builder) Build() *CopyTablesResponse {
+	m0 := &CopyTablesResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type RenameTableItem struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Full path
-	SourcePath string `protobuf:"bytes,1,opt,name=source_path,json=sourcePath,proto3" json:"source_path,omitempty"`
-	// Full path
-	DestinationPath string `protobuf:"bytes,2,opt,name=destination_path,json=destinationPath,proto3" json:"destination_path,omitempty"`
-	// Move options
-	ReplaceDestination bool `protobuf:"varint,3,opt,name=replace_destination,json=replaceDestination,proto3" json:"replace_destination,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SourcePath         string                 `protobuf:"bytes,1,opt,name=source_path,json=sourcePath,proto3"`
+	xxx_hidden_DestinationPath    string                 `protobuf:"bytes,2,opt,name=destination_path,json=destinationPath,proto3"`
+	xxx_hidden_ReplaceDestination bool                   `protobuf:"varint,3,opt,name=replace_destination,json=replaceDestination,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *RenameTableItem) Reset() {
@@ -4615,42 +7400,68 @@ func (x *RenameTableItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RenameTableItem.ProtoReflect.Descriptor instead.
-func (*RenameTableItem) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{52}
-}
-
 func (x *RenameTableItem) GetSourcePath() string {
 	if x != nil {
-		return x.SourcePath
+		return x.xxx_hidden_SourcePath
 	}
 	return ""
 }
 
 func (x *RenameTableItem) GetDestinationPath() string {
 	if x != nil {
-		return x.DestinationPath
+		return x.xxx_hidden_DestinationPath
 	}
 	return ""
 }
 
 func (x *RenameTableItem) GetReplaceDestination() bool {
 	if x != nil {
-		return x.ReplaceDestination
+		return x.xxx_hidden_ReplaceDestination
 	}
 	return false
 }
 
+func (x *RenameTableItem) SetSourcePath(v string) {
+	x.xxx_hidden_SourcePath = v
+}
+
+func (x *RenameTableItem) SetDestinationPath(v string) {
+	x.xxx_hidden_DestinationPath = v
+}
+
+func (x *RenameTableItem) SetReplaceDestination(v bool) {
+	x.xxx_hidden_ReplaceDestination = v
+}
+
+type RenameTableItem_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Full path
+	SourcePath string
+	// Full path
+	DestinationPath string
+	// Move options
+	ReplaceDestination bool
+}
+
+func (b0 RenameTableItem_builder) Build() *RenameTableItem {
+	m0 := &RenameTableItem{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SourcePath = b.SourcePath
+	x.xxx_hidden_DestinationPath = b.DestinationPath
+	x.xxx_hidden_ReplaceDestination = b.ReplaceDestination
+	return m0
+}
+
 // Moves given tables
 type RenameTablesRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Source and destination paths inside RenameTableItem describe rename actions
-	Tables        []*RenameTableItem `protobuf:"bytes,3,rep,name=tables,proto3" json:"tables,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_SessionId       string                          `protobuf:"bytes,2,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_Tables          *[]*RenameTableItem             `protobuf:"bytes,3,rep,name=tables,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *RenameTablesRequest) Reset() {
@@ -4678,37 +7489,77 @@ func (x *RenameTablesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RenameTablesRequest.ProtoReflect.Descriptor instead.
-func (*RenameTablesRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{53}
-}
-
 func (x *RenameTablesRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *RenameTablesRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *RenameTablesRequest) GetTables() []*RenameTableItem {
 	if x != nil {
-		return x.Tables
+		if x.xxx_hidden_Tables != nil {
+			return *x.xxx_hidden_Tables
+		}
 	}
 	return nil
 }
 
+func (x *RenameTablesRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *RenameTablesRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *RenameTablesRequest) SetTables(v []*RenameTableItem) {
+	x.xxx_hidden_Tables = &v
+}
+
+func (x *RenameTablesRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *RenameTablesRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type RenameTablesRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Session identifier
+	SessionId string
+	// Source and destination paths inside RenameTableItem describe rename actions
+	Tables []*RenameTableItem
+}
+
+func (b0 RenameTablesRequest_builder) Build() *RenameTablesRequest {
+	m0 := &RenameTablesRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_Tables = &b.Tables
+	return m0
+}
+
 type RenameTablesResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *RenameTablesResponse) Reset() {
@@ -4736,36 +7587,54 @@ func (x *RenameTablesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RenameTablesResponse.ProtoReflect.Descriptor instead.
-func (*RenameTablesResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{54}
-}
-
 func (x *RenameTablesResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *RenameTablesResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *RenameTablesResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *RenameTablesResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type RenameTablesResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 RenameTablesResponse_builder) Build() *RenameTablesResponse {
+	m0 := &RenameTablesResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Describe table with given path
 type DescribeTableRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Full path
-	Path            string                          `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,4,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Includes shard key distribution info
-	IncludeShardKeyBounds bool `protobuf:"varint,5,opt,name=include_shard_key_bounds,json=includeShardKeyBounds,proto3" json:"include_shard_key_bounds,omitempty"`
-	// Includes table statistics
-	IncludeTableStats bool `protobuf:"varint,6,opt,name=include_table_stats,json=includeTableStats,proto3" json:"include_table_stats,omitempty"`
-	// Includes partition statistics (required include_table_statistics)
-	IncludePartitionStats bool `protobuf:"varint,7,opt,name=include_partition_stats,json=includePartitionStats,proto3" json:"include_partition_stats,omitempty"`
-	// Includes shard -> node id maping (required include_partition_stats)
-	IncludeShardNodesInfo bool `protobuf:"varint,9,opt,name=include_shard_nodes_info,json=includeShardNodesInfo,proto3" json:"include_shard_nodes_info,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                            protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId             string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_Path                  string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_OperationParams       *Ydb_Operations.OperationParams `protobuf:"bytes,4,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_IncludeShardKeyBounds bool                            `protobuf:"varint,5,opt,name=include_shard_key_bounds,json=includeShardKeyBounds,proto3"`
+	xxx_hidden_IncludeTableStats     bool                            `protobuf:"varint,6,opt,name=include_table_stats,json=includeTableStats,proto3"`
+	xxx_hidden_IncludePartitionStats bool                            `protobuf:"varint,7,opt,name=include_partition_stats,json=includePartitionStats,proto3"`
+	xxx_hidden_IncludeShardNodesInfo bool                            `protobuf:"varint,9,opt,name=include_shard_nodes_info,json=includeShardNodesInfo,proto3"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *DescribeTableRequest) Reset() {
@@ -4793,66 +7662,131 @@ func (x *DescribeTableRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeTableRequest.ProtoReflect.Descriptor instead.
-func (*DescribeTableRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{55}
-}
-
 func (x *DescribeTableRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *DescribeTableRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DescribeTableRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeTableRequest) GetIncludeShardKeyBounds() bool {
 	if x != nil {
-		return x.IncludeShardKeyBounds
+		return x.xxx_hidden_IncludeShardKeyBounds
 	}
 	return false
 }
 
 func (x *DescribeTableRequest) GetIncludeTableStats() bool {
 	if x != nil {
-		return x.IncludeTableStats
+		return x.xxx_hidden_IncludeTableStats
 	}
 	return false
 }
 
 func (x *DescribeTableRequest) GetIncludePartitionStats() bool {
 	if x != nil {
-		return x.IncludePartitionStats
+		return x.xxx_hidden_IncludePartitionStats
 	}
 	return false
 }
 
 func (x *DescribeTableRequest) GetIncludeShardNodesInfo() bool {
 	if x != nil {
-		return x.IncludeShardNodesInfo
+		return x.xxx_hidden_IncludeShardNodesInfo
 	}
 	return false
 }
 
+func (x *DescribeTableRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *DescribeTableRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *DescribeTableRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DescribeTableRequest) SetIncludeShardKeyBounds(v bool) {
+	x.xxx_hidden_IncludeShardKeyBounds = v
+}
+
+func (x *DescribeTableRequest) SetIncludeTableStats(v bool) {
+	x.xxx_hidden_IncludeTableStats = v
+}
+
+func (x *DescribeTableRequest) SetIncludePartitionStats(v bool) {
+	x.xxx_hidden_IncludePartitionStats = v
+}
+
+func (x *DescribeTableRequest) SetIncludeShardNodesInfo(v bool) {
+	x.xxx_hidden_IncludeShardNodesInfo = v
+}
+
+func (x *DescribeTableRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DescribeTableRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DescribeTableRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// Full path
+	Path            string
+	OperationParams *Ydb_Operations.OperationParams
+	// Includes shard key distribution info
+	IncludeShardKeyBounds bool
+	// Includes table statistics
+	IncludeTableStats bool
+	// Includes partition statistics (required include_table_statistics)
+	IncludePartitionStats bool
+	// Includes shard -> node id maping (required include_partition_stats)
+	IncludeShardNodesInfo bool
+}
+
+func (b0 DescribeTableRequest_builder) Build() *DescribeTableRequest {
+	m0 := &DescribeTableRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_IncludeShardKeyBounds = b.IncludeShardKeyBounds
+	x.xxx_hidden_IncludeTableStats = b.IncludeTableStats
+	x.xxx_hidden_IncludePartitionStats = b.IncludePartitionStats
+	x.xxx_hidden_IncludeShardNodesInfo = b.IncludeShardNodesInfo
+	return m0
+}
+
 type DescribeTableResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Holds DescribeTableResult in case of successful call
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeTableResponse) Reset() {
@@ -4880,56 +7814,64 @@ func (x *DescribeTableResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeTableResponse.ProtoReflect.Descriptor instead.
-func (*DescribeTableResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{56}
-}
-
 func (x *DescribeTableResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DescribeTableResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DescribeTableResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DescribeTableResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DescribeTableResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Holds DescribeTableResult in case of successful call
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DescribeTableResponse_builder) Build() *DescribeTableResponse {
+	m0 := &DescribeTableResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DescribeTableResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Description of scheme object
-	Self *Ydb_Scheme.Entry `protobuf:"bytes,1,opt,name=self,proto3" json:"self,omitempty"`
-	// List of columns
-	Columns []*ColumnMeta `protobuf:"bytes,2,rep,name=columns,proto3" json:"columns,omitempty"`
-	// List of primary key columns
-	PrimaryKey []string `protobuf:"bytes,3,rep,name=primary_key,json=primaryKey,proto3" json:"primary_key,omitempty"`
-	// List of key ranges for shard
-	ShardKeyBounds []*Ydb.TypedValue `protobuf:"bytes,4,rep,name=shard_key_bounds,json=shardKeyBounds,proto3" json:"shard_key_bounds,omitempty"`
-	// List of indexes
-	Indexes []*TableIndexDescription `protobuf:"bytes,5,rep,name=indexes,proto3" json:"indexes,omitempty"`
-	// Statistics of table
-	TableStats *TableStats `protobuf:"bytes,6,opt,name=table_stats,json=tableStats,proto3" json:"table_stats,omitempty"`
-	// TTL params
-	TtlSettings *TtlSettings `protobuf:"bytes,7,opt,name=ttl_settings,json=ttlSettings,proto3" json:"ttl_settings,omitempty"`
-	// Storage settings for table
-	StorageSettings *StorageSettings `protobuf:"bytes,8,opt,name=storage_settings,json=storageSettings,proto3" json:"storage_settings,omitempty"`
-	// Column families
-	ColumnFamilies []*ColumnFamily `protobuf:"bytes,9,rep,name=column_families,json=columnFamilies,proto3" json:"column_families,omitempty"`
-	// Attributes
-	Attributes map[string]string `protobuf:"bytes,10,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Partitioning settings for table
-	PartitioningSettings *PartitioningSettings `protobuf:"bytes,12,opt,name=partitioning_settings,json=partitioningSettings,proto3" json:"partitioning_settings,omitempty"`
-	// Bloom filter by key
-	KeyBloomFilter Ydb.FeatureFlag_Status `protobuf:"varint,13,opt,name=key_bloom_filter,json=keyBloomFilter,proto3,enum=Ydb.FeatureFlag_Status" json:"key_bloom_filter,omitempty"`
-	// Read replicas settings for table
-	ReadReplicasSettings *ReadReplicasSettings `protobuf:"bytes,14,opt,name=read_replicas_settings,json=readReplicasSettings,proto3" json:"read_replicas_settings,omitempty"`
-	// List of changefeeds
-	Changefeeds []*ChangefeedDescription `protobuf:"bytes,15,rep,name=changefeeds,proto3" json:"changefeeds,omitempty"`
-	// Tiering rules name
-	Tiering string `protobuf:"bytes,16,opt,name=tiering,proto3" json:"tiering,omitempty"`
-	// Is temporary table
-	Temporary bool `protobuf:"varint,17,opt,name=temporary,proto3" json:"temporary,omitempty"`
-	// Is table column or row oriented
-	StoreType     StoreType `protobuf:"varint,18,opt,name=store_type,json=storeType,proto3,enum=Ydb.Table.StoreType" json:"store_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                           protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Self                 *Ydb_Scheme.Entry         `protobuf:"bytes,1,opt,name=self,proto3"`
+	xxx_hidden_Columns              *[]*ColumnMeta            `protobuf:"bytes,2,rep,name=columns,proto3"`
+	xxx_hidden_PrimaryKey           []string                  `protobuf:"bytes,3,rep,name=primary_key,json=primaryKey,proto3"`
+	xxx_hidden_ShardKeyBounds       *[]*Ydb.TypedValue        `protobuf:"bytes,4,rep,name=shard_key_bounds,json=shardKeyBounds,proto3"`
+	xxx_hidden_Indexes              *[]*TableIndexDescription `protobuf:"bytes,5,rep,name=indexes,proto3"`
+	xxx_hidden_TableStats           *TableStats               `protobuf:"bytes,6,opt,name=table_stats,json=tableStats,proto3"`
+	xxx_hidden_TtlSettings          *TtlSettings              `protobuf:"bytes,7,opt,name=ttl_settings,json=ttlSettings,proto3"`
+	xxx_hidden_StorageSettings      *StorageSettings          `protobuf:"bytes,8,opt,name=storage_settings,json=storageSettings,proto3"`
+	xxx_hidden_ColumnFamilies       *[]*ColumnFamily          `protobuf:"bytes,9,rep,name=column_families,json=columnFamilies,proto3"`
+	xxx_hidden_Attributes           map[string]string         `protobuf:"bytes,10,rep,name=attributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_PartitioningSettings *PartitioningSettings     `protobuf:"bytes,12,opt,name=partitioning_settings,json=partitioningSettings,proto3"`
+	xxx_hidden_KeyBloomFilter       Ydb.FeatureFlag_Status    `protobuf:"varint,13,opt,name=key_bloom_filter,json=keyBloomFilter,proto3,enum=Ydb.FeatureFlag_Status"`
+	xxx_hidden_ReadReplicasSettings *ReadReplicasSettings     `protobuf:"bytes,14,opt,name=read_replicas_settings,json=readReplicasSettings,proto3"`
+	xxx_hidden_Changefeeds          *[]*ChangefeedDescription `protobuf:"bytes,15,rep,name=changefeeds,proto3"`
+	xxx_hidden_Tiering              string                    `protobuf:"bytes,16,opt,name=tiering,proto3"`
+	xxx_hidden_Temporary            bool                      `protobuf:"varint,17,opt,name=temporary,proto3"`
+	xxx_hidden_StoreType            StoreType                 `protobuf:"varint,18,opt,name=store_type,json=storeType,proto3,enum=Ydb.Table.StoreType"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *DescribeTableResult) Reset() {
@@ -4957,141 +7899,337 @@ func (x *DescribeTableResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeTableResult.ProtoReflect.Descriptor instead.
-func (*DescribeTableResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{57}
-}
-
 func (x *DescribeTableResult) GetSelf() *Ydb_Scheme.Entry {
 	if x != nil {
-		return x.Self
+		return x.xxx_hidden_Self
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetColumns() []*ColumnMeta {
 	if x != nil {
-		return x.Columns
+		if x.xxx_hidden_Columns != nil {
+			return *x.xxx_hidden_Columns
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetPrimaryKey() []string {
 	if x != nil {
-		return x.PrimaryKey
+		return x.xxx_hidden_PrimaryKey
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetShardKeyBounds() []*Ydb.TypedValue {
 	if x != nil {
-		return x.ShardKeyBounds
+		if x.xxx_hidden_ShardKeyBounds != nil {
+			return *x.xxx_hidden_ShardKeyBounds
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetIndexes() []*TableIndexDescription {
 	if x != nil {
-		return x.Indexes
+		if x.xxx_hidden_Indexes != nil {
+			return *x.xxx_hidden_Indexes
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetTableStats() *TableStats {
 	if x != nil {
-		return x.TableStats
+		return x.xxx_hidden_TableStats
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetTtlSettings() *TtlSettings {
 	if x != nil {
-		return x.TtlSettings
+		return x.xxx_hidden_TtlSettings
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetStorageSettings() *StorageSettings {
 	if x != nil {
-		return x.StorageSettings
+		return x.xxx_hidden_StorageSettings
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetColumnFamilies() []*ColumnFamily {
 	if x != nil {
-		return x.ColumnFamilies
+		if x.xxx_hidden_ColumnFamilies != nil {
+			return *x.xxx_hidden_ColumnFamilies
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetAttributes() map[string]string {
 	if x != nil {
-		return x.Attributes
+		return x.xxx_hidden_Attributes
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetPartitioningSettings() *PartitioningSettings {
 	if x != nil {
-		return x.PartitioningSettings
+		return x.xxx_hidden_PartitioningSettings
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetKeyBloomFilter() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.KeyBloomFilter
+		return x.xxx_hidden_KeyBloomFilter
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
 func (x *DescribeTableResult) GetReadReplicasSettings() *ReadReplicasSettings {
 	if x != nil {
-		return x.ReadReplicasSettings
+		return x.xxx_hidden_ReadReplicasSettings
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetChangefeeds() []*ChangefeedDescription {
 	if x != nil {
-		return x.Changefeeds
+		if x.xxx_hidden_Changefeeds != nil {
+			return *x.xxx_hidden_Changefeeds
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTableResult) GetTiering() string {
 	if x != nil {
-		return x.Tiering
+		return x.xxx_hidden_Tiering
 	}
 	return ""
 }
 
 func (x *DescribeTableResult) GetTemporary() bool {
 	if x != nil {
-		return x.Temporary
+		return x.xxx_hidden_Temporary
 	}
 	return false
 }
 
 func (x *DescribeTableResult) GetStoreType() StoreType {
 	if x != nil {
-		return x.StoreType
+		return x.xxx_hidden_StoreType
 	}
 	return StoreType_STORE_TYPE_UNSPECIFIED
 }
 
+func (x *DescribeTableResult) SetSelf(v *Ydb_Scheme.Entry) {
+	x.xxx_hidden_Self = v
+}
+
+func (x *DescribeTableResult) SetColumns(v []*ColumnMeta) {
+	x.xxx_hidden_Columns = &v
+}
+
+func (x *DescribeTableResult) SetPrimaryKey(v []string) {
+	x.xxx_hidden_PrimaryKey = v
+}
+
+func (x *DescribeTableResult) SetShardKeyBounds(v []*Ydb.TypedValue) {
+	x.xxx_hidden_ShardKeyBounds = &v
+}
+
+func (x *DescribeTableResult) SetIndexes(v []*TableIndexDescription) {
+	x.xxx_hidden_Indexes = &v
+}
+
+func (x *DescribeTableResult) SetTableStats(v *TableStats) {
+	x.xxx_hidden_TableStats = v
+}
+
+func (x *DescribeTableResult) SetTtlSettings(v *TtlSettings) {
+	x.xxx_hidden_TtlSettings = v
+}
+
+func (x *DescribeTableResult) SetStorageSettings(v *StorageSettings) {
+	x.xxx_hidden_StorageSettings = v
+}
+
+func (x *DescribeTableResult) SetColumnFamilies(v []*ColumnFamily) {
+	x.xxx_hidden_ColumnFamilies = &v
+}
+
+func (x *DescribeTableResult) SetAttributes(v map[string]string) {
+	x.xxx_hidden_Attributes = v
+}
+
+func (x *DescribeTableResult) SetPartitioningSettings(v *PartitioningSettings) {
+	x.xxx_hidden_PartitioningSettings = v
+}
+
+func (x *DescribeTableResult) SetKeyBloomFilter(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_KeyBloomFilter = v
+}
+
+func (x *DescribeTableResult) SetReadReplicasSettings(v *ReadReplicasSettings) {
+	x.xxx_hidden_ReadReplicasSettings = v
+}
+
+func (x *DescribeTableResult) SetChangefeeds(v []*ChangefeedDescription) {
+	x.xxx_hidden_Changefeeds = &v
+}
+
+func (x *DescribeTableResult) SetTiering(v string) {
+	x.xxx_hidden_Tiering = v
+}
+
+func (x *DescribeTableResult) SetTemporary(v bool) {
+	x.xxx_hidden_Temporary = v
+}
+
+func (x *DescribeTableResult) SetStoreType(v StoreType) {
+	x.xxx_hidden_StoreType = v
+}
+
+func (x *DescribeTableResult) HasSelf() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Self != nil
+}
+
+func (x *DescribeTableResult) HasTableStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TableStats != nil
+}
+
+func (x *DescribeTableResult) HasTtlSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TtlSettings != nil
+}
+
+func (x *DescribeTableResult) HasStorageSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StorageSettings != nil
+}
+
+func (x *DescribeTableResult) HasPartitioningSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PartitioningSettings != nil
+}
+
+func (x *DescribeTableResult) HasReadReplicasSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ReadReplicasSettings != nil
+}
+
+func (x *DescribeTableResult) ClearSelf() {
+	x.xxx_hidden_Self = nil
+}
+
+func (x *DescribeTableResult) ClearTableStats() {
+	x.xxx_hidden_TableStats = nil
+}
+
+func (x *DescribeTableResult) ClearTtlSettings() {
+	x.xxx_hidden_TtlSettings = nil
+}
+
+func (x *DescribeTableResult) ClearStorageSettings() {
+	x.xxx_hidden_StorageSettings = nil
+}
+
+func (x *DescribeTableResult) ClearPartitioningSettings() {
+	x.xxx_hidden_PartitioningSettings = nil
+}
+
+func (x *DescribeTableResult) ClearReadReplicasSettings() {
+	x.xxx_hidden_ReadReplicasSettings = nil
+}
+
+type DescribeTableResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Description of scheme object
+	Self *Ydb_Scheme.Entry
+	// List of columns
+	Columns []*ColumnMeta
+	// List of primary key columns
+	PrimaryKey []string
+	// List of key ranges for shard
+	ShardKeyBounds []*Ydb.TypedValue
+	// List of indexes
+	Indexes []*TableIndexDescription
+	// Statistics of table
+	TableStats *TableStats
+	// TTL params
+	TtlSettings *TtlSettings
+	// Storage settings for table
+	StorageSettings *StorageSettings
+	// Column families
+	ColumnFamilies []*ColumnFamily
+	// Attributes
+	Attributes map[string]string
+	// Partitioning settings for table
+	PartitioningSettings *PartitioningSettings
+	// Bloom filter by key
+	KeyBloomFilter Ydb.FeatureFlag_Status
+	// Read replicas settings for table
+	ReadReplicasSettings *ReadReplicasSettings
+	// List of changefeeds
+	Changefeeds []*ChangefeedDescription
+	// Tiering rules name
+	Tiering string
+	// Is temporary table
+	Temporary bool
+	// Is table column or row oriented
+	StoreType StoreType
+}
+
+func (b0 DescribeTableResult_builder) Build() *DescribeTableResult {
+	m0 := &DescribeTableResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Self = b.Self
+	x.xxx_hidden_Columns = &b.Columns
+	x.xxx_hidden_PrimaryKey = b.PrimaryKey
+	x.xxx_hidden_ShardKeyBounds = &b.ShardKeyBounds
+	x.xxx_hidden_Indexes = &b.Indexes
+	x.xxx_hidden_TableStats = b.TableStats
+	x.xxx_hidden_TtlSettings = b.TtlSettings
+	x.xxx_hidden_StorageSettings = b.StorageSettings
+	x.xxx_hidden_ColumnFamilies = &b.ColumnFamilies
+	x.xxx_hidden_Attributes = b.Attributes
+	x.xxx_hidden_PartitioningSettings = b.PartitioningSettings
+	x.xxx_hidden_KeyBloomFilter = b.KeyBloomFilter
+	x.xxx_hidden_ReadReplicasSettings = b.ReadReplicasSettings
+	x.xxx_hidden_Changefeeds = &b.Changefeeds
+	x.xxx_hidden_Tiering = b.Tiering
+	x.xxx_hidden_Temporary = b.Temporary
+	x.xxx_hidden_StoreType = b.StoreType
+	return m0
+}
+
 type Query struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Text of query or id prepared query
-	//
-	// Types that are valid to be assigned to Query:
-	//
-	//	*Query_YqlText
-	//	*Query_Id
-	Query         isQuery_Query `protobuf_oneof:"query"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Query isQuery_Query          `protobuf_oneof:"query"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Query) Reset() {
@@ -5119,21 +8257,9 @@ func (x *Query) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Query.ProtoReflect.Descriptor instead.
-func (*Query) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{58}
-}
-
-func (x *Query) GetQuery() isQuery_Query {
-	if x != nil {
-		return x.Query
-	}
-	return nil
-}
-
 func (x *Query) GetYqlText() string {
 	if x != nil {
-		if x, ok := x.Query.(*Query_YqlText); ok {
+		if x, ok := x.xxx_hidden_Query.(*query_YqlText); ok {
 			return x.YqlText
 		}
 	}
@@ -5142,33 +8268,134 @@ func (x *Query) GetYqlText() string {
 
 func (x *Query) GetId() string {
 	if x != nil {
-		if x, ok := x.Query.(*Query_Id); ok {
+		if x, ok := x.xxx_hidden_Query.(*query_Id); ok {
 			return x.Id
 		}
 	}
 	return ""
 }
 
+func (x *Query) SetYqlText(v string) {
+	x.xxx_hidden_Query = &query_YqlText{v}
+}
+
+func (x *Query) SetId(v string) {
+	x.xxx_hidden_Query = &query_Id{v}
+}
+
+func (x *Query) HasQuery() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Query != nil
+}
+
+func (x *Query) HasYqlText() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Query.(*query_YqlText)
+	return ok
+}
+
+func (x *Query) HasId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Query.(*query_Id)
+	return ok
+}
+
+func (x *Query) ClearQuery() {
+	x.xxx_hidden_Query = nil
+}
+
+func (x *Query) ClearYqlText() {
+	if _, ok := x.xxx_hidden_Query.(*query_YqlText); ok {
+		x.xxx_hidden_Query = nil
+	}
+}
+
+func (x *Query) ClearId() {
+	if _, ok := x.xxx_hidden_Query.(*query_Id); ok {
+		x.xxx_hidden_Query = nil
+	}
+}
+
+const Query_Query_not_set_case case_Query_Query = 0
+const Query_YqlText_case case_Query_Query = 1
+const Query_Id_case case_Query_Query = 2
+
+func (x *Query) WhichQuery() case_Query_Query {
+	if x == nil {
+		return Query_Query_not_set_case
+	}
+	switch x.xxx_hidden_Query.(type) {
+	case *query_YqlText:
+		return Query_YqlText_case
+	case *query_Id:
+		return Query_Id_case
+	default:
+		return Query_Query_not_set_case
+	}
+}
+
+type Query_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Text of query or id prepared query
+
+	// Fields of oneof xxx_hidden_Query:
+	// SQL program
+	YqlText *string
+	// Prepared query id
+	Id *string
+	// -- end of xxx_hidden_Query
+}
+
+func (b0 Query_builder) Build() *Query {
+	m0 := &Query{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.YqlText != nil {
+		x.xxx_hidden_Query = &query_YqlText{*b.YqlText}
+	}
+	if b.Id != nil {
+		x.xxx_hidden_Query = &query_Id{*b.Id}
+	}
+	return m0
+}
+
+type case_Query_Query protoreflect.FieldNumber
+
+func (x case_Query_Query) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[58].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isQuery_Query interface {
 	isQuery_Query()
 }
 
-type Query_YqlText struct {
+type query_YqlText struct {
 	// SQL program
 	YqlText string `protobuf:"bytes,1,opt,name=yql_text,json=yqlText,proto3,oneof"`
 }
 
-type Query_Id struct {
+type query_Id struct {
 	// Prepared query id
 	Id string `protobuf:"bytes,2,opt,name=id,proto3,oneof"`
 }
 
-func (*Query_YqlText) isQuery_Query() {}
+func (*query_YqlText) isQuery_Query() {}
 
-func (*Query_Id) isQuery_Query() {}
+func (*query_Id) isQuery_Query() {}
 
 type SerializableModeSettings struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5198,16 +8425,23 @@ func (x *SerializableModeSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SerializableModeSettings.ProtoReflect.Descriptor instead.
-func (*SerializableModeSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{59}
+type SerializableModeSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 SerializableModeSettings_builder) Build() *SerializableModeSettings {
+	m0 := &SerializableModeSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type OnlineModeSettings struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	AllowInconsistentReads bool                   `protobuf:"varint,1,opt,name=allow_inconsistent_reads,json=allowInconsistentReads,proto3" json:"allow_inconsistent_reads,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_AllowInconsistentReads bool                   `protobuf:"varint,1,opt,name=allow_inconsistent_reads,json=allowInconsistentReads,proto3"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *OnlineModeSettings) Reset() {
@@ -5235,20 +8469,33 @@ func (x *OnlineModeSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OnlineModeSettings.ProtoReflect.Descriptor instead.
-func (*OnlineModeSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{60}
-}
-
 func (x *OnlineModeSettings) GetAllowInconsistentReads() bool {
 	if x != nil {
-		return x.AllowInconsistentReads
+		return x.xxx_hidden_AllowInconsistentReads
 	}
 	return false
 }
 
+func (x *OnlineModeSettings) SetAllowInconsistentReads(v bool) {
+	x.xxx_hidden_AllowInconsistentReads = v
+}
+
+type OnlineModeSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	AllowInconsistentReads bool
+}
+
+func (b0 OnlineModeSettings_builder) Build() *OnlineModeSettings {
+	m0 := &OnlineModeSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_AllowInconsistentReads = b.AllowInconsistentReads
+	return m0
+}
+
 type StaleModeSettings struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5278,13 +8525,20 @@ func (x *StaleModeSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StaleModeSettings.ProtoReflect.Descriptor instead.
-func (*StaleModeSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{61}
+type StaleModeSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 StaleModeSettings_builder) Build() *StaleModeSettings {
+	m0 := &StaleModeSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type SnapshotModeSettings struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5314,22 +8568,23 @@ func (x *SnapshotModeSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SnapshotModeSettings.ProtoReflect.Descriptor instead.
-func (*SnapshotModeSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{62}
+type SnapshotModeSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 SnapshotModeSettings_builder) Build() *SnapshotModeSettings {
+	m0 := &SnapshotModeSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type TransactionSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to TxMode:
-	//
-	//	*TransactionSettings_SerializableReadWrite
-	//	*TransactionSettings_OnlineReadOnly
-	//	*TransactionSettings_StaleReadOnly
-	//	*TransactionSettings_SnapshotReadOnly
-	TxMode        isTransactionSettings_TxMode `protobuf_oneof:"tx_mode"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState       `protogen:"opaque.v1"`
+	xxx_hidden_TxMode isTransactionSettings_TxMode `protobuf_oneof:"tx_mode"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *TransactionSettings) Reset() {
@@ -5357,21 +8612,9 @@ func (x *TransactionSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TransactionSettings.ProtoReflect.Descriptor instead.
-func (*TransactionSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{63}
-}
-
-func (x *TransactionSettings) GetTxMode() isTransactionSettings_TxMode {
-	if x != nil {
-		return x.TxMode
-	}
-	return nil
-}
-
 func (x *TransactionSettings) GetSerializableReadWrite() *SerializableModeSettings {
 	if x != nil {
-		if x, ok := x.TxMode.(*TransactionSettings_SerializableReadWrite); ok {
+		if x, ok := x.xxx_hidden_TxMode.(*transactionSettings_SerializableReadWrite); ok {
 			return x.SerializableReadWrite
 		}
 	}
@@ -5380,7 +8623,7 @@ func (x *TransactionSettings) GetSerializableReadWrite() *SerializableModeSettin
 
 func (x *TransactionSettings) GetOnlineReadOnly() *OnlineModeSettings {
 	if x != nil {
-		if x, ok := x.TxMode.(*TransactionSettings_OnlineReadOnly); ok {
+		if x, ok := x.xxx_hidden_TxMode.(*transactionSettings_OnlineReadOnly); ok {
 			return x.OnlineReadOnly
 		}
 	}
@@ -5389,7 +8632,7 @@ func (x *TransactionSettings) GetOnlineReadOnly() *OnlineModeSettings {
 
 func (x *TransactionSettings) GetStaleReadOnly() *StaleModeSettings {
 	if x != nil {
-		if x, ok := x.TxMode.(*TransactionSettings_StaleReadOnly); ok {
+		if x, ok := x.xxx_hidden_TxMode.(*transactionSettings_StaleReadOnly); ok {
 			return x.StaleReadOnly
 		}
 	}
@@ -5398,51 +8641,210 @@ func (x *TransactionSettings) GetStaleReadOnly() *StaleModeSettings {
 
 func (x *TransactionSettings) GetSnapshotReadOnly() *SnapshotModeSettings {
 	if x != nil {
-		if x, ok := x.TxMode.(*TransactionSettings_SnapshotReadOnly); ok {
+		if x, ok := x.xxx_hidden_TxMode.(*transactionSettings_SnapshotReadOnly); ok {
 			return x.SnapshotReadOnly
 		}
 	}
 	return nil
 }
 
+func (x *TransactionSettings) SetSerializableReadWrite(v *SerializableModeSettings) {
+	if v == nil {
+		x.xxx_hidden_TxMode = nil
+		return
+	}
+	x.xxx_hidden_TxMode = &transactionSettings_SerializableReadWrite{v}
+}
+
+func (x *TransactionSettings) SetOnlineReadOnly(v *OnlineModeSettings) {
+	if v == nil {
+		x.xxx_hidden_TxMode = nil
+		return
+	}
+	x.xxx_hidden_TxMode = &transactionSettings_OnlineReadOnly{v}
+}
+
+func (x *TransactionSettings) SetStaleReadOnly(v *StaleModeSettings) {
+	if v == nil {
+		x.xxx_hidden_TxMode = nil
+		return
+	}
+	x.xxx_hidden_TxMode = &transactionSettings_StaleReadOnly{v}
+}
+
+func (x *TransactionSettings) SetSnapshotReadOnly(v *SnapshotModeSettings) {
+	if v == nil {
+		x.xxx_hidden_TxMode = nil
+		return
+	}
+	x.xxx_hidden_TxMode = &transactionSettings_SnapshotReadOnly{v}
+}
+
+func (x *TransactionSettings) HasTxMode() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxMode != nil
+}
+
+func (x *TransactionSettings) HasSerializableReadWrite() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxMode.(*transactionSettings_SerializableReadWrite)
+	return ok
+}
+
+func (x *TransactionSettings) HasOnlineReadOnly() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxMode.(*transactionSettings_OnlineReadOnly)
+	return ok
+}
+
+func (x *TransactionSettings) HasStaleReadOnly() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxMode.(*transactionSettings_StaleReadOnly)
+	return ok
+}
+
+func (x *TransactionSettings) HasSnapshotReadOnly() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxMode.(*transactionSettings_SnapshotReadOnly)
+	return ok
+}
+
+func (x *TransactionSettings) ClearTxMode() {
+	x.xxx_hidden_TxMode = nil
+}
+
+func (x *TransactionSettings) ClearSerializableReadWrite() {
+	if _, ok := x.xxx_hidden_TxMode.(*transactionSettings_SerializableReadWrite); ok {
+		x.xxx_hidden_TxMode = nil
+	}
+}
+
+func (x *TransactionSettings) ClearOnlineReadOnly() {
+	if _, ok := x.xxx_hidden_TxMode.(*transactionSettings_OnlineReadOnly); ok {
+		x.xxx_hidden_TxMode = nil
+	}
+}
+
+func (x *TransactionSettings) ClearStaleReadOnly() {
+	if _, ok := x.xxx_hidden_TxMode.(*transactionSettings_StaleReadOnly); ok {
+		x.xxx_hidden_TxMode = nil
+	}
+}
+
+func (x *TransactionSettings) ClearSnapshotReadOnly() {
+	if _, ok := x.xxx_hidden_TxMode.(*transactionSettings_SnapshotReadOnly); ok {
+		x.xxx_hidden_TxMode = nil
+	}
+}
+
+const TransactionSettings_TxMode_not_set_case case_TransactionSettings_TxMode = 0
+const TransactionSettings_SerializableReadWrite_case case_TransactionSettings_TxMode = 1
+const TransactionSettings_OnlineReadOnly_case case_TransactionSettings_TxMode = 2
+const TransactionSettings_StaleReadOnly_case case_TransactionSettings_TxMode = 3
+const TransactionSettings_SnapshotReadOnly_case case_TransactionSettings_TxMode = 4
+
+func (x *TransactionSettings) WhichTxMode() case_TransactionSettings_TxMode {
+	if x == nil {
+		return TransactionSettings_TxMode_not_set_case
+	}
+	switch x.xxx_hidden_TxMode.(type) {
+	case *transactionSettings_SerializableReadWrite:
+		return TransactionSettings_SerializableReadWrite_case
+	case *transactionSettings_OnlineReadOnly:
+		return TransactionSettings_OnlineReadOnly_case
+	case *transactionSettings_StaleReadOnly:
+		return TransactionSettings_StaleReadOnly_case
+	case *transactionSettings_SnapshotReadOnly:
+		return TransactionSettings_SnapshotReadOnly_case
+	default:
+		return TransactionSettings_TxMode_not_set_case
+	}
+}
+
+type TransactionSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_TxMode:
+	SerializableReadWrite *SerializableModeSettings
+	OnlineReadOnly        *OnlineModeSettings
+	StaleReadOnly         *StaleModeSettings
+	SnapshotReadOnly      *SnapshotModeSettings
+	// -- end of xxx_hidden_TxMode
+}
+
+func (b0 TransactionSettings_builder) Build() *TransactionSettings {
+	m0 := &TransactionSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.SerializableReadWrite != nil {
+		x.xxx_hidden_TxMode = &transactionSettings_SerializableReadWrite{b.SerializableReadWrite}
+	}
+	if b.OnlineReadOnly != nil {
+		x.xxx_hidden_TxMode = &transactionSettings_OnlineReadOnly{b.OnlineReadOnly}
+	}
+	if b.StaleReadOnly != nil {
+		x.xxx_hidden_TxMode = &transactionSettings_StaleReadOnly{b.StaleReadOnly}
+	}
+	if b.SnapshotReadOnly != nil {
+		x.xxx_hidden_TxMode = &transactionSettings_SnapshotReadOnly{b.SnapshotReadOnly}
+	}
+	return m0
+}
+
+type case_TransactionSettings_TxMode protoreflect.FieldNumber
+
+func (x case_TransactionSettings_TxMode) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[63].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isTransactionSettings_TxMode interface {
 	isTransactionSettings_TxMode()
 }
 
-type TransactionSettings_SerializableReadWrite struct {
+type transactionSettings_SerializableReadWrite struct {
 	SerializableReadWrite *SerializableModeSettings `protobuf:"bytes,1,opt,name=serializable_read_write,json=serializableReadWrite,proto3,oneof"`
 }
 
-type TransactionSettings_OnlineReadOnly struct {
+type transactionSettings_OnlineReadOnly struct {
 	OnlineReadOnly *OnlineModeSettings `protobuf:"bytes,2,opt,name=online_read_only,json=onlineReadOnly,proto3,oneof"`
 }
 
-type TransactionSettings_StaleReadOnly struct {
+type transactionSettings_StaleReadOnly struct {
 	StaleReadOnly *StaleModeSettings `protobuf:"bytes,3,opt,name=stale_read_only,json=staleReadOnly,proto3,oneof"`
 }
 
-type TransactionSettings_SnapshotReadOnly struct {
+type transactionSettings_SnapshotReadOnly struct {
 	SnapshotReadOnly *SnapshotModeSettings `protobuf:"bytes,4,opt,name=snapshot_read_only,json=snapshotReadOnly,proto3,oneof"`
 }
 
-func (*TransactionSettings_SerializableReadWrite) isTransactionSettings_TxMode() {}
+func (*transactionSettings_SerializableReadWrite) isTransactionSettings_TxMode() {}
 
-func (*TransactionSettings_OnlineReadOnly) isTransactionSettings_TxMode() {}
+func (*transactionSettings_OnlineReadOnly) isTransactionSettings_TxMode() {}
 
-func (*TransactionSettings_StaleReadOnly) isTransactionSettings_TxMode() {}
+func (*transactionSettings_StaleReadOnly) isTransactionSettings_TxMode() {}
 
-func (*TransactionSettings_SnapshotReadOnly) isTransactionSettings_TxMode() {}
+func (*transactionSettings_SnapshotReadOnly) isTransactionSettings_TxMode() {}
 
 type TransactionControl struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to TxSelector:
-	//
-	//	*TransactionControl_TxId
-	//	*TransactionControl_BeginTx
-	TxSelector    isTransactionControl_TxSelector `protobuf_oneof:"tx_selector"`
-	CommitTx      bool                            `protobuf:"varint,10,opt,name=commit_tx,json=commitTx,proto3" json:"commit_tx,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_TxSelector isTransactionControl_TxSelector `protobuf_oneof:"tx_selector"`
+	xxx_hidden_CommitTx   bool                            `protobuf:"varint,10,opt,name=commit_tx,json=commitTx,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *TransactionControl) Reset() {
@@ -5470,21 +8872,9 @@ func (x *TransactionControl) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TransactionControl.ProtoReflect.Descriptor instead.
-func (*TransactionControl) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{64}
-}
-
-func (x *TransactionControl) GetTxSelector() isTransactionControl_TxSelector {
-	if x != nil {
-		return x.TxSelector
-	}
-	return nil
-}
-
 func (x *TransactionControl) GetTxId() string {
 	if x != nil {
-		if x, ok := x.TxSelector.(*TransactionControl_TxId); ok {
+		if x, ok := x.xxx_hidden_TxSelector.(*transactionControl_TxId); ok {
 			return x.TxId
 		}
 	}
@@ -5493,7 +8883,7 @@ func (x *TransactionControl) GetTxId() string {
 
 func (x *TransactionControl) GetBeginTx() *TransactionSettings {
 	if x != nil {
-		if x, ok := x.TxSelector.(*TransactionControl_BeginTx); ok {
+		if x, ok := x.xxx_hidden_TxSelector.(*transactionControl_BeginTx); ok {
 			return x.BeginTx
 		}
 	}
@@ -5502,32 +8892,139 @@ func (x *TransactionControl) GetBeginTx() *TransactionSettings {
 
 func (x *TransactionControl) GetCommitTx() bool {
 	if x != nil {
-		return x.CommitTx
+		return x.xxx_hidden_CommitTx
 	}
 	return false
+}
+
+func (x *TransactionControl) SetTxId(v string) {
+	x.xxx_hidden_TxSelector = &transactionControl_TxId{v}
+}
+
+func (x *TransactionControl) SetBeginTx(v *TransactionSettings) {
+	if v == nil {
+		x.xxx_hidden_TxSelector = nil
+		return
+	}
+	x.xxx_hidden_TxSelector = &transactionControl_BeginTx{v}
+}
+
+func (x *TransactionControl) SetCommitTx(v bool) {
+	x.xxx_hidden_CommitTx = v
+}
+
+func (x *TransactionControl) HasTxSelector() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxSelector != nil
+}
+
+func (x *TransactionControl) HasTxId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxSelector.(*transactionControl_TxId)
+	return ok
+}
+
+func (x *TransactionControl) HasBeginTx() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxSelector.(*transactionControl_BeginTx)
+	return ok
+}
+
+func (x *TransactionControl) ClearTxSelector() {
+	x.xxx_hidden_TxSelector = nil
+}
+
+func (x *TransactionControl) ClearTxId() {
+	if _, ok := x.xxx_hidden_TxSelector.(*transactionControl_TxId); ok {
+		x.xxx_hidden_TxSelector = nil
+	}
+}
+
+func (x *TransactionControl) ClearBeginTx() {
+	if _, ok := x.xxx_hidden_TxSelector.(*transactionControl_BeginTx); ok {
+		x.xxx_hidden_TxSelector = nil
+	}
+}
+
+const TransactionControl_TxSelector_not_set_case case_TransactionControl_TxSelector = 0
+const TransactionControl_TxId_case case_TransactionControl_TxSelector = 1
+const TransactionControl_BeginTx_case case_TransactionControl_TxSelector = 2
+
+func (x *TransactionControl) WhichTxSelector() case_TransactionControl_TxSelector {
+	if x == nil {
+		return TransactionControl_TxSelector_not_set_case
+	}
+	switch x.xxx_hidden_TxSelector.(type) {
+	case *transactionControl_TxId:
+		return TransactionControl_TxId_case
+	case *transactionControl_BeginTx:
+		return TransactionControl_BeginTx_case
+	default:
+		return TransactionControl_TxSelector_not_set_case
+	}
+}
+
+type TransactionControl_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_TxSelector:
+	TxId    *string
+	BeginTx *TransactionSettings
+	// -- end of xxx_hidden_TxSelector
+	CommitTx bool
+}
+
+func (b0 TransactionControl_builder) Build() *TransactionControl {
+	m0 := &TransactionControl{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.TxId != nil {
+		x.xxx_hidden_TxSelector = &transactionControl_TxId{*b.TxId}
+	}
+	if b.BeginTx != nil {
+		x.xxx_hidden_TxSelector = &transactionControl_BeginTx{b.BeginTx}
+	}
+	x.xxx_hidden_CommitTx = b.CommitTx
+	return m0
+}
+
+type case_TransactionControl_TxSelector protoreflect.FieldNumber
+
+func (x case_TransactionControl_TxSelector) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[64].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isTransactionControl_TxSelector interface {
 	isTransactionControl_TxSelector()
 }
 
-type TransactionControl_TxId struct {
+type transactionControl_TxId struct {
 	TxId string `protobuf:"bytes,1,opt,name=tx_id,json=txId,proto3,oneof"`
 }
 
-type TransactionControl_BeginTx struct {
+type transactionControl_BeginTx struct {
 	BeginTx *TransactionSettings `protobuf:"bytes,2,opt,name=begin_tx,json=beginTx,proto3,oneof"`
 }
 
-func (*TransactionControl_TxId) isTransactionControl_TxSelector() {}
+func (*transactionControl_TxId) isTransactionControl_TxSelector() {}
 
-func (*TransactionControl_BeginTx) isTransactionControl_TxSelector() {}
+func (*transactionControl_BeginTx) isTransactionControl_TxSelector() {}
 
 type QueryCachePolicy struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	KeepInCache   bool                   `protobuf:"varint,1,opt,name=keep_in_cache,json=keepInCache,proto3" json:"keep_in_cache,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_KeepInCache bool                   `protobuf:"varint,1,opt,name=keep_in_cache,json=keepInCache,proto3"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *QueryCachePolicy) Reset() {
@@ -5555,21 +9052,34 @@ func (x *QueryCachePolicy) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryCachePolicy.ProtoReflect.Descriptor instead.
-func (*QueryCachePolicy) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{65}
-}
-
 func (x *QueryCachePolicy) GetKeepInCache() bool {
 	if x != nil {
-		return x.KeepInCache
+		return x.xxx_hidden_KeepInCache
 	}
 	return false
 }
 
+func (x *QueryCachePolicy) SetKeepInCache(v bool) {
+	x.xxx_hidden_KeepInCache = v
+}
+
+type QueryCachePolicy_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	KeepInCache bool
+}
+
+func (b0 QueryCachePolicy_builder) Build() *QueryCachePolicy {
+	m0 := &QueryCachePolicy{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_KeepInCache = b.KeepInCache
+	return m0
+}
+
 // Collect and return query execution stats
 type QueryStatsCollection struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5599,24 +9109,29 @@ func (x *QueryStatsCollection) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryStatsCollection.ProtoReflect.Descriptor instead.
-func (*QueryStatsCollection) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{66}
+type QueryStatsCollection_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 QueryStatsCollection_builder) Build() *QueryStatsCollection {
+	m0 := &QueryStatsCollection{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ExecuteDataQueryRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string              `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	TxControl *TransactionControl `protobuf:"bytes,2,opt,name=tx_control,json=txControl,proto3" json:"tx_control,omitempty"`
-	Query     *Query              `protobuf:"bytes,3,opt,name=query,proto3" json:"query,omitempty"`
-	// Map of query parameters (optional)
-	Parameters       map[string]*Ydb.TypedValue      `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	QueryCachePolicy *QueryCachePolicy               `protobuf:"bytes,5,opt,name=query_cache_policy,json=queryCachePolicy,proto3" json:"query_cache_policy,omitempty"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,6,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	CollectStats     QueryStatsCollection_Mode       `protobuf:"varint,7,opt,name=collect_stats,json=collectStats,proto3,enum=Ydb.Table.QueryStatsCollection_Mode" json:"collect_stats,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId        string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TxControl        *TransactionControl             `protobuf:"bytes,2,opt,name=tx_control,json=txControl,proto3"`
+	xxx_hidden_Query            *Query                          `protobuf:"bytes,3,opt,name=query,proto3"`
+	xxx_hidden_Parameters       map[string]*Ydb.TypedValue      `protobuf:"bytes,4,rep,name=parameters,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_QueryCachePolicy *QueryCachePolicy               `protobuf:"bytes,5,opt,name=query_cache_policy,json=queryCachePolicy,proto3"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,6,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_CollectStats     QueryStatsCollection_Mode       `protobuf:"varint,7,opt,name=collect_stats,json=collectStats,proto3,enum=Ydb.Table.QueryStatsCollection_Mode"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ExecuteDataQueryRequest) Reset() {
@@ -5644,65 +9159,160 @@ func (x *ExecuteDataQueryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteDataQueryRequest.ProtoReflect.Descriptor instead.
-func (*ExecuteDataQueryRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{67}
-}
-
 func (x *ExecuteDataQueryRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *ExecuteDataQueryRequest) GetTxControl() *TransactionControl {
 	if x != nil {
-		return x.TxControl
+		return x.xxx_hidden_TxControl
 	}
 	return nil
 }
 
 func (x *ExecuteDataQueryRequest) GetQuery() *Query {
 	if x != nil {
-		return x.Query
+		return x.xxx_hidden_Query
 	}
 	return nil
 }
 
 func (x *ExecuteDataQueryRequest) GetParameters() map[string]*Ydb.TypedValue {
 	if x != nil {
-		return x.Parameters
+		return x.xxx_hidden_Parameters
 	}
 	return nil
 }
 
 func (x *ExecuteDataQueryRequest) GetQueryCachePolicy() *QueryCachePolicy {
 	if x != nil {
-		return x.QueryCachePolicy
+		return x.xxx_hidden_QueryCachePolicy
 	}
 	return nil
 }
 
 func (x *ExecuteDataQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ExecuteDataQueryRequest) GetCollectStats() QueryStatsCollection_Mode {
 	if x != nil {
-		return x.CollectStats
+		return x.xxx_hidden_CollectStats
 	}
 	return QueryStatsCollection_STATS_COLLECTION_UNSPECIFIED
 }
 
+func (x *ExecuteDataQueryRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *ExecuteDataQueryRequest) SetTxControl(v *TransactionControl) {
+	x.xxx_hidden_TxControl = v
+}
+
+func (x *ExecuteDataQueryRequest) SetQuery(v *Query) {
+	x.xxx_hidden_Query = v
+}
+
+func (x *ExecuteDataQueryRequest) SetParameters(v map[string]*Ydb.TypedValue) {
+	x.xxx_hidden_Parameters = v
+}
+
+func (x *ExecuteDataQueryRequest) SetQueryCachePolicy(v *QueryCachePolicy) {
+	x.xxx_hidden_QueryCachePolicy = v
+}
+
+func (x *ExecuteDataQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ExecuteDataQueryRequest) SetCollectStats(v QueryStatsCollection_Mode) {
+	x.xxx_hidden_CollectStats = v
+}
+
+func (x *ExecuteDataQueryRequest) HasTxControl() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxControl != nil
+}
+
+func (x *ExecuteDataQueryRequest) HasQuery() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Query != nil
+}
+
+func (x *ExecuteDataQueryRequest) HasQueryCachePolicy() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_QueryCachePolicy != nil
+}
+
+func (x *ExecuteDataQueryRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ExecuteDataQueryRequest) ClearTxControl() {
+	x.xxx_hidden_TxControl = nil
+}
+
+func (x *ExecuteDataQueryRequest) ClearQuery() {
+	x.xxx_hidden_Query = nil
+}
+
+func (x *ExecuteDataQueryRequest) ClearQueryCachePolicy() {
+	x.xxx_hidden_QueryCachePolicy = nil
+}
+
+func (x *ExecuteDataQueryRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ExecuteDataQueryRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	TxControl *TransactionControl
+	Query     *Query
+	// Map of query parameters (optional)
+	Parameters       map[string]*Ydb.TypedValue
+	QueryCachePolicy *QueryCachePolicy
+	OperationParams  *Ydb_Operations.OperationParams
+	CollectStats     QueryStatsCollection_Mode
+}
+
+func (b0 ExecuteDataQueryRequest_builder) Build() *ExecuteDataQueryRequest {
+	m0 := &ExecuteDataQueryRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TxControl = b.TxControl
+	x.xxx_hidden_Query = b.Query
+	x.xxx_hidden_Parameters = b.Parameters
+	x.xxx_hidden_QueryCachePolicy = b.QueryCachePolicy
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_CollectStats = b.CollectStats
+	return m0
+}
+
 type ExecuteDataQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ExecuteDataQueryResponse) Reset() {
@@ -5730,27 +9340,49 @@ func (x *ExecuteDataQueryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteDataQueryResponse.ProtoReflect.Descriptor instead.
-func (*ExecuteDataQueryResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{68}
-}
-
 func (x *ExecuteDataQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ExecuteDataQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ExecuteDataQueryResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ExecuteDataQueryResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ExecuteDataQueryResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ExecuteDataQueryResponse_builder) Build() *ExecuteDataQueryResponse {
+	m0 := &ExecuteDataQueryResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ExecuteSchemeQueryRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// SQL text
-	YqlText         string                          `protobuf:"bytes,2,opt,name=yql_text,json=yqlText,proto3" json:"yql_text,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_YqlText         string                          `protobuf:"bytes,2,opt,name=yql_text,json=yqlText,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ExecuteSchemeQueryRequest) Reset() {
@@ -5778,37 +9410,75 @@ func (x *ExecuteSchemeQueryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteSchemeQueryRequest.ProtoReflect.Descriptor instead.
-func (*ExecuteSchemeQueryRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{69}
-}
-
 func (x *ExecuteSchemeQueryRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *ExecuteSchemeQueryRequest) GetYqlText() string {
 	if x != nil {
-		return x.YqlText
+		return x.xxx_hidden_YqlText
 	}
 	return ""
 }
 
 func (x *ExecuteSchemeQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *ExecuteSchemeQueryRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *ExecuteSchemeQueryRequest) SetYqlText(v string) {
+	x.xxx_hidden_YqlText = v
+}
+
+func (x *ExecuteSchemeQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ExecuteSchemeQueryRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ExecuteSchemeQueryRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ExecuteSchemeQueryRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// SQL text
+	YqlText         string
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 ExecuteSchemeQueryRequest_builder) Build() *ExecuteSchemeQueryRequest {
+	m0 := &ExecuteSchemeQueryRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_YqlText = b.YqlText
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type ExecuteSchemeQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ExecuteSchemeQueryResponse) Reset() {
@@ -5836,23 +9506,46 @@ func (x *ExecuteSchemeQueryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteSchemeQueryResponse.ProtoReflect.Descriptor instead.
-func (*ExecuteSchemeQueryResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{70}
-}
-
 func (x *ExecuteSchemeQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ExecuteSchemeQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ExecuteSchemeQueryResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ExecuteSchemeQueryResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ExecuteSchemeQueryResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ExecuteSchemeQueryResponse_builder) Build() *ExecuteSchemeQueryResponse {
+	m0 := &ExecuteSchemeQueryResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Holds transaction id
 type TransactionMeta struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Transaction identifier
-	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id string                 `protobuf:"bytes,1,opt,name=id,proto3"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5882,27 +9575,39 @@ func (x *TransactionMeta) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TransactionMeta.ProtoReflect.Descriptor instead.
-func (*TransactionMeta) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{71}
-}
-
 func (x *TransactionMeta) GetId() string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
+func (x *TransactionMeta) SetId(v string) {
+	x.xxx_hidden_Id = v
+}
+
+type TransactionMeta_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Transaction identifier
+	Id string
+}
+
+func (b0 TransactionMeta_builder) Build() *TransactionMeta {
+	m0 := &TransactionMeta{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	return m0
+}
+
 // Holds query id and type of parameters
 type QueryMeta struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Query identifier
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Type of parameters
-	ParametersTypes map[string]*Ydb.Type `protobuf:"bytes,2,rep,name=parameters_types,json=parametersTypes,proto3" json:"parameters_types,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id              string                 `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_ParametersTypes map[string]*Ydb.Type   `protobuf:"bytes,2,rep,name=parameters_types,json=parametersTypes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *QueryMeta) Reset() {
@@ -5930,38 +9635,55 @@ func (x *QueryMeta) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryMeta.ProtoReflect.Descriptor instead.
-func (*QueryMeta) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{72}
-}
-
 func (x *QueryMeta) GetId() string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *QueryMeta) GetParametersTypes() map[string]*Ydb.Type {
 	if x != nil {
-		return x.ParametersTypes
+		return x.xxx_hidden_ParametersTypes
 	}
 	return nil
 }
 
+func (x *QueryMeta) SetId(v string) {
+	x.xxx_hidden_Id = v
+}
+
+func (x *QueryMeta) SetParametersTypes(v map[string]*Ydb.Type) {
+	x.xxx_hidden_ParametersTypes = v
+}
+
+type QueryMeta_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Query identifier
+	Id string
+	// Type of parameters
+	ParametersTypes map[string]*Ydb.Type
+}
+
+func (b0 QueryMeta_builder) Build() *QueryMeta {
+	m0 := &QueryMeta{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_ParametersTypes = b.ParametersTypes
+	return m0
+}
+
 // One QueryResult can contain multiple tables
 type ExecuteQueryResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result rets (for each table)
-	ResultSets []*Ydb.ResultSet `protobuf:"bytes,1,rep,name=result_sets,json=resultSets,proto3" json:"result_sets,omitempty"`
-	// Transaction metadata
-	TxMeta *TransactionMeta `protobuf:"bytes,2,opt,name=tx_meta,json=txMeta,proto3" json:"tx_meta,omitempty"`
-	// Query metadata
-	QueryMeta *QueryMeta `protobuf:"bytes,3,opt,name=query_meta,json=queryMeta,proto3" json:"query_meta,omitempty"`
-	// Query execution statistics
-	QueryStats    *Ydb_TableStats.QueryStats `protobuf:"bytes,4,opt,name=query_stats,json=queryStats,proto3" json:"query_stats,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ResultSets *[]*Ydb.ResultSet          `protobuf:"bytes,1,rep,name=result_sets,json=resultSets,proto3"`
+	xxx_hidden_TxMeta     *TransactionMeta           `protobuf:"bytes,2,opt,name=tx_meta,json=txMeta,proto3"`
+	xxx_hidden_QueryMeta  *QueryMeta                 `protobuf:"bytes,3,opt,name=query_meta,json=queryMeta,proto3"`
+	xxx_hidden_QueryStats *Ydb_TableStats.QueryStats `protobuf:"bytes,4,opt,name=query_stats,json=queryStats,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ExecuteQueryResult) Reset() {
@@ -5989,50 +9711,118 @@ func (x *ExecuteQueryResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteQueryResult.ProtoReflect.Descriptor instead.
-func (*ExecuteQueryResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{73}
-}
-
 func (x *ExecuteQueryResult) GetResultSets() []*Ydb.ResultSet {
 	if x != nil {
-		return x.ResultSets
+		if x.xxx_hidden_ResultSets != nil {
+			return *x.xxx_hidden_ResultSets
+		}
 	}
 	return nil
 }
 
 func (x *ExecuteQueryResult) GetTxMeta() *TransactionMeta {
 	if x != nil {
-		return x.TxMeta
+		return x.xxx_hidden_TxMeta
 	}
 	return nil
 }
 
 func (x *ExecuteQueryResult) GetQueryMeta() *QueryMeta {
 	if x != nil {
-		return x.QueryMeta
+		return x.xxx_hidden_QueryMeta
 	}
 	return nil
 }
 
 func (x *ExecuteQueryResult) GetQueryStats() *Ydb_TableStats.QueryStats {
 	if x != nil {
-		return x.QueryStats
+		return x.xxx_hidden_QueryStats
 	}
 	return nil
 }
 
+func (x *ExecuteQueryResult) SetResultSets(v []*Ydb.ResultSet) {
+	x.xxx_hidden_ResultSets = &v
+}
+
+func (x *ExecuteQueryResult) SetTxMeta(v *TransactionMeta) {
+	x.xxx_hidden_TxMeta = v
+}
+
+func (x *ExecuteQueryResult) SetQueryMeta(v *QueryMeta) {
+	x.xxx_hidden_QueryMeta = v
+}
+
+func (x *ExecuteQueryResult) SetQueryStats(v *Ydb_TableStats.QueryStats) {
+	x.xxx_hidden_QueryStats = v
+}
+
+func (x *ExecuteQueryResult) HasTxMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxMeta != nil
+}
+
+func (x *ExecuteQueryResult) HasQueryMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_QueryMeta != nil
+}
+
+func (x *ExecuteQueryResult) HasQueryStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_QueryStats != nil
+}
+
+func (x *ExecuteQueryResult) ClearTxMeta() {
+	x.xxx_hidden_TxMeta = nil
+}
+
+func (x *ExecuteQueryResult) ClearQueryMeta() {
+	x.xxx_hidden_QueryMeta = nil
+}
+
+func (x *ExecuteQueryResult) ClearQueryStats() {
+	x.xxx_hidden_QueryStats = nil
+}
+
+type ExecuteQueryResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result rets (for each table)
+	ResultSets []*Ydb.ResultSet
+	// Transaction metadata
+	TxMeta *TransactionMeta
+	// Query metadata
+	QueryMeta *QueryMeta
+	// Query execution statistics
+	QueryStats *Ydb_TableStats.QueryStats
+}
+
+func (b0 ExecuteQueryResult_builder) Build() *ExecuteQueryResult {
+	m0 := &ExecuteQueryResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ResultSets = &b.ResultSets
+	x.xxx_hidden_TxMeta = b.TxMeta
+	x.xxx_hidden_QueryMeta = b.QueryMeta
+	x.xxx_hidden_QueryStats = b.QueryStats
+	return m0
+}
+
 // Explain data query
 type ExplainDataQueryRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// SQL text to explain
-	YqlText                string                          `protobuf:"bytes,2,opt,name=yql_text,json=yqlText,proto3" json:"yql_text,omitempty"`
-	OperationParams        *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	CollectFullDiagnostics bool                            `protobuf:"varint,4,opt,name=collect_full_diagnostics,json=collectFullDiagnostics,proto3" json:"collect_full_diagnostics,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                             protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId              string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_YqlText                string                          `protobuf:"bytes,2,opt,name=yql_text,json=yqlText,proto3"`
+	xxx_hidden_OperationParams        *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_CollectFullDiagnostics bool                            `protobuf:"varint,4,opt,name=collect_full_diagnostics,json=collectFullDiagnostics,proto3"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *ExplainDataQueryRequest) Reset() {
@@ -6060,45 +9850,88 @@ func (x *ExplainDataQueryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExplainDataQueryRequest.ProtoReflect.Descriptor instead.
-func (*ExplainDataQueryRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{74}
-}
-
 func (x *ExplainDataQueryRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *ExplainDataQueryRequest) GetYqlText() string {
 	if x != nil {
-		return x.YqlText
+		return x.xxx_hidden_YqlText
 	}
 	return ""
 }
 
 func (x *ExplainDataQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ExplainDataQueryRequest) GetCollectFullDiagnostics() bool {
 	if x != nil {
-		return x.CollectFullDiagnostics
+		return x.xxx_hidden_CollectFullDiagnostics
 	}
 	return false
 }
 
+func (x *ExplainDataQueryRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *ExplainDataQueryRequest) SetYqlText(v string) {
+	x.xxx_hidden_YqlText = v
+}
+
+func (x *ExplainDataQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ExplainDataQueryRequest) SetCollectFullDiagnostics(v bool) {
+	x.xxx_hidden_CollectFullDiagnostics = v
+}
+
+func (x *ExplainDataQueryRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ExplainDataQueryRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ExplainDataQueryRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// SQL text to explain
+	YqlText                string
+	OperationParams        *Ydb_Operations.OperationParams
+	CollectFullDiagnostics bool
+}
+
+func (b0 ExplainDataQueryRequest_builder) Build() *ExplainDataQueryRequest {
+	m0 := &ExplainDataQueryRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_YqlText = b.YqlText
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_CollectFullDiagnostics = b.CollectFullDiagnostics
+	return m0
+}
+
 type ExplainDataQueryResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Holds ExplainQueryResult in case of successful call
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ExplainDataQueryResponse) Reset() {
@@ -6126,25 +9959,50 @@ func (x *ExplainDataQueryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExplainDataQueryResponse.ProtoReflect.Descriptor instead.
-func (*ExplainDataQueryResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{75}
-}
-
 func (x *ExplainDataQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ExplainDataQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ExplainDataQueryResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ExplainDataQueryResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ExplainDataQueryResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Holds ExplainQueryResult in case of successful call
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ExplainDataQueryResponse_builder) Build() *ExplainDataQueryResponse {
+	m0 := &ExplainDataQueryResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ExplainQueryResult struct {
-	state                protoimpl.MessageState `protogen:"open.v1"`
-	QueryAst             string                 `protobuf:"bytes,1,opt,name=query_ast,json=queryAst,proto3" json:"query_ast,omitempty"`
-	QueryPlan            string                 `protobuf:"bytes,2,opt,name=query_plan,json=queryPlan,proto3" json:"query_plan,omitempty"`
-	QueryFullDiagnostics string                 `protobuf:"bytes,3,opt,name=query_full_diagnostics,json=queryFullDiagnostics,proto3" json:"query_full_diagnostics,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_QueryAst             string                 `protobuf:"bytes,1,opt,name=query_ast,json=queryAst,proto3"`
+	xxx_hidden_QueryPlan            string                 `protobuf:"bytes,2,opt,name=query_plan,json=queryPlan,proto3"`
+	xxx_hidden_QueryFullDiagnostics string                 `protobuf:"bytes,3,opt,name=query_full_diagnostics,json=queryFullDiagnostics,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *ExplainQueryResult) Reset() {
@@ -6172,42 +10030,65 @@ func (x *ExplainQueryResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExplainQueryResult.ProtoReflect.Descriptor instead.
-func (*ExplainQueryResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{76}
-}
-
 func (x *ExplainQueryResult) GetQueryAst() string {
 	if x != nil {
-		return x.QueryAst
+		return x.xxx_hidden_QueryAst
 	}
 	return ""
 }
 
 func (x *ExplainQueryResult) GetQueryPlan() string {
 	if x != nil {
-		return x.QueryPlan
+		return x.xxx_hidden_QueryPlan
 	}
 	return ""
 }
 
 func (x *ExplainQueryResult) GetQueryFullDiagnostics() string {
 	if x != nil {
-		return x.QueryFullDiagnostics
+		return x.xxx_hidden_QueryFullDiagnostics
 	}
 	return ""
 }
 
+func (x *ExplainQueryResult) SetQueryAst(v string) {
+	x.xxx_hidden_QueryAst = v
+}
+
+func (x *ExplainQueryResult) SetQueryPlan(v string) {
+	x.xxx_hidden_QueryPlan = v
+}
+
+func (x *ExplainQueryResult) SetQueryFullDiagnostics(v string) {
+	x.xxx_hidden_QueryFullDiagnostics = v
+}
+
+type ExplainQueryResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	QueryAst             string
+	QueryPlan            string
+	QueryFullDiagnostics string
+}
+
+func (b0 ExplainQueryResult_builder) Build() *ExplainQueryResult {
+	m0 := &ExplainQueryResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_QueryAst = b.QueryAst
+	x.xxx_hidden_QueryPlan = b.QueryPlan
+	x.xxx_hidden_QueryFullDiagnostics = b.QueryFullDiagnostics
+	return m0
+}
+
 // Prepare given program to execute
 type PrepareDataQueryRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// SQL text
-	YqlText         string                          `protobuf:"bytes,2,opt,name=yql_text,json=yqlText,proto3" json:"yql_text,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_YqlText         string                          `protobuf:"bytes,2,opt,name=yql_text,json=yqlText,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *PrepareDataQueryRequest) Reset() {
@@ -6235,38 +10116,75 @@ func (x *PrepareDataQueryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrepareDataQueryRequest.ProtoReflect.Descriptor instead.
-func (*PrepareDataQueryRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{77}
-}
-
 func (x *PrepareDataQueryRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *PrepareDataQueryRequest) GetYqlText() string {
 	if x != nil {
-		return x.YqlText
+		return x.xxx_hidden_YqlText
 	}
 	return ""
 }
 
 func (x *PrepareDataQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *PrepareDataQueryRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *PrepareDataQueryRequest) SetYqlText(v string) {
+	x.xxx_hidden_YqlText = v
+}
+
+func (x *PrepareDataQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *PrepareDataQueryRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *PrepareDataQueryRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type PrepareDataQueryRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// SQL text
+	YqlText         string
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 PrepareDataQueryRequest_builder) Build() *PrepareDataQueryRequest {
+	m0 := &PrepareDataQueryRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_YqlText = b.YqlText
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type PrepareDataQueryResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Holds PrepareQueryResult in case of successful call
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *PrepareDataQueryResponse) Reset() {
@@ -6294,26 +10212,49 @@ func (x *PrepareDataQueryResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrepareDataQueryResponse.ProtoReflect.Descriptor instead.
-func (*PrepareDataQueryResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{78}
-}
-
 func (x *PrepareDataQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *PrepareDataQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *PrepareDataQueryResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *PrepareDataQueryResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type PrepareDataQueryResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Holds PrepareQueryResult in case of successful call
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 PrepareDataQueryResponse_builder) Build() *PrepareDataQueryResponse {
+	m0 := &PrepareDataQueryResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type PrepareQueryResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Query id, used to perform ExecuteDataQuery
-	QueryId string `protobuf:"bytes,1,opt,name=query_id,json=queryId,proto3" json:"query_id,omitempty"`
-	// Parameters type, used to fill in parameter values
-	ParametersTypes map[string]*Ydb.Type `protobuf:"bytes,2,rep,name=parameters_types,json=parametersTypes,proto3" json:"parameters_types,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_QueryId         string                 `protobuf:"bytes,1,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_ParametersTypes map[string]*Ydb.Type   `protobuf:"bytes,2,rep,name=parameters_types,json=parametersTypes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *PrepareQueryResult) Reset() {
@@ -6341,33 +10282,53 @@ func (x *PrepareQueryResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PrepareQueryResult.ProtoReflect.Descriptor instead.
-func (*PrepareQueryResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{79}
-}
-
 func (x *PrepareQueryResult) GetQueryId() string {
 	if x != nil {
-		return x.QueryId
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *PrepareQueryResult) GetParametersTypes() map[string]*Ydb.Type {
 	if x != nil {
-		return x.ParametersTypes
+		return x.xxx_hidden_ParametersTypes
 	}
 	return nil
 }
 
+func (x *PrepareQueryResult) SetQueryId(v string) {
+	x.xxx_hidden_QueryId = v
+}
+
+func (x *PrepareQueryResult) SetParametersTypes(v map[string]*Ydb.Type) {
+	x.xxx_hidden_ParametersTypes = v
+}
+
+type PrepareQueryResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Query id, used to perform ExecuteDataQuery
+	QueryId string
+	// Parameters type, used to fill in parameter values
+	ParametersTypes map[string]*Ydb.Type
+}
+
+func (b0 PrepareQueryResult_builder) Build() *PrepareQueryResult {
+	m0 := &PrepareQueryResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_ParametersTypes = b.ParametersTypes
+	return m0
+}
+
 // Keep session alive
 type KeepAliveRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *KeepAliveRequest) Reset() {
@@ -6395,30 +10356,61 @@ func (x *KeepAliveRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use KeepAliveRequest.ProtoReflect.Descriptor instead.
-func (*KeepAliveRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{80}
-}
-
 func (x *KeepAliveRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *KeepAliveRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *KeepAliveRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *KeepAliveRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *KeepAliveRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *KeepAliveRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type KeepAliveRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId       string
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 KeepAliveRequest_builder) Build() *KeepAliveRequest {
+	m0 := &KeepAliveRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type KeepAliveResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *KeepAliveResponse) Reset() {
@@ -6446,23 +10438,47 @@ func (x *KeepAliveResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use KeepAliveResponse.ProtoReflect.Descriptor instead.
-func (*KeepAliveResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{81}
-}
-
 func (x *KeepAliveResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *KeepAliveResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *KeepAliveResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *KeepAliveResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type KeepAliveResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 KeepAliveResponse_builder) Build() *KeepAliveResponse {
+	m0 := &KeepAliveResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type KeepAliveResult struct {
-	state         protoimpl.MessageState        `protogen:"open.v1"`
-	SessionStatus KeepAliveResult_SessionStatus `protobuf:"varint,1,opt,name=session_status,json=sessionStatus,proto3,enum=Ydb.Table.KeepAliveResult_SessionStatus" json:"session_status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState        `protogen:"opaque.v1"`
+	xxx_hidden_SessionStatus KeepAliveResult_SessionStatus `protobuf:"varint,1,opt,name=session_status,json=sessionStatus,proto3,enum=Ydb.Table.KeepAliveResult_SessionStatus"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *KeepAliveResult) Reset() {
@@ -6490,27 +10506,39 @@ func (x *KeepAliveResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use KeepAliveResult.ProtoReflect.Descriptor instead.
-func (*KeepAliveResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{82}
-}
-
 func (x *KeepAliveResult) GetSessionStatus() KeepAliveResult_SessionStatus {
 	if x != nil {
-		return x.SessionStatus
+		return x.xxx_hidden_SessionStatus
 	}
 	return KeepAliveResult_SESSION_STATUS_UNSPECIFIED
 }
 
+func (x *KeepAliveResult) SetSessionStatus(v KeepAliveResult_SessionStatus) {
+	x.xxx_hidden_SessionStatus = v
+}
+
+type KeepAliveResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	SessionStatus KeepAliveResult_SessionStatus
+}
+
+func (b0 KeepAliveResult_builder) Build() *KeepAliveResult {
+	m0 := &KeepAliveResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionStatus = b.SessionStatus
+	return m0
+}
+
 // Begin transaction on given session with given settings
 type BeginTransactionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	TxSettings      *TransactionSettings            `protobuf:"bytes,2,opt,name=tx_settings,json=txSettings,proto3" json:"tx_settings,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TxSettings      *TransactionSettings            `protobuf:"bytes,2,opt,name=tx_settings,json=txSettings,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *BeginTransactionRequest) Reset() {
@@ -6538,38 +10566,85 @@ func (x *BeginTransactionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BeginTransactionRequest.ProtoReflect.Descriptor instead.
-func (*BeginTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{83}
-}
-
 func (x *BeginTransactionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *BeginTransactionRequest) GetTxSettings() *TransactionSettings {
 	if x != nil {
-		return x.TxSettings
+		return x.xxx_hidden_TxSettings
 	}
 	return nil
 }
 
 func (x *BeginTransactionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *BeginTransactionRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *BeginTransactionRequest) SetTxSettings(v *TransactionSettings) {
+	x.xxx_hidden_TxSettings = v
+}
+
+func (x *BeginTransactionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *BeginTransactionRequest) HasTxSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxSettings != nil
+}
+
+func (x *BeginTransactionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *BeginTransactionRequest) ClearTxSettings() {
+	x.xxx_hidden_TxSettings = nil
+}
+
+func (x *BeginTransactionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type BeginTransactionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId       string
+	TxSettings      *TransactionSettings
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 BeginTransactionRequest_builder) Build() *BeginTransactionRequest {
+	m0 := &BeginTransactionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TxSettings = b.TxSettings
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type BeginTransactionResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Holds BeginTransactionResult in case of successful call
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *BeginTransactionResponse) Reset() {
@@ -6597,23 +10672,48 @@ func (x *BeginTransactionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BeginTransactionResponse.ProtoReflect.Descriptor instead.
-func (*BeginTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{84}
-}
-
 func (x *BeginTransactionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *BeginTransactionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *BeginTransactionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *BeginTransactionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type BeginTransactionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Holds BeginTransactionResult in case of successful call
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 BeginTransactionResponse_builder) Build() *BeginTransactionResponse {
+	m0 := &BeginTransactionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type BeginTransactionResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TxMeta        *TransactionMeta       `protobuf:"bytes,1,opt,name=tx_meta,json=txMeta,proto3" json:"tx_meta,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TxMeta *TransactionMeta       `protobuf:"bytes,1,opt,name=tx_meta,json=txMeta,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *BeginTransactionResult) Reset() {
@@ -6641,29 +10741,51 @@ func (x *BeginTransactionResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BeginTransactionResult.ProtoReflect.Descriptor instead.
-func (*BeginTransactionResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{85}
-}
-
 func (x *BeginTransactionResult) GetTxMeta() *TransactionMeta {
 	if x != nil {
-		return x.TxMeta
+		return x.xxx_hidden_TxMeta
 	}
 	return nil
 }
 
+func (x *BeginTransactionResult) SetTxMeta(v *TransactionMeta) {
+	x.xxx_hidden_TxMeta = v
+}
+
+func (x *BeginTransactionResult) HasTxMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxMeta != nil
+}
+
+func (x *BeginTransactionResult) ClearTxMeta() {
+	x.xxx_hidden_TxMeta = nil
+}
+
+type BeginTransactionResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TxMeta *TransactionMeta
+}
+
+func (b0 BeginTransactionResult_builder) Build() *BeginTransactionResult {
+	m0 := &BeginTransactionResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TxMeta = b.TxMeta
+	return m0
+}
+
 // Commit transaction with given session and tx id
 type CommitTransactionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Transaction identifier
-	TxId            string                          `protobuf:"bytes,2,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	CollectStats    QueryStatsCollection_Mode       `protobuf:"varint,4,opt,name=collect_stats,json=collectStats,proto3,enum=Ydb.Table.QueryStatsCollection_Mode" json:"collect_stats,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TxId            string                          `protobuf:"bytes,2,opt,name=tx_id,json=txId,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_CollectStats    QueryStatsCollection_Mode       `protobuf:"varint,4,opt,name=collect_stats,json=collectStats,proto3,enum=Ydb.Table.QueryStatsCollection_Mode"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CommitTransactionRequest) Reset() {
@@ -6691,44 +10813,88 @@ func (x *CommitTransactionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CommitTransactionRequest.ProtoReflect.Descriptor instead.
-func (*CommitTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{86}
-}
-
 func (x *CommitTransactionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *CommitTransactionRequest) GetTxId() string {
 	if x != nil {
-		return x.TxId
+		return x.xxx_hidden_TxId
 	}
 	return ""
 }
 
 func (x *CommitTransactionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CommitTransactionRequest) GetCollectStats() QueryStatsCollection_Mode {
 	if x != nil {
-		return x.CollectStats
+		return x.xxx_hidden_CollectStats
 	}
 	return QueryStatsCollection_STATS_COLLECTION_UNSPECIFIED
 }
 
+func (x *CommitTransactionRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *CommitTransactionRequest) SetTxId(v string) {
+	x.xxx_hidden_TxId = v
+}
+
+func (x *CommitTransactionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CommitTransactionRequest) SetCollectStats(v QueryStatsCollection_Mode) {
+	x.xxx_hidden_CollectStats = v
+}
+
+func (x *CommitTransactionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CommitTransactionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type CommitTransactionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// Transaction identifier
+	TxId            string
+	OperationParams *Ydb_Operations.OperationParams
+	CollectStats    QueryStatsCollection_Mode
+}
+
+func (b0 CommitTransactionRequest_builder) Build() *CommitTransactionRequest {
+	m0 := &CommitTransactionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TxId = b.TxId
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_CollectStats = b.CollectStats
+	return m0
+}
+
 type CommitTransactionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CommitTransactionResponse) Reset() {
@@ -6756,23 +10922,47 @@ func (x *CommitTransactionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CommitTransactionResponse.ProtoReflect.Descriptor instead.
-func (*CommitTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{87}
-}
-
 func (x *CommitTransactionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CommitTransactionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CommitTransactionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CommitTransactionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CommitTransactionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CommitTransactionResponse_builder) Build() *CommitTransactionResponse {
+	m0 := &CommitTransactionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type CommitTransactionResult struct {
-	state         protoimpl.MessageState     `protogen:"open.v1"`
-	QueryStats    *Ydb_TableStats.QueryStats `protobuf:"bytes,1,opt,name=query_stats,json=queryStats,proto3" json:"query_stats,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_QueryStats *Ydb_TableStats.QueryStats `protobuf:"bytes,1,opt,name=query_stats,json=queryStats,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CommitTransactionResult) Reset() {
@@ -6800,28 +10990,50 @@ func (x *CommitTransactionResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CommitTransactionResult.ProtoReflect.Descriptor instead.
-func (*CommitTransactionResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{88}
-}
-
 func (x *CommitTransactionResult) GetQueryStats() *Ydb_TableStats.QueryStats {
 	if x != nil {
-		return x.QueryStats
+		return x.xxx_hidden_QueryStats
 	}
 	return nil
 }
 
+func (x *CommitTransactionResult) SetQueryStats(v *Ydb_TableStats.QueryStats) {
+	x.xxx_hidden_QueryStats = v
+}
+
+func (x *CommitTransactionResult) HasQueryStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_QueryStats != nil
+}
+
+func (x *CommitTransactionResult) ClearQueryStats() {
+	x.xxx_hidden_QueryStats = nil
+}
+
+type CommitTransactionResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	QueryStats *Ydb_TableStats.QueryStats
+}
+
+func (b0 CommitTransactionResult_builder) Build() *CommitTransactionResult {
+	m0 := &CommitTransactionResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_QueryStats = b.QueryStats
+	return m0
+}
+
 // Rollback transaction with given session and tx id
 type RollbackTransactionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Transaction identifier
-	TxId            string                          `protobuf:"bytes,2,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_SessionId       string                          `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TxId            string                          `protobuf:"bytes,2,opt,name=tx_id,json=txId,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *RollbackTransactionRequest) Reset() {
@@ -6849,37 +11061,75 @@ func (x *RollbackTransactionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RollbackTransactionRequest.ProtoReflect.Descriptor instead.
-func (*RollbackTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{89}
-}
-
 func (x *RollbackTransactionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *RollbackTransactionRequest) GetTxId() string {
 	if x != nil {
-		return x.TxId
+		return x.xxx_hidden_TxId
 	}
 	return ""
 }
 
 func (x *RollbackTransactionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *RollbackTransactionRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *RollbackTransactionRequest) SetTxId(v string) {
+	x.xxx_hidden_TxId = v
+}
+
+func (x *RollbackTransactionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *RollbackTransactionRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *RollbackTransactionRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type RollbackTransactionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// Transaction identifier
+	TxId            string
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 RollbackTransactionRequest_builder) Build() *RollbackTransactionRequest {
+	m0 := &RollbackTransactionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TxId = b.TxId
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type RollbackTransactionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *RollbackTransactionResponse) Reset() {
@@ -6907,24 +11157,48 @@ func (x *RollbackTransactionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RollbackTransactionResponse.ProtoReflect.Descriptor instead.
-func (*RollbackTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{90}
-}
-
 func (x *RollbackTransactionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *RollbackTransactionResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *RollbackTransactionResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *RollbackTransactionResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type RollbackTransactionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 RollbackTransactionResponse_builder) Build() *RollbackTransactionResponse {
+	m0 := &RollbackTransactionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type StoragePolicyDescription struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name   string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Labels map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *StoragePolicyDescription) Reset() {
@@ -6952,31 +11226,50 @@ func (x *StoragePolicyDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StoragePolicyDescription.ProtoReflect.Descriptor instead.
-func (*StoragePolicyDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{91}
-}
-
 func (x *StoragePolicyDescription) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *StoragePolicyDescription) GetLabels() map[string]string {
 	if x != nil {
-		return x.Labels
+		return x.xxx_hidden_Labels
 	}
 	return nil
 }
 
+func (x *StoragePolicyDescription) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *StoragePolicyDescription) SetLabels(v map[string]string) {
+	x.xxx_hidden_Labels = v
+}
+
+type StoragePolicyDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name   string
+	Labels map[string]string
+}
+
+func (b0 StoragePolicyDescription_builder) Build() *StoragePolicyDescription {
+	m0 := &StoragePolicyDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Labels = b.Labels
+	return m0
+}
+
 type CompactionPolicyDescription struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name   string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Labels map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CompactionPolicyDescription) Reset() {
@@ -7004,31 +11297,50 @@ func (x *CompactionPolicyDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CompactionPolicyDescription.ProtoReflect.Descriptor instead.
-func (*CompactionPolicyDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{92}
-}
-
 func (x *CompactionPolicyDescription) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *CompactionPolicyDescription) GetLabels() map[string]string {
 	if x != nil {
-		return x.Labels
+		return x.xxx_hidden_Labels
 	}
 	return nil
 }
 
+func (x *CompactionPolicyDescription) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *CompactionPolicyDescription) SetLabels(v map[string]string) {
+	x.xxx_hidden_Labels = v
+}
+
+type CompactionPolicyDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name   string
+	Labels map[string]string
+}
+
+func (b0 CompactionPolicyDescription_builder) Build() *CompactionPolicyDescription {
+	m0 := &CompactionPolicyDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Labels = b.Labels
+	return m0
+}
+
 type PartitioningPolicyDescription struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name   string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Labels map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *PartitioningPolicyDescription) Reset() {
@@ -7056,31 +11368,50 @@ func (x *PartitioningPolicyDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PartitioningPolicyDescription.ProtoReflect.Descriptor instead.
-func (*PartitioningPolicyDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{93}
-}
-
 func (x *PartitioningPolicyDescription) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *PartitioningPolicyDescription) GetLabels() map[string]string {
 	if x != nil {
-		return x.Labels
+		return x.xxx_hidden_Labels
 	}
 	return nil
 }
 
+func (x *PartitioningPolicyDescription) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *PartitioningPolicyDescription) SetLabels(v map[string]string) {
+	x.xxx_hidden_Labels = v
+}
+
+type PartitioningPolicyDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name   string
+	Labels map[string]string
+}
+
+func (b0 PartitioningPolicyDescription_builder) Build() *PartitioningPolicyDescription {
+	m0 := &PartitioningPolicyDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Labels = b.Labels
+	return m0
+}
+
 type ExecutionPolicyDescription struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name   string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Labels map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ExecutionPolicyDescription) Reset() {
@@ -7108,31 +11439,50 @@ func (x *ExecutionPolicyDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecutionPolicyDescription.ProtoReflect.Descriptor instead.
-func (*ExecutionPolicyDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{94}
-}
-
 func (x *ExecutionPolicyDescription) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ExecutionPolicyDescription) GetLabels() map[string]string {
 	if x != nil {
-		return x.Labels
+		return x.xxx_hidden_Labels
 	}
 	return nil
 }
 
+func (x *ExecutionPolicyDescription) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *ExecutionPolicyDescription) SetLabels(v map[string]string) {
+	x.xxx_hidden_Labels = v
+}
+
+type ExecutionPolicyDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name   string
+	Labels map[string]string
+}
+
+func (b0 ExecutionPolicyDescription_builder) Build() *ExecutionPolicyDescription {
+	m0 := &ExecutionPolicyDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Labels = b.Labels
+	return m0
+}
+
 type ReplicationPolicyDescription struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name   string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Labels map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ReplicationPolicyDescription) Reset() {
@@ -7160,31 +11510,50 @@ func (x *ReplicationPolicyDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReplicationPolicyDescription.ProtoReflect.Descriptor instead.
-func (*ReplicationPolicyDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{95}
-}
-
 func (x *ReplicationPolicyDescription) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ReplicationPolicyDescription) GetLabels() map[string]string {
 	if x != nil {
-		return x.Labels
+		return x.xxx_hidden_Labels
 	}
 	return nil
 }
 
+func (x *ReplicationPolicyDescription) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *ReplicationPolicyDescription) SetLabels(v map[string]string) {
+	x.xxx_hidden_Labels = v
+}
+
+type ReplicationPolicyDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name   string
+	Labels map[string]string
+}
+
+func (b0 ReplicationPolicyDescription_builder) Build() *ReplicationPolicyDescription {
+	m0 := &ReplicationPolicyDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Labels = b.Labels
+	return m0
+}
+
 type CachingPolicyDescription struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name   string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Labels map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CachingPolicyDescription) Reset() {
@@ -7212,43 +11581,62 @@ func (x *CachingPolicyDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CachingPolicyDescription.ProtoReflect.Descriptor instead.
-func (*CachingPolicyDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{96}
-}
-
 func (x *CachingPolicyDescription) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *CachingPolicyDescription) GetLabels() map[string]string {
 	if x != nil {
-		return x.Labels
+		return x.xxx_hidden_Labels
 	}
 	return nil
 }
 
+func (x *CachingPolicyDescription) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *CachingPolicyDescription) SetLabels(v map[string]string) {
+	x.xxx_hidden_Labels = v
+}
+
+type CachingPolicyDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name   string
+	Labels map[string]string
+}
+
+func (b0 CachingPolicyDescription_builder) Build() *CachingPolicyDescription {
+	m0 := &CachingPolicyDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Labels = b.Labels
+	return m0
+}
+
 type TableProfileDescription struct {
-	state                       protoimpl.MessageState `protogen:"open.v1"`
-	Name                        string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Labels                      map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	DefaultStoragePolicy        string                 `protobuf:"bytes,3,opt,name=default_storage_policy,json=defaultStoragePolicy,proto3" json:"default_storage_policy,omitempty"`
-	AllowedStoragePolicies      []string               `protobuf:"bytes,4,rep,name=allowed_storage_policies,json=allowedStoragePolicies,proto3" json:"allowed_storage_policies,omitempty"`
-	DefaultCompactionPolicy     string                 `protobuf:"bytes,5,opt,name=default_compaction_policy,json=defaultCompactionPolicy,proto3" json:"default_compaction_policy,omitempty"`
-	AllowedCompactionPolicies   []string               `protobuf:"bytes,6,rep,name=allowed_compaction_policies,json=allowedCompactionPolicies,proto3" json:"allowed_compaction_policies,omitempty"`
-	DefaultPartitioningPolicy   string                 `protobuf:"bytes,7,opt,name=default_partitioning_policy,json=defaultPartitioningPolicy,proto3" json:"default_partitioning_policy,omitempty"`
-	AllowedPartitioningPolicies []string               `protobuf:"bytes,8,rep,name=allowed_partitioning_policies,json=allowedPartitioningPolicies,proto3" json:"allowed_partitioning_policies,omitempty"`
-	DefaultExecutionPolicy      string                 `protobuf:"bytes,9,opt,name=default_execution_policy,json=defaultExecutionPolicy,proto3" json:"default_execution_policy,omitempty"`
-	AllowedExecutionPolicies    []string               `protobuf:"bytes,10,rep,name=allowed_execution_policies,json=allowedExecutionPolicies,proto3" json:"allowed_execution_policies,omitempty"`
-	DefaultReplicationPolicy    string                 `protobuf:"bytes,11,opt,name=default_replication_policy,json=defaultReplicationPolicy,proto3" json:"default_replication_policy,omitempty"`
-	AllowedReplicationPolicies  []string               `protobuf:"bytes,12,rep,name=allowed_replication_policies,json=allowedReplicationPolicies,proto3" json:"allowed_replication_policies,omitempty"`
-	DefaultCachingPolicy        string                 `protobuf:"bytes,13,opt,name=default_caching_policy,json=defaultCachingPolicy,proto3" json:"default_caching_policy,omitempty"`
-	AllowedCachingPolicies      []string               `protobuf:"bytes,14,rep,name=allowed_caching_policies,json=allowedCachingPolicies,proto3" json:"allowed_caching_policies,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	state                                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name                        string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Labels                      map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_DefaultStoragePolicy        string                 `protobuf:"bytes,3,opt,name=default_storage_policy,json=defaultStoragePolicy,proto3"`
+	xxx_hidden_AllowedStoragePolicies      []string               `protobuf:"bytes,4,rep,name=allowed_storage_policies,json=allowedStoragePolicies,proto3"`
+	xxx_hidden_DefaultCompactionPolicy     string                 `protobuf:"bytes,5,opt,name=default_compaction_policy,json=defaultCompactionPolicy,proto3"`
+	xxx_hidden_AllowedCompactionPolicies   []string               `protobuf:"bytes,6,rep,name=allowed_compaction_policies,json=allowedCompactionPolicies,proto3"`
+	xxx_hidden_DefaultPartitioningPolicy   string                 `protobuf:"bytes,7,opt,name=default_partitioning_policy,json=defaultPartitioningPolicy,proto3"`
+	xxx_hidden_AllowedPartitioningPolicies []string               `protobuf:"bytes,8,rep,name=allowed_partitioning_policies,json=allowedPartitioningPolicies,proto3"`
+	xxx_hidden_DefaultExecutionPolicy      string                 `protobuf:"bytes,9,opt,name=default_execution_policy,json=defaultExecutionPolicy,proto3"`
+	xxx_hidden_AllowedExecutionPolicies    []string               `protobuf:"bytes,10,rep,name=allowed_execution_policies,json=allowedExecutionPolicies,proto3"`
+	xxx_hidden_DefaultReplicationPolicy    string                 `protobuf:"bytes,11,opt,name=default_replication_policy,json=defaultReplicationPolicy,proto3"`
+	xxx_hidden_AllowedReplicationPolicies  []string               `protobuf:"bytes,12,rep,name=allowed_replication_policies,json=allowedReplicationPolicies,proto3"`
+	xxx_hidden_DefaultCachingPolicy        string                 `protobuf:"bytes,13,opt,name=default_caching_policy,json=defaultCachingPolicy,proto3"`
+	xxx_hidden_AllowedCachingPolicies      []string               `protobuf:"bytes,14,rep,name=allowed_caching_policies,json=allowedCachingPolicies,proto3"`
+	unknownFields                          protoimpl.UnknownFields
+	sizeCache                              protoimpl.SizeCache
 }
 
 func (x *TableProfileDescription) Reset() {
@@ -7276,114 +11664,205 @@ func (x *TableProfileDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TableProfileDescription.ProtoReflect.Descriptor instead.
-func (*TableProfileDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{97}
-}
-
 func (x *TableProfileDescription) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *TableProfileDescription) GetLabels() map[string]string {
 	if x != nil {
-		return x.Labels
+		return x.xxx_hidden_Labels
 	}
 	return nil
 }
 
 func (x *TableProfileDescription) GetDefaultStoragePolicy() string {
 	if x != nil {
-		return x.DefaultStoragePolicy
+		return x.xxx_hidden_DefaultStoragePolicy
 	}
 	return ""
 }
 
 func (x *TableProfileDescription) GetAllowedStoragePolicies() []string {
 	if x != nil {
-		return x.AllowedStoragePolicies
+		return x.xxx_hidden_AllowedStoragePolicies
 	}
 	return nil
 }
 
 func (x *TableProfileDescription) GetDefaultCompactionPolicy() string {
 	if x != nil {
-		return x.DefaultCompactionPolicy
+		return x.xxx_hidden_DefaultCompactionPolicy
 	}
 	return ""
 }
 
 func (x *TableProfileDescription) GetAllowedCompactionPolicies() []string {
 	if x != nil {
-		return x.AllowedCompactionPolicies
+		return x.xxx_hidden_AllowedCompactionPolicies
 	}
 	return nil
 }
 
 func (x *TableProfileDescription) GetDefaultPartitioningPolicy() string {
 	if x != nil {
-		return x.DefaultPartitioningPolicy
+		return x.xxx_hidden_DefaultPartitioningPolicy
 	}
 	return ""
 }
 
 func (x *TableProfileDescription) GetAllowedPartitioningPolicies() []string {
 	if x != nil {
-		return x.AllowedPartitioningPolicies
+		return x.xxx_hidden_AllowedPartitioningPolicies
 	}
 	return nil
 }
 
 func (x *TableProfileDescription) GetDefaultExecutionPolicy() string {
 	if x != nil {
-		return x.DefaultExecutionPolicy
+		return x.xxx_hidden_DefaultExecutionPolicy
 	}
 	return ""
 }
 
 func (x *TableProfileDescription) GetAllowedExecutionPolicies() []string {
 	if x != nil {
-		return x.AllowedExecutionPolicies
+		return x.xxx_hidden_AllowedExecutionPolicies
 	}
 	return nil
 }
 
 func (x *TableProfileDescription) GetDefaultReplicationPolicy() string {
 	if x != nil {
-		return x.DefaultReplicationPolicy
+		return x.xxx_hidden_DefaultReplicationPolicy
 	}
 	return ""
 }
 
 func (x *TableProfileDescription) GetAllowedReplicationPolicies() []string {
 	if x != nil {
-		return x.AllowedReplicationPolicies
+		return x.xxx_hidden_AllowedReplicationPolicies
 	}
 	return nil
 }
 
 func (x *TableProfileDescription) GetDefaultCachingPolicy() string {
 	if x != nil {
-		return x.DefaultCachingPolicy
+		return x.xxx_hidden_DefaultCachingPolicy
 	}
 	return ""
 }
 
 func (x *TableProfileDescription) GetAllowedCachingPolicies() []string {
 	if x != nil {
-		return x.AllowedCachingPolicies
+		return x.xxx_hidden_AllowedCachingPolicies
 	}
 	return nil
 }
 
+func (x *TableProfileDescription) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *TableProfileDescription) SetLabels(v map[string]string) {
+	x.xxx_hidden_Labels = v
+}
+
+func (x *TableProfileDescription) SetDefaultStoragePolicy(v string) {
+	x.xxx_hidden_DefaultStoragePolicy = v
+}
+
+func (x *TableProfileDescription) SetAllowedStoragePolicies(v []string) {
+	x.xxx_hidden_AllowedStoragePolicies = v
+}
+
+func (x *TableProfileDescription) SetDefaultCompactionPolicy(v string) {
+	x.xxx_hidden_DefaultCompactionPolicy = v
+}
+
+func (x *TableProfileDescription) SetAllowedCompactionPolicies(v []string) {
+	x.xxx_hidden_AllowedCompactionPolicies = v
+}
+
+func (x *TableProfileDescription) SetDefaultPartitioningPolicy(v string) {
+	x.xxx_hidden_DefaultPartitioningPolicy = v
+}
+
+func (x *TableProfileDescription) SetAllowedPartitioningPolicies(v []string) {
+	x.xxx_hidden_AllowedPartitioningPolicies = v
+}
+
+func (x *TableProfileDescription) SetDefaultExecutionPolicy(v string) {
+	x.xxx_hidden_DefaultExecutionPolicy = v
+}
+
+func (x *TableProfileDescription) SetAllowedExecutionPolicies(v []string) {
+	x.xxx_hidden_AllowedExecutionPolicies = v
+}
+
+func (x *TableProfileDescription) SetDefaultReplicationPolicy(v string) {
+	x.xxx_hidden_DefaultReplicationPolicy = v
+}
+
+func (x *TableProfileDescription) SetAllowedReplicationPolicies(v []string) {
+	x.xxx_hidden_AllowedReplicationPolicies = v
+}
+
+func (x *TableProfileDescription) SetDefaultCachingPolicy(v string) {
+	x.xxx_hidden_DefaultCachingPolicy = v
+}
+
+func (x *TableProfileDescription) SetAllowedCachingPolicies(v []string) {
+	x.xxx_hidden_AllowedCachingPolicies = v
+}
+
+type TableProfileDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name                        string
+	Labels                      map[string]string
+	DefaultStoragePolicy        string
+	AllowedStoragePolicies      []string
+	DefaultCompactionPolicy     string
+	AllowedCompactionPolicies   []string
+	DefaultPartitioningPolicy   string
+	AllowedPartitioningPolicies []string
+	DefaultExecutionPolicy      string
+	AllowedExecutionPolicies    []string
+	DefaultReplicationPolicy    string
+	AllowedReplicationPolicies  []string
+	DefaultCachingPolicy        string
+	AllowedCachingPolicies      []string
+}
+
+func (b0 TableProfileDescription_builder) Build() *TableProfileDescription {
+	m0 := &TableProfileDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Labels = b.Labels
+	x.xxx_hidden_DefaultStoragePolicy = b.DefaultStoragePolicy
+	x.xxx_hidden_AllowedStoragePolicies = b.AllowedStoragePolicies
+	x.xxx_hidden_DefaultCompactionPolicy = b.DefaultCompactionPolicy
+	x.xxx_hidden_AllowedCompactionPolicies = b.AllowedCompactionPolicies
+	x.xxx_hidden_DefaultPartitioningPolicy = b.DefaultPartitioningPolicy
+	x.xxx_hidden_AllowedPartitioningPolicies = b.AllowedPartitioningPolicies
+	x.xxx_hidden_DefaultExecutionPolicy = b.DefaultExecutionPolicy
+	x.xxx_hidden_AllowedExecutionPolicies = b.AllowedExecutionPolicies
+	x.xxx_hidden_DefaultReplicationPolicy = b.DefaultReplicationPolicy
+	x.xxx_hidden_AllowedReplicationPolicies = b.AllowedReplicationPolicies
+	x.xxx_hidden_DefaultCachingPolicy = b.DefaultCachingPolicy
+	x.xxx_hidden_AllowedCachingPolicies = b.AllowedCachingPolicies
+	return m0
+}
+
 type DescribeTableOptionsRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeTableOptionsRequest) Reset() {
@@ -7411,24 +11890,47 @@ func (x *DescribeTableOptionsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeTableOptionsRequest.ProtoReflect.Descriptor instead.
-func (*DescribeTableOptionsRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{98}
-}
-
 func (x *DescribeTableOptionsRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *DescribeTableOptionsRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DescribeTableOptionsRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DescribeTableOptionsRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DescribeTableOptionsRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 DescribeTableOptionsRequest_builder) Build() *DescribeTableOptionsRequest {
+	m0 := &DescribeTableOptionsRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type DescribeTableOptionsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result holds ListTableParametersResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeTableOptionsResponse) Reset() {
@@ -7456,29 +11958,54 @@ func (x *DescribeTableOptionsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeTableOptionsResponse.ProtoReflect.Descriptor instead.
-func (*DescribeTableOptionsResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{99}
-}
-
 func (x *DescribeTableOptionsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DescribeTableOptionsResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DescribeTableOptionsResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DescribeTableOptionsResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DescribeTableOptionsResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result holds ListTableParametersResult
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DescribeTableOptionsResponse_builder) Build() *DescribeTableOptionsResponse {
+	m0 := &DescribeTableOptionsResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DescribeTableOptionsResult struct {
-	state                     protoimpl.MessageState           `protogen:"open.v1"`
-	TableProfilePresets       []*TableProfileDescription       `protobuf:"bytes,1,rep,name=table_profile_presets,json=tableProfilePresets,proto3" json:"table_profile_presets,omitempty"`
-	StoragePolicyPresets      []*StoragePolicyDescription      `protobuf:"bytes,2,rep,name=storage_policy_presets,json=storagePolicyPresets,proto3" json:"storage_policy_presets,omitempty"`
-	CompactionPolicyPresets   []*CompactionPolicyDescription   `protobuf:"bytes,3,rep,name=compaction_policy_presets,json=compactionPolicyPresets,proto3" json:"compaction_policy_presets,omitempty"`
-	PartitioningPolicyPresets []*PartitioningPolicyDescription `protobuf:"bytes,4,rep,name=partitioning_policy_presets,json=partitioningPolicyPresets,proto3" json:"partitioning_policy_presets,omitempty"`
-	ExecutionPolicyPresets    []*ExecutionPolicyDescription    `protobuf:"bytes,5,rep,name=execution_policy_presets,json=executionPolicyPresets,proto3" json:"execution_policy_presets,omitempty"`
-	ReplicationPolicyPresets  []*ReplicationPolicyDescription  `protobuf:"bytes,6,rep,name=replication_policy_presets,json=replicationPolicyPresets,proto3" json:"replication_policy_presets,omitempty"`
-	CachingPolicyPresets      []*CachingPolicyDescription      `protobuf:"bytes,7,rep,name=caching_policy_presets,json=cachingPolicyPresets,proto3" json:"caching_policy_presets,omitempty"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state                                protoimpl.MessageState            `protogen:"opaque.v1"`
+	xxx_hidden_TableProfilePresets       *[]*TableProfileDescription       `protobuf:"bytes,1,rep,name=table_profile_presets,json=tableProfilePresets,proto3"`
+	xxx_hidden_StoragePolicyPresets      *[]*StoragePolicyDescription      `protobuf:"bytes,2,rep,name=storage_policy_presets,json=storagePolicyPresets,proto3"`
+	xxx_hidden_CompactionPolicyPresets   *[]*CompactionPolicyDescription   `protobuf:"bytes,3,rep,name=compaction_policy_presets,json=compactionPolicyPresets,proto3"`
+	xxx_hidden_PartitioningPolicyPresets *[]*PartitioningPolicyDescription `protobuf:"bytes,4,rep,name=partitioning_policy_presets,json=partitioningPolicyPresets,proto3"`
+	xxx_hidden_ExecutionPolicyPresets    *[]*ExecutionPolicyDescription    `protobuf:"bytes,5,rep,name=execution_policy_presets,json=executionPolicyPresets,proto3"`
+	xxx_hidden_ReplicationPolicyPresets  *[]*ReplicationPolicyDescription  `protobuf:"bytes,6,rep,name=replication_policy_presets,json=replicationPolicyPresets,proto3"`
+	xxx_hidden_CachingPolicyPresets      *[]*CachingPolicyDescription      `protobuf:"bytes,7,rep,name=caching_policy_presets,json=cachingPolicyPresets,proto3"`
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *DescribeTableOptionsResult) Reset() {
@@ -7506,78 +12033,129 @@ func (x *DescribeTableOptionsResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeTableOptionsResult.ProtoReflect.Descriptor instead.
-func (*DescribeTableOptionsResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{100}
-}
-
 func (x *DescribeTableOptionsResult) GetTableProfilePresets() []*TableProfileDescription {
 	if x != nil {
-		return x.TableProfilePresets
+		if x.xxx_hidden_TableProfilePresets != nil {
+			return *x.xxx_hidden_TableProfilePresets
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTableOptionsResult) GetStoragePolicyPresets() []*StoragePolicyDescription {
 	if x != nil {
-		return x.StoragePolicyPresets
+		if x.xxx_hidden_StoragePolicyPresets != nil {
+			return *x.xxx_hidden_StoragePolicyPresets
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTableOptionsResult) GetCompactionPolicyPresets() []*CompactionPolicyDescription {
 	if x != nil {
-		return x.CompactionPolicyPresets
+		if x.xxx_hidden_CompactionPolicyPresets != nil {
+			return *x.xxx_hidden_CompactionPolicyPresets
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTableOptionsResult) GetPartitioningPolicyPresets() []*PartitioningPolicyDescription {
 	if x != nil {
-		return x.PartitioningPolicyPresets
+		if x.xxx_hidden_PartitioningPolicyPresets != nil {
+			return *x.xxx_hidden_PartitioningPolicyPresets
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTableOptionsResult) GetExecutionPolicyPresets() []*ExecutionPolicyDescription {
 	if x != nil {
-		return x.ExecutionPolicyPresets
+		if x.xxx_hidden_ExecutionPolicyPresets != nil {
+			return *x.xxx_hidden_ExecutionPolicyPresets
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTableOptionsResult) GetReplicationPolicyPresets() []*ReplicationPolicyDescription {
 	if x != nil {
-		return x.ReplicationPolicyPresets
+		if x.xxx_hidden_ReplicationPolicyPresets != nil {
+			return *x.xxx_hidden_ReplicationPolicyPresets
+		}
 	}
 	return nil
 }
 
 func (x *DescribeTableOptionsResult) GetCachingPolicyPresets() []*CachingPolicyDescription {
 	if x != nil {
-		return x.CachingPolicyPresets
+		if x.xxx_hidden_CachingPolicyPresets != nil {
+			return *x.xxx_hidden_CachingPolicyPresets
+		}
 	}
 	return nil
 }
 
+func (x *DescribeTableOptionsResult) SetTableProfilePresets(v []*TableProfileDescription) {
+	x.xxx_hidden_TableProfilePresets = &v
+}
+
+func (x *DescribeTableOptionsResult) SetStoragePolicyPresets(v []*StoragePolicyDescription) {
+	x.xxx_hidden_StoragePolicyPresets = &v
+}
+
+func (x *DescribeTableOptionsResult) SetCompactionPolicyPresets(v []*CompactionPolicyDescription) {
+	x.xxx_hidden_CompactionPolicyPresets = &v
+}
+
+func (x *DescribeTableOptionsResult) SetPartitioningPolicyPresets(v []*PartitioningPolicyDescription) {
+	x.xxx_hidden_PartitioningPolicyPresets = &v
+}
+
+func (x *DescribeTableOptionsResult) SetExecutionPolicyPresets(v []*ExecutionPolicyDescription) {
+	x.xxx_hidden_ExecutionPolicyPresets = &v
+}
+
+func (x *DescribeTableOptionsResult) SetReplicationPolicyPresets(v []*ReplicationPolicyDescription) {
+	x.xxx_hidden_ReplicationPolicyPresets = &v
+}
+
+func (x *DescribeTableOptionsResult) SetCachingPolicyPresets(v []*CachingPolicyDescription) {
+	x.xxx_hidden_CachingPolicyPresets = &v
+}
+
+type DescribeTableOptionsResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TableProfilePresets       []*TableProfileDescription
+	StoragePolicyPresets      []*StoragePolicyDescription
+	CompactionPolicyPresets   []*CompactionPolicyDescription
+	PartitioningPolicyPresets []*PartitioningPolicyDescription
+	ExecutionPolicyPresets    []*ExecutionPolicyDescription
+	ReplicationPolicyPresets  []*ReplicationPolicyDescription
+	CachingPolicyPresets      []*CachingPolicyDescription
+}
+
+func (b0 DescribeTableOptionsResult_builder) Build() *DescribeTableOptionsResult {
+	m0 := &DescribeTableOptionsResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TableProfilePresets = &b.TableProfilePresets
+	x.xxx_hidden_StoragePolicyPresets = &b.StoragePolicyPresets
+	x.xxx_hidden_CompactionPolicyPresets = &b.CompactionPolicyPresets
+	x.xxx_hidden_PartitioningPolicyPresets = &b.PartitioningPolicyPresets
+	x.xxx_hidden_ExecutionPolicyPresets = &b.ExecutionPolicyPresets
+	x.xxx_hidden_ReplicationPolicyPresets = &b.ReplicationPolicyPresets
+	x.xxx_hidden_CachingPolicyPresets = &b.CachingPolicyPresets
+	return m0
+}
+
 type KeyRange struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Left border
-	//
-	// Types that are valid to be assigned to FromBound:
-	//
-	//	*KeyRange_Greater
-	//	*KeyRange_GreaterOrEqual
-	FromBound isKeyRange_FromBound `protobuf_oneof:"from_bound"`
-	// Right border
-	//
-	// Types that are valid to be assigned to ToBound:
-	//
-	//	*KeyRange_Less
-	//	*KeyRange_LessOrEqual
-	ToBound       isKeyRange_ToBound `protobuf_oneof:"to_bound"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_FromBound isKeyRange_FromBound   `protobuf_oneof:"from_bound"`
+	xxx_hidden_ToBound   isKeyRange_ToBound     `protobuf_oneof:"to_bound"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *KeyRange) Reset() {
@@ -7605,21 +12183,9 @@ func (x *KeyRange) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use KeyRange.ProtoReflect.Descriptor instead.
-func (*KeyRange) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{101}
-}
-
-func (x *KeyRange) GetFromBound() isKeyRange_FromBound {
-	if x != nil {
-		return x.FromBound
-	}
-	return nil
-}
-
 func (x *KeyRange) GetGreater() *Ydb.TypedValue {
 	if x != nil {
-		if x, ok := x.FromBound.(*KeyRange_Greater); ok {
+		if x, ok := x.xxx_hidden_FromBound.(*keyRange_Greater); ok {
 			return x.Greater
 		}
 	}
@@ -7628,23 +12194,16 @@ func (x *KeyRange) GetGreater() *Ydb.TypedValue {
 
 func (x *KeyRange) GetGreaterOrEqual() *Ydb.TypedValue {
 	if x != nil {
-		if x, ok := x.FromBound.(*KeyRange_GreaterOrEqual); ok {
+		if x, ok := x.xxx_hidden_FromBound.(*keyRange_GreaterOrEqual); ok {
 			return x.GreaterOrEqual
 		}
 	}
 	return nil
 }
 
-func (x *KeyRange) GetToBound() isKeyRange_ToBound {
-	if x != nil {
-		return x.ToBound
-	}
-	return nil
-}
-
 func (x *KeyRange) GetLess() *Ydb.TypedValue {
 	if x != nil {
-		if x, ok := x.ToBound.(*KeyRange_Less); ok {
+		if x, ok := x.xxx_hidden_ToBound.(*keyRange_Less); ok {
 			return x.Less
 		}
 	}
@@ -7653,75 +12212,270 @@ func (x *KeyRange) GetLess() *Ydb.TypedValue {
 
 func (x *KeyRange) GetLessOrEqual() *Ydb.TypedValue {
 	if x != nil {
-		if x, ok := x.ToBound.(*KeyRange_LessOrEqual); ok {
+		if x, ok := x.xxx_hidden_ToBound.(*keyRange_LessOrEqual); ok {
 			return x.LessOrEqual
 		}
 	}
 	return nil
 }
 
+func (x *KeyRange) SetGreater(v *Ydb.TypedValue) {
+	if v == nil {
+		x.xxx_hidden_FromBound = nil
+		return
+	}
+	x.xxx_hidden_FromBound = &keyRange_Greater{v}
+}
+
+func (x *KeyRange) SetGreaterOrEqual(v *Ydb.TypedValue) {
+	if v == nil {
+		x.xxx_hidden_FromBound = nil
+		return
+	}
+	x.xxx_hidden_FromBound = &keyRange_GreaterOrEqual{v}
+}
+
+func (x *KeyRange) SetLess(v *Ydb.TypedValue) {
+	if v == nil {
+		x.xxx_hidden_ToBound = nil
+		return
+	}
+	x.xxx_hidden_ToBound = &keyRange_Less{v}
+}
+
+func (x *KeyRange) SetLessOrEqual(v *Ydb.TypedValue) {
+	if v == nil {
+		x.xxx_hidden_ToBound = nil
+		return
+	}
+	x.xxx_hidden_ToBound = &keyRange_LessOrEqual{v}
+}
+
+func (x *KeyRange) HasFromBound() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_FromBound != nil
+}
+
+func (x *KeyRange) HasGreater() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_FromBound.(*keyRange_Greater)
+	return ok
+}
+
+func (x *KeyRange) HasGreaterOrEqual() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_FromBound.(*keyRange_GreaterOrEqual)
+	return ok
+}
+
+func (x *KeyRange) HasToBound() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ToBound != nil
+}
+
+func (x *KeyRange) HasLess() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ToBound.(*keyRange_Less)
+	return ok
+}
+
+func (x *KeyRange) HasLessOrEqual() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ToBound.(*keyRange_LessOrEqual)
+	return ok
+}
+
+func (x *KeyRange) ClearFromBound() {
+	x.xxx_hidden_FromBound = nil
+}
+
+func (x *KeyRange) ClearGreater() {
+	if _, ok := x.xxx_hidden_FromBound.(*keyRange_Greater); ok {
+		x.xxx_hidden_FromBound = nil
+	}
+}
+
+func (x *KeyRange) ClearGreaterOrEqual() {
+	if _, ok := x.xxx_hidden_FromBound.(*keyRange_GreaterOrEqual); ok {
+		x.xxx_hidden_FromBound = nil
+	}
+}
+
+func (x *KeyRange) ClearToBound() {
+	x.xxx_hidden_ToBound = nil
+}
+
+func (x *KeyRange) ClearLess() {
+	if _, ok := x.xxx_hidden_ToBound.(*keyRange_Less); ok {
+		x.xxx_hidden_ToBound = nil
+	}
+}
+
+func (x *KeyRange) ClearLessOrEqual() {
+	if _, ok := x.xxx_hidden_ToBound.(*keyRange_LessOrEqual); ok {
+		x.xxx_hidden_ToBound = nil
+	}
+}
+
+const KeyRange_FromBound_not_set_case case_KeyRange_FromBound = 0
+const KeyRange_Greater_case case_KeyRange_FromBound = 1
+const KeyRange_GreaterOrEqual_case case_KeyRange_FromBound = 2
+
+func (x *KeyRange) WhichFromBound() case_KeyRange_FromBound {
+	if x == nil {
+		return KeyRange_FromBound_not_set_case
+	}
+	switch x.xxx_hidden_FromBound.(type) {
+	case *keyRange_Greater:
+		return KeyRange_Greater_case
+	case *keyRange_GreaterOrEqual:
+		return KeyRange_GreaterOrEqual_case
+	default:
+		return KeyRange_FromBound_not_set_case
+	}
+}
+
+const KeyRange_ToBound_not_set_case case_KeyRange_ToBound = 0
+const KeyRange_Less_case case_KeyRange_ToBound = 3
+const KeyRange_LessOrEqual_case case_KeyRange_ToBound = 4
+
+func (x *KeyRange) WhichToBound() case_KeyRange_ToBound {
+	if x == nil {
+		return KeyRange_ToBound_not_set_case
+	}
+	switch x.xxx_hidden_ToBound.(type) {
+	case *keyRange_Less:
+		return KeyRange_Less_case
+	case *keyRange_LessOrEqual:
+		return KeyRange_LessOrEqual_case
+	default:
+		return KeyRange_ToBound_not_set_case
+	}
+}
+
+type KeyRange_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Left border
+
+	// Fields of oneof xxx_hidden_FromBound:
+	// Specify if we don't want to include given key
+	Greater *Ydb.TypedValue
+	// Specify if we want to include given key
+	GreaterOrEqual *Ydb.TypedValue
+	// -- end of xxx_hidden_FromBound
+	// Right border
+
+	// Fields of oneof xxx_hidden_ToBound:
+	// Specify if we don't want to include given key
+	Less *Ydb.TypedValue
+	// Specify if we want to include given key
+	LessOrEqual *Ydb.TypedValue
+	// -- end of xxx_hidden_ToBound
+}
+
+func (b0 KeyRange_builder) Build() *KeyRange {
+	m0 := &KeyRange{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Greater != nil {
+		x.xxx_hidden_FromBound = &keyRange_Greater{b.Greater}
+	}
+	if b.GreaterOrEqual != nil {
+		x.xxx_hidden_FromBound = &keyRange_GreaterOrEqual{b.GreaterOrEqual}
+	}
+	if b.Less != nil {
+		x.xxx_hidden_ToBound = &keyRange_Less{b.Less}
+	}
+	if b.LessOrEqual != nil {
+		x.xxx_hidden_ToBound = &keyRange_LessOrEqual{b.LessOrEqual}
+	}
+	return m0
+}
+
+type case_KeyRange_FromBound protoreflect.FieldNumber
+
+func (x case_KeyRange_FromBound) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[101].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type case_KeyRange_ToBound protoreflect.FieldNumber
+
+func (x case_KeyRange_ToBound) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[101].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isKeyRange_FromBound interface {
 	isKeyRange_FromBound()
 }
 
-type KeyRange_Greater struct {
+type keyRange_Greater struct {
 	// Specify if we don't want to include given key
 	Greater *Ydb.TypedValue `protobuf:"bytes,1,opt,name=greater,proto3,oneof"`
 }
 
-type KeyRange_GreaterOrEqual struct {
+type keyRange_GreaterOrEqual struct {
 	// Specify if we want to include given key
 	GreaterOrEqual *Ydb.TypedValue `protobuf:"bytes,2,opt,name=greater_or_equal,json=greaterOrEqual,proto3,oneof"`
 }
 
-func (*KeyRange_Greater) isKeyRange_FromBound() {}
+func (*keyRange_Greater) isKeyRange_FromBound() {}
 
-func (*KeyRange_GreaterOrEqual) isKeyRange_FromBound() {}
+func (*keyRange_GreaterOrEqual) isKeyRange_FromBound() {}
 
 type isKeyRange_ToBound interface {
 	isKeyRange_ToBound()
 }
 
-type KeyRange_Less struct {
+type keyRange_Less struct {
 	// Specify if we don't want to include given key
 	Less *Ydb.TypedValue `protobuf:"bytes,3,opt,name=less,proto3,oneof"`
 }
 
-type KeyRange_LessOrEqual struct {
+type keyRange_LessOrEqual struct {
 	// Specify if we want to include given key
 	LessOrEqual *Ydb.TypedValue `protobuf:"bytes,4,opt,name=less_or_equal,json=lessOrEqual,proto3,oneof"`
 }
 
-func (*KeyRange_Less) isKeyRange_ToBound() {}
+func (*keyRange_Less) isKeyRange_ToBound() {}
 
-func (*KeyRange_LessOrEqual) isKeyRange_ToBound() {}
+func (*keyRange_LessOrEqual) isKeyRange_ToBound() {}
 
 // Request to read table (without SQL)
 type ReadTableRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Path to table to read
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Primary key range to read
-	KeyRange *KeyRange `protobuf:"bytes,3,opt,name=key_range,json=keyRange,proto3" json:"key_range,omitempty"`
-	// Output columns
-	Columns []string `protobuf:"bytes,4,rep,name=columns,proto3" json:"columns,omitempty"`
-	// Require ordered reading
-	Ordered bool `protobuf:"varint,5,opt,name=ordered,proto3" json:"ordered,omitempty"`
-	// Limits row count to read
-	RowLimit uint64 `protobuf:"varint,6,opt,name=row_limit,json=rowLimit,proto3" json:"row_limit,omitempty"`
-	// Use a server-side snapshot
-	UseSnapshot Ydb.FeatureFlag_Status `protobuf:"varint,7,opt,name=use_snapshot,json=useSnapshot,proto3,enum=Ydb.FeatureFlag_Status" json:"use_snapshot,omitempty"`
-	// Server-side best-effort policy. Can be used as a hint to limit the size
-	// of batches sent from a server. If both are specified, the server chooses
-	// the smaller one. The limits are not strict, so batch size can be slightly
-	// greater than any of the limits
-	BatchLimitBytes             uint64                 `protobuf:"varint,8,opt,name=batch_limit_bytes,json=batchLimitBytes,proto3" json:"batch_limit_bytes,omitempty"`
-	BatchLimitRows              uint64                 `protobuf:"varint,9,opt,name=batch_limit_rows,json=batchLimitRows,proto3" json:"batch_limit_rows,omitempty"`
-	ReturnNotNullDataAsOptional Ydb.FeatureFlag_Status `protobuf:"varint,10,opt,name=return_not_null_data_as_optional,json=returnNotNullDataAsOptional,proto3,enum=Ydb.FeatureFlag_Status" json:"return_not_null_data_as_optional,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	state                                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId                   string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_Path                        string                 `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_KeyRange                    *KeyRange              `protobuf:"bytes,3,opt,name=key_range,json=keyRange,proto3"`
+	xxx_hidden_Columns                     []string               `protobuf:"bytes,4,rep,name=columns,proto3"`
+	xxx_hidden_Ordered                     bool                   `protobuf:"varint,5,opt,name=ordered,proto3"`
+	xxx_hidden_RowLimit                    uint64                 `protobuf:"varint,6,opt,name=row_limit,json=rowLimit,proto3"`
+	xxx_hidden_UseSnapshot                 Ydb.FeatureFlag_Status `protobuf:"varint,7,opt,name=use_snapshot,json=useSnapshot,proto3,enum=Ydb.FeatureFlag_Status"`
+	xxx_hidden_BatchLimitBytes             uint64                 `protobuf:"varint,8,opt,name=batch_limit_bytes,json=batchLimitBytes,proto3"`
+	xxx_hidden_BatchLimitRows              uint64                 `protobuf:"varint,9,opt,name=batch_limit_rows,json=batchLimitRows,proto3"`
+	xxx_hidden_ReturnNotNullDataAsOptional Ydb.FeatureFlag_Status `protobuf:"varint,10,opt,name=return_not_null_data_as_optional,json=returnNotNullDataAsOptional,proto3,enum=Ydb.FeatureFlag_Status"`
+	unknownFields                          protoimpl.UnknownFields
+	sizeCache                              protoimpl.SizeCache
 }
 
 func (x *ReadTableRequest) Reset() {
@@ -7749,94 +12503,179 @@ func (x *ReadTableRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadTableRequest.ProtoReflect.Descriptor instead.
-func (*ReadTableRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{102}
-}
-
 func (x *ReadTableRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *ReadTableRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *ReadTableRequest) GetKeyRange() *KeyRange {
 	if x != nil {
-		return x.KeyRange
+		return x.xxx_hidden_KeyRange
 	}
 	return nil
 }
 
 func (x *ReadTableRequest) GetColumns() []string {
 	if x != nil {
-		return x.Columns
+		return x.xxx_hidden_Columns
 	}
 	return nil
 }
 
 func (x *ReadTableRequest) GetOrdered() bool {
 	if x != nil {
-		return x.Ordered
+		return x.xxx_hidden_Ordered
 	}
 	return false
 }
 
 func (x *ReadTableRequest) GetRowLimit() uint64 {
 	if x != nil {
-		return x.RowLimit
+		return x.xxx_hidden_RowLimit
 	}
 	return 0
 }
 
 func (x *ReadTableRequest) GetUseSnapshot() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.UseSnapshot
+		return x.xxx_hidden_UseSnapshot
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
 func (x *ReadTableRequest) GetBatchLimitBytes() uint64 {
 	if x != nil {
-		return x.BatchLimitBytes
+		return x.xxx_hidden_BatchLimitBytes
 	}
 	return 0
 }
 
 func (x *ReadTableRequest) GetBatchLimitRows() uint64 {
 	if x != nil {
-		return x.BatchLimitRows
+		return x.xxx_hidden_BatchLimitRows
 	}
 	return 0
 }
 
 func (x *ReadTableRequest) GetReturnNotNullDataAsOptional() Ydb.FeatureFlag_Status {
 	if x != nil {
-		return x.ReturnNotNullDataAsOptional
+		return x.xxx_hidden_ReturnNotNullDataAsOptional
 	}
 	return Ydb.FeatureFlag_Status(0)
 }
 
+func (x *ReadTableRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *ReadTableRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *ReadTableRequest) SetKeyRange(v *KeyRange) {
+	x.xxx_hidden_KeyRange = v
+}
+
+func (x *ReadTableRequest) SetColumns(v []string) {
+	x.xxx_hidden_Columns = v
+}
+
+func (x *ReadTableRequest) SetOrdered(v bool) {
+	x.xxx_hidden_Ordered = v
+}
+
+func (x *ReadTableRequest) SetRowLimit(v uint64) {
+	x.xxx_hidden_RowLimit = v
+}
+
+func (x *ReadTableRequest) SetUseSnapshot(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_UseSnapshot = v
+}
+
+func (x *ReadTableRequest) SetBatchLimitBytes(v uint64) {
+	x.xxx_hidden_BatchLimitBytes = v
+}
+
+func (x *ReadTableRequest) SetBatchLimitRows(v uint64) {
+	x.xxx_hidden_BatchLimitRows = v
+}
+
+func (x *ReadTableRequest) SetReturnNotNullDataAsOptional(v Ydb.FeatureFlag_Status) {
+	x.xxx_hidden_ReturnNotNullDataAsOptional = v
+}
+
+func (x *ReadTableRequest) HasKeyRange() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_KeyRange != nil
+}
+
+func (x *ReadTableRequest) ClearKeyRange() {
+	x.xxx_hidden_KeyRange = nil
+}
+
+type ReadTableRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// Path to table to read
+	Path string
+	// Primary key range to read
+	KeyRange *KeyRange
+	// Output columns
+	Columns []string
+	// Require ordered reading
+	Ordered bool
+	// Limits row count to read
+	RowLimit uint64
+	// Use a server-side snapshot
+	UseSnapshot Ydb.FeatureFlag_Status
+	// Server-side best-effort policy. Can be used as a hint to limit the size
+	// of batches sent from a server. If both are specified, the server chooses
+	// the smaller one. The limits are not strict, so batch size can be slightly
+	// greater than any of the limits
+	BatchLimitBytes             uint64
+	BatchLimitRows              uint64
+	ReturnNotNullDataAsOptional Ydb.FeatureFlag_Status
+}
+
+func (b0 ReadTableRequest_builder) Build() *ReadTableRequest {
+	m0 := &ReadTableRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_KeyRange = b.KeyRange
+	x.xxx_hidden_Columns = b.Columns
+	x.xxx_hidden_Ordered = b.Ordered
+	x.xxx_hidden_RowLimit = b.RowLimit
+	x.xxx_hidden_UseSnapshot = b.UseSnapshot
+	x.xxx_hidden_BatchLimitBytes = b.BatchLimitBytes
+	x.xxx_hidden_BatchLimitRows = b.BatchLimitRows
+	x.xxx_hidden_ReturnNotNullDataAsOptional = b.ReturnNotNullDataAsOptional
+	return m0
+}
+
 // ReadTable doesn't use Operation, returns result directly
 type ReadTableResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Status of request (same as other statuses)
-	Status Ydb.StatusIds_StatusCode `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	// Issues
-	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	// Optional snapshot that corresponds to the returned data
-	Snapshot *Ydb.VirtualTimestamp `protobuf:"bytes,4,opt,name=snapshot,proto3" json:"snapshot,omitempty"`
-	// Read table result
-	Result        *ReadTableResult `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status   Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues   *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_Snapshot *Ydb.VirtualTimestamp      `protobuf:"bytes,4,opt,name=snapshot,proto3"`
+	xxx_hidden_Result   *ReadTableResult           `protobuf:"bytes,3,opt,name=result,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ReadTableResponse) Reset() {
@@ -7864,46 +12703,104 @@ func (x *ReadTableResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadTableResponse.ProtoReflect.Descriptor instead.
-func (*ReadTableResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{103}
-}
-
 func (x *ReadTableResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *ReadTableResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *ReadTableResponse) GetSnapshot() *Ydb.VirtualTimestamp {
 	if x != nil {
-		return x.Snapshot
+		return x.xxx_hidden_Snapshot
 	}
 	return nil
 }
 
 func (x *ReadTableResponse) GetResult() *ReadTableResult {
 	if x != nil {
-		return x.Result
+		return x.xxx_hidden_Result
 	}
 	return nil
 }
 
+func (x *ReadTableResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *ReadTableResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *ReadTableResponse) SetSnapshot(v *Ydb.VirtualTimestamp) {
+	x.xxx_hidden_Snapshot = v
+}
+
+func (x *ReadTableResponse) SetResult(v *ReadTableResult) {
+	x.xxx_hidden_Result = v
+}
+
+func (x *ReadTableResponse) HasSnapshot() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Snapshot != nil
+}
+
+func (x *ReadTableResponse) HasResult() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Result != nil
+}
+
+func (x *ReadTableResponse) ClearSnapshot() {
+	x.xxx_hidden_Snapshot = nil
+}
+
+func (x *ReadTableResponse) ClearResult() {
+	x.xxx_hidden_Result = nil
+}
+
+type ReadTableResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Status of request (same as other statuses)
+	Status Ydb.StatusIds_StatusCode
+	// Issues
+	Issues []*Ydb_Issue.IssueMessage
+	// Optional snapshot that corresponds to the returned data
+	Snapshot *Ydb.VirtualTimestamp
+	// Read table result
+	Result *ReadTableResult
+}
+
+func (b0 ReadTableResponse_builder) Build() *ReadTableResponse {
+	m0 := &ReadTableResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_Snapshot = b.Snapshot
+	x.xxx_hidden_Result = b.Result
+	return m0
+}
+
 // Result of read table request
 type ReadTableResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Result set (same as result of sql request)
-	ResultSet     *Ydb.ResultSet `protobuf:"bytes,1,opt,name=result_set,json=resultSet,proto3" json:"result_set,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ResultSet *Ydb.ResultSet         `protobuf:"bytes,1,opt,name=result_set,json=resultSet,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ReadTableResult) Reset() {
@@ -7931,31 +12828,51 @@ func (x *ReadTableResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadTableResult.ProtoReflect.Descriptor instead.
-func (*ReadTableResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{104}
-}
-
 func (x *ReadTableResult) GetResultSet() *Ydb.ResultSet {
 	if x != nil {
-		return x.ResultSet
+		return x.xxx_hidden_ResultSet
 	}
 	return nil
 }
 
+func (x *ReadTableResult) SetResultSet(v *Ydb.ResultSet) {
+	x.xxx_hidden_ResultSet = v
+}
+
+func (x *ReadTableResult) HasResultSet() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResultSet != nil
+}
+
+func (x *ReadTableResult) ClearResultSet() {
+	x.xxx_hidden_ResultSet = nil
+}
+
+type ReadTableResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Result set (same as result of sql request)
+	ResultSet *Ydb.ResultSet
+}
+
+func (b0 ReadTableResult_builder) Build() *ReadTableResult {
+	m0 := &ReadTableResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ResultSet = b.ResultSet
+	return m0
+}
+
 type ReadRowsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Path to table to read
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Keys to read. Must be a list of structs where each stuct is a key
-	// for one requested row and should contain all key columns
-	Keys *Ydb.TypedValue `protobuf:"bytes,3,opt,name=keys,proto3" json:"keys,omitempty"`
-	// Output columns. If empty all columns will be requested
-	Columns       []string `protobuf:"bytes,4,rep,name=columns,proto3" json:"columns,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_Path      string                 `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_Keys      *Ydb.TypedValue        `protobuf:"bytes,3,opt,name=keys,proto3"`
+	xxx_hidden_Columns   []string               `protobuf:"bytes,4,rep,name=columns,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ReadRowsRequest) Reset() {
@@ -7983,49 +12900,93 @@ func (x *ReadRowsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadRowsRequest.ProtoReflect.Descriptor instead.
-func (*ReadRowsRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{105}
-}
-
 func (x *ReadRowsRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *ReadRowsRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *ReadRowsRequest) GetKeys() *Ydb.TypedValue {
 	if x != nil {
-		return x.Keys
+		return x.xxx_hidden_Keys
 	}
 	return nil
 }
 
 func (x *ReadRowsRequest) GetColumns() []string {
 	if x != nil {
-		return x.Columns
+		return x.xxx_hidden_Columns
 	}
 	return nil
 }
 
+func (x *ReadRowsRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *ReadRowsRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *ReadRowsRequest) SetKeys(v *Ydb.TypedValue) {
+	x.xxx_hidden_Keys = v
+}
+
+func (x *ReadRowsRequest) SetColumns(v []string) {
+	x.xxx_hidden_Columns = v
+}
+
+func (x *ReadRowsRequest) HasKeys() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Keys != nil
+}
+
+func (x *ReadRowsRequest) ClearKeys() {
+	x.xxx_hidden_Keys = nil
+}
+
+type ReadRowsRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier
+	SessionId string
+	// Path to table to read
+	Path string
+	// Keys to read. Must be a list of structs where each stuct is a key
+	// for one requested row and should contain all key columns
+	Keys *Ydb.TypedValue
+	// Output columns. If empty all columns will be requested
+	Columns []string
+}
+
+func (b0 ReadRowsRequest_builder) Build() *ReadRowsRequest {
+	m0 := &ReadRowsRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_Keys = b.Keys
+	x.xxx_hidden_Columns = b.Columns
+	return m0
+}
+
 type ReadRowsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Status of request (same as other statuses)
-	Status Ydb.StatusIds_StatusCode `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	// Issues
-	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	// Result set (same as result of sql request)
-	ResultSet     *Ydb.ResultSet `protobuf:"bytes,3,opt,name=result_set,json=resultSet,proto3" json:"result_set,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status    Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues    *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_ResultSet *Ydb.ResultSet             `protobuf:"bytes,3,opt,name=result_set,json=resultSet,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ReadRowsResponse) Reset() {
@@ -8053,51 +13014,82 @@ func (x *ReadRowsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ReadRowsResponse.ProtoReflect.Descriptor instead.
-func (*ReadRowsResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{106}
-}
-
 func (x *ReadRowsResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *ReadRowsResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *ReadRowsResponse) GetResultSet() *Ydb.ResultSet {
 	if x != nil {
-		return x.ResultSet
+		return x.xxx_hidden_ResultSet
 	}
 	return nil
 }
 
+func (x *ReadRowsResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *ReadRowsResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *ReadRowsResponse) SetResultSet(v *Ydb.ResultSet) {
+	x.xxx_hidden_ResultSet = v
+}
+
+func (x *ReadRowsResponse) HasResultSet() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResultSet != nil
+}
+
+func (x *ReadRowsResponse) ClearResultSet() {
+	x.xxx_hidden_ResultSet = nil
+}
+
+type ReadRowsResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Status of request (same as other statuses)
+	Status Ydb.StatusIds_StatusCode
+	// Issues
+	Issues []*Ydb_Issue.IssueMessage
+	// Result set (same as result of sql request)
+	ResultSet *Ydb.ResultSet
+}
+
+func (b0 ReadRowsResponse_builder) Build() *ReadRowsResponse {
+	m0 := &ReadRowsResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_ResultSet = b.ResultSet
+	return m0
+}
+
 type BulkUpsertRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	Table string                 `protobuf:"bytes,1,opt,name=table,proto3" json:"table,omitempty"`
-	// "rows" parameter must be a list of structs where each stuct represents one row.
-	// It must contain all key columns but not necessarily all non-key columns.
-	// Similar to UPSERT statement only values of specified columns will be updated.
-	Rows            *Ydb.TypedValue                 `protobuf:"bytes,2,opt,name=rows,proto3" json:"rows,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// You may set data_format + data instead of rows to insert data in serialized formats.
-	//
-	// Types that are valid to be assigned to DataFormat:
-	//
-	//	*BulkUpsertRequest_ArrowBatchSettings
-	//	*BulkUpsertRequest_CsvSettings
-	DataFormat isBulkUpsertRequest_DataFormat `protobuf_oneof:"data_format"`
-	// It's last in the definition to help with sidecar patterns
-	Data          []byte `protobuf:"bytes,1000,opt,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Table           string                          `protobuf:"bytes,1,opt,name=table,proto3"`
+	xxx_hidden_Rows            *Ydb.TypedValue                 `protobuf:"bytes,2,opt,name=rows,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_DataFormat      isBulkUpsertRequest_DataFormat  `protobuf_oneof:"data_format"`
+	xxx_hidden_Data            []byte                          `protobuf:"bytes,1000,opt,name=data,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *BulkUpsertRequest) Reset() {
@@ -8125,42 +13117,30 @@ func (x *BulkUpsertRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BulkUpsertRequest.ProtoReflect.Descriptor instead.
-func (*BulkUpsertRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{107}
-}
-
 func (x *BulkUpsertRequest) GetTable() string {
 	if x != nil {
-		return x.Table
+		return x.xxx_hidden_Table
 	}
 	return ""
 }
 
 func (x *BulkUpsertRequest) GetRows() *Ydb.TypedValue {
 	if x != nil {
-		return x.Rows
+		return x.xxx_hidden_Rows
 	}
 	return nil
 }
 
 func (x *BulkUpsertRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
-	}
-	return nil
-}
-
-func (x *BulkUpsertRequest) GetDataFormat() isBulkUpsertRequest_DataFormat {
-	if x != nil {
-		return x.DataFormat
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *BulkUpsertRequest) GetArrowBatchSettings() *Ydb_Formats.ArrowBatchSettings {
 	if x != nil {
-		if x, ok := x.DataFormat.(*BulkUpsertRequest_ArrowBatchSettings); ok {
+		if x, ok := x.xxx_hidden_DataFormat.(*bulkUpsertRequest_ArrowBatchSettings); ok {
 			return x.ArrowBatchSettings
 		}
 	}
@@ -8169,7 +13149,7 @@ func (x *BulkUpsertRequest) GetArrowBatchSettings() *Ydb_Formats.ArrowBatchSetti
 
 func (x *BulkUpsertRequest) GetCsvSettings() *Ydb_Formats.CsvSettings {
 	if x != nil {
-		if x, ok := x.DataFormat.(*BulkUpsertRequest_CsvSettings); ok {
+		if x, ok := x.xxx_hidden_DataFormat.(*bulkUpsertRequest_CsvSettings); ok {
 			return x.CsvSettings
 		}
 	}
@@ -8178,32 +13158,192 @@ func (x *BulkUpsertRequest) GetCsvSettings() *Ydb_Formats.CsvSettings {
 
 func (x *BulkUpsertRequest) GetData() []byte {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
+}
+
+func (x *BulkUpsertRequest) SetTable(v string) {
+	x.xxx_hidden_Table = v
+}
+
+func (x *BulkUpsertRequest) SetRows(v *Ydb.TypedValue) {
+	x.xxx_hidden_Rows = v
+}
+
+func (x *BulkUpsertRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *BulkUpsertRequest) SetArrowBatchSettings(v *Ydb_Formats.ArrowBatchSettings) {
+	if v == nil {
+		x.xxx_hidden_DataFormat = nil
+		return
+	}
+	x.xxx_hidden_DataFormat = &bulkUpsertRequest_ArrowBatchSettings{v}
+}
+
+func (x *BulkUpsertRequest) SetCsvSettings(v *Ydb_Formats.CsvSettings) {
+	if v == nil {
+		x.xxx_hidden_DataFormat = nil
+		return
+	}
+	x.xxx_hidden_DataFormat = &bulkUpsertRequest_CsvSettings{v}
+}
+
+func (x *BulkUpsertRequest) SetData(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Data = v
+}
+
+func (x *BulkUpsertRequest) HasRows() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Rows != nil
+}
+
+func (x *BulkUpsertRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *BulkUpsertRequest) HasDataFormat() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_DataFormat != nil
+}
+
+func (x *BulkUpsertRequest) HasArrowBatchSettings() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_DataFormat.(*bulkUpsertRequest_ArrowBatchSettings)
+	return ok
+}
+
+func (x *BulkUpsertRequest) HasCsvSettings() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_DataFormat.(*bulkUpsertRequest_CsvSettings)
+	return ok
+}
+
+func (x *BulkUpsertRequest) ClearRows() {
+	x.xxx_hidden_Rows = nil
+}
+
+func (x *BulkUpsertRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *BulkUpsertRequest) ClearDataFormat() {
+	x.xxx_hidden_DataFormat = nil
+}
+
+func (x *BulkUpsertRequest) ClearArrowBatchSettings() {
+	if _, ok := x.xxx_hidden_DataFormat.(*bulkUpsertRequest_ArrowBatchSettings); ok {
+		x.xxx_hidden_DataFormat = nil
+	}
+}
+
+func (x *BulkUpsertRequest) ClearCsvSettings() {
+	if _, ok := x.xxx_hidden_DataFormat.(*bulkUpsertRequest_CsvSettings); ok {
+		x.xxx_hidden_DataFormat = nil
+	}
+}
+
+const BulkUpsertRequest_DataFormat_not_set_case case_BulkUpsertRequest_DataFormat = 0
+const BulkUpsertRequest_ArrowBatchSettings_case case_BulkUpsertRequest_DataFormat = 7
+const BulkUpsertRequest_CsvSettings_case case_BulkUpsertRequest_DataFormat = 8
+
+func (x *BulkUpsertRequest) WhichDataFormat() case_BulkUpsertRequest_DataFormat {
+	if x == nil {
+		return BulkUpsertRequest_DataFormat_not_set_case
+	}
+	switch x.xxx_hidden_DataFormat.(type) {
+	case *bulkUpsertRequest_ArrowBatchSettings:
+		return BulkUpsertRequest_ArrowBatchSettings_case
+	case *bulkUpsertRequest_CsvSettings:
+		return BulkUpsertRequest_CsvSettings_case
+	default:
+		return BulkUpsertRequest_DataFormat_not_set_case
+	}
+}
+
+type BulkUpsertRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Table string
+	// "rows" parameter must be a list of structs where each stuct represents one row.
+	// It must contain all key columns but not necessarily all non-key columns.
+	// Similar to UPSERT statement only values of specified columns will be updated.
+	Rows            *Ydb.TypedValue
+	OperationParams *Ydb_Operations.OperationParams
+	// You may set data_format + data instead of rows to insert data in serialized formats.
+
+	// Fields of oneof xxx_hidden_DataFormat:
+	ArrowBatchSettings *Ydb_Formats.ArrowBatchSettings
+	CsvSettings        *Ydb_Formats.CsvSettings
+	// -- end of xxx_hidden_DataFormat
+	// It's last in the definition to help with sidecar patterns
+	Data []byte
+}
+
+func (b0 BulkUpsertRequest_builder) Build() *BulkUpsertRequest {
+	m0 := &BulkUpsertRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Table = b.Table
+	x.xxx_hidden_Rows = b.Rows
+	x.xxx_hidden_OperationParams = b.OperationParams
+	if b.ArrowBatchSettings != nil {
+		x.xxx_hidden_DataFormat = &bulkUpsertRequest_ArrowBatchSettings{b.ArrowBatchSettings}
+	}
+	if b.CsvSettings != nil {
+		x.xxx_hidden_DataFormat = &bulkUpsertRequest_CsvSettings{b.CsvSettings}
+	}
+	x.xxx_hidden_Data = b.Data
+	return m0
+}
+
+type case_BulkUpsertRequest_DataFormat protoreflect.FieldNumber
+
+func (x case_BulkUpsertRequest_DataFormat) String() string {
+	md := file_protos_ydb_table_proto_msgTypes[107].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isBulkUpsertRequest_DataFormat interface {
 	isBulkUpsertRequest_DataFormat()
 }
 
-type BulkUpsertRequest_ArrowBatchSettings struct {
+type bulkUpsertRequest_ArrowBatchSettings struct {
 	ArrowBatchSettings *Ydb_Formats.ArrowBatchSettings `protobuf:"bytes,7,opt,name=arrow_batch_settings,json=arrowBatchSettings,proto3,oneof"`
 }
 
-type BulkUpsertRequest_CsvSettings struct {
+type bulkUpsertRequest_CsvSettings struct {
 	CsvSettings *Ydb_Formats.CsvSettings `protobuf:"bytes,8,opt,name=csv_settings,json=csvSettings,proto3,oneof"`
 }
 
-func (*BulkUpsertRequest_ArrowBatchSettings) isBulkUpsertRequest_DataFormat() {}
+func (*bulkUpsertRequest_ArrowBatchSettings) isBulkUpsertRequest_DataFormat() {}
 
-func (*BulkUpsertRequest_CsvSettings) isBulkUpsertRequest_DataFormat() {}
+func (*bulkUpsertRequest_CsvSettings) isBulkUpsertRequest_DataFormat() {}
 
 type BulkUpsertResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *BulkUpsertResponse) Reset() {
@@ -8231,20 +13371,44 @@ func (x *BulkUpsertResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BulkUpsertResponse.ProtoReflect.Descriptor instead.
-func (*BulkUpsertResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{108}
-}
-
 func (x *BulkUpsertResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *BulkUpsertResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *BulkUpsertResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *BulkUpsertResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type BulkUpsertResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 BulkUpsertResponse_builder) Build() *BulkUpsertResponse {
+	m0 := &BulkUpsertResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type BulkUpsertResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8274,22 +13438,27 @@ func (x *BulkUpsertResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BulkUpsertResult.ProtoReflect.Descriptor instead.
-func (*BulkUpsertResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{109}
+type BulkUpsertResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 BulkUpsertResult_builder) Build() *BulkUpsertResult {
+	m0 := &BulkUpsertResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ExecuteScanQueryRequest struct {
-	state        protoimpl.MessageState       `protogen:"open.v1"`
-	Query        *Query                       `protobuf:"bytes,3,opt,name=query,proto3" json:"query,omitempty"`
-	Parameters   map[string]*Ydb.TypedValue   `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Mode         ExecuteScanQueryRequest_Mode `protobuf:"varint,6,opt,name=mode,proto3,enum=Ydb.Table.ExecuteScanQueryRequest_Mode" json:"mode,omitempty"`
-	CollectStats QueryStatsCollection_Mode    `protobuf:"varint,8,opt,name=collect_stats,json=collectStats,proto3,enum=Ydb.Table.QueryStatsCollection_Mode" json:"collect_stats,omitempty"`
-	// works only in mode: MODE_EXPLAIN,
-	// collects additional diagnostics about query compilation, including query plan and scheme
-	CollectFullDiagnostics bool `protobuf:"varint,9,opt,name=collect_full_diagnostics,json=collectFullDiagnostics,proto3" json:"collect_full_diagnostics,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                             protoimpl.MessageState       `protogen:"opaque.v1"`
+	xxx_hidden_Query                  *Query                       `protobuf:"bytes,3,opt,name=query,proto3"`
+	xxx_hidden_Parameters             map[string]*Ydb.TypedValue   `protobuf:"bytes,4,rep,name=parameters,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_Mode                   ExecuteScanQueryRequest_Mode `protobuf:"varint,6,opt,name=mode,proto3,enum=Ydb.Table.ExecuteScanQueryRequest_Mode"`
+	xxx_hidden_CollectStats           QueryStatsCollection_Mode    `protobuf:"varint,8,opt,name=collect_stats,json=collectStats,proto3,enum=Ydb.Table.QueryStatsCollection_Mode"`
+	xxx_hidden_CollectFullDiagnostics bool                         `protobuf:"varint,9,opt,name=collect_full_diagnostics,json=collectFullDiagnostics,proto3"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *ExecuteScanQueryRequest) Reset() {
@@ -8317,53 +13486,103 @@ func (x *ExecuteScanQueryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteScanQueryRequest.ProtoReflect.Descriptor instead.
-func (*ExecuteScanQueryRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{110}
-}
-
 func (x *ExecuteScanQueryRequest) GetQuery() *Query {
 	if x != nil {
-		return x.Query
+		return x.xxx_hidden_Query
 	}
 	return nil
 }
 
 func (x *ExecuteScanQueryRequest) GetParameters() map[string]*Ydb.TypedValue {
 	if x != nil {
-		return x.Parameters
+		return x.xxx_hidden_Parameters
 	}
 	return nil
 }
 
 func (x *ExecuteScanQueryRequest) GetMode() ExecuteScanQueryRequest_Mode {
 	if x != nil {
-		return x.Mode
+		return x.xxx_hidden_Mode
 	}
 	return ExecuteScanQueryRequest_MODE_UNSPECIFIED
 }
 
 func (x *ExecuteScanQueryRequest) GetCollectStats() QueryStatsCollection_Mode {
 	if x != nil {
-		return x.CollectStats
+		return x.xxx_hidden_CollectStats
 	}
 	return QueryStatsCollection_STATS_COLLECTION_UNSPECIFIED
 }
 
 func (x *ExecuteScanQueryRequest) GetCollectFullDiagnostics() bool {
 	if x != nil {
-		return x.CollectFullDiagnostics
+		return x.xxx_hidden_CollectFullDiagnostics
 	}
 	return false
 }
 
+func (x *ExecuteScanQueryRequest) SetQuery(v *Query) {
+	x.xxx_hidden_Query = v
+}
+
+func (x *ExecuteScanQueryRequest) SetParameters(v map[string]*Ydb.TypedValue) {
+	x.xxx_hidden_Parameters = v
+}
+
+func (x *ExecuteScanQueryRequest) SetMode(v ExecuteScanQueryRequest_Mode) {
+	x.xxx_hidden_Mode = v
+}
+
+func (x *ExecuteScanQueryRequest) SetCollectStats(v QueryStatsCollection_Mode) {
+	x.xxx_hidden_CollectStats = v
+}
+
+func (x *ExecuteScanQueryRequest) SetCollectFullDiagnostics(v bool) {
+	x.xxx_hidden_CollectFullDiagnostics = v
+}
+
+func (x *ExecuteScanQueryRequest) HasQuery() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Query != nil
+}
+
+func (x *ExecuteScanQueryRequest) ClearQuery() {
+	x.xxx_hidden_Query = nil
+}
+
+type ExecuteScanQueryRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Query        *Query
+	Parameters   map[string]*Ydb.TypedValue
+	Mode         ExecuteScanQueryRequest_Mode
+	CollectStats QueryStatsCollection_Mode
+	// works only in mode: MODE_EXPLAIN,
+	// collects additional diagnostics about query compilation, including query plan and scheme
+	CollectFullDiagnostics bool
+}
+
+func (b0 ExecuteScanQueryRequest_builder) Build() *ExecuteScanQueryRequest {
+	m0 := &ExecuteScanQueryRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Query = b.Query
+	x.xxx_hidden_Parameters = b.Parameters
+	x.xxx_hidden_Mode = b.Mode
+	x.xxx_hidden_CollectStats = b.CollectStats
+	x.xxx_hidden_CollectFullDiagnostics = b.CollectFullDiagnostics
+	return m0
+}
+
 type ExecuteScanQueryPartialResponse struct {
-	state         protoimpl.MessageState         `protogen:"open.v1"`
-	Status        Ydb.StatusIds_StatusCode       `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage      `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	Result        *ExecuteScanQueryPartialResult `protobuf:"bytes,3,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState         `protogen:"opaque.v1"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode       `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage     `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_Result *ExecuteScanQueryPartialResult `protobuf:"bytes,3,opt,name=result,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ExecuteScanQueryPartialResponse) Reset() {
@@ -8391,41 +13610,77 @@ func (x *ExecuteScanQueryPartialResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteScanQueryPartialResponse.ProtoReflect.Descriptor instead.
-func (*ExecuteScanQueryPartialResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{111}
-}
-
 func (x *ExecuteScanQueryPartialResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *ExecuteScanQueryPartialResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *ExecuteScanQueryPartialResponse) GetResult() *ExecuteScanQueryPartialResult {
 	if x != nil {
-		return x.Result
+		return x.xxx_hidden_Result
 	}
 	return nil
 }
 
+func (x *ExecuteScanQueryPartialResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *ExecuteScanQueryPartialResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *ExecuteScanQueryPartialResponse) SetResult(v *ExecuteScanQueryPartialResult) {
+	x.xxx_hidden_Result = v
+}
+
+func (x *ExecuteScanQueryPartialResponse) HasResult() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Result != nil
+}
+
+func (x *ExecuteScanQueryPartialResponse) ClearResult() {
+	x.xxx_hidden_Result = nil
+}
+
+type ExecuteScanQueryPartialResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+	Result *ExecuteScanQueryPartialResult
+}
+
+func (b0 ExecuteScanQueryPartialResponse_builder) Build() *ExecuteScanQueryPartialResponse {
+	m0 := &ExecuteScanQueryPartialResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_Result = b.Result
+	return m0
+}
+
 type ExecuteScanQueryPartialResult struct {
-	state      protoimpl.MessageState     `protogen:"open.v1"`
-	ResultSet  *Ydb.ResultSet             `protobuf:"bytes,1,opt,name=result_set,json=resultSet,proto3" json:"result_set,omitempty"`
-	QueryStats *Ydb_TableStats.QueryStats `protobuf:"bytes,6,opt,name=query_stats,json=queryStats,proto3" json:"query_stats,omitempty"`
-	// works only in mode: MODE_EXPLAIN,
-	// collects additional diagnostics about query compilation, including query plan and scheme
-	QueryFullDiagnostics string `protobuf:"bytes,7,opt,name=query_full_diagnostics,json=queryFullDiagnostics,proto3" json:"query_full_diagnostics,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                           protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ResultSet            *Ydb.ResultSet             `protobuf:"bytes,1,opt,name=result_set,json=resultSet,proto3"`
+	xxx_hidden_QueryStats           *Ydb_TableStats.QueryStats `protobuf:"bytes,6,opt,name=query_stats,json=queryStats,proto3"`
+	xxx_hidden_QueryFullDiagnostics string                     `protobuf:"bytes,7,opt,name=query_full_diagnostics,json=queryFullDiagnostics,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *ExecuteScanQueryPartialResult) Reset() {
@@ -8453,38 +13708,89 @@ func (x *ExecuteScanQueryPartialResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteScanQueryPartialResult.ProtoReflect.Descriptor instead.
-func (*ExecuteScanQueryPartialResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{112}
-}
-
 func (x *ExecuteScanQueryPartialResult) GetResultSet() *Ydb.ResultSet {
 	if x != nil {
-		return x.ResultSet
+		return x.xxx_hidden_ResultSet
 	}
 	return nil
 }
 
 func (x *ExecuteScanQueryPartialResult) GetQueryStats() *Ydb_TableStats.QueryStats {
 	if x != nil {
-		return x.QueryStats
+		return x.xxx_hidden_QueryStats
 	}
 	return nil
 }
 
 func (x *ExecuteScanQueryPartialResult) GetQueryFullDiagnostics() string {
 	if x != nil {
-		return x.QueryFullDiagnostics
+		return x.xxx_hidden_QueryFullDiagnostics
 	}
 	return ""
 }
 
+func (x *ExecuteScanQueryPartialResult) SetResultSet(v *Ydb.ResultSet) {
+	x.xxx_hidden_ResultSet = v
+}
+
+func (x *ExecuteScanQueryPartialResult) SetQueryStats(v *Ydb_TableStats.QueryStats) {
+	x.xxx_hidden_QueryStats = v
+}
+
+func (x *ExecuteScanQueryPartialResult) SetQueryFullDiagnostics(v string) {
+	x.xxx_hidden_QueryFullDiagnostics = v
+}
+
+func (x *ExecuteScanQueryPartialResult) HasResultSet() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResultSet != nil
+}
+
+func (x *ExecuteScanQueryPartialResult) HasQueryStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_QueryStats != nil
+}
+
+func (x *ExecuteScanQueryPartialResult) ClearResultSet() {
+	x.xxx_hidden_ResultSet = nil
+}
+
+func (x *ExecuteScanQueryPartialResult) ClearQueryStats() {
+	x.xxx_hidden_QueryStats = nil
+}
+
+type ExecuteScanQueryPartialResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ResultSet  *Ydb.ResultSet
+	QueryStats *Ydb_TableStats.QueryStats
+	// works only in mode: MODE_EXPLAIN,
+	// collects additional diagnostics about query compilation, including query plan and scheme
+	QueryFullDiagnostics string
+}
+
+func (b0 ExecuteScanQueryPartialResult_builder) Build() *ExecuteScanQueryPartialResult {
+	m0 := &ExecuteScanQueryPartialResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ResultSet = b.ResultSet
+	x.xxx_hidden_QueryStats = b.QueryStats
+	x.xxx_hidden_QueryFullDiagnostics = b.QueryFullDiagnostics
+	return m0
+}
+
 type SequenceDescription_SetVal struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	NextValue     *int64                 `protobuf:"zigzag64,1,opt,name=next_value,json=nextValue,proto3,oneof" json:"next_value,omitempty"`
-	NextUsed      *bool                  `protobuf:"varint,2,opt,name=next_used,json=nextUsed,proto3,oneof" json:"next_used,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_NextValue   int64                  `protobuf:"zigzag64,1,opt,name=next_value,json=nextValue,proto3,oneof"`
+	xxx_hidden_NextUsed    bool                   `protobuf:"varint,2,opt,name=next_used,json=nextUsed,proto3,oneof"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *SequenceDescription_SetVal) Reset() {
@@ -8512,23 +13818,74 @@ func (x *SequenceDescription_SetVal) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SequenceDescription_SetVal.ProtoReflect.Descriptor instead.
-func (*SequenceDescription_SetVal) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_table_proto_rawDescGZIP(), []int{29, 0}
-}
-
 func (x *SequenceDescription_SetVal) GetNextValue() int64 {
-	if x != nil && x.NextValue != nil {
-		return *x.NextValue
+	if x != nil {
+		return x.xxx_hidden_NextValue
 	}
 	return 0
 }
 
 func (x *SequenceDescription_SetVal) GetNextUsed() bool {
-	if x != nil && x.NextUsed != nil {
-		return *x.NextUsed
+	if x != nil {
+		return x.xxx_hidden_NextUsed
 	}
 	return false
+}
+
+func (x *SequenceDescription_SetVal) SetNextValue(v int64) {
+	x.xxx_hidden_NextValue = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *SequenceDescription_SetVal) SetNextUsed(v bool) {
+	x.xxx_hidden_NextUsed = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *SequenceDescription_SetVal) HasNextValue() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *SequenceDescription_SetVal) HasNextUsed() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *SequenceDescription_SetVal) ClearNextValue() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_NextValue = 0
+}
+
+func (x *SequenceDescription_SetVal) ClearNextUsed() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_NextUsed = false
+}
+
+type SequenceDescription_SetVal_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	NextValue *int64
+	NextUsed  *bool
+}
+
+func (b0 SequenceDescription_SetVal_builder) Build() *SequenceDescription_SetVal {
+	m0 := &SequenceDescription_SetVal{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.NextValue != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_NextValue = *b.NextValue
+	}
+	if b.NextUsed != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_NextUsed = *b.NextUsed
+	}
+	return m0
 }
 
 var File_protos_ydb_table_proto protoreflect.FileDescriptor
@@ -9265,18 +14622,6 @@ const file_protos_ydb_table_proto_rawDesc = "" +
 	"\x11STORE_TYPE_COLUMN\x10\x02BS\n" +
 	"\x14tech.ydb.proto.tableZ8github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Table\xf8\x01\x01b\x06proto3"
 
-var (
-	file_protos_ydb_table_proto_rawDescOnce sync.Once
-	file_protos_ydb_table_proto_rawDescData []byte
-)
-
-func file_protos_ydb_table_proto_rawDescGZIP() []byte {
-	file_protos_ydb_table_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_table_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_table_proto_rawDesc), len(file_protos_ydb_table_proto_rawDesc)))
-	})
-	return file_protos_ydb_table_proto_rawDescData
-}
-
 var file_protos_ydb_table_proto_enumTypes = make([]protoimpl.EnumInfo, 13)
 var file_protos_ydb_table_proto_msgTypes = make([]protoimpl.MessageInfo, 130)
 var file_protos_ydb_table_proto_goTypes = []any{
@@ -9665,65 +15010,65 @@ func file_protos_ydb_table_proto_init() {
 		return
 	}
 	file_protos_ydb_table_proto_msgTypes[8].OneofWrappers = []any{
-		(*TableIndex_GlobalIndex)(nil),
-		(*TableIndex_GlobalAsyncIndex)(nil),
-		(*TableIndex_GlobalUniqueIndex)(nil),
+		(*tableIndex_GlobalIndex)(nil),
+		(*tableIndex_GlobalAsyncIndex)(nil),
+		(*tableIndex_GlobalUniqueIndex)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[9].OneofWrappers = []any{
-		(*TableIndexDescription_GlobalIndex)(nil),
-		(*TableIndexDescription_GlobalAsyncIndex)(nil),
-		(*TableIndexDescription_GlobalUniqueIndex)(nil),
+		(*tableIndexDescription_GlobalIndex)(nil),
+		(*tableIndexDescription_GlobalAsyncIndex)(nil),
+		(*tableIndexDescription_GlobalUniqueIndex)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[24].OneofWrappers = []any{
-		(*PartitioningPolicy_UniformPartitions)(nil),
-		(*PartitioningPolicy_ExplicitPartitions)(nil),
+		(*partitioningPolicy_UniformPartitions)(nil),
+		(*partitioningPolicy_ExplicitPartitions)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[29].OneofWrappers = []any{}
 	file_protos_ydb_table_proto_msgTypes[30].OneofWrappers = []any{
-		(*ColumnMeta_FromLiteral)(nil),
-		(*ColumnMeta_FromSequence)(nil),
+		(*columnMeta_FromLiteral)(nil),
+		(*columnMeta_FromSequence)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[33].OneofWrappers = []any{
-		(*TtlSettings_DateTypeColumn)(nil),
-		(*TtlSettings_ValueSinceUnixEpoch)(nil),
+		(*ttlSettings_DateTypeColumn)(nil),
+		(*ttlSettings_ValueSinceUnixEpoch)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[39].OneofWrappers = []any{
-		(*ReadReplicasSettings_PerAzReadReplicasCount)(nil),
-		(*ReadReplicasSettings_AnyAzReadReplicasCount)(nil),
+		(*readReplicasSettings_PerAzReadReplicasCount)(nil),
+		(*readReplicasSettings_AnyAzReadReplicasCount)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[40].OneofWrappers = []any{
-		(*CreateTableRequest_UniformPartitions)(nil),
-		(*CreateTableRequest_PartitionAtKeys)(nil),
+		(*createTableRequest_UniformPartitions)(nil),
+		(*createTableRequest_PartitionAtKeys)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[45].OneofWrappers = []any{
-		(*AlterTableRequest_SetTtlSettings)(nil),
-		(*AlterTableRequest_DropTtlSettings)(nil),
-		(*AlterTableRequest_SetTiering)(nil),
-		(*AlterTableRequest_DropTiering)(nil),
+		(*alterTableRequest_SetTtlSettings)(nil),
+		(*alterTableRequest_DropTtlSettings)(nil),
+		(*alterTableRequest_SetTiering)(nil),
+		(*alterTableRequest_DropTiering)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[58].OneofWrappers = []any{
-		(*Query_YqlText)(nil),
-		(*Query_Id)(nil),
+		(*query_YqlText)(nil),
+		(*query_Id)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[63].OneofWrappers = []any{
-		(*TransactionSettings_SerializableReadWrite)(nil),
-		(*TransactionSettings_OnlineReadOnly)(nil),
-		(*TransactionSettings_StaleReadOnly)(nil),
-		(*TransactionSettings_SnapshotReadOnly)(nil),
+		(*transactionSettings_SerializableReadWrite)(nil),
+		(*transactionSettings_OnlineReadOnly)(nil),
+		(*transactionSettings_StaleReadOnly)(nil),
+		(*transactionSettings_SnapshotReadOnly)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[64].OneofWrappers = []any{
-		(*TransactionControl_TxId)(nil),
-		(*TransactionControl_BeginTx)(nil),
+		(*transactionControl_TxId)(nil),
+		(*transactionControl_BeginTx)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[101].OneofWrappers = []any{
-		(*KeyRange_Greater)(nil),
-		(*KeyRange_GreaterOrEqual)(nil),
-		(*KeyRange_Less)(nil),
-		(*KeyRange_LessOrEqual)(nil),
+		(*keyRange_Greater)(nil),
+		(*keyRange_GreaterOrEqual)(nil),
+		(*keyRange_Less)(nil),
+		(*keyRange_LessOrEqual)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[107].OneofWrappers = []any{
-		(*BulkUpsertRequest_ArrowBatchSettings)(nil),
-		(*BulkUpsertRequest_CsvSettings)(nil),
+		(*bulkUpsertRequest_ArrowBatchSettings)(nil),
+		(*bulkUpsertRequest_CsvSettings)(nil),
 	}
 	file_protos_ydb_table_proto_msgTypes[115].OneofWrappers = []any{}
 	type x struct{}

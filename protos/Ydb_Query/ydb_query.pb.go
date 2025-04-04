@@ -15,7 +15,6 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -70,11 +69,6 @@ func (x Syntax) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use Syntax.Descriptor instead.
-func (Syntax) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{0}
-}
-
 type ExecMode int32
 
 const (
@@ -125,11 +119,6 @@ func (x ExecMode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ExecMode.Descriptor instead.
-func (ExecMode) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{1}
-}
-
 type StatsMode int32
 
 const (
@@ -178,11 +167,6 @@ func (StatsMode) Type() protoreflect.EnumType {
 
 func (x StatsMode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use StatsMode.Descriptor instead.
-func (StatsMode) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{2}
 }
 
 type ExecStatus int32
@@ -238,13 +222,8 @@ func (x ExecStatus) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ExecStatus.Descriptor instead.
-func (ExecStatus) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{3}
-}
-
 type CreateSessionRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -274,21 +253,26 @@ func (x *CreateSessionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateSessionRequest.ProtoReflect.Descriptor instead.
-func (*CreateSessionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{0}
+type CreateSessionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 CreateSessionRequest_builder) Build() *CreateSessionRequest {
+	m0 := &CreateSessionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type CreateSessionResponse struct {
-	state  protoimpl.MessageState    `protogen:"open.v1"`
-	Status Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	// Identifier of created session
-	SessionId string `protobuf:"bytes,3,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Identifier node where session was created
-	NodeId        int64 `protobuf:"varint,4,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status    Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues    *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_SessionId string                     `protobuf:"bytes,3,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_NodeId    int64                      `protobuf:"varint,4,opt,name=node_id,json=nodeId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateSessionResponse) Reset() {
@@ -316,45 +300,79 @@ func (x *CreateSessionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateSessionResponse.ProtoReflect.Descriptor instead.
-func (*CreateSessionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *CreateSessionResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *CreateSessionResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *CreateSessionResponse) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *CreateSessionResponse) GetNodeId() int64 {
 	if x != nil {
-		return x.NodeId
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
+func (x *CreateSessionResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *CreateSessionResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *CreateSessionResponse) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *CreateSessionResponse) SetNodeId(v int64) {
+	x.xxx_hidden_NodeId = v
+}
+
+type CreateSessionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+	// Identifier of created session
+	SessionId string
+	// Identifier node where session was created
+	NodeId int64
+}
+
+func (b0 CreateSessionResponse_builder) Build() *CreateSessionResponse {
+	m0 := &CreateSessionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_NodeId = b.NodeId
+	return m0
+}
+
 type DeleteSessionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Identifier of session to delete (required)
-	SessionId     string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DeleteSessionRequest) Reset() {
@@ -382,24 +400,38 @@ func (x *DeleteSessionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteSessionRequest.ProtoReflect.Descriptor instead.
-func (*DeleteSessionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *DeleteSessionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
+func (x *DeleteSessionRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+type DeleteSessionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Identifier of session to delete (required)
+	SessionId string
+}
+
+func (b0 DeleteSessionRequest_builder) Build() *DeleteSessionRequest {
+	m0 := &DeleteSessionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	return m0
+}
+
 type DeleteSessionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Status        Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *DeleteSessionResponse) Reset() {
@@ -427,31 +459,51 @@ func (x *DeleteSessionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteSessionResponse.ProtoReflect.Descriptor instead.
-func (*DeleteSessionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *DeleteSessionResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *DeleteSessionResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
+func (x *DeleteSessionResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *DeleteSessionResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+type DeleteSessionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+}
+
+func (b0 DeleteSessionResponse_builder) Build() *DeleteSessionResponse {
+	m0 := &DeleteSessionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	return m0
+}
+
 type AttachSessionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Identifier of session to attach (required)
-	SessionId     string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AttachSessionRequest) Reset() {
@@ -479,24 +531,38 @@ func (x *AttachSessionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AttachSessionRequest.ProtoReflect.Descriptor instead.
-func (*AttachSessionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *AttachSessionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
+func (x *AttachSessionRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+type AttachSessionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Identifier of session to attach (required)
+	SessionId string
+}
+
+func (b0 AttachSessionRequest_builder) Build() *AttachSessionRequest {
+	m0 := &AttachSessionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	return m0
+}
+
 type SessionState struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Status        Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *SessionState) Reset() {
@@ -524,27 +590,48 @@ func (x *SessionState) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SessionState.ProtoReflect.Descriptor instead.
-func (*SessionState) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *SessionState) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *SessionState) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
+func (x *SessionState) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *SessionState) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+type SessionState_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+}
+
+func (b0 SessionState_builder) Build() *SessionState {
+	m0 := &SessionState{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	return m0
+}
+
 type SerializableModeSettings struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -574,16 +661,23 @@ func (x *SerializableModeSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SerializableModeSettings.ProtoReflect.Descriptor instead.
-func (*SerializableModeSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{6}
+type SerializableModeSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 SerializableModeSettings_builder) Build() *SerializableModeSettings {
+	m0 := &SerializableModeSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type OnlineModeSettings struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	AllowInconsistentReads bool                   `protobuf:"varint,1,opt,name=allow_inconsistent_reads,json=allowInconsistentReads,proto3" json:"allow_inconsistent_reads,omitempty"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_AllowInconsistentReads bool                   `protobuf:"varint,1,opt,name=allow_inconsistent_reads,json=allowInconsistentReads,proto3"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *OnlineModeSettings) Reset() {
@@ -611,20 +705,33 @@ func (x *OnlineModeSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use OnlineModeSettings.ProtoReflect.Descriptor instead.
-func (*OnlineModeSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{7}
-}
-
 func (x *OnlineModeSettings) GetAllowInconsistentReads() bool {
 	if x != nil {
-		return x.AllowInconsistentReads
+		return x.xxx_hidden_AllowInconsistentReads
 	}
 	return false
 }
 
+func (x *OnlineModeSettings) SetAllowInconsistentReads(v bool) {
+	x.xxx_hidden_AllowInconsistentReads = v
+}
+
+type OnlineModeSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	AllowInconsistentReads bool
+}
+
+func (b0 OnlineModeSettings_builder) Build() *OnlineModeSettings {
+	m0 := &OnlineModeSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_AllowInconsistentReads = b.AllowInconsistentReads
+	return m0
+}
+
 type StaleModeSettings struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -654,13 +761,20 @@ func (x *StaleModeSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StaleModeSettings.ProtoReflect.Descriptor instead.
-func (*StaleModeSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{8}
+type StaleModeSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 StaleModeSettings_builder) Build() *StaleModeSettings {
+	m0 := &StaleModeSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type SnapshotModeSettings struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -690,22 +804,23 @@ func (x *SnapshotModeSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SnapshotModeSettings.ProtoReflect.Descriptor instead.
-func (*SnapshotModeSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{9}
+type SnapshotModeSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 SnapshotModeSettings_builder) Build() *SnapshotModeSettings {
+	m0 := &SnapshotModeSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type TransactionSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to TxMode:
-	//
-	//	*TransactionSettings_SerializableReadWrite
-	//	*TransactionSettings_OnlineReadOnly
-	//	*TransactionSettings_StaleReadOnly
-	//	*TransactionSettings_SnapshotReadOnly
-	TxMode        isTransactionSettings_TxMode `protobuf_oneof:"tx_mode"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState       `protogen:"opaque.v1"`
+	xxx_hidden_TxMode isTransactionSettings_TxMode `protobuf_oneof:"tx_mode"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *TransactionSettings) Reset() {
@@ -733,21 +848,9 @@ func (x *TransactionSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TransactionSettings.ProtoReflect.Descriptor instead.
-func (*TransactionSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{10}
-}
-
-func (x *TransactionSettings) GetTxMode() isTransactionSettings_TxMode {
-	if x != nil {
-		return x.TxMode
-	}
-	return nil
-}
-
 func (x *TransactionSettings) GetSerializableReadWrite() *SerializableModeSettings {
 	if x != nil {
-		if x, ok := x.TxMode.(*TransactionSettings_SerializableReadWrite); ok {
+		if x, ok := x.xxx_hidden_TxMode.(*transactionSettings_SerializableReadWrite); ok {
 			return x.SerializableReadWrite
 		}
 	}
@@ -756,7 +859,7 @@ func (x *TransactionSettings) GetSerializableReadWrite() *SerializableModeSettin
 
 func (x *TransactionSettings) GetOnlineReadOnly() *OnlineModeSettings {
 	if x != nil {
-		if x, ok := x.TxMode.(*TransactionSettings_OnlineReadOnly); ok {
+		if x, ok := x.xxx_hidden_TxMode.(*transactionSettings_OnlineReadOnly); ok {
 			return x.OnlineReadOnly
 		}
 	}
@@ -765,7 +868,7 @@ func (x *TransactionSettings) GetOnlineReadOnly() *OnlineModeSettings {
 
 func (x *TransactionSettings) GetStaleReadOnly() *StaleModeSettings {
 	if x != nil {
-		if x, ok := x.TxMode.(*TransactionSettings_StaleReadOnly); ok {
+		if x, ok := x.xxx_hidden_TxMode.(*transactionSettings_StaleReadOnly); ok {
 			return x.StaleReadOnly
 		}
 	}
@@ -774,51 +877,210 @@ func (x *TransactionSettings) GetStaleReadOnly() *StaleModeSettings {
 
 func (x *TransactionSettings) GetSnapshotReadOnly() *SnapshotModeSettings {
 	if x != nil {
-		if x, ok := x.TxMode.(*TransactionSettings_SnapshotReadOnly); ok {
+		if x, ok := x.xxx_hidden_TxMode.(*transactionSettings_SnapshotReadOnly); ok {
 			return x.SnapshotReadOnly
 		}
 	}
 	return nil
 }
 
+func (x *TransactionSettings) SetSerializableReadWrite(v *SerializableModeSettings) {
+	if v == nil {
+		x.xxx_hidden_TxMode = nil
+		return
+	}
+	x.xxx_hidden_TxMode = &transactionSettings_SerializableReadWrite{v}
+}
+
+func (x *TransactionSettings) SetOnlineReadOnly(v *OnlineModeSettings) {
+	if v == nil {
+		x.xxx_hidden_TxMode = nil
+		return
+	}
+	x.xxx_hidden_TxMode = &transactionSettings_OnlineReadOnly{v}
+}
+
+func (x *TransactionSettings) SetStaleReadOnly(v *StaleModeSettings) {
+	if v == nil {
+		x.xxx_hidden_TxMode = nil
+		return
+	}
+	x.xxx_hidden_TxMode = &transactionSettings_StaleReadOnly{v}
+}
+
+func (x *TransactionSettings) SetSnapshotReadOnly(v *SnapshotModeSettings) {
+	if v == nil {
+		x.xxx_hidden_TxMode = nil
+		return
+	}
+	x.xxx_hidden_TxMode = &transactionSettings_SnapshotReadOnly{v}
+}
+
+func (x *TransactionSettings) HasTxMode() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxMode != nil
+}
+
+func (x *TransactionSettings) HasSerializableReadWrite() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxMode.(*transactionSettings_SerializableReadWrite)
+	return ok
+}
+
+func (x *TransactionSettings) HasOnlineReadOnly() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxMode.(*transactionSettings_OnlineReadOnly)
+	return ok
+}
+
+func (x *TransactionSettings) HasStaleReadOnly() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxMode.(*transactionSettings_StaleReadOnly)
+	return ok
+}
+
+func (x *TransactionSettings) HasSnapshotReadOnly() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxMode.(*transactionSettings_SnapshotReadOnly)
+	return ok
+}
+
+func (x *TransactionSettings) ClearTxMode() {
+	x.xxx_hidden_TxMode = nil
+}
+
+func (x *TransactionSettings) ClearSerializableReadWrite() {
+	if _, ok := x.xxx_hidden_TxMode.(*transactionSettings_SerializableReadWrite); ok {
+		x.xxx_hidden_TxMode = nil
+	}
+}
+
+func (x *TransactionSettings) ClearOnlineReadOnly() {
+	if _, ok := x.xxx_hidden_TxMode.(*transactionSettings_OnlineReadOnly); ok {
+		x.xxx_hidden_TxMode = nil
+	}
+}
+
+func (x *TransactionSettings) ClearStaleReadOnly() {
+	if _, ok := x.xxx_hidden_TxMode.(*transactionSettings_StaleReadOnly); ok {
+		x.xxx_hidden_TxMode = nil
+	}
+}
+
+func (x *TransactionSettings) ClearSnapshotReadOnly() {
+	if _, ok := x.xxx_hidden_TxMode.(*transactionSettings_SnapshotReadOnly); ok {
+		x.xxx_hidden_TxMode = nil
+	}
+}
+
+const TransactionSettings_TxMode_not_set_case case_TransactionSettings_TxMode = 0
+const TransactionSettings_SerializableReadWrite_case case_TransactionSettings_TxMode = 1
+const TransactionSettings_OnlineReadOnly_case case_TransactionSettings_TxMode = 2
+const TransactionSettings_StaleReadOnly_case case_TransactionSettings_TxMode = 3
+const TransactionSettings_SnapshotReadOnly_case case_TransactionSettings_TxMode = 4
+
+func (x *TransactionSettings) WhichTxMode() case_TransactionSettings_TxMode {
+	if x == nil {
+		return TransactionSettings_TxMode_not_set_case
+	}
+	switch x.xxx_hidden_TxMode.(type) {
+	case *transactionSettings_SerializableReadWrite:
+		return TransactionSettings_SerializableReadWrite_case
+	case *transactionSettings_OnlineReadOnly:
+		return TransactionSettings_OnlineReadOnly_case
+	case *transactionSettings_StaleReadOnly:
+		return TransactionSettings_StaleReadOnly_case
+	case *transactionSettings_SnapshotReadOnly:
+		return TransactionSettings_SnapshotReadOnly_case
+	default:
+		return TransactionSettings_TxMode_not_set_case
+	}
+}
+
+type TransactionSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_TxMode:
+	SerializableReadWrite *SerializableModeSettings
+	OnlineReadOnly        *OnlineModeSettings
+	StaleReadOnly         *StaleModeSettings
+	SnapshotReadOnly      *SnapshotModeSettings
+	// -- end of xxx_hidden_TxMode
+}
+
+func (b0 TransactionSettings_builder) Build() *TransactionSettings {
+	m0 := &TransactionSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.SerializableReadWrite != nil {
+		x.xxx_hidden_TxMode = &transactionSettings_SerializableReadWrite{b.SerializableReadWrite}
+	}
+	if b.OnlineReadOnly != nil {
+		x.xxx_hidden_TxMode = &transactionSettings_OnlineReadOnly{b.OnlineReadOnly}
+	}
+	if b.StaleReadOnly != nil {
+		x.xxx_hidden_TxMode = &transactionSettings_StaleReadOnly{b.StaleReadOnly}
+	}
+	if b.SnapshotReadOnly != nil {
+		x.xxx_hidden_TxMode = &transactionSettings_SnapshotReadOnly{b.SnapshotReadOnly}
+	}
+	return m0
+}
+
+type case_TransactionSettings_TxMode protoreflect.FieldNumber
+
+func (x case_TransactionSettings_TxMode) String() string {
+	md := file_protos_ydb_query_proto_msgTypes[10].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
 type isTransactionSettings_TxMode interface {
 	isTransactionSettings_TxMode()
 }
 
-type TransactionSettings_SerializableReadWrite struct {
+type transactionSettings_SerializableReadWrite struct {
 	SerializableReadWrite *SerializableModeSettings `protobuf:"bytes,1,opt,name=serializable_read_write,json=serializableReadWrite,proto3,oneof"`
 }
 
-type TransactionSettings_OnlineReadOnly struct {
+type transactionSettings_OnlineReadOnly struct {
 	OnlineReadOnly *OnlineModeSettings `protobuf:"bytes,2,opt,name=online_read_only,json=onlineReadOnly,proto3,oneof"`
 }
 
-type TransactionSettings_StaleReadOnly struct {
+type transactionSettings_StaleReadOnly struct {
 	StaleReadOnly *StaleModeSettings `protobuf:"bytes,3,opt,name=stale_read_only,json=staleReadOnly,proto3,oneof"`
 }
 
-type TransactionSettings_SnapshotReadOnly struct {
+type transactionSettings_SnapshotReadOnly struct {
 	SnapshotReadOnly *SnapshotModeSettings `protobuf:"bytes,4,opt,name=snapshot_read_only,json=snapshotReadOnly,proto3,oneof"`
 }
 
-func (*TransactionSettings_SerializableReadWrite) isTransactionSettings_TxMode() {}
+func (*transactionSettings_SerializableReadWrite) isTransactionSettings_TxMode() {}
 
-func (*TransactionSettings_OnlineReadOnly) isTransactionSettings_TxMode() {}
+func (*transactionSettings_OnlineReadOnly) isTransactionSettings_TxMode() {}
 
-func (*TransactionSettings_StaleReadOnly) isTransactionSettings_TxMode() {}
+func (*transactionSettings_StaleReadOnly) isTransactionSettings_TxMode() {}
 
-func (*TransactionSettings_SnapshotReadOnly) isTransactionSettings_TxMode() {}
+func (*transactionSettings_SnapshotReadOnly) isTransactionSettings_TxMode() {}
 
 type TransactionControl struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to TxSelector:
-	//
-	//	*TransactionControl_TxId
-	//	*TransactionControl_BeginTx
-	TxSelector    isTransactionControl_TxSelector `protobuf_oneof:"tx_selector"`
-	CommitTx      bool                            `protobuf:"varint,10,opt,name=commit_tx,json=commitTx,proto3" json:"commit_tx,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_TxSelector isTransactionControl_TxSelector `protobuf_oneof:"tx_selector"`
+	xxx_hidden_CommitTx   bool                            `protobuf:"varint,10,opt,name=commit_tx,json=commitTx,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *TransactionControl) Reset() {
@@ -846,21 +1108,9 @@ func (x *TransactionControl) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TransactionControl.ProtoReflect.Descriptor instead.
-func (*TransactionControl) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{11}
-}
-
-func (x *TransactionControl) GetTxSelector() isTransactionControl_TxSelector {
-	if x != nil {
-		return x.TxSelector
-	}
-	return nil
-}
-
 func (x *TransactionControl) GetTxId() string {
 	if x != nil {
-		if x, ok := x.TxSelector.(*TransactionControl_TxId); ok {
+		if x, ok := x.xxx_hidden_TxSelector.(*transactionControl_TxId); ok {
 			return x.TxId
 		}
 	}
@@ -869,7 +1119,7 @@ func (x *TransactionControl) GetTxId() string {
 
 func (x *TransactionControl) GetBeginTx() *TransactionSettings {
 	if x != nil {
-		if x, ok := x.TxSelector.(*TransactionControl_BeginTx); ok {
+		if x, ok := x.xxx_hidden_TxSelector.(*transactionControl_BeginTx); ok {
 			return x.BeginTx
 		}
 	}
@@ -878,34 +1128,140 @@ func (x *TransactionControl) GetBeginTx() *TransactionSettings {
 
 func (x *TransactionControl) GetCommitTx() bool {
 	if x != nil {
-		return x.CommitTx
+		return x.xxx_hidden_CommitTx
 	}
 	return false
+}
+
+func (x *TransactionControl) SetTxId(v string) {
+	x.xxx_hidden_TxSelector = &transactionControl_TxId{v}
+}
+
+func (x *TransactionControl) SetBeginTx(v *TransactionSettings) {
+	if v == nil {
+		x.xxx_hidden_TxSelector = nil
+		return
+	}
+	x.xxx_hidden_TxSelector = &transactionControl_BeginTx{v}
+}
+
+func (x *TransactionControl) SetCommitTx(v bool) {
+	x.xxx_hidden_CommitTx = v
+}
+
+func (x *TransactionControl) HasTxSelector() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxSelector != nil
+}
+
+func (x *TransactionControl) HasTxId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxSelector.(*transactionControl_TxId)
+	return ok
+}
+
+func (x *TransactionControl) HasBeginTx() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_TxSelector.(*transactionControl_BeginTx)
+	return ok
+}
+
+func (x *TransactionControl) ClearTxSelector() {
+	x.xxx_hidden_TxSelector = nil
+}
+
+func (x *TransactionControl) ClearTxId() {
+	if _, ok := x.xxx_hidden_TxSelector.(*transactionControl_TxId); ok {
+		x.xxx_hidden_TxSelector = nil
+	}
+}
+
+func (x *TransactionControl) ClearBeginTx() {
+	if _, ok := x.xxx_hidden_TxSelector.(*transactionControl_BeginTx); ok {
+		x.xxx_hidden_TxSelector = nil
+	}
+}
+
+const TransactionControl_TxSelector_not_set_case case_TransactionControl_TxSelector = 0
+const TransactionControl_TxId_case case_TransactionControl_TxSelector = 1
+const TransactionControl_BeginTx_case case_TransactionControl_TxSelector = 2
+
+func (x *TransactionControl) WhichTxSelector() case_TransactionControl_TxSelector {
+	if x == nil {
+		return TransactionControl_TxSelector_not_set_case
+	}
+	switch x.xxx_hidden_TxSelector.(type) {
+	case *transactionControl_TxId:
+		return TransactionControl_TxId_case
+	case *transactionControl_BeginTx:
+		return TransactionControl_BeginTx_case
+	default:
+		return TransactionControl_TxSelector_not_set_case
+	}
+}
+
+type TransactionControl_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_TxSelector:
+	TxId    *string
+	BeginTx *TransactionSettings
+	// -- end of xxx_hidden_TxSelector
+	CommitTx bool
+}
+
+func (b0 TransactionControl_builder) Build() *TransactionControl {
+	m0 := &TransactionControl{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.TxId != nil {
+		x.xxx_hidden_TxSelector = &transactionControl_TxId{*b.TxId}
+	}
+	if b.BeginTx != nil {
+		x.xxx_hidden_TxSelector = &transactionControl_BeginTx{b.BeginTx}
+	}
+	x.xxx_hidden_CommitTx = b.CommitTx
+	return m0
+}
+
+type case_TransactionControl_TxSelector protoreflect.FieldNumber
+
+func (x case_TransactionControl_TxSelector) String() string {
+	md := file_protos_ydb_query_proto_msgTypes[11].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isTransactionControl_TxSelector interface {
 	isTransactionControl_TxSelector()
 }
 
-type TransactionControl_TxId struct {
+type transactionControl_TxId struct {
 	TxId string `protobuf:"bytes,1,opt,name=tx_id,json=txId,proto3,oneof"`
 }
 
-type TransactionControl_BeginTx struct {
+type transactionControl_BeginTx struct {
 	BeginTx *TransactionSettings `protobuf:"bytes,2,opt,name=begin_tx,json=beginTx,proto3,oneof"`
 }
 
-func (*TransactionControl_TxId) isTransactionControl_TxSelector() {}
+func (*transactionControl_TxId) isTransactionControl_TxSelector() {}
 
-func (*TransactionControl_BeginTx) isTransactionControl_TxSelector() {}
+func (*transactionControl_BeginTx) isTransactionControl_TxSelector() {}
 
 type BeginTransactionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier (required)
-	SessionId     string               `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	TxSettings    *TransactionSettings `protobuf:"bytes,2,opt,name=tx_settings,json=txSettings,proto3" json:"tx_settings,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId  string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TxSettings *TransactionSettings   `protobuf:"bytes,2,opt,name=tx_settings,json=txSettings,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *BeginTransactionRequest) Reset() {
@@ -933,29 +1289,59 @@ func (x *BeginTransactionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BeginTransactionRequest.ProtoReflect.Descriptor instead.
-func (*BeginTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{12}
-}
-
 func (x *BeginTransactionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *BeginTransactionRequest) GetTxSettings() *TransactionSettings {
 	if x != nil {
-		return x.TxSettings
+		return x.xxx_hidden_TxSettings
 	}
 	return nil
 }
 
+func (x *BeginTransactionRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *BeginTransactionRequest) SetTxSettings(v *TransactionSettings) {
+	x.xxx_hidden_TxSettings = v
+}
+
+func (x *BeginTransactionRequest) HasTxSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxSettings != nil
+}
+
+func (x *BeginTransactionRequest) ClearTxSettings() {
+	x.xxx_hidden_TxSettings = nil
+}
+
+type BeginTransactionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier (required)
+	SessionId  string
+	TxSettings *TransactionSettings
+}
+
+func (b0 BeginTransactionRequest_builder) Build() *BeginTransactionRequest {
+	m0 := &BeginTransactionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TxSettings = b.TxSettings
+	return m0
+}
+
 type TransactionMeta struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Transaction identifier
-	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id string                 `protobuf:"bytes,1,opt,name=id,proto3"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -985,25 +1371,39 @@ func (x *TransactionMeta) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use TransactionMeta.ProtoReflect.Descriptor instead.
-func (*TransactionMeta) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{13}
-}
-
 func (x *TransactionMeta) GetId() string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
+func (x *TransactionMeta) SetId(v string) {
+	x.xxx_hidden_Id = v
+}
+
+type TransactionMeta_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Transaction identifier
+	Id string
+}
+
+func (b0 TransactionMeta_builder) Build() *TransactionMeta {
+	m0 := &TransactionMeta{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	return m0
+}
+
 type BeginTransactionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Status        Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	TxMeta        *TransactionMeta          `protobuf:"bytes,3,opt,name=tx_meta,json=txMeta,proto3" json:"tx_meta,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_TxMeta *TransactionMeta           `protobuf:"bytes,3,opt,name=tx_meta,json=txMeta,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *BeginTransactionResponse) Reset() {
@@ -1031,40 +1431,76 @@ func (x *BeginTransactionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use BeginTransactionResponse.ProtoReflect.Descriptor instead.
-func (*BeginTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{14}
-}
-
 func (x *BeginTransactionResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *BeginTransactionResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *BeginTransactionResponse) GetTxMeta() *TransactionMeta {
 	if x != nil {
-		return x.TxMeta
+		return x.xxx_hidden_TxMeta
 	}
 	return nil
 }
 
+func (x *BeginTransactionResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *BeginTransactionResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *BeginTransactionResponse) SetTxMeta(v *TransactionMeta) {
+	x.xxx_hidden_TxMeta = v
+}
+
+func (x *BeginTransactionResponse) HasTxMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxMeta != nil
+}
+
+func (x *BeginTransactionResponse) ClearTxMeta() {
+	x.xxx_hidden_TxMeta = nil
+}
+
+type BeginTransactionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+	TxMeta *TransactionMeta
+}
+
+func (b0 BeginTransactionResponse_builder) Build() *BeginTransactionResponse {
+	m0 := &BeginTransactionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_TxMeta = b.TxMeta
+	return m0
+}
+
 type CommitTransactionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier (required)
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Transaction identifier (required)
-	TxId          string `protobuf:"bytes,2,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TxId      string                 `protobuf:"bytes,2,opt,name=tx_id,json=txId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CommitTransactionRequest) Reset() {
@@ -1092,31 +1528,52 @@ func (x *CommitTransactionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CommitTransactionRequest.ProtoReflect.Descriptor instead.
-func (*CommitTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{15}
-}
-
 func (x *CommitTransactionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *CommitTransactionRequest) GetTxId() string {
 	if x != nil {
-		return x.TxId
+		return x.xxx_hidden_TxId
 	}
 	return ""
 }
 
+func (x *CommitTransactionRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *CommitTransactionRequest) SetTxId(v string) {
+	x.xxx_hidden_TxId = v
+}
+
+type CommitTransactionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier (required)
+	SessionId string
+	// Transaction identifier (required)
+	TxId string
+}
+
+func (b0 CommitTransactionRequest_builder) Build() *CommitTransactionRequest {
+	m0 := &CommitTransactionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TxId = b.TxId
+	return m0
+}
+
 type CommitTransactionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Status        Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *CommitTransactionResponse) Reset() {
@@ -1144,33 +1601,52 @@ func (x *CommitTransactionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CommitTransactionResponse.ProtoReflect.Descriptor instead.
-func (*CommitTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{16}
-}
-
 func (x *CommitTransactionResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *CommitTransactionResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
+func (x *CommitTransactionResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *CommitTransactionResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+type CommitTransactionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+}
+
+func (b0 CommitTransactionResponse_builder) Build() *CommitTransactionResponse {
+	m0 := &CommitTransactionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	return m0
+}
+
 type RollbackTransactionRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier (required)
-	SessionId string `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	// Transaction identifier (required)
-	TxId          string `protobuf:"bytes,2,opt,name=tx_id,json=txId,proto3" json:"tx_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId string                 `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TxId      string                 `protobuf:"bytes,2,opt,name=tx_id,json=txId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *RollbackTransactionRequest) Reset() {
@@ -1198,31 +1674,52 @@ func (x *RollbackTransactionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RollbackTransactionRequest.ProtoReflect.Descriptor instead.
-func (*RollbackTransactionRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{17}
-}
-
 func (x *RollbackTransactionRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *RollbackTransactionRequest) GetTxId() string {
 	if x != nil {
-		return x.TxId
+		return x.xxx_hidden_TxId
 	}
 	return ""
 }
 
+func (x *RollbackTransactionRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *RollbackTransactionRequest) SetTxId(v string) {
+	x.xxx_hidden_TxId = v
+}
+
+type RollbackTransactionRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier (required)
+	SessionId string
+	// Transaction identifier (required)
+	TxId string
+}
+
+func (b0 RollbackTransactionRequest_builder) Build() *RollbackTransactionRequest {
+	m0 := &RollbackTransactionRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TxId = b.TxId
+	return m0
+}
+
 type RollbackTransactionResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Status        Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *RollbackTransactionResponse) Reset() {
@@ -1250,31 +1747,52 @@ func (x *RollbackTransactionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RollbackTransactionResponse.ProtoReflect.Descriptor instead.
-func (*RollbackTransactionResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{18}
-}
-
 func (x *RollbackTransactionResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *RollbackTransactionResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
+func (x *RollbackTransactionResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *RollbackTransactionResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+type RollbackTransactionResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+}
+
+func (b0 RollbackTransactionResponse_builder) Build() *RollbackTransactionResponse {
+	m0 := &RollbackTransactionResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	return m0
+}
+
 type QueryContent struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Syntax        Syntax                 `protobuf:"varint,1,opt,name=syntax,proto3,enum=Ydb.Query.Syntax" json:"syntax,omitempty"`
-	Text          string                 `protobuf:"bytes,2,opt,name=text,proto3" json:"text,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Syntax Syntax                 `protobuf:"varint,1,opt,name=syntax,proto3,enum=Ydb.Query.Syntax"`
+	xxx_hidden_Text   string                 `protobuf:"bytes,2,opt,name=text,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *QueryContent) Reset() {
@@ -1302,45 +1820,57 @@ func (x *QueryContent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use QueryContent.ProtoReflect.Descriptor instead.
-func (*QueryContent) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{19}
-}
-
 func (x *QueryContent) GetSyntax() Syntax {
 	if x != nil {
-		return x.Syntax
+		return x.xxx_hidden_Syntax
 	}
 	return Syntax_SYNTAX_UNSPECIFIED
 }
 
 func (x *QueryContent) GetText() string {
 	if x != nil {
-		return x.Text
+		return x.xxx_hidden_Text
 	}
 	return ""
 }
 
+func (x *QueryContent) SetSyntax(v Syntax) {
+	x.xxx_hidden_Syntax = v
+}
+
+func (x *QueryContent) SetText(v string) {
+	x.xxx_hidden_Text = v
+}
+
+type QueryContent_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Syntax Syntax
+	Text   string
+}
+
+func (b0 QueryContent_builder) Build() *QueryContent {
+	m0 := &QueryContent{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Syntax = b.Syntax
+	x.xxx_hidden_Text = b.Text
+	return m0
+}
+
 type ExecuteQueryRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Session identifier (required)
-	SessionId string              `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3" json:"session_id,omitempty"`
-	ExecMode  ExecMode            `protobuf:"varint,2,opt,name=exec_mode,json=execMode,proto3,enum=Ydb.Query.ExecMode" json:"exec_mode,omitempty"`
-	TxControl *TransactionControl `protobuf:"bytes,3,opt,name=tx_control,json=txControl,proto3" json:"tx_control,omitempty"`
-	// Types that are valid to be assigned to Query:
-	//
-	//	*ExecuteQueryRequest_QueryContent
-	Query      isExecuteQueryRequest_Query `protobuf_oneof:"query"`
-	Parameters map[string]*Ydb.TypedValue  `protobuf:"bytes,6,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	StatsMode  StatsMode                   `protobuf:"varint,7,opt,name=stats_mode,json=statsMode,proto3,enum=Ydb.Query.StatsMode" json:"stats_mode,omitempty"`
-	// For queries with multiple result sets, some of them may be computed concurrently.
-	// If true, parts of different results sets may be interleaved in response stream.
-	ConcurrentResultSets bool `protobuf:"varint,8,opt,name=concurrent_result_sets,json=concurrentResultSets,proto3" json:"concurrent_result_sets,omitempty"`
-	// Allows to set size limitation (in bytes) for one result part
-	ResponsePartLimitBytes int64  `protobuf:"varint,9,opt,name=response_part_limit_bytes,json=responsePartLimitBytes,proto3" json:"response_part_limit_bytes,omitempty"`
-	PoolId                 string `protobuf:"bytes,10,opt,name=pool_id,json=poolId,proto3" json:"pool_id,omitempty"` // Workload manager pool id
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                             protoimpl.MessageState      `protogen:"opaque.v1"`
+	xxx_hidden_SessionId              string                      `protobuf:"bytes,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_ExecMode               ExecMode                    `protobuf:"varint,2,opt,name=exec_mode,json=execMode,proto3,enum=Ydb.Query.ExecMode"`
+	xxx_hidden_TxControl              *TransactionControl         `protobuf:"bytes,3,opt,name=tx_control,json=txControl,proto3"`
+	xxx_hidden_Query                  isExecuteQueryRequest_Query `protobuf_oneof:"query"`
+	xxx_hidden_Parameters             map[string]*Ydb.TypedValue  `protobuf:"bytes,6,rep,name=parameters,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_StatsMode              StatsMode                   `protobuf:"varint,7,opt,name=stats_mode,json=statsMode,proto3,enum=Ydb.Query.StatsMode"`
+	xxx_hidden_ConcurrentResultSets   bool                        `protobuf:"varint,8,opt,name=concurrent_result_sets,json=concurrentResultSets,proto3"`
+	xxx_hidden_ResponsePartLimitBytes int64                       `protobuf:"varint,9,opt,name=response_part_limit_bytes,json=responsePartLimitBytes,proto3"`
+	xxx_hidden_PoolId                 string                      `protobuf:"bytes,10,opt,name=pool_id,json=poolId,proto3"`
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *ExecuteQueryRequest) Reset() {
@@ -1368,42 +1898,30 @@ func (x *ExecuteQueryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteQueryRequest.ProtoReflect.Descriptor instead.
-func (*ExecuteQueryRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{20}
-}
-
 func (x *ExecuteQueryRequest) GetSessionId() string {
 	if x != nil {
-		return x.SessionId
+		return x.xxx_hidden_SessionId
 	}
 	return ""
 }
 
 func (x *ExecuteQueryRequest) GetExecMode() ExecMode {
 	if x != nil {
-		return x.ExecMode
+		return x.xxx_hidden_ExecMode
 	}
 	return ExecMode_EXEC_MODE_UNSPECIFIED
 }
 
 func (x *ExecuteQueryRequest) GetTxControl() *TransactionControl {
 	if x != nil {
-		return x.TxControl
-	}
-	return nil
-}
-
-func (x *ExecuteQueryRequest) GetQuery() isExecuteQueryRequest_Query {
-	if x != nil {
-		return x.Query
+		return x.xxx_hidden_TxControl
 	}
 	return nil
 }
 
 func (x *ExecuteQueryRequest) GetQueryContent() *QueryContent {
 	if x != nil {
-		if x, ok := x.Query.(*ExecuteQueryRequest_QueryContent); ok {
+		if x, ok := x.xxx_hidden_Query.(*executeQueryRequest_QueryContent); ok {
 			return x.QueryContent
 		}
 	}
@@ -1412,54 +1930,193 @@ func (x *ExecuteQueryRequest) GetQueryContent() *QueryContent {
 
 func (x *ExecuteQueryRequest) GetParameters() map[string]*Ydb.TypedValue {
 	if x != nil {
-		return x.Parameters
+		return x.xxx_hidden_Parameters
 	}
 	return nil
 }
 
 func (x *ExecuteQueryRequest) GetStatsMode() StatsMode {
 	if x != nil {
-		return x.StatsMode
+		return x.xxx_hidden_StatsMode
 	}
 	return StatsMode_STATS_MODE_UNSPECIFIED
 }
 
 func (x *ExecuteQueryRequest) GetConcurrentResultSets() bool {
 	if x != nil {
-		return x.ConcurrentResultSets
+		return x.xxx_hidden_ConcurrentResultSets
 	}
 	return false
 }
 
 func (x *ExecuteQueryRequest) GetResponsePartLimitBytes() int64 {
 	if x != nil {
-		return x.ResponsePartLimitBytes
+		return x.xxx_hidden_ResponsePartLimitBytes
 	}
 	return 0
 }
 
 func (x *ExecuteQueryRequest) GetPoolId() string {
 	if x != nil {
-		return x.PoolId
+		return x.xxx_hidden_PoolId
 	}
 	return ""
+}
+
+func (x *ExecuteQueryRequest) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = v
+}
+
+func (x *ExecuteQueryRequest) SetExecMode(v ExecMode) {
+	x.xxx_hidden_ExecMode = v
+}
+
+func (x *ExecuteQueryRequest) SetTxControl(v *TransactionControl) {
+	x.xxx_hidden_TxControl = v
+}
+
+func (x *ExecuteQueryRequest) SetQueryContent(v *QueryContent) {
+	if v == nil {
+		x.xxx_hidden_Query = nil
+		return
+	}
+	x.xxx_hidden_Query = &executeQueryRequest_QueryContent{v}
+}
+
+func (x *ExecuteQueryRequest) SetParameters(v map[string]*Ydb.TypedValue) {
+	x.xxx_hidden_Parameters = v
+}
+
+func (x *ExecuteQueryRequest) SetStatsMode(v StatsMode) {
+	x.xxx_hidden_StatsMode = v
+}
+
+func (x *ExecuteQueryRequest) SetConcurrentResultSets(v bool) {
+	x.xxx_hidden_ConcurrentResultSets = v
+}
+
+func (x *ExecuteQueryRequest) SetResponsePartLimitBytes(v int64) {
+	x.xxx_hidden_ResponsePartLimitBytes = v
+}
+
+func (x *ExecuteQueryRequest) SetPoolId(v string) {
+	x.xxx_hidden_PoolId = v
+}
+
+func (x *ExecuteQueryRequest) HasTxControl() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxControl != nil
+}
+
+func (x *ExecuteQueryRequest) HasQuery() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Query != nil
+}
+
+func (x *ExecuteQueryRequest) HasQueryContent() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Query.(*executeQueryRequest_QueryContent)
+	return ok
+}
+
+func (x *ExecuteQueryRequest) ClearTxControl() {
+	x.xxx_hidden_TxControl = nil
+}
+
+func (x *ExecuteQueryRequest) ClearQuery() {
+	x.xxx_hidden_Query = nil
+}
+
+func (x *ExecuteQueryRequest) ClearQueryContent() {
+	if _, ok := x.xxx_hidden_Query.(*executeQueryRequest_QueryContent); ok {
+		x.xxx_hidden_Query = nil
+	}
+}
+
+const ExecuteQueryRequest_Query_not_set_case case_ExecuteQueryRequest_Query = 0
+const ExecuteQueryRequest_QueryContent_case case_ExecuteQueryRequest_Query = 4
+
+func (x *ExecuteQueryRequest) WhichQuery() case_ExecuteQueryRequest_Query {
+	if x == nil {
+		return ExecuteQueryRequest_Query_not_set_case
+	}
+	switch x.xxx_hidden_Query.(type) {
+	case *executeQueryRequest_QueryContent:
+		return ExecuteQueryRequest_QueryContent_case
+	default:
+		return ExecuteQueryRequest_Query_not_set_case
+	}
+}
+
+type ExecuteQueryRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Session identifier (required)
+	SessionId string
+	ExecMode  ExecMode
+	TxControl *TransactionControl
+	// Fields of oneof xxx_hidden_Query:
+	QueryContent *QueryContent
+	// -- end of xxx_hidden_Query
+	Parameters map[string]*Ydb.TypedValue
+	StatsMode  StatsMode
+	// For queries with multiple result sets, some of them may be computed concurrently.
+	// If true, parts of different results sets may be interleaved in response stream.
+	ConcurrentResultSets bool
+	// Allows to set size limitation (in bytes) for one result part
+	ResponsePartLimitBytes int64
+	PoolId                 string
+}
+
+func (b0 ExecuteQueryRequest_builder) Build() *ExecuteQueryRequest {
+	m0 := &ExecuteQueryRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_ExecMode = b.ExecMode
+	x.xxx_hidden_TxControl = b.TxControl
+	if b.QueryContent != nil {
+		x.xxx_hidden_Query = &executeQueryRequest_QueryContent{b.QueryContent}
+	}
+	x.xxx_hidden_Parameters = b.Parameters
+	x.xxx_hidden_StatsMode = b.StatsMode
+	x.xxx_hidden_ConcurrentResultSets = b.ConcurrentResultSets
+	x.xxx_hidden_ResponsePartLimitBytes = b.ResponsePartLimitBytes
+	x.xxx_hidden_PoolId = b.PoolId
+	return m0
+}
+
+type case_ExecuteQueryRequest_Query protoreflect.FieldNumber
+
+func (x case_ExecuteQueryRequest_Query) String() string {
+	md := file_protos_ydb_query_proto_msgTypes[20].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isExecuteQueryRequest_Query interface {
 	isExecuteQueryRequest_Query()
 }
 
-type ExecuteQueryRequest_QueryContent struct {
+type executeQueryRequest_QueryContent struct {
 	QueryContent *QueryContent `protobuf:"bytes,4,opt,name=query_content,json=queryContent,proto3,oneof"`
 }
 
-func (*ExecuteQueryRequest_QueryContent) isExecuteQueryRequest_Query() {}
+func (*executeQueryRequest_QueryContent) isExecuteQueryRequest_Query() {}
 
 type ResultSetMeta struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Columns       []*Ydb.Column          `protobuf:"bytes,1,rep,name=columns,proto3" json:"columns,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Columns *[]*Ydb.Column         `protobuf:"bytes,1,rep,name=columns,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ResultSetMeta) Reset() {
@@ -1487,31 +2144,43 @@ func (x *ResultSetMeta) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResultSetMeta.ProtoReflect.Descriptor instead.
-func (*ResultSetMeta) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{21}
-}
-
 func (x *ResultSetMeta) GetColumns() []*Ydb.Column {
 	if x != nil {
-		return x.Columns
+		if x.xxx_hidden_Columns != nil {
+			return *x.xxx_hidden_Columns
+		}
 	}
 	return nil
 }
 
+func (x *ResultSetMeta) SetColumns(v []*Ydb.Column) {
+	x.xxx_hidden_Columns = &v
+}
+
+type ResultSetMeta_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Columns []*Ydb.Column
+}
+
+func (b0 ResultSetMeta_builder) Build() *ResultSetMeta {
+	m0 := &ResultSetMeta{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Columns = &b.Columns
+	return m0
+}
+
 type ExecuteQueryResponsePart struct {
-	state  protoimpl.MessageState    `protogen:"open.v1"`
-	Status Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	// Index of current result set
-	ResultSetIndex int64 `protobuf:"varint,3,opt,name=result_set_index,json=resultSetIndex,proto3" json:"result_set_index,omitempty"`
-	// Result set part
-	ResultSet *Ydb.ResultSet `protobuf:"bytes,4,opt,name=result_set,json=resultSet,proto3" json:"result_set,omitempty"`
-	// Execution statistics (last part only)
-	ExecStats     *Ydb_TableStats.QueryStats `protobuf:"bytes,5,opt,name=exec_stats,json=execStats,proto3" json:"exec_stats,omitempty"`
-	TxMeta        *TransactionMeta           `protobuf:"bytes,6,opt,name=tx_meta,json=txMeta,proto3" json:"tx_meta,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status         Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues         *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_ResultSetIndex int64                      `protobuf:"varint,3,opt,name=result_set_index,json=resultSetIndex,proto3"`
+	xxx_hidden_ResultSet      *Ydb.ResultSet             `protobuf:"bytes,4,opt,name=result_set,json=resultSet,proto3"`
+	xxx_hidden_ExecStats      *Ydb_TableStats.QueryStats `protobuf:"bytes,5,opt,name=exec_stats,json=execStats,proto3"`
+	xxx_hidden_TxMeta         *TransactionMeta           `protobuf:"bytes,6,opt,name=tx_meta,json=txMeta,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ExecuteQueryResponsePart) Reset() {
@@ -1539,66 +2208,145 @@ func (x *ExecuteQueryResponsePart) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteQueryResponsePart.ProtoReflect.Descriptor instead.
-func (*ExecuteQueryResponsePart) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{22}
-}
-
 func (x *ExecuteQueryResponsePart) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *ExecuteQueryResponsePart) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *ExecuteQueryResponsePart) GetResultSetIndex() int64 {
 	if x != nil {
-		return x.ResultSetIndex
+		return x.xxx_hidden_ResultSetIndex
 	}
 	return 0
 }
 
 func (x *ExecuteQueryResponsePart) GetResultSet() *Ydb.ResultSet {
 	if x != nil {
-		return x.ResultSet
+		return x.xxx_hidden_ResultSet
 	}
 	return nil
 }
 
 func (x *ExecuteQueryResponsePart) GetExecStats() *Ydb_TableStats.QueryStats {
 	if x != nil {
-		return x.ExecStats
+		return x.xxx_hidden_ExecStats
 	}
 	return nil
 }
 
 func (x *ExecuteQueryResponsePart) GetTxMeta() *TransactionMeta {
 	if x != nil {
-		return x.TxMeta
+		return x.xxx_hidden_TxMeta
 	}
 	return nil
 }
 
+func (x *ExecuteQueryResponsePart) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *ExecuteQueryResponsePart) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *ExecuteQueryResponsePart) SetResultSetIndex(v int64) {
+	x.xxx_hidden_ResultSetIndex = v
+}
+
+func (x *ExecuteQueryResponsePart) SetResultSet(v *Ydb.ResultSet) {
+	x.xxx_hidden_ResultSet = v
+}
+
+func (x *ExecuteQueryResponsePart) SetExecStats(v *Ydb_TableStats.QueryStats) {
+	x.xxx_hidden_ExecStats = v
+}
+
+func (x *ExecuteQueryResponsePart) SetTxMeta(v *TransactionMeta) {
+	x.xxx_hidden_TxMeta = v
+}
+
+func (x *ExecuteQueryResponsePart) HasResultSet() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResultSet != nil
+}
+
+func (x *ExecuteQueryResponsePart) HasExecStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ExecStats != nil
+}
+
+func (x *ExecuteQueryResponsePart) HasTxMeta() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_TxMeta != nil
+}
+
+func (x *ExecuteQueryResponsePart) ClearResultSet() {
+	x.xxx_hidden_ResultSet = nil
+}
+
+func (x *ExecuteQueryResponsePart) ClearExecStats() {
+	x.xxx_hidden_ExecStats = nil
+}
+
+func (x *ExecuteQueryResponsePart) ClearTxMeta() {
+	x.xxx_hidden_TxMeta = nil
+}
+
+type ExecuteQueryResponsePart_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status Ydb.StatusIds_StatusCode
+	Issues []*Ydb_Issue.IssueMessage
+	// Index of current result set
+	ResultSetIndex int64
+	// Result set part
+	ResultSet *Ydb.ResultSet
+	// Execution statistics (last part only)
+	ExecStats *Ydb_TableStats.QueryStats
+	TxMeta    *TransactionMeta
+}
+
+func (b0 ExecuteQueryResponsePart_builder) Build() *ExecuteQueryResponsePart {
+	m0 := &ExecuteQueryResponsePart{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_ResultSetIndex = b.ResultSetIndex
+	x.xxx_hidden_ResultSet = b.ResultSet
+	x.xxx_hidden_ExecStats = b.ExecStats
+	x.xxx_hidden_TxMeta = b.TxMeta
+	return m0
+}
+
 type ExecuteScriptRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	ExecMode        ExecMode                        `protobuf:"varint,2,opt,name=exec_mode,json=execMode,proto3,enum=Ydb.Query.ExecMode" json:"exec_mode,omitempty"`
-	ScriptContent   *QueryContent                   `protobuf:"bytes,3,opt,name=script_content,json=scriptContent,proto3" json:"script_content,omitempty"`
-	Parameters      map[string]*Ydb.TypedValue      `protobuf:"bytes,4,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	StatsMode       StatsMode                       `protobuf:"varint,5,opt,name=stats_mode,json=statsMode,proto3,enum=Ydb.Query.StatsMode" json:"stats_mode,omitempty"`
-	// After script execution operation finishes, TTL will start counting.
-	// After this TTL the results will be removed from database.
-	ResultsTtl    *durationpb.Duration `protobuf:"bytes,6,opt,name=results_ttl,json=resultsTtl,proto3" json:"results_ttl,omitempty"`
-	PoolId        string               `protobuf:"bytes,7,opt,name=pool_id,json=poolId,proto3" json:"pool_id,omitempty"` // Workload manager pool id
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_ExecMode        ExecMode                        `protobuf:"varint,2,opt,name=exec_mode,json=execMode,proto3,enum=Ydb.Query.ExecMode"`
+	xxx_hidden_ScriptContent   *QueryContent                   `protobuf:"bytes,3,opt,name=script_content,json=scriptContent,proto3"`
+	xxx_hidden_Parameters      map[string]*Ydb.TypedValue      `protobuf:"bytes,4,rep,name=parameters,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_StatsMode       StatsMode                       `protobuf:"varint,5,opt,name=stats_mode,json=statsMode,proto3,enum=Ydb.Query.StatsMode"`
+	xxx_hidden_ResultsTtl      *durationpb.Duration            `protobuf:"bytes,6,opt,name=results_ttl,json=resultsTtl,proto3"`
+	xxx_hidden_PoolId          string                          `protobuf:"bytes,7,opt,name=pool_id,json=poolId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ExecuteScriptRequest) Reset() {
@@ -1626,71 +2374,154 @@ func (x *ExecuteScriptRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteScriptRequest.ProtoReflect.Descriptor instead.
-func (*ExecuteScriptRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{23}
-}
-
 func (x *ExecuteScriptRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ExecuteScriptRequest) GetExecMode() ExecMode {
 	if x != nil {
-		return x.ExecMode
+		return x.xxx_hidden_ExecMode
 	}
 	return ExecMode_EXEC_MODE_UNSPECIFIED
 }
 
 func (x *ExecuteScriptRequest) GetScriptContent() *QueryContent {
 	if x != nil {
-		return x.ScriptContent
+		return x.xxx_hidden_ScriptContent
 	}
 	return nil
 }
 
 func (x *ExecuteScriptRequest) GetParameters() map[string]*Ydb.TypedValue {
 	if x != nil {
-		return x.Parameters
+		return x.xxx_hidden_Parameters
 	}
 	return nil
 }
 
 func (x *ExecuteScriptRequest) GetStatsMode() StatsMode {
 	if x != nil {
-		return x.StatsMode
+		return x.xxx_hidden_StatsMode
 	}
 	return StatsMode_STATS_MODE_UNSPECIFIED
 }
 
 func (x *ExecuteScriptRequest) GetResultsTtl() *durationpb.Duration {
 	if x != nil {
-		return x.ResultsTtl
+		return x.xxx_hidden_ResultsTtl
 	}
 	return nil
 }
 
 func (x *ExecuteScriptRequest) GetPoolId() string {
 	if x != nil {
-		return x.PoolId
+		return x.xxx_hidden_PoolId
 	}
 	return ""
 }
 
+func (x *ExecuteScriptRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ExecuteScriptRequest) SetExecMode(v ExecMode) {
+	x.xxx_hidden_ExecMode = v
+}
+
+func (x *ExecuteScriptRequest) SetScriptContent(v *QueryContent) {
+	x.xxx_hidden_ScriptContent = v
+}
+
+func (x *ExecuteScriptRequest) SetParameters(v map[string]*Ydb.TypedValue) {
+	x.xxx_hidden_Parameters = v
+}
+
+func (x *ExecuteScriptRequest) SetStatsMode(v StatsMode) {
+	x.xxx_hidden_StatsMode = v
+}
+
+func (x *ExecuteScriptRequest) SetResultsTtl(v *durationpb.Duration) {
+	x.xxx_hidden_ResultsTtl = v
+}
+
+func (x *ExecuteScriptRequest) SetPoolId(v string) {
+	x.xxx_hidden_PoolId = v
+}
+
+func (x *ExecuteScriptRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ExecuteScriptRequest) HasScriptContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ScriptContent != nil
+}
+
+func (x *ExecuteScriptRequest) HasResultsTtl() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResultsTtl != nil
+}
+
+func (x *ExecuteScriptRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ExecuteScriptRequest) ClearScriptContent() {
+	x.xxx_hidden_ScriptContent = nil
+}
+
+func (x *ExecuteScriptRequest) ClearResultsTtl() {
+	x.xxx_hidden_ResultsTtl = nil
+}
+
+type ExecuteScriptRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	ExecMode        ExecMode
+	ScriptContent   *QueryContent
+	Parameters      map[string]*Ydb.TypedValue
+	StatsMode       StatsMode
+	// After script execution operation finishes, TTL will start counting.
+	// After this TTL the results will be removed from database.
+	ResultsTtl *durationpb.Duration
+	PoolId     string
+}
+
+func (b0 ExecuteScriptRequest_builder) Build() *ExecuteScriptRequest {
+	m0 := &ExecuteScriptRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_ExecMode = b.ExecMode
+	x.xxx_hidden_ScriptContent = b.ScriptContent
+	x.xxx_hidden_Parameters = b.Parameters
+	x.xxx_hidden_StatsMode = b.StatsMode
+	x.xxx_hidden_ResultsTtl = b.ResultsTtl
+	x.xxx_hidden_PoolId = b.PoolId
+	return m0
+}
+
 type ExecuteScriptMetadata struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	ExecutionId    string                 `protobuf:"bytes,1,opt,name=execution_id,json=executionId,proto3" json:"execution_id,omitempty"`
-	ExecStatus     ExecStatus             `protobuf:"varint,2,opt,name=exec_status,json=execStatus,proto3,enum=Ydb.Query.ExecStatus" json:"exec_status,omitempty"`
-	ScriptContent  *QueryContent          `protobuf:"bytes,3,opt,name=script_content,json=scriptContent,proto3" json:"script_content,omitempty"`
-	ResultSetsMeta []*ResultSetMeta       `protobuf:"bytes,4,rep,name=result_sets_meta,json=resultSetsMeta,proto3" json:"result_sets_meta,omitempty"`
-	ExecMode       ExecMode               `protobuf:"varint,5,opt,name=exec_mode,json=execMode,proto3,enum=Ydb.Query.ExecMode" json:"exec_mode,omitempty"`
-	// Execution statistics
-	ExecStats     *Ydb_TableStats.QueryStats `protobuf:"bytes,6,opt,name=exec_stats,json=execStats,proto3" json:"exec_stats,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ExecutionId    string                     `protobuf:"bytes,1,opt,name=execution_id,json=executionId,proto3"`
+	xxx_hidden_ExecStatus     ExecStatus                 `protobuf:"varint,2,opt,name=exec_status,json=execStatus,proto3,enum=Ydb.Query.ExecStatus"`
+	xxx_hidden_ScriptContent  *QueryContent              `protobuf:"bytes,3,opt,name=script_content,json=scriptContent,proto3"`
+	xxx_hidden_ResultSetsMeta *[]*ResultSetMeta          `protobuf:"bytes,4,rep,name=result_sets_meta,json=resultSetsMeta,proto3"`
+	xxx_hidden_ExecMode       ExecMode                   `protobuf:"varint,5,opt,name=exec_mode,json=execMode,proto3,enum=Ydb.Query.ExecMode"`
+	xxx_hidden_ExecStats      *Ydb_TableStats.QueryStats `protobuf:"bytes,6,opt,name=exec_stats,json=execStats,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ExecuteScriptMetadata) Reset() {
@@ -1718,61 +2549,129 @@ func (x *ExecuteScriptMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExecuteScriptMetadata.ProtoReflect.Descriptor instead.
-func (*ExecuteScriptMetadata) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{24}
-}
-
 func (x *ExecuteScriptMetadata) GetExecutionId() string {
 	if x != nil {
-		return x.ExecutionId
+		return x.xxx_hidden_ExecutionId
 	}
 	return ""
 }
 
 func (x *ExecuteScriptMetadata) GetExecStatus() ExecStatus {
 	if x != nil {
-		return x.ExecStatus
+		return x.xxx_hidden_ExecStatus
 	}
 	return ExecStatus_EXEC_STATUS_UNSPECIFIED
 }
 
 func (x *ExecuteScriptMetadata) GetScriptContent() *QueryContent {
 	if x != nil {
-		return x.ScriptContent
+		return x.xxx_hidden_ScriptContent
 	}
 	return nil
 }
 
 func (x *ExecuteScriptMetadata) GetResultSetsMeta() []*ResultSetMeta {
 	if x != nil {
-		return x.ResultSetsMeta
+		if x.xxx_hidden_ResultSetsMeta != nil {
+			return *x.xxx_hidden_ResultSetsMeta
+		}
 	}
 	return nil
 }
 
 func (x *ExecuteScriptMetadata) GetExecMode() ExecMode {
 	if x != nil {
-		return x.ExecMode
+		return x.xxx_hidden_ExecMode
 	}
 	return ExecMode_EXEC_MODE_UNSPECIFIED
 }
 
 func (x *ExecuteScriptMetadata) GetExecStats() *Ydb_TableStats.QueryStats {
 	if x != nil {
-		return x.ExecStats
+		return x.xxx_hidden_ExecStats
 	}
 	return nil
 }
 
+func (x *ExecuteScriptMetadata) SetExecutionId(v string) {
+	x.xxx_hidden_ExecutionId = v
+}
+
+func (x *ExecuteScriptMetadata) SetExecStatus(v ExecStatus) {
+	x.xxx_hidden_ExecStatus = v
+}
+
+func (x *ExecuteScriptMetadata) SetScriptContent(v *QueryContent) {
+	x.xxx_hidden_ScriptContent = v
+}
+
+func (x *ExecuteScriptMetadata) SetResultSetsMeta(v []*ResultSetMeta) {
+	x.xxx_hidden_ResultSetsMeta = &v
+}
+
+func (x *ExecuteScriptMetadata) SetExecMode(v ExecMode) {
+	x.xxx_hidden_ExecMode = v
+}
+
+func (x *ExecuteScriptMetadata) SetExecStats(v *Ydb_TableStats.QueryStats) {
+	x.xxx_hidden_ExecStats = v
+}
+
+func (x *ExecuteScriptMetadata) HasScriptContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ScriptContent != nil
+}
+
+func (x *ExecuteScriptMetadata) HasExecStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ExecStats != nil
+}
+
+func (x *ExecuteScriptMetadata) ClearScriptContent() {
+	x.xxx_hidden_ScriptContent = nil
+}
+
+func (x *ExecuteScriptMetadata) ClearExecStats() {
+	x.xxx_hidden_ExecStats = nil
+}
+
+type ExecuteScriptMetadata_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ExecutionId    string
+	ExecStatus     ExecStatus
+	ScriptContent  *QueryContent
+	ResultSetsMeta []*ResultSetMeta
+	ExecMode       ExecMode
+	// Execution statistics
+	ExecStats *Ydb_TableStats.QueryStats
+}
+
+func (b0 ExecuteScriptMetadata_builder) Build() *ExecuteScriptMetadata {
+	m0 := &ExecuteScriptMetadata{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ExecutionId = b.ExecutionId
+	x.xxx_hidden_ExecStatus = b.ExecStatus
+	x.xxx_hidden_ScriptContent = b.ScriptContent
+	x.xxx_hidden_ResultSetsMeta = &b.ResultSetsMeta
+	x.xxx_hidden_ExecMode = b.ExecMode
+	x.xxx_hidden_ExecStats = b.ExecStats
+	return m0
+}
+
 type FetchScriptResultsRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	OperationId    string                 `protobuf:"bytes,1,opt,name=operation_id,json=operationId,proto3" json:"operation_id,omitempty"`
-	ResultSetIndex int64                  `protobuf:"varint,2,opt,name=result_set_index,json=resultSetIndex,proto3" json:"result_set_index,omitempty"`
-	FetchToken     string                 `protobuf:"bytes,3,opt,name=fetch_token,json=fetchToken,proto3" json:"fetch_token,omitempty"`
-	RowsLimit      int64                  `protobuf:"varint,4,opt,name=rows_limit,json=rowsLimit,proto3" json:"rows_limit,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_OperationId    string                 `protobuf:"bytes,1,opt,name=operation_id,json=operationId,proto3"`
+	xxx_hidden_ResultSetIndex int64                  `protobuf:"varint,2,opt,name=result_set_index,json=resultSetIndex,proto3"`
+	xxx_hidden_FetchToken     string                 `protobuf:"bytes,3,opt,name=fetch_token,json=fetchToken,proto3"`
+	xxx_hidden_RowsLimit      int64                  `protobuf:"varint,4,opt,name=rows_limit,json=rowsLimit,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *FetchScriptResultsRequest) Reset() {
@@ -1800,48 +2699,79 @@ func (x *FetchScriptResultsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FetchScriptResultsRequest.ProtoReflect.Descriptor instead.
-func (*FetchScriptResultsRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{25}
-}
-
 func (x *FetchScriptResultsRequest) GetOperationId() string {
 	if x != nil {
-		return x.OperationId
+		return x.xxx_hidden_OperationId
 	}
 	return ""
 }
 
 func (x *FetchScriptResultsRequest) GetResultSetIndex() int64 {
 	if x != nil {
-		return x.ResultSetIndex
+		return x.xxx_hidden_ResultSetIndex
 	}
 	return 0
 }
 
 func (x *FetchScriptResultsRequest) GetFetchToken() string {
 	if x != nil {
-		return x.FetchToken
+		return x.xxx_hidden_FetchToken
 	}
 	return ""
 }
 
 func (x *FetchScriptResultsRequest) GetRowsLimit() int64 {
 	if x != nil {
-		return x.RowsLimit
+		return x.xxx_hidden_RowsLimit
 	}
 	return 0
 }
 
+func (x *FetchScriptResultsRequest) SetOperationId(v string) {
+	x.xxx_hidden_OperationId = v
+}
+
+func (x *FetchScriptResultsRequest) SetResultSetIndex(v int64) {
+	x.xxx_hidden_ResultSetIndex = v
+}
+
+func (x *FetchScriptResultsRequest) SetFetchToken(v string) {
+	x.xxx_hidden_FetchToken = v
+}
+
+func (x *FetchScriptResultsRequest) SetRowsLimit(v int64) {
+	x.xxx_hidden_RowsLimit = v
+}
+
+type FetchScriptResultsRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationId    string
+	ResultSetIndex int64
+	FetchToken     string
+	RowsLimit      int64
+}
+
+func (b0 FetchScriptResultsRequest_builder) Build() *FetchScriptResultsRequest {
+	m0 := &FetchScriptResultsRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationId = b.OperationId
+	x.xxx_hidden_ResultSetIndex = b.ResultSetIndex
+	x.xxx_hidden_FetchToken = b.FetchToken
+	x.xxx_hidden_RowsLimit = b.RowsLimit
+	return m0
+}
+
 type FetchScriptResultsResponse struct {
-	state          protoimpl.MessageState    `protogen:"open.v1"`
-	Status         Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues         []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	ResultSetIndex int64                     `protobuf:"varint,3,opt,name=result_set_index,json=resultSetIndex,proto3" json:"result_set_index,omitempty"`
-	ResultSet      *Ydb.ResultSet            `protobuf:"bytes,4,opt,name=result_set,json=resultSet,proto3" json:"result_set,omitempty"`
-	NextFetchToken string                    `protobuf:"bytes,5,opt,name=next_fetch_token,json=nextFetchToken,proto3" json:"next_fetch_token,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status         Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues         *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_ResultSetIndex int64                      `protobuf:"varint,3,opt,name=result_set_index,json=resultSetIndex,proto3"`
+	xxx_hidden_ResultSet      *Ydb.ResultSet             `protobuf:"bytes,4,opt,name=result_set,json=resultSet,proto3"`
+	xxx_hidden_NextFetchToken string                     `protobuf:"bytes,5,opt,name=next_fetch_token,json=nextFetchToken,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *FetchScriptResultsResponse) Reset() {
@@ -1869,51 +2799,101 @@ func (x *FetchScriptResultsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FetchScriptResultsResponse.ProtoReflect.Descriptor instead.
-func (*FetchScriptResultsResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{26}
-}
-
 func (x *FetchScriptResultsResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *FetchScriptResultsResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *FetchScriptResultsResponse) GetResultSetIndex() int64 {
 	if x != nil {
-		return x.ResultSetIndex
+		return x.xxx_hidden_ResultSetIndex
 	}
 	return 0
 }
 
 func (x *FetchScriptResultsResponse) GetResultSet() *Ydb.ResultSet {
 	if x != nil {
-		return x.ResultSet
+		return x.xxx_hidden_ResultSet
 	}
 	return nil
 }
 
 func (x *FetchScriptResultsResponse) GetNextFetchToken() string {
 	if x != nil {
-		return x.NextFetchToken
+		return x.xxx_hidden_NextFetchToken
 	}
 	return ""
 }
 
+func (x *FetchScriptResultsResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *FetchScriptResultsResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *FetchScriptResultsResponse) SetResultSetIndex(v int64) {
+	x.xxx_hidden_ResultSetIndex = v
+}
+
+func (x *FetchScriptResultsResponse) SetResultSet(v *Ydb.ResultSet) {
+	x.xxx_hidden_ResultSet = v
+}
+
+func (x *FetchScriptResultsResponse) SetNextFetchToken(v string) {
+	x.xxx_hidden_NextFetchToken = v
+}
+
+func (x *FetchScriptResultsResponse) HasResultSet() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResultSet != nil
+}
+
+func (x *FetchScriptResultsResponse) ClearResultSet() {
+	x.xxx_hidden_ResultSet = nil
+}
+
+type FetchScriptResultsResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status         Ydb.StatusIds_StatusCode
+	Issues         []*Ydb_Issue.IssueMessage
+	ResultSetIndex int64
+	ResultSet      *Ydb.ResultSet
+	NextFetchToken string
+}
+
+func (b0 FetchScriptResultsResponse_builder) Build() *FetchScriptResultsResponse {
+	m0 := &FetchScriptResultsResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_ResultSetIndex = b.ResultSetIndex
+	x.xxx_hidden_ResultSet = b.ResultSet
+	x.xxx_hidden_NextFetchToken = b.NextFetchToken
+	return m0
+}
+
 type Script struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ScriptContent *QueryContent          `protobuf:"bytes,1,opt,name=script_content,json=scriptContent,proto3" json:"script_content,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ScriptContent *QueryContent          `protobuf:"bytes,1,opt,name=script_content,json=scriptContent,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *Script) Reset() {
@@ -1941,16 +2921,40 @@ func (x *Script) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Script.ProtoReflect.Descriptor instead.
-func (*Script) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_query_proto_rawDescGZIP(), []int{27}
-}
-
 func (x *Script) GetScriptContent() *QueryContent {
 	if x != nil {
-		return x.ScriptContent
+		return x.xxx_hidden_ScriptContent
 	}
 	return nil
+}
+
+func (x *Script) SetScriptContent(v *QueryContent) {
+	x.xxx_hidden_ScriptContent = v
+}
+
+func (x *Script) HasScriptContent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ScriptContent != nil
+}
+
+func (x *Script) ClearScriptContent() {
+	x.xxx_hidden_ScriptContent = nil
+}
+
+type Script_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ScriptContent *QueryContent
+}
+
+func (b0 Script_builder) Build() *Script {
+	m0 := &Script{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ScriptContent = b.ScriptContent
+	return m0
 }
 
 var File_protos_ydb_query_proto protoreflect.FileDescriptor
@@ -2122,18 +3126,6 @@ const file_protos_ydb_query_proto_rawDesc = "" +
 	"\x12EXEC_STATUS_FAILED\x102BS\n" +
 	"\x14tech.ydb.proto.queryZ8github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Query\xf8\x01\x01b\x06proto3"
 
-var (
-	file_protos_ydb_query_proto_rawDescOnce sync.Once
-	file_protos_ydb_query_proto_rawDescData []byte
-)
-
-func file_protos_ydb_query_proto_rawDescGZIP() []byte {
-	file_protos_ydb_query_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_query_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_query_proto_rawDesc), len(file_protos_ydb_query_proto_rawDesc)))
-	})
-	return file_protos_ydb_query_proto_rawDescData
-}
-
 var file_protos_ydb_query_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_protos_ydb_query_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_protos_ydb_query_proto_goTypes = []any{
@@ -2242,17 +3234,17 @@ func file_protos_ydb_query_proto_init() {
 		return
 	}
 	file_protos_ydb_query_proto_msgTypes[10].OneofWrappers = []any{
-		(*TransactionSettings_SerializableReadWrite)(nil),
-		(*TransactionSettings_OnlineReadOnly)(nil),
-		(*TransactionSettings_StaleReadOnly)(nil),
-		(*TransactionSettings_SnapshotReadOnly)(nil),
+		(*transactionSettings_SerializableReadWrite)(nil),
+		(*transactionSettings_OnlineReadOnly)(nil),
+		(*transactionSettings_StaleReadOnly)(nil),
+		(*transactionSettings_SnapshotReadOnly)(nil),
 	}
 	file_protos_ydb_query_proto_msgTypes[11].OneofWrappers = []any{
-		(*TransactionControl_TxId)(nil),
-		(*TransactionControl_BeginTx)(nil),
+		(*transactionControl_TxId)(nil),
+		(*transactionControl_BeginTx)(nil),
 	}
 	file_protos_ydb_query_proto_msgTypes[20].OneofWrappers = []any{
-		(*ExecuteQueryRequest_QueryContent)(nil),
+		(*executeQueryRequest_QueryContent)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

@@ -13,7 +13,6 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -77,11 +76,6 @@ func (x ExportProgress_Progress) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ExportProgress_Progress.Descriptor instead.
-func (ExportProgress_Progress) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{0, 0}
-}
-
 type ExportToS3Settings_Scheme int32
 
 const (
@@ -124,11 +118,6 @@ func (ExportToS3Settings_Scheme) Type() protoreflect.EnumType {
 
 func (x ExportToS3Settings_Scheme) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ExportToS3Settings_Scheme.Descriptor instead.
-func (ExportToS3Settings_Scheme) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{7, 0}
 }
 
 type ExportToS3Settings_StorageClass int32
@@ -193,14 +182,9 @@ func (x ExportToS3Settings_StorageClass) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ExportToS3Settings_StorageClass.Descriptor instead.
-func (ExportToS3Settings_StorageClass) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{7, 1}
-}
-
 // / Common
 type ExportProgress struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -230,19 +214,26 @@ func (x *ExportProgress) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportProgress.ProtoReflect.Descriptor instead.
-func (*ExportProgress) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{0}
+type ExportProgress_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ExportProgress_builder) Build() *ExportProgress {
+	m0 := &ExportProgress{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ExportItemProgress struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	PartsTotal     uint32                 `protobuf:"varint,1,opt,name=parts_total,json=partsTotal,proto3" json:"parts_total,omitempty"`
-	PartsCompleted uint32                 `protobuf:"varint,2,opt,name=parts_completed,json=partsCompleted,proto3" json:"parts_completed,omitempty"`
-	StartTime      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
-	EndTime        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PartsTotal     uint32                 `protobuf:"varint,1,opt,name=parts_total,json=partsTotal,proto3"`
+	xxx_hidden_PartsCompleted uint32                 `protobuf:"varint,2,opt,name=parts_completed,json=partsCompleted,proto3"`
+	xxx_hidden_StartTime      *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=start_time,json=startTime,proto3"`
+	xxx_hidden_EndTime        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=end_time,json=endTime,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ExportItemProgress) Reset() {
@@ -270,51 +261,104 @@ func (x *ExportItemProgress) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportItemProgress.ProtoReflect.Descriptor instead.
-func (*ExportItemProgress) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *ExportItemProgress) GetPartsTotal() uint32 {
 	if x != nil {
-		return x.PartsTotal
+		return x.xxx_hidden_PartsTotal
 	}
 	return 0
 }
 
 func (x *ExportItemProgress) GetPartsCompleted() uint32 {
 	if x != nil {
-		return x.PartsCompleted
+		return x.xxx_hidden_PartsCompleted
 	}
 	return 0
 }
 
 func (x *ExportItemProgress) GetStartTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.StartTime
+		return x.xxx_hidden_StartTime
 	}
 	return nil
 }
 
 func (x *ExportItemProgress) GetEndTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.EndTime
+		return x.xxx_hidden_EndTime
 	}
 	return nil
 }
 
+func (x *ExportItemProgress) SetPartsTotal(v uint32) {
+	x.xxx_hidden_PartsTotal = v
+}
+
+func (x *ExportItemProgress) SetPartsCompleted(v uint32) {
+	x.xxx_hidden_PartsCompleted = v
+}
+
+func (x *ExportItemProgress) SetStartTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_StartTime = v
+}
+
+func (x *ExportItemProgress) SetEndTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_EndTime = v
+}
+
+func (x *ExportItemProgress) HasStartTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StartTime != nil
+}
+
+func (x *ExportItemProgress) HasEndTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_EndTime != nil
+}
+
+func (x *ExportItemProgress) ClearStartTime() {
+	x.xxx_hidden_StartTime = nil
+}
+
+func (x *ExportItemProgress) ClearEndTime() {
+	x.xxx_hidden_EndTime = nil
+}
+
+type ExportItemProgress_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	PartsTotal     uint32
+	PartsCompleted uint32
+	StartTime      *timestamppb.Timestamp
+	EndTime        *timestamppb.Timestamp
+}
+
+func (b0 ExportItemProgress_builder) Build() *ExportItemProgress {
+	m0 := &ExportItemProgress{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_PartsTotal = b.PartsTotal
+	x.xxx_hidden_PartsCompleted = b.PartsCompleted
+	x.xxx_hidden_StartTime = b.StartTime
+	x.xxx_hidden_EndTime = b.EndTime
+	return m0
+}
+
 // / YT
 type ExportToYtSettings struct {
-	state           protoimpl.MessageState     `protogen:"open.v1"`
-	Host            string                     `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
-	Port            uint32                     `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	Token           string                     `protobuf:"bytes,3,opt,name=token,proto3" json:"token,omitempty"`
-	Items           []*ExportToYtSettings_Item `protobuf:"bytes,4,rep,name=items,proto3" json:"items,omitempty"`
-	Description     string                     `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	NumberOfRetries uint32                     `protobuf:"varint,6,opt,name=number_of_retries,json=numberOfRetries,proto3" json:"number_of_retries,omitempty"`
-	UseTypeV3       bool                       `protobuf:"varint,7,opt,name=use_type_v3,json=useTypeV3,proto3" json:"use_type_v3,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState      `protogen:"opaque.v1"`
+	xxx_hidden_Host            string                      `protobuf:"bytes,1,opt,name=host,proto3"`
+	xxx_hidden_Port            uint32                      `protobuf:"varint,2,opt,name=port,proto3"`
+	xxx_hidden_Token           string                      `protobuf:"bytes,3,opt,name=token,proto3"`
+	xxx_hidden_Items           *[]*ExportToYtSettings_Item `protobuf:"bytes,4,rep,name=items,proto3"`
+	xxx_hidden_Description     string                      `protobuf:"bytes,5,opt,name=description,proto3"`
+	xxx_hidden_NumberOfRetries uint32                      `protobuf:"varint,6,opt,name=number_of_retries,json=numberOfRetries,proto3"`
+	xxx_hidden_UseTypeV3       bool                        `protobuf:"varint,7,opt,name=use_type_v3,json=useTypeV3,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ExportToYtSettings) Reset() {
@@ -342,62 +386,113 @@ func (x *ExportToYtSettings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToYtSettings.ProtoReflect.Descriptor instead.
-func (*ExportToYtSettings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *ExportToYtSettings) GetHost() string {
 	if x != nil {
-		return x.Host
+		return x.xxx_hidden_Host
 	}
 	return ""
 }
 
 func (x *ExportToYtSettings) GetPort() uint32 {
 	if x != nil {
-		return x.Port
+		return x.xxx_hidden_Port
 	}
 	return 0
 }
 
 func (x *ExportToYtSettings) GetToken() string {
 	if x != nil {
-		return x.Token
+		return x.xxx_hidden_Token
 	}
 	return ""
 }
 
 func (x *ExportToYtSettings) GetItems() []*ExportToYtSettings_Item {
 	if x != nil {
-		return x.Items
+		if x.xxx_hidden_Items != nil {
+			return *x.xxx_hidden_Items
+		}
 	}
 	return nil
 }
 
 func (x *ExportToYtSettings) GetDescription() string {
 	if x != nil {
-		return x.Description
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
 func (x *ExportToYtSettings) GetNumberOfRetries() uint32 {
 	if x != nil {
-		return x.NumberOfRetries
+		return x.xxx_hidden_NumberOfRetries
 	}
 	return 0
 }
 
 func (x *ExportToYtSettings) GetUseTypeV3() bool {
 	if x != nil {
-		return x.UseTypeV3
+		return x.xxx_hidden_UseTypeV3
 	}
 	return false
 }
 
+func (x *ExportToYtSettings) SetHost(v string) {
+	x.xxx_hidden_Host = v
+}
+
+func (x *ExportToYtSettings) SetPort(v uint32) {
+	x.xxx_hidden_Port = v
+}
+
+func (x *ExportToYtSettings) SetToken(v string) {
+	x.xxx_hidden_Token = v
+}
+
+func (x *ExportToYtSettings) SetItems(v []*ExportToYtSettings_Item) {
+	x.xxx_hidden_Items = &v
+}
+
+func (x *ExportToYtSettings) SetDescription(v string) {
+	x.xxx_hidden_Description = v
+}
+
+func (x *ExportToYtSettings) SetNumberOfRetries(v uint32) {
+	x.xxx_hidden_NumberOfRetries = v
+}
+
+func (x *ExportToYtSettings) SetUseTypeV3(v bool) {
+	x.xxx_hidden_UseTypeV3 = v
+}
+
+type ExportToYtSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Host            string
+	Port            uint32
+	Token           string
+	Items           []*ExportToYtSettings_Item
+	Description     string
+	NumberOfRetries uint32
+	UseTypeV3       bool
+}
+
+func (b0 ExportToYtSettings_builder) Build() *ExportToYtSettings {
+	m0 := &ExportToYtSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Host = b.Host
+	x.xxx_hidden_Port = b.Port
+	x.xxx_hidden_Token = b.Token
+	x.xxx_hidden_Items = &b.Items
+	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_NumberOfRetries = b.NumberOfRetries
+	x.xxx_hidden_UseTypeV3 = b.UseTypeV3
+	return m0
+}
+
 type ExportToYtResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -427,18 +522,25 @@ func (x *ExportToYtResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToYtResult.ProtoReflect.Descriptor instead.
-func (*ExportToYtResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{3}
+type ExportToYtResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ExportToYtResult_builder) Build() *ExportToYtResult {
+	m0 := &ExportToYtResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ExportToYtMetadata struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Settings      *ExportToYtSettings     `protobuf:"bytes,1,opt,name=settings,proto3" json:"settings,omitempty"`
-	Progress      ExportProgress_Progress `protobuf:"varint,2,opt,name=progress,proto3,enum=Ydb.Export.ExportProgress_Progress" json:"progress,omitempty"`
-	ItemsProgress []*ExportItemProgress   `protobuf:"bytes,3,rep,name=items_progress,json=itemsProgress,proto3" json:"items_progress,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Settings      *ExportToYtSettings     `protobuf:"bytes,1,opt,name=settings,proto3"`
+	xxx_hidden_Progress      ExportProgress_Progress `protobuf:"varint,2,opt,name=progress,proto3,enum=Ydb.Export.ExportProgress_Progress"`
+	xxx_hidden_ItemsProgress *[]*ExportItemProgress  `protobuf:"bytes,3,rep,name=items_progress,json=itemsProgress,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ExportToYtMetadata) Reset() {
@@ -466,38 +568,76 @@ func (x *ExportToYtMetadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToYtMetadata.ProtoReflect.Descriptor instead.
-func (*ExportToYtMetadata) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *ExportToYtMetadata) GetSettings() *ExportToYtSettings {
 	if x != nil {
-		return x.Settings
+		return x.xxx_hidden_Settings
 	}
 	return nil
 }
 
 func (x *ExportToYtMetadata) GetProgress() ExportProgress_Progress {
 	if x != nil {
-		return x.Progress
+		return x.xxx_hidden_Progress
 	}
 	return ExportProgress_PROGRESS_UNSPECIFIED
 }
 
 func (x *ExportToYtMetadata) GetItemsProgress() []*ExportItemProgress {
 	if x != nil {
-		return x.ItemsProgress
+		if x.xxx_hidden_ItemsProgress != nil {
+			return *x.xxx_hidden_ItemsProgress
+		}
 	}
 	return nil
 }
 
+func (x *ExportToYtMetadata) SetSettings(v *ExportToYtSettings) {
+	x.xxx_hidden_Settings = v
+}
+
+func (x *ExportToYtMetadata) SetProgress(v ExportProgress_Progress) {
+	x.xxx_hidden_Progress = v
+}
+
+func (x *ExportToYtMetadata) SetItemsProgress(v []*ExportItemProgress) {
+	x.xxx_hidden_ItemsProgress = &v
+}
+
+func (x *ExportToYtMetadata) HasSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Settings != nil
+}
+
+func (x *ExportToYtMetadata) ClearSettings() {
+	x.xxx_hidden_Settings = nil
+}
+
+type ExportToYtMetadata_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Settings      *ExportToYtSettings
+	Progress      ExportProgress_Progress
+	ItemsProgress []*ExportItemProgress
+}
+
+func (b0 ExportToYtMetadata_builder) Build() *ExportToYtMetadata {
+	m0 := &ExportToYtMetadata{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Settings = b.Settings
+	x.xxx_hidden_Progress = b.Progress
+	x.xxx_hidden_ItemsProgress = &b.ItemsProgress
+	return m0
+}
+
 type ExportToYtRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	Settings        *ExportToYtSettings             `protobuf:"bytes,2,opt,name=settings,proto3" json:"settings,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Settings        *ExportToYtSettings             `protobuf:"bytes,2,opt,name=settings,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ExportToYtRequest) Reset() {
@@ -525,32 +665,71 @@ func (x *ExportToYtRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToYtRequest.ProtoReflect.Descriptor instead.
-func (*ExportToYtRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *ExportToYtRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ExportToYtRequest) GetSettings() *ExportToYtSettings {
 	if x != nil {
-		return x.Settings
+		return x.xxx_hidden_Settings
 	}
 	return nil
 }
 
+func (x *ExportToYtRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ExportToYtRequest) SetSettings(v *ExportToYtSettings) {
+	x.xxx_hidden_Settings = v
+}
+
+func (x *ExportToYtRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ExportToYtRequest) HasSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Settings != nil
+}
+
+func (x *ExportToYtRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ExportToYtRequest) ClearSettings() {
+	x.xxx_hidden_Settings = nil
+}
+
+type ExportToYtRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	Settings        *ExportToYtSettings
+}
+
+func (b0 ExportToYtRequest_builder) Build() *ExportToYtRequest {
+	m0 := &ExportToYtRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Settings = b.Settings
+	return m0
+}
+
 type ExportToYtResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result = ExportToYtResult
-	// operation.metadata = ExportToYtMetadata
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ExportToYtResponse) Reset() {
@@ -578,43 +757,61 @@ func (x *ExportToYtResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToYtResponse.ProtoReflect.Descriptor instead.
-func (*ExportToYtResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{6}
-}
-
 func (x *ExportToYtResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ExportToYtResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ExportToYtResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ExportToYtResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ExportToYtResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result = ExportToYtResult
+	// operation.metadata = ExportToYtMetadata
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ExportToYtResponse_builder) Build() *ExportToYtResponse {
+	m0 := &ExportToYtResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // / S3
 type ExportToS3Settings struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	Endpoint        string                          `protobuf:"bytes,1,opt,name=endpoint,proto3" json:"endpoint,omitempty"`
-	Scheme          ExportToS3Settings_Scheme       `protobuf:"varint,2,opt,name=scheme,proto3,enum=Ydb.Export.ExportToS3Settings_Scheme" json:"scheme,omitempty"` // HTTPS if not specified
-	Bucket          string                          `protobuf:"bytes,3,opt,name=bucket,proto3" json:"bucket,omitempty"`
-	AccessKey       string                          `protobuf:"bytes,4,opt,name=access_key,json=accessKey,proto3" json:"access_key,omitempty"`
-	SecretKey       string                          `protobuf:"bytes,5,opt,name=secret_key,json=secretKey,proto3" json:"secret_key,omitempty"`
-	Items           []*ExportToS3Settings_Item      `protobuf:"bytes,6,rep,name=items,proto3" json:"items,omitempty"`
-	Description     string                          `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
-	NumberOfRetries uint32                          `protobuf:"varint,8,opt,name=number_of_retries,json=numberOfRetries,proto3" json:"number_of_retries,omitempty"`
-	StorageClass    ExportToS3Settings_StorageClass `protobuf:"varint,9,opt,name=storage_class,json=storageClass,proto3,enum=Ydb.Export.ExportToS3Settings_StorageClass" json:"storage_class,omitempty"`
-	// Codec used to compress data. Codecs are available:
-	// - zstd.
-	// - zstd-N, where N is compression level, e.g. zstd-3.
-	Compression string `protobuf:"bytes,10,opt,name=compression,proto3" json:"compression,omitempty"`
-	// Region to use in requests
-	Region string `protobuf:"bytes,11,opt,name=region,proto3" json:"region,omitempty"`
-	// disables virtual hosting style buckets aws s3 feature
-	// it changes the way bucket appended to url. e.g. https//bucket_name.example.com/ vs https://example.com/bucket_name
-	// details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html
-	// it is especially useful for custom s3 implementations
-	DisableVirtualAddressing bool `protobuf:"varint,12,opt,name=disable_virtual_addressing,json=disableVirtualAddressing,proto3" json:"disable_virtual_addressing,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                               protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Endpoint                 string                          `protobuf:"bytes,1,opt,name=endpoint,proto3"`
+	xxx_hidden_Scheme                   ExportToS3Settings_Scheme       `protobuf:"varint,2,opt,name=scheme,proto3,enum=Ydb.Export.ExportToS3Settings_Scheme"`
+	xxx_hidden_Bucket                   string                          `protobuf:"bytes,3,opt,name=bucket,proto3"`
+	xxx_hidden_AccessKey                string                          `protobuf:"bytes,4,opt,name=access_key,json=accessKey,proto3"`
+	xxx_hidden_SecretKey                string                          `protobuf:"bytes,5,opt,name=secret_key,json=secretKey,proto3"`
+	xxx_hidden_Items                    *[]*ExportToS3Settings_Item     `protobuf:"bytes,6,rep,name=items,proto3"`
+	xxx_hidden_Description              string                          `protobuf:"bytes,7,opt,name=description,proto3"`
+	xxx_hidden_NumberOfRetries          uint32                          `protobuf:"varint,8,opt,name=number_of_retries,json=numberOfRetries,proto3"`
+	xxx_hidden_StorageClass             ExportToS3Settings_StorageClass `protobuf:"varint,9,opt,name=storage_class,json=storageClass,proto3,enum=Ydb.Export.ExportToS3Settings_StorageClass"`
+	xxx_hidden_Compression              string                          `protobuf:"bytes,10,opt,name=compression,proto3"`
+	xxx_hidden_Region                   string                          `protobuf:"bytes,11,opt,name=region,proto3"`
+	xxx_hidden_DisableVirtualAddressing bool                            `protobuf:"varint,12,opt,name=disable_virtual_addressing,json=disableVirtualAddressing,proto3"`
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
 }
 
 func (x *ExportToS3Settings) Reset() {
@@ -642,97 +839,186 @@ func (x *ExportToS3Settings) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToS3Settings.ProtoReflect.Descriptor instead.
-func (*ExportToS3Settings) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{7}
-}
-
 func (x *ExportToS3Settings) GetEndpoint() string {
 	if x != nil {
-		return x.Endpoint
+		return x.xxx_hidden_Endpoint
 	}
 	return ""
 }
 
 func (x *ExportToS3Settings) GetScheme() ExportToS3Settings_Scheme {
 	if x != nil {
-		return x.Scheme
+		return x.xxx_hidden_Scheme
 	}
 	return ExportToS3Settings_UNSPECIFIED
 }
 
 func (x *ExportToS3Settings) GetBucket() string {
 	if x != nil {
-		return x.Bucket
+		return x.xxx_hidden_Bucket
 	}
 	return ""
 }
 
 func (x *ExportToS3Settings) GetAccessKey() string {
 	if x != nil {
-		return x.AccessKey
+		return x.xxx_hidden_AccessKey
 	}
 	return ""
 }
 
 func (x *ExportToS3Settings) GetSecretKey() string {
 	if x != nil {
-		return x.SecretKey
+		return x.xxx_hidden_SecretKey
 	}
 	return ""
 }
 
 func (x *ExportToS3Settings) GetItems() []*ExportToS3Settings_Item {
 	if x != nil {
-		return x.Items
+		if x.xxx_hidden_Items != nil {
+			return *x.xxx_hidden_Items
+		}
 	}
 	return nil
 }
 
 func (x *ExportToS3Settings) GetDescription() string {
 	if x != nil {
-		return x.Description
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
 func (x *ExportToS3Settings) GetNumberOfRetries() uint32 {
 	if x != nil {
-		return x.NumberOfRetries
+		return x.xxx_hidden_NumberOfRetries
 	}
 	return 0
 }
 
 func (x *ExportToS3Settings) GetStorageClass() ExportToS3Settings_StorageClass {
 	if x != nil {
-		return x.StorageClass
+		return x.xxx_hidden_StorageClass
 	}
 	return ExportToS3Settings_STORAGE_CLASS_UNSPECIFIED
 }
 
 func (x *ExportToS3Settings) GetCompression() string {
 	if x != nil {
-		return x.Compression
+		return x.xxx_hidden_Compression
 	}
 	return ""
 }
 
 func (x *ExportToS3Settings) GetRegion() string {
 	if x != nil {
-		return x.Region
+		return x.xxx_hidden_Region
 	}
 	return ""
 }
 
 func (x *ExportToS3Settings) GetDisableVirtualAddressing() bool {
 	if x != nil {
-		return x.DisableVirtualAddressing
+		return x.xxx_hidden_DisableVirtualAddressing
 	}
 	return false
 }
 
+func (x *ExportToS3Settings) SetEndpoint(v string) {
+	x.xxx_hidden_Endpoint = v
+}
+
+func (x *ExportToS3Settings) SetScheme(v ExportToS3Settings_Scheme) {
+	x.xxx_hidden_Scheme = v
+}
+
+func (x *ExportToS3Settings) SetBucket(v string) {
+	x.xxx_hidden_Bucket = v
+}
+
+func (x *ExportToS3Settings) SetAccessKey(v string) {
+	x.xxx_hidden_AccessKey = v
+}
+
+func (x *ExportToS3Settings) SetSecretKey(v string) {
+	x.xxx_hidden_SecretKey = v
+}
+
+func (x *ExportToS3Settings) SetItems(v []*ExportToS3Settings_Item) {
+	x.xxx_hidden_Items = &v
+}
+
+func (x *ExportToS3Settings) SetDescription(v string) {
+	x.xxx_hidden_Description = v
+}
+
+func (x *ExportToS3Settings) SetNumberOfRetries(v uint32) {
+	x.xxx_hidden_NumberOfRetries = v
+}
+
+func (x *ExportToS3Settings) SetStorageClass(v ExportToS3Settings_StorageClass) {
+	x.xxx_hidden_StorageClass = v
+}
+
+func (x *ExportToS3Settings) SetCompression(v string) {
+	x.xxx_hidden_Compression = v
+}
+
+func (x *ExportToS3Settings) SetRegion(v string) {
+	x.xxx_hidden_Region = v
+}
+
+func (x *ExportToS3Settings) SetDisableVirtualAddressing(v bool) {
+	x.xxx_hidden_DisableVirtualAddressing = v
+}
+
+type ExportToS3Settings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Endpoint        string
+	Scheme          ExportToS3Settings_Scheme
+	Bucket          string
+	AccessKey       string
+	SecretKey       string
+	Items           []*ExportToS3Settings_Item
+	Description     string
+	NumberOfRetries uint32
+	StorageClass    ExportToS3Settings_StorageClass
+	// Codec used to compress data. Codecs are available:
+	// - zstd.
+	// - zstd-N, where N is compression level, e.g. zstd-3.
+	Compression string
+	// Region to use in requests
+	Region string
+	// disables virtual hosting style buckets aws s3 feature
+	// it changes the way bucket appended to url. e.g. https//bucket_name.example.com/ vs https://example.com/bucket_name
+	// details: https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html
+	// it is especially useful for custom s3 implementations
+	DisableVirtualAddressing bool
+}
+
+func (b0 ExportToS3Settings_builder) Build() *ExportToS3Settings {
+	m0 := &ExportToS3Settings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Endpoint = b.Endpoint
+	x.xxx_hidden_Scheme = b.Scheme
+	x.xxx_hidden_Bucket = b.Bucket
+	x.xxx_hidden_AccessKey = b.AccessKey
+	x.xxx_hidden_SecretKey = b.SecretKey
+	x.xxx_hidden_Items = &b.Items
+	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_NumberOfRetries = b.NumberOfRetries
+	x.xxx_hidden_StorageClass = b.StorageClass
+	x.xxx_hidden_Compression = b.Compression
+	x.xxx_hidden_Region = b.Region
+	x.xxx_hidden_DisableVirtualAddressing = b.DisableVirtualAddressing
+	return m0
+}
+
 type ExportToS3Result struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -762,18 +1048,25 @@ func (x *ExportToS3Result) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToS3Result.ProtoReflect.Descriptor instead.
-func (*ExportToS3Result) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{8}
+type ExportToS3Result_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ExportToS3Result_builder) Build() *ExportToS3Result {
+	m0 := &ExportToS3Result{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 type ExportToS3Metadata struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Settings      *ExportToS3Settings     `protobuf:"bytes,1,opt,name=settings,proto3" json:"settings,omitempty"`
-	Progress      ExportProgress_Progress `protobuf:"varint,2,opt,name=progress,proto3,enum=Ydb.Export.ExportProgress_Progress" json:"progress,omitempty"`
-	ItemsProgress []*ExportItemProgress   `protobuf:"bytes,3,rep,name=items_progress,json=itemsProgress,proto3" json:"items_progress,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Settings      *ExportToS3Settings     `protobuf:"bytes,1,opt,name=settings,proto3"`
+	xxx_hidden_Progress      ExportProgress_Progress `protobuf:"varint,2,opt,name=progress,proto3,enum=Ydb.Export.ExportProgress_Progress"`
+	xxx_hidden_ItemsProgress *[]*ExportItemProgress  `protobuf:"bytes,3,rep,name=items_progress,json=itemsProgress,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ExportToS3Metadata) Reset() {
@@ -801,38 +1094,76 @@ func (x *ExportToS3Metadata) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToS3Metadata.ProtoReflect.Descriptor instead.
-func (*ExportToS3Metadata) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *ExportToS3Metadata) GetSettings() *ExportToS3Settings {
 	if x != nil {
-		return x.Settings
+		return x.xxx_hidden_Settings
 	}
 	return nil
 }
 
 func (x *ExportToS3Metadata) GetProgress() ExportProgress_Progress {
 	if x != nil {
-		return x.Progress
+		return x.xxx_hidden_Progress
 	}
 	return ExportProgress_PROGRESS_UNSPECIFIED
 }
 
 func (x *ExportToS3Metadata) GetItemsProgress() []*ExportItemProgress {
 	if x != nil {
-		return x.ItemsProgress
+		if x.xxx_hidden_ItemsProgress != nil {
+			return *x.xxx_hidden_ItemsProgress
+		}
 	}
 	return nil
 }
 
+func (x *ExportToS3Metadata) SetSettings(v *ExportToS3Settings) {
+	x.xxx_hidden_Settings = v
+}
+
+func (x *ExportToS3Metadata) SetProgress(v ExportProgress_Progress) {
+	x.xxx_hidden_Progress = v
+}
+
+func (x *ExportToS3Metadata) SetItemsProgress(v []*ExportItemProgress) {
+	x.xxx_hidden_ItemsProgress = &v
+}
+
+func (x *ExportToS3Metadata) HasSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Settings != nil
+}
+
+func (x *ExportToS3Metadata) ClearSettings() {
+	x.xxx_hidden_Settings = nil
+}
+
+type ExportToS3Metadata_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Settings      *ExportToS3Settings
+	Progress      ExportProgress_Progress
+	ItemsProgress []*ExportItemProgress
+}
+
+func (b0 ExportToS3Metadata_builder) Build() *ExportToS3Metadata {
+	m0 := &ExportToS3Metadata{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Settings = b.Settings
+	x.xxx_hidden_Progress = b.Progress
+	x.xxx_hidden_ItemsProgress = &b.ItemsProgress
+	return m0
+}
+
 type ExportToS3Request struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	Settings        *ExportToS3Settings             `protobuf:"bytes,2,opt,name=settings,proto3" json:"settings,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Settings        *ExportToS3Settings             `protobuf:"bytes,2,opt,name=settings,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ExportToS3Request) Reset() {
@@ -860,32 +1191,71 @@ func (x *ExportToS3Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToS3Request.ProtoReflect.Descriptor instead.
-func (*ExportToS3Request) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{10}
-}
-
 func (x *ExportToS3Request) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ExportToS3Request) GetSettings() *ExportToS3Settings {
 	if x != nil {
-		return x.Settings
+		return x.xxx_hidden_Settings
 	}
 	return nil
 }
 
+func (x *ExportToS3Request) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ExportToS3Request) SetSettings(v *ExportToS3Settings) {
+	x.xxx_hidden_Settings = v
+}
+
+func (x *ExportToS3Request) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ExportToS3Request) HasSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Settings != nil
+}
+
+func (x *ExportToS3Request) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *ExportToS3Request) ClearSettings() {
+	x.xxx_hidden_Settings = nil
+}
+
+type ExportToS3Request_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	Settings        *ExportToS3Settings
+}
+
+func (b0 ExportToS3Request_builder) Build() *ExportToS3Request {
+	m0 := &ExportToS3Request{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Settings = b.Settings
+	return m0
+}
+
 type ExportToS3Response struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result = ExportToS3Result
-	// operation.metadata = ExportToS3Metadata
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ExportToS3Response) Reset() {
@@ -913,25 +1283,50 @@ func (x *ExportToS3Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToS3Response.ProtoReflect.Descriptor instead.
-func (*ExportToS3Response) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{11}
-}
-
 func (x *ExportToS3Response) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ExportToS3Response) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ExportToS3Response) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ExportToS3Response) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ExportToS3Response_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result = ExportToS3Result
+	// operation.metadata = ExportToS3Metadata
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ExportToS3Response_builder) Build() *ExportToS3Response {
+	m0 := &ExportToS3Response{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ExportToYtSettings_Item struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Database path to a table to be exported
-	SourcePath      string `protobuf:"bytes,1,opt,name=source_path,json=sourcePath,proto3" json:"source_path,omitempty"`
-	DestinationPath string `protobuf:"bytes,2,opt,name=destination_path,json=destinationPath,proto3" json:"destination_path,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SourcePath      string                 `protobuf:"bytes,1,opt,name=source_path,json=sourcePath,proto3"`
+	xxx_hidden_DestinationPath string                 `protobuf:"bytes,2,opt,name=destination_path,json=destinationPath,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ExportToYtSettings_Item) Reset() {
@@ -959,36 +1354,51 @@ func (x *ExportToYtSettings_Item) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToYtSettings_Item.ProtoReflect.Descriptor instead.
-func (*ExportToYtSettings_Item) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{2, 0}
-}
-
 func (x *ExportToYtSettings_Item) GetSourcePath() string {
 	if x != nil {
-		return x.SourcePath
+		return x.xxx_hidden_SourcePath
 	}
 	return ""
 }
 
 func (x *ExportToYtSettings_Item) GetDestinationPath() string {
 	if x != nil {
-		return x.DestinationPath
+		return x.xxx_hidden_DestinationPath
 	}
 	return ""
 }
 
-type ExportToS3Settings_Item struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
+func (x *ExportToYtSettings_Item) SetSourcePath(v string) {
+	x.xxx_hidden_SourcePath = v
+}
+
+func (x *ExportToYtSettings_Item) SetDestinationPath(v string) {
+	x.xxx_hidden_DestinationPath = v
+}
+
+type ExportToYtSettings_Item_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
 	// Database path to a table to be exported
-	SourcePath string `protobuf:"bytes,1,opt,name=source_path,json=sourcePath,proto3" json:"source_path,omitempty"`
-	// Tables are exported to one or more S3 objects.
-	// The object name begins with 'destination_prefix'.
-	// This prefix will be followed by '/data_PartNumber', where 'PartNumber'
-	// represents the index of the part, starting at zero.
-	DestinationPrefix string `protobuf:"bytes,2,opt,name=destination_prefix,json=destinationPrefix,proto3" json:"destination_prefix,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	SourcePath      string
+	DestinationPath string
+}
+
+func (b0 ExportToYtSettings_Item_builder) Build() *ExportToYtSettings_Item {
+	m0 := &ExportToYtSettings_Item{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SourcePath = b.SourcePath
+	x.xxx_hidden_DestinationPath = b.DestinationPath
+	return m0
+}
+
+type ExportToS3Settings_Item struct {
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SourcePath        string                 `protobuf:"bytes,1,opt,name=source_path,json=sourcePath,proto3"`
+	xxx_hidden_DestinationPrefix string                 `protobuf:"bytes,2,opt,name=destination_prefix,json=destinationPrefix,proto3"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *ExportToS3Settings_Item) Reset() {
@@ -1016,23 +1426,47 @@ func (x *ExportToS3Settings_Item) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ExportToS3Settings_Item.ProtoReflect.Descriptor instead.
-func (*ExportToS3Settings_Item) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_export_proto_rawDescGZIP(), []int{7, 0}
-}
-
 func (x *ExportToS3Settings_Item) GetSourcePath() string {
 	if x != nil {
-		return x.SourcePath
+		return x.xxx_hidden_SourcePath
 	}
 	return ""
 }
 
 func (x *ExportToS3Settings_Item) GetDestinationPrefix() string {
 	if x != nil {
-		return x.DestinationPrefix
+		return x.xxx_hidden_DestinationPrefix
 	}
 	return ""
+}
+
+func (x *ExportToS3Settings_Item) SetSourcePath(v string) {
+	x.xxx_hidden_SourcePath = v
+}
+
+func (x *ExportToS3Settings_Item) SetDestinationPrefix(v string) {
+	x.xxx_hidden_DestinationPrefix = v
+}
+
+type ExportToS3Settings_Item_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Database path to a table to be exported
+	SourcePath string
+	// Tables are exported to one or more S3 objects.
+	// The object name begins with 'destination_prefix'.
+	// This prefix will be followed by '/data_PartNumber', where 'PartNumber'
+	// represents the index of the part, starting at zero.
+	DestinationPrefix string
+}
+
+func (b0 ExportToS3Settings_Item_builder) Build() *ExportToS3Settings_Item {
+	m0 := &ExportToS3Settings_Item{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SourcePath = b.SourcePath
+	x.xxx_hidden_DestinationPrefix = b.DestinationPrefix
+	return m0
 }
 
 var File_protos_ydb_export_proto protoreflect.FileDescriptor
@@ -1124,18 +1558,6 @@ const file_protos_ydb_export_proto_rawDesc = "" +
 	"\x12ExportToS3Response\x127\n" +
 	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperationBU\n" +
 	"\x15tech.ydb.proto.exportZ9github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Export\xf8\x01\x01b\x06proto3"
-
-var (
-	file_protos_ydb_export_proto_rawDescOnce sync.Once
-	file_protos_ydb_export_proto_rawDescData []byte
-)
-
-func file_protos_ydb_export_proto_rawDescGZIP() []byte {
-	file_protos_ydb_export_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_export_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_export_proto_rawDesc), len(file_protos_ydb_export_proto_rawDesc)))
-	})
-	return file_protos_ydb_export_proto_rawDescData
-}
 
 var file_protos_ydb_export_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_protos_ydb_export_proto_msgTypes = make([]protoimpl.MessageInfo, 14)

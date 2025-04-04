@@ -12,7 +12,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -64,24 +63,19 @@ func (x ListingRequest_EMatchType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use ListingRequest_EMatchType.Descriptor instead.
-func (ListingRequest_EMatchType) EnumDescriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_object_storage_proto_rawDescGZIP(), []int{0, 0}
-}
-
 type ListingRequest struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	TableName           string                 `protobuf:"bytes,1,opt,name=table_name,json=tableName,proto3" json:"table_name,omitempty"`
-	KeyPrefix           *Ydb.TypedValue        `protobuf:"bytes,2,opt,name=key_prefix,json=keyPrefix,proto3" json:"key_prefix,omitempty"` // A tuple representing all key columns that preceed path column
-	PathColumnPrefix    string                 `protobuf:"bytes,3,opt,name=path_column_prefix,json=pathColumnPrefix,proto3" json:"path_column_prefix,omitempty"`
-	PathColumnDelimiter string                 `protobuf:"bytes,4,opt,name=path_column_delimiter,json=pathColumnDelimiter,proto3" json:"path_column_delimiter,omitempty"`
-	ContinuationToken   []byte                 `protobuf:"bytes,5,opt,name=continuation_token,json=continuationToken,proto3" json:"continuation_token,omitempty"`
-	StartAfterKeySuffix *Ydb.TypedValue        `protobuf:"bytes,6,opt,name=start_after_key_suffix,json=startAfterKeySuffix,proto3" json:"start_after_key_suffix,omitempty"` // A tuple representing key columns that succeed path column
-	MaxKeys             int32                  `protobuf:"varint,7,opt,name=max_keys,json=maxKeys,proto3" json:"max_keys,omitempty"`
-	ColumnsToReturn     []string               `protobuf:"bytes,8,rep,name=columns_to_return,json=columnsToReturn,proto3" json:"columns_to_return,omitempty"`
-	MatchingFilter      *Ydb.TypedValue        `protobuf:"bytes,10,opt,name=matching_filter,json=matchingFilter,proto3" json:"matching_filter,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TableName           string                 `protobuf:"bytes,1,opt,name=table_name,json=tableName,proto3"`
+	xxx_hidden_KeyPrefix           *Ydb.TypedValue        `protobuf:"bytes,2,opt,name=key_prefix,json=keyPrefix,proto3"`
+	xxx_hidden_PathColumnPrefix    string                 `protobuf:"bytes,3,opt,name=path_column_prefix,json=pathColumnPrefix,proto3"`
+	xxx_hidden_PathColumnDelimiter string                 `protobuf:"bytes,4,opt,name=path_column_delimiter,json=pathColumnDelimiter,proto3"`
+	xxx_hidden_ContinuationToken   []byte                 `protobuf:"bytes,5,opt,name=continuation_token,json=continuationToken,proto3"`
+	xxx_hidden_StartAfterKeySuffix *Ydb.TypedValue        `protobuf:"bytes,6,opt,name=start_after_key_suffix,json=startAfterKeySuffix,proto3"`
+	xxx_hidden_MaxKeys             int32                  `protobuf:"varint,7,opt,name=max_keys,json=maxKeys,proto3"`
+	xxx_hidden_ColumnsToReturn     []string               `protobuf:"bytes,8,rep,name=columns_to_return,json=columnsToReturn,proto3"`
+	xxx_hidden_MatchingFilter      *Ydb.TypedValue        `protobuf:"bytes,10,opt,name=matching_filter,json=matchingFilter,proto3"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *ListingRequest) Reset() {
@@ -109,84 +103,181 @@ func (x *ListingRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListingRequest.ProtoReflect.Descriptor instead.
-func (*ListingRequest) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_object_storage_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *ListingRequest) GetTableName() string {
 	if x != nil {
-		return x.TableName
+		return x.xxx_hidden_TableName
 	}
 	return ""
 }
 
 func (x *ListingRequest) GetKeyPrefix() *Ydb.TypedValue {
 	if x != nil {
-		return x.KeyPrefix
+		return x.xxx_hidden_KeyPrefix
 	}
 	return nil
 }
 
 func (x *ListingRequest) GetPathColumnPrefix() string {
 	if x != nil {
-		return x.PathColumnPrefix
+		return x.xxx_hidden_PathColumnPrefix
 	}
 	return ""
 }
 
 func (x *ListingRequest) GetPathColumnDelimiter() string {
 	if x != nil {
-		return x.PathColumnDelimiter
+		return x.xxx_hidden_PathColumnDelimiter
 	}
 	return ""
 }
 
 func (x *ListingRequest) GetContinuationToken() []byte {
 	if x != nil {
-		return x.ContinuationToken
+		return x.xxx_hidden_ContinuationToken
 	}
 	return nil
 }
 
 func (x *ListingRequest) GetStartAfterKeySuffix() *Ydb.TypedValue {
 	if x != nil {
-		return x.StartAfterKeySuffix
+		return x.xxx_hidden_StartAfterKeySuffix
 	}
 	return nil
 }
 
 func (x *ListingRequest) GetMaxKeys() int32 {
 	if x != nil {
-		return x.MaxKeys
+		return x.xxx_hidden_MaxKeys
 	}
 	return 0
 }
 
 func (x *ListingRequest) GetColumnsToReturn() []string {
 	if x != nil {
-		return x.ColumnsToReturn
+		return x.xxx_hidden_ColumnsToReturn
 	}
 	return nil
 }
 
 func (x *ListingRequest) GetMatchingFilter() *Ydb.TypedValue {
 	if x != nil {
-		return x.MatchingFilter
+		return x.xxx_hidden_MatchingFilter
 	}
 	return nil
 }
 
+func (x *ListingRequest) SetTableName(v string) {
+	x.xxx_hidden_TableName = v
+}
+
+func (x *ListingRequest) SetKeyPrefix(v *Ydb.TypedValue) {
+	x.xxx_hidden_KeyPrefix = v
+}
+
+func (x *ListingRequest) SetPathColumnPrefix(v string) {
+	x.xxx_hidden_PathColumnPrefix = v
+}
+
+func (x *ListingRequest) SetPathColumnDelimiter(v string) {
+	x.xxx_hidden_PathColumnDelimiter = v
+}
+
+func (x *ListingRequest) SetContinuationToken(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_ContinuationToken = v
+}
+
+func (x *ListingRequest) SetStartAfterKeySuffix(v *Ydb.TypedValue) {
+	x.xxx_hidden_StartAfterKeySuffix = v
+}
+
+func (x *ListingRequest) SetMaxKeys(v int32) {
+	x.xxx_hidden_MaxKeys = v
+}
+
+func (x *ListingRequest) SetColumnsToReturn(v []string) {
+	x.xxx_hidden_ColumnsToReturn = v
+}
+
+func (x *ListingRequest) SetMatchingFilter(v *Ydb.TypedValue) {
+	x.xxx_hidden_MatchingFilter = v
+}
+
+func (x *ListingRequest) HasKeyPrefix() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_KeyPrefix != nil
+}
+
+func (x *ListingRequest) HasStartAfterKeySuffix() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StartAfterKeySuffix != nil
+}
+
+func (x *ListingRequest) HasMatchingFilter() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MatchingFilter != nil
+}
+
+func (x *ListingRequest) ClearKeyPrefix() {
+	x.xxx_hidden_KeyPrefix = nil
+}
+
+func (x *ListingRequest) ClearStartAfterKeySuffix() {
+	x.xxx_hidden_StartAfterKeySuffix = nil
+}
+
+func (x *ListingRequest) ClearMatchingFilter() {
+	x.xxx_hidden_MatchingFilter = nil
+}
+
+type ListingRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TableName           string
+	KeyPrefix           *Ydb.TypedValue
+	PathColumnPrefix    string
+	PathColumnDelimiter string
+	ContinuationToken   []byte
+	StartAfterKeySuffix *Ydb.TypedValue
+	MaxKeys             int32
+	ColumnsToReturn     []string
+	MatchingFilter      *Ydb.TypedValue
+}
+
+func (b0 ListingRequest_builder) Build() *ListingRequest {
+	m0 := &ListingRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TableName = b.TableName
+	x.xxx_hidden_KeyPrefix = b.KeyPrefix
+	x.xxx_hidden_PathColumnPrefix = b.PathColumnPrefix
+	x.xxx_hidden_PathColumnDelimiter = b.PathColumnDelimiter
+	x.xxx_hidden_ContinuationToken = b.ContinuationToken
+	x.xxx_hidden_StartAfterKeySuffix = b.StartAfterKeySuffix
+	x.xxx_hidden_MaxKeys = b.MaxKeys
+	x.xxx_hidden_ColumnsToReturn = b.ColumnsToReturn
+	x.xxx_hidden_MatchingFilter = b.MatchingFilter
+	return m0
+}
+
 type ListingResponse struct {
-	state                 protoimpl.MessageState    `protogen:"open.v1"`
-	Status                Ydb.StatusIds_StatusCode  `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues                []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3" json:"issues,omitempty"`
-	CommonPrefixes        []string                  `protobuf:"bytes,3,rep,name=common_prefixes,json=commonPrefixes,proto3" json:"common_prefixes,omitempty"` // Folders.
-	Contents              *Ydb.ResultSet            `protobuf:"bytes,4,opt,name=contents,proto3" json:"contents,omitempty"`                                   // Every Contents row starts with key suffix with KeySuffixSize columns
-	IsTruncated           bool                      `protobuf:"varint,5,opt,name=is_truncated,json=isTruncated,proto3" json:"is_truncated,omitempty"`
-	NextContinuationToken []byte                    `protobuf:"bytes,6,opt,name=next_continuation_token,json=nextContinuationToken,proto3" json:"next_continuation_token,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                            protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status                Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues                *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	xxx_hidden_CommonPrefixes        []string                   `protobuf:"bytes,3,rep,name=common_prefixes,json=commonPrefixes,proto3"`
+	xxx_hidden_Contents              *Ydb.ResultSet             `protobuf:"bytes,4,opt,name=contents,proto3"`
+	xxx_hidden_IsTruncated           bool                       `protobuf:"varint,5,opt,name=is_truncated,json=isTruncated,proto3"`
+	xxx_hidden_NextContinuationToken []byte                     `protobuf:"bytes,6,opt,name=next_continuation_token,json=nextContinuationToken,proto3"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *ListingResponse) Reset() {
@@ -214,51 +305,110 @@ func (x *ListingResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListingResponse.ProtoReflect.Descriptor instead.
-func (*ListingResponse) Descriptor() ([]byte, []int) {
-	return file_draft_protos_ydb_object_storage_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *ListingResponse) GetStatus() Ydb.StatusIds_StatusCode {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *ListingResponse) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *ListingResponse) GetCommonPrefixes() []string {
 	if x != nil {
-		return x.CommonPrefixes
+		return x.xxx_hidden_CommonPrefixes
 	}
 	return nil
 }
 
 func (x *ListingResponse) GetContents() *Ydb.ResultSet {
 	if x != nil {
-		return x.Contents
+		return x.xxx_hidden_Contents
 	}
 	return nil
 }
 
 func (x *ListingResponse) GetIsTruncated() bool {
 	if x != nil {
-		return x.IsTruncated
+		return x.xxx_hidden_IsTruncated
 	}
 	return false
 }
 
 func (x *ListingResponse) GetNextContinuationToken() []byte {
 	if x != nil {
-		return x.NextContinuationToken
+		return x.xxx_hidden_NextContinuationToken
 	}
 	return nil
+}
+
+func (x *ListingResponse) SetStatus(v Ydb.StatusIds_StatusCode) {
+	x.xxx_hidden_Status = v
+}
+
+func (x *ListingResponse) SetIssues(v []*Ydb_Issue.IssueMessage) {
+	x.xxx_hidden_Issues = &v
+}
+
+func (x *ListingResponse) SetCommonPrefixes(v []string) {
+	x.xxx_hidden_CommonPrefixes = v
+}
+
+func (x *ListingResponse) SetContents(v *Ydb.ResultSet) {
+	x.xxx_hidden_Contents = v
+}
+
+func (x *ListingResponse) SetIsTruncated(v bool) {
+	x.xxx_hidden_IsTruncated = v
+}
+
+func (x *ListingResponse) SetNextContinuationToken(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_NextContinuationToken = v
+}
+
+func (x *ListingResponse) HasContents() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Contents != nil
+}
+
+func (x *ListingResponse) ClearContents() {
+	x.xxx_hidden_Contents = nil
+}
+
+type ListingResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Status                Ydb.StatusIds_StatusCode
+	Issues                []*Ydb_Issue.IssueMessage
+	CommonPrefixes        []string
+	Contents              *Ydb.ResultSet
+	IsTruncated           bool
+	NextContinuationToken []byte
+}
+
+func (b0 ListingResponse_builder) Build() *ListingResponse {
+	m0 := &ListingResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_CommonPrefixes = b.CommonPrefixes
+	x.xxx_hidden_Contents = b.Contents
+	x.xxx_hidden_IsTruncated = b.IsTruncated
+	x.xxx_hidden_NextContinuationToken = b.NextContinuationToken
+	return m0
 }
 
 var File_draft_protos_ydb_object_storage_proto protoreflect.FileDescriptor
@@ -292,18 +442,6 @@ const file_draft_protos_ydb_object_storage_proto_rawDesc = "" +
 	"\fis_truncated\x18\x05 \x01(\bR\visTruncated\x126\n" +
 	"\x17next_continuation_token\x18\x06 \x01(\fR\x15nextContinuationTokenBp\n" +
 	"#tech.ydb.proto.draft.object_storageZFgithub.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_ObjectStorage\xf8\x01\x01b\x06proto3"
-
-var (
-	file_draft_protos_ydb_object_storage_proto_rawDescOnce sync.Once
-	file_draft_protos_ydb_object_storage_proto_rawDescData []byte
-)
-
-func file_draft_protos_ydb_object_storage_proto_rawDescGZIP() []byte {
-	file_draft_protos_ydb_object_storage_proto_rawDescOnce.Do(func() {
-		file_draft_protos_ydb_object_storage_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_draft_protos_ydb_object_storage_proto_rawDesc), len(file_draft_protos_ydb_object_storage_proto_rawDesc)))
-	})
-	return file_draft_protos_ydb_object_storage_proto_rawDescData
-}
 
 var file_draft_protos_ydb_object_storage_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_draft_protos_ydb_object_storage_proto_msgTypes = make([]protoimpl.MessageInfo, 2)

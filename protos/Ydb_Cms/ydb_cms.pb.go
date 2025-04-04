@@ -11,7 +11,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -75,23 +74,14 @@ func (x GetDatabaseStatusResult_State) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use GetDatabaseStatusResult_State.Descriptor instead.
-func (GetDatabaseStatusResult_State) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{12, 0}
-}
-
 // A set of uniform storage units.
 // Single storage unit can be thought of as a reserved part of a RAID.
 type StorageUnits struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Kind of the storage unit. Determine guarantees
-	// for all main unit parameters: used hard disk type, capacity
-	// throughput, IOPS etc.
-	UnitKind string `protobuf:"bytes,1,opt,name=unit_kind,json=unitKind,proto3" json:"unit_kind,omitempty"`
-	// Required. The number of units in this set.
-	Count         uint64 `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_UnitKind string                 `protobuf:"bytes,1,opt,name=unit_kind,json=unitKind,proto3"`
+	xxx_hidden_Count    uint64                 `protobuf:"varint,2,opt,name=count,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *StorageUnits) Reset() {
@@ -119,38 +109,56 @@ func (x *StorageUnits) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StorageUnits.ProtoReflect.Descriptor instead.
-func (*StorageUnits) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *StorageUnits) GetUnitKind() string {
 	if x != nil {
-		return x.UnitKind
+		return x.xxx_hidden_UnitKind
 	}
 	return ""
 }
 
 func (x *StorageUnits) GetCount() uint64 {
 	if x != nil {
-		return x.Count
+		return x.xxx_hidden_Count
 	}
 	return 0
 }
 
+func (x *StorageUnits) SetUnitKind(v string) {
+	x.xxx_hidden_UnitKind = v
+}
+
+func (x *StorageUnits) SetCount(v uint64) {
+	x.xxx_hidden_Count = v
+}
+
+type StorageUnits_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Required. Kind of the storage unit. Determine guarantees
+	// for all main unit parameters: used hard disk type, capacity
+	// throughput, IOPS etc.
+	UnitKind string
+	// Required. The number of units in this set.
+	Count uint64
+}
+
+func (b0 StorageUnits_builder) Build() *StorageUnits {
+	m0 := &StorageUnits{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_UnitKind = b.UnitKind
+	x.xxx_hidden_Count = b.Count
+	return m0
+}
+
 // A set of uniform computational units.
 type ComputationalUnits struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Kind of the computational unit. Determine main
-	// unit parameters like available memory, CPU, etc.
-	UnitKind string `protobuf:"bytes,1,opt,name=unit_kind,json=unitKind,proto3" json:"unit_kind,omitempty"`
-	// The availability zone all unit should be located in.
-	// By default any availability zone can be used.
-	AvailabilityZone string `protobuf:"bytes,2,opt,name=availability_zone,json=availabilityZone,proto3" json:"availability_zone,omitempty"`
-	// Required. The number of units in this set.
-	Count         uint64 `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_UnitKind         string                 `protobuf:"bytes,1,opt,name=unit_kind,json=unitKind,proto3"`
+	xxx_hidden_AvailabilityZone string                 `protobuf:"bytes,2,opt,name=availability_zone,json=availabilityZone,proto3"`
+	xxx_hidden_Count            uint64                 `protobuf:"varint,3,opt,name=count,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ComputationalUnits) Reset() {
@@ -178,44 +186,71 @@ func (x *ComputationalUnits) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ComputationalUnits.ProtoReflect.Descriptor instead.
-func (*ComputationalUnits) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *ComputationalUnits) GetUnitKind() string {
 	if x != nil {
-		return x.UnitKind
+		return x.xxx_hidden_UnitKind
 	}
 	return ""
 }
 
 func (x *ComputationalUnits) GetAvailabilityZone() string {
 	if x != nil {
-		return x.AvailabilityZone
+		return x.xxx_hidden_AvailabilityZone
 	}
 	return ""
 }
 
 func (x *ComputationalUnits) GetCount() uint64 {
 	if x != nil {
-		return x.Count
+		return x.xxx_hidden_Count
 	}
 	return 0
+}
+
+func (x *ComputationalUnits) SetUnitKind(v string) {
+	x.xxx_hidden_UnitKind = v
+}
+
+func (x *ComputationalUnits) SetAvailabilityZone(v string) {
+	x.xxx_hidden_AvailabilityZone = v
+}
+
+func (x *ComputationalUnits) SetCount(v uint64) {
+	x.xxx_hidden_Count = v
+}
+
+type ComputationalUnits_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Required. Kind of the computational unit. Determine main
+	// unit parameters like available memory, CPU, etc.
+	UnitKind string
+	// The availability zone all unit should be located in.
+	// By default any availability zone can be used.
+	AvailabilityZone string
+	// Required. The number of units in this set.
+	Count uint64
+}
+
+func (b0 ComputationalUnits_builder) Build() *ComputationalUnits {
+	m0 := &ComputationalUnits{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_UnitKind = b.UnitKind
+	x.xxx_hidden_AvailabilityZone = b.AvailabilityZone
+	x.xxx_hidden_Count = b.Count
+	return m0
 }
 
 // Computational unit allocated for database. Used to register
 // externally allocated computational resources in CMS.
 type AllocatedComputationalUnit struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Computational unit host name.
-	Host string `protobuf:"bytes,1,opt,name=host,proto3" json:"host,omitempty"`
-	// Required. Computational unit port.
-	Port uint32 `protobuf:"varint,2,opt,name=port,proto3" json:"port,omitempty"`
-	// Required. Computational unit kind.
-	UnitKind      string `protobuf:"bytes,3,opt,name=unit_kind,json=unitKind,proto3" json:"unit_kind,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Host     string                 `protobuf:"bytes,1,opt,name=host,proto3"`
+	xxx_hidden_Port     uint32                 `protobuf:"varint,2,opt,name=port,proto3"`
+	xxx_hidden_UnitKind string                 `protobuf:"bytes,3,opt,name=unit_kind,json=unitKind,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *AllocatedComputationalUnit) Reset() {
@@ -243,41 +278,67 @@ func (x *AllocatedComputationalUnit) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AllocatedComputationalUnit.ProtoReflect.Descriptor instead.
-func (*AllocatedComputationalUnit) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{2}
-}
-
 func (x *AllocatedComputationalUnit) GetHost() string {
 	if x != nil {
-		return x.Host
+		return x.xxx_hidden_Host
 	}
 	return ""
 }
 
 func (x *AllocatedComputationalUnit) GetPort() uint32 {
 	if x != nil {
-		return x.Port
+		return x.xxx_hidden_Port
 	}
 	return 0
 }
 
 func (x *AllocatedComputationalUnit) GetUnitKind() string {
 	if x != nil {
-		return x.UnitKind
+		return x.xxx_hidden_UnitKind
 	}
 	return ""
 }
 
+func (x *AllocatedComputationalUnit) SetHost(v string) {
+	x.xxx_hidden_Host = v
+}
+
+func (x *AllocatedComputationalUnit) SetPort(v uint32) {
+	x.xxx_hidden_Port = v
+}
+
+func (x *AllocatedComputationalUnit) SetUnitKind(v string) {
+	x.xxx_hidden_UnitKind = v
+}
+
+type AllocatedComputationalUnit_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Required. Computational unit host name.
+	Host string
+	// Required. Computational unit port.
+	Port uint32
+	// Required. Computational unit kind.
+	UnitKind string
+}
+
+func (b0 AllocatedComputationalUnit_builder) Build() *AllocatedComputationalUnit {
+	m0 := &AllocatedComputationalUnit{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Host = b.Host
+	x.xxx_hidden_Port = b.Port
+	x.xxx_hidden_UnitKind = b.UnitKind
+	return m0
+}
+
 // A set of computational and storage resources.
 type Resources struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Storage resources.
-	StorageUnits []*StorageUnits `protobuf:"bytes,1,rep,name=storage_units,json=storageUnits,proto3" json:"storage_units,omitempty"`
-	// Computational resources.
-	ComputationalUnits []*ComputationalUnits `protobuf:"bytes,2,rep,name=computational_units,json=computationalUnits,proto3" json:"computational_units,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StorageUnits       *[]*StorageUnits       `protobuf:"bytes,1,rep,name=storage_units,json=storageUnits,proto3"`
+	xxx_hidden_ComputationalUnits *[]*ComputationalUnits `protobuf:"bytes,2,rep,name=computational_units,json=computationalUnits,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *Resources) Reset() {
@@ -305,31 +366,55 @@ func (x *Resources) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use Resources.ProtoReflect.Descriptor instead.
-func (*Resources) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{3}
-}
-
 func (x *Resources) GetStorageUnits() []*StorageUnits {
 	if x != nil {
-		return x.StorageUnits
+		if x.xxx_hidden_StorageUnits != nil {
+			return *x.xxx_hidden_StorageUnits
+		}
 	}
 	return nil
 }
 
 func (x *Resources) GetComputationalUnits() []*ComputationalUnits {
 	if x != nil {
-		return x.ComputationalUnits
+		if x.xxx_hidden_ComputationalUnits != nil {
+			return *x.xxx_hidden_ComputationalUnits
+		}
 	}
 	return nil
 }
 
+func (x *Resources) SetStorageUnits(v []*StorageUnits) {
+	x.xxx_hidden_StorageUnits = &v
+}
+
+func (x *Resources) SetComputationalUnits(v []*ComputationalUnits) {
+	x.xxx_hidden_ComputationalUnits = &v
+}
+
+type Resources_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Storage resources.
+	StorageUnits []*StorageUnits
+	// Computational resources.
+	ComputationalUnits []*ComputationalUnits
+}
+
+func (b0 Resources_builder) Build() *Resources {
+	m0 := &Resources{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_StorageUnits = &b.StorageUnits
+	x.xxx_hidden_ComputationalUnits = &b.ComputationalUnits
+	return m0
+}
+
 type ServerlessResources struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Full path to shared database's home dir whose resources will be used.
-	SharedDatabasePath string `protobuf:"bytes,1,opt,name=shared_database_path,json=sharedDatabasePath,proto3" json:"shared_database_path,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SharedDatabasePath string                 `protobuf:"bytes,1,opt,name=shared_database_path,json=sharedDatabasePath,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *ServerlessResources) Reset() {
@@ -357,28 +442,39 @@ func (x *ServerlessResources) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ServerlessResources.ProtoReflect.Descriptor instead.
-func (*ServerlessResources) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{4}
-}
-
 func (x *ServerlessResources) GetSharedDatabasePath() string {
 	if x != nil {
-		return x.SharedDatabasePath
+		return x.xxx_hidden_SharedDatabasePath
 	}
 	return ""
 }
 
+func (x *ServerlessResources) SetSharedDatabasePath(v string) {
+	x.xxx_hidden_SharedDatabasePath = v
+}
+
+type ServerlessResources_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Full path to shared database's home dir whose resources will be used.
+	SharedDatabasePath string
+}
+
+func (b0 ServerlessResources_builder) Build() *ServerlessResources {
+	m0 := &ServerlessResources{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_SharedDatabasePath = b.SharedDatabasePath
+	return m0
+}
+
 type DatabaseOptions struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Do not initialize services required for transactions processing.
-	DisableTxService bool `protobuf:"varint,1,opt,name=disable_tx_service,json=disableTxService,proto3" json:"disable_tx_service,omitempty"`
-	// Old-style database, do not create external schemeshard for database
-	DisableExternalSubdomain bool `protobuf:"varint,2,opt,name=disable_external_subdomain,json=disableExternalSubdomain,proto3" json:"disable_external_subdomain,omitempty"`
-	// Transaction plan resolution in milliseconds
-	PlanResolution uint32 `protobuf:"varint,3,opt,name=plan_resolution,json=planResolution,proto3" json:"plan_resolution,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DisableTxService         bool                   `protobuf:"varint,1,opt,name=disable_tx_service,json=disableTxService,proto3"`
+	xxx_hidden_DisableExternalSubdomain bool                   `protobuf:"varint,2,opt,name=disable_external_subdomain,json=disableExternalSubdomain,proto3"`
+	xxx_hidden_PlanResolution           uint32                 `protobuf:"varint,3,opt,name=plan_resolution,json=planResolution,proto3"`
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
 }
 
 func (x *DatabaseOptions) Reset() {
@@ -406,39 +502,66 @@ func (x *DatabaseOptions) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DatabaseOptions.ProtoReflect.Descriptor instead.
-func (*DatabaseOptions) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{5}
-}
-
 func (x *DatabaseOptions) GetDisableTxService() bool {
 	if x != nil {
-		return x.DisableTxService
+		return x.xxx_hidden_DisableTxService
 	}
 	return false
 }
 
 func (x *DatabaseOptions) GetDisableExternalSubdomain() bool {
 	if x != nil {
-		return x.DisableExternalSubdomain
+		return x.xxx_hidden_DisableExternalSubdomain
 	}
 	return false
 }
 
 func (x *DatabaseOptions) GetPlanResolution() uint32 {
 	if x != nil {
-		return x.PlanResolution
+		return x.xxx_hidden_PlanResolution
 	}
 	return 0
 }
 
+func (x *DatabaseOptions) SetDisableTxService(v bool) {
+	x.xxx_hidden_DisableTxService = v
+}
+
+func (x *DatabaseOptions) SetDisableExternalSubdomain(v bool) {
+	x.xxx_hidden_DisableExternalSubdomain = v
+}
+
+func (x *DatabaseOptions) SetPlanResolution(v uint32) {
+	x.xxx_hidden_PlanResolution = v
+}
+
+type DatabaseOptions_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Do not initialize services required for transactions processing.
+	DisableTxService bool
+	// Old-style database, do not create external schemeshard for database
+	DisableExternalSubdomain bool
+	// Transaction plan resolution in milliseconds
+	PlanResolution uint32
+}
+
+func (b0 DatabaseOptions_builder) Build() *DatabaseOptions {
+	m0 := &DatabaseOptions{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_DisableTxService = b.DisableTxService
+	x.xxx_hidden_DisableExternalSubdomain = b.DisableExternalSubdomain
+	x.xxx_hidden_PlanResolution = b.PlanResolution
+	return m0
+}
+
 // A set of quotas for schema operations
 type SchemaOperationQuotas struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Leaky bucket based quotas
-	LeakyBucketQuotas []*SchemaOperationQuotas_LeakyBucket `protobuf:"bytes,1,rep,name=leaky_bucket_quotas,json=leakyBucketQuotas,proto3" json:"leaky_bucket_quotas,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                        protoimpl.MessageState                `protogen:"opaque.v1"`
+	xxx_hidden_LeakyBucketQuotas *[]*SchemaOperationQuotas_LeakyBucket `protobuf:"bytes,1,rep,name=leaky_bucket_quotas,json=leakyBucketQuotas,proto3"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *SchemaOperationQuotas) Reset() {
@@ -466,37 +589,44 @@ func (x *SchemaOperationQuotas) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SchemaOperationQuotas.ProtoReflect.Descriptor instead.
-func (*SchemaOperationQuotas) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{6}
-}
-
 func (x *SchemaOperationQuotas) GetLeakyBucketQuotas() []*SchemaOperationQuotas_LeakyBucket {
 	if x != nil {
-		return x.LeakyBucketQuotas
+		if x.xxx_hidden_LeakyBucketQuotas != nil {
+			return *x.xxx_hidden_LeakyBucketQuotas
+		}
 	}
 	return nil
 }
 
+func (x *SchemaOperationQuotas) SetLeakyBucketQuotas(v []*SchemaOperationQuotas_LeakyBucket) {
+	x.xxx_hidden_LeakyBucketQuotas = &v
+}
+
+type SchemaOperationQuotas_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Leaky bucket based quotas
+	LeakyBucketQuotas []*SchemaOperationQuotas_LeakyBucket
+}
+
+func (b0 SchemaOperationQuotas_builder) Build() *SchemaOperationQuotas {
+	m0 := &SchemaOperationQuotas{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_LeakyBucketQuotas = &b.LeakyBucketQuotas
+	return m0
+}
+
 // A set of quotas for the database
 type DatabaseQuotas struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// A maximum data size in bytes, new data will be rejected when exceeded
-	DataSizeHardQuota uint64 `protobuf:"varint,1,opt,name=data_size_hard_quota,json=dataSizeHardQuota,proto3" json:"data_size_hard_quota,omitempty"`
-	// An optional size in bytes (lower than data_size_hard_quota). When data
-	// size becomes lower than this value new data ingestion is re-enabled
-	// again. This is useful to help avoid database from rapidly entering and
-	// exiting from the overloaded state.
-	DataSizeSoftQuota uint64 `protobuf:"varint,2,opt,name=data_size_soft_quota,json=dataSizeSoftQuota,proto3" json:"data_size_soft_quota,omitempty"`
-	// A maximum count of shards in all data streams.
-	DataStreamShardsQuota uint64 `protobuf:"varint,3,opt,name=data_stream_shards_quota,json=dataStreamShardsQuota,proto3" json:"data_stream_shards_quota,omitempty"`
-	// A maximum storage that will be reserved for all data stream shards.
-	DataStreamReservedStorageQuota uint64 `protobuf:"varint,5,opt,name=data_stream_reserved_storage_quota,json=dataStreamReservedStorageQuota,proto3" json:"data_stream_reserved_storage_quota,omitempty"`
-	// A minimum value of `TtlSettings.run_interval_seconds` that can be specified.
-	// Default is 1800 (15 minutes).
-	TtlMinRunInternalSeconds uint32 `protobuf:"varint,4,opt,name=ttl_min_run_internal_seconds,json=ttlMinRunInternalSeconds,proto3" json:"ttl_min_run_internal_seconds,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DataSizeHardQuota              uint64                 `protobuf:"varint,1,opt,name=data_size_hard_quota,json=dataSizeHardQuota,proto3"`
+	xxx_hidden_DataSizeSoftQuota              uint64                 `protobuf:"varint,2,opt,name=data_size_soft_quota,json=dataSizeSoftQuota,proto3"`
+	xxx_hidden_DataStreamShardsQuota          uint64                 `protobuf:"varint,3,opt,name=data_stream_shards_quota,json=dataStreamShardsQuota,proto3"`
+	xxx_hidden_DataStreamReservedStorageQuota uint64                 `protobuf:"varint,5,opt,name=data_stream_reserved_storage_quota,json=dataStreamReservedStorageQuota,proto3"`
+	xxx_hidden_TtlMinRunInternalSeconds       uint32                 `protobuf:"varint,4,opt,name=ttl_min_run_internal_seconds,json=ttlMinRunInternalSeconds,proto3"`
+	unknownFields                             protoimpl.UnknownFields
+	sizeCache                                 protoimpl.SizeCache
 }
 
 func (x *DatabaseQuotas) Reset() {
@@ -524,72 +654,107 @@ func (x *DatabaseQuotas) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DatabaseQuotas.ProtoReflect.Descriptor instead.
-func (*DatabaseQuotas) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{7}
-}
-
 func (x *DatabaseQuotas) GetDataSizeHardQuota() uint64 {
 	if x != nil {
-		return x.DataSizeHardQuota
+		return x.xxx_hidden_DataSizeHardQuota
 	}
 	return 0
 }
 
 func (x *DatabaseQuotas) GetDataSizeSoftQuota() uint64 {
 	if x != nil {
-		return x.DataSizeSoftQuota
+		return x.xxx_hidden_DataSizeSoftQuota
 	}
 	return 0
 }
 
 func (x *DatabaseQuotas) GetDataStreamShardsQuota() uint64 {
 	if x != nil {
-		return x.DataStreamShardsQuota
+		return x.xxx_hidden_DataStreamShardsQuota
 	}
 	return 0
 }
 
 func (x *DatabaseQuotas) GetDataStreamReservedStorageQuota() uint64 {
 	if x != nil {
-		return x.DataStreamReservedStorageQuota
+		return x.xxx_hidden_DataStreamReservedStorageQuota
 	}
 	return 0
 }
 
 func (x *DatabaseQuotas) GetTtlMinRunInternalSeconds() uint32 {
 	if x != nil {
-		return x.TtlMinRunInternalSeconds
+		return x.xxx_hidden_TtlMinRunInternalSeconds
 	}
 	return 0
+}
+
+func (x *DatabaseQuotas) SetDataSizeHardQuota(v uint64) {
+	x.xxx_hidden_DataSizeHardQuota = v
+}
+
+func (x *DatabaseQuotas) SetDataSizeSoftQuota(v uint64) {
+	x.xxx_hidden_DataSizeSoftQuota = v
+}
+
+func (x *DatabaseQuotas) SetDataStreamShardsQuota(v uint64) {
+	x.xxx_hidden_DataStreamShardsQuota = v
+}
+
+func (x *DatabaseQuotas) SetDataStreamReservedStorageQuota(v uint64) {
+	x.xxx_hidden_DataStreamReservedStorageQuota = v
+}
+
+func (x *DatabaseQuotas) SetTtlMinRunInternalSeconds(v uint32) {
+	x.xxx_hidden_TtlMinRunInternalSeconds = v
+}
+
+type DatabaseQuotas_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// A maximum data size in bytes, new data will be rejected when exceeded
+	DataSizeHardQuota uint64
+	// An optional size in bytes (lower than data_size_hard_quota). When data
+	// size becomes lower than this value new data ingestion is re-enabled
+	// again. This is useful to help avoid database from rapidly entering and
+	// exiting from the overloaded state.
+	DataSizeSoftQuota uint64
+	// A maximum count of shards in all data streams.
+	DataStreamShardsQuota uint64
+	// A maximum storage that will be reserved for all data stream shards.
+	DataStreamReservedStorageQuota uint64
+	// A minimum value of `TtlSettings.run_interval_seconds` that can be specified.
+	// Default is 1800 (15 minutes).
+	TtlMinRunInternalSeconds uint32
+}
+
+func (b0 DatabaseQuotas_builder) Build() *DatabaseQuotas {
+	m0 := &DatabaseQuotas{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_DataSizeHardQuota = b.DataSizeHardQuota
+	x.xxx_hidden_DataSizeSoftQuota = b.DataSizeSoftQuota
+	x.xxx_hidden_DataStreamShardsQuota = b.DataStreamShardsQuota
+	x.xxx_hidden_DataStreamReservedStorageQuota = b.DataStreamReservedStorageQuota
+	x.xxx_hidden_TtlMinRunInternalSeconds = b.TtlMinRunInternalSeconds
+	return m0
 }
 
 // Request to create a new database. For successfull creation
 // specified database shouldn't exist. At least one storage
 // unit should be requested for the database.
 type CreateDatabaseRequest struct {
-	state           protoimpl.MessageState          `protogen:"open.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Required. Full path to database's home dir. Used as database ID.
-	Path string `protobuf:"bytes,2,opt,name=path,proto3" json:"path,omitempty"`
-	// Types that are valid to be assigned to ResourcesKind:
-	//
-	//	*CreateDatabaseRequest_Resources
-	//	*CreateDatabaseRequest_SharedResources
-	//	*CreateDatabaseRequest_ServerlessResources
-	ResourcesKind isCreateDatabaseRequest_ResourcesKind `protobuf_oneof:"resources_kind"`
-	// Additional database options.
-	Options *DatabaseOptions `protobuf:"bytes,4,opt,name=options,proto3" json:"options,omitempty"`
-	// Attach attributes to database.
-	Attributes map[string]string `protobuf:"bytes,5,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Optional quotas for schema operations
-	SchemaOperationQuotas *SchemaOperationQuotas `protobuf:"bytes,8,opt,name=schema_operation_quotas,json=schemaOperationQuotas,proto3" json:"schema_operation_quotas,omitempty"`
-	// Optional idempotency key
-	IdempotencyKey string `protobuf:"bytes,9,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	// Optional quotas for the database
-	DatabaseQuotas *DatabaseQuotas `protobuf:"bytes,10,opt,name=database_quotas,json=databaseQuotas,proto3" json:"database_quotas,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                            protoimpl.MessageState                `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams       *Ydb_Operations.OperationParams       `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path                  string                                `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_ResourcesKind         isCreateDatabaseRequest_ResourcesKind `protobuf_oneof:"resources_kind"`
+	xxx_hidden_Options               *DatabaseOptions                      `protobuf:"bytes,4,opt,name=options,proto3"`
+	xxx_hidden_Attributes            map[string]string                     `protobuf:"bytes,5,rep,name=attributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_SchemaOperationQuotas *SchemaOperationQuotas                `protobuf:"bytes,8,opt,name=schema_operation_quotas,json=schemaOperationQuotas,proto3"`
+	xxx_hidden_IdempotencyKey        string                                `protobuf:"bytes,9,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	xxx_hidden_DatabaseQuotas        *DatabaseQuotas                       `protobuf:"bytes,10,opt,name=database_quotas,json=databaseQuotas,proto3"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *CreateDatabaseRequest) Reset() {
@@ -617,35 +782,23 @@ func (x *CreateDatabaseRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateDatabaseRequest.ProtoReflect.Descriptor instead.
-func (*CreateDatabaseRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{8}
-}
-
 func (x *CreateDatabaseRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateDatabaseRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
-func (x *CreateDatabaseRequest) GetResourcesKind() isCreateDatabaseRequest_ResourcesKind {
-	if x != nil {
-		return x.ResourcesKind
-	}
-	return nil
-}
-
 func (x *CreateDatabaseRequest) GetResources() *Resources {
 	if x != nil {
-		if x, ok := x.ResourcesKind.(*CreateDatabaseRequest_Resources); ok {
+		if x, ok := x.xxx_hidden_ResourcesKind.(*createDatabaseRequest_Resources); ok {
 			return x.Resources
 		}
 	}
@@ -654,7 +807,7 @@ func (x *CreateDatabaseRequest) GetResources() *Resources {
 
 func (x *CreateDatabaseRequest) GetSharedResources() *Resources {
 	if x != nil {
-		if x, ok := x.ResourcesKind.(*CreateDatabaseRequest_SharedResources); ok {
+		if x, ok := x.xxx_hidden_ResourcesKind.(*createDatabaseRequest_SharedResources); ok {
 			return x.SharedResources
 		}
 	}
@@ -663,7 +816,7 @@ func (x *CreateDatabaseRequest) GetSharedResources() *Resources {
 
 func (x *CreateDatabaseRequest) GetServerlessResources() *ServerlessResources {
 	if x != nil {
-		if x, ok := x.ResourcesKind.(*CreateDatabaseRequest_ServerlessResources); ok {
+		if x, ok := x.xxx_hidden_ResourcesKind.(*createDatabaseRequest_ServerlessResources); ok {
 			return x.ServerlessResources
 		}
 	}
@@ -672,69 +825,298 @@ func (x *CreateDatabaseRequest) GetServerlessResources() *ServerlessResources {
 
 func (x *CreateDatabaseRequest) GetOptions() *DatabaseOptions {
 	if x != nil {
-		return x.Options
+		return x.xxx_hidden_Options
 	}
 	return nil
 }
 
 func (x *CreateDatabaseRequest) GetAttributes() map[string]string {
 	if x != nil {
-		return x.Attributes
+		return x.xxx_hidden_Attributes
 	}
 	return nil
 }
 
 func (x *CreateDatabaseRequest) GetSchemaOperationQuotas() *SchemaOperationQuotas {
 	if x != nil {
-		return x.SchemaOperationQuotas
+		return x.xxx_hidden_SchemaOperationQuotas
 	}
 	return nil
 }
 
 func (x *CreateDatabaseRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *CreateDatabaseRequest) GetDatabaseQuotas() *DatabaseQuotas {
 	if x != nil {
-		return x.DatabaseQuotas
+		return x.xxx_hidden_DatabaseQuotas
 	}
 	return nil
+}
+
+func (x *CreateDatabaseRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *CreateDatabaseRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *CreateDatabaseRequest) SetResources(v *Resources) {
+	if v == nil {
+		x.xxx_hidden_ResourcesKind = nil
+		return
+	}
+	x.xxx_hidden_ResourcesKind = &createDatabaseRequest_Resources{v}
+}
+
+func (x *CreateDatabaseRequest) SetSharedResources(v *Resources) {
+	if v == nil {
+		x.xxx_hidden_ResourcesKind = nil
+		return
+	}
+	x.xxx_hidden_ResourcesKind = &createDatabaseRequest_SharedResources{v}
+}
+
+func (x *CreateDatabaseRequest) SetServerlessResources(v *ServerlessResources) {
+	if v == nil {
+		x.xxx_hidden_ResourcesKind = nil
+		return
+	}
+	x.xxx_hidden_ResourcesKind = &createDatabaseRequest_ServerlessResources{v}
+}
+
+func (x *CreateDatabaseRequest) SetOptions(v *DatabaseOptions) {
+	x.xxx_hidden_Options = v
+}
+
+func (x *CreateDatabaseRequest) SetAttributes(v map[string]string) {
+	x.xxx_hidden_Attributes = v
+}
+
+func (x *CreateDatabaseRequest) SetSchemaOperationQuotas(v *SchemaOperationQuotas) {
+	x.xxx_hidden_SchemaOperationQuotas = v
+}
+
+func (x *CreateDatabaseRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *CreateDatabaseRequest) SetDatabaseQuotas(v *DatabaseQuotas) {
+	x.xxx_hidden_DatabaseQuotas = v
+}
+
+func (x *CreateDatabaseRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *CreateDatabaseRequest) HasResourcesKind() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResourcesKind != nil
+}
+
+func (x *CreateDatabaseRequest) HasResources() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ResourcesKind.(*createDatabaseRequest_Resources)
+	return ok
+}
+
+func (x *CreateDatabaseRequest) HasSharedResources() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ResourcesKind.(*createDatabaseRequest_SharedResources)
+	return ok
+}
+
+func (x *CreateDatabaseRequest) HasServerlessResources() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ResourcesKind.(*createDatabaseRequest_ServerlessResources)
+	return ok
+}
+
+func (x *CreateDatabaseRequest) HasOptions() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Options != nil
+}
+
+func (x *CreateDatabaseRequest) HasSchemaOperationQuotas() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SchemaOperationQuotas != nil
+}
+
+func (x *CreateDatabaseRequest) HasDatabaseQuotas() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_DatabaseQuotas != nil
+}
+
+func (x *CreateDatabaseRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *CreateDatabaseRequest) ClearResourcesKind() {
+	x.xxx_hidden_ResourcesKind = nil
+}
+
+func (x *CreateDatabaseRequest) ClearResources() {
+	if _, ok := x.xxx_hidden_ResourcesKind.(*createDatabaseRequest_Resources); ok {
+		x.xxx_hidden_ResourcesKind = nil
+	}
+}
+
+func (x *CreateDatabaseRequest) ClearSharedResources() {
+	if _, ok := x.xxx_hidden_ResourcesKind.(*createDatabaseRequest_SharedResources); ok {
+		x.xxx_hidden_ResourcesKind = nil
+	}
+}
+
+func (x *CreateDatabaseRequest) ClearServerlessResources() {
+	if _, ok := x.xxx_hidden_ResourcesKind.(*createDatabaseRequest_ServerlessResources); ok {
+		x.xxx_hidden_ResourcesKind = nil
+	}
+}
+
+func (x *CreateDatabaseRequest) ClearOptions() {
+	x.xxx_hidden_Options = nil
+}
+
+func (x *CreateDatabaseRequest) ClearSchemaOperationQuotas() {
+	x.xxx_hidden_SchemaOperationQuotas = nil
+}
+
+func (x *CreateDatabaseRequest) ClearDatabaseQuotas() {
+	x.xxx_hidden_DatabaseQuotas = nil
+}
+
+const CreateDatabaseRequest_ResourcesKind_not_set_case case_CreateDatabaseRequest_ResourcesKind = 0
+const CreateDatabaseRequest_Resources_case case_CreateDatabaseRequest_ResourcesKind = 3
+const CreateDatabaseRequest_SharedResources_case case_CreateDatabaseRequest_ResourcesKind = 6
+const CreateDatabaseRequest_ServerlessResources_case case_CreateDatabaseRequest_ResourcesKind = 7
+
+func (x *CreateDatabaseRequest) WhichResourcesKind() case_CreateDatabaseRequest_ResourcesKind {
+	if x == nil {
+		return CreateDatabaseRequest_ResourcesKind_not_set_case
+	}
+	switch x.xxx_hidden_ResourcesKind.(type) {
+	case *createDatabaseRequest_Resources:
+		return CreateDatabaseRequest_Resources_case
+	case *createDatabaseRequest_SharedResources:
+		return CreateDatabaseRequest_SharedResources_case
+	case *createDatabaseRequest_ServerlessResources:
+		return CreateDatabaseRequest_ServerlessResources_case
+	default:
+		return CreateDatabaseRequest_ResourcesKind_not_set_case
+	}
+}
+
+type CreateDatabaseRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OperationParams *Ydb_Operations.OperationParams
+	// Required. Full path to database's home dir. Used as database ID.
+	Path string
+	// Fields of oneof xxx_hidden_ResourcesKind:
+	// Resources to allocate for database by CMS.
+	Resources *Resources
+	// Shared resources can be used by serverless databases.
+	SharedResources *Resources
+	// If specified, the created database will be "serverless".
+	ServerlessResources *ServerlessResources
+	// -- end of xxx_hidden_ResourcesKind
+	// Additional database options.
+	Options *DatabaseOptions
+	// Attach attributes to database.
+	Attributes map[string]string
+	// Optional quotas for schema operations
+	SchemaOperationQuotas *SchemaOperationQuotas
+	// Optional idempotency key
+	IdempotencyKey string
+	// Optional quotas for the database
+	DatabaseQuotas *DatabaseQuotas
+}
+
+func (b0 CreateDatabaseRequest_builder) Build() *CreateDatabaseRequest {
+	m0 := &CreateDatabaseRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	if b.Resources != nil {
+		x.xxx_hidden_ResourcesKind = &createDatabaseRequest_Resources{b.Resources}
+	}
+	if b.SharedResources != nil {
+		x.xxx_hidden_ResourcesKind = &createDatabaseRequest_SharedResources{b.SharedResources}
+	}
+	if b.ServerlessResources != nil {
+		x.xxx_hidden_ResourcesKind = &createDatabaseRequest_ServerlessResources{b.ServerlessResources}
+	}
+	x.xxx_hidden_Options = b.Options
+	x.xxx_hidden_Attributes = b.Attributes
+	x.xxx_hidden_SchemaOperationQuotas = b.SchemaOperationQuotas
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_DatabaseQuotas = b.DatabaseQuotas
+	return m0
+}
+
+type case_CreateDatabaseRequest_ResourcesKind protoreflect.FieldNumber
+
+func (x case_CreateDatabaseRequest_ResourcesKind) String() string {
+	md := file_protos_ydb_cms_proto_msgTypes[8].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isCreateDatabaseRequest_ResourcesKind interface {
 	isCreateDatabaseRequest_ResourcesKind()
 }
 
-type CreateDatabaseRequest_Resources struct {
+type createDatabaseRequest_Resources struct {
 	// Resources to allocate for database by CMS.
 	Resources *Resources `protobuf:"bytes,3,opt,name=resources,proto3,oneof"`
 }
 
-type CreateDatabaseRequest_SharedResources struct {
+type createDatabaseRequest_SharedResources struct {
 	// Shared resources can be used by serverless databases.
 	SharedResources *Resources `protobuf:"bytes,6,opt,name=shared_resources,json=sharedResources,proto3,oneof"`
 }
 
-type CreateDatabaseRequest_ServerlessResources struct {
+type createDatabaseRequest_ServerlessResources struct {
 	// If specified, the created database will be "serverless".
 	ServerlessResources *ServerlessResources `protobuf:"bytes,7,opt,name=serverless_resources,json=serverlessResources,proto3,oneof"`
 }
 
-func (*CreateDatabaseRequest_Resources) isCreateDatabaseRequest_ResourcesKind() {}
+func (*createDatabaseRequest_Resources) isCreateDatabaseRequest_ResourcesKind() {}
 
-func (*CreateDatabaseRequest_SharedResources) isCreateDatabaseRequest_ResourcesKind() {}
+func (*createDatabaseRequest_SharedResources) isCreateDatabaseRequest_ResourcesKind() {}
 
-func (*CreateDatabaseRequest_ServerlessResources) isCreateDatabaseRequest_ResourcesKind() {}
+func (*createDatabaseRequest_ServerlessResources) isCreateDatabaseRequest_ResourcesKind() {}
 
 type CreateDatabaseResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateDatabaseResponse) Reset() {
@@ -762,27 +1144,49 @@ func (x *CreateDatabaseResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateDatabaseResponse.ProtoReflect.Descriptor instead.
-func (*CreateDatabaseResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{9}
-}
-
 func (x *CreateDatabaseResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *CreateDatabaseResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *CreateDatabaseResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *CreateDatabaseResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type CreateDatabaseResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 CreateDatabaseResponse_builder) Build() *CreateDatabaseResponse {
+	m0 := &CreateDatabaseResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // Get current database status.
 type GetDatabaseStatusRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Full path to database's home dir.
-	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	// Operation parameters
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetDatabaseStatusRequest) Reset() {
@@ -810,31 +1214,62 @@ func (x *GetDatabaseStatusRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetDatabaseStatusRequest.ProtoReflect.Descriptor instead.
-func (*GetDatabaseStatusRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{10}
-}
-
 func (x *GetDatabaseStatusRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *GetDatabaseStatusRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *GetDatabaseStatusRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *GetDatabaseStatusRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *GetDatabaseStatusRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *GetDatabaseStatusRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type GetDatabaseStatusRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Required. Full path to database's home dir.
+	Path string
+	// Operation parameters
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 GetDatabaseStatusRequest_builder) Build() *GetDatabaseStatusRequest {
+	m0 := &GetDatabaseStatusRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type GetDatabaseStatusResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result holds GetDatabaseStatusResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetDatabaseStatusResponse) Reset() {
@@ -862,43 +1297,55 @@ func (x *GetDatabaseStatusResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetDatabaseStatusResponse.ProtoReflect.Descriptor instead.
-func (*GetDatabaseStatusResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{11}
-}
-
 func (x *GetDatabaseStatusResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *GetDatabaseStatusResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *GetDatabaseStatusResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *GetDatabaseStatusResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type GetDatabaseStatusResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result holds GetDatabaseStatusResult
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 GetDatabaseStatusResponse_builder) Build() *GetDatabaseStatusResponse {
+	m0 := &GetDatabaseStatusResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type GetDatabaseStatusResult struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Full path to database's home dir.
-	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	// Current database state.
-	State GetDatabaseStatusResult_State `protobuf:"varint,2,opt,name=state,proto3,enum=Ydb.Cms.GetDatabaseStatusResult_State" json:"state,omitempty"`
-	// Types that are valid to be assigned to ResourcesKind:
-	//
-	//	*GetDatabaseStatusResult_RequiredResources
-	//	*GetDatabaseStatusResult_RequiredSharedResources
-	//	*GetDatabaseStatusResult_ServerlessResources
-	ResourcesKind isGetDatabaseStatusResult_ResourcesKind `protobuf_oneof:"resources_kind"`
-	// Database resources allocated by CMS.
-	AllocatedResources *Resources `protobuf:"bytes,4,opt,name=allocated_resources,json=allocatedResources,proto3" json:"allocated_resources,omitempty"`
-	// Externally allocated database resources registered in CMS.
-	RegisteredResources []*AllocatedComputationalUnit `protobuf:"bytes,5,rep,name=registered_resources,json=registeredResources,proto3" json:"registered_resources,omitempty"`
-	// Current database generation. Incremented at each successful
-	// alter request.
-	Generation uint64 `protobuf:"varint,6,opt,name=generation,proto3" json:"generation,omitempty"`
-	// Current quotas for schema operations
-	SchemaOperationQuotas *SchemaOperationQuotas `protobuf:"bytes,9,opt,name=schema_operation_quotas,json=schemaOperationQuotas,proto3" json:"schema_operation_quotas,omitempty"`
-	// Current quotas for the database
-	DatabaseQuotas *DatabaseQuotas `protobuf:"bytes,10,opt,name=database_quotas,json=databaseQuotas,proto3" json:"database_quotas,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                            protoimpl.MessageState                  `protogen:"opaque.v1"`
+	xxx_hidden_Path                  string                                  `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_State                 GetDatabaseStatusResult_State           `protobuf:"varint,2,opt,name=state,proto3,enum=Ydb.Cms.GetDatabaseStatusResult_State"`
+	xxx_hidden_ResourcesKind         isGetDatabaseStatusResult_ResourcesKind `protobuf_oneof:"resources_kind"`
+	xxx_hidden_AllocatedResources    *Resources                              `protobuf:"bytes,4,opt,name=allocated_resources,json=allocatedResources,proto3"`
+	xxx_hidden_RegisteredResources   *[]*AllocatedComputationalUnit          `protobuf:"bytes,5,rep,name=registered_resources,json=registeredResources,proto3"`
+	xxx_hidden_Generation            uint64                                  `protobuf:"varint,6,opt,name=generation,proto3"`
+	xxx_hidden_SchemaOperationQuotas *SchemaOperationQuotas                  `protobuf:"bytes,9,opt,name=schema_operation_quotas,json=schemaOperationQuotas,proto3"`
+	xxx_hidden_DatabaseQuotas        *DatabaseQuotas                         `protobuf:"bytes,10,opt,name=database_quotas,json=databaseQuotas,proto3"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *GetDatabaseStatusResult) Reset() {
@@ -926,35 +1373,23 @@ func (x *GetDatabaseStatusResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetDatabaseStatusResult.ProtoReflect.Descriptor instead.
-func (*GetDatabaseStatusResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{12}
-}
-
 func (x *GetDatabaseStatusResult) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *GetDatabaseStatusResult) GetState() GetDatabaseStatusResult_State {
 	if x != nil {
-		return x.State
+		return x.xxx_hidden_State
 	}
 	return GetDatabaseStatusResult_STATE_UNSPECIFIED
 }
 
-func (x *GetDatabaseStatusResult) GetResourcesKind() isGetDatabaseStatusResult_ResourcesKind {
-	if x != nil {
-		return x.ResourcesKind
-	}
-	return nil
-}
-
 func (x *GetDatabaseStatusResult) GetRequiredResources() *Resources {
 	if x != nil {
-		if x, ok := x.ResourcesKind.(*GetDatabaseStatusResult_RequiredResources); ok {
+		if x, ok := x.xxx_hidden_ResourcesKind.(*getDatabaseStatusResult_RequiredResources); ok {
 			return x.RequiredResources
 		}
 	}
@@ -963,7 +1398,7 @@ func (x *GetDatabaseStatusResult) GetRequiredResources() *Resources {
 
 func (x *GetDatabaseStatusResult) GetRequiredSharedResources() *Resources {
 	if x != nil {
-		if x, ok := x.ResourcesKind.(*GetDatabaseStatusResult_RequiredSharedResources); ok {
+		if x, ok := x.xxx_hidden_ResourcesKind.(*getDatabaseStatusResult_RequiredSharedResources); ok {
 			return x.RequiredSharedResources
 		}
 	}
@@ -972,7 +1407,7 @@ func (x *GetDatabaseStatusResult) GetRequiredSharedResources() *Resources {
 
 func (x *GetDatabaseStatusResult) GetServerlessResources() *ServerlessResources {
 	if x != nil {
-		if x, ok := x.ResourcesKind.(*GetDatabaseStatusResult_ServerlessResources); ok {
+		if x, ok := x.xxx_hidden_ResourcesKind.(*getDatabaseStatusResult_ServerlessResources); ok {
 			return x.ServerlessResources
 		}
 	}
@@ -981,91 +1416,299 @@ func (x *GetDatabaseStatusResult) GetServerlessResources() *ServerlessResources 
 
 func (x *GetDatabaseStatusResult) GetAllocatedResources() *Resources {
 	if x != nil {
-		return x.AllocatedResources
+		return x.xxx_hidden_AllocatedResources
 	}
 	return nil
 }
 
 func (x *GetDatabaseStatusResult) GetRegisteredResources() []*AllocatedComputationalUnit {
 	if x != nil {
-		return x.RegisteredResources
+		if x.xxx_hidden_RegisteredResources != nil {
+			return *x.xxx_hidden_RegisteredResources
+		}
 	}
 	return nil
 }
 
 func (x *GetDatabaseStatusResult) GetGeneration() uint64 {
 	if x != nil {
-		return x.Generation
+		return x.xxx_hidden_Generation
 	}
 	return 0
 }
 
 func (x *GetDatabaseStatusResult) GetSchemaOperationQuotas() *SchemaOperationQuotas {
 	if x != nil {
-		return x.SchemaOperationQuotas
+		return x.xxx_hidden_SchemaOperationQuotas
 	}
 	return nil
 }
 
 func (x *GetDatabaseStatusResult) GetDatabaseQuotas() *DatabaseQuotas {
 	if x != nil {
-		return x.DatabaseQuotas
+		return x.xxx_hidden_DatabaseQuotas
 	}
 	return nil
+}
+
+func (x *GetDatabaseStatusResult) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *GetDatabaseStatusResult) SetState(v GetDatabaseStatusResult_State) {
+	x.xxx_hidden_State = v
+}
+
+func (x *GetDatabaseStatusResult) SetRequiredResources(v *Resources) {
+	if v == nil {
+		x.xxx_hidden_ResourcesKind = nil
+		return
+	}
+	x.xxx_hidden_ResourcesKind = &getDatabaseStatusResult_RequiredResources{v}
+}
+
+func (x *GetDatabaseStatusResult) SetRequiredSharedResources(v *Resources) {
+	if v == nil {
+		x.xxx_hidden_ResourcesKind = nil
+		return
+	}
+	x.xxx_hidden_ResourcesKind = &getDatabaseStatusResult_RequiredSharedResources{v}
+}
+
+func (x *GetDatabaseStatusResult) SetServerlessResources(v *ServerlessResources) {
+	if v == nil {
+		x.xxx_hidden_ResourcesKind = nil
+		return
+	}
+	x.xxx_hidden_ResourcesKind = &getDatabaseStatusResult_ServerlessResources{v}
+}
+
+func (x *GetDatabaseStatusResult) SetAllocatedResources(v *Resources) {
+	x.xxx_hidden_AllocatedResources = v
+}
+
+func (x *GetDatabaseStatusResult) SetRegisteredResources(v []*AllocatedComputationalUnit) {
+	x.xxx_hidden_RegisteredResources = &v
+}
+
+func (x *GetDatabaseStatusResult) SetGeneration(v uint64) {
+	x.xxx_hidden_Generation = v
+}
+
+func (x *GetDatabaseStatusResult) SetSchemaOperationQuotas(v *SchemaOperationQuotas) {
+	x.xxx_hidden_SchemaOperationQuotas = v
+}
+
+func (x *GetDatabaseStatusResult) SetDatabaseQuotas(v *DatabaseQuotas) {
+	x.xxx_hidden_DatabaseQuotas = v
+}
+
+func (x *GetDatabaseStatusResult) HasResourcesKind() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ResourcesKind != nil
+}
+
+func (x *GetDatabaseStatusResult) HasRequiredResources() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ResourcesKind.(*getDatabaseStatusResult_RequiredResources)
+	return ok
+}
+
+func (x *GetDatabaseStatusResult) HasRequiredSharedResources() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ResourcesKind.(*getDatabaseStatusResult_RequiredSharedResources)
+	return ok
+}
+
+func (x *GetDatabaseStatusResult) HasServerlessResources() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_ResourcesKind.(*getDatabaseStatusResult_ServerlessResources)
+	return ok
+}
+
+func (x *GetDatabaseStatusResult) HasAllocatedResources() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_AllocatedResources != nil
+}
+
+func (x *GetDatabaseStatusResult) HasSchemaOperationQuotas() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SchemaOperationQuotas != nil
+}
+
+func (x *GetDatabaseStatusResult) HasDatabaseQuotas() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_DatabaseQuotas != nil
+}
+
+func (x *GetDatabaseStatusResult) ClearResourcesKind() {
+	x.xxx_hidden_ResourcesKind = nil
+}
+
+func (x *GetDatabaseStatusResult) ClearRequiredResources() {
+	if _, ok := x.xxx_hidden_ResourcesKind.(*getDatabaseStatusResult_RequiredResources); ok {
+		x.xxx_hidden_ResourcesKind = nil
+	}
+}
+
+func (x *GetDatabaseStatusResult) ClearRequiredSharedResources() {
+	if _, ok := x.xxx_hidden_ResourcesKind.(*getDatabaseStatusResult_RequiredSharedResources); ok {
+		x.xxx_hidden_ResourcesKind = nil
+	}
+}
+
+func (x *GetDatabaseStatusResult) ClearServerlessResources() {
+	if _, ok := x.xxx_hidden_ResourcesKind.(*getDatabaseStatusResult_ServerlessResources); ok {
+		x.xxx_hidden_ResourcesKind = nil
+	}
+}
+
+func (x *GetDatabaseStatusResult) ClearAllocatedResources() {
+	x.xxx_hidden_AllocatedResources = nil
+}
+
+func (x *GetDatabaseStatusResult) ClearSchemaOperationQuotas() {
+	x.xxx_hidden_SchemaOperationQuotas = nil
+}
+
+func (x *GetDatabaseStatusResult) ClearDatabaseQuotas() {
+	x.xxx_hidden_DatabaseQuotas = nil
+}
+
+const GetDatabaseStatusResult_ResourcesKind_not_set_case case_GetDatabaseStatusResult_ResourcesKind = 0
+const GetDatabaseStatusResult_RequiredResources_case case_GetDatabaseStatusResult_ResourcesKind = 3
+const GetDatabaseStatusResult_RequiredSharedResources_case case_GetDatabaseStatusResult_ResourcesKind = 7
+const GetDatabaseStatusResult_ServerlessResources_case case_GetDatabaseStatusResult_ResourcesKind = 8
+
+func (x *GetDatabaseStatusResult) WhichResourcesKind() case_GetDatabaseStatusResult_ResourcesKind {
+	if x == nil {
+		return GetDatabaseStatusResult_ResourcesKind_not_set_case
+	}
+	switch x.xxx_hidden_ResourcesKind.(type) {
+	case *getDatabaseStatusResult_RequiredResources:
+		return GetDatabaseStatusResult_RequiredResources_case
+	case *getDatabaseStatusResult_RequiredSharedResources:
+		return GetDatabaseStatusResult_RequiredSharedResources_case
+	case *getDatabaseStatusResult_ServerlessResources:
+		return GetDatabaseStatusResult_ServerlessResources_case
+	default:
+		return GetDatabaseStatusResult_ResourcesKind_not_set_case
+	}
+}
+
+type GetDatabaseStatusResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Full path to database's home dir.
+	Path string
+	// Current database state.
+	State GetDatabaseStatusResult_State
+	// Fields of oneof xxx_hidden_ResourcesKind:
+	// Database resources requested for allocation.
+	RequiredResources       *Resources
+	RequiredSharedResources *Resources
+	ServerlessResources     *ServerlessResources
+	// -- end of xxx_hidden_ResourcesKind
+	// Database resources allocated by CMS.
+	AllocatedResources *Resources
+	// Externally allocated database resources registered in CMS.
+	RegisteredResources []*AllocatedComputationalUnit
+	// Current database generation. Incremented at each successful
+	// alter request.
+	Generation uint64
+	// Current quotas for schema operations
+	SchemaOperationQuotas *SchemaOperationQuotas
+	// Current quotas for the database
+	DatabaseQuotas *DatabaseQuotas
+}
+
+func (b0 GetDatabaseStatusResult_builder) Build() *GetDatabaseStatusResult {
+	m0 := &GetDatabaseStatusResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_State = b.State
+	if b.RequiredResources != nil {
+		x.xxx_hidden_ResourcesKind = &getDatabaseStatusResult_RequiredResources{b.RequiredResources}
+	}
+	if b.RequiredSharedResources != nil {
+		x.xxx_hidden_ResourcesKind = &getDatabaseStatusResult_RequiredSharedResources{b.RequiredSharedResources}
+	}
+	if b.ServerlessResources != nil {
+		x.xxx_hidden_ResourcesKind = &getDatabaseStatusResult_ServerlessResources{b.ServerlessResources}
+	}
+	x.xxx_hidden_AllocatedResources = b.AllocatedResources
+	x.xxx_hidden_RegisteredResources = &b.RegisteredResources
+	x.xxx_hidden_Generation = b.Generation
+	x.xxx_hidden_SchemaOperationQuotas = b.SchemaOperationQuotas
+	x.xxx_hidden_DatabaseQuotas = b.DatabaseQuotas
+	return m0
+}
+
+type case_GetDatabaseStatusResult_ResourcesKind protoreflect.FieldNumber
+
+func (x case_GetDatabaseStatusResult_ResourcesKind) String() string {
+	md := file_protos_ydb_cms_proto_msgTypes[12].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
 type isGetDatabaseStatusResult_ResourcesKind interface {
 	isGetDatabaseStatusResult_ResourcesKind()
 }
 
-type GetDatabaseStatusResult_RequiredResources struct {
+type getDatabaseStatusResult_RequiredResources struct {
 	// Database resources requested for allocation.
 	RequiredResources *Resources `protobuf:"bytes,3,opt,name=required_resources,json=requiredResources,proto3,oneof"`
 }
 
-type GetDatabaseStatusResult_RequiredSharedResources struct {
+type getDatabaseStatusResult_RequiredSharedResources struct {
 	RequiredSharedResources *Resources `protobuf:"bytes,7,opt,name=required_shared_resources,json=requiredSharedResources,proto3,oneof"`
 }
 
-type GetDatabaseStatusResult_ServerlessResources struct {
+type getDatabaseStatusResult_ServerlessResources struct {
 	ServerlessResources *ServerlessResources `protobuf:"bytes,8,opt,name=serverless_resources,json=serverlessResources,proto3,oneof"`
 }
 
-func (*GetDatabaseStatusResult_RequiredResources) isGetDatabaseStatusResult_ResourcesKind() {}
+func (*getDatabaseStatusResult_RequiredResources) isGetDatabaseStatusResult_ResourcesKind() {}
 
-func (*GetDatabaseStatusResult_RequiredSharedResources) isGetDatabaseStatusResult_ResourcesKind() {}
+func (*getDatabaseStatusResult_RequiredSharedResources) isGetDatabaseStatusResult_ResourcesKind() {}
 
-func (*GetDatabaseStatusResult_ServerlessResources) isGetDatabaseStatusResult_ResourcesKind() {}
+func (*getDatabaseStatusResult_ServerlessResources) isGetDatabaseStatusResult_ResourcesKind() {}
 
 // Change resources allocated for database.
 type AlterDatabaseRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Full path to database's home dir.
-	Path string `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	// Additional computational units to allocate for database.
-	ComputationalUnitsToAdd []*ComputationalUnits `protobuf:"bytes,2,rep,name=computational_units_to_add,json=computationalUnitsToAdd,proto3" json:"computational_units_to_add,omitempty"`
-	// Computational units to deallocate.
-	ComputationalUnitsToRemove []*ComputationalUnits `protobuf:"bytes,3,rep,name=computational_units_to_remove,json=computationalUnitsToRemove,proto3" json:"computational_units_to_remove,omitempty"`
-	// Additional storage units to allocate for database.
-	StorageUnitsToAdd []*StorageUnits `protobuf:"bytes,4,rep,name=storage_units_to_add,json=storageUnitsToAdd,proto3" json:"storage_units_to_add,omitempty"`
-	// Externally allocated computational units to register for database.
-	ComputationalUnitsToRegister []*AllocatedComputationalUnit `protobuf:"bytes,5,rep,name=computational_units_to_register,json=computationalUnitsToRegister,proto3" json:"computational_units_to_register,omitempty"`
-	// Externally allocated computational units to deregister.
-	ComputationalUnitsToDeregister []*AllocatedComputationalUnit `protobuf:"bytes,6,rep,name=computational_units_to_deregister,json=computationalUnitsToDeregister,proto3" json:"computational_units_to_deregister,omitempty"`
-	// Operation parameters.
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,7,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	// Current generation of altered database.
-	Generation uint64 `protobuf:"varint,8,opt,name=generation,proto3" json:"generation,omitempty"`
-	// Change quotas for schema operations
-	SchemaOperationQuotas *SchemaOperationQuotas `protobuf:"bytes,9,opt,name=schema_operation_quotas,json=schemaOperationQuotas,proto3" json:"schema_operation_quotas,omitempty"`
-	// Optional idempotency key
-	IdempotencyKey string `protobuf:"bytes,10,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	// Change quotas for the database
-	DatabaseQuotas *DatabaseQuotas `protobuf:"bytes,11,opt,name=database_quotas,json=databaseQuotas,proto3" json:"database_quotas,omitempty"`
-	// Alter attributes. Leave the value blank to drop an attribute.
-	AlterAttributes map[string]string `protobuf:"bytes,12,rep,name=alter_attributes,json=alterAttributes,proto3" json:"alter_attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                                     protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Path                           string                          `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_ComputationalUnitsToAdd        *[]*ComputationalUnits          `protobuf:"bytes,2,rep,name=computational_units_to_add,json=computationalUnitsToAdd,proto3"`
+	xxx_hidden_ComputationalUnitsToRemove     *[]*ComputationalUnits          `protobuf:"bytes,3,rep,name=computational_units_to_remove,json=computationalUnitsToRemove,proto3"`
+	xxx_hidden_StorageUnitsToAdd              *[]*StorageUnits                `protobuf:"bytes,4,rep,name=storage_units_to_add,json=storageUnitsToAdd,proto3"`
+	xxx_hidden_ComputationalUnitsToRegister   *[]*AllocatedComputationalUnit  `protobuf:"bytes,5,rep,name=computational_units_to_register,json=computationalUnitsToRegister,proto3"`
+	xxx_hidden_ComputationalUnitsToDeregister *[]*AllocatedComputationalUnit  `protobuf:"bytes,6,rep,name=computational_units_to_deregister,json=computationalUnitsToDeregister,proto3"`
+	xxx_hidden_OperationParams                *Ydb_Operations.OperationParams `protobuf:"bytes,7,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Generation                     uint64                          `protobuf:"varint,8,opt,name=generation,proto3"`
+	xxx_hidden_SchemaOperationQuotas          *SchemaOperationQuotas          `protobuf:"bytes,9,opt,name=schema_operation_quotas,json=schemaOperationQuotas,proto3"`
+	xxx_hidden_IdempotencyKey                 string                          `protobuf:"bytes,10,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	xxx_hidden_DatabaseQuotas                 *DatabaseQuotas                 `protobuf:"bytes,11,opt,name=database_quotas,json=databaseQuotas,proto3"`
+	xxx_hidden_AlterAttributes                map[string]string               `protobuf:"bytes,12,rep,name=alter_attributes,json=alterAttributes,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields                             protoimpl.UnknownFields
+	sizeCache                                 protoimpl.SizeCache
 }
 
 func (x *AlterDatabaseRequest) Reset() {
@@ -1093,100 +1736,234 @@ func (x *AlterDatabaseRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterDatabaseRequest.ProtoReflect.Descriptor instead.
-func (*AlterDatabaseRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{13}
-}
-
 func (x *AlterDatabaseRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *AlterDatabaseRequest) GetComputationalUnitsToAdd() []*ComputationalUnits {
 	if x != nil {
-		return x.ComputationalUnitsToAdd
+		if x.xxx_hidden_ComputationalUnitsToAdd != nil {
+			return *x.xxx_hidden_ComputationalUnitsToAdd
+		}
 	}
 	return nil
 }
 
 func (x *AlterDatabaseRequest) GetComputationalUnitsToRemove() []*ComputationalUnits {
 	if x != nil {
-		return x.ComputationalUnitsToRemove
+		if x.xxx_hidden_ComputationalUnitsToRemove != nil {
+			return *x.xxx_hidden_ComputationalUnitsToRemove
+		}
 	}
 	return nil
 }
 
 func (x *AlterDatabaseRequest) GetStorageUnitsToAdd() []*StorageUnits {
 	if x != nil {
-		return x.StorageUnitsToAdd
+		if x.xxx_hidden_StorageUnitsToAdd != nil {
+			return *x.xxx_hidden_StorageUnitsToAdd
+		}
 	}
 	return nil
 }
 
 func (x *AlterDatabaseRequest) GetComputationalUnitsToRegister() []*AllocatedComputationalUnit {
 	if x != nil {
-		return x.ComputationalUnitsToRegister
+		if x.xxx_hidden_ComputationalUnitsToRegister != nil {
+			return *x.xxx_hidden_ComputationalUnitsToRegister
+		}
 	}
 	return nil
 }
 
 func (x *AlterDatabaseRequest) GetComputationalUnitsToDeregister() []*AllocatedComputationalUnit {
 	if x != nil {
-		return x.ComputationalUnitsToDeregister
+		if x.xxx_hidden_ComputationalUnitsToDeregister != nil {
+			return *x.xxx_hidden_ComputationalUnitsToDeregister
+		}
 	}
 	return nil
 }
 
 func (x *AlterDatabaseRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *AlterDatabaseRequest) GetGeneration() uint64 {
 	if x != nil {
-		return x.Generation
+		return x.xxx_hidden_Generation
 	}
 	return 0
 }
 
 func (x *AlterDatabaseRequest) GetSchemaOperationQuotas() *SchemaOperationQuotas {
 	if x != nil {
-		return x.SchemaOperationQuotas
+		return x.xxx_hidden_SchemaOperationQuotas
 	}
 	return nil
 }
 
 func (x *AlterDatabaseRequest) GetIdempotencyKey() string {
 	if x != nil {
-		return x.IdempotencyKey
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *AlterDatabaseRequest) GetDatabaseQuotas() *DatabaseQuotas {
 	if x != nil {
-		return x.DatabaseQuotas
+		return x.xxx_hidden_DatabaseQuotas
 	}
 	return nil
 }
 
 func (x *AlterDatabaseRequest) GetAlterAttributes() map[string]string {
 	if x != nil {
-		return x.AlterAttributes
+		return x.xxx_hidden_AlterAttributes
 	}
 	return nil
 }
 
+func (x *AlterDatabaseRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *AlterDatabaseRequest) SetComputationalUnitsToAdd(v []*ComputationalUnits) {
+	x.xxx_hidden_ComputationalUnitsToAdd = &v
+}
+
+func (x *AlterDatabaseRequest) SetComputationalUnitsToRemove(v []*ComputationalUnits) {
+	x.xxx_hidden_ComputationalUnitsToRemove = &v
+}
+
+func (x *AlterDatabaseRequest) SetStorageUnitsToAdd(v []*StorageUnits) {
+	x.xxx_hidden_StorageUnitsToAdd = &v
+}
+
+func (x *AlterDatabaseRequest) SetComputationalUnitsToRegister(v []*AllocatedComputationalUnit) {
+	x.xxx_hidden_ComputationalUnitsToRegister = &v
+}
+
+func (x *AlterDatabaseRequest) SetComputationalUnitsToDeregister(v []*AllocatedComputationalUnit) {
+	x.xxx_hidden_ComputationalUnitsToDeregister = &v
+}
+
+func (x *AlterDatabaseRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *AlterDatabaseRequest) SetGeneration(v uint64) {
+	x.xxx_hidden_Generation = v
+}
+
+func (x *AlterDatabaseRequest) SetSchemaOperationQuotas(v *SchemaOperationQuotas) {
+	x.xxx_hidden_SchemaOperationQuotas = v
+}
+
+func (x *AlterDatabaseRequest) SetIdempotencyKey(v string) {
+	x.xxx_hidden_IdempotencyKey = v
+}
+
+func (x *AlterDatabaseRequest) SetDatabaseQuotas(v *DatabaseQuotas) {
+	x.xxx_hidden_DatabaseQuotas = v
+}
+
+func (x *AlterDatabaseRequest) SetAlterAttributes(v map[string]string) {
+	x.xxx_hidden_AlterAttributes = v
+}
+
+func (x *AlterDatabaseRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *AlterDatabaseRequest) HasSchemaOperationQuotas() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SchemaOperationQuotas != nil
+}
+
+func (x *AlterDatabaseRequest) HasDatabaseQuotas() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_DatabaseQuotas != nil
+}
+
+func (x *AlterDatabaseRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+func (x *AlterDatabaseRequest) ClearSchemaOperationQuotas() {
+	x.xxx_hidden_SchemaOperationQuotas = nil
+}
+
+func (x *AlterDatabaseRequest) ClearDatabaseQuotas() {
+	x.xxx_hidden_DatabaseQuotas = nil
+}
+
+type AlterDatabaseRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Required. Full path to database's home dir.
+	Path string
+	// Additional computational units to allocate for database.
+	ComputationalUnitsToAdd []*ComputationalUnits
+	// Computational units to deallocate.
+	ComputationalUnitsToRemove []*ComputationalUnits
+	// Additional storage units to allocate for database.
+	StorageUnitsToAdd []*StorageUnits
+	// Externally allocated computational units to register for database.
+	ComputationalUnitsToRegister []*AllocatedComputationalUnit
+	// Externally allocated computational units to deregister.
+	ComputationalUnitsToDeregister []*AllocatedComputationalUnit
+	// Operation parameters.
+	OperationParams *Ydb_Operations.OperationParams
+	// Current generation of altered database.
+	Generation uint64
+	// Change quotas for schema operations
+	SchemaOperationQuotas *SchemaOperationQuotas
+	// Optional idempotency key
+	IdempotencyKey string
+	// Change quotas for the database
+	DatabaseQuotas *DatabaseQuotas
+	// Alter attributes. Leave the value blank to drop an attribute.
+	AlterAttributes map[string]string
+}
+
+func (b0 AlterDatabaseRequest_builder) Build() *AlterDatabaseRequest {
+	m0 := &AlterDatabaseRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_ComputationalUnitsToAdd = &b.ComputationalUnitsToAdd
+	x.xxx_hidden_ComputationalUnitsToRemove = &b.ComputationalUnitsToRemove
+	x.xxx_hidden_StorageUnitsToAdd = &b.StorageUnitsToAdd
+	x.xxx_hidden_ComputationalUnitsToRegister = &b.ComputationalUnitsToRegister
+	x.xxx_hidden_ComputationalUnitsToDeregister = &b.ComputationalUnitsToDeregister
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Generation = b.Generation
+	x.xxx_hidden_SchemaOperationQuotas = b.SchemaOperationQuotas
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_DatabaseQuotas = b.DatabaseQuotas
+	x.xxx_hidden_AlterAttributes = b.AlterAttributes
+	return m0
+}
+
 type AlterDatabaseResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AlterDatabaseResponse) Reset() {
@@ -1214,25 +1991,48 @@ func (x *AlterDatabaseResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AlterDatabaseResponse.ProtoReflect.Descriptor instead.
-func (*AlterDatabaseResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{14}
-}
-
 func (x *AlterDatabaseResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *AlterDatabaseResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *AlterDatabaseResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *AlterDatabaseResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type AlterDatabaseResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 AlterDatabaseResponse_builder) Build() *AlterDatabaseResponse {
+	m0 := &AlterDatabaseResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 // List all databases known by CMS.
 type ListDatabasesRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Operation parameters
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListDatabasesRequest) Reset() {
@@ -1260,24 +2060,48 @@ func (x *ListDatabasesRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListDatabasesRequest.ProtoReflect.Descriptor instead.
-func (*ListDatabasesRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{15}
-}
-
 func (x *ListDatabasesRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *ListDatabasesRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *ListDatabasesRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *ListDatabasesRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type ListDatabasesRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Operation parameters
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 ListDatabasesRequest_builder) Build() *ListDatabasesRequest {
+	m0 := &ListDatabasesRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type ListDatabasesResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result holds ListDatabasesResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListDatabasesResponse) Reset() {
@@ -1305,23 +2129,48 @@ func (x *ListDatabasesResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListDatabasesResponse.ProtoReflect.Descriptor instead.
-func (*ListDatabasesResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{16}
-}
-
 func (x *ListDatabasesResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *ListDatabasesResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *ListDatabasesResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *ListDatabasesResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type ListDatabasesResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result holds ListDatabasesResult
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 ListDatabasesResponse_builder) Build() *ListDatabasesResponse {
+	m0 := &ListDatabasesResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type ListDatabasesResult struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Paths         []string               `protobuf:"bytes,1,rep,name=paths,proto3" json:"paths,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Paths []string               `protobuf:"bytes,1,rep,name=paths,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ListDatabasesResult) Reset() {
@@ -1349,26 +2198,38 @@ func (x *ListDatabasesResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListDatabasesResult.ProtoReflect.Descriptor instead.
-func (*ListDatabasesResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{17}
-}
-
 func (x *ListDatabasesResult) GetPaths() []string {
 	if x != nil {
-		return x.Paths
+		return x.xxx_hidden_Paths
 	}
 	return nil
 }
 
+func (x *ListDatabasesResult) SetPaths(v []string) {
+	x.xxx_hidden_Paths = v
+}
+
+type ListDatabasesResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Paths []string
+}
+
+func (b0 ListDatabasesResult_builder) Build() *ListDatabasesResult {
+	m0 := &ListDatabasesResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Paths = b.Paths
+	return m0
+}
+
 // Completely remove database and all his data.
 type RemoveDatabaseRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Full path to database's home dir.
-	Path            string                          `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *RemoveDatabaseRequest) Reset() {
@@ -1396,30 +2257,61 @@ func (x *RemoveDatabaseRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RemoveDatabaseRequest.ProtoReflect.Descriptor instead.
-func (*RemoveDatabaseRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{18}
-}
-
 func (x *RemoveDatabaseRequest) GetPath() string {
 	if x != nil {
-		return x.Path
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *RemoveDatabaseRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *RemoveDatabaseRequest) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+func (x *RemoveDatabaseRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *RemoveDatabaseRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *RemoveDatabaseRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type RemoveDatabaseRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Required. Full path to database's home dir.
+	Path            string
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 RemoveDatabaseRequest_builder) Build() *RemoveDatabaseRequest {
+	m0 := &RemoveDatabaseRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type RemoveDatabaseResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *RemoveDatabaseResponse) Reset() {
@@ -1447,24 +2339,48 @@ func (x *RemoveDatabaseResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RemoveDatabaseResponse.ProtoReflect.Descriptor instead.
-func (*RemoveDatabaseResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{19}
-}
-
 func (x *RemoveDatabaseResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *RemoveDatabaseResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *RemoveDatabaseResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *RemoveDatabaseResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type RemoveDatabaseResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 RemoveDatabaseResponse_builder) Build() *RemoveDatabaseResponse {
+	m0 := &RemoveDatabaseResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type StorageUnitDescription struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Kind          string                 `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Kind   string                 `protobuf:"bytes,1,opt,name=kind,proto3"`
+	xxx_hidden_Labels map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *StorageUnitDescription) Reset() {
@@ -1492,31 +2408,50 @@ func (x *StorageUnitDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StorageUnitDescription.ProtoReflect.Descriptor instead.
-func (*StorageUnitDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{20}
-}
-
 func (x *StorageUnitDescription) GetKind() string {
 	if x != nil {
-		return x.Kind
+		return x.xxx_hidden_Kind
 	}
 	return ""
 }
 
 func (x *StorageUnitDescription) GetLabels() map[string]string {
 	if x != nil {
-		return x.Labels
+		return x.xxx_hidden_Labels
 	}
 	return nil
 }
 
+func (x *StorageUnitDescription) SetKind(v string) {
+	x.xxx_hidden_Kind = v
+}
+
+func (x *StorageUnitDescription) SetLabels(v map[string]string) {
+	x.xxx_hidden_Labels = v
+}
+
+type StorageUnitDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Kind   string
+	Labels map[string]string
+}
+
+func (b0 StorageUnitDescription_builder) Build() *StorageUnitDescription {
+	m0 := &StorageUnitDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Kind = b.Kind
+	x.xxx_hidden_Labels = b.Labels
+	return m0
+}
+
 type AvailabilityZoneDescription struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Labels        map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name   string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Labels map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *AvailabilityZoneDescription) Reset() {
@@ -1544,32 +2479,51 @@ func (x *AvailabilityZoneDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use AvailabilityZoneDescription.ProtoReflect.Descriptor instead.
-func (*AvailabilityZoneDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{21}
-}
-
 func (x *AvailabilityZoneDescription) GetName() string {
 	if x != nil {
-		return x.Name
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *AvailabilityZoneDescription) GetLabels() map[string]string {
 	if x != nil {
-		return x.Labels
+		return x.xxx_hidden_Labels
 	}
 	return nil
 }
 
+func (x *AvailabilityZoneDescription) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *AvailabilityZoneDescription) SetLabels(v map[string]string) {
+	x.xxx_hidden_Labels = v
+}
+
+type AvailabilityZoneDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name   string
+	Labels map[string]string
+}
+
+func (b0 AvailabilityZoneDescription_builder) Build() *AvailabilityZoneDescription {
+	m0 := &AvailabilityZoneDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Labels = b.Labels
+	return m0
+}
+
 type ComputationalUnitDescription struct {
-	state                    protoimpl.MessageState `protogen:"open.v1"`
-	Kind                     string                 `protobuf:"bytes,1,opt,name=kind,proto3" json:"kind,omitempty"`
-	Labels                   map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	AllowedAvailabilityZones []string               `protobuf:"bytes,3,rep,name=allowed_availability_zones,json=allowedAvailabilityZones,proto3" json:"allowed_availability_zones,omitempty"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Kind                     string                 `protobuf:"bytes,1,opt,name=kind,proto3"`
+	xxx_hidden_Labels                   map[string]string      `protobuf:"bytes,2,rep,name=labels,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_AllowedAvailabilityZones []string               `protobuf:"bytes,3,rep,name=allowed_availability_zones,json=allowedAvailabilityZones,proto3"`
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
 }
 
 func (x *ComputationalUnitDescription) Reset() {
@@ -1597,38 +2551,62 @@ func (x *ComputationalUnitDescription) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ComputationalUnitDescription.ProtoReflect.Descriptor instead.
-func (*ComputationalUnitDescription) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{22}
-}
-
 func (x *ComputationalUnitDescription) GetKind() string {
 	if x != nil {
-		return x.Kind
+		return x.xxx_hidden_Kind
 	}
 	return ""
 }
 
 func (x *ComputationalUnitDescription) GetLabels() map[string]string {
 	if x != nil {
-		return x.Labels
+		return x.xxx_hidden_Labels
 	}
 	return nil
 }
 
 func (x *ComputationalUnitDescription) GetAllowedAvailabilityZones() []string {
 	if x != nil {
-		return x.AllowedAvailabilityZones
+		return x.xxx_hidden_AllowedAvailabilityZones
 	}
 	return nil
 }
 
+func (x *ComputationalUnitDescription) SetKind(v string) {
+	x.xxx_hidden_Kind = v
+}
+
+func (x *ComputationalUnitDescription) SetLabels(v map[string]string) {
+	x.xxx_hidden_Labels = v
+}
+
+func (x *ComputationalUnitDescription) SetAllowedAvailabilityZones(v []string) {
+	x.xxx_hidden_AllowedAvailabilityZones = v
+}
+
+type ComputationalUnitDescription_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Kind                     string
+	Labels                   map[string]string
+	AllowedAvailabilityZones []string
+}
+
+func (b0 ComputationalUnitDescription_builder) Build() *ComputationalUnitDescription {
+	m0 := &ComputationalUnitDescription{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Kind = b.Kind
+	x.xxx_hidden_Labels = b.Labels
+	x.xxx_hidden_AllowedAvailabilityZones = b.AllowedAvailabilityZones
+	return m0
+}
+
 type DescribeDatabaseOptionsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Operation parameters
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeDatabaseOptionsRequest) Reset() {
@@ -1656,24 +2634,48 @@ func (x *DescribeDatabaseOptionsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeDatabaseOptionsRequest.ProtoReflect.Descriptor instead.
-func (*DescribeDatabaseOptionsRequest) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{23}
-}
-
 func (x *DescribeDatabaseOptionsRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
+func (x *DescribeDatabaseOptionsRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
+	x.xxx_hidden_OperationParams = v
+}
+
+func (x *DescribeDatabaseOptionsRequest) HasOperationParams() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperationParams != nil
+}
+
+func (x *DescribeDatabaseOptionsRequest) ClearOperationParams() {
+	x.xxx_hidden_OperationParams = nil
+}
+
+type DescribeDatabaseOptionsRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Operation parameters
+	OperationParams *Ydb_Operations.OperationParams
+}
+
+func (b0 DescribeDatabaseOptionsRequest_builder) Build() *DescribeDatabaseOptionsRequest {
+	m0 := &DescribeDatabaseOptionsRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_OperationParams = b.OperationParams
+	return m0
+}
+
 type DescribeDatabaseOptionsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// operation.result holds DescribeDatabaseOptionsResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeDatabaseOptionsResponse) Reset() {
@@ -1701,25 +2703,50 @@ func (x *DescribeDatabaseOptionsResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeDatabaseOptionsResponse.ProtoReflect.Descriptor instead.
-func (*DescribeDatabaseOptionsResponse) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{24}
-}
-
 func (x *DescribeDatabaseOptionsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
+func (x *DescribeDatabaseOptionsResponse) SetOperation(v *Ydb_Operations.Operation) {
+	x.xxx_hidden_Operation = v
+}
+
+func (x *DescribeDatabaseOptionsResponse) HasOperation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Operation != nil
+}
+
+func (x *DescribeDatabaseOptionsResponse) ClearOperation() {
+	x.xxx_hidden_Operation = nil
+}
+
+type DescribeDatabaseOptionsResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// operation.result holds DescribeDatabaseOptionsResult
+	Operation *Ydb_Operations.Operation
+}
+
+func (b0 DescribeDatabaseOptionsResponse_builder) Build() *DescribeDatabaseOptionsResponse {
+	m0 := &DescribeDatabaseOptionsResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Operation = b.Operation
+	return m0
+}
+
 type DescribeDatabaseOptionsResult struct {
-	state              protoimpl.MessageState          `protogen:"open.v1"`
-	StorageUnits       []*StorageUnitDescription       `protobuf:"bytes,1,rep,name=storage_units,json=storageUnits,proto3" json:"storage_units,omitempty"`
-	AvailabilityZones  []*AvailabilityZoneDescription  `protobuf:"bytes,2,rep,name=availability_zones,json=availabilityZones,proto3" json:"availability_zones,omitempty"`
-	ComputationalUnits []*ComputationalUnitDescription `protobuf:"bytes,3,rep,name=computational_units,json=computationalUnits,proto3" json:"computational_units,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                         protoimpl.MessageState           `protogen:"opaque.v1"`
+	xxx_hidden_StorageUnits       *[]*StorageUnitDescription       `protobuf:"bytes,1,rep,name=storage_units,json=storageUnits,proto3"`
+	xxx_hidden_AvailabilityZones  *[]*AvailabilityZoneDescription  `protobuf:"bytes,2,rep,name=availability_zones,json=availabilityZones,proto3"`
+	xxx_hidden_ComputationalUnits *[]*ComputationalUnitDescription `protobuf:"bytes,3,rep,name=computational_units,json=computationalUnits,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *DescribeDatabaseOptionsResult) Reset() {
@@ -1747,41 +2774,70 @@ func (x *DescribeDatabaseOptionsResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DescribeDatabaseOptionsResult.ProtoReflect.Descriptor instead.
-func (*DescribeDatabaseOptionsResult) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{25}
-}
-
 func (x *DescribeDatabaseOptionsResult) GetStorageUnits() []*StorageUnitDescription {
 	if x != nil {
-		return x.StorageUnits
+		if x.xxx_hidden_StorageUnits != nil {
+			return *x.xxx_hidden_StorageUnits
+		}
 	}
 	return nil
 }
 
 func (x *DescribeDatabaseOptionsResult) GetAvailabilityZones() []*AvailabilityZoneDescription {
 	if x != nil {
-		return x.AvailabilityZones
+		if x.xxx_hidden_AvailabilityZones != nil {
+			return *x.xxx_hidden_AvailabilityZones
+		}
 	}
 	return nil
 }
 
 func (x *DescribeDatabaseOptionsResult) GetComputationalUnits() []*ComputationalUnitDescription {
 	if x != nil {
-		return x.ComputationalUnits
+		if x.xxx_hidden_ComputationalUnits != nil {
+			return *x.xxx_hidden_ComputationalUnits
+		}
 	}
 	return nil
 }
 
+func (x *DescribeDatabaseOptionsResult) SetStorageUnits(v []*StorageUnitDescription) {
+	x.xxx_hidden_StorageUnits = &v
+}
+
+func (x *DescribeDatabaseOptionsResult) SetAvailabilityZones(v []*AvailabilityZoneDescription) {
+	x.xxx_hidden_AvailabilityZones = &v
+}
+
+func (x *DescribeDatabaseOptionsResult) SetComputationalUnits(v []*ComputationalUnitDescription) {
+	x.xxx_hidden_ComputationalUnits = &v
+}
+
+type DescribeDatabaseOptionsResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	StorageUnits       []*StorageUnitDescription
+	AvailabilityZones  []*AvailabilityZoneDescription
+	ComputationalUnits []*ComputationalUnitDescription
+}
+
+func (b0 DescribeDatabaseOptionsResult_builder) Build() *DescribeDatabaseOptionsResult {
+	m0 := &DescribeDatabaseOptionsResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_StorageUnits = &b.StorageUnits
+	x.xxx_hidden_AvailabilityZones = &b.AvailabilityZones
+	x.xxx_hidden_ComputationalUnits = &b.ComputationalUnits
+	return m0
+}
+
 // A single quota based on leaky bucket
 type SchemaOperationQuotas_LeakyBucket struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Bucket size, e.g. <1000> per day
-	BucketSize float64 `protobuf:"fixed64,1,opt,name=bucket_size,json=bucketSize,proto3" json:"bucket_size,omitempty"`
-	// Bucket duration in seconds, e.g. 1000 per <day>
-	BucketSeconds uint64 `protobuf:"varint,2,opt,name=bucket_seconds,json=bucketSeconds,proto3" json:"bucket_seconds,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_BucketSize    float64                `protobuf:"fixed64,1,opt,name=bucket_size,json=bucketSize,proto3"`
+	xxx_hidden_BucketSeconds uint64                 `protobuf:"varint,2,opt,name=bucket_seconds,json=bucketSeconds,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *SchemaOperationQuotas_LeakyBucket) Reset() {
@@ -1809,23 +2865,44 @@ func (x *SchemaOperationQuotas_LeakyBucket) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SchemaOperationQuotas_LeakyBucket.ProtoReflect.Descriptor instead.
-func (*SchemaOperationQuotas_LeakyBucket) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_cms_proto_rawDescGZIP(), []int{6, 0}
-}
-
 func (x *SchemaOperationQuotas_LeakyBucket) GetBucketSize() float64 {
 	if x != nil {
-		return x.BucketSize
+		return x.xxx_hidden_BucketSize
 	}
 	return 0
 }
 
 func (x *SchemaOperationQuotas_LeakyBucket) GetBucketSeconds() uint64 {
 	if x != nil {
-		return x.BucketSeconds
+		return x.xxx_hidden_BucketSeconds
 	}
 	return 0
+}
+
+func (x *SchemaOperationQuotas_LeakyBucket) SetBucketSize(v float64) {
+	x.xxx_hidden_BucketSize = v
+}
+
+func (x *SchemaOperationQuotas_LeakyBucket) SetBucketSeconds(v uint64) {
+	x.xxx_hidden_BucketSeconds = v
+}
+
+type SchemaOperationQuotas_LeakyBucket_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Bucket size, e.g. <1000> per day
+	BucketSize float64
+	// Bucket duration in seconds, e.g. 1000 per <day>
+	BucketSeconds uint64
+}
+
+func (b0 SchemaOperationQuotas_LeakyBucket_builder) Build() *SchemaOperationQuotas_LeakyBucket {
+	m0 := &SchemaOperationQuotas_LeakyBucket{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_BucketSize = b.BucketSize
+	x.xxx_hidden_BucketSeconds = b.BucketSeconds
+	return m0
 }
 
 var File_protos_ydb_cms_proto protoreflect.FileDescriptor
@@ -1973,18 +3050,6 @@ const file_protos_ydb_cms_proto_rawDesc = "" +
 	"\x13computational_units\x18\x03 \x03(\v2%.Ydb.Cms.ComputationalUnitDescriptionR\x12computationalUnitsBO\n" +
 	"\x12tech.ydb.proto.cmsZ6github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Cms\xf8\x01\x01b\x06proto3"
 
-var (
-	file_protos_ydb_cms_proto_rawDescOnce sync.Once
-	file_protos_ydb_cms_proto_rawDescData []byte
-)
-
-func file_protos_ydb_cms_proto_rawDescGZIP() []byte {
-	file_protos_ydb_cms_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_cms_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_cms_proto_rawDesc), len(file_protos_ydb_cms_proto_rawDesc)))
-	})
-	return file_protos_ydb_cms_proto_rawDescData
-}
-
 var file_protos_ydb_cms_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_protos_ydb_cms_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_protos_ydb_cms_proto_goTypes = []any{
@@ -2082,14 +3147,14 @@ func file_protos_ydb_cms_proto_init() {
 		return
 	}
 	file_protos_ydb_cms_proto_msgTypes[8].OneofWrappers = []any{
-		(*CreateDatabaseRequest_Resources)(nil),
-		(*CreateDatabaseRequest_SharedResources)(nil),
-		(*CreateDatabaseRequest_ServerlessResources)(nil),
+		(*createDatabaseRequest_Resources)(nil),
+		(*createDatabaseRequest_SharedResources)(nil),
+		(*createDatabaseRequest_ServerlessResources)(nil),
 	}
 	file_protos_ydb_cms_proto_msgTypes[12].OneofWrappers = []any{
-		(*GetDatabaseStatusResult_RequiredResources)(nil),
-		(*GetDatabaseStatusResult_RequiredSharedResources)(nil),
-		(*GetDatabaseStatusResult_ServerlessResources)(nil),
+		(*getDatabaseStatusResult_RequiredResources)(nil),
+		(*getDatabaseStatusResult_RequiredSharedResources)(nil),
+		(*getDatabaseStatusResult_ServerlessResources)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

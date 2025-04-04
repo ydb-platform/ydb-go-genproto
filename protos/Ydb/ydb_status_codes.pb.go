@@ -10,7 +10,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -120,13 +119,8 @@ func (x StatusIds_StatusCode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use StatusIds_StatusCode.Descriptor instead.
-func (StatusIds_StatusCode) EnumDescriptor() ([]byte, []int) {
-	return file_protos_ydb_status_codes_proto_rawDescGZIP(), []int{0, 0}
-}
-
 type StatusIds struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -156,9 +150,16 @@ func (x *StatusIds) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StatusIds.ProtoReflect.Descriptor instead.
-func (*StatusIds) Descriptor() ([]byte, []int) {
-	return file_protos_ydb_status_codes_proto_rawDescGZIP(), []int{0}
+type StatusIds_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 StatusIds_builder) Build() *StatusIds {
+	m0 := &StatusIds{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
 }
 
 var File_protos_ydb_status_codes_proto protoreflect.FileDescriptor
@@ -192,18 +193,6 @@ const file_protos_ydb_status_codes_proto_rawDesc = "" +
 	"\fSESSION_BUSY\x10\xbe\xb6\x18\x12\x14\n" +
 	"\x0eEXTERNAL_ERROR\x10ȶ\x18BW\n" +
 	"\x0etech.ydb.protoB\x11StatusCodesProtosZ2github.com/ydb-platform/ydb-go-genproto/protos/Ydbb\x06proto3"
-
-var (
-	file_protos_ydb_status_codes_proto_rawDescOnce sync.Once
-	file_protos_ydb_status_codes_proto_rawDescData []byte
-)
-
-func file_protos_ydb_status_codes_proto_rawDescGZIP() []byte {
-	file_protos_ydb_status_codes_proto_rawDescOnce.Do(func() {
-		file_protos_ydb_status_codes_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_protos_ydb_status_codes_proto_rawDesc), len(file_protos_ydb_status_codes_proto_rawDesc)))
-	})
-	return file_protos_ydb_status_codes_proto_rawDescData
-}
 
 var file_protos_ydb_status_codes_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_protos_ydb_status_codes_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
