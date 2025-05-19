@@ -20,8 +20,9 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ImportService_ImportFromS3_FullMethodName = "/Ydb.Import.V1.ImportService/ImportFromS3"
-	ImportService_ImportData_FullMethodName   = "/Ydb.Import.V1.ImportService/ImportData"
+	ImportService_ImportFromS3_FullMethodName          = "/Ydb.Import.V1.ImportService/ImportFromS3"
+	ImportService_ListObjectsInS3Export_FullMethodName = "/Ydb.Import.V1.ImportService/ListObjectsInS3Export"
+	ImportService_ImportData_FullMethodName            = "/Ydb.Import.V1.ImportService/ImportData"
 )
 
 // ImportServiceClient is the client API for ImportService service.
@@ -31,6 +32,8 @@ type ImportServiceClient interface {
 	// Imports data from S3.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	ImportFromS3(ctx context.Context, in *Ydb_Import.ImportFromS3Request, opts ...grpc.CallOption) (*Ydb_Import.ImportFromS3Response, error)
+	// List objects from existing export stored in S3 bucket
+	ListObjectsInS3Export(ctx context.Context, in *Ydb_Import.ListObjectsInS3ExportRequest, opts ...grpc.CallOption) (*Ydb_Import.ListObjectsInS3ExportResponse, error)
 	// Writes data to a table.
 	// Method accepts serialized data in the selected format and writes it non-transactionally.
 	ImportData(ctx context.Context, in *Ydb_Import.ImportDataRequest, opts ...grpc.CallOption) (*Ydb_Import.ImportDataResponse, error)
@@ -53,6 +56,15 @@ func (c *importServiceClient) ImportFromS3(ctx context.Context, in *Ydb_Import.I
 	return out, nil
 }
 
+func (c *importServiceClient) ListObjectsInS3Export(ctx context.Context, in *Ydb_Import.ListObjectsInS3ExportRequest, opts ...grpc.CallOption) (*Ydb_Import.ListObjectsInS3ExportResponse, error) {
+	out := new(Ydb_Import.ListObjectsInS3ExportResponse)
+	err := c.cc.Invoke(ctx, ImportService_ListObjectsInS3Export_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *importServiceClient) ImportData(ctx context.Context, in *Ydb_Import.ImportDataRequest, opts ...grpc.CallOption) (*Ydb_Import.ImportDataResponse, error) {
 	out := new(Ydb_Import.ImportDataResponse)
 	err := c.cc.Invoke(ctx, ImportService_ImportData_FullMethodName, in, out, opts...)
@@ -69,6 +81,8 @@ type ImportServiceServer interface {
 	// Imports data from S3.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	ImportFromS3(context.Context, *Ydb_Import.ImportFromS3Request) (*Ydb_Import.ImportFromS3Response, error)
+	// List objects from existing export stored in S3 bucket
+	ListObjectsInS3Export(context.Context, *Ydb_Import.ListObjectsInS3ExportRequest) (*Ydb_Import.ListObjectsInS3ExportResponse, error)
 	// Writes data to a table.
 	// Method accepts serialized data in the selected format and writes it non-transactionally.
 	ImportData(context.Context, *Ydb_Import.ImportDataRequest) (*Ydb_Import.ImportDataResponse, error)
@@ -81,6 +95,9 @@ type UnimplementedImportServiceServer struct {
 
 func (UnimplementedImportServiceServer) ImportFromS3(context.Context, *Ydb_Import.ImportFromS3Request) (*Ydb_Import.ImportFromS3Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportFromS3 not implemented")
+}
+func (UnimplementedImportServiceServer) ListObjectsInS3Export(context.Context, *Ydb_Import.ListObjectsInS3ExportRequest) (*Ydb_Import.ListObjectsInS3ExportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListObjectsInS3Export not implemented")
 }
 func (UnimplementedImportServiceServer) ImportData(context.Context, *Ydb_Import.ImportDataRequest) (*Ydb_Import.ImportDataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportData not implemented")
@@ -116,6 +133,24 @@ func _ImportService_ImportFromS3_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ImportService_ListObjectsInS3Export_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ydb_Import.ListObjectsInS3ExportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ImportServiceServer).ListObjectsInS3Export(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ImportService_ListObjectsInS3Export_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ImportServiceServer).ListObjectsInS3Export(ctx, req.(*Ydb_Import.ListObjectsInS3ExportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ImportService_ImportData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Ydb_Import.ImportDataRequest)
 	if err := dec(in); err != nil {
@@ -144,6 +179,10 @@ var ImportService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ImportFromS3",
 			Handler:    _ImportService_ImportFromS3_Handler,
+		},
+		{
+			MethodName: "ListObjectsInS3Export",
+			Handler:    _ImportService_ListObjectsInS3Export_Handler,
 		},
 		{
 			MethodName: "ImportData",
