@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	ExportService_ExportToYt_FullMethodName = "/Ydb.Export.V1.ExportService/ExportToYt"
 	ExportService_ExportToS3_FullMethodName = "/Ydb.Export.V1.ExportService/ExportToS3"
+	ExportService_ExportToFs_FullMethodName = "/Ydb.Export.V1.ExportService/ExportToFs"
 )
 
 // ExportServiceClient is the client API for ExportService service.
@@ -34,6 +35,9 @@ type ExportServiceClient interface {
 	// Exports data to S3.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	ExportToS3(ctx context.Context, in *Ydb_Export.ExportToS3Request, opts ...grpc.CallOption) (*Ydb_Export.ExportToS3Response, error)
+	// Exports data to file system.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	ExportToFs(ctx context.Context, in *Ydb_Export.ExportToFsRequest, opts ...grpc.CallOption) (*Ydb_Export.ExportToFsResponse, error)
 }
 
 type exportServiceClient struct {
@@ -62,6 +66,15 @@ func (c *exportServiceClient) ExportToS3(ctx context.Context, in *Ydb_Export.Exp
 	return out, nil
 }
 
+func (c *exportServiceClient) ExportToFs(ctx context.Context, in *Ydb_Export.ExportToFsRequest, opts ...grpc.CallOption) (*Ydb_Export.ExportToFsResponse, error) {
+	out := new(Ydb_Export.ExportToFsResponse)
+	err := c.cc.Invoke(ctx, ExportService_ExportToFs_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ExportServiceServer is the server API for ExportService service.
 // All implementations must embed UnimplementedExportServiceServer
 // for forward compatibility
@@ -72,6 +85,9 @@ type ExportServiceServer interface {
 	// Exports data to S3.
 	// Method starts an asynchronous operation that can be cancelled while it is in progress.
 	ExportToS3(context.Context, *Ydb_Export.ExportToS3Request) (*Ydb_Export.ExportToS3Response, error)
+	// Exports data to file system.
+	// Method starts an asynchronous operation that can be cancelled while it is in progress.
+	ExportToFs(context.Context, *Ydb_Export.ExportToFsRequest) (*Ydb_Export.ExportToFsResponse, error)
 	mustEmbedUnimplementedExportServiceServer()
 }
 
@@ -84,6 +100,9 @@ func (UnimplementedExportServiceServer) ExportToYt(context.Context, *Ydb_Export.
 }
 func (UnimplementedExportServiceServer) ExportToS3(context.Context, *Ydb_Export.ExportToS3Request) (*Ydb_Export.ExportToS3Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportToS3 not implemented")
+}
+func (UnimplementedExportServiceServer) ExportToFs(context.Context, *Ydb_Export.ExportToFsRequest) (*Ydb_Export.ExportToFsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportToFs not implemented")
 }
 func (UnimplementedExportServiceServer) mustEmbedUnimplementedExportServiceServer() {}
 
@@ -134,6 +153,24 @@ func _ExportService_ExportToS3_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ExportService_ExportToFs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ydb_Export.ExportToFsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ExportServiceServer).ExportToFs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ExportService_ExportToFs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ExportServiceServer).ExportToFs(ctx, req.(*Ydb_Export.ExportToFsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ExportService_ServiceDesc is the grpc.ServiceDesc for ExportService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -148,6 +185,10 @@ var ExportService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportToS3",
 			Handler:    _ExportService_ExportToS3_Handler,
+		},
+		{
+			MethodName: "ExportToFs",
+			Handler:    _ExportService_ExportToFs_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
