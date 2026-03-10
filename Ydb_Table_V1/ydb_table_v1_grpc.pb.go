@@ -20,28 +20,31 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	TableService_CreateSession_FullMethodName          = "/Ydb.Table.V1.TableService/CreateSession"
-	TableService_DeleteSession_FullMethodName          = "/Ydb.Table.V1.TableService/DeleteSession"
-	TableService_KeepAlive_FullMethodName              = "/Ydb.Table.V1.TableService/KeepAlive"
-	TableService_CreateTable_FullMethodName            = "/Ydb.Table.V1.TableService/CreateTable"
-	TableService_DropTable_FullMethodName              = "/Ydb.Table.V1.TableService/DropTable"
-	TableService_AlterTable_FullMethodName             = "/Ydb.Table.V1.TableService/AlterTable"
-	TableService_CopyTable_FullMethodName              = "/Ydb.Table.V1.TableService/CopyTable"
-	TableService_CopyTables_FullMethodName             = "/Ydb.Table.V1.TableService/CopyTables"
-	TableService_RenameTables_FullMethodName           = "/Ydb.Table.V1.TableService/RenameTables"
-	TableService_DescribeTable_FullMethodName          = "/Ydb.Table.V1.TableService/DescribeTable"
-	TableService_ExplainDataQuery_FullMethodName       = "/Ydb.Table.V1.TableService/ExplainDataQuery"
-	TableService_PrepareDataQuery_FullMethodName       = "/Ydb.Table.V1.TableService/PrepareDataQuery"
-	TableService_ExecuteDataQuery_FullMethodName       = "/Ydb.Table.V1.TableService/ExecuteDataQuery"
-	TableService_ExecuteSchemeQuery_FullMethodName     = "/Ydb.Table.V1.TableService/ExecuteSchemeQuery"
-	TableService_BeginTransaction_FullMethodName       = "/Ydb.Table.V1.TableService/BeginTransaction"
-	TableService_CommitTransaction_FullMethodName      = "/Ydb.Table.V1.TableService/CommitTransaction"
-	TableService_RollbackTransaction_FullMethodName    = "/Ydb.Table.V1.TableService/RollbackTransaction"
-	TableService_DescribeTableOptions_FullMethodName   = "/Ydb.Table.V1.TableService/DescribeTableOptions"
-	TableService_StreamReadTable_FullMethodName        = "/Ydb.Table.V1.TableService/StreamReadTable"
-	TableService_ReadRows_FullMethodName               = "/Ydb.Table.V1.TableService/ReadRows"
-	TableService_BulkUpsert_FullMethodName             = "/Ydb.Table.V1.TableService/BulkUpsert"
-	TableService_StreamExecuteScanQuery_FullMethodName = "/Ydb.Table.V1.TableService/StreamExecuteScanQuery"
+	TableService_CreateSession_FullMethodName              = "/Ydb.Table.V1.TableService/CreateSession"
+	TableService_DeleteSession_FullMethodName              = "/Ydb.Table.V1.TableService/DeleteSession"
+	TableService_KeepAlive_FullMethodName                  = "/Ydb.Table.V1.TableService/KeepAlive"
+	TableService_CreateTable_FullMethodName                = "/Ydb.Table.V1.TableService/CreateTable"
+	TableService_DropTable_FullMethodName                  = "/Ydb.Table.V1.TableService/DropTable"
+	TableService_AlterTable_FullMethodName                 = "/Ydb.Table.V1.TableService/AlterTable"
+	TableService_CopyTable_FullMethodName                  = "/Ydb.Table.V1.TableService/CopyTable"
+	TableService_CopyTables_FullMethodName                 = "/Ydb.Table.V1.TableService/CopyTables"
+	TableService_RenameTables_FullMethodName               = "/Ydb.Table.V1.TableService/RenameTables"
+	TableService_DescribeTable_FullMethodName              = "/Ydb.Table.V1.TableService/DescribeTable"
+	TableService_ExplainDataQuery_FullMethodName           = "/Ydb.Table.V1.TableService/ExplainDataQuery"
+	TableService_PrepareDataQuery_FullMethodName           = "/Ydb.Table.V1.TableService/PrepareDataQuery"
+	TableService_ExecuteDataQuery_FullMethodName           = "/Ydb.Table.V1.TableService/ExecuteDataQuery"
+	TableService_ExecuteSchemeQuery_FullMethodName         = "/Ydb.Table.V1.TableService/ExecuteSchemeQuery"
+	TableService_BeginTransaction_FullMethodName           = "/Ydb.Table.V1.TableService/BeginTransaction"
+	TableService_CommitTransaction_FullMethodName          = "/Ydb.Table.V1.TableService/CommitTransaction"
+	TableService_RollbackTransaction_FullMethodName        = "/Ydb.Table.V1.TableService/RollbackTransaction"
+	TableService_DescribeTableOptions_FullMethodName       = "/Ydb.Table.V1.TableService/DescribeTableOptions"
+	TableService_StreamReadTable_FullMethodName            = "/Ydb.Table.V1.TableService/StreamReadTable"
+	TableService_ReadRows_FullMethodName                   = "/Ydb.Table.V1.TableService/ReadRows"
+	TableService_BulkUpsert_FullMethodName                 = "/Ydb.Table.V1.TableService/BulkUpsert"
+	TableService_StreamExecuteScanQuery_FullMethodName     = "/Ydb.Table.V1.TableService/StreamExecuteScanQuery"
+	TableService_DescribeExternalDataSource_FullMethodName = "/Ydb.Table.V1.TableService/DescribeExternalDataSource"
+	TableService_DescribeExternalTable_FullMethodName      = "/Ydb.Table.V1.TableService/DescribeExternalTable"
+	TableService_DescribeSystemView_FullMethodName         = "/Ydb.Table.V1.TableService/DescribeSystemView"
 )
 
 // TableServiceClient is the client API for TableService service.
@@ -51,7 +54,7 @@ type TableServiceClient interface {
 	// Create new session. Implicit session creation is forbidden,
 	// so user must create new session before execute any query,
 	// otherwise BAD_SESSION status will be returned.
-	// Simultaneous execution of requests are forbiden.
+	// Simultaneous execution of requests are forbidden.
 	// Sessions are volatile, can be invalidated by server, for example in case
 	// of fatal errors. All requests with this session will fail with BAD_SESSION status.
 	// So, client must be able to handle BAD_SESSION status.
@@ -104,6 +107,12 @@ type TableServiceClient interface {
 	BulkUpsert(ctx context.Context, in *Ydb_Table.BulkUpsertRequest, opts ...grpc.CallOption) (*Ydb_Table.BulkUpsertResponse, error)
 	// Executes scan query with streaming result.
 	StreamExecuteScanQuery(ctx context.Context, in *Ydb_Table.ExecuteScanQueryRequest, opts ...grpc.CallOption) (TableService_StreamExecuteScanQueryClient, error)
+	// Returns information about a given external data source.
+	DescribeExternalDataSource(ctx context.Context, in *Ydb_Table.DescribeExternalDataSourceRequest, opts ...grpc.CallOption) (*Ydb_Table.DescribeExternalDataSourceResponse, error)
+	// Returns information about a given external table.
+	DescribeExternalTable(ctx context.Context, in *Ydb_Table.DescribeExternalTableRequest, opts ...grpc.CallOption) (*Ydb_Table.DescribeExternalTableResponse, error)
+	// Returns information about a given system view table.
+	DescribeSystemView(ctx context.Context, in *Ydb_Table.DescribeSystemViewRequest, opts ...grpc.CallOption) (*Ydb_Table.DescribeSystemViewResponse, error)
 }
 
 type tableServiceClient struct {
@@ -358,6 +367,33 @@ func (x *tableServiceStreamExecuteScanQueryClient) Recv() (*Ydb_Table.ExecuteSca
 	return m, nil
 }
 
+func (c *tableServiceClient) DescribeExternalDataSource(ctx context.Context, in *Ydb_Table.DescribeExternalDataSourceRequest, opts ...grpc.CallOption) (*Ydb_Table.DescribeExternalDataSourceResponse, error) {
+	out := new(Ydb_Table.DescribeExternalDataSourceResponse)
+	err := c.cc.Invoke(ctx, TableService_DescribeExternalDataSource_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tableServiceClient) DescribeExternalTable(ctx context.Context, in *Ydb_Table.DescribeExternalTableRequest, opts ...grpc.CallOption) (*Ydb_Table.DescribeExternalTableResponse, error) {
+	out := new(Ydb_Table.DescribeExternalTableResponse)
+	err := c.cc.Invoke(ctx, TableService_DescribeExternalTable_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tableServiceClient) DescribeSystemView(ctx context.Context, in *Ydb_Table.DescribeSystemViewRequest, opts ...grpc.CallOption) (*Ydb_Table.DescribeSystemViewResponse, error) {
+	out := new(Ydb_Table.DescribeSystemViewResponse)
+	err := c.cc.Invoke(ctx, TableService_DescribeSystemView_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TableServiceServer is the server API for TableService service.
 // All implementations must embed UnimplementedTableServiceServer
 // for forward compatibility
@@ -365,7 +401,7 @@ type TableServiceServer interface {
 	// Create new session. Implicit session creation is forbidden,
 	// so user must create new session before execute any query,
 	// otherwise BAD_SESSION status will be returned.
-	// Simultaneous execution of requests are forbiden.
+	// Simultaneous execution of requests are forbidden.
 	// Sessions are volatile, can be invalidated by server, for example in case
 	// of fatal errors. All requests with this session will fail with BAD_SESSION status.
 	// So, client must be able to handle BAD_SESSION status.
@@ -418,6 +454,12 @@ type TableServiceServer interface {
 	BulkUpsert(context.Context, *Ydb_Table.BulkUpsertRequest) (*Ydb_Table.BulkUpsertResponse, error)
 	// Executes scan query with streaming result.
 	StreamExecuteScanQuery(*Ydb_Table.ExecuteScanQueryRequest, TableService_StreamExecuteScanQueryServer) error
+	// Returns information about a given external data source.
+	DescribeExternalDataSource(context.Context, *Ydb_Table.DescribeExternalDataSourceRequest) (*Ydb_Table.DescribeExternalDataSourceResponse, error)
+	// Returns information about a given external table.
+	DescribeExternalTable(context.Context, *Ydb_Table.DescribeExternalTableRequest) (*Ydb_Table.DescribeExternalTableResponse, error)
+	// Returns information about a given system view table.
+	DescribeSystemView(context.Context, *Ydb_Table.DescribeSystemViewRequest) (*Ydb_Table.DescribeSystemViewResponse, error)
 	mustEmbedUnimplementedTableServiceServer()
 }
 
@@ -490,6 +532,15 @@ func (UnimplementedTableServiceServer) BulkUpsert(context.Context, *Ydb_Table.Bu
 }
 func (UnimplementedTableServiceServer) StreamExecuteScanQuery(*Ydb_Table.ExecuteScanQueryRequest, TableService_StreamExecuteScanQueryServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamExecuteScanQuery not implemented")
+}
+func (UnimplementedTableServiceServer) DescribeExternalDataSource(context.Context, *Ydb_Table.DescribeExternalDataSourceRequest) (*Ydb_Table.DescribeExternalDataSourceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DescribeExternalDataSource not implemented")
+}
+func (UnimplementedTableServiceServer) DescribeExternalTable(context.Context, *Ydb_Table.DescribeExternalTableRequest) (*Ydb_Table.DescribeExternalTableResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DescribeExternalTable not implemented")
+}
+func (UnimplementedTableServiceServer) DescribeSystemView(context.Context, *Ydb_Table.DescribeSystemViewRequest) (*Ydb_Table.DescribeSystemViewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DescribeSystemView not implemented")
 }
 func (UnimplementedTableServiceServer) mustEmbedUnimplementedTableServiceServer() {}
 
@@ -906,6 +957,60 @@ func (x *tableServiceStreamExecuteScanQueryServer) Send(m *Ydb_Table.ExecuteScan
 	return x.ServerStream.SendMsg(m)
 }
 
+func _TableService_DescribeExternalDataSource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ydb_Table.DescribeExternalDataSourceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TableServiceServer).DescribeExternalDataSource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TableService_DescribeExternalDataSource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TableServiceServer).DescribeExternalDataSource(ctx, req.(*Ydb_Table.DescribeExternalDataSourceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TableService_DescribeExternalTable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ydb_Table.DescribeExternalTableRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TableServiceServer).DescribeExternalTable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TableService_DescribeExternalTable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TableServiceServer).DescribeExternalTable(ctx, req.(*Ydb_Table.DescribeExternalTableRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TableService_DescribeSystemView_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ydb_Table.DescribeSystemViewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TableServiceServer).DescribeSystemView(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TableService_DescribeSystemView_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TableServiceServer).DescribeSystemView(ctx, req.(*Ydb_Table.DescribeSystemViewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TableService_ServiceDesc is the grpc.ServiceDesc for TableService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -992,6 +1097,18 @@ var TableService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BulkUpsert",
 			Handler:    _TableService_BulkUpsert_Handler,
+		},
+		{
+			MethodName: "DescribeExternalDataSource",
+			Handler:    _TableService_DescribeExternalDataSource_Handler,
+		},
+		{
+			MethodName: "DescribeExternalTable",
+			Handler:    _TableService_DescribeExternalTable_Handler,
+		},
+		{
+			MethodName: "DescribeSystemView",
+			Handler:    _TableService_DescribeSystemView_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
