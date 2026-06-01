@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: ydb_monitoring_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_Monitoring_V1
 
 import (
 	Ydb_Monitoring "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Monitoring"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,11 +25,11 @@ var File_ydb_monitoring_v1_proto protoreflect.FileDescriptor
 
 const file_ydb_monitoring_v1_proto_rawDesc = "" +
 	"\n" +
-	"\x17ydb_monitoring_v1.proto\x12\x11Ydb.Monitoring.V1\x1a\x1bprotos/ydb_monitoring.proto\x1a!google/protobuf/go_features.proto2\xb7\x01\n" +
+	"\x17ydb_monitoring_v1.proto\x12\x11Ydb.Monitoring.V1\x1a\x1bprotos/ydb_monitoring.proto2\xb7\x01\n" +
 	"\x11MonitoringService\x12P\n" +
 	"\tSelfCheck\x12 .Ydb.Monitoring.SelfCheckRequest\x1a!.Ydb.Monitoring.SelfCheckResponse\x12P\n" +
-	"\tNodeCheck\x12 .Ydb.Monitoring.NodeCheckRequest\x1a!.Ydb.Monitoring.NodeCheckResponseBa\n" +
-	"\x1ctech.ydb.proto.monitoring.v1Z9github.com/ydb-platform/ydb-go-genproto/Ydb_Monitoring_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\tNodeCheck\x12 .Ydb.Monitoring.NodeCheckRequest\x1a!.Ydb.Monitoring.NodeCheckResponseBY\n" +
+	"\x1ctech.ydb.proto.monitoring.v1Z9github.com/ydb-platform/ydb-go-genproto/Ydb_Monitoring_V1b\x06proto3"
 
 var file_ydb_monitoring_v1_proto_goTypes = []any{
 	(*Ydb_Monitoring.SelfCheckRequest)(nil),  // 0: Ydb.Monitoring.SelfCheckRequest

@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: ydb_import_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_Import_V1
 
 import (
 	Ydb_Import "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Import"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,26 +25,41 @@ var File_ydb_import_v1_proto protoreflect.FileDescriptor
 
 const file_ydb_import_v1_proto_rawDesc = "" +
 	"\n" +
-	"\x13ydb_import_v1.proto\x12\rYdb.Import.V1\x1a\x17protos/ydb_import.proto\x1a!google/protobuf/go_features.proto2\xaf\x01\n" +
+	"\x13ydb_import_v1.proto\x12\rYdb.Import.V1\x1a\x17protos/ydb_import.proto2\xde\x03\n" +
 	"\rImportService\x12Q\n" +
-	"\fImportFromS3\x12\x1f.Ydb.Import.ImportFromS3Request\x1a .Ydb.Import.ImportFromS3Response\x12K\n" +
+	"\fImportFromS3\x12\x1f.Ydb.Import.ImportFromS3Request\x1a .Ydb.Import.ImportFromS3Response\x12Q\n" +
+	"\fImportFromFs\x12\x1f.Ydb.Import.ImportFromFsRequest\x1a .Ydb.Import.ImportFromFsResponse\x12l\n" +
+	"\x15ListObjectsInS3Export\x12(.Ydb.Import.ListObjectsInS3ExportRequest\x1a).Ydb.Import.ListObjectsInS3ExportResponse\x12l\n" +
+	"\x15ListObjectsInFsExport\x12(.Ydb.Import.ListObjectsInFsExportRequest\x1a).Ydb.Import.ListObjectsInFsExportResponse\x12K\n" +
 	"\n" +
-	"ImportData\x12\x1d.Ydb.Import.ImportDataRequest\x1a\x1e.Ydb.Import.ImportDataResponseBZ\n" +
-	"\x19tech.ydb.proto.import_.v1Z5github.com/ydb-platform/ydb-go-genproto/Ydb_Import_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"ImportData\x12\x1d.Ydb.Import.ImportDataRequest\x1a\x1e.Ydb.Import.ImportDataResponseBR\n" +
+	"\x19tech.ydb.proto.import_.v1Z5github.com/ydb-platform/ydb-go-genproto/Ydb_Import_V1b\x06proto3"
 
 var file_ydb_import_v1_proto_goTypes = []any{
-	(*Ydb_Import.ImportFromS3Request)(nil),  // 0: Ydb.Import.ImportFromS3Request
-	(*Ydb_Import.ImportDataRequest)(nil),    // 1: Ydb.Import.ImportDataRequest
-	(*Ydb_Import.ImportFromS3Response)(nil), // 2: Ydb.Import.ImportFromS3Response
-	(*Ydb_Import.ImportDataResponse)(nil),   // 3: Ydb.Import.ImportDataResponse
+	(*Ydb_Import.ImportFromS3Request)(nil),           // 0: Ydb.Import.ImportFromS3Request
+	(*Ydb_Import.ImportFromFsRequest)(nil),           // 1: Ydb.Import.ImportFromFsRequest
+	(*Ydb_Import.ListObjectsInS3ExportRequest)(nil),  // 2: Ydb.Import.ListObjectsInS3ExportRequest
+	(*Ydb_Import.ListObjectsInFsExportRequest)(nil),  // 3: Ydb.Import.ListObjectsInFsExportRequest
+	(*Ydb_Import.ImportDataRequest)(nil),             // 4: Ydb.Import.ImportDataRequest
+	(*Ydb_Import.ImportFromS3Response)(nil),          // 5: Ydb.Import.ImportFromS3Response
+	(*Ydb_Import.ImportFromFsResponse)(nil),          // 6: Ydb.Import.ImportFromFsResponse
+	(*Ydb_Import.ListObjectsInS3ExportResponse)(nil), // 7: Ydb.Import.ListObjectsInS3ExportResponse
+	(*Ydb_Import.ListObjectsInFsExportResponse)(nil), // 8: Ydb.Import.ListObjectsInFsExportResponse
+	(*Ydb_Import.ImportDataResponse)(nil),            // 9: Ydb.Import.ImportDataResponse
 }
 var file_ydb_import_v1_proto_depIdxs = []int32{
 	0, // 0: Ydb.Import.V1.ImportService.ImportFromS3:input_type -> Ydb.Import.ImportFromS3Request
-	1, // 1: Ydb.Import.V1.ImportService.ImportData:input_type -> Ydb.Import.ImportDataRequest
-	2, // 2: Ydb.Import.V1.ImportService.ImportFromS3:output_type -> Ydb.Import.ImportFromS3Response
-	3, // 3: Ydb.Import.V1.ImportService.ImportData:output_type -> Ydb.Import.ImportDataResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	1, // 1: Ydb.Import.V1.ImportService.ImportFromFs:input_type -> Ydb.Import.ImportFromFsRequest
+	2, // 2: Ydb.Import.V1.ImportService.ListObjectsInS3Export:input_type -> Ydb.Import.ListObjectsInS3ExportRequest
+	3, // 3: Ydb.Import.V1.ImportService.ListObjectsInFsExport:input_type -> Ydb.Import.ListObjectsInFsExportRequest
+	4, // 4: Ydb.Import.V1.ImportService.ImportData:input_type -> Ydb.Import.ImportDataRequest
+	5, // 5: Ydb.Import.V1.ImportService.ImportFromS3:output_type -> Ydb.Import.ImportFromS3Response
+	6, // 6: Ydb.Import.V1.ImportService.ImportFromFs:output_type -> Ydb.Import.ImportFromFsResponse
+	7, // 7: Ydb.Import.V1.ImportService.ListObjectsInS3Export:output_type -> Ydb.Import.ListObjectsInS3ExportResponse
+	8, // 8: Ydb.Import.V1.ImportService.ListObjectsInFsExport:output_type -> Ydb.Import.ListObjectsInFsExportResponse
+	9, // 9: Ydb.Import.V1.ImportService.ImportData:output_type -> Ydb.Import.ImportDataResponse
+	5, // [5:10] is the sub-list for method output_type
+	0, // [0:5] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

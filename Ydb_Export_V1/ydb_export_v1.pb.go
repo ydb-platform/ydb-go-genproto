@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: ydb_export_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_Export_V1
 
 import (
 	Ydb_Export "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Export"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,27 +25,33 @@ var File_ydb_export_v1_proto protoreflect.FileDescriptor
 
 const file_ydb_export_v1_proto_rawDesc = "" +
 	"\n" +
-	"\x13ydb_export_v1.proto\x12\rYdb.Export.V1\x1a\x17protos/ydb_export.proto\x1a!google/protobuf/go_features.proto2\xa9\x01\n" +
+	"\x13ydb_export_v1.proto\x12\rYdb.Export.V1\x1a\x17protos/ydb_export.proto2\xf6\x01\n" +
 	"\rExportService\x12K\n" +
 	"\n" +
 	"ExportToYt\x12\x1d.Ydb.Export.ExportToYtRequest\x1a\x1e.Ydb.Export.ExportToYtResponse\x12K\n" +
 	"\n" +
-	"ExportToS3\x12\x1d.Ydb.Export.ExportToS3Request\x1a\x1e.Ydb.Export.ExportToS3ResponseBY\n" +
-	"\x18tech.ydb.proto.export.v1Z5github.com/ydb-platform/ydb-go-genproto/Ydb_Export_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"ExportToS3\x12\x1d.Ydb.Export.ExportToS3Request\x1a\x1e.Ydb.Export.ExportToS3Response\x12K\n" +
+	"\n" +
+	"ExportToFs\x12\x1d.Ydb.Export.ExportToFsRequest\x1a\x1e.Ydb.Export.ExportToFsResponseBQ\n" +
+	"\x18tech.ydb.proto.export.v1Z5github.com/ydb-platform/ydb-go-genproto/Ydb_Export_V1b\x06proto3"
 
 var file_ydb_export_v1_proto_goTypes = []any{
 	(*Ydb_Export.ExportToYtRequest)(nil),  // 0: Ydb.Export.ExportToYtRequest
 	(*Ydb_Export.ExportToS3Request)(nil),  // 1: Ydb.Export.ExportToS3Request
-	(*Ydb_Export.ExportToYtResponse)(nil), // 2: Ydb.Export.ExportToYtResponse
-	(*Ydb_Export.ExportToS3Response)(nil), // 3: Ydb.Export.ExportToS3Response
+	(*Ydb_Export.ExportToFsRequest)(nil),  // 2: Ydb.Export.ExportToFsRequest
+	(*Ydb_Export.ExportToYtResponse)(nil), // 3: Ydb.Export.ExportToYtResponse
+	(*Ydb_Export.ExportToS3Response)(nil), // 4: Ydb.Export.ExportToS3Response
+	(*Ydb_Export.ExportToFsResponse)(nil), // 5: Ydb.Export.ExportToFsResponse
 }
 var file_ydb_export_v1_proto_depIdxs = []int32{
 	0, // 0: Ydb.Export.V1.ExportService.ExportToYt:input_type -> Ydb.Export.ExportToYtRequest
 	1, // 1: Ydb.Export.V1.ExportService.ExportToS3:input_type -> Ydb.Export.ExportToS3Request
-	2, // 2: Ydb.Export.V1.ExportService.ExportToYt:output_type -> Ydb.Export.ExportToYtResponse
-	3, // 3: Ydb.Export.V1.ExportService.ExportToS3:output_type -> Ydb.Export.ExportToS3Response
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	2, // 2: Ydb.Export.V1.ExportService.ExportToFs:input_type -> Ydb.Export.ExportToFsRequest
+	3, // 3: Ydb.Export.V1.ExportService.ExportToYt:output_type -> Ydb.Export.ExportToYtResponse
+	4, // 4: Ydb.Export.V1.ExportService.ExportToS3:output_type -> Ydb.Export.ExportToS3Response
+	5, // 5: Ydb.Export.V1.ExportService.ExportToFs:output_type -> Ydb.Export.ExportToFsResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

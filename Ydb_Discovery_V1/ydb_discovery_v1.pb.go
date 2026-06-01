@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: ydb_discovery_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_Discovery_V1
 
 import (
 	Ydb_Discovery "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Discovery"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,11 +25,11 @@ var File_ydb_discovery_v1_proto protoreflect.FileDescriptor
 
 const file_ydb_discovery_v1_proto_rawDesc = "" +
 	"\n" +
-	"\x16ydb_discovery_v1.proto\x12\x10Ydb.Discovery.V1\x1a\x1aprotos/ydb_discovery.proto\x1a!google/protobuf/go_features.proto2\xb5\x01\n" +
+	"\x16ydb_discovery_v1.proto\x12\x10Ydb.Discovery.V1\x1a\x1aprotos/ydb_discovery.proto2\xb5\x01\n" +
 	"\x10DiscoveryService\x12Z\n" +
 	"\rListEndpoints\x12#.Ydb.Discovery.ListEndpointsRequest\x1a$.Ydb.Discovery.ListEndpointsResponse\x12E\n" +
-	"\x06WhoAmI\x12\x1c.Ydb.Discovery.WhoAmIRequest\x1a\x1d.Ydb.Discovery.WhoAmIResponseB_\n" +
-	"\x1btech.ydb.proto.discovery.v1Z8github.com/ydb-platform/ydb-go-genproto/Ydb_Discovery_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x06WhoAmI\x12\x1c.Ydb.Discovery.WhoAmIRequest\x1a\x1d.Ydb.Discovery.WhoAmIResponseBW\n" +
+	"\x1btech.ydb.proto.discovery.v1Z8github.com/ydb-platform/ydb-go-genproto/Ydb_Discovery_V1b\x06proto3"
 
 var file_ydb_discovery_v1_proto_goTypes = []any{
 	(*Ydb_Discovery.ListEndpointsRequest)(nil),  // 0: Ydb.Discovery.ListEndpointsRequest

@@ -4,14 +4,11 @@
 // 	protoc        v6.30.2
 // source: protos/ydb_status_codes.proto
 
-//go:build !protoopaque
-
 package Ydb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -123,7 +120,7 @@ func (x StatusIds_StatusCode) Number() protoreflect.EnumNumber {
 }
 
 type StatusIds struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -169,7 +166,7 @@ var File_protos_ydb_status_codes_proto protoreflect.FileDescriptor
 
 const file_protos_ydb_status_codes_proto_rawDesc = "" +
 	"\n" +
-	"\x1dprotos/ydb_status_codes.proto\x12\x03Ydb\x1a!google/protobuf/go_features.proto\"\xbd\x03\n" +
+	"\x1dprotos/ydb_status_codes.proto\x12\x03Ydb\"\xbd\x03\n" +
 	"\tStatusIds\"\xaf\x03\n" +
 	"\n" +
 	"StatusCode\x12\x1b\n" +
@@ -194,8 +191,8 @@ const file_protos_ydb_status_codes_proto_rawDesc = "" +
 	"\fUNDETERMINED\x10\xaa\xb6\x18\x12\x11\n" +
 	"\vUNSUPPORTED\x10\xb4\xb6\x18\x12\x12\n" +
 	"\fSESSION_BUSY\x10\xbe\xb6\x18\x12\x14\n" +
-	"\x0eEXTERNAL_ERROR\x10ȶ\x18B_\n" +
-	"\x0etech.ydb.protoB\x11StatusCodesProtosZ2github.com/ydb-platform/ydb-go-genproto/protos/Ydb\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x0eEXTERNAL_ERROR\x10ȶ\x18BW\n" +
+	"\x0etech.ydb.protoB\x11StatusCodesProtosZ2github.com/ydb-platform/ydb-go-genproto/protos/Ydbb\x06proto3"
 
 var file_protos_ydb_status_codes_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_protos_ydb_status_codes_proto_msgTypes = make([]protoimpl.MessageInfo, 1)

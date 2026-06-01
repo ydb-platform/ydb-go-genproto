@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: protos/ydb_monitoring.proto
 
-//go:build !protoopaque
-
 package Ydb_Monitoring
 
 import (
 	Ydb_Operations "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -135,7 +132,7 @@ func (x SelfCheck_Result) Number() protoreflect.EnumNumber {
 }
 
 type StatusFlag struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -178,13 +175,13 @@ func (b0 StatusFlag_builder) Build() *StatusFlag {
 }
 
 type SelfCheckRequest struct {
-	state               protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams     *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`                                  // basic operation params, including timeout
-	ReturnVerboseStatus *bool                           `protobuf:"varint,2,opt,name=return_verbose_status,json=returnVerboseStatus" json:"return_verbose_status,omitempty"`                   // return detailed info about components checked with their statuses
-	MinimumStatus       *StatusFlag_Status              `protobuf:"varint,3,opt,name=minimum_status,json=minimumStatus,enum=Ydb.Monitoring.StatusFlag_Status" json:"minimum_status,omitempty"` // minimum status of issues to return
-	MaximumLevel        *uint32                         `protobuf:"varint,4,opt,name=maximum_level,json=maximumLevel" json:"maximum_level,omitempty"`                                          // maximum level of issues to return
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                          protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams     *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_ReturnVerboseStatus bool                            `protobuf:"varint,2,opt,name=return_verbose_status,json=returnVerboseStatus,proto3"`
+	xxx_hidden_MinimumStatus       StatusFlag_Status               `protobuf:"varint,3,opt,name=minimum_status,json=minimumStatus,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_MaximumLevel        uint32                          `protobuf:"varint,4,opt,name=maximum_level,json=maximumLevel,proto3"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *SelfCheckRequest) Reset() {
@@ -214,118 +211,84 @@ func (x *SelfCheckRequest) ProtoReflect() protoreflect.Message {
 
 func (x *SelfCheckRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *SelfCheckRequest) GetReturnVerboseStatus() bool {
-	if x != nil && x.ReturnVerboseStatus != nil {
-		return *x.ReturnVerboseStatus
+	if x != nil {
+		return x.xxx_hidden_ReturnVerboseStatus
 	}
 	return false
 }
 
 func (x *SelfCheckRequest) GetMinimumStatus() StatusFlag_Status {
-	if x != nil && x.MinimumStatus != nil {
-		return *x.MinimumStatus
+	if x != nil {
+		return x.xxx_hidden_MinimumStatus
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *SelfCheckRequest) GetMaximumLevel() uint32 {
-	if x != nil && x.MaximumLevel != nil {
-		return *x.MaximumLevel
+	if x != nil {
+		return x.xxx_hidden_MaximumLevel
 	}
 	return 0
 }
 
 func (x *SelfCheckRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *SelfCheckRequest) SetReturnVerboseStatus(v bool) {
-	x.ReturnVerboseStatus = &v
+	x.xxx_hidden_ReturnVerboseStatus = v
 }
 
 func (x *SelfCheckRequest) SetMinimumStatus(v StatusFlag_Status) {
-	x.MinimumStatus = &v
+	x.xxx_hidden_MinimumStatus = v
 }
 
 func (x *SelfCheckRequest) SetMaximumLevel(v uint32) {
-	x.MaximumLevel = &v
+	x.xxx_hidden_MaximumLevel = v
 }
 
 func (x *SelfCheckRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *SelfCheckRequest) HasReturnVerboseStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReturnVerboseStatus != nil
-}
-
-func (x *SelfCheckRequest) HasMinimumStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.MinimumStatus != nil
-}
-
-func (x *SelfCheckRequest) HasMaximumLevel() bool {
-	if x == nil {
-		return false
-	}
-	return x.MaximumLevel != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *SelfCheckRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *SelfCheckRequest) ClearReturnVerboseStatus() {
-	x.ReturnVerboseStatus = nil
-}
-
-func (x *SelfCheckRequest) ClearMinimumStatus() {
-	x.MinimumStatus = nil
-}
-
-func (x *SelfCheckRequest) ClearMaximumLevel() {
-	x.MaximumLevel = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type SelfCheckRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams     *Ydb_Operations.OperationParams
-	ReturnVerboseStatus *bool
-	MinimumStatus       *StatusFlag_Status
-	MaximumLevel        *uint32
+	ReturnVerboseStatus bool
+	MinimumStatus       StatusFlag_Status
+	MaximumLevel        uint32
 }
 
 func (b0 SelfCheckRequest_builder) Build() *SelfCheckRequest {
 	m0 := &SelfCheckRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.ReturnVerboseStatus = b.ReturnVerboseStatus
-	x.MinimumStatus = b.MinimumStatus
-	x.MaximumLevel = b.MaximumLevel
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_ReturnVerboseStatus = b.ReturnVerboseStatus
+	x.xxx_hidden_MinimumStatus = b.MinimumStatus
+	x.xxx_hidden_MaximumLevel = b.MaximumLevel
 	return m0
 }
 
 type SelfCheckResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// After successfull completion must contain SelfCheckResult.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *SelfCheckResponse) Reset() {
@@ -355,24 +318,24 @@ func (x *SelfCheckResponse) ProtoReflect() protoreflect.Message {
 
 func (x *SelfCheckResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *SelfCheckResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *SelfCheckResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *SelfCheckResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type SelfCheckResponse_builder struct {
@@ -386,15 +349,15 @@ func (b0 SelfCheckResponse_builder) Build() *SelfCheckResponse {
 	m0 := &SelfCheckResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type NodeCheckRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"` // basic operation params, including timeout
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *NodeCheckRequest) Reset() {
@@ -424,24 +387,24 @@ func (x *NodeCheckRequest) ProtoReflect() protoreflect.Message {
 
 func (x *NodeCheckRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *NodeCheckRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *NodeCheckRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *NodeCheckRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type NodeCheckRequest_builder struct {
@@ -454,16 +417,15 @@ func (b0 NodeCheckRequest_builder) Build() *NodeCheckRequest {
 	m0 := &NodeCheckRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
+	x.xxx_hidden_OperationParams = b.OperationParams
 	return m0
 }
 
 type NodeCheckResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// After successfull completion must contain SelfCheckResult.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *NodeCheckResponse) Reset() {
@@ -493,24 +455,24 @@ func (x *NodeCheckResponse) ProtoReflect() protoreflect.Message {
 
 func (x *NodeCheckResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *NodeCheckResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *NodeCheckResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *NodeCheckResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type NodeCheckResponse_builder struct {
@@ -524,12 +486,12 @@ func (b0 NodeCheckResponse_builder) Build() *NodeCheckResponse {
 	m0 := &NodeCheckResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type SelfCheck struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -572,11 +534,11 @@ func (b0 SelfCheck_builder) Build() *SelfCheck {
 }
 
 type StoragePDiskStatus struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Overall       *StatusFlag_Status     `protobuf:"varint,2,opt,name=overall,enum=Ydb.Monitoring.StatusFlag_Status" json:"overall,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id      string                 `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_Overall StatusFlag_Status      `protobuf:"varint,2,opt,name=overall,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *StoragePDiskStatus) Reset() {
@@ -605,73 +567,51 @@ func (x *StoragePDiskStatus) ProtoReflect() protoreflect.Message {
 }
 
 func (x *StoragePDiskStatus) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *StoragePDiskStatus) GetOverall() StatusFlag_Status {
-	if x != nil && x.Overall != nil {
-		return *x.Overall
+	if x != nil {
+		return x.xxx_hidden_Overall
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *StoragePDiskStatus) SetId(v string) {
-	x.Id = &v
+	x.xxx_hidden_Id = v
 }
 
 func (x *StoragePDiskStatus) SetOverall(v StatusFlag_Status) {
-	x.Overall = &v
-}
-
-func (x *StoragePDiskStatus) HasId() bool {
-	if x == nil {
-		return false
-	}
-	return x.Id != nil
-}
-
-func (x *StoragePDiskStatus) HasOverall() bool {
-	if x == nil {
-		return false
-	}
-	return x.Overall != nil
-}
-
-func (x *StoragePDiskStatus) ClearId() {
-	x.Id = nil
-}
-
-func (x *StoragePDiskStatus) ClearOverall() {
-	x.Overall = nil
+	x.xxx_hidden_Overall = v
 }
 
 type StoragePDiskStatus_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Id      *string
-	Overall *StatusFlag_Status
+	Id      string
+	Overall StatusFlag_Status
 }
 
 func (b0 StoragePDiskStatus_builder) Build() *StoragePDiskStatus {
 	m0 := &StoragePDiskStatus{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
-	x.Overall = b.Overall
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Overall = b.Overall
 	return m0
 }
 
 type StorageVDiskStatus struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Overall       *StatusFlag_Status     `protobuf:"varint,2,opt,name=overall,enum=Ydb.Monitoring.StatusFlag_Status" json:"overall,omitempty"`
-	VdiskStatus   *StatusFlag_Status     `protobuf:"varint,3,opt,name=vdisk_status,json=vdiskStatus,enum=Ydb.Monitoring.StatusFlag_Status" json:"vdisk_status,omitempty"`
-	Pdisk         *StoragePDiskStatus    `protobuf:"bytes,4,opt,name=pdisk" json:"pdisk,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          string                 `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_Overall     StatusFlag_Status      `protobuf:"varint,2,opt,name=overall,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_VdiskStatus StatusFlag_Status      `protobuf:"varint,3,opt,name=vdisk_status,json=vdiskStatus,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_Pdisk       *StoragePDiskStatus    `protobuf:"bytes,4,opt,name=pdisk,proto3"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *StorageVDiskStatus) Reset() {
@@ -700,99 +640,66 @@ func (x *StorageVDiskStatus) ProtoReflect() protoreflect.Message {
 }
 
 func (x *StorageVDiskStatus) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *StorageVDiskStatus) GetOverall() StatusFlag_Status {
-	if x != nil && x.Overall != nil {
-		return *x.Overall
+	if x != nil {
+		return x.xxx_hidden_Overall
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *StorageVDiskStatus) GetVdiskStatus() StatusFlag_Status {
-	if x != nil && x.VdiskStatus != nil {
-		return *x.VdiskStatus
+	if x != nil {
+		return x.xxx_hidden_VdiskStatus
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *StorageVDiskStatus) GetPdisk() *StoragePDiskStatus {
 	if x != nil {
-		return x.Pdisk
+		return x.xxx_hidden_Pdisk
 	}
 	return nil
 }
 
 func (x *StorageVDiskStatus) SetId(v string) {
-	x.Id = &v
+	x.xxx_hidden_Id = v
 }
 
 func (x *StorageVDiskStatus) SetOverall(v StatusFlag_Status) {
-	x.Overall = &v
+	x.xxx_hidden_Overall = v
 }
 
 func (x *StorageVDiskStatus) SetVdiskStatus(v StatusFlag_Status) {
-	x.VdiskStatus = &v
+	x.xxx_hidden_VdiskStatus = v
 }
 
 func (x *StorageVDiskStatus) SetPdisk(v *StoragePDiskStatus) {
-	x.Pdisk = v
-}
-
-func (x *StorageVDiskStatus) HasId() bool {
-	if x == nil {
-		return false
-	}
-	return x.Id != nil
-}
-
-func (x *StorageVDiskStatus) HasOverall() bool {
-	if x == nil {
-		return false
-	}
-	return x.Overall != nil
-}
-
-func (x *StorageVDiskStatus) HasVdiskStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.VdiskStatus != nil
+	x.xxx_hidden_Pdisk = v
 }
 
 func (x *StorageVDiskStatus) HasPdisk() bool {
 	if x == nil {
 		return false
 	}
-	return x.Pdisk != nil
-}
-
-func (x *StorageVDiskStatus) ClearId() {
-	x.Id = nil
-}
-
-func (x *StorageVDiskStatus) ClearOverall() {
-	x.Overall = nil
-}
-
-func (x *StorageVDiskStatus) ClearVdiskStatus() {
-	x.VdiskStatus = nil
+	return x.xxx_hidden_Pdisk != nil
 }
 
 func (x *StorageVDiskStatus) ClearPdisk() {
-	x.Pdisk = nil
+	x.xxx_hidden_Pdisk = nil
 }
 
 type StorageVDiskStatus_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Id          *string
-	Overall     *StatusFlag_Status
-	VdiskStatus *StatusFlag_Status
+	Id          string
+	Overall     StatusFlag_Status
+	VdiskStatus StatusFlag_Status
 	Pdisk       *StoragePDiskStatus
 }
 
@@ -800,20 +707,20 @@ func (b0 StorageVDiskStatus_builder) Build() *StorageVDiskStatus {
 	m0 := &StorageVDiskStatus{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
-	x.Overall = b.Overall
-	x.VdiskStatus = b.VdiskStatus
-	x.Pdisk = b.Pdisk
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Overall = b.Overall
+	x.xxx_hidden_VdiskStatus = b.VdiskStatus
+	x.xxx_hidden_Pdisk = b.Pdisk
 	return m0
 }
 
 type StorageGroupStatus struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Overall       *StatusFlag_Status     `protobuf:"varint,2,opt,name=overall,enum=Ydb.Monitoring.StatusFlag_Status" json:"overall,omitempty"`
-	Vdisks        []*StorageVDiskStatus  `protobuf:"bytes,3,rep,name=vdisks" json:"vdisks,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id      string                 `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_Overall StatusFlag_Status      `protobuf:"varint,2,opt,name=overall,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_Vdisks  *[]*StorageVDiskStatus `protobuf:"bytes,3,rep,name=vdisks,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *StorageGroupStatus) Reset() {
@@ -842,65 +749,45 @@ func (x *StorageGroupStatus) ProtoReflect() protoreflect.Message {
 }
 
 func (x *StorageGroupStatus) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *StorageGroupStatus) GetOverall() StatusFlag_Status {
-	if x != nil && x.Overall != nil {
-		return *x.Overall
+	if x != nil {
+		return x.xxx_hidden_Overall
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *StorageGroupStatus) GetVdisks() []*StorageVDiskStatus {
 	if x != nil {
-		return x.Vdisks
+		if x.xxx_hidden_Vdisks != nil {
+			return *x.xxx_hidden_Vdisks
+		}
 	}
 	return nil
 }
 
 func (x *StorageGroupStatus) SetId(v string) {
-	x.Id = &v
+	x.xxx_hidden_Id = v
 }
 
 func (x *StorageGroupStatus) SetOverall(v StatusFlag_Status) {
-	x.Overall = &v
+	x.xxx_hidden_Overall = v
 }
 
 func (x *StorageGroupStatus) SetVdisks(v []*StorageVDiskStatus) {
-	x.Vdisks = v
-}
-
-func (x *StorageGroupStatus) HasId() bool {
-	if x == nil {
-		return false
-	}
-	return x.Id != nil
-}
-
-func (x *StorageGroupStatus) HasOverall() bool {
-	if x == nil {
-		return false
-	}
-	return x.Overall != nil
-}
-
-func (x *StorageGroupStatus) ClearId() {
-	x.Id = nil
-}
-
-func (x *StorageGroupStatus) ClearOverall() {
-	x.Overall = nil
+	x.xxx_hidden_Vdisks = &v
 }
 
 type StorageGroupStatus_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Id      *string
-	Overall *StatusFlag_Status
+	Id      string
+	Overall StatusFlag_Status
 	Vdisks  []*StorageVDiskStatus
 }
 
@@ -908,19 +795,19 @@ func (b0 StorageGroupStatus_builder) Build() *StorageGroupStatus {
 	m0 := &StorageGroupStatus{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
-	x.Overall = b.Overall
-	x.Vdisks = b.Vdisks
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Overall = b.Overall
+	x.xxx_hidden_Vdisks = &b.Vdisks
 	return m0
 }
 
 type StoragePoolStatus struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Overall       *StatusFlag_Status     `protobuf:"varint,2,opt,name=overall,enum=Ydb.Monitoring.StatusFlag_Status" json:"overall,omitempty"`
-	Groups        []*StorageGroupStatus  `protobuf:"bytes,3,rep,name=groups" json:"groups,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id      string                 `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_Overall StatusFlag_Status      `protobuf:"varint,2,opt,name=overall,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_Groups  *[]*StorageGroupStatus `protobuf:"bytes,3,rep,name=groups,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *StoragePoolStatus) Reset() {
@@ -949,65 +836,45 @@ func (x *StoragePoolStatus) ProtoReflect() protoreflect.Message {
 }
 
 func (x *StoragePoolStatus) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *StoragePoolStatus) GetOverall() StatusFlag_Status {
-	if x != nil && x.Overall != nil {
-		return *x.Overall
+	if x != nil {
+		return x.xxx_hidden_Overall
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *StoragePoolStatus) GetGroups() []*StorageGroupStatus {
 	if x != nil {
-		return x.Groups
+		if x.xxx_hidden_Groups != nil {
+			return *x.xxx_hidden_Groups
+		}
 	}
 	return nil
 }
 
 func (x *StoragePoolStatus) SetId(v string) {
-	x.Id = &v
+	x.xxx_hidden_Id = v
 }
 
 func (x *StoragePoolStatus) SetOverall(v StatusFlag_Status) {
-	x.Overall = &v
+	x.xxx_hidden_Overall = v
 }
 
 func (x *StoragePoolStatus) SetGroups(v []*StorageGroupStatus) {
-	x.Groups = v
-}
-
-func (x *StoragePoolStatus) HasId() bool {
-	if x == nil {
-		return false
-	}
-	return x.Id != nil
-}
-
-func (x *StoragePoolStatus) HasOverall() bool {
-	if x == nil {
-		return false
-	}
-	return x.Overall != nil
-}
-
-func (x *StoragePoolStatus) ClearId() {
-	x.Id = nil
-}
-
-func (x *StoragePoolStatus) ClearOverall() {
-	x.Overall = nil
+	x.xxx_hidden_Groups = &v
 }
 
 type StoragePoolStatus_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Id      *string
-	Overall *StatusFlag_Status
+	Id      string
+	Overall StatusFlag_Status
 	Groups  []*StorageGroupStatus
 }
 
@@ -1015,18 +882,18 @@ func (b0 StoragePoolStatus_builder) Build() *StoragePoolStatus {
 	m0 := &StoragePoolStatus{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
-	x.Overall = b.Overall
-	x.Groups = b.Groups
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Overall = b.Overall
+	x.xxx_hidden_Groups = &b.Groups
 	return m0
 }
 
 type StorageStatus struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Overall       *StatusFlag_Status     `protobuf:"varint,1,opt,name=overall,enum=Ydb.Monitoring.StatusFlag_Status" json:"overall,omitempty"`
-	Pools         []*StoragePoolStatus   `protobuf:"bytes,2,rep,name=pools" json:"pools,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Overall StatusFlag_Status      `protobuf:"varint,1,opt,name=overall,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_Pools   *[]*StoragePoolStatus  `protobuf:"bytes,2,rep,name=pools,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *StorageStatus) Reset() {
@@ -1055,42 +922,33 @@ func (x *StorageStatus) ProtoReflect() protoreflect.Message {
 }
 
 func (x *StorageStatus) GetOverall() StatusFlag_Status {
-	if x != nil && x.Overall != nil {
-		return *x.Overall
+	if x != nil {
+		return x.xxx_hidden_Overall
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *StorageStatus) GetPools() []*StoragePoolStatus {
 	if x != nil {
-		return x.Pools
+		if x.xxx_hidden_Pools != nil {
+			return *x.xxx_hidden_Pools
+		}
 	}
 	return nil
 }
 
 func (x *StorageStatus) SetOverall(v StatusFlag_Status) {
-	x.Overall = &v
+	x.xxx_hidden_Overall = v
 }
 
 func (x *StorageStatus) SetPools(v []*StoragePoolStatus) {
-	x.Pools = v
-}
-
-func (x *StorageStatus) HasOverall() bool {
-	if x == nil {
-		return false
-	}
-	return x.Overall != nil
-}
-
-func (x *StorageStatus) ClearOverall() {
-	x.Overall = nil
+	x.xxx_hidden_Pools = &v
 }
 
 type StorageStatus_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Overall *StatusFlag_Status
+	Overall StatusFlag_Status
 	Pools   []*StoragePoolStatus
 }
 
@@ -1098,21 +956,21 @@ func (b0 StorageStatus_builder) Build() *StorageStatus {
 	m0 := &StorageStatus{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Overall = b.Overall
-	x.Pools = b.Pools
+	x.xxx_hidden_Overall = b.Overall
+	x.xxx_hidden_Pools = &b.Pools
 	return m0
 }
 
 // Describes the state of a tablet group.
 type ComputeTabletStatus struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Overall       *StatusFlag_Status     `protobuf:"varint,1,opt,name=overall,enum=Ydb.Monitoring.StatusFlag_Status" json:"overall,omitempty"`
-	Type          *string                `protobuf:"bytes,2,opt,name=type" json:"type,omitempty"`
-	State         *string                `protobuf:"bytes,3,opt,name=state" json:"state,omitempty"`
-	Count         *uint32                `protobuf:"varint,4,opt,name=count" json:"count,omitempty"`
-	Id            []string               `protobuf:"bytes,5,rep,name=id" json:"id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Overall StatusFlag_Status      `protobuf:"varint,1,opt,name=overall,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_Type    string                 `protobuf:"bytes,2,opt,name=type,proto3"`
+	xxx_hidden_State   string                 `protobuf:"bytes,3,opt,name=state,proto3"`
+	xxx_hidden_Count   uint32                 `protobuf:"varint,4,opt,name=count,proto3"`
+	xxx_hidden_Id      []string               `protobuf:"bytes,5,rep,name=id,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ComputeTabletStatus) Reset() {
@@ -1141,111 +999,67 @@ func (x *ComputeTabletStatus) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ComputeTabletStatus) GetOverall() StatusFlag_Status {
-	if x != nil && x.Overall != nil {
-		return *x.Overall
+	if x != nil {
+		return x.xxx_hidden_Overall
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *ComputeTabletStatus) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.xxx_hidden_Type
 	}
 	return ""
 }
 
 func (x *ComputeTabletStatus) GetState() string {
-	if x != nil && x.State != nil {
-		return *x.State
+	if x != nil {
+		return x.xxx_hidden_State
 	}
 	return ""
 }
 
 func (x *ComputeTabletStatus) GetCount() uint32 {
-	if x != nil && x.Count != nil {
-		return *x.Count
+	if x != nil {
+		return x.xxx_hidden_Count
 	}
 	return 0
 }
 
 func (x *ComputeTabletStatus) GetId() []string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return nil
 }
 
 func (x *ComputeTabletStatus) SetOverall(v StatusFlag_Status) {
-	x.Overall = &v
+	x.xxx_hidden_Overall = v
 }
 
 func (x *ComputeTabletStatus) SetType(v string) {
-	x.Type = &v
+	x.xxx_hidden_Type = v
 }
 
 func (x *ComputeTabletStatus) SetState(v string) {
-	x.State = &v
+	x.xxx_hidden_State = v
 }
 
 func (x *ComputeTabletStatus) SetCount(v uint32) {
-	x.Count = &v
+	x.xxx_hidden_Count = v
 }
 
 func (x *ComputeTabletStatus) SetId(v []string) {
-	x.Id = v
-}
-
-func (x *ComputeTabletStatus) HasOverall() bool {
-	if x == nil {
-		return false
-	}
-	return x.Overall != nil
-}
-
-func (x *ComputeTabletStatus) HasType() bool {
-	if x == nil {
-		return false
-	}
-	return x.Type != nil
-}
-
-func (x *ComputeTabletStatus) HasState() bool {
-	if x == nil {
-		return false
-	}
-	return x.State != nil
-}
-
-func (x *ComputeTabletStatus) HasCount() bool {
-	if x == nil {
-		return false
-	}
-	return x.Count != nil
-}
-
-func (x *ComputeTabletStatus) ClearOverall() {
-	x.Overall = nil
-}
-
-func (x *ComputeTabletStatus) ClearType() {
-	x.Type = nil
-}
-
-func (x *ComputeTabletStatus) ClearState() {
-	x.State = nil
-}
-
-func (x *ComputeTabletStatus) ClearCount() {
-	x.Count = nil
+	x.xxx_hidden_Id = v
 }
 
 type ComputeTabletStatus_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Overall *StatusFlag_Status
-	Type    *string
-	State   *string
-	Count   *uint32
+	Overall StatusFlag_Status
+	Type    string
+	State   string
+	Count   uint32
 	Id      []string
 }
 
@@ -1253,21 +1067,21 @@ func (b0 ComputeTabletStatus_builder) Build() *ComputeTabletStatus {
 	m0 := &ComputeTabletStatus{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Overall = b.Overall
-	x.Type = b.Type
-	x.State = b.State
-	x.Count = b.Count
-	x.Id = b.Id
+	x.xxx_hidden_Overall = b.Overall
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_State = b.State
+	x.xxx_hidden_Count = b.Count
+	x.xxx_hidden_Id = b.Id
 	return m0
 }
 
 type ThreadPoolStatus struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Overall       *StatusFlag_Status     `protobuf:"varint,1,opt,name=overall,enum=Ydb.Monitoring.StatusFlag_Status" json:"overall,omitempty"`
-	Name          *string                `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Usage         *float32               `protobuf:"fixed32,3,opt,name=usage" json:"usage,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Overall StatusFlag_Status      `protobuf:"varint,1,opt,name=overall,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_Name    string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_Usage   float32                `protobuf:"fixed32,3,opt,name=usage,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ThreadPoolStatus) Reset() {
@@ -1296,96 +1110,63 @@ func (x *ThreadPoolStatus) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ThreadPoolStatus) GetOverall() StatusFlag_Status {
-	if x != nil && x.Overall != nil {
-		return *x.Overall
+	if x != nil {
+		return x.xxx_hidden_Overall
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *ThreadPoolStatus) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ThreadPoolStatus) GetUsage() float32 {
-	if x != nil && x.Usage != nil {
-		return *x.Usage
+	if x != nil {
+		return x.xxx_hidden_Usage
 	}
 	return 0
 }
 
 func (x *ThreadPoolStatus) SetOverall(v StatusFlag_Status) {
-	x.Overall = &v
+	x.xxx_hidden_Overall = v
 }
 
 func (x *ThreadPoolStatus) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *ThreadPoolStatus) SetUsage(v float32) {
-	x.Usage = &v
-}
-
-func (x *ThreadPoolStatus) HasOverall() bool {
-	if x == nil {
-		return false
-	}
-	return x.Overall != nil
-}
-
-func (x *ThreadPoolStatus) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *ThreadPoolStatus) HasUsage() bool {
-	if x == nil {
-		return false
-	}
-	return x.Usage != nil
-}
-
-func (x *ThreadPoolStatus) ClearOverall() {
-	x.Overall = nil
-}
-
-func (x *ThreadPoolStatus) ClearName() {
-	x.Name = nil
-}
-
-func (x *ThreadPoolStatus) ClearUsage() {
-	x.Usage = nil
+	x.xxx_hidden_Usage = v
 }
 
 type ThreadPoolStatus_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Overall *StatusFlag_Status
-	Name    *string
-	Usage   *float32
+	Overall StatusFlag_Status
+	Name    string
+	Usage   float32
 }
 
 func (b0 ThreadPoolStatus_builder) Build() *ThreadPoolStatus {
 	m0 := &ThreadPoolStatus{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Overall = b.Overall
-	x.Name = b.Name
-	x.Usage = b.Usage
+	x.xxx_hidden_Overall = b.Overall
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Usage = b.Usage
 	return m0
 }
 
 type LoadAverageStatus struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Overall       *StatusFlag_Status     `protobuf:"varint,1,opt,name=overall,enum=Ydb.Monitoring.StatusFlag_Status" json:"overall,omitempty"`
-	Load          *float32               `protobuf:"fixed32,2,opt,name=load" json:"load,omitempty"`
-	Cores         *uint32                `protobuf:"varint,3,opt,name=cores" json:"cores,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Overall StatusFlag_Status      `protobuf:"varint,1,opt,name=overall,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_Load    float32                `protobuf:"fixed32,2,opt,name=load,proto3"`
+	xxx_hidden_Cores   uint32                 `protobuf:"varint,3,opt,name=cores,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *LoadAverageStatus) Reset() {
@@ -1414,98 +1195,65 @@ func (x *LoadAverageStatus) ProtoReflect() protoreflect.Message {
 }
 
 func (x *LoadAverageStatus) GetOverall() StatusFlag_Status {
-	if x != nil && x.Overall != nil {
-		return *x.Overall
+	if x != nil {
+		return x.xxx_hidden_Overall
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *LoadAverageStatus) GetLoad() float32 {
-	if x != nil && x.Load != nil {
-		return *x.Load
+	if x != nil {
+		return x.xxx_hidden_Load
 	}
 	return 0
 }
 
 func (x *LoadAverageStatus) GetCores() uint32 {
-	if x != nil && x.Cores != nil {
-		return *x.Cores
+	if x != nil {
+		return x.xxx_hidden_Cores
 	}
 	return 0
 }
 
 func (x *LoadAverageStatus) SetOverall(v StatusFlag_Status) {
-	x.Overall = &v
+	x.xxx_hidden_Overall = v
 }
 
 func (x *LoadAverageStatus) SetLoad(v float32) {
-	x.Load = &v
+	x.xxx_hidden_Load = v
 }
 
 func (x *LoadAverageStatus) SetCores(v uint32) {
-	x.Cores = &v
-}
-
-func (x *LoadAverageStatus) HasOverall() bool {
-	if x == nil {
-		return false
-	}
-	return x.Overall != nil
-}
-
-func (x *LoadAverageStatus) HasLoad() bool {
-	if x == nil {
-		return false
-	}
-	return x.Load != nil
-}
-
-func (x *LoadAverageStatus) HasCores() bool {
-	if x == nil {
-		return false
-	}
-	return x.Cores != nil
-}
-
-func (x *LoadAverageStatus) ClearOverall() {
-	x.Overall = nil
-}
-
-func (x *LoadAverageStatus) ClearLoad() {
-	x.Load = nil
-}
-
-func (x *LoadAverageStatus) ClearCores() {
-	x.Cores = nil
+	x.xxx_hidden_Cores = v
 }
 
 type LoadAverageStatus_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Overall *StatusFlag_Status
-	Load    *float32
-	Cores   *uint32
+	Overall StatusFlag_Status
+	Load    float32
+	Cores   uint32
 }
 
 func (b0 LoadAverageStatus_builder) Build() *LoadAverageStatus {
 	m0 := &LoadAverageStatus{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Overall = b.Overall
-	x.Load = b.Load
-	x.Cores = b.Cores
+	x.xxx_hidden_Overall = b.Overall
+	x.xxx_hidden_Load = b.Load
+	x.xxx_hidden_Cores = b.Cores
 	return m0
 }
 
 type ComputeNodeStatus struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Overall       *StatusFlag_Status     `protobuf:"varint,2,opt,name=overall,enum=Ydb.Monitoring.StatusFlag_Status" json:"overall,omitempty"`
-	Tablets       []*ComputeTabletStatus `protobuf:"bytes,3,rep,name=tablets" json:"tablets,omitempty"`
-	Pools         []*ThreadPoolStatus    `protobuf:"bytes,4,rep,name=pools" json:"pools,omitempty"`
-	Load          *LoadAverageStatus     `protobuf:"bytes,5,opt,name=load" json:"load,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Id      string                  `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_Overall StatusFlag_Status       `protobuf:"varint,2,opt,name=overall,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_Tablets *[]*ComputeTabletStatus `protobuf:"bytes,3,rep,name=tablets,proto3"`
+	xxx_hidden_Pools   *[]*ThreadPoolStatus    `protobuf:"bytes,4,rep,name=pools,proto3"`
+	xxx_hidden_Load    *LoadAverageStatus      `protobuf:"bytes,5,opt,name=load,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ComputeNodeStatus) Reset() {
@@ -1534,98 +1282,80 @@ func (x *ComputeNodeStatus) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ComputeNodeStatus) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *ComputeNodeStatus) GetOverall() StatusFlag_Status {
-	if x != nil && x.Overall != nil {
-		return *x.Overall
+	if x != nil {
+		return x.xxx_hidden_Overall
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *ComputeNodeStatus) GetTablets() []*ComputeTabletStatus {
 	if x != nil {
-		return x.Tablets
+		if x.xxx_hidden_Tablets != nil {
+			return *x.xxx_hidden_Tablets
+		}
 	}
 	return nil
 }
 
 func (x *ComputeNodeStatus) GetPools() []*ThreadPoolStatus {
 	if x != nil {
-		return x.Pools
+		if x.xxx_hidden_Pools != nil {
+			return *x.xxx_hidden_Pools
+		}
 	}
 	return nil
 }
 
 func (x *ComputeNodeStatus) GetLoad() *LoadAverageStatus {
 	if x != nil {
-		return x.Load
+		return x.xxx_hidden_Load
 	}
 	return nil
 }
 
 func (x *ComputeNodeStatus) SetId(v string) {
-	x.Id = &v
+	x.xxx_hidden_Id = v
 }
 
 func (x *ComputeNodeStatus) SetOverall(v StatusFlag_Status) {
-	x.Overall = &v
+	x.xxx_hidden_Overall = v
 }
 
 func (x *ComputeNodeStatus) SetTablets(v []*ComputeTabletStatus) {
-	x.Tablets = v
+	x.xxx_hidden_Tablets = &v
 }
 
 func (x *ComputeNodeStatus) SetPools(v []*ThreadPoolStatus) {
-	x.Pools = v
+	x.xxx_hidden_Pools = &v
 }
 
 func (x *ComputeNodeStatus) SetLoad(v *LoadAverageStatus) {
-	x.Load = v
-}
-
-func (x *ComputeNodeStatus) HasId() bool {
-	if x == nil {
-		return false
-	}
-	return x.Id != nil
-}
-
-func (x *ComputeNodeStatus) HasOverall() bool {
-	if x == nil {
-		return false
-	}
-	return x.Overall != nil
+	x.xxx_hidden_Load = v
 }
 
 func (x *ComputeNodeStatus) HasLoad() bool {
 	if x == nil {
 		return false
 	}
-	return x.Load != nil
-}
-
-func (x *ComputeNodeStatus) ClearId() {
-	x.Id = nil
-}
-
-func (x *ComputeNodeStatus) ClearOverall() {
-	x.Overall = nil
+	return x.xxx_hidden_Load != nil
 }
 
 func (x *ComputeNodeStatus) ClearLoad() {
-	x.Load = nil
+	x.xxx_hidden_Load = nil
 }
 
 type ComputeNodeStatus_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Id      *string
-	Overall *StatusFlag_Status
+	Id      string
+	Overall StatusFlag_Status
 	Tablets []*ComputeTabletStatus
 	Pools   []*ThreadPoolStatus
 	Load    *LoadAverageStatus
@@ -1635,21 +1365,21 @@ func (b0 ComputeNodeStatus_builder) Build() *ComputeNodeStatus {
 	m0 := &ComputeNodeStatus{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
-	x.Overall = b.Overall
-	x.Tablets = b.Tablets
-	x.Pools = b.Pools
-	x.Load = b.Load
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Overall = b.Overall
+	x.xxx_hidden_Tablets = &b.Tablets
+	x.xxx_hidden_Pools = &b.Pools
+	x.xxx_hidden_Load = b.Load
 	return m0
 }
 
 type ComputeStatus struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Overall       *StatusFlag_Status     `protobuf:"varint,1,opt,name=overall,enum=Ydb.Monitoring.StatusFlag_Status" json:"overall,omitempty"`
-	Nodes         []*ComputeNodeStatus   `protobuf:"bytes,2,rep,name=nodes" json:"nodes,omitempty"`
-	Tablets       []*ComputeTabletStatus `protobuf:"bytes,3,rep,name=tablets" json:"tablets,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Overall StatusFlag_Status       `protobuf:"varint,1,opt,name=overall,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_Nodes   *[]*ComputeNodeStatus   `protobuf:"bytes,2,rep,name=nodes,proto3"`
+	xxx_hidden_Tablets *[]*ComputeTabletStatus `protobuf:"bytes,3,rep,name=tablets,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ComputeStatus) Reset() {
@@ -1678,53 +1408,46 @@ func (x *ComputeStatus) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ComputeStatus) GetOverall() StatusFlag_Status {
-	if x != nil && x.Overall != nil {
-		return *x.Overall
+	if x != nil {
+		return x.xxx_hidden_Overall
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *ComputeStatus) GetNodes() []*ComputeNodeStatus {
 	if x != nil {
-		return x.Nodes
+		if x.xxx_hidden_Nodes != nil {
+			return *x.xxx_hidden_Nodes
+		}
 	}
 	return nil
 }
 
 func (x *ComputeStatus) GetTablets() []*ComputeTabletStatus {
 	if x != nil {
-		return x.Tablets
+		if x.xxx_hidden_Tablets != nil {
+			return *x.xxx_hidden_Tablets
+		}
 	}
 	return nil
 }
 
 func (x *ComputeStatus) SetOverall(v StatusFlag_Status) {
-	x.Overall = &v
+	x.xxx_hidden_Overall = v
 }
 
 func (x *ComputeStatus) SetNodes(v []*ComputeNodeStatus) {
-	x.Nodes = v
+	x.xxx_hidden_Nodes = &v
 }
 
 func (x *ComputeStatus) SetTablets(v []*ComputeTabletStatus) {
-	x.Tablets = v
-}
-
-func (x *ComputeStatus) HasOverall() bool {
-	if x == nil {
-		return false
-	}
-	return x.Overall != nil
-}
-
-func (x *ComputeStatus) ClearOverall() {
-	x.Overall = nil
+	x.xxx_hidden_Tablets = &v
 }
 
 type ComputeStatus_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Overall *StatusFlag_Status
+	Overall StatusFlag_Status
 	Nodes   []*ComputeNodeStatus
 	Tablets []*ComputeTabletStatus
 }
@@ -1733,19 +1456,19 @@ func (b0 ComputeStatus_builder) Build() *ComputeStatus {
 	m0 := &ComputeStatus{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Overall = b.Overall
-	x.Nodes = b.Nodes
-	x.Tablets = b.Tablets
+	x.xxx_hidden_Overall = b.Overall
+	x.xxx_hidden_Nodes = &b.Nodes
+	x.xxx_hidden_Tablets = &b.Tablets
 	return m0
 }
 
 type LocationNode struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Id            *uint32                `protobuf:"varint,1,opt,name=id" json:"id,omitempty"`
-	Host          *string                `protobuf:"bytes,2,opt,name=host" json:"host,omitempty"`
-	Port          *uint32                `protobuf:"varint,3,opt,name=port" json:"port,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id   uint32                 `protobuf:"varint,1,opt,name=id,proto3"`
+	xxx_hidden_Host string                 `protobuf:"bytes,2,opt,name=host,proto3"`
+	xxx_hidden_Port uint32                 `protobuf:"varint,3,opt,name=port,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *LocationNode) Reset() {
@@ -1774,95 +1497,62 @@ func (x *LocationNode) ProtoReflect() protoreflect.Message {
 }
 
 func (x *LocationNode) GetId() uint32 {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.xxx_hidden_Id
 	}
 	return 0
 }
 
 func (x *LocationNode) GetHost() string {
-	if x != nil && x.Host != nil {
-		return *x.Host
+	if x != nil {
+		return x.xxx_hidden_Host
 	}
 	return ""
 }
 
 func (x *LocationNode) GetPort() uint32 {
-	if x != nil && x.Port != nil {
-		return *x.Port
+	if x != nil {
+		return x.xxx_hidden_Port
 	}
 	return 0
 }
 
 func (x *LocationNode) SetId(v uint32) {
-	x.Id = &v
+	x.xxx_hidden_Id = v
 }
 
 func (x *LocationNode) SetHost(v string) {
-	x.Host = &v
+	x.xxx_hidden_Host = v
 }
 
 func (x *LocationNode) SetPort(v uint32) {
-	x.Port = &v
-}
-
-func (x *LocationNode) HasId() bool {
-	if x == nil {
-		return false
-	}
-	return x.Id != nil
-}
-
-func (x *LocationNode) HasHost() bool {
-	if x == nil {
-		return false
-	}
-	return x.Host != nil
-}
-
-func (x *LocationNode) HasPort() bool {
-	if x == nil {
-		return false
-	}
-	return x.Port != nil
-}
-
-func (x *LocationNode) ClearId() {
-	x.Id = nil
-}
-
-func (x *LocationNode) ClearHost() {
-	x.Host = nil
-}
-
-func (x *LocationNode) ClearPort() {
-	x.Port = nil
+	x.xxx_hidden_Port = v
 }
 
 type LocationNode_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Id   *uint32
-	Host *string
-	Port *uint32
+	Id   uint32
+	Host string
+	Port uint32
 }
 
 func (b0 LocationNode_builder) Build() *LocationNode {
 	m0 := &LocationNode{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
-	x.Host = b.Host
-	x.Port = b.Port
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Host = b.Host
+	x.xxx_hidden_Port = b.Port
 	return m0
 }
 
 type LocationStoragePDisk struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Path          *string                `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id   string                 `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_Path string                 `protobuf:"bytes,2,opt,name=path,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *LocationStoragePDisk) Reset() {
@@ -1891,71 +1581,49 @@ func (x *LocationStoragePDisk) ProtoReflect() protoreflect.Message {
 }
 
 func (x *LocationStoragePDisk) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *LocationStoragePDisk) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *LocationStoragePDisk) SetId(v string) {
-	x.Id = &v
+	x.xxx_hidden_Id = v
 }
 
 func (x *LocationStoragePDisk) SetPath(v string) {
-	x.Path = &v
-}
-
-func (x *LocationStoragePDisk) HasId() bool {
-	if x == nil {
-		return false
-	}
-	return x.Id != nil
-}
-
-func (x *LocationStoragePDisk) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *LocationStoragePDisk) ClearId() {
-	x.Id = nil
-}
-
-func (x *LocationStoragePDisk) ClearPath() {
-	x.Path = nil
+	x.xxx_hidden_Path = v
 }
 
 type LocationStoragePDisk_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Id   *string
-	Path *string
+	Id   string
+	Path string
 }
 
 func (b0 LocationStoragePDisk_builder) Build() *LocationStoragePDisk {
 	m0 := &LocationStoragePDisk{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
-	x.Path = b.Path
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Path = b.Path
 	return m0
 }
 
 type LocationStorageVDisk struct {
-	state         protoimpl.MessageState  `protogen:"hybrid.v1"`
-	Id            []string                `protobuf:"bytes,1,rep,name=id" json:"id,omitempty"`
-	Pdisk         []*LocationStoragePDisk `protobuf:"bytes,2,rep,name=pdisk" json:"pdisk,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Id    []string                 `protobuf:"bytes,1,rep,name=id,proto3"`
+	xxx_hidden_Pdisk *[]*LocationStoragePDisk `protobuf:"bytes,2,rep,name=pdisk,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *LocationStorageVDisk) Reset() {
@@ -1985,24 +1653,26 @@ func (x *LocationStorageVDisk) ProtoReflect() protoreflect.Message {
 
 func (x *LocationStorageVDisk) GetId() []string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return nil
 }
 
 func (x *LocationStorageVDisk) GetPdisk() []*LocationStoragePDisk {
 	if x != nil {
-		return x.Pdisk
+		if x.xxx_hidden_Pdisk != nil {
+			return *x.xxx_hidden_Pdisk
+		}
 	}
 	return nil
 }
 
 func (x *LocationStorageVDisk) SetId(v []string) {
-	x.Id = v
+	x.xxx_hidden_Id = v
 }
 
 func (x *LocationStorageVDisk) SetPdisk(v []*LocationStoragePDisk) {
-	x.Pdisk = v
+	x.xxx_hidden_Pdisk = &v
 }
 
 type LocationStorageVDisk_builder struct {
@@ -2016,17 +1686,17 @@ func (b0 LocationStorageVDisk_builder) Build() *LocationStorageVDisk {
 	m0 := &LocationStorageVDisk{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
-	x.Pdisk = b.Pdisk
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Pdisk = &b.Pdisk
 	return m0
 }
 
 type LocationStorageGroup struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Id            []string               `protobuf:"bytes,1,rep,name=id" json:"id,omitempty"`
-	Vdisk         *LocationStorageVDisk  `protobuf:"bytes,2,opt,name=vdisk" json:"vdisk,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id    []string               `protobuf:"bytes,1,rep,name=id,proto3"`
+	xxx_hidden_Vdisk *LocationStorageVDisk  `protobuf:"bytes,2,opt,name=vdisk,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *LocationStorageGroup) Reset() {
@@ -2056,35 +1726,35 @@ func (x *LocationStorageGroup) ProtoReflect() protoreflect.Message {
 
 func (x *LocationStorageGroup) GetId() []string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return nil
 }
 
 func (x *LocationStorageGroup) GetVdisk() *LocationStorageVDisk {
 	if x != nil {
-		return x.Vdisk
+		return x.xxx_hidden_Vdisk
 	}
 	return nil
 }
 
 func (x *LocationStorageGroup) SetId(v []string) {
-	x.Id = v
+	x.xxx_hidden_Id = v
 }
 
 func (x *LocationStorageGroup) SetVdisk(v *LocationStorageVDisk) {
-	x.Vdisk = v
+	x.xxx_hidden_Vdisk = v
 }
 
 func (x *LocationStorageGroup) HasVdisk() bool {
 	if x == nil {
 		return false
 	}
-	return x.Vdisk != nil
+	return x.xxx_hidden_Vdisk != nil
 }
 
 func (x *LocationStorageGroup) ClearVdisk() {
-	x.Vdisk = nil
+	x.xxx_hidden_Vdisk = nil
 }
 
 type LocationStorageGroup_builder struct {
@@ -2098,17 +1768,17 @@ func (b0 LocationStorageGroup_builder) Build() *LocationStorageGroup {
 	m0 := &LocationStorageGroup{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
-	x.Vdisk = b.Vdisk
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Vdisk = b.Vdisk
 	return m0
 }
 
 type LocationStoragePool struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Group         *LocationStorageGroup  `protobuf:"bytes,2,opt,name=group" json:"group,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name  string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Group *LocationStorageGroup  `protobuf:"bytes,2,opt,name=group,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *LocationStoragePool) Reset() {
@@ -2137,53 +1807,42 @@ func (x *LocationStoragePool) ProtoReflect() protoreflect.Message {
 }
 
 func (x *LocationStoragePool) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *LocationStoragePool) GetGroup() *LocationStorageGroup {
 	if x != nil {
-		return x.Group
+		return x.xxx_hidden_Group
 	}
 	return nil
 }
 
 func (x *LocationStoragePool) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *LocationStoragePool) SetGroup(v *LocationStorageGroup) {
-	x.Group = v
-}
-
-func (x *LocationStoragePool) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
+	x.xxx_hidden_Group = v
 }
 
 func (x *LocationStoragePool) HasGroup() bool {
 	if x == nil {
 		return false
 	}
-	return x.Group != nil
-}
-
-func (x *LocationStoragePool) ClearName() {
-	x.Name = nil
+	return x.xxx_hidden_Group != nil
 }
 
 func (x *LocationStoragePool) ClearGroup() {
-	x.Group = nil
+	x.xxx_hidden_Group = nil
 }
 
 type LocationStoragePool_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Name  *string
+	Name  string
 	Group *LocationStorageGroup
 }
 
@@ -2191,17 +1850,17 @@ func (b0 LocationStoragePool_builder) Build() *LocationStoragePool {
 	m0 := &LocationStoragePool{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Name = b.Name
-	x.Group = b.Group
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Group = b.Group
 	return m0
 }
 
 type LocationStorage struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Node          *LocationNode          `protobuf:"bytes,1,opt,name=node" json:"node,omitempty"`
-	Pool          *LocationStoragePool   `protobuf:"bytes,2,opt,name=pool" json:"pool,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Node *LocationNode          `protobuf:"bytes,1,opt,name=node,proto3"`
+	xxx_hidden_Pool *LocationStoragePool   `protobuf:"bytes,2,opt,name=pool,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *LocationStorage) Reset() {
@@ -2231,46 +1890,46 @@ func (x *LocationStorage) ProtoReflect() protoreflect.Message {
 
 func (x *LocationStorage) GetNode() *LocationNode {
 	if x != nil {
-		return x.Node
+		return x.xxx_hidden_Node
 	}
 	return nil
 }
 
 func (x *LocationStorage) GetPool() *LocationStoragePool {
 	if x != nil {
-		return x.Pool
+		return x.xxx_hidden_Pool
 	}
 	return nil
 }
 
 func (x *LocationStorage) SetNode(v *LocationNode) {
-	x.Node = v
+	x.xxx_hidden_Node = v
 }
 
 func (x *LocationStorage) SetPool(v *LocationStoragePool) {
-	x.Pool = v
+	x.xxx_hidden_Pool = v
 }
 
 func (x *LocationStorage) HasNode() bool {
 	if x == nil {
 		return false
 	}
-	return x.Node != nil
+	return x.xxx_hidden_Node != nil
 }
 
 func (x *LocationStorage) HasPool() bool {
 	if x == nil {
 		return false
 	}
-	return x.Pool != nil
+	return x.xxx_hidden_Pool != nil
 }
 
 func (x *LocationStorage) ClearNode() {
-	x.Node = nil
+	x.xxx_hidden_Node = nil
 }
 
 func (x *LocationStorage) ClearPool() {
-	x.Pool = nil
+	x.xxx_hidden_Pool = nil
 }
 
 type LocationStorage_builder struct {
@@ -2284,16 +1943,16 @@ func (b0 LocationStorage_builder) Build() *LocationStorage {
 	m0 := &LocationStorage{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Node = b.Node
-	x.Pool = b.Pool
+	x.xxx_hidden_Node = b.Node
+	x.xxx_hidden_Pool = b.Pool
 	return m0
 }
 
 type LocationComputePool struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *LocationComputePool) Reset() {
@@ -2322,48 +1981,37 @@ func (x *LocationComputePool) ProtoReflect() protoreflect.Message {
 }
 
 func (x *LocationComputePool) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *LocationComputePool) SetName(v string) {
-	x.Name = &v
-}
-
-func (x *LocationComputePool) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *LocationComputePool) ClearName() {
-	x.Name = nil
+	x.xxx_hidden_Name = v
 }
 
 type LocationComputePool_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Name *string
+	Name string
 }
 
 func (b0 LocationComputePool_builder) Build() *LocationComputePool {
 	m0 := &LocationComputePool{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Name = b.Name
+	x.xxx_hidden_Name = b.Name
 	return m0
 }
 
 type LocationComputeTablet struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Type          *string                `protobuf:"bytes,1,opt,name=type" json:"type,omitempty"`
-	Id            []string               `protobuf:"bytes,2,rep,name=id" json:"id,omitempty"`
-	Count         *uint32                `protobuf:"varint,3,opt,name=count" json:"count,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Type  string                 `protobuf:"bytes,1,opt,name=type,proto3"`
+	xxx_hidden_Id    []string               `protobuf:"bytes,2,rep,name=id,proto3"`
+	xxx_hidden_Count uint32                 `protobuf:"varint,3,opt,name=count,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *LocationComputeTablet) Reset() {
@@ -2392,85 +2040,63 @@ func (x *LocationComputeTablet) ProtoReflect() protoreflect.Message {
 }
 
 func (x *LocationComputeTablet) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.xxx_hidden_Type
 	}
 	return ""
 }
 
 func (x *LocationComputeTablet) GetId() []string {
 	if x != nil {
-		return x.Id
+		return x.xxx_hidden_Id
 	}
 	return nil
 }
 
 func (x *LocationComputeTablet) GetCount() uint32 {
-	if x != nil && x.Count != nil {
-		return *x.Count
+	if x != nil {
+		return x.xxx_hidden_Count
 	}
 	return 0
 }
 
 func (x *LocationComputeTablet) SetType(v string) {
-	x.Type = &v
+	x.xxx_hidden_Type = v
 }
 
 func (x *LocationComputeTablet) SetId(v []string) {
-	x.Id = v
+	x.xxx_hidden_Id = v
 }
 
 func (x *LocationComputeTablet) SetCount(v uint32) {
-	x.Count = &v
-}
-
-func (x *LocationComputeTablet) HasType() bool {
-	if x == nil {
-		return false
-	}
-	return x.Type != nil
-}
-
-func (x *LocationComputeTablet) HasCount() bool {
-	if x == nil {
-		return false
-	}
-	return x.Count != nil
-}
-
-func (x *LocationComputeTablet) ClearType() {
-	x.Type = nil
-}
-
-func (x *LocationComputeTablet) ClearCount() {
-	x.Count = nil
+	x.xxx_hidden_Count = v
 }
 
 type LocationComputeTablet_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Type  *string
+	Type  string
 	Id    []string
-	Count *uint32
+	Count uint32
 }
 
 func (b0 LocationComputeTablet_builder) Build() *LocationComputeTablet {
 	m0 := &LocationComputeTablet{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Type = b.Type
-	x.Id = b.Id
-	x.Count = b.Count
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Count = b.Count
 	return m0
 }
 
 type LocationCompute struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Node          *LocationNode          `protobuf:"bytes,1,opt,name=node" json:"node,omitempty"`
-	Pool          *LocationComputePool   `protobuf:"bytes,2,opt,name=pool" json:"pool,omitempty"`
-	Tablet        *LocationComputeTablet `protobuf:"bytes,3,opt,name=tablet" json:"tablet,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Node   *LocationNode          `protobuf:"bytes,1,opt,name=node,proto3"`
+	xxx_hidden_Pool   *LocationComputePool   `protobuf:"bytes,2,opt,name=pool,proto3"`
+	xxx_hidden_Tablet *LocationComputeTablet `protobuf:"bytes,3,opt,name=tablet,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *LocationCompute) Reset() {
@@ -2500,68 +2126,68 @@ func (x *LocationCompute) ProtoReflect() protoreflect.Message {
 
 func (x *LocationCompute) GetNode() *LocationNode {
 	if x != nil {
-		return x.Node
+		return x.xxx_hidden_Node
 	}
 	return nil
 }
 
 func (x *LocationCompute) GetPool() *LocationComputePool {
 	if x != nil {
-		return x.Pool
+		return x.xxx_hidden_Pool
 	}
 	return nil
 }
 
 func (x *LocationCompute) GetTablet() *LocationComputeTablet {
 	if x != nil {
-		return x.Tablet
+		return x.xxx_hidden_Tablet
 	}
 	return nil
 }
 
 func (x *LocationCompute) SetNode(v *LocationNode) {
-	x.Node = v
+	x.xxx_hidden_Node = v
 }
 
 func (x *LocationCompute) SetPool(v *LocationComputePool) {
-	x.Pool = v
+	x.xxx_hidden_Pool = v
 }
 
 func (x *LocationCompute) SetTablet(v *LocationComputeTablet) {
-	x.Tablet = v
+	x.xxx_hidden_Tablet = v
 }
 
 func (x *LocationCompute) HasNode() bool {
 	if x == nil {
 		return false
 	}
-	return x.Node != nil
+	return x.xxx_hidden_Node != nil
 }
 
 func (x *LocationCompute) HasPool() bool {
 	if x == nil {
 		return false
 	}
-	return x.Pool != nil
+	return x.xxx_hidden_Pool != nil
 }
 
 func (x *LocationCompute) HasTablet() bool {
 	if x == nil {
 		return false
 	}
-	return x.Tablet != nil
+	return x.xxx_hidden_Tablet != nil
 }
 
 func (x *LocationCompute) ClearNode() {
-	x.Node = nil
+	x.xxx_hidden_Node = nil
 }
 
 func (x *LocationCompute) ClearPool() {
-	x.Pool = nil
+	x.xxx_hidden_Pool = nil
 }
 
 func (x *LocationCompute) ClearTablet() {
-	x.Tablet = nil
+	x.xxx_hidden_Tablet = nil
 }
 
 type LocationCompute_builder struct {
@@ -2576,17 +2202,17 @@ func (b0 LocationCompute_builder) Build() *LocationCompute {
 	m0 := &LocationCompute{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Node = b.Node
-	x.Pool = b.Pool
-	x.Tablet = b.Tablet
+	x.xxx_hidden_Node = b.Node
+	x.xxx_hidden_Pool = b.Pool
+	x.xxx_hidden_Tablet = b.Tablet
 	return m0
 }
 
 type LocationDatabase struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *LocationDatabase) Reset() {
@@ -2615,48 +2241,37 @@ func (x *LocationDatabase) ProtoReflect() protoreflect.Message {
 }
 
 func (x *LocationDatabase) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *LocationDatabase) SetName(v string) {
-	x.Name = &v
-}
-
-func (x *LocationDatabase) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *LocationDatabase) ClearName() {
-	x.Name = nil
+	x.xxx_hidden_Name = v
 }
 
 type LocationDatabase_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Name *string
+	Name string
 }
 
 func (b0 LocationDatabase_builder) Build() *LocationDatabase {
 	m0 := &LocationDatabase{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Name = b.Name
+	x.xxx_hidden_Name = b.Name
 	return m0
 }
 
 type Location struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Storage       *LocationStorage       `protobuf:"bytes,1,opt,name=storage" json:"storage,omitempty"`
-	Compute       *LocationCompute       `protobuf:"bytes,2,opt,name=compute" json:"compute,omitempty"`
-	Database      *LocationDatabase      `protobuf:"bytes,3,opt,name=database" json:"database,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Storage  *LocationStorage       `protobuf:"bytes,1,opt,name=storage,proto3"`
+	xxx_hidden_Compute  *LocationCompute       `protobuf:"bytes,2,opt,name=compute,proto3"`
+	xxx_hidden_Database *LocationDatabase      `protobuf:"bytes,3,opt,name=database,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *Location) Reset() {
@@ -2686,68 +2301,68 @@ func (x *Location) ProtoReflect() protoreflect.Message {
 
 func (x *Location) GetStorage() *LocationStorage {
 	if x != nil {
-		return x.Storage
+		return x.xxx_hidden_Storage
 	}
 	return nil
 }
 
 func (x *Location) GetCompute() *LocationCompute {
 	if x != nil {
-		return x.Compute
+		return x.xxx_hidden_Compute
 	}
 	return nil
 }
 
 func (x *Location) GetDatabase() *LocationDatabase {
 	if x != nil {
-		return x.Database
+		return x.xxx_hidden_Database
 	}
 	return nil
 }
 
 func (x *Location) SetStorage(v *LocationStorage) {
-	x.Storage = v
+	x.xxx_hidden_Storage = v
 }
 
 func (x *Location) SetCompute(v *LocationCompute) {
-	x.Compute = v
+	x.xxx_hidden_Compute = v
 }
 
 func (x *Location) SetDatabase(v *LocationDatabase) {
-	x.Database = v
+	x.xxx_hidden_Database = v
 }
 
 func (x *Location) HasStorage() bool {
 	if x == nil {
 		return false
 	}
-	return x.Storage != nil
+	return x.xxx_hidden_Storage != nil
 }
 
 func (x *Location) HasCompute() bool {
 	if x == nil {
 		return false
 	}
-	return x.Compute != nil
+	return x.xxx_hidden_Compute != nil
 }
 
 func (x *Location) HasDatabase() bool {
 	if x == nil {
 		return false
 	}
-	return x.Database != nil
+	return x.xxx_hidden_Database != nil
 }
 
 func (x *Location) ClearStorage() {
-	x.Storage = nil
+	x.xxx_hidden_Storage = nil
 }
 
 func (x *Location) ClearCompute() {
-	x.Compute = nil
+	x.xxx_hidden_Compute = nil
 }
 
 func (x *Location) ClearDatabase() {
-	x.Database = nil
+	x.xxx_hidden_Database = nil
 }
 
 type Location_builder struct {
@@ -2762,25 +2377,25 @@ func (b0 Location_builder) Build() *Location {
 	m0 := &Location{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Storage = b.Storage
-	x.Compute = b.Compute
-	x.Database = b.Database
+	x.xxx_hidden_Storage = b.Storage
+	x.xxx_hidden_Compute = b.Compute
+	x.xxx_hidden_Database = b.Database
 	return m0
 }
 
 type IssueLog struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	Status        *StatusFlag_Status     `protobuf:"varint,2,opt,name=status,enum=Ydb.Monitoring.StatusFlag_Status" json:"status,omitempty"`
-	Message       *string                `protobuf:"bytes,3,opt,name=message" json:"message,omitempty"`
-	Location      *Location              `protobuf:"bytes,4,opt,name=location" json:"location,omitempty"`
-	Reason        []string               `protobuf:"bytes,5,rep,name=reason" json:"reason,omitempty"`
-	Type          *string                `protobuf:"bytes,6,opt,name=type" json:"type,omitempty"`
-	Level         *uint32                `protobuf:"varint,7,opt,name=level" json:"level,omitempty"`
-	Listed        *uint32                `protobuf:"varint,8,opt,name=listed" json:"listed,omitempty"`
-	Count         *uint32                `protobuf:"varint,9,opt,name=count" json:"count,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id       string                 `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_Status   StatusFlag_Status      `protobuf:"varint,2,opt,name=status,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_Message  string                 `protobuf:"bytes,3,opt,name=message,proto3"`
+	xxx_hidden_Location *Location              `protobuf:"bytes,4,opt,name=location,proto3"`
+	xxx_hidden_Reason   []string               `protobuf:"bytes,5,rep,name=reason,proto3"`
+	xxx_hidden_Type     string                 `protobuf:"bytes,6,opt,name=type,proto3"`
+	xxx_hidden_Level    uint32                 `protobuf:"varint,7,opt,name=level,proto3"`
+	xxx_hidden_Listed   uint32                 `protobuf:"varint,8,opt,name=listed,proto3"`
+	xxx_hidden_Count    uint32                 `protobuf:"varint,9,opt,name=count,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *IssueLog) Reset() {
@@ -2809,230 +2424,153 @@ func (x *IssueLog) ProtoReflect() protoreflect.Message {
 }
 
 func (x *IssueLog) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *IssueLog) GetStatus() StatusFlag_Status {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *IssueLog) GetMessage() string {
-	if x != nil && x.Message != nil {
-		return *x.Message
+	if x != nil {
+		return x.xxx_hidden_Message
 	}
 	return ""
 }
 
 func (x *IssueLog) GetLocation() *Location {
 	if x != nil {
-		return x.Location
+		return x.xxx_hidden_Location
 	}
 	return nil
 }
 
 func (x *IssueLog) GetReason() []string {
 	if x != nil {
-		return x.Reason
+		return x.xxx_hidden_Reason
 	}
 	return nil
 }
 
 func (x *IssueLog) GetType() string {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.xxx_hidden_Type
 	}
 	return ""
 }
 
 func (x *IssueLog) GetLevel() uint32 {
-	if x != nil && x.Level != nil {
-		return *x.Level
+	if x != nil {
+		return x.xxx_hidden_Level
 	}
 	return 0
 }
 
 func (x *IssueLog) GetListed() uint32 {
-	if x != nil && x.Listed != nil {
-		return *x.Listed
+	if x != nil {
+		return x.xxx_hidden_Listed
 	}
 	return 0
 }
 
 func (x *IssueLog) GetCount() uint32 {
-	if x != nil && x.Count != nil {
-		return *x.Count
+	if x != nil {
+		return x.xxx_hidden_Count
 	}
 	return 0
 }
 
 func (x *IssueLog) SetId(v string) {
-	x.Id = &v
+	x.xxx_hidden_Id = v
 }
 
 func (x *IssueLog) SetStatus(v StatusFlag_Status) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *IssueLog) SetMessage(v string) {
-	x.Message = &v
+	x.xxx_hidden_Message = v
 }
 
 func (x *IssueLog) SetLocation(v *Location) {
-	x.Location = v
+	x.xxx_hidden_Location = v
 }
 
 func (x *IssueLog) SetReason(v []string) {
-	x.Reason = v
+	x.xxx_hidden_Reason = v
 }
 
 func (x *IssueLog) SetType(v string) {
-	x.Type = &v
+	x.xxx_hidden_Type = v
 }
 
 func (x *IssueLog) SetLevel(v uint32) {
-	x.Level = &v
+	x.xxx_hidden_Level = v
 }
 
 func (x *IssueLog) SetListed(v uint32) {
-	x.Listed = &v
+	x.xxx_hidden_Listed = v
 }
 
 func (x *IssueLog) SetCount(v uint32) {
-	x.Count = &v
-}
-
-func (x *IssueLog) HasId() bool {
-	if x == nil {
-		return false
-	}
-	return x.Id != nil
-}
-
-func (x *IssueLog) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
-}
-
-func (x *IssueLog) HasMessage() bool {
-	if x == nil {
-		return false
-	}
-	return x.Message != nil
+	x.xxx_hidden_Count = v
 }
 
 func (x *IssueLog) HasLocation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Location != nil
-}
-
-func (x *IssueLog) HasType() bool {
-	if x == nil {
-		return false
-	}
-	return x.Type != nil
-}
-
-func (x *IssueLog) HasLevel() bool {
-	if x == nil {
-		return false
-	}
-	return x.Level != nil
-}
-
-func (x *IssueLog) HasListed() bool {
-	if x == nil {
-		return false
-	}
-	return x.Listed != nil
-}
-
-func (x *IssueLog) HasCount() bool {
-	if x == nil {
-		return false
-	}
-	return x.Count != nil
-}
-
-func (x *IssueLog) ClearId() {
-	x.Id = nil
-}
-
-func (x *IssueLog) ClearStatus() {
-	x.Status = nil
-}
-
-func (x *IssueLog) ClearMessage() {
-	x.Message = nil
+	return x.xxx_hidden_Location != nil
 }
 
 func (x *IssueLog) ClearLocation() {
-	x.Location = nil
-}
-
-func (x *IssueLog) ClearType() {
-	x.Type = nil
-}
-
-func (x *IssueLog) ClearLevel() {
-	x.Level = nil
-}
-
-func (x *IssueLog) ClearListed() {
-	x.Listed = nil
-}
-
-func (x *IssueLog) ClearCount() {
-	x.Count = nil
+	x.xxx_hidden_Location = nil
 }
 
 type IssueLog_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Id       *string
-	Status   *StatusFlag_Status
-	Message  *string
+	Id       string
+	Status   StatusFlag_Status
+	Message  string
 	Location *Location
 	Reason   []string
-	Type     *string
-	Level    *uint32
-	Listed   *uint32
-	Count    *uint32
+	Type     string
+	Level    uint32
+	Listed   uint32
+	Count    uint32
 }
 
 func (b0 IssueLog_builder) Build() *IssueLog {
 	m0 := &IssueLog{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
-	x.Status = b.Status
-	x.Message = b.Message
-	x.Location = b.Location
-	x.Reason = b.Reason
-	x.Type = b.Type
-	x.Level = b.Level
-	x.Listed = b.Listed
-	x.Count = b.Count
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Message = b.Message
+	x.xxx_hidden_Location = b.Location
+	x.xxx_hidden_Reason = b.Reason
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_Level = b.Level
+	x.xxx_hidden_Listed = b.Listed
+	x.xxx_hidden_Count = b.Count
 	return m0
 }
 
 type DatabaseStatus struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Overall       *StatusFlag_Status     `protobuf:"varint,2,opt,name=overall,enum=Ydb.Monitoring.StatusFlag_Status" json:"overall,omitempty"`
-	Storage       *StorageStatus         `protobuf:"bytes,3,opt,name=storage" json:"storage,omitempty"`
-	Compute       *ComputeStatus         `protobuf:"bytes,4,opt,name=compute" json:"compute,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name    string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Overall StatusFlag_Status      `protobuf:"varint,2,opt,name=overall,proto3,enum=Ydb.Monitoring.StatusFlag_Status"`
+	xxx_hidden_Storage *StorageStatus         `protobuf:"bytes,3,opt,name=storage,proto3"`
+	xxx_hidden_Compute *ComputeStatus         `protobuf:"bytes,4,opt,name=compute,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *DatabaseStatus) Reset() {
@@ -3061,98 +2599,76 @@ func (x *DatabaseStatus) ProtoReflect() protoreflect.Message {
 }
 
 func (x *DatabaseStatus) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *DatabaseStatus) GetOverall() StatusFlag_Status {
-	if x != nil && x.Overall != nil {
-		return *x.Overall
+	if x != nil {
+		return x.xxx_hidden_Overall
 	}
 	return StatusFlag_UNSPECIFIED
 }
 
 func (x *DatabaseStatus) GetStorage() *StorageStatus {
 	if x != nil {
-		return x.Storage
+		return x.xxx_hidden_Storage
 	}
 	return nil
 }
 
 func (x *DatabaseStatus) GetCompute() *ComputeStatus {
 	if x != nil {
-		return x.Compute
+		return x.xxx_hidden_Compute
 	}
 	return nil
 }
 
 func (x *DatabaseStatus) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *DatabaseStatus) SetOverall(v StatusFlag_Status) {
-	x.Overall = &v
+	x.xxx_hidden_Overall = v
 }
 
 func (x *DatabaseStatus) SetStorage(v *StorageStatus) {
-	x.Storage = v
+	x.xxx_hidden_Storage = v
 }
 
 func (x *DatabaseStatus) SetCompute(v *ComputeStatus) {
-	x.Compute = v
-}
-
-func (x *DatabaseStatus) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *DatabaseStatus) HasOverall() bool {
-	if x == nil {
-		return false
-	}
-	return x.Overall != nil
+	x.xxx_hidden_Compute = v
 }
 
 func (x *DatabaseStatus) HasStorage() bool {
 	if x == nil {
 		return false
 	}
-	return x.Storage != nil
+	return x.xxx_hidden_Storage != nil
 }
 
 func (x *DatabaseStatus) HasCompute() bool {
 	if x == nil {
 		return false
 	}
-	return x.Compute != nil
-}
-
-func (x *DatabaseStatus) ClearName() {
-	x.Name = nil
-}
-
-func (x *DatabaseStatus) ClearOverall() {
-	x.Overall = nil
+	return x.xxx_hidden_Compute != nil
 }
 
 func (x *DatabaseStatus) ClearStorage() {
-	x.Storage = nil
+	x.xxx_hidden_Storage = nil
 }
 
 func (x *DatabaseStatus) ClearCompute() {
-	x.Compute = nil
+	x.xxx_hidden_Compute = nil
 }
 
 type DatabaseStatus_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Name    *string
-	Overall *StatusFlag_Status
+	Name    string
+	Overall StatusFlag_Status
 	Storage *StorageStatus
 	Compute *ComputeStatus
 }
@@ -3161,20 +2677,20 @@ func (b0 DatabaseStatus_builder) Build() *DatabaseStatus {
 	m0 := &DatabaseStatus{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Name = b.Name
-	x.Overall = b.Overall
-	x.Storage = b.Storage
-	x.Compute = b.Compute
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Overall = b.Overall
+	x.xxx_hidden_Storage = b.Storage
+	x.xxx_hidden_Compute = b.Compute
 	return m0
 }
 
 type SelfCheckResult struct {
-	state           protoimpl.MessageState `protogen:"hybrid.v1"`
-	SelfCheckResult *SelfCheck_Result      `protobuf:"varint,1,opt,name=self_check_result,json=selfCheckResult,enum=Ydb.Monitoring.SelfCheck_Result" json:"self_check_result,omitempty"`
-	IssueLog        []*IssueLog            `protobuf:"bytes,2,rep,name=issue_log,json=issueLog" json:"issue_log,omitempty"`
-	DatabaseStatus  []*DatabaseStatus      `protobuf:"bytes,3,rep,name=database_status,json=databaseStatus" json:"database_status,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SelfCheckResult SelfCheck_Result       `protobuf:"varint,1,opt,name=self_check_result,json=selfCheckResult,proto3,enum=Ydb.Monitoring.SelfCheck_Result"`
+	xxx_hidden_IssueLog        *[]*IssueLog           `protobuf:"bytes,2,rep,name=issue_log,json=issueLog,proto3"`
+	xxx_hidden_DatabaseStatus  *[]*DatabaseStatus     `protobuf:"bytes,3,rep,name=database_status,json=databaseStatus,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *SelfCheckResult) Reset() {
@@ -3203,53 +2719,46 @@ func (x *SelfCheckResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SelfCheckResult) GetSelfCheckResult() SelfCheck_Result {
-	if x != nil && x.SelfCheckResult != nil {
-		return *x.SelfCheckResult
+	if x != nil {
+		return x.xxx_hidden_SelfCheckResult
 	}
 	return SelfCheck_UNSPECIFIED
 }
 
 func (x *SelfCheckResult) GetIssueLog() []*IssueLog {
 	if x != nil {
-		return x.IssueLog
+		if x.xxx_hidden_IssueLog != nil {
+			return *x.xxx_hidden_IssueLog
+		}
 	}
 	return nil
 }
 
 func (x *SelfCheckResult) GetDatabaseStatus() []*DatabaseStatus {
 	if x != nil {
-		return x.DatabaseStatus
+		if x.xxx_hidden_DatabaseStatus != nil {
+			return *x.xxx_hidden_DatabaseStatus
+		}
 	}
 	return nil
 }
 
 func (x *SelfCheckResult) SetSelfCheckResult(v SelfCheck_Result) {
-	x.SelfCheckResult = &v
+	x.xxx_hidden_SelfCheckResult = v
 }
 
 func (x *SelfCheckResult) SetIssueLog(v []*IssueLog) {
-	x.IssueLog = v
+	x.xxx_hidden_IssueLog = &v
 }
 
 func (x *SelfCheckResult) SetDatabaseStatus(v []*DatabaseStatus) {
-	x.DatabaseStatus = v
-}
-
-func (x *SelfCheckResult) HasSelfCheckResult() bool {
-	if x == nil {
-		return false
-	}
-	return x.SelfCheckResult != nil
-}
-
-func (x *SelfCheckResult) ClearSelfCheckResult() {
-	x.SelfCheckResult = nil
+	x.xxx_hidden_DatabaseStatus = &v
 }
 
 type SelfCheckResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	SelfCheckResult *SelfCheck_Result
+	SelfCheckResult SelfCheck_Result
 	IssueLog        []*IssueLog
 	DatabaseStatus  []*DatabaseStatus
 }
@@ -3258,9 +2767,9 @@ func (b0 SelfCheckResult_builder) Build() *SelfCheckResult {
 	m0 := &SelfCheckResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.SelfCheckResult = b.SelfCheckResult
-	x.IssueLog = b.IssueLog
-	x.DatabaseStatus = b.DatabaseStatus
+	x.xxx_hidden_SelfCheckResult = b.SelfCheckResult
+	x.xxx_hidden_IssueLog = &b.IssueLog
+	x.xxx_hidden_DatabaseStatus = &b.DatabaseStatus
 	return m0
 }
 
@@ -3268,7 +2777,7 @@ var File_protos_ydb_monitoring_proto protoreflect.FileDescriptor
 
 const file_protos_ydb_monitoring_proto_rawDesc = "" +
 	"\n" +
-	"\x1bprotos/ydb_monitoring.proto\x12\x0eYdb.Monitoring\x1a\x1aprotos/ydb_operation.proto\x1a!google/protobuf/go_features.proto\"g\n" +
+	"\x1bprotos/ydb_monitoring.proto\x12\x0eYdb.Monitoring\x1a\x1aprotos/ydb_operation.proto\"g\n" +
 	"\n" +
 	"StatusFlag\"Y\n" +
 	"\x06Status\x12\x0f\n" +
@@ -3395,8 +2904,8 @@ const file_protos_ydb_monitoring_proto_rawDesc = "" +
 	"\x0fSelfCheckResult\x12L\n" +
 	"\x11self_check_result\x18\x01 \x01(\x0e2 .Ydb.Monitoring.SelfCheck.ResultR\x0fselfCheckResult\x125\n" +
 	"\tissue_log\x18\x02 \x03(\v2\x18.Ydb.Monitoring.IssueLogR\bissueLog\x12G\n" +
-	"\x0fdatabase_status\x18\x03 \x03(\v2\x1e.Ydb.Monitoring.DatabaseStatusR\x0edatabaseStatusBw\n" +
-	"\x19tech.ydb.proto.monitoringB\x10MonitoringProtosZ=github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Monitoring\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x0fdatabase_status\x18\x03 \x03(\v2\x1e.Ydb.Monitoring.DatabaseStatusR\x0edatabaseStatusBo\n" +
+	"\x19tech.ydb.proto.monitoringB\x10MonitoringProtosZ=github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Monitoring\xf8\x01\x01b\x06proto3"
 
 var file_protos_ydb_monitoring_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_protos_ydb_monitoring_proto_msgTypes = make([]protoimpl.MessageInfo, 30)

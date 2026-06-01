@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: draft/protos/ydb_keyvalue.proto
 
-//go:build !protoopaque
-
 package Ydb_KeyValue
 
 import (
 	Ydb_Operations "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -170,13 +167,11 @@ func (x ExecuteTransactionRequest_Command_Write_Tactic) Number() protoreflect.En
 }
 
 type StorageChannelInfo struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Storage channel index.
-	StorageChannel *uint32 `protobuf:"varint,1,opt,name=storage_channel,json=storageChannel" json:"storage_channel,omitempty"`
-	// The status flag of the storage channel.
-	StatusFlag    *StorageChannelInfo_StatusFlag `protobuf:"varint,2,opt,name=status_flag,json=statusFlag,enum=Ydb.KeyValue.StorageChannelInfo_StatusFlag" json:"status_flag,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                     protoimpl.MessageState        `protogen:"opaque.v1"`
+	xxx_hidden_StorageChannel uint32                        `protobuf:"varint,1,opt,name=storage_channel,json=storageChannel,proto3"`
+	xxx_hidden_StatusFlag     StorageChannelInfo_StatusFlag `protobuf:"varint,2,opt,name=status_flag,json=statusFlag,proto3,enum=Ydb.KeyValue.StorageChannelInfo_StatusFlag"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *StorageChannelInfo) Reset() {
@@ -205,69 +200,47 @@ func (x *StorageChannelInfo) ProtoReflect() protoreflect.Message {
 }
 
 func (x *StorageChannelInfo) GetStorageChannel() uint32 {
-	if x != nil && x.StorageChannel != nil {
-		return *x.StorageChannel
+	if x != nil {
+		return x.xxx_hidden_StorageChannel
 	}
 	return 0
 }
 
 func (x *StorageChannelInfo) GetStatusFlag() StorageChannelInfo_StatusFlag {
-	if x != nil && x.StatusFlag != nil {
-		return *x.StatusFlag
+	if x != nil {
+		return x.xxx_hidden_StatusFlag
 	}
 	return StorageChannelInfo_STATUS_FLAG_UNSPECIFIED
 }
 
 func (x *StorageChannelInfo) SetStorageChannel(v uint32) {
-	x.StorageChannel = &v
+	x.xxx_hidden_StorageChannel = v
 }
 
 func (x *StorageChannelInfo) SetStatusFlag(v StorageChannelInfo_StatusFlag) {
-	x.StatusFlag = &v
-}
-
-func (x *StorageChannelInfo) HasStorageChannel() bool {
-	if x == nil {
-		return false
-	}
-	return x.StorageChannel != nil
-}
-
-func (x *StorageChannelInfo) HasStatusFlag() bool {
-	if x == nil {
-		return false
-	}
-	return x.StatusFlag != nil
-}
-
-func (x *StorageChannelInfo) ClearStorageChannel() {
-	x.StorageChannel = nil
-}
-
-func (x *StorageChannelInfo) ClearStatusFlag() {
-	x.StatusFlag = nil
+	x.xxx_hidden_StatusFlag = v
 }
 
 type StorageChannelInfo_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Storage channel index.
-	StorageChannel *uint32
+	StorageChannel uint32
 	// The status flag of the storage channel.
-	StatusFlag *StorageChannelInfo_StatusFlag
+	StatusFlag StorageChannelInfo_StatusFlag
 }
 
 func (b0 StorageChannelInfo_builder) Build() *StorageChannelInfo {
 	m0 := &StorageChannelInfo{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.StorageChannel = b.StorageChannel
-	x.StatusFlag = b.StatusFlag
+	x.xxx_hidden_StorageChannel = b.StorageChannel
+	x.xxx_hidden_StatusFlag = b.StatusFlag
 	return m0
 }
 
 type Priorities struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -310,13 +283,10 @@ func (b0 Priorities_builder) Build() *Priorities {
 }
 
 type StorageConfig struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Channel configs.
-	// Channels 0 and 1 are system channels needed for tablet operation.
-	// Channels starting with 2 are user channels.
-	Channel       []*StorageConfig_ChannelConfig `protobuf:"bytes,1,rep,name=channel" json:"channel,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Channel *[]*StorageConfig_ChannelConfig `protobuf:"bytes,1,rep,name=channel,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *StorageConfig) Reset() {
@@ -346,13 +316,15 @@ func (x *StorageConfig) ProtoReflect() protoreflect.Message {
 
 func (x *StorageConfig) GetChannel() []*StorageConfig_ChannelConfig {
 	if x != nil {
-		return x.Channel
+		if x.xxx_hidden_Channel != nil {
+			return *x.xxx_hidden_Channel
+		}
 	}
 	return nil
 }
 
 func (x *StorageConfig) SetChannel(v []*StorageConfig_ChannelConfig) {
-	x.Channel = v
+	x.xxx_hidden_Channel = &v
 }
 
 type StorageConfig_builder struct {
@@ -368,30 +340,16 @@ func (b0 StorageConfig_builder) Build() *StorageConfig {
 	m0 := &StorageConfig{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Channel = b.Channel
+	x.xxx_hidden_Channel = &b.Channel
 	return m0
 }
 
 type KeyRange struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// The lower bound of the key range.
-	// If unspecified, the range begins from the lowest key.
-	//
-	// Types that are valid to be assigned to FromBound:
-	//
-	//	*KeyRange_FromKeyInclusive
-	//	*KeyRange_FromKeyExclusive
-	FromBound isKeyRange_FromBound `protobuf_oneof:"from_bound"`
-	// The higher bound of the key range.
-	// If unspecified, the range ends with the highest key.
-	//
-	// Types that are valid to be assigned to ToBound:
-	//
-	//	*KeyRange_ToKeyInclusive
-	//	*KeyRange_ToKeyExclusive
-	ToBound       isKeyRange_ToBound `protobuf_oneof:"to_bound"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_FromBound isKeyRange_FromBound   `protobuf_oneof:"from_bound"`
+	xxx_hidden_ToBound   isKeyRange_ToBound     `protobuf_oneof:"to_bound"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *KeyRange) Reset() {
@@ -419,16 +377,9 @@ func (x *KeyRange) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *KeyRange) GetFromBound() isKeyRange_FromBound {
-	if x != nil {
-		return x.FromBound
-	}
-	return nil
-}
-
 func (x *KeyRange) GetFromKeyInclusive() string {
 	if x != nil {
-		if x, ok := x.FromBound.(*KeyRange_FromKeyInclusive); ok {
+		if x, ok := x.xxx_hidden_FromBound.(*keyRange_FromKeyInclusive); ok {
 			return x.FromKeyInclusive
 		}
 	}
@@ -437,23 +388,16 @@ func (x *KeyRange) GetFromKeyInclusive() string {
 
 func (x *KeyRange) GetFromKeyExclusive() string {
 	if x != nil {
-		if x, ok := x.FromBound.(*KeyRange_FromKeyExclusive); ok {
+		if x, ok := x.xxx_hidden_FromBound.(*keyRange_FromKeyExclusive); ok {
 			return x.FromKeyExclusive
 		}
 	}
 	return ""
 }
 
-func (x *KeyRange) GetToBound() isKeyRange_ToBound {
-	if x != nil {
-		return x.ToBound
-	}
-	return nil
-}
-
 func (x *KeyRange) GetToKeyInclusive() string {
 	if x != nil {
-		if x, ok := x.ToBound.(*KeyRange_ToKeyInclusive); ok {
+		if x, ok := x.xxx_hidden_ToBound.(*keyRange_ToKeyInclusive); ok {
 			return x.ToKeyInclusive
 		}
 	}
@@ -462,7 +406,7 @@ func (x *KeyRange) GetToKeyInclusive() string {
 
 func (x *KeyRange) GetToKeyExclusive() string {
 	if x != nil {
-		if x, ok := x.ToBound.(*KeyRange_ToKeyExclusive); ok {
+		if x, ok := x.xxx_hidden_ToBound.(*keyRange_ToKeyExclusive); ok {
 			return x.ToKeyExclusive
 		}
 	}
@@ -470,33 +414,33 @@ func (x *KeyRange) GetToKeyExclusive() string {
 }
 
 func (x *KeyRange) SetFromKeyInclusive(v string) {
-	x.FromBound = &KeyRange_FromKeyInclusive{v}
+	x.xxx_hidden_FromBound = &keyRange_FromKeyInclusive{v}
 }
 
 func (x *KeyRange) SetFromKeyExclusive(v string) {
-	x.FromBound = &KeyRange_FromKeyExclusive{v}
+	x.xxx_hidden_FromBound = &keyRange_FromKeyExclusive{v}
 }
 
 func (x *KeyRange) SetToKeyInclusive(v string) {
-	x.ToBound = &KeyRange_ToKeyInclusive{v}
+	x.xxx_hidden_ToBound = &keyRange_ToKeyInclusive{v}
 }
 
 func (x *KeyRange) SetToKeyExclusive(v string) {
-	x.ToBound = &KeyRange_ToKeyExclusive{v}
+	x.xxx_hidden_ToBound = &keyRange_ToKeyExclusive{v}
 }
 
 func (x *KeyRange) HasFromBound() bool {
 	if x == nil {
 		return false
 	}
-	return x.FromBound != nil
+	return x.xxx_hidden_FromBound != nil
 }
 
 func (x *KeyRange) HasFromKeyInclusive() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.FromBound.(*KeyRange_FromKeyInclusive)
+	_, ok := x.xxx_hidden_FromBound.(*keyRange_FromKeyInclusive)
 	return ok
 }
 
@@ -504,7 +448,7 @@ func (x *KeyRange) HasFromKeyExclusive() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.FromBound.(*KeyRange_FromKeyExclusive)
+	_, ok := x.xxx_hidden_FromBound.(*keyRange_FromKeyExclusive)
 	return ok
 }
 
@@ -512,14 +456,14 @@ func (x *KeyRange) HasToBound() bool {
 	if x == nil {
 		return false
 	}
-	return x.ToBound != nil
+	return x.xxx_hidden_ToBound != nil
 }
 
 func (x *KeyRange) HasToKeyInclusive() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.ToBound.(*KeyRange_ToKeyInclusive)
+	_, ok := x.xxx_hidden_ToBound.(*keyRange_ToKeyInclusive)
 	return ok
 }
 
@@ -527,39 +471,39 @@ func (x *KeyRange) HasToKeyExclusive() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.ToBound.(*KeyRange_ToKeyExclusive)
+	_, ok := x.xxx_hidden_ToBound.(*keyRange_ToKeyExclusive)
 	return ok
 }
 
 func (x *KeyRange) ClearFromBound() {
-	x.FromBound = nil
+	x.xxx_hidden_FromBound = nil
 }
 
 func (x *KeyRange) ClearFromKeyInclusive() {
-	if _, ok := x.FromBound.(*KeyRange_FromKeyInclusive); ok {
-		x.FromBound = nil
+	if _, ok := x.xxx_hidden_FromBound.(*keyRange_FromKeyInclusive); ok {
+		x.xxx_hidden_FromBound = nil
 	}
 }
 
 func (x *KeyRange) ClearFromKeyExclusive() {
-	if _, ok := x.FromBound.(*KeyRange_FromKeyExclusive); ok {
-		x.FromBound = nil
+	if _, ok := x.xxx_hidden_FromBound.(*keyRange_FromKeyExclusive); ok {
+		x.xxx_hidden_FromBound = nil
 	}
 }
 
 func (x *KeyRange) ClearToBound() {
-	x.ToBound = nil
+	x.xxx_hidden_ToBound = nil
 }
 
 func (x *KeyRange) ClearToKeyInclusive() {
-	if _, ok := x.ToBound.(*KeyRange_ToKeyInclusive); ok {
-		x.ToBound = nil
+	if _, ok := x.xxx_hidden_ToBound.(*keyRange_ToKeyInclusive); ok {
+		x.xxx_hidden_ToBound = nil
 	}
 }
 
 func (x *KeyRange) ClearToKeyExclusive() {
-	if _, ok := x.ToBound.(*KeyRange_ToKeyExclusive); ok {
-		x.ToBound = nil
+	if _, ok := x.xxx_hidden_ToBound.(*keyRange_ToKeyExclusive); ok {
+		x.xxx_hidden_ToBound = nil
 	}
 }
 
@@ -571,10 +515,10 @@ func (x *KeyRange) WhichFromBound() case_KeyRange_FromBound {
 	if x == nil {
 		return KeyRange_FromBound_not_set_case
 	}
-	switch x.FromBound.(type) {
-	case *KeyRange_FromKeyInclusive:
+	switch x.xxx_hidden_FromBound.(type) {
+	case *keyRange_FromKeyInclusive:
 		return KeyRange_FromKeyInclusive_case
-	case *KeyRange_FromKeyExclusive:
+	case *keyRange_FromKeyExclusive:
 		return KeyRange_FromKeyExclusive_case
 	default:
 		return KeyRange_FromBound_not_set_case
@@ -589,10 +533,10 @@ func (x *KeyRange) WhichToBound() case_KeyRange_ToBound {
 	if x == nil {
 		return KeyRange_ToBound_not_set_case
 	}
-	switch x.ToBound.(type) {
-	case *KeyRange_ToKeyInclusive:
+	switch x.xxx_hidden_ToBound.(type) {
+	case *keyRange_ToKeyInclusive:
 		return KeyRange_ToKeyInclusive_case
-	case *KeyRange_ToKeyExclusive:
+	case *keyRange_ToKeyExclusive:
 		return KeyRange_ToKeyExclusive_case
 	default:
 		return KeyRange_ToBound_not_set_case
@@ -605,21 +549,21 @@ type KeyRange_builder struct {
 	// The lower bound of the key range.
 	// If unspecified, the range begins from the lowest key.
 
-	// Fields of oneof FromBound:
+	// Fields of oneof xxx_hidden_FromBound:
 	// Set in order for the range to include the key specified
 	FromKeyInclusive *string
 	// Set in order for the range not to include the key specified
 	FromKeyExclusive *string
-	// -- end of FromBound
+	// -- end of xxx_hidden_FromBound
 	// The higher bound of the key range.
 	// If unspecified, the range ends with the highest key.
 
-	// Fields of oneof ToBound:
+	// Fields of oneof xxx_hidden_ToBound:
 	// Set in order for the range to include the key specified
 	ToKeyInclusive *string
 	// Set in order for the range not to include the key specified
 	ToKeyExclusive *string
-	// -- end of ToBound
+	// -- end of xxx_hidden_ToBound
 }
 
 func (b0 KeyRange_builder) Build() *KeyRange {
@@ -627,16 +571,16 @@ func (b0 KeyRange_builder) Build() *KeyRange {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.FromKeyInclusive != nil {
-		x.FromBound = &KeyRange_FromKeyInclusive{*b.FromKeyInclusive}
+		x.xxx_hidden_FromBound = &keyRange_FromKeyInclusive{*b.FromKeyInclusive}
 	}
 	if b.FromKeyExclusive != nil {
-		x.FromBound = &KeyRange_FromKeyExclusive{*b.FromKeyExclusive}
+		x.xxx_hidden_FromBound = &keyRange_FromKeyExclusive{*b.FromKeyExclusive}
 	}
 	if b.ToKeyInclusive != nil {
-		x.ToBound = &KeyRange_ToKeyInclusive{*b.ToKeyInclusive}
+		x.xxx_hidden_ToBound = &keyRange_ToKeyInclusive{*b.ToKeyInclusive}
 	}
 	if b.ToKeyExclusive != nil {
-		x.ToBound = &KeyRange_ToKeyExclusive{*b.ToKeyExclusive}
+		x.xxx_hidden_ToBound = &keyRange_ToKeyExclusive{*b.ToKeyExclusive}
 	}
 	return m0
 }
@@ -665,51 +609,49 @@ type isKeyRange_FromBound interface {
 	isKeyRange_FromBound()
 }
 
-type KeyRange_FromKeyInclusive struct {
+type keyRange_FromKeyInclusive struct {
 	// Set in order for the range to include the key specified
-	FromKeyInclusive string `protobuf:"bytes,1,opt,name=from_key_inclusive,json=fromKeyInclusive,oneof"`
+	FromKeyInclusive string `protobuf:"bytes,1,opt,name=from_key_inclusive,json=fromKeyInclusive,proto3,oneof"`
 }
 
-type KeyRange_FromKeyExclusive struct {
+type keyRange_FromKeyExclusive struct {
 	// Set in order for the range not to include the key specified
-	FromKeyExclusive string `protobuf:"bytes,2,opt,name=from_key_exclusive,json=fromKeyExclusive,oneof"`
+	FromKeyExclusive string `protobuf:"bytes,2,opt,name=from_key_exclusive,json=fromKeyExclusive,proto3,oneof"`
 }
 
-func (*KeyRange_FromKeyInclusive) isKeyRange_FromBound() {}
+func (*keyRange_FromKeyInclusive) isKeyRange_FromBound() {}
 
-func (*KeyRange_FromKeyExclusive) isKeyRange_FromBound() {}
+func (*keyRange_FromKeyExclusive) isKeyRange_FromBound() {}
 
 type isKeyRange_ToBound interface {
 	isKeyRange_ToBound()
 }
 
-type KeyRange_ToKeyInclusive struct {
+type keyRange_ToKeyInclusive struct {
 	// Set in order for the range to include the key specified
-	ToKeyInclusive string `protobuf:"bytes,3,opt,name=to_key_inclusive,json=toKeyInclusive,oneof"`
+	ToKeyInclusive string `protobuf:"bytes,3,opt,name=to_key_inclusive,json=toKeyInclusive,proto3,oneof"`
 }
 
-type KeyRange_ToKeyExclusive struct {
+type keyRange_ToKeyExclusive struct {
 	// Set in order for the range not to include the key specified
-	ToKeyExclusive string `protobuf:"bytes,4,opt,name=to_key_exclusive,json=toKeyExclusive,oneof"`
+	ToKeyExclusive string `protobuf:"bytes,4,opt,name=to_key_exclusive,json=toKeyExclusive,proto3,oneof"`
 }
 
-func (*KeyRange_ToKeyInclusive) isKeyRange_ToBound() {}
+func (*keyRange_ToKeyInclusive) isKeyRange_ToBound() {}
 
-func (*KeyRange_ToKeyExclusive) isKeyRange_ToBound() {}
+func (*keyRange_ToKeyExclusive) isKeyRange_ToBound() {}
 
 // The lock mechanism provides a way to ensure that only one client holds the lock.
 // The client is provided the lock generation.
 // Only operations with matching lock generation and operations with no lock generation are executed.
 // When lock generation is missmatched operations will be failed with PRECONDITION_FAILED status.
 type AcquireLockRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// Volume path.
-	Path *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	// Partition of the volume.
-	PartitionId   *uint64 `protobuf:"varint,3,opt,name=partition_id,json=partitionId" json:"partition_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_PartitionId     uint64                          `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *AcquireLockRequest) Reset() {
@@ -739,68 +681,46 @@ func (x *AcquireLockRequest) ProtoReflect() protoreflect.Message {
 
 func (x *AcquireLockRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *AcquireLockRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *AcquireLockRequest) GetPartitionId() uint64 {
-	if x != nil && x.PartitionId != nil {
-		return *x.PartitionId
+	if x != nil {
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *AcquireLockRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *AcquireLockRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *AcquireLockRequest) SetPartitionId(v uint64) {
-	x.PartitionId = &v
+	x.xxx_hidden_PartitionId = v
 }
 
 func (x *AcquireLockRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *AcquireLockRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *AcquireLockRequest) HasPartitionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.PartitionId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *AcquireLockRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *AcquireLockRequest) ClearPath() {
-	x.Path = nil
-}
-
-func (x *AcquireLockRequest) ClearPartitionId() {
-	x.PartitionId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type AcquireLockRequest_builder struct {
@@ -808,27 +728,26 @@ type AcquireLockRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	// Volume path.
-	Path *string
+	Path string
 	// Partition of the volume.
-	PartitionId *uint64
+	PartitionId uint64
 }
 
 func (b0 AcquireLockRequest_builder) Build() *AcquireLockRequest {
 	m0 := &AcquireLockRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
-	x.PartitionId = b.PartitionId
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionId = b.PartitionId
 	return m0
 }
 
 type AcquireLockResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AcquireLockResponse) Reset() {
@@ -858,24 +777,24 @@ func (x *AcquireLockResponse) ProtoReflect() protoreflect.Message {
 
 func (x *AcquireLockResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *AcquireLockResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *AcquireLockResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *AcquireLockResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type AcquireLockResponse_builder struct {
@@ -889,18 +808,16 @@ func (b0 AcquireLockResponse_builder) Build() *AcquireLockResponse {
 	m0 := &AcquireLockResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type AcquireLockResult struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// The generation of the lock to provide as an argument to all the operations the user performs with the partition.
-	LockGeneration *uint64 `protobuf:"varint,1,opt,name=lock_generation,json=lockGeneration" json:"lock_generation,omitempty"`
-	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId        *uint32 `protobuf:"varint,2,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_LockGeneration uint64                 `protobuf:"varint,1,opt,name=lock_generation,json=lockGeneration,proto3"`
+	xxx_hidden_NodeId         uint32                 `protobuf:"varint,2,opt,name=node_id,json=nodeId,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *AcquireLockResult) Reset() {
@@ -929,82 +846,56 @@ func (x *AcquireLockResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *AcquireLockResult) GetLockGeneration() uint64 {
-	if x != nil && x.LockGeneration != nil {
-		return *x.LockGeneration
+	if x != nil {
+		return x.xxx_hidden_LockGeneration
 	}
 	return 0
 }
 
 func (x *AcquireLockResult) GetNodeId() uint32 {
-	if x != nil && x.NodeId != nil {
-		return *x.NodeId
+	if x != nil {
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *AcquireLockResult) SetLockGeneration(v uint64) {
-	x.LockGeneration = &v
+	x.xxx_hidden_LockGeneration = v
 }
 
 func (x *AcquireLockResult) SetNodeId(v uint32) {
-	x.NodeId = &v
-}
-
-func (x *AcquireLockResult) HasLockGeneration() bool {
-	if x == nil {
-		return false
-	}
-	return x.LockGeneration != nil
-}
-
-func (x *AcquireLockResult) HasNodeId() bool {
-	if x == nil {
-		return false
-	}
-	return x.NodeId != nil
-}
-
-func (x *AcquireLockResult) ClearLockGeneration() {
-	x.LockGeneration = nil
-}
-
-func (x *AcquireLockResult) ClearNodeId() {
-	x.NodeId = nil
+	x.xxx_hidden_NodeId = v
 }
 
 type AcquireLockResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The generation of the lock to provide as an argument to all the operations the user performs with the partition.
-	LockGeneration *uint64
+	LockGeneration uint64
 	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId *uint32
+	NodeId uint32
 }
 
 func (b0 AcquireLockResult_builder) Build() *AcquireLockResult {
 	m0 := &AcquireLockResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.LockGeneration = b.LockGeneration
-	x.NodeId = b.NodeId
+	x.xxx_hidden_LockGeneration = b.LockGeneration
+	x.xxx_hidden_NodeId = b.NodeId
 	return m0
 }
 
 type ExecuteTransactionRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// Volume path.
-	Path *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	// Partition of the volume.
-	PartitionId *uint64 `protobuf:"varint,3,opt,name=partition_id,json=partitionId" json:"partition_id,omitempty"`
-	// Generation of the exclusive lock acquired for the partition as a result of an AcquireLock call.
-	LockGeneration *uint64 `protobuf:"varint,4,opt,name=lock_generation,json=lockGeneration" json:"lock_generation,omitempty"`
-	// Commands to execute as a single atomic transaction.
-	// The order of execution of commands is the same as the order of commands in the ExecuteTransactionRequest.
-	// The order of execution of different transactions is not specified.
-	Commands      []*ExecuteTransactionRequest_Command `protobuf:"bytes,5,rep,name=commands" json:"commands,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState                `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams       `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                                `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_PartitionId     uint64                                `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_LockGeneration  uint64                                `protobuf:"varint,4,opt,name=lock_generation,json=lockGeneration,proto3,oneof"`
+	xxx_hidden_Commands        *[]*ExecuteTransactionRequest_Command `protobuf:"bytes,5,rep,name=commands,proto3"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ExecuteTransactionRequest) Reset() {
@@ -1034,101 +925,83 @@ func (x *ExecuteTransactionRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ExecuteTransactionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ExecuteTransactionRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *ExecuteTransactionRequest) GetPartitionId() uint64 {
-	if x != nil && x.PartitionId != nil {
-		return *x.PartitionId
+	if x != nil {
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *ExecuteTransactionRequest) GetLockGeneration() uint64 {
-	if x != nil && x.LockGeneration != nil {
-		return *x.LockGeneration
+	if x != nil {
+		return x.xxx_hidden_LockGeneration
 	}
 	return 0
 }
 
 func (x *ExecuteTransactionRequest) GetCommands() []*ExecuteTransactionRequest_Command {
 	if x != nil {
-		return x.Commands
+		if x.xxx_hidden_Commands != nil {
+			return *x.xxx_hidden_Commands
+		}
 	}
 	return nil
 }
 
 func (x *ExecuteTransactionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ExecuteTransactionRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *ExecuteTransactionRequest) SetPartitionId(v uint64) {
-	x.PartitionId = &v
+	x.xxx_hidden_PartitionId = v
 }
 
 func (x *ExecuteTransactionRequest) SetLockGeneration(v uint64) {
-	x.LockGeneration = &v
+	x.xxx_hidden_LockGeneration = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
 }
 
 func (x *ExecuteTransactionRequest) SetCommands(v []*ExecuteTransactionRequest_Command) {
-	x.Commands = v
+	x.xxx_hidden_Commands = &v
 }
 
 func (x *ExecuteTransactionRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ExecuteTransactionRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *ExecuteTransactionRequest) HasPartitionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.PartitionId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ExecuteTransactionRequest) HasLockGeneration() bool {
 	if x == nil {
 		return false
 	}
-	return x.LockGeneration != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
 func (x *ExecuteTransactionRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ExecuteTransactionRequest) ClearPath() {
-	x.Path = nil
-}
-
-func (x *ExecuteTransactionRequest) ClearPartitionId() {
-	x.PartitionId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ExecuteTransactionRequest) ClearLockGeneration() {
-	x.LockGeneration = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_LockGeneration = 0
 }
 
 type ExecuteTransactionRequest_builder struct {
@@ -1136,9 +1009,9 @@ type ExecuteTransactionRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	// Volume path.
-	Path *string
+	Path string
 	// Partition of the volume.
-	PartitionId *uint64
+	PartitionId uint64
 	// Generation of the exclusive lock acquired for the partition as a result of an AcquireLock call.
 	LockGeneration *uint64
 	// Commands to execute as a single atomic transaction.
@@ -1151,20 +1024,22 @@ func (b0 ExecuteTransactionRequest_builder) Build() *ExecuteTransactionRequest {
 	m0 := &ExecuteTransactionRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
-	x.PartitionId = b.PartitionId
-	x.LockGeneration = b.LockGeneration
-	x.Commands = b.Commands
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionId = b.PartitionId
+	if b.LockGeneration != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		x.xxx_hidden_LockGeneration = *b.LockGeneration
+	}
+	x.xxx_hidden_Commands = &b.Commands
 	return m0
 }
 
 type ExecuteTransactionResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ExecuteTransactionResponse) Reset() {
@@ -1194,24 +1069,24 @@ func (x *ExecuteTransactionResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ExecuteTransactionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ExecuteTransactionResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ExecuteTransactionResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ExecuteTransactionResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ExecuteTransactionResponse_builder struct {
@@ -1225,18 +1100,16 @@ func (b0 ExecuteTransactionResponse_builder) Build() *ExecuteTransactionResponse
 	m0 := &ExecuteTransactionResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ExecuteTransactionResult struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Contains status flags for the storage channels used by the transaction.
-	StorageChannelInfo []*StorageChannelInfo `protobuf:"bytes,1,rep,name=storage_channel_info,json=storageChannelInfo" json:"storage_channel_info,omitempty"`
-	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId        *uint32 `protobuf:"varint,2,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StorageChannelInfo *[]*StorageChannelInfo `protobuf:"bytes,1,rep,name=storage_channel_info,json=storageChannelInfo,proto3"`
+	xxx_hidden_NodeId             uint32                 `protobuf:"varint,2,opt,name=node_id,json=nodeId,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *ExecuteTransactionResult) Reset() {
@@ -1266,35 +1139,26 @@ func (x *ExecuteTransactionResult) ProtoReflect() protoreflect.Message {
 
 func (x *ExecuteTransactionResult) GetStorageChannelInfo() []*StorageChannelInfo {
 	if x != nil {
-		return x.StorageChannelInfo
+		if x.xxx_hidden_StorageChannelInfo != nil {
+			return *x.xxx_hidden_StorageChannelInfo
+		}
 	}
 	return nil
 }
 
 func (x *ExecuteTransactionResult) GetNodeId() uint32 {
-	if x != nil && x.NodeId != nil {
-		return *x.NodeId
+	if x != nil {
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *ExecuteTransactionResult) SetStorageChannelInfo(v []*StorageChannelInfo) {
-	x.StorageChannelInfo = v
+	x.xxx_hidden_StorageChannelInfo = &v
 }
 
 func (x *ExecuteTransactionResult) SetNodeId(v uint32) {
-	x.NodeId = &v
-}
-
-func (x *ExecuteTransactionResult) HasNodeId() bool {
-	if x == nil {
-		return false
-	}
-	return x.NodeId != nil
-}
-
-func (x *ExecuteTransactionResult) ClearNodeId() {
-	x.NodeId = nil
+	x.xxx_hidden_NodeId = v
 }
 
 type ExecuteTransactionResult_builder struct {
@@ -1303,42 +1167,33 @@ type ExecuteTransactionResult_builder struct {
 	// Contains status flags for the storage channels used by the transaction.
 	StorageChannelInfo []*StorageChannelInfo
 	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId *uint32
+	NodeId uint32
 }
 
 func (b0 ExecuteTransactionResult_builder) Build() *ExecuteTransactionResult {
 	m0 := &ExecuteTransactionResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.StorageChannelInfo = b.StorageChannelInfo
-	x.NodeId = b.NodeId
+	x.xxx_hidden_StorageChannelInfo = &b.StorageChannelInfo
+	x.xxx_hidden_NodeId = b.NodeId
 	return m0
 }
 
 type ReadRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// Volume path.
-	Path *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	// Partition of the volume.
-	PartitionId *uint64 `protobuf:"varint,3,opt,name=partition_id,json=partitionId" json:"partition_id,omitempty"`
-	// Generation of the exclusive lock acquired for the partition as a result of an AcquireLock call.
-	LockGeneration *uint64 `protobuf:"varint,4,opt,name=lock_generation,json=lockGeneration" json:"lock_generation,omitempty"`
-	// Key of the key-value pair to read.
-	Key *string `protobuf:"bytes,5,opt,name=key" json:"key,omitempty"`
-	// Offset in bytes from the beginning of the value to read data from.
-	Offset *uint64 `protobuf:"varint,6,opt,name=offset" json:"offset,omitempty"`
-	// Size of the data to read in bytes. 0 means "read to the end of the value".
-	Size *uint64 `protobuf:"varint,7,opt,name=size" json:"size,omitempty"`
-	// Result protobuf size limit.
-	// Overrides the default limit only with a smaller value.
-	// 0 means "use the default limit".
-	LimitBytes *uint64 `protobuf:"varint,8,opt,name=limit_bytes,json=limitBytes" json:"limit_bytes,omitempty"`
-	// Priority to use for the Distributed Storage Get operation.
-	// Has no effect for the INLINE storage channel.
-	Priority      *Priorities_Priority `protobuf:"varint,9,opt,name=priority,enum=Ydb.KeyValue.Priorities_Priority" json:"priority,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_PartitionId     uint64                          `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_LockGeneration  uint64                          `protobuf:"varint,4,opt,name=lock_generation,json=lockGeneration,proto3,oneof"`
+	xxx_hidden_Key             string                          `protobuf:"bytes,5,opt,name=key,proto3"`
+	xxx_hidden_Offset          uint64                          `protobuf:"varint,6,opt,name=offset,proto3"`
+	xxx_hidden_Size            uint64                          `protobuf:"varint,7,opt,name=size,proto3"`
+	xxx_hidden_LimitBytes      uint64                          `protobuf:"varint,8,opt,name=limit_bytes,json=limitBytes,proto3"`
+	xxx_hidden_Priority        Priorities_Priority             `protobuf:"varint,9,opt,name=priority,proto3,enum=Ydb.KeyValue.Priorities_Priority"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ReadRequest) Reset() {
@@ -1368,200 +1223,125 @@ func (x *ReadRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ReadRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ReadRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *ReadRequest) GetPartitionId() uint64 {
-	if x != nil && x.PartitionId != nil {
-		return *x.PartitionId
+	if x != nil {
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *ReadRequest) GetLockGeneration() uint64 {
-	if x != nil && x.LockGeneration != nil {
-		return *x.LockGeneration
+	if x != nil {
+		return x.xxx_hidden_LockGeneration
 	}
 	return 0
 }
 
 func (x *ReadRequest) GetKey() string {
-	if x != nil && x.Key != nil {
-		return *x.Key
+	if x != nil {
+		return x.xxx_hidden_Key
 	}
 	return ""
 }
 
 func (x *ReadRequest) GetOffset() uint64 {
-	if x != nil && x.Offset != nil {
-		return *x.Offset
+	if x != nil {
+		return x.xxx_hidden_Offset
 	}
 	return 0
 }
 
 func (x *ReadRequest) GetSize() uint64 {
-	if x != nil && x.Size != nil {
-		return *x.Size
+	if x != nil {
+		return x.xxx_hidden_Size
 	}
 	return 0
 }
 
 func (x *ReadRequest) GetLimitBytes() uint64 {
-	if x != nil && x.LimitBytes != nil {
-		return *x.LimitBytes
+	if x != nil {
+		return x.xxx_hidden_LimitBytes
 	}
 	return 0
 }
 
 func (x *ReadRequest) GetPriority() Priorities_Priority {
-	if x != nil && x.Priority != nil {
-		return *x.Priority
+	if x != nil {
+		return x.xxx_hidden_Priority
 	}
 	return Priorities_PRIORITY_UNSPECIFIED
 }
 
 func (x *ReadRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ReadRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *ReadRequest) SetPartitionId(v uint64) {
-	x.PartitionId = &v
+	x.xxx_hidden_PartitionId = v
 }
 
 func (x *ReadRequest) SetLockGeneration(v uint64) {
-	x.LockGeneration = &v
+	x.xxx_hidden_LockGeneration = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 9)
 }
 
 func (x *ReadRequest) SetKey(v string) {
-	x.Key = &v
+	x.xxx_hidden_Key = v
 }
 
 func (x *ReadRequest) SetOffset(v uint64) {
-	x.Offset = &v
+	x.xxx_hidden_Offset = v
 }
 
 func (x *ReadRequest) SetSize(v uint64) {
-	x.Size = &v
+	x.xxx_hidden_Size = v
 }
 
 func (x *ReadRequest) SetLimitBytes(v uint64) {
-	x.LimitBytes = &v
+	x.xxx_hidden_LimitBytes = v
 }
 
 func (x *ReadRequest) SetPriority(v Priorities_Priority) {
-	x.Priority = &v
+	x.xxx_hidden_Priority = v
 }
 
 func (x *ReadRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ReadRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *ReadRequest) HasPartitionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.PartitionId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ReadRequest) HasLockGeneration() bool {
 	if x == nil {
 		return false
 	}
-	return x.LockGeneration != nil
-}
-
-func (x *ReadRequest) HasKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.Key != nil
-}
-
-func (x *ReadRequest) HasOffset() bool {
-	if x == nil {
-		return false
-	}
-	return x.Offset != nil
-}
-
-func (x *ReadRequest) HasSize() bool {
-	if x == nil {
-		return false
-	}
-	return x.Size != nil
-}
-
-func (x *ReadRequest) HasLimitBytes() bool {
-	if x == nil {
-		return false
-	}
-	return x.LimitBytes != nil
-}
-
-func (x *ReadRequest) HasPriority() bool {
-	if x == nil {
-		return false
-	}
-	return x.Priority != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
 func (x *ReadRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ReadRequest) ClearPath() {
-	x.Path = nil
-}
-
-func (x *ReadRequest) ClearPartitionId() {
-	x.PartitionId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ReadRequest) ClearLockGeneration() {
-	x.LockGeneration = nil
-}
-
-func (x *ReadRequest) ClearKey() {
-	x.Key = nil
-}
-
-func (x *ReadRequest) ClearOffset() {
-	x.Offset = nil
-}
-
-func (x *ReadRequest) ClearSize() {
-	x.Size = nil
-}
-
-func (x *ReadRequest) ClearLimitBytes() {
-	x.LimitBytes = nil
-}
-
-func (x *ReadRequest) ClearPriority() {
-	x.Priority = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_LockGeneration = 0
 }
 
 type ReadRequest_builder struct {
@@ -1569,48 +1349,50 @@ type ReadRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	// Volume path.
-	Path *string
+	Path string
 	// Partition of the volume.
-	PartitionId *uint64
+	PartitionId uint64
 	// Generation of the exclusive lock acquired for the partition as a result of an AcquireLock call.
 	LockGeneration *uint64
 	// Key of the key-value pair to read.
-	Key *string
+	Key string
 	// Offset in bytes from the beginning of the value to read data from.
-	Offset *uint64
+	Offset uint64
 	// Size of the data to read in bytes. 0 means "read to the end of the value".
-	Size *uint64
+	Size uint64
 	// Result protobuf size limit.
 	// Overrides the default limit only with a smaller value.
 	// 0 means "use the default limit".
-	LimitBytes *uint64
+	LimitBytes uint64
 	// Priority to use for the Distributed Storage Get operation.
 	// Has no effect for the INLINE storage channel.
-	Priority *Priorities_Priority
+	Priority Priorities_Priority
 }
 
 func (b0 ReadRequest_builder) Build() *ReadRequest {
 	m0 := &ReadRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
-	x.PartitionId = b.PartitionId
-	x.LockGeneration = b.LockGeneration
-	x.Key = b.Key
-	x.Offset = b.Offset
-	x.Size = b.Size
-	x.LimitBytes = b.LimitBytes
-	x.Priority = b.Priority
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionId = b.PartitionId
+	if b.LockGeneration != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 9)
+		x.xxx_hidden_LockGeneration = *b.LockGeneration
+	}
+	x.xxx_hidden_Key = b.Key
+	x.xxx_hidden_Offset = b.Offset
+	x.xxx_hidden_Size = b.Size
+	x.xxx_hidden_LimitBytes = b.LimitBytes
+	x.xxx_hidden_Priority = b.Priority
 	return m0
 }
 
 type ReadResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ReadResponse) Reset() {
@@ -1640,24 +1422,24 @@ func (x *ReadResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ReadResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ReadResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ReadResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ReadResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ReadResponse_builder struct {
@@ -1671,27 +1453,20 @@ func (b0 ReadResponse_builder) Build() *ReadResponse {
 	m0 := &ReadResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ReadResult struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// The key of the requested key-value pair.
-	RequestedKey *string `protobuf:"bytes,1,opt,name=requested_key,json=requestedKey" json:"requested_key,omitempty"`
-	// Offset in bytes from the beginning of the value requested.
-	RequestedOffset *uint64 `protobuf:"varint,2,opt,name=requested_offset,json=requestedOffset" json:"requested_offset,omitempty"`
-	// Size of the data requested.
-	RequestedSize *uint64 `protobuf:"varint,3,opt,name=requested_size,json=requestedSize" json:"requested_size,omitempty"`
-	// The bytes of the requested part of the value.
-	Value []byte `protobuf:"bytes,4,opt,name=value" json:"value,omitempty"`
-	// If requested data size is larger than limit_bytes then result will contain only part of the requested value and
-	// the is_overrun flag will be set.
-	IsOverrun *bool `protobuf:"varint,5,opt,name=is_overrun,json=isOverrun" json:"is_overrun,omitempty"`
-	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId        *uint32 `protobuf:"varint,6,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_RequestedKey    string                 `protobuf:"bytes,1,opt,name=requested_key,json=requestedKey,proto3"`
+	xxx_hidden_RequestedOffset uint64                 `protobuf:"varint,2,opt,name=requested_offset,json=requestedOffset,proto3"`
+	xxx_hidden_RequestedSize   uint64                 `protobuf:"varint,3,opt,name=requested_size,json=requestedSize,proto3"`
+	xxx_hidden_Value           []byte                 `protobuf:"bytes,4,opt,name=value,proto3"`
+	xxx_hidden_IsOverrun       bool                   `protobuf:"varint,5,opt,name=is_overrun,json=isOverrun,proto3"`
+	xxx_hidden_NodeId          uint32                 `protobuf:"varint,6,opt,name=node_id,json=nodeId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ReadResult) Reset() {
@@ -1720,191 +1495,118 @@ func (x *ReadResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ReadResult) GetRequestedKey() string {
-	if x != nil && x.RequestedKey != nil {
-		return *x.RequestedKey
+	if x != nil {
+		return x.xxx_hidden_RequestedKey
 	}
 	return ""
 }
 
 func (x *ReadResult) GetRequestedOffset() uint64 {
-	if x != nil && x.RequestedOffset != nil {
-		return *x.RequestedOffset
+	if x != nil {
+		return x.xxx_hidden_RequestedOffset
 	}
 	return 0
 }
 
 func (x *ReadResult) GetRequestedSize() uint64 {
-	if x != nil && x.RequestedSize != nil {
-		return *x.RequestedSize
+	if x != nil {
+		return x.xxx_hidden_RequestedSize
 	}
 	return 0
 }
 
 func (x *ReadResult) GetValue() []byte {
 	if x != nil {
-		return x.Value
+		return x.xxx_hidden_Value
 	}
 	return nil
 }
 
 func (x *ReadResult) GetIsOverrun() bool {
-	if x != nil && x.IsOverrun != nil {
-		return *x.IsOverrun
+	if x != nil {
+		return x.xxx_hidden_IsOverrun
 	}
 	return false
 }
 
 func (x *ReadResult) GetNodeId() uint32 {
-	if x != nil && x.NodeId != nil {
-		return *x.NodeId
+	if x != nil {
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *ReadResult) SetRequestedKey(v string) {
-	x.RequestedKey = &v
+	x.xxx_hidden_RequestedKey = v
 }
 
 func (x *ReadResult) SetRequestedOffset(v uint64) {
-	x.RequestedOffset = &v
+	x.xxx_hidden_RequestedOffset = v
 }
 
 func (x *ReadResult) SetRequestedSize(v uint64) {
-	x.RequestedSize = &v
+	x.xxx_hidden_RequestedSize = v
 }
 
 func (x *ReadResult) SetValue(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.Value = v
+	x.xxx_hidden_Value = v
 }
 
 func (x *ReadResult) SetIsOverrun(v bool) {
-	x.IsOverrun = &v
+	x.xxx_hidden_IsOverrun = v
 }
 
 func (x *ReadResult) SetNodeId(v uint32) {
-	x.NodeId = &v
-}
-
-func (x *ReadResult) HasRequestedKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.RequestedKey != nil
-}
-
-func (x *ReadResult) HasRequestedOffset() bool {
-	if x == nil {
-		return false
-	}
-	return x.RequestedOffset != nil
-}
-
-func (x *ReadResult) HasRequestedSize() bool {
-	if x == nil {
-		return false
-	}
-	return x.RequestedSize != nil
-}
-
-func (x *ReadResult) HasValue() bool {
-	if x == nil {
-		return false
-	}
-	return x.Value != nil
-}
-
-func (x *ReadResult) HasIsOverrun() bool {
-	if x == nil {
-		return false
-	}
-	return x.IsOverrun != nil
-}
-
-func (x *ReadResult) HasNodeId() bool {
-	if x == nil {
-		return false
-	}
-	return x.NodeId != nil
-}
-
-func (x *ReadResult) ClearRequestedKey() {
-	x.RequestedKey = nil
-}
-
-func (x *ReadResult) ClearRequestedOffset() {
-	x.RequestedOffset = nil
-}
-
-func (x *ReadResult) ClearRequestedSize() {
-	x.RequestedSize = nil
-}
-
-func (x *ReadResult) ClearValue() {
-	x.Value = nil
-}
-
-func (x *ReadResult) ClearIsOverrun() {
-	x.IsOverrun = nil
-}
-
-func (x *ReadResult) ClearNodeId() {
-	x.NodeId = nil
+	x.xxx_hidden_NodeId = v
 }
 
 type ReadResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The key of the requested key-value pair.
-	RequestedKey *string
+	RequestedKey string
 	// Offset in bytes from the beginning of the value requested.
-	RequestedOffset *uint64
+	RequestedOffset uint64
 	// Size of the data requested.
-	RequestedSize *uint64
+	RequestedSize uint64
 	// The bytes of the requested part of the value.
 	Value []byte
 	// If requested data size is larger than limit_bytes then result will contain only part of the requested value and
 	// the is_overrun flag will be set.
-	IsOverrun *bool
+	IsOverrun bool
 	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId *uint32
+	NodeId uint32
 }
 
 func (b0 ReadResult_builder) Build() *ReadResult {
 	m0 := &ReadResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.RequestedKey = b.RequestedKey
-	x.RequestedOffset = b.RequestedOffset
-	x.RequestedSize = b.RequestedSize
-	x.Value = b.Value
-	x.IsOverrun = b.IsOverrun
-	x.NodeId = b.NodeId
+	x.xxx_hidden_RequestedKey = b.RequestedKey
+	x.xxx_hidden_RequestedOffset = b.RequestedOffset
+	x.xxx_hidden_RequestedSize = b.RequestedSize
+	x.xxx_hidden_Value = b.Value
+	x.xxx_hidden_IsOverrun = b.IsOverrun
+	x.xxx_hidden_NodeId = b.NodeId
 	return m0
 }
 
 type ReadRangeRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// Volume path.
-	Path *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	// Partition of the volume.
-	PartitionId *uint64 `protobuf:"varint,3,opt,name=partition_id,json=partitionId" json:"partition_id,omitempty"`
-	// Generation of the exclusive lock acquired for the partition as a result of an AcquireLock call.
-	LockGeneration *uint64 `protobuf:"varint,4,opt,name=lock_generation,json=lockGeneration" json:"lock_generation,omitempty"`
-	// The range of keys to read.
-	Range *KeyRange `protobuf:"bytes,5,opt,name=range" json:"range,omitempty"`
-	// Result protobuf size limit.
-	// Overrides the default limit only with a smaller value.
-	// 0 means "use the default limit".
-	LimitBytes *uint64 `protobuf:"varint,6,opt,name=limit_bytes,json=limitBytes" json:"limit_bytes,omitempty"`
-	// Priority to use for the Distributed Storage Get operation.
-	// Has no effect for the INLINE storage channel.
-	Priority      *Priorities_Priority `protobuf:"varint,7,opt,name=priority,enum=Ydb.KeyValue.Priorities_Priority" json:"priority,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_PartitionId     uint64                          `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_LockGeneration  uint64                          `protobuf:"varint,4,opt,name=lock_generation,json=lockGeneration,proto3,oneof"`
+	xxx_hidden_Range           *KeyRange                       `protobuf:"bytes,5,opt,name=range,proto3"`
+	xxx_hidden_LimitBytes      uint64                          `protobuf:"varint,6,opt,name=limit_bytes,json=limitBytes,proto3"`
+	xxx_hidden_Priority        Priorities_Priority             `protobuf:"varint,7,opt,name=priority,proto3,enum=Ydb.KeyValue.Priorities_Priority"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ReadRangeRequest) Reset() {
@@ -1934,156 +1636,114 @@ func (x *ReadRangeRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ReadRangeRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ReadRangeRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *ReadRangeRequest) GetPartitionId() uint64 {
-	if x != nil && x.PartitionId != nil {
-		return *x.PartitionId
+	if x != nil {
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *ReadRangeRequest) GetLockGeneration() uint64 {
-	if x != nil && x.LockGeneration != nil {
-		return *x.LockGeneration
+	if x != nil {
+		return x.xxx_hidden_LockGeneration
 	}
 	return 0
 }
 
 func (x *ReadRangeRequest) GetRange() *KeyRange {
 	if x != nil {
-		return x.Range
+		return x.xxx_hidden_Range
 	}
 	return nil
 }
 
 func (x *ReadRangeRequest) GetLimitBytes() uint64 {
-	if x != nil && x.LimitBytes != nil {
-		return *x.LimitBytes
+	if x != nil {
+		return x.xxx_hidden_LimitBytes
 	}
 	return 0
 }
 
 func (x *ReadRangeRequest) GetPriority() Priorities_Priority {
-	if x != nil && x.Priority != nil {
-		return *x.Priority
+	if x != nil {
+		return x.xxx_hidden_Priority
 	}
 	return Priorities_PRIORITY_UNSPECIFIED
 }
 
 func (x *ReadRangeRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ReadRangeRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *ReadRangeRequest) SetPartitionId(v uint64) {
-	x.PartitionId = &v
+	x.xxx_hidden_PartitionId = v
 }
 
 func (x *ReadRangeRequest) SetLockGeneration(v uint64) {
-	x.LockGeneration = &v
+	x.xxx_hidden_LockGeneration = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
 }
 
 func (x *ReadRangeRequest) SetRange(v *KeyRange) {
-	x.Range = v
+	x.xxx_hidden_Range = v
 }
 
 func (x *ReadRangeRequest) SetLimitBytes(v uint64) {
-	x.LimitBytes = &v
+	x.xxx_hidden_LimitBytes = v
 }
 
 func (x *ReadRangeRequest) SetPriority(v Priorities_Priority) {
-	x.Priority = &v
+	x.xxx_hidden_Priority = v
 }
 
 func (x *ReadRangeRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ReadRangeRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *ReadRangeRequest) HasPartitionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.PartitionId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ReadRangeRequest) HasLockGeneration() bool {
 	if x == nil {
 		return false
 	}
-	return x.LockGeneration != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
 func (x *ReadRangeRequest) HasRange() bool {
 	if x == nil {
 		return false
 	}
-	return x.Range != nil
-}
-
-func (x *ReadRangeRequest) HasLimitBytes() bool {
-	if x == nil {
-		return false
-	}
-	return x.LimitBytes != nil
-}
-
-func (x *ReadRangeRequest) HasPriority() bool {
-	if x == nil {
-		return false
-	}
-	return x.Priority != nil
+	return x.xxx_hidden_Range != nil
 }
 
 func (x *ReadRangeRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ReadRangeRequest) ClearPath() {
-	x.Path = nil
-}
-
-func (x *ReadRangeRequest) ClearPartitionId() {
-	x.PartitionId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ReadRangeRequest) ClearLockGeneration() {
-	x.LockGeneration = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_LockGeneration = 0
 }
 
 func (x *ReadRangeRequest) ClearRange() {
-	x.Range = nil
-}
-
-func (x *ReadRangeRequest) ClearLimitBytes() {
-	x.LimitBytes = nil
-}
-
-func (x *ReadRangeRequest) ClearPriority() {
-	x.Priority = nil
+	x.xxx_hidden_Range = nil
 }
 
 type ReadRangeRequest_builder struct {
@@ -2091,9 +1751,9 @@ type ReadRangeRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	// Volume path.
-	Path *string
+	Path string
 	// Partition of the volume.
-	PartitionId *uint64
+	PartitionId uint64
 	// Generation of the exclusive lock acquired for the partition as a result of an AcquireLock call.
 	LockGeneration *uint64
 	// The range of keys to read.
@@ -2101,32 +1761,34 @@ type ReadRangeRequest_builder struct {
 	// Result protobuf size limit.
 	// Overrides the default limit only with a smaller value.
 	// 0 means "use the default limit".
-	LimitBytes *uint64
+	LimitBytes uint64
 	// Priority to use for the Distributed Storage Get operation.
 	// Has no effect for the INLINE storage channel.
-	Priority *Priorities_Priority
+	Priority Priorities_Priority
 }
 
 func (b0 ReadRangeRequest_builder) Build() *ReadRangeRequest {
 	m0 := &ReadRangeRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
-	x.PartitionId = b.PartitionId
-	x.LockGeneration = b.LockGeneration
-	x.Range = b.Range
-	x.LimitBytes = b.LimitBytes
-	x.Priority = b.Priority
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionId = b.PartitionId
+	if b.LockGeneration != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
+		x.xxx_hidden_LockGeneration = *b.LockGeneration
+	}
+	x.xxx_hidden_Range = b.Range
+	x.xxx_hidden_LimitBytes = b.LimitBytes
+	x.xxx_hidden_Priority = b.Priority
 	return m0
 }
 
 type ReadRangeResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ReadRangeResponse) Reset() {
@@ -2156,24 +1818,24 @@ func (x *ReadRangeResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ReadRangeResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ReadRangeResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ReadRangeResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ReadRangeResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ReadRangeResponse_builder struct {
@@ -2187,26 +1849,17 @@ func (b0 ReadRangeResponse_builder) Build() *ReadRangeResponse {
 	m0 := &ReadRangeResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ReadRangeResult struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// List of key-value pairs requested.
-	Pair []*ReadRangeResult_KeyValuePair `protobuf:"bytes,1,rep,name=pair" json:"pair,omitempty"`
-	// If requested data size is larger than limit_bytes then result will contain
-	// only part of the requested key-value pairs and the is_overrun flag will be set.
-	// The pair list contains only full values.
-	// In order to continue reading the client should send another request for the key range
-	// with from_key_exclusive set to the last key read.
-	// If first pair doesn't fit the limit_bytes then the result will be empty and the is_overrun flag will be set.
-	// Use ListRange and Read methods to find and read large key-value pairs.
-	IsOverrun *bool `protobuf:"varint,2,opt,name=is_overrun,json=isOverrun" json:"is_overrun,omitempty"`
-	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId        *uint32 `protobuf:"varint,3,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState           `protogen:"opaque.v1"`
+	xxx_hidden_Pair      *[]*ReadRangeResult_KeyValuePair `protobuf:"bytes,1,rep,name=pair,proto3"`
+	xxx_hidden_IsOverrun bool                             `protobuf:"varint,2,opt,name=is_overrun,json=isOverrun,proto3"`
+	xxx_hidden_NodeId    uint32                           `protobuf:"varint,3,opt,name=node_id,json=nodeId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ReadRangeResult) Reset() {
@@ -2236,57 +1889,37 @@ func (x *ReadRangeResult) ProtoReflect() protoreflect.Message {
 
 func (x *ReadRangeResult) GetPair() []*ReadRangeResult_KeyValuePair {
 	if x != nil {
-		return x.Pair
+		if x.xxx_hidden_Pair != nil {
+			return *x.xxx_hidden_Pair
+		}
 	}
 	return nil
 }
 
 func (x *ReadRangeResult) GetIsOverrun() bool {
-	if x != nil && x.IsOverrun != nil {
-		return *x.IsOverrun
+	if x != nil {
+		return x.xxx_hidden_IsOverrun
 	}
 	return false
 }
 
 func (x *ReadRangeResult) GetNodeId() uint32 {
-	if x != nil && x.NodeId != nil {
-		return *x.NodeId
+	if x != nil {
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *ReadRangeResult) SetPair(v []*ReadRangeResult_KeyValuePair) {
-	x.Pair = v
+	x.xxx_hidden_Pair = &v
 }
 
 func (x *ReadRangeResult) SetIsOverrun(v bool) {
-	x.IsOverrun = &v
+	x.xxx_hidden_IsOverrun = v
 }
 
 func (x *ReadRangeResult) SetNodeId(v uint32) {
-	x.NodeId = &v
-}
-
-func (x *ReadRangeResult) HasIsOverrun() bool {
-	if x == nil {
-		return false
-	}
-	return x.IsOverrun != nil
-}
-
-func (x *ReadRangeResult) HasNodeId() bool {
-	if x == nil {
-		return false
-	}
-	return x.NodeId != nil
-}
-
-func (x *ReadRangeResult) ClearIsOverrun() {
-	x.IsOverrun = nil
-}
-
-func (x *ReadRangeResult) ClearNodeId() {
-	x.NodeId = nil
+	x.xxx_hidden_NodeId = v
 }
 
 type ReadRangeResult_builder struct {
@@ -2301,36 +1934,33 @@ type ReadRangeResult_builder struct {
 	// with from_key_exclusive set to the last key read.
 	// If first pair doesn't fit the limit_bytes then the result will be empty and the is_overrun flag will be set.
 	// Use ListRange and Read methods to find and read large key-value pairs.
-	IsOverrun *bool
+	IsOverrun bool
 	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId *uint32
+	NodeId uint32
 }
 
 func (b0 ReadRangeResult_builder) Build() *ReadRangeResult {
 	m0 := &ReadRangeResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Pair = b.Pair
-	x.IsOverrun = b.IsOverrun
-	x.NodeId = b.NodeId
+	x.xxx_hidden_Pair = &b.Pair
+	x.xxx_hidden_IsOverrun = b.IsOverrun
+	x.xxx_hidden_NodeId = b.NodeId
 	return m0
 }
 
 type ListRangeRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// Volume path.
-	Path *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	// Partition of the volume.
-	PartitionId *uint64 `protobuf:"varint,3,opt,name=partition_id,json=partitionId" json:"partition_id,omitempty"`
-	// Generation of the exclusive lock acquired for the partition as a result of an AcquireLock call.
-	LockGeneration *uint64 `protobuf:"varint,4,opt,name=lock_generation,json=lockGeneration" json:"lock_generation,omitempty"`
-	// The range of keys to read
-	Range *KeyRange `protobuf:"bytes,5,opt,name=range" json:"range,omitempty"`
-	// Result protobuf size limit. If not 0, overrides the default one only with a smaller value.
-	LimitBytes    *uint64 `protobuf:"varint,6,opt,name=limit_bytes,json=limitBytes" json:"limit_bytes,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_PartitionId     uint64                          `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_LockGeneration  uint64                          `protobuf:"varint,4,opt,name=lock_generation,json=lockGeneration,proto3,oneof"`
+	xxx_hidden_Range           *KeyRange                       `protobuf:"bytes,5,opt,name=range,proto3"`
+	xxx_hidden_LimitBytes      uint64                          `protobuf:"varint,6,opt,name=limit_bytes,json=limitBytes,proto3"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListRangeRequest) Reset() {
@@ -2360,134 +1990,103 @@ func (x *ListRangeRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ListRangeRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListRangeRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *ListRangeRequest) GetPartitionId() uint64 {
-	if x != nil && x.PartitionId != nil {
-		return *x.PartitionId
+	if x != nil {
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *ListRangeRequest) GetLockGeneration() uint64 {
-	if x != nil && x.LockGeneration != nil {
-		return *x.LockGeneration
+	if x != nil {
+		return x.xxx_hidden_LockGeneration
 	}
 	return 0
 }
 
 func (x *ListRangeRequest) GetRange() *KeyRange {
 	if x != nil {
-		return x.Range
+		return x.xxx_hidden_Range
 	}
 	return nil
 }
 
 func (x *ListRangeRequest) GetLimitBytes() uint64 {
-	if x != nil && x.LimitBytes != nil {
-		return *x.LimitBytes
+	if x != nil {
+		return x.xxx_hidden_LimitBytes
 	}
 	return 0
 }
 
 func (x *ListRangeRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ListRangeRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *ListRangeRequest) SetPartitionId(v uint64) {
-	x.PartitionId = &v
+	x.xxx_hidden_PartitionId = v
 }
 
 func (x *ListRangeRequest) SetLockGeneration(v uint64) {
-	x.LockGeneration = &v
+	x.xxx_hidden_LockGeneration = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
 }
 
 func (x *ListRangeRequest) SetRange(v *KeyRange) {
-	x.Range = v
+	x.xxx_hidden_Range = v
 }
 
 func (x *ListRangeRequest) SetLimitBytes(v uint64) {
-	x.LimitBytes = &v
+	x.xxx_hidden_LimitBytes = v
 }
 
 func (x *ListRangeRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ListRangeRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *ListRangeRequest) HasPartitionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.PartitionId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ListRangeRequest) HasLockGeneration() bool {
 	if x == nil {
 		return false
 	}
-	return x.LockGeneration != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
 func (x *ListRangeRequest) HasRange() bool {
 	if x == nil {
 		return false
 	}
-	return x.Range != nil
-}
-
-func (x *ListRangeRequest) HasLimitBytes() bool {
-	if x == nil {
-		return false
-	}
-	return x.LimitBytes != nil
+	return x.xxx_hidden_Range != nil
 }
 
 func (x *ListRangeRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ListRangeRequest) ClearPath() {
-	x.Path = nil
-}
-
-func (x *ListRangeRequest) ClearPartitionId() {
-	x.PartitionId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ListRangeRequest) ClearLockGeneration() {
-	x.LockGeneration = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_LockGeneration = 0
 }
 
 func (x *ListRangeRequest) ClearRange() {
-	x.Range = nil
-}
-
-func (x *ListRangeRequest) ClearLimitBytes() {
-	x.LimitBytes = nil
+	x.xxx_hidden_Range = nil
 }
 
 type ListRangeRequest_builder struct {
@@ -2495,36 +2094,38 @@ type ListRangeRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	// Volume path.
-	Path *string
+	Path string
 	// Partition of the volume.
-	PartitionId *uint64
+	PartitionId uint64
 	// Generation of the exclusive lock acquired for the partition as a result of an AcquireLock call.
 	LockGeneration *uint64
 	// The range of keys to read
 	Range *KeyRange
 	// Result protobuf size limit. If not 0, overrides the default one only with a smaller value.
-	LimitBytes *uint64
+	LimitBytes uint64
 }
 
 func (b0 ListRangeRequest_builder) Build() *ListRangeRequest {
 	m0 := &ListRangeRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
-	x.PartitionId = b.PartitionId
-	x.LockGeneration = b.LockGeneration
-	x.Range = b.Range
-	x.LimitBytes = b.LimitBytes
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionId = b.PartitionId
+	if b.LockGeneration != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
+		x.xxx_hidden_LockGeneration = *b.LockGeneration
+	}
+	x.xxx_hidden_Range = b.Range
+	x.xxx_hidden_LimitBytes = b.LimitBytes
 	return m0
 }
 
 type ListRangeResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListRangeResponse) Reset() {
@@ -2554,24 +2155,24 @@ func (x *ListRangeResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ListRangeResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ListRangeResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ListRangeResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ListRangeResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ListRangeResponse_builder struct {
@@ -2585,21 +2186,17 @@ func (b0 ListRangeResponse_builder) Build() *ListRangeResponse {
 	m0 := &ListRangeResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ListRangeResult struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// List of the key-value pairs and metadata requested.
-	Key []*ListRangeResult_KeyInfo `protobuf:"bytes,1,rep,name=key" json:"key,omitempty"`
-	// If requested data size is larger than limit_bytes then result will contain
-	// only part of the requested key-value pairs and the is_overrun flag will be set.
-	IsOverrun *bool `protobuf:"varint,2,opt,name=is_overrun,json=isOverrun" json:"is_overrun,omitempty"`
-	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId        *uint32 `protobuf:"varint,3,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState      `protogen:"opaque.v1"`
+	xxx_hidden_Key       *[]*ListRangeResult_KeyInfo `protobuf:"bytes,1,rep,name=key,proto3"`
+	xxx_hidden_IsOverrun bool                        `protobuf:"varint,2,opt,name=is_overrun,json=isOverrun,proto3"`
+	xxx_hidden_NodeId    uint32                      `protobuf:"varint,3,opt,name=node_id,json=nodeId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListRangeResult) Reset() {
@@ -2629,57 +2226,37 @@ func (x *ListRangeResult) ProtoReflect() protoreflect.Message {
 
 func (x *ListRangeResult) GetKey() []*ListRangeResult_KeyInfo {
 	if x != nil {
-		return x.Key
+		if x.xxx_hidden_Key != nil {
+			return *x.xxx_hidden_Key
+		}
 	}
 	return nil
 }
 
 func (x *ListRangeResult) GetIsOverrun() bool {
-	if x != nil && x.IsOverrun != nil {
-		return *x.IsOverrun
+	if x != nil {
+		return x.xxx_hidden_IsOverrun
 	}
 	return false
 }
 
 func (x *ListRangeResult) GetNodeId() uint32 {
-	if x != nil && x.NodeId != nil {
-		return *x.NodeId
+	if x != nil {
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *ListRangeResult) SetKey(v []*ListRangeResult_KeyInfo) {
-	x.Key = v
+	x.xxx_hidden_Key = &v
 }
 
 func (x *ListRangeResult) SetIsOverrun(v bool) {
-	x.IsOverrun = &v
+	x.xxx_hidden_IsOverrun = v
 }
 
 func (x *ListRangeResult) SetNodeId(v uint32) {
-	x.NodeId = &v
-}
-
-func (x *ListRangeResult) HasIsOverrun() bool {
-	if x == nil {
-		return false
-	}
-	return x.IsOverrun != nil
-}
-
-func (x *ListRangeResult) HasNodeId() bool {
-	if x == nil {
-		return false
-	}
-	return x.NodeId != nil
-}
-
-func (x *ListRangeResult) ClearIsOverrun() {
-	x.IsOverrun = nil
-}
-
-func (x *ListRangeResult) ClearNodeId() {
-	x.NodeId = nil
+	x.xxx_hidden_NodeId = v
 }
 
 type ListRangeResult_builder struct {
@@ -2689,34 +2266,32 @@ type ListRangeResult_builder struct {
 	Key []*ListRangeResult_KeyInfo
 	// If requested data size is larger than limit_bytes then result will contain
 	// only part of the requested key-value pairs and the is_overrun flag will be set.
-	IsOverrun *bool
+	IsOverrun bool
 	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId *uint32
+	NodeId uint32
 }
 
 func (b0 ListRangeResult_builder) Build() *ListRangeResult {
 	m0 := &ListRangeResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Key = b.Key
-	x.IsOverrun = b.IsOverrun
-	x.NodeId = b.NodeId
+	x.xxx_hidden_Key = &b.Key
+	x.xxx_hidden_IsOverrun = b.IsOverrun
+	x.xxx_hidden_NodeId = b.NodeId
 	return m0
 }
 
 type GetStorageChannelStatusRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// Volume path.
-	Path *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	// Partition of the volume.
-	PartitionId *uint64 `protobuf:"varint,3,opt,name=partition_id,json=partitionId" json:"partition_id,omitempty"`
-	// Generation of the exclusive lock acquired for the partition as a result of an AcquireLock call.
-	LockGeneration *uint64 `protobuf:"varint,4,opt,name=lock_generation,json=lockGeneration" json:"lock_generation,omitempty"`
-	// List of storage channels to get StorageChannelInfo for.
-	StorageChannel []uint32 `protobuf:"varint,5,rep,packed,name=storage_channel,json=storageChannel" json:"storage_channel,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_PartitionId     uint64                          `protobuf:"varint,3,opt,name=partition_id,json=partitionId,proto3"`
+	xxx_hidden_LockGeneration  uint64                          `protobuf:"varint,4,opt,name=lock_generation,json=lockGeneration,proto3,oneof"`
+	xxx_hidden_StorageChannel  []uint32                        `protobuf:"varint,5,rep,packed,name=storage_channel,json=storageChannel,proto3"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetStorageChannelStatusRequest) Reset() {
@@ -2746,101 +2321,81 @@ func (x *GetStorageChannelStatusRequest) ProtoReflect() protoreflect.Message {
 
 func (x *GetStorageChannelStatusRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *GetStorageChannelStatusRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *GetStorageChannelStatusRequest) GetPartitionId() uint64 {
-	if x != nil && x.PartitionId != nil {
-		return *x.PartitionId
+	if x != nil {
+		return x.xxx_hidden_PartitionId
 	}
 	return 0
 }
 
 func (x *GetStorageChannelStatusRequest) GetLockGeneration() uint64 {
-	if x != nil && x.LockGeneration != nil {
-		return *x.LockGeneration
+	if x != nil {
+		return x.xxx_hidden_LockGeneration
 	}
 	return 0
 }
 
 func (x *GetStorageChannelStatusRequest) GetStorageChannel() []uint32 {
 	if x != nil {
-		return x.StorageChannel
+		return x.xxx_hidden_StorageChannel
 	}
 	return nil
 }
 
 func (x *GetStorageChannelStatusRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *GetStorageChannelStatusRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *GetStorageChannelStatusRequest) SetPartitionId(v uint64) {
-	x.PartitionId = &v
+	x.xxx_hidden_PartitionId = v
 }
 
 func (x *GetStorageChannelStatusRequest) SetLockGeneration(v uint64) {
-	x.LockGeneration = &v
+	x.xxx_hidden_LockGeneration = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
 }
 
 func (x *GetStorageChannelStatusRequest) SetStorageChannel(v []uint32) {
-	x.StorageChannel = v
+	x.xxx_hidden_StorageChannel = v
 }
 
 func (x *GetStorageChannelStatusRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *GetStorageChannelStatusRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *GetStorageChannelStatusRequest) HasPartitionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.PartitionId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *GetStorageChannelStatusRequest) HasLockGeneration() bool {
 	if x == nil {
 		return false
 	}
-	return x.LockGeneration != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
 func (x *GetStorageChannelStatusRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *GetStorageChannelStatusRequest) ClearPath() {
-	x.Path = nil
-}
-
-func (x *GetStorageChannelStatusRequest) ClearPartitionId() {
-	x.PartitionId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *GetStorageChannelStatusRequest) ClearLockGeneration() {
-	x.LockGeneration = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_LockGeneration = 0
 }
 
 type GetStorageChannelStatusRequest_builder struct {
@@ -2848,9 +2403,9 @@ type GetStorageChannelStatusRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	// Volume path.
-	Path *string
+	Path string
 	// Partition of the volume.
-	PartitionId *uint64
+	PartitionId uint64
 	// Generation of the exclusive lock acquired for the partition as a result of an AcquireLock call.
 	LockGeneration *uint64
 	// List of storage channels to get StorageChannelInfo for.
@@ -2861,20 +2416,22 @@ func (b0 GetStorageChannelStatusRequest_builder) Build() *GetStorageChannelStatu
 	m0 := &GetStorageChannelStatusRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
-	x.PartitionId = b.PartitionId
-	x.LockGeneration = b.LockGeneration
-	x.StorageChannel = b.StorageChannel
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionId = b.PartitionId
+	if b.LockGeneration != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		x.xxx_hidden_LockGeneration = *b.LockGeneration
+	}
+	x.xxx_hidden_StorageChannel = b.StorageChannel
 	return m0
 }
 
 type GetStorageChannelStatusResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetStorageChannelStatusResponse) Reset() {
@@ -2904,24 +2461,24 @@ func (x *GetStorageChannelStatusResponse) ProtoReflect() protoreflect.Message {
 
 func (x *GetStorageChannelStatusResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *GetStorageChannelStatusResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *GetStorageChannelStatusResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *GetStorageChannelStatusResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type GetStorageChannelStatusResponse_builder struct {
@@ -2935,18 +2492,16 @@ func (b0 GetStorageChannelStatusResponse_builder) Build() *GetStorageChannelStat
 	m0 := &GetStorageChannelStatusResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type GetStorageChannelStatusResult struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Contains status flags for the requested storage channels.
-	StorageChannelInfo []*StorageChannelInfo `protobuf:"bytes,1,rep,name=storage_channel_info,json=storageChannelInfo" json:"storage_channel_info,omitempty"`
-	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId        *uint32 `protobuf:"varint,2,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StorageChannelInfo *[]*StorageChannelInfo `protobuf:"bytes,1,rep,name=storage_channel_info,json=storageChannelInfo,proto3"`
+	xxx_hidden_NodeId             uint32                 `protobuf:"varint,2,opt,name=node_id,json=nodeId,proto3"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *GetStorageChannelStatusResult) Reset() {
@@ -2976,35 +2531,26 @@ func (x *GetStorageChannelStatusResult) ProtoReflect() protoreflect.Message {
 
 func (x *GetStorageChannelStatusResult) GetStorageChannelInfo() []*StorageChannelInfo {
 	if x != nil {
-		return x.StorageChannelInfo
+		if x.xxx_hidden_StorageChannelInfo != nil {
+			return *x.xxx_hidden_StorageChannelInfo
+		}
 	}
 	return nil
 }
 
 func (x *GetStorageChannelStatusResult) GetNodeId() uint32 {
-	if x != nil && x.NodeId != nil {
-		return *x.NodeId
+	if x != nil {
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *GetStorageChannelStatusResult) SetStorageChannelInfo(v []*StorageChannelInfo) {
-	x.StorageChannelInfo = v
+	x.xxx_hidden_StorageChannelInfo = &v
 }
 
 func (x *GetStorageChannelStatusResult) SetNodeId(v uint32) {
-	x.NodeId = &v
-}
-
-func (x *GetStorageChannelStatusResult) HasNodeId() bool {
-	if x == nil {
-		return false
-	}
-	return x.NodeId != nil
-}
-
-func (x *GetStorageChannelStatusResult) ClearNodeId() {
-	x.NodeId = nil
+	x.xxx_hidden_NodeId = v
 }
 
 type GetStorageChannelStatusResult_builder struct {
@@ -3013,29 +2559,26 @@ type GetStorageChannelStatusResult_builder struct {
 	// Contains status flags for the requested storage channels.
 	StorageChannelInfo []*StorageChannelInfo
 	// Contains 0 if the request was sent to the node of the partition, node ID of the partition otherwise.
-	NodeId *uint32
+	NodeId uint32
 }
 
 func (b0 GetStorageChannelStatusResult_builder) Build() *GetStorageChannelStatusResult {
 	m0 := &GetStorageChannelStatusResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.StorageChannelInfo = b.StorageChannelInfo
-	x.NodeId = b.NodeId
+	x.xxx_hidden_StorageChannelInfo = &b.StorageChannelInfo
+	x.xxx_hidden_NodeId = b.NodeId
 	return m0
 }
 
 type CreateVolumeRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// Volume path.
-	Path *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	// The partition count of the new volume.
-	PartitionCount *uint32 `protobuf:"varint,4,opt,name=partition_count,json=partitionCount" json:"partition_count,omitempty"`
-	// Set storage kinds for storage channels.
-	StorageConfig *StorageConfig `protobuf:"bytes,5,opt,name=storage_config,json=storageConfig" json:"storage_config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_PartitionCount  uint32                          `protobuf:"varint,4,opt,name=partition_count,json=partitionCount,proto3"`
+	xxx_hidden_StorageConfig   *StorageConfig                  `protobuf:"bytes,5,opt,name=storage_config,json=storageConfig,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateVolumeRequest) Reset() {
@@ -3065,90 +2608,68 @@ func (x *CreateVolumeRequest) ProtoReflect() protoreflect.Message {
 
 func (x *CreateVolumeRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateVolumeRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *CreateVolumeRequest) GetPartitionCount() uint32 {
-	if x != nil && x.PartitionCount != nil {
-		return *x.PartitionCount
+	if x != nil {
+		return x.xxx_hidden_PartitionCount
 	}
 	return 0
 }
 
 func (x *CreateVolumeRequest) GetStorageConfig() *StorageConfig {
 	if x != nil {
-		return x.StorageConfig
+		return x.xxx_hidden_StorageConfig
 	}
 	return nil
 }
 
 func (x *CreateVolumeRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *CreateVolumeRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *CreateVolumeRequest) SetPartitionCount(v uint32) {
-	x.PartitionCount = &v
+	x.xxx_hidden_PartitionCount = v
 }
 
 func (x *CreateVolumeRequest) SetStorageConfig(v *StorageConfig) {
-	x.StorageConfig = v
+	x.xxx_hidden_StorageConfig = v
 }
 
 func (x *CreateVolumeRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *CreateVolumeRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *CreateVolumeRequest) HasPartitionCount() bool {
-	if x == nil {
-		return false
-	}
-	return x.PartitionCount != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *CreateVolumeRequest) HasStorageConfig() bool {
 	if x == nil {
 		return false
 	}
-	return x.StorageConfig != nil
+	return x.xxx_hidden_StorageConfig != nil
 }
 
 func (x *CreateVolumeRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *CreateVolumeRequest) ClearPath() {
-	x.Path = nil
-}
-
-func (x *CreateVolumeRequest) ClearPartitionCount() {
-	x.PartitionCount = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *CreateVolumeRequest) ClearStorageConfig() {
-	x.StorageConfig = nil
+	x.xxx_hidden_StorageConfig = nil
 }
 
 type CreateVolumeRequest_builder struct {
@@ -3156,9 +2677,9 @@ type CreateVolumeRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	// Volume path.
-	Path *string
+	Path string
 	// The partition count of the new volume.
-	PartitionCount *uint32
+	PartitionCount uint32
 	// Set storage kinds for storage channels.
 	StorageConfig *StorageConfig
 }
@@ -3167,19 +2688,18 @@ func (b0 CreateVolumeRequest_builder) Build() *CreateVolumeRequest {
 	m0 := &CreateVolumeRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
-	x.PartitionCount = b.PartitionCount
-	x.StorageConfig = b.StorageConfig
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionCount = b.PartitionCount
+	x.xxx_hidden_StorageConfig = b.StorageConfig
 	return m0
 }
 
 type CreateVolumeResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateVolumeResponse) Reset() {
@@ -3209,24 +2729,24 @@ func (x *CreateVolumeResponse) ProtoReflect() protoreflect.Message {
 
 func (x *CreateVolumeResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *CreateVolumeResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *CreateVolumeResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *CreateVolumeResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type CreateVolumeResponse_builder struct {
@@ -3240,12 +2760,12 @@ func (b0 CreateVolumeResponse_builder) Build() *CreateVolumeResponse {
 	m0 := &CreateVolumeResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type CreateVolumeResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3288,12 +2808,11 @@ func (b0 CreateVolumeResult_builder) Build() *CreateVolumeResult {
 }
 
 type DropVolumeRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// Volume path.
-	Path          *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DropVolumeRequest) Reset() {
@@ -3323,46 +2842,35 @@ func (x *DropVolumeRequest) ProtoReflect() protoreflect.Message {
 
 func (x *DropVolumeRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DropVolumeRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DropVolumeRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DropVolumeRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *DropVolumeRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DropVolumeRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DropVolumeRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *DropVolumeRequest) ClearPath() {
-	x.Path = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DropVolumeRequest_builder struct {
@@ -3370,24 +2878,23 @@ type DropVolumeRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	// Volume path.
-	Path *string
+	Path string
 }
 
 func (b0 DropVolumeRequest_builder) Build() *DropVolumeRequest {
 	m0 := &DropVolumeRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
 	return m0
 }
 
 type DropVolumeResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DropVolumeResponse) Reset() {
@@ -3417,24 +2924,24 @@ func (x *DropVolumeResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DropVolumeResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DropVolumeResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DropVolumeResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DropVolumeResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DropVolumeResponse_builder struct {
@@ -3448,12 +2955,12 @@ func (b0 DropVolumeResponse_builder) Build() *DropVolumeResponse {
 	m0 := &DropVolumeResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DropVolumeResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3496,18 +3003,13 @@ func (b0 DropVolumeResult_builder) Build() *DropVolumeResult {
 }
 
 type AlterVolumeRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// Volume path.
-	Path *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	// Change the partition count of the volume.
-	// The value should be greater or equal than current patition count.
-	AlterPartitionCount *uint32 `protobuf:"varint,3,opt,name=alter_partition_count,json=alterPartitionCount" json:"alter_partition_count,omitempty"`
-	// Set storage kinds for storage channels.
-	// If the field is not present, storage channel settings are not changed.
-	StorageConfig *StorageConfig `protobuf:"bytes,4,opt,name=storage_config,json=storageConfig" json:"storage_config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                          protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams     *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path                string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_AlterPartitionCount uint32                          `protobuf:"varint,3,opt,name=alter_partition_count,json=alterPartitionCount,proto3"`
+	xxx_hidden_StorageConfig       *StorageConfig                  `protobuf:"bytes,4,opt,name=storage_config,json=storageConfig,proto3"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *AlterVolumeRequest) Reset() {
@@ -3537,90 +3039,68 @@ func (x *AlterVolumeRequest) ProtoReflect() protoreflect.Message {
 
 func (x *AlterVolumeRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *AlterVolumeRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *AlterVolumeRequest) GetAlterPartitionCount() uint32 {
-	if x != nil && x.AlterPartitionCount != nil {
-		return *x.AlterPartitionCount
+	if x != nil {
+		return x.xxx_hidden_AlterPartitionCount
 	}
 	return 0
 }
 
 func (x *AlterVolumeRequest) GetStorageConfig() *StorageConfig {
 	if x != nil {
-		return x.StorageConfig
+		return x.xxx_hidden_StorageConfig
 	}
 	return nil
 }
 
 func (x *AlterVolumeRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *AlterVolumeRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *AlterVolumeRequest) SetAlterPartitionCount(v uint32) {
-	x.AlterPartitionCount = &v
+	x.xxx_hidden_AlterPartitionCount = v
 }
 
 func (x *AlterVolumeRequest) SetStorageConfig(v *StorageConfig) {
-	x.StorageConfig = v
+	x.xxx_hidden_StorageConfig = v
 }
 
 func (x *AlterVolumeRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *AlterVolumeRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *AlterVolumeRequest) HasAlterPartitionCount() bool {
-	if x == nil {
-		return false
-	}
-	return x.AlterPartitionCount != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *AlterVolumeRequest) HasStorageConfig() bool {
 	if x == nil {
 		return false
 	}
-	return x.StorageConfig != nil
+	return x.xxx_hidden_StorageConfig != nil
 }
 
 func (x *AlterVolumeRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *AlterVolumeRequest) ClearPath() {
-	x.Path = nil
-}
-
-func (x *AlterVolumeRequest) ClearAlterPartitionCount() {
-	x.AlterPartitionCount = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *AlterVolumeRequest) ClearStorageConfig() {
-	x.StorageConfig = nil
+	x.xxx_hidden_StorageConfig = nil
 }
 
 type AlterVolumeRequest_builder struct {
@@ -3628,10 +3108,10 @@ type AlterVolumeRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	// Volume path.
-	Path *string
+	Path string
 	// Change the partition count of the volume.
 	// The value should be greater or equal than current patition count.
-	AlterPartitionCount *uint32
+	AlterPartitionCount uint32
 	// Set storage kinds for storage channels.
 	// If the field is not present, storage channel settings are not changed.
 	StorageConfig *StorageConfig
@@ -3641,19 +3121,18 @@ func (b0 AlterVolumeRequest_builder) Build() *AlterVolumeRequest {
 	m0 := &AlterVolumeRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
-	x.AlterPartitionCount = b.AlterPartitionCount
-	x.StorageConfig = b.StorageConfig
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_AlterPartitionCount = b.AlterPartitionCount
+	x.xxx_hidden_StorageConfig = b.StorageConfig
 	return m0
 }
 
 type AlterVolumeResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AlterVolumeResponse) Reset() {
@@ -3683,24 +3162,24 @@ func (x *AlterVolumeResponse) ProtoReflect() protoreflect.Message {
 
 func (x *AlterVolumeResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *AlterVolumeResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *AlterVolumeResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *AlterVolumeResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type AlterVolumeResponse_builder struct {
@@ -3714,12 +3193,12 @@ func (b0 AlterVolumeResponse_builder) Build() *AlterVolumeResponse {
 	m0 := &AlterVolumeResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type AlterVolumeResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3762,12 +3241,11 @@ func (b0 AlterVolumeResult_builder) Build() *AlterVolumeResult {
 }
 
 type DescribeVolumeRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// Volume path.
-	Path          *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeVolumeRequest) Reset() {
@@ -3797,46 +3275,35 @@ func (x *DescribeVolumeRequest) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeVolumeRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeVolumeRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DescribeVolumeRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DescribeVolumeRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *DescribeVolumeRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DescribeVolumeRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DescribeVolumeRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *DescribeVolumeRequest) ClearPath() {
-	x.Path = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DescribeVolumeRequest_builder struct {
@@ -3844,24 +3311,23 @@ type DescribeVolumeRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	// Volume path.
-	Path *string
+	Path string
 }
 
 func (b0 DescribeVolumeRequest_builder) Build() *DescribeVolumeRequest {
 	m0 := &DescribeVolumeRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
 	return m0
 }
 
 type DescribeVolumeResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeVolumeResponse) Reset() {
@@ -3891,24 +3357,24 @@ func (x *DescribeVolumeResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeVolumeResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DescribeVolumeResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DescribeVolumeResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DescribeVolumeResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DescribeVolumeResponse_builder struct {
@@ -3922,18 +3388,16 @@ func (b0 DescribeVolumeResponse_builder) Build() *DescribeVolumeResponse {
 	m0 := &DescribeVolumeResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DescribeVolumeResult struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Volume path.
-	Path *string `protobuf:"bytes,1,opt,name=path" json:"path,omitempty"`
-	// Count of partitions.
-	PartitionCount *uint64 `protobuf:"varint,2,opt,name=partition_count,json=partitionCount" json:"partition_count,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Path           string                 `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_PartitionCount uint64                 `protobuf:"varint,2,opt,name=partition_count,json=partitionCount,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *DescribeVolumeResult) Reset() {
@@ -3962,77 +3426,52 @@ func (x *DescribeVolumeResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *DescribeVolumeResult) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DescribeVolumeResult) GetPartitionCount() uint64 {
-	if x != nil && x.PartitionCount != nil {
-		return *x.PartitionCount
+	if x != nil {
+		return x.xxx_hidden_PartitionCount
 	}
 	return 0
 }
 
 func (x *DescribeVolumeResult) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *DescribeVolumeResult) SetPartitionCount(v uint64) {
-	x.PartitionCount = &v
-}
-
-func (x *DescribeVolumeResult) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *DescribeVolumeResult) HasPartitionCount() bool {
-	if x == nil {
-		return false
-	}
-	return x.PartitionCount != nil
-}
-
-func (x *DescribeVolumeResult) ClearPath() {
-	x.Path = nil
-}
-
-func (x *DescribeVolumeResult) ClearPartitionCount() {
-	x.PartitionCount = nil
+	x.xxx_hidden_PartitionCount = v
 }
 
 type DescribeVolumeResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Volume path.
-	Path *string
+	Path string
 	// Count of partitions.
-	PartitionCount *uint64
+	PartitionCount uint64
 }
 
 func (b0 DescribeVolumeResult_builder) Build() *DescribeVolumeResult {
 	m0 := &DescribeVolumeResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Path = b.Path
-	x.PartitionCount = b.PartitionCount
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_PartitionCount = b.PartitionCount
 	return m0
 }
 
 type ListLocalPartitionsRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// Volume path.
-	Path *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	// ID of the node to get partitions for.
-	// 0 means the node the request was send to.
-	NodeId        *uint64 `protobuf:"varint,3,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_NodeId          uint64                          `protobuf:"varint,3,opt,name=node_id,json=nodeId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListLocalPartitionsRequest) Reset() {
@@ -4062,68 +3501,46 @@ func (x *ListLocalPartitionsRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ListLocalPartitionsRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListLocalPartitionsRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *ListLocalPartitionsRequest) GetNodeId() uint64 {
-	if x != nil && x.NodeId != nil {
-		return *x.NodeId
+	if x != nil {
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *ListLocalPartitionsRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ListLocalPartitionsRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *ListLocalPartitionsRequest) SetNodeId(v uint64) {
-	x.NodeId = &v
+	x.xxx_hidden_NodeId = v
 }
 
 func (x *ListLocalPartitionsRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ListLocalPartitionsRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *ListLocalPartitionsRequest) HasNodeId() bool {
-	if x == nil {
-		return false
-	}
-	return x.NodeId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ListLocalPartitionsRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ListLocalPartitionsRequest) ClearPath() {
-	x.Path = nil
-}
-
-func (x *ListLocalPartitionsRequest) ClearNodeId() {
-	x.NodeId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type ListLocalPartitionsRequest_builder struct {
@@ -4131,28 +3548,27 @@ type ListLocalPartitionsRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	// Volume path.
-	Path *string
+	Path string
 	// ID of the node to get partitions for.
 	// 0 means the node the request was send to.
-	NodeId *uint64
+	NodeId uint64
 }
 
 func (b0 ListLocalPartitionsRequest_builder) Build() *ListLocalPartitionsRequest {
 	m0 := &ListLocalPartitionsRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
-	x.NodeId = b.NodeId
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_NodeId = b.NodeId
 	return m0
 }
 
 type ListLocalPartitionsResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Operation contains the result of the request. Check the ydb_operation.proto.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListLocalPartitionsResponse) Reset() {
@@ -4182,24 +3598,24 @@ func (x *ListLocalPartitionsResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ListLocalPartitionsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ListLocalPartitionsResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ListLocalPartitionsResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ListLocalPartitionsResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ListLocalPartitionsResponse_builder struct {
@@ -4213,20 +3629,17 @@ func (b0 ListLocalPartitionsResponse_builder) Build() *ListLocalPartitionsRespon
 	m0 := &ListLocalPartitionsResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ListLocalPartitionsResult struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Volume path.
-	Path *string `protobuf:"bytes,1,opt,name=path" json:"path,omitempty"`
-	// ID of the node.
-	NodeId *uint64 `protobuf:"varint,2,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
-	// List of the partitions of the volume on the node.
-	PartitionIds  []uint64 `protobuf:"varint,3,rep,packed,name=partition_ids,json=partitionIds" json:"partition_ids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Path         string                 `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_NodeId       uint64                 `protobuf:"varint,2,opt,name=node_id,json=nodeId,proto3"`
+	xxx_hidden_PartitionIds []uint64               `protobuf:"varint,3,rep,packed,name=partition_ids,json=partitionIds,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ListLocalPartitionsResult) Reset() {
@@ -4255,67 +3668,45 @@ func (x *ListLocalPartitionsResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ListLocalPartitionsResult) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *ListLocalPartitionsResult) GetNodeId() uint64 {
-	if x != nil && x.NodeId != nil {
-		return *x.NodeId
+	if x != nil {
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *ListLocalPartitionsResult) GetPartitionIds() []uint64 {
 	if x != nil {
-		return x.PartitionIds
+		return x.xxx_hidden_PartitionIds
 	}
 	return nil
 }
 
 func (x *ListLocalPartitionsResult) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *ListLocalPartitionsResult) SetNodeId(v uint64) {
-	x.NodeId = &v
+	x.xxx_hidden_NodeId = v
 }
 
 func (x *ListLocalPartitionsResult) SetPartitionIds(v []uint64) {
-	x.PartitionIds = v
-}
-
-func (x *ListLocalPartitionsResult) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *ListLocalPartitionsResult) HasNodeId() bool {
-	if x == nil {
-		return false
-	}
-	return x.NodeId != nil
-}
-
-func (x *ListLocalPartitionsResult) ClearPath() {
-	x.Path = nil
-}
-
-func (x *ListLocalPartitionsResult) ClearNodeId() {
-	x.NodeId = nil
+	x.xxx_hidden_PartitionIds = v
 }
 
 type ListLocalPartitionsResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Volume path.
-	Path *string
+	Path string
 	// ID of the node.
-	NodeId *uint64
+	NodeId uint64
 	// List of the partitions of the volume on the node.
 	PartitionIds []uint64
 }
@@ -4324,19 +3715,17 @@ func (b0 ListLocalPartitionsResult_builder) Build() *ListLocalPartitionsResult {
 	m0 := &ListLocalPartitionsResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Path = b.Path
-	x.NodeId = b.NodeId
-	x.PartitionIds = b.PartitionIds
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_NodeId = b.NodeId
+	x.xxx_hidden_PartitionIds = b.PartitionIds
 	return m0
 }
 
 type StorageConfig_ChannelConfig struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Media for the storage channel.
-	// This field specifies the kind of one storage_pool_types configured in config.yaml
-	Media         *string `protobuf:"bytes,1,opt,name=media" json:"media,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Media string                 `protobuf:"bytes,1,opt,name=media,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *StorageConfig_ChannelConfig) Reset() {
@@ -4365,25 +3754,14 @@ func (x *StorageConfig_ChannelConfig) ProtoReflect() protoreflect.Message {
 }
 
 func (x *StorageConfig_ChannelConfig) GetMedia() string {
-	if x != nil && x.Media != nil {
-		return *x.Media
+	if x != nil {
+		return x.xxx_hidden_Media
 	}
 	return ""
 }
 
 func (x *StorageConfig_ChannelConfig) SetMedia(v string) {
-	x.Media = &v
-}
-
-func (x *StorageConfig_ChannelConfig) HasMedia() bool {
-	if x == nil {
-		return false
-	}
-	return x.Media != nil
-}
-
-func (x *StorageConfig_ChannelConfig) ClearMedia() {
-	x.Media = nil
+	x.xxx_hidden_Media = v
 }
 
 type StorageConfig_ChannelConfig_builder struct {
@@ -4391,29 +3769,22 @@ type StorageConfig_ChannelConfig_builder struct {
 
 	// Media for the storage channel.
 	// This field specifies the kind of one storage_pool_types configured in config.yaml
-	Media *string
+	Media string
 }
 
 func (b0 StorageConfig_ChannelConfig_builder) Build() *StorageConfig_ChannelConfig {
 	m0 := &StorageConfig_ChannelConfig{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Media = b.Media
+	x.xxx_hidden_Media = b.Media
 	return m0
 }
 
 type ExecuteTransactionRequest_Command struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Types that are valid to be assigned to Action:
-	//
-	//	*ExecuteTransactionRequest_Command_DeleteRange_
-	//	*ExecuteTransactionRequest_Command_Rename_
-	//	*ExecuteTransactionRequest_Command_CopyRange_
-	//	*ExecuteTransactionRequest_Command_Concat_
-	//	*ExecuteTransactionRequest_Command_Write_
-	Action        isExecuteTransactionRequest_Command_Action `protobuf_oneof:"action"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState                     `protogen:"opaque.v1"`
+	xxx_hidden_Action isExecuteTransactionRequest_Command_Action `protobuf_oneof:"action"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ExecuteTransactionRequest_Command) Reset() {
@@ -4441,16 +3812,9 @@ func (x *ExecuteTransactionRequest_Command) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-func (x *ExecuteTransactionRequest_Command) GetAction() isExecuteTransactionRequest_Command_Action {
-	if x != nil {
-		return x.Action
-	}
-	return nil
-}
-
 func (x *ExecuteTransactionRequest_Command) GetDeleteRange() *ExecuteTransactionRequest_Command_DeleteRange {
 	if x != nil {
-		if x, ok := x.Action.(*ExecuteTransactionRequest_Command_DeleteRange_); ok {
+		if x, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_DeleteRange_); ok {
 			return x.DeleteRange
 		}
 	}
@@ -4459,7 +3823,7 @@ func (x *ExecuteTransactionRequest_Command) GetDeleteRange() *ExecuteTransaction
 
 func (x *ExecuteTransactionRequest_Command) GetRename() *ExecuteTransactionRequest_Command_Rename {
 	if x != nil {
-		if x, ok := x.Action.(*ExecuteTransactionRequest_Command_Rename_); ok {
+		if x, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_Rename_); ok {
 			return x.Rename
 		}
 	}
@@ -4468,7 +3832,7 @@ func (x *ExecuteTransactionRequest_Command) GetRename() *ExecuteTransactionReque
 
 func (x *ExecuteTransactionRequest_Command) GetCopyRange() *ExecuteTransactionRequest_Command_CopyRange {
 	if x != nil {
-		if x, ok := x.Action.(*ExecuteTransactionRequest_Command_CopyRange_); ok {
+		if x, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_CopyRange_); ok {
 			return x.CopyRange
 		}
 	}
@@ -4477,7 +3841,7 @@ func (x *ExecuteTransactionRequest_Command) GetCopyRange() *ExecuteTransactionRe
 
 func (x *ExecuteTransactionRequest_Command) GetConcat() *ExecuteTransactionRequest_Command_Concat {
 	if x != nil {
-		if x, ok := x.Action.(*ExecuteTransactionRequest_Command_Concat_); ok {
+		if x, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_Concat_); ok {
 			return x.Concat
 		}
 	}
@@ -4486,7 +3850,7 @@ func (x *ExecuteTransactionRequest_Command) GetConcat() *ExecuteTransactionReque
 
 func (x *ExecuteTransactionRequest_Command) GetWrite() *ExecuteTransactionRequest_Command_Write {
 	if x != nil {
-		if x, ok := x.Action.(*ExecuteTransactionRequest_Command_Write_); ok {
+		if x, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_Write_); ok {
 			return x.Write
 		}
 	}
@@ -4495,56 +3859,56 @@ func (x *ExecuteTransactionRequest_Command) GetWrite() *ExecuteTransactionReques
 
 func (x *ExecuteTransactionRequest_Command) SetDeleteRange(v *ExecuteTransactionRequest_Command_DeleteRange) {
 	if v == nil {
-		x.Action = nil
+		x.xxx_hidden_Action = nil
 		return
 	}
-	x.Action = &ExecuteTransactionRequest_Command_DeleteRange_{v}
+	x.xxx_hidden_Action = &executeTransactionRequest_Command_DeleteRange_{v}
 }
 
 func (x *ExecuteTransactionRequest_Command) SetRename(v *ExecuteTransactionRequest_Command_Rename) {
 	if v == nil {
-		x.Action = nil
+		x.xxx_hidden_Action = nil
 		return
 	}
-	x.Action = &ExecuteTransactionRequest_Command_Rename_{v}
+	x.xxx_hidden_Action = &executeTransactionRequest_Command_Rename_{v}
 }
 
 func (x *ExecuteTransactionRequest_Command) SetCopyRange(v *ExecuteTransactionRequest_Command_CopyRange) {
 	if v == nil {
-		x.Action = nil
+		x.xxx_hidden_Action = nil
 		return
 	}
-	x.Action = &ExecuteTransactionRequest_Command_CopyRange_{v}
+	x.xxx_hidden_Action = &executeTransactionRequest_Command_CopyRange_{v}
 }
 
 func (x *ExecuteTransactionRequest_Command) SetConcat(v *ExecuteTransactionRequest_Command_Concat) {
 	if v == nil {
-		x.Action = nil
+		x.xxx_hidden_Action = nil
 		return
 	}
-	x.Action = &ExecuteTransactionRequest_Command_Concat_{v}
+	x.xxx_hidden_Action = &executeTransactionRequest_Command_Concat_{v}
 }
 
 func (x *ExecuteTransactionRequest_Command) SetWrite(v *ExecuteTransactionRequest_Command_Write) {
 	if v == nil {
-		x.Action = nil
+		x.xxx_hidden_Action = nil
 		return
 	}
-	x.Action = &ExecuteTransactionRequest_Command_Write_{v}
+	x.xxx_hidden_Action = &executeTransactionRequest_Command_Write_{v}
 }
 
 func (x *ExecuteTransactionRequest_Command) HasAction() bool {
 	if x == nil {
 		return false
 	}
-	return x.Action != nil
+	return x.xxx_hidden_Action != nil
 }
 
 func (x *ExecuteTransactionRequest_Command) HasDeleteRange() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*ExecuteTransactionRequest_Command_DeleteRange_)
+	_, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_DeleteRange_)
 	return ok
 }
 
@@ -4552,7 +3916,7 @@ func (x *ExecuteTransactionRequest_Command) HasRename() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*ExecuteTransactionRequest_Command_Rename_)
+	_, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_Rename_)
 	return ok
 }
 
@@ -4560,7 +3924,7 @@ func (x *ExecuteTransactionRequest_Command) HasCopyRange() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*ExecuteTransactionRequest_Command_CopyRange_)
+	_, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_CopyRange_)
 	return ok
 }
 
@@ -4568,7 +3932,7 @@ func (x *ExecuteTransactionRequest_Command) HasConcat() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*ExecuteTransactionRequest_Command_Concat_)
+	_, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_Concat_)
 	return ok
 }
 
@@ -4576,41 +3940,41 @@ func (x *ExecuteTransactionRequest_Command) HasWrite() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*ExecuteTransactionRequest_Command_Write_)
+	_, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_Write_)
 	return ok
 }
 
 func (x *ExecuteTransactionRequest_Command) ClearAction() {
-	x.Action = nil
+	x.xxx_hidden_Action = nil
 }
 
 func (x *ExecuteTransactionRequest_Command) ClearDeleteRange() {
-	if _, ok := x.Action.(*ExecuteTransactionRequest_Command_DeleteRange_); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_DeleteRange_); ok {
+		x.xxx_hidden_Action = nil
 	}
 }
 
 func (x *ExecuteTransactionRequest_Command) ClearRename() {
-	if _, ok := x.Action.(*ExecuteTransactionRequest_Command_Rename_); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_Rename_); ok {
+		x.xxx_hidden_Action = nil
 	}
 }
 
 func (x *ExecuteTransactionRequest_Command) ClearCopyRange() {
-	if _, ok := x.Action.(*ExecuteTransactionRequest_Command_CopyRange_); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_CopyRange_); ok {
+		x.xxx_hidden_Action = nil
 	}
 }
 
 func (x *ExecuteTransactionRequest_Command) ClearConcat() {
-	if _, ok := x.Action.(*ExecuteTransactionRequest_Command_Concat_); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_Concat_); ok {
+		x.xxx_hidden_Action = nil
 	}
 }
 
 func (x *ExecuteTransactionRequest_Command) ClearWrite() {
-	if _, ok := x.Action.(*ExecuteTransactionRequest_Command_Write_); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*executeTransactionRequest_Command_Write_); ok {
+		x.xxx_hidden_Action = nil
 	}
 }
 
@@ -4625,16 +3989,16 @@ func (x *ExecuteTransactionRequest_Command) WhichAction() case_ExecuteTransactio
 	if x == nil {
 		return ExecuteTransactionRequest_Command_Action_not_set_case
 	}
-	switch x.Action.(type) {
-	case *ExecuteTransactionRequest_Command_DeleteRange_:
+	switch x.xxx_hidden_Action.(type) {
+	case *executeTransactionRequest_Command_DeleteRange_:
 		return ExecuteTransactionRequest_Command_DeleteRange_case
-	case *ExecuteTransactionRequest_Command_Rename_:
+	case *executeTransactionRequest_Command_Rename_:
 		return ExecuteTransactionRequest_Command_Rename_case
-	case *ExecuteTransactionRequest_Command_CopyRange_:
+	case *executeTransactionRequest_Command_CopyRange_:
 		return ExecuteTransactionRequest_Command_CopyRange_case
-	case *ExecuteTransactionRequest_Command_Concat_:
+	case *executeTransactionRequest_Command_Concat_:
 		return ExecuteTransactionRequest_Command_Concat_case
-	case *ExecuteTransactionRequest_Command_Write_:
+	case *executeTransactionRequest_Command_Write_:
 		return ExecuteTransactionRequest_Command_Write_case
 	default:
 		return ExecuteTransactionRequest_Command_Action_not_set_case
@@ -4644,7 +4008,7 @@ func (x *ExecuteTransactionRequest_Command) WhichAction() case_ExecuteTransactio
 type ExecuteTransactionRequest_Command_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof Action:
+	// Fields of oneof xxx_hidden_Action:
 	// Delete key-value pairs with keys in the range specified.
 	DeleteRange *ExecuteTransactionRequest_Command_DeleteRange
 	// Change the key of a key-value pair.
@@ -4657,7 +4021,7 @@ type ExecuteTransactionRequest_Command_builder struct {
 	Concat *ExecuteTransactionRequest_Command_Concat
 	// Create a new key-value pair with key and value specified.
 	Write *ExecuteTransactionRequest_Command_Write
-	// -- end of Action
+	// -- end of xxx_hidden_Action
 }
 
 func (b0 ExecuteTransactionRequest_Command_builder) Build() *ExecuteTransactionRequest_Command {
@@ -4665,19 +4029,19 @@ func (b0 ExecuteTransactionRequest_Command_builder) Build() *ExecuteTransactionR
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.DeleteRange != nil {
-		x.Action = &ExecuteTransactionRequest_Command_DeleteRange_{b.DeleteRange}
+		x.xxx_hidden_Action = &executeTransactionRequest_Command_DeleteRange_{b.DeleteRange}
 	}
 	if b.Rename != nil {
-		x.Action = &ExecuteTransactionRequest_Command_Rename_{b.Rename}
+		x.xxx_hidden_Action = &executeTransactionRequest_Command_Rename_{b.Rename}
 	}
 	if b.CopyRange != nil {
-		x.Action = &ExecuteTransactionRequest_Command_CopyRange_{b.CopyRange}
+		x.xxx_hidden_Action = &executeTransactionRequest_Command_CopyRange_{b.CopyRange}
 	}
 	if b.Concat != nil {
-		x.Action = &ExecuteTransactionRequest_Command_Concat_{b.Concat}
+		x.xxx_hidden_Action = &executeTransactionRequest_Command_Concat_{b.Concat}
 	}
 	if b.Write != nil {
-		x.Action = &ExecuteTransactionRequest_Command_Write_{b.Write}
+		x.xxx_hidden_Action = &executeTransactionRequest_Command_Write_{b.Write}
 	}
 	return m0
 }
@@ -4696,51 +4060,49 @@ type isExecuteTransactionRequest_Command_Action interface {
 	isExecuteTransactionRequest_Command_Action()
 }
 
-type ExecuteTransactionRequest_Command_DeleteRange_ struct {
+type executeTransactionRequest_Command_DeleteRange_ struct {
 	// Delete key-value pairs with keys in the range specified.
-	DeleteRange *ExecuteTransactionRequest_Command_DeleteRange `protobuf:"bytes,1,opt,name=delete_range,json=deleteRange,oneof"`
+	DeleteRange *ExecuteTransactionRequest_Command_DeleteRange `protobuf:"bytes,1,opt,name=delete_range,json=deleteRange,proto3,oneof"`
 }
 
-type ExecuteTransactionRequest_Command_Rename_ struct {
+type executeTransactionRequest_Command_Rename_ struct {
 	// Change the key of a key-value pair.
-	Rename *ExecuteTransactionRequest_Command_Rename `protobuf:"bytes,2,opt,name=rename,oneof"`
+	Rename *ExecuteTransactionRequest_Command_Rename `protobuf:"bytes,2,opt,name=rename,proto3,oneof"`
 }
 
-type ExecuteTransactionRequest_Command_CopyRange_ struct {
+type executeTransactionRequest_Command_CopyRange_ struct {
 	// Create a copy of key-value pairs with keys in the range specified by removing and/or prepending a prefix
 	// to each key.
-	CopyRange *ExecuteTransactionRequest_Command_CopyRange `protobuf:"bytes,3,opt,name=copy_range,json=copyRange,oneof"`
+	CopyRange *ExecuteTransactionRequest_Command_CopyRange `protobuf:"bytes,3,opt,name=copy_range,json=copyRange,proto3,oneof"`
 }
 
-type ExecuteTransactionRequest_Command_Concat_ struct {
+type executeTransactionRequest_Command_Concat_ struct {
 	// Create a new key-value pair with key specified by concatenating values of multiple other key-value pairs
 	// with keys specified.
-	Concat *ExecuteTransactionRequest_Command_Concat `protobuf:"bytes,4,opt,name=concat,oneof"`
+	Concat *ExecuteTransactionRequest_Command_Concat `protobuf:"bytes,4,opt,name=concat,proto3,oneof"`
 }
 
-type ExecuteTransactionRequest_Command_Write_ struct {
+type executeTransactionRequest_Command_Write_ struct {
 	// Create a new key-value pair with key and value specified.
-	Write *ExecuteTransactionRequest_Command_Write `protobuf:"bytes,5,opt,name=write,oneof"`
+	Write *ExecuteTransactionRequest_Command_Write `protobuf:"bytes,5,opt,name=write,proto3,oneof"`
 }
 
-func (*ExecuteTransactionRequest_Command_DeleteRange_) isExecuteTransactionRequest_Command_Action() {}
+func (*executeTransactionRequest_Command_DeleteRange_) isExecuteTransactionRequest_Command_Action() {}
 
-func (*ExecuteTransactionRequest_Command_Rename_) isExecuteTransactionRequest_Command_Action() {}
+func (*executeTransactionRequest_Command_Rename_) isExecuteTransactionRequest_Command_Action() {}
 
-func (*ExecuteTransactionRequest_Command_CopyRange_) isExecuteTransactionRequest_Command_Action() {}
+func (*executeTransactionRequest_Command_CopyRange_) isExecuteTransactionRequest_Command_Action() {}
 
-func (*ExecuteTransactionRequest_Command_Concat_) isExecuteTransactionRequest_Command_Action() {}
+func (*executeTransactionRequest_Command_Concat_) isExecuteTransactionRequest_Command_Action() {}
 
-func (*ExecuteTransactionRequest_Command_Write_) isExecuteTransactionRequest_Command_Action() {}
+func (*executeTransactionRequest_Command_Write_) isExecuteTransactionRequest_Command_Action() {}
 
 type ExecuteTransactionRequest_Command_Rename struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// The key to change.
-	OldKey *string `protobuf:"bytes,1,opt,name=old_key,json=oldKey" json:"old_key,omitempty"`
-	// The new key to change the old key to.
-	NewKey        *string `protobuf:"bytes,2,opt,name=new_key,json=newKey" json:"new_key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_OldKey string                 `protobuf:"bytes,1,opt,name=old_key,json=oldKey,proto3"`
+	xxx_hidden_NewKey string                 `protobuf:"bytes,2,opt,name=new_key,json=newKey,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ExecuteTransactionRequest_Command_Rename) Reset() {
@@ -4769,78 +4131,52 @@ func (x *ExecuteTransactionRequest_Command_Rename) ProtoReflect() protoreflect.M
 }
 
 func (x *ExecuteTransactionRequest_Command_Rename) GetOldKey() string {
-	if x != nil && x.OldKey != nil {
-		return *x.OldKey
+	if x != nil {
+		return x.xxx_hidden_OldKey
 	}
 	return ""
 }
 
 func (x *ExecuteTransactionRequest_Command_Rename) GetNewKey() string {
-	if x != nil && x.NewKey != nil {
-		return *x.NewKey
+	if x != nil {
+		return x.xxx_hidden_NewKey
 	}
 	return ""
 }
 
 func (x *ExecuteTransactionRequest_Command_Rename) SetOldKey(v string) {
-	x.OldKey = &v
+	x.xxx_hidden_OldKey = v
 }
 
 func (x *ExecuteTransactionRequest_Command_Rename) SetNewKey(v string) {
-	x.NewKey = &v
-}
-
-func (x *ExecuteTransactionRequest_Command_Rename) HasOldKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.OldKey != nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Rename) HasNewKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.NewKey != nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Rename) ClearOldKey() {
-	x.OldKey = nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Rename) ClearNewKey() {
-	x.NewKey = nil
+	x.xxx_hidden_NewKey = v
 }
 
 type ExecuteTransactionRequest_Command_Rename_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The key to change.
-	OldKey *string
+	OldKey string
 	// The new key to change the old key to.
-	NewKey *string
+	NewKey string
 }
 
 func (b0 ExecuteTransactionRequest_Command_Rename_builder) Build() *ExecuteTransactionRequest_Command_Rename {
 	m0 := &ExecuteTransactionRequest_Command_Rename{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OldKey = b.OldKey
-	x.NewKey = b.NewKey
+	x.xxx_hidden_OldKey = b.OldKey
+	x.xxx_hidden_NewKey = b.NewKey
 	return m0
 }
 
 type ExecuteTransactionRequest_Command_Concat struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Keys to use as the source for the concatenation.
-	InputKeys []string `protobuf:"bytes,1,rep,name=input_keys,json=inputKeys" json:"input_keys,omitempty"`
-	// New key to use for the result of the concatenation.
-	OutputKey *string `protobuf:"bytes,2,opt,name=output_key,json=outputKey" json:"output_key,omitempty"`
-	// Input keys are deleted after the concatenation by default.
-	// In order to keep both the inputs and the output, set keep_inputs to true.
-	KeepInputs    *bool `protobuf:"varint,3,opt,name=keep_inputs,json=keepInputs" json:"keep_inputs,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_InputKeys  []string               `protobuf:"bytes,1,rep,name=input_keys,json=inputKeys,proto3"`
+	xxx_hidden_OutputKey  string                 `protobuf:"bytes,2,opt,name=output_key,json=outputKey,proto3"`
+	xxx_hidden_KeepInputs bool                   `protobuf:"varint,3,opt,name=keep_inputs,json=keepInputs,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ExecuteTransactionRequest_Command_Concat) Reset() {
@@ -4870,57 +4206,35 @@ func (x *ExecuteTransactionRequest_Command_Concat) ProtoReflect() protoreflect.M
 
 func (x *ExecuteTransactionRequest_Command_Concat) GetInputKeys() []string {
 	if x != nil {
-		return x.InputKeys
+		return x.xxx_hidden_InputKeys
 	}
 	return nil
 }
 
 func (x *ExecuteTransactionRequest_Command_Concat) GetOutputKey() string {
-	if x != nil && x.OutputKey != nil {
-		return *x.OutputKey
+	if x != nil {
+		return x.xxx_hidden_OutputKey
 	}
 	return ""
 }
 
 func (x *ExecuteTransactionRequest_Command_Concat) GetKeepInputs() bool {
-	if x != nil && x.KeepInputs != nil {
-		return *x.KeepInputs
+	if x != nil {
+		return x.xxx_hidden_KeepInputs
 	}
 	return false
 }
 
 func (x *ExecuteTransactionRequest_Command_Concat) SetInputKeys(v []string) {
-	x.InputKeys = v
+	x.xxx_hidden_InputKeys = v
 }
 
 func (x *ExecuteTransactionRequest_Command_Concat) SetOutputKey(v string) {
-	x.OutputKey = &v
+	x.xxx_hidden_OutputKey = v
 }
 
 func (x *ExecuteTransactionRequest_Command_Concat) SetKeepInputs(v bool) {
-	x.KeepInputs = &v
-}
-
-func (x *ExecuteTransactionRequest_Command_Concat) HasOutputKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.OutputKey != nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Concat) HasKeepInputs() bool {
-	if x == nil {
-		return false
-	}
-	return x.KeepInputs != nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Concat) ClearOutputKey() {
-	x.OutputKey = nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Concat) ClearKeepInputs() {
-	x.KeepInputs = nil
+	x.xxx_hidden_KeepInputs = v
 }
 
 type ExecuteTransactionRequest_Command_Concat_builder struct {
@@ -4929,19 +4243,19 @@ type ExecuteTransactionRequest_Command_Concat_builder struct {
 	// Keys to use as the source for the concatenation.
 	InputKeys []string
 	// New key to use for the result of the concatenation.
-	OutputKey *string
+	OutputKey string
 	// Input keys are deleted after the concatenation by default.
 	// In order to keep both the inputs and the output, set keep_inputs to true.
-	KeepInputs *bool
+	KeepInputs bool
 }
 
 func (b0 ExecuteTransactionRequest_Command_Concat_builder) Build() *ExecuteTransactionRequest_Command_Concat {
 	m0 := &ExecuteTransactionRequest_Command_Concat{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.InputKeys = b.InputKeys
-	x.OutputKey = b.OutputKey
-	x.KeepInputs = b.KeepInputs
+	x.xxx_hidden_InputKeys = b.InputKeys
+	x.xxx_hidden_OutputKey = b.OutputKey
+	x.xxx_hidden_KeepInputs = b.KeepInputs
 	return m0
 }
 
@@ -4950,17 +4264,12 @@ func (b0 ExecuteTransactionRequest_Command_Concat_builder) Build() *ExecuteTrans
 // For example, copy of the key-value pairs [{aaabc,1}, {aaaef,2}, {baaef,3}] can be stripped of the 'aa' prefix
 // and prepended with the 'x' so that the new pairs that are added are [{xabc, 1}, {xaef, 2}].
 type ExecuteTransactionRequest_Command_CopyRange struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// The range of keys to copy
-	Range *KeyRange `protobuf:"bytes,1,opt,name=range" json:"range,omitempty"`
-	// For each source key that begins with the prefix_to_remove, that prefix is removed from the new key before
-	// prepending it with the prefix_to_add.
-	// Acts as filter if not empty.
-	PrefixToRemove *string `protobuf:"bytes,2,opt,name=prefix_to_remove,json=prefixToRemove" json:"prefix_to_remove,omitempty"`
-	// The prefix to prepend to each new key.
-	PrefixToAdd   *string `protobuf:"bytes,3,opt,name=prefix_to_add,json=prefixToAdd" json:"prefix_to_add,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Range          *KeyRange              `protobuf:"bytes,1,opt,name=range,proto3"`
+	xxx_hidden_PrefixToRemove string                 `protobuf:"bytes,2,opt,name=prefix_to_remove,json=prefixToRemove,proto3"`
+	xxx_hidden_PrefixToAdd    string                 `protobuf:"bytes,3,opt,name=prefix_to_add,json=prefixToAdd,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ExecuteTransactionRequest_Command_CopyRange) Reset() {
@@ -4990,68 +4299,46 @@ func (x *ExecuteTransactionRequest_Command_CopyRange) ProtoReflect() protoreflec
 
 func (x *ExecuteTransactionRequest_Command_CopyRange) GetRange() *KeyRange {
 	if x != nil {
-		return x.Range
+		return x.xxx_hidden_Range
 	}
 	return nil
 }
 
 func (x *ExecuteTransactionRequest_Command_CopyRange) GetPrefixToRemove() string {
-	if x != nil && x.PrefixToRemove != nil {
-		return *x.PrefixToRemove
+	if x != nil {
+		return x.xxx_hidden_PrefixToRemove
 	}
 	return ""
 }
 
 func (x *ExecuteTransactionRequest_Command_CopyRange) GetPrefixToAdd() string {
-	if x != nil && x.PrefixToAdd != nil {
-		return *x.PrefixToAdd
+	if x != nil {
+		return x.xxx_hidden_PrefixToAdd
 	}
 	return ""
 }
 
 func (x *ExecuteTransactionRequest_Command_CopyRange) SetRange(v *KeyRange) {
-	x.Range = v
+	x.xxx_hidden_Range = v
 }
 
 func (x *ExecuteTransactionRequest_Command_CopyRange) SetPrefixToRemove(v string) {
-	x.PrefixToRemove = &v
+	x.xxx_hidden_PrefixToRemove = v
 }
 
 func (x *ExecuteTransactionRequest_Command_CopyRange) SetPrefixToAdd(v string) {
-	x.PrefixToAdd = &v
+	x.xxx_hidden_PrefixToAdd = v
 }
 
 func (x *ExecuteTransactionRequest_Command_CopyRange) HasRange() bool {
 	if x == nil {
 		return false
 	}
-	return x.Range != nil
-}
-
-func (x *ExecuteTransactionRequest_Command_CopyRange) HasPrefixToRemove() bool {
-	if x == nil {
-		return false
-	}
-	return x.PrefixToRemove != nil
-}
-
-func (x *ExecuteTransactionRequest_Command_CopyRange) HasPrefixToAdd() bool {
-	if x == nil {
-		return false
-	}
-	return x.PrefixToAdd != nil
+	return x.xxx_hidden_Range != nil
 }
 
 func (x *ExecuteTransactionRequest_Command_CopyRange) ClearRange() {
-	x.Range = nil
-}
-
-func (x *ExecuteTransactionRequest_Command_CopyRange) ClearPrefixToRemove() {
-	x.PrefixToRemove = nil
-}
-
-func (x *ExecuteTransactionRequest_Command_CopyRange) ClearPrefixToAdd() {
-	x.PrefixToAdd = nil
+	x.xxx_hidden_Range = nil
 }
 
 type ExecuteTransactionRequest_Command_CopyRange_builder struct {
@@ -5062,43 +4349,30 @@ type ExecuteTransactionRequest_Command_CopyRange_builder struct {
 	// For each source key that begins with the prefix_to_remove, that prefix is removed from the new key before
 	// prepending it with the prefix_to_add.
 	// Acts as filter if not empty.
-	PrefixToRemove *string
+	PrefixToRemove string
 	// The prefix to prepend to each new key.
-	PrefixToAdd *string
+	PrefixToAdd string
 }
 
 func (b0 ExecuteTransactionRequest_Command_CopyRange_builder) Build() *ExecuteTransactionRequest_Command_CopyRange {
 	m0 := &ExecuteTransactionRequest_Command_CopyRange{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Range = b.Range
-	x.PrefixToRemove = b.PrefixToRemove
-	x.PrefixToAdd = b.PrefixToAdd
+	x.xxx_hidden_Range = b.Range
+	x.xxx_hidden_PrefixToRemove = b.PrefixToRemove
+	x.xxx_hidden_PrefixToAdd = b.PrefixToAdd
 	return m0
 }
 
 type ExecuteTransactionRequest_Command_Write struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Key of the key-value pair to write.
-	Key *string `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
-	// Value of the key-value pair to write.
-	Value []byte `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
-	// Storage channel to write the value to. Channel numbers begin with 1 and may go up to approximately 250
-	// (depends on the channel configuration of each partition).
-	// Channel 1 is called the INLINE channel (value is stored in the index table).
-	// Channel 2 is called the MAIN channel (value is stored as a separate blob in the Distributed Storage).
-	// Channels 1 and 2 are available for all partitions.
-	// If the storage channel specified is not configured for the partition, the value is stored in
-	// channel 2 (the MAIN channel).
-	StorageChannel *uint32 `protobuf:"varint,3,opt,name=storage_channel,json=storageChannel" json:"storage_channel,omitempty"` // (default = 0 is same as 2 or MAIN)
-	// Priority to use for the Distributed Storage Get operation.
-	// Has no effect for the INLINE storage channel.
-	Priority *Priorities_Priority `protobuf:"varint,4,opt,name=priority,enum=Ydb.KeyValue.Priorities_Priority" json:"priority,omitempty"`
-	// Tactic to use for the Distributed Storage Put operation.
-	// Has no effect for the INLINE storage channel.
-	Tactic        *ExecuteTransactionRequest_Command_Write_Tactic `protobuf:"varint,5,opt,name=tactic,enum=Ydb.KeyValue.ExecuteTransactionRequest_Command_Write_Tactic" json:"tactic,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                     protoimpl.MessageState                         `protogen:"opaque.v1"`
+	xxx_hidden_Key            string                                         `protobuf:"bytes,1,opt,name=key,proto3"`
+	xxx_hidden_Value          []byte                                         `protobuf:"bytes,2,opt,name=value,proto3"`
+	xxx_hidden_StorageChannel uint32                                         `protobuf:"varint,3,opt,name=storage_channel,json=storageChannel,proto3"`
+	xxx_hidden_Priority       Priorities_Priority                            `protobuf:"varint,4,opt,name=priority,proto3,enum=Ydb.KeyValue.Priorities_Priority"`
+	xxx_hidden_Tactic         ExecuteTransactionRequest_Command_Write_Tactic `protobuf:"varint,5,opt,name=tactic,proto3,enum=Ydb.KeyValue.ExecuteTransactionRequest_Command_Write_Tactic"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ExecuteTransactionRequest_Command_Write) Reset() {
@@ -5127,123 +4401,68 @@ func (x *ExecuteTransactionRequest_Command_Write) ProtoReflect() protoreflect.Me
 }
 
 func (x *ExecuteTransactionRequest_Command_Write) GetKey() string {
-	if x != nil && x.Key != nil {
-		return *x.Key
+	if x != nil {
+		return x.xxx_hidden_Key
 	}
 	return ""
 }
 
 func (x *ExecuteTransactionRequest_Command_Write) GetValue() []byte {
 	if x != nil {
-		return x.Value
+		return x.xxx_hidden_Value
 	}
 	return nil
 }
 
 func (x *ExecuteTransactionRequest_Command_Write) GetStorageChannel() uint32 {
-	if x != nil && x.StorageChannel != nil {
-		return *x.StorageChannel
+	if x != nil {
+		return x.xxx_hidden_StorageChannel
 	}
 	return 0
 }
 
 func (x *ExecuteTransactionRequest_Command_Write) GetPriority() Priorities_Priority {
-	if x != nil && x.Priority != nil {
-		return *x.Priority
+	if x != nil {
+		return x.xxx_hidden_Priority
 	}
 	return Priorities_PRIORITY_UNSPECIFIED
 }
 
 func (x *ExecuteTransactionRequest_Command_Write) GetTactic() ExecuteTransactionRequest_Command_Write_Tactic {
-	if x != nil && x.Tactic != nil {
-		return *x.Tactic
+	if x != nil {
+		return x.xxx_hidden_Tactic
 	}
 	return ExecuteTransactionRequest_Command_Write_TACTIC_UNSPECIFIED
 }
 
 func (x *ExecuteTransactionRequest_Command_Write) SetKey(v string) {
-	x.Key = &v
+	x.xxx_hidden_Key = v
 }
 
 func (x *ExecuteTransactionRequest_Command_Write) SetValue(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.Value = v
+	x.xxx_hidden_Value = v
 }
 
 func (x *ExecuteTransactionRequest_Command_Write) SetStorageChannel(v uint32) {
-	x.StorageChannel = &v
+	x.xxx_hidden_StorageChannel = v
 }
 
 func (x *ExecuteTransactionRequest_Command_Write) SetPriority(v Priorities_Priority) {
-	x.Priority = &v
+	x.xxx_hidden_Priority = v
 }
 
 func (x *ExecuteTransactionRequest_Command_Write) SetTactic(v ExecuteTransactionRequest_Command_Write_Tactic) {
-	x.Tactic = &v
-}
-
-func (x *ExecuteTransactionRequest_Command_Write) HasKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.Key != nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Write) HasValue() bool {
-	if x == nil {
-		return false
-	}
-	return x.Value != nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Write) HasStorageChannel() bool {
-	if x == nil {
-		return false
-	}
-	return x.StorageChannel != nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Write) HasPriority() bool {
-	if x == nil {
-		return false
-	}
-	return x.Priority != nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Write) HasTactic() bool {
-	if x == nil {
-		return false
-	}
-	return x.Tactic != nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Write) ClearKey() {
-	x.Key = nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Write) ClearValue() {
-	x.Value = nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Write) ClearStorageChannel() {
-	x.StorageChannel = nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Write) ClearPriority() {
-	x.Priority = nil
-}
-
-func (x *ExecuteTransactionRequest_Command_Write) ClearTactic() {
-	x.Tactic = nil
+	x.xxx_hidden_Tactic = v
 }
 
 type ExecuteTransactionRequest_Command_Write_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Key of the key-value pair to write.
-	Key *string
+	Key string
 	// Value of the key-value pair to write.
 	Value []byte
 	// Storage channel to write the value to. Channel numbers begin with 1 and may go up to approximately 250
@@ -5253,33 +4472,32 @@ type ExecuteTransactionRequest_Command_Write_builder struct {
 	// Channels 1 and 2 are available for all partitions.
 	// If the storage channel specified is not configured for the partition, the value is stored in
 	// channel 2 (the MAIN channel).
-	StorageChannel *uint32
+	StorageChannel uint32
 	// Priority to use for the Distributed Storage Get operation.
 	// Has no effect for the INLINE storage channel.
-	Priority *Priorities_Priority
+	Priority Priorities_Priority
 	// Tactic to use for the Distributed Storage Put operation.
 	// Has no effect for the INLINE storage channel.
-	Tactic *ExecuteTransactionRequest_Command_Write_Tactic
+	Tactic ExecuteTransactionRequest_Command_Write_Tactic
 }
 
 func (b0 ExecuteTransactionRequest_Command_Write_builder) Build() *ExecuteTransactionRequest_Command_Write {
 	m0 := &ExecuteTransactionRequest_Command_Write{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Key = b.Key
-	x.Value = b.Value
-	x.StorageChannel = b.StorageChannel
-	x.Priority = b.Priority
-	x.Tactic = b.Tactic
+	x.xxx_hidden_Key = b.Key
+	x.xxx_hidden_Value = b.Value
+	x.xxx_hidden_StorageChannel = b.StorageChannel
+	x.xxx_hidden_Priority = b.Priority
+	x.xxx_hidden_Tactic = b.Tactic
 	return m0
 }
 
 type ExecuteTransactionRequest_Command_DeleteRange struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// The range of keys to delete.
-	Range         *KeyRange `protobuf:"bytes,1,opt,name=range" json:"range,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Range *KeyRange              `protobuf:"bytes,1,opt,name=range,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ExecuteTransactionRequest_Command_DeleteRange) Reset() {
@@ -5309,24 +4527,24 @@ func (x *ExecuteTransactionRequest_Command_DeleteRange) ProtoReflect() protorefl
 
 func (x *ExecuteTransactionRequest_Command_DeleteRange) GetRange() *KeyRange {
 	if x != nil {
-		return x.Range
+		return x.xxx_hidden_Range
 	}
 	return nil
 }
 
 func (x *ExecuteTransactionRequest_Command_DeleteRange) SetRange(v *KeyRange) {
-	x.Range = v
+	x.xxx_hidden_Range = v
 }
 
 func (x *ExecuteTransactionRequest_Command_DeleteRange) HasRange() bool {
 	if x == nil {
 		return false
 	}
-	return x.Range != nil
+	return x.xxx_hidden_Range != nil
 }
 
 func (x *ExecuteTransactionRequest_Command_DeleteRange) ClearRange() {
-	x.Range = nil
+	x.xxx_hidden_Range = nil
 }
 
 type ExecuteTransactionRequest_Command_DeleteRange_builder struct {
@@ -5340,26 +4558,18 @@ func (b0 ExecuteTransactionRequest_Command_DeleteRange_builder) Build() *Execute
 	m0 := &ExecuteTransactionRequest_Command_DeleteRange{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Range = b.Range
+	x.xxx_hidden_Range = b.Range
 	return m0
 }
 
 type ReadRangeResult_KeyValuePair struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// The key of the key-value pair.
-	Key *string `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
-	// The value of the key-value pair.
-	Value []byte `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
-	// Unix time of the creation of the key-value pair (in ms).
-	CreationUnixTime *uint64 `protobuf:"varint,4,opt,name=creation_unix_time,json=creationUnixTime" json:"creation_unix_time,omitempty"`
-	// Contains the index of the actually used storage channel. The actually used storage channel may differ from
-	// the value specified in the write request for example if there were no such storage channel at the moment
-	// of execution of the write command.
-	// For values created as a result of concatenation or copy of concatenated values, the storage channel of the first
-	// part of the value is specified.
-	StorageChannel *uint32 `protobuf:"varint,5,opt,name=storage_channel,json=storageChannel" json:"storage_channel,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Key              string                 `protobuf:"bytes,1,opt,name=key,proto3"`
+	xxx_hidden_Value            []byte                 `protobuf:"bytes,2,opt,name=value,proto3"`
+	xxx_hidden_CreationUnixTime uint64                 `protobuf:"varint,4,opt,name=creation_unix_time,json=creationUnixTime,proto3"`
+	xxx_hidden_StorageChannel   uint32                 `protobuf:"varint,5,opt,name=storage_channel,json=storageChannel,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ReadRangeResult_KeyValuePair) Reset() {
@@ -5388,140 +4598,88 @@ func (x *ReadRangeResult_KeyValuePair) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ReadRangeResult_KeyValuePair) GetKey() string {
-	if x != nil && x.Key != nil {
-		return *x.Key
+	if x != nil {
+		return x.xxx_hidden_Key
 	}
 	return ""
 }
 
 func (x *ReadRangeResult_KeyValuePair) GetValue() []byte {
 	if x != nil {
-		return x.Value
+		return x.xxx_hidden_Value
 	}
 	return nil
 }
 
 func (x *ReadRangeResult_KeyValuePair) GetCreationUnixTime() uint64 {
-	if x != nil && x.CreationUnixTime != nil {
-		return *x.CreationUnixTime
+	if x != nil {
+		return x.xxx_hidden_CreationUnixTime
 	}
 	return 0
 }
 
 func (x *ReadRangeResult_KeyValuePair) GetStorageChannel() uint32 {
-	if x != nil && x.StorageChannel != nil {
-		return *x.StorageChannel
+	if x != nil {
+		return x.xxx_hidden_StorageChannel
 	}
 	return 0
 }
 
 func (x *ReadRangeResult_KeyValuePair) SetKey(v string) {
-	x.Key = &v
+	x.xxx_hidden_Key = v
 }
 
 func (x *ReadRangeResult_KeyValuePair) SetValue(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.Value = v
+	x.xxx_hidden_Value = v
 }
 
 func (x *ReadRangeResult_KeyValuePair) SetCreationUnixTime(v uint64) {
-	x.CreationUnixTime = &v
+	x.xxx_hidden_CreationUnixTime = v
 }
 
 func (x *ReadRangeResult_KeyValuePair) SetStorageChannel(v uint32) {
-	x.StorageChannel = &v
-}
-
-func (x *ReadRangeResult_KeyValuePair) HasKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.Key != nil
-}
-
-func (x *ReadRangeResult_KeyValuePair) HasValue() bool {
-	if x == nil {
-		return false
-	}
-	return x.Value != nil
-}
-
-func (x *ReadRangeResult_KeyValuePair) HasCreationUnixTime() bool {
-	if x == nil {
-		return false
-	}
-	return x.CreationUnixTime != nil
-}
-
-func (x *ReadRangeResult_KeyValuePair) HasStorageChannel() bool {
-	if x == nil {
-		return false
-	}
-	return x.StorageChannel != nil
-}
-
-func (x *ReadRangeResult_KeyValuePair) ClearKey() {
-	x.Key = nil
-}
-
-func (x *ReadRangeResult_KeyValuePair) ClearValue() {
-	x.Value = nil
-}
-
-func (x *ReadRangeResult_KeyValuePair) ClearCreationUnixTime() {
-	x.CreationUnixTime = nil
-}
-
-func (x *ReadRangeResult_KeyValuePair) ClearStorageChannel() {
-	x.StorageChannel = nil
+	x.xxx_hidden_StorageChannel = v
 }
 
 type ReadRangeResult_KeyValuePair_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The key of the key-value pair.
-	Key *string
+	Key string
 	// The value of the key-value pair.
 	Value []byte
 	// Unix time of the creation of the key-value pair (in ms).
-	CreationUnixTime *uint64
+	CreationUnixTime uint64
 	// Contains the index of the actually used storage channel. The actually used storage channel may differ from
 	// the value specified in the write request for example if there were no such storage channel at the moment
 	// of execution of the write command.
 	// For values created as a result of concatenation or copy of concatenated values, the storage channel of the first
 	// part of the value is specified.
-	StorageChannel *uint32
+	StorageChannel uint32
 }
 
 func (b0 ReadRangeResult_KeyValuePair_builder) Build() *ReadRangeResult_KeyValuePair {
 	m0 := &ReadRangeResult_KeyValuePair{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Key = b.Key
-	x.Value = b.Value
-	x.CreationUnixTime = b.CreationUnixTime
-	x.StorageChannel = b.StorageChannel
+	x.xxx_hidden_Key = b.Key
+	x.xxx_hidden_Value = b.Value
+	x.xxx_hidden_CreationUnixTime = b.CreationUnixTime
+	x.xxx_hidden_StorageChannel = b.StorageChannel
 	return m0
 }
 
 type ListRangeResult_KeyInfo struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// The key of the key-value pair.
-	Key *string `protobuf:"bytes,1,opt,name=key" json:"key,omitempty"`
-	// Full size of the value of the key-value pair.
-	ValueSize *uint32 `protobuf:"varint,2,opt,name=value_size,json=valueSize" json:"value_size,omitempty"`
-	// Unix time of the creation of the key-value pair (in ms).
-	CreationUnixTime *uint64 `protobuf:"varint,3,opt,name=creation_unix_time,json=creationUnixTime" json:"creation_unix_time,omitempty"`
-	// Contains the index of the actually used storage channel. The actually used storage channel may differ from
-	// the value specified in the write request for example if there were no such storage channel at the moment
-	// of execution of the write command.
-	// For values created as a result of concatenation or copy of concatenated values, the storage channel of the first
-	// part of the value is specified.
-	StorageChannel *uint32 `protobuf:"varint,4,opt,name=storage_channel,json=storageChannel" json:"storage_channel,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Key              string                 `protobuf:"bytes,1,opt,name=key,proto3"`
+	xxx_hidden_ValueSize        uint32                 `protobuf:"varint,2,opt,name=value_size,json=valueSize,proto3"`
+	xxx_hidden_CreationUnixTime uint64                 `protobuf:"varint,3,opt,name=creation_unix_time,json=creationUnixTime,proto3"`
+	xxx_hidden_StorageChannel   uint32                 `protobuf:"varint,4,opt,name=storage_channel,json=storageChannel,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ListRangeResult_KeyInfo) Reset() {
@@ -5550,118 +4708,74 @@ func (x *ListRangeResult_KeyInfo) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ListRangeResult_KeyInfo) GetKey() string {
-	if x != nil && x.Key != nil {
-		return *x.Key
+	if x != nil {
+		return x.xxx_hidden_Key
 	}
 	return ""
 }
 
 func (x *ListRangeResult_KeyInfo) GetValueSize() uint32 {
-	if x != nil && x.ValueSize != nil {
-		return *x.ValueSize
+	if x != nil {
+		return x.xxx_hidden_ValueSize
 	}
 	return 0
 }
 
 func (x *ListRangeResult_KeyInfo) GetCreationUnixTime() uint64 {
-	if x != nil && x.CreationUnixTime != nil {
-		return *x.CreationUnixTime
+	if x != nil {
+		return x.xxx_hidden_CreationUnixTime
 	}
 	return 0
 }
 
 func (x *ListRangeResult_KeyInfo) GetStorageChannel() uint32 {
-	if x != nil && x.StorageChannel != nil {
-		return *x.StorageChannel
+	if x != nil {
+		return x.xxx_hidden_StorageChannel
 	}
 	return 0
 }
 
 func (x *ListRangeResult_KeyInfo) SetKey(v string) {
-	x.Key = &v
+	x.xxx_hidden_Key = v
 }
 
 func (x *ListRangeResult_KeyInfo) SetValueSize(v uint32) {
-	x.ValueSize = &v
+	x.xxx_hidden_ValueSize = v
 }
 
 func (x *ListRangeResult_KeyInfo) SetCreationUnixTime(v uint64) {
-	x.CreationUnixTime = &v
+	x.xxx_hidden_CreationUnixTime = v
 }
 
 func (x *ListRangeResult_KeyInfo) SetStorageChannel(v uint32) {
-	x.StorageChannel = &v
-}
-
-func (x *ListRangeResult_KeyInfo) HasKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.Key != nil
-}
-
-func (x *ListRangeResult_KeyInfo) HasValueSize() bool {
-	if x == nil {
-		return false
-	}
-	return x.ValueSize != nil
-}
-
-func (x *ListRangeResult_KeyInfo) HasCreationUnixTime() bool {
-	if x == nil {
-		return false
-	}
-	return x.CreationUnixTime != nil
-}
-
-func (x *ListRangeResult_KeyInfo) HasStorageChannel() bool {
-	if x == nil {
-		return false
-	}
-	return x.StorageChannel != nil
-}
-
-func (x *ListRangeResult_KeyInfo) ClearKey() {
-	x.Key = nil
-}
-
-func (x *ListRangeResult_KeyInfo) ClearValueSize() {
-	x.ValueSize = nil
-}
-
-func (x *ListRangeResult_KeyInfo) ClearCreationUnixTime() {
-	x.CreationUnixTime = nil
-}
-
-func (x *ListRangeResult_KeyInfo) ClearStorageChannel() {
-	x.StorageChannel = nil
+	x.xxx_hidden_StorageChannel = v
 }
 
 type ListRangeResult_KeyInfo_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The key of the key-value pair.
-	Key *string
+	Key string
 	// Full size of the value of the key-value pair.
-	ValueSize *uint32
+	ValueSize uint32
 	// Unix time of the creation of the key-value pair (in ms).
-	CreationUnixTime *uint64
+	CreationUnixTime uint64
 	// Contains the index of the actually used storage channel. The actually used storage channel may differ from
 	// the value specified in the write request for example if there were no such storage channel at the moment
 	// of execution of the write command.
 	// For values created as a result of concatenation or copy of concatenated values, the storage channel of the first
 	// part of the value is specified.
-	StorageChannel *uint32
+	StorageChannel uint32
 }
 
 func (b0 ListRangeResult_KeyInfo_builder) Build() *ListRangeResult_KeyInfo {
 	m0 := &ListRangeResult_KeyInfo{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Key = b.Key
-	x.ValueSize = b.ValueSize
-	x.CreationUnixTime = b.CreationUnixTime
-	x.StorageChannel = b.StorageChannel
+	x.xxx_hidden_Key = b.Key
+	x.xxx_hidden_ValueSize = b.ValueSize
+	x.xxx_hidden_CreationUnixTime = b.CreationUnixTime
+	x.xxx_hidden_StorageChannel = b.StorageChannel
 	return m0
 }
 
@@ -5669,7 +4783,7 @@ var File_draft_protos_ydb_keyvalue_proto protoreflect.FileDescriptor
 
 const file_draft_protos_ydb_keyvalue_proto_rawDesc = "" +
 	"\n" +
-	"\x1fdraft/protos/ydb_keyvalue.proto\x12\fYdb.KeyValue\x1a\x1aprotos/ydb_operation.proto\x1a!google/protobuf/go_features.proto\"\x8c\x02\n" +
+	"\x1fdraft/protos/ydb_keyvalue.proto\x12\fYdb.KeyValue\x1a\x1aprotos/ydb_operation.proto\"\x8c\x02\n" +
 	"\x12StorageChannelInfo\x12'\n" +
 	"\x0fstorage_channel\x18\x01 \x01(\rR\x0estorageChannel\x12L\n" +
 	"\vstatus_flag\x18\x02 \x01(\x0e2+.Ydb.KeyValue.StorageChannelInfo.StatusFlagR\n" +
@@ -5708,12 +4822,12 @@ const file_draft_protos_ydb_keyvalue_proto_rawDesc = "" +
 	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"U\n" +
 	"\x11AcquireLockResult\x12'\n" +
 	"\x0flock_generation\x18\x01 \x01(\x04R\x0elockGeneration\x12\x17\n" +
-	"\anode_id\x18\x02 \x01(\rR\x06nodeId\"\x8c\v\n" +
+	"\anode_id\x18\x02 \x01(\rR\x06nodeId\"\xa5\v\n" +
 	"\x19ExecuteTransactionRequest\x12J\n" +
 	"\x10operation_params\x18\x01 \x01(\v2\x1f.Ydb.Operations.OperationParamsR\x0foperationParams\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x12!\n" +
-	"\fpartition_id\x18\x03 \x01(\x04R\vpartitionId\x12'\n" +
-	"\x0flock_generation\x18\x04 \x01(\x04R\x0elockGeneration\x12K\n" +
+	"\fpartition_id\x18\x03 \x01(\x04R\vpartitionId\x12,\n" +
+	"\x0flock_generation\x18\x04 \x01(\x04H\x00R\x0elockGeneration\x88\x01\x01\x12K\n" +
 	"\bcommands\x18\x05 \x03(\v2/.Ydb.KeyValue.ExecuteTransactionRequest.CommandR\bcommands\x1a\xf5\b\n" +
 	"\aCommand\x12`\n" +
 	"\fdelete_range\x18\x01 \x01(\v2;.Ydb.KeyValue.ExecuteTransactionRequest.Command.DeleteRangeH\x00R\vdeleteRange\x12P\n" +
@@ -5748,23 +4862,25 @@ const file_draft_protos_ydb_keyvalue_proto_rawDesc = "" +
 	"\x12TACTIC_MIN_LATENCY\x10\x02\x1a;\n" +
 	"\vDeleteRange\x12,\n" +
 	"\x05range\x18\x01 \x01(\v2\x16.Ydb.KeyValue.KeyRangeR\x05rangeB\b\n" +
-	"\x06action\"U\n" +
+	"\x06actionB\x12\n" +
+	"\x10_lock_generation\"U\n" +
 	"\x1aExecuteTransactionResponse\x127\n" +
 	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"\x87\x01\n" +
 	"\x18ExecuteTransactionResult\x12R\n" +
 	"\x14storage_channel_info\x18\x01 \x03(\v2 .Ydb.KeyValue.StorageChannelInfoR\x12storageChannelInfo\x12\x17\n" +
-	"\anode_id\x18\x02 \x01(\rR\x06nodeId\"\xd7\x02\n" +
+	"\anode_id\x18\x02 \x01(\rR\x06nodeId\"\xf0\x02\n" +
 	"\vReadRequest\x12J\n" +
 	"\x10operation_params\x18\x01 \x01(\v2\x1f.Ydb.Operations.OperationParamsR\x0foperationParams\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x12!\n" +
-	"\fpartition_id\x18\x03 \x01(\x04R\vpartitionId\x12'\n" +
-	"\x0flock_generation\x18\x04 \x01(\x04R\x0elockGeneration\x12\x10\n" +
+	"\fpartition_id\x18\x03 \x01(\x04R\vpartitionId\x12,\n" +
+	"\x0flock_generation\x18\x04 \x01(\x04H\x00R\x0elockGeneration\x88\x01\x01\x12\x10\n" +
 	"\x03key\x18\x05 \x01(\tR\x03key\x12\x16\n" +
 	"\x06offset\x18\x06 \x01(\x04R\x06offset\x12\x12\n" +
 	"\x04size\x18\a \x01(\x04R\x04size\x12\x1f\n" +
 	"\vlimit_bytes\x18\b \x01(\x04R\n" +
 	"limitBytes\x12=\n" +
-	"\bpriority\x18\t \x01(\x0e2!.Ydb.KeyValue.Priorities.PriorityR\bpriority\"G\n" +
+	"\bpriority\x18\t \x01(\x0e2!.Ydb.KeyValue.Priorities.PriorityR\bpriorityB\x12\n" +
+	"\x10_lock_generation\"G\n" +
 	"\fReadResponse\x127\n" +
 	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"\xd1\x01\n" +
 	"\n" +
@@ -5775,16 +4891,17 @@ const file_draft_protos_ydb_keyvalue_proto_rawDesc = "" +
 	"\x05value\x18\x04 \x01(\fR\x05value\x12\x1d\n" +
 	"\n" +
 	"is_overrun\x18\x05 \x01(\bR\tisOverrun\x12\x17\n" +
-	"\anode_id\x18\x06 \x01(\rR\x06nodeId\"\xcc\x02\n" +
+	"\anode_id\x18\x06 \x01(\rR\x06nodeId\"\xe5\x02\n" +
 	"\x10ReadRangeRequest\x12J\n" +
 	"\x10operation_params\x18\x01 \x01(\v2\x1f.Ydb.Operations.OperationParamsR\x0foperationParams\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x12!\n" +
-	"\fpartition_id\x18\x03 \x01(\x04R\vpartitionId\x12'\n" +
-	"\x0flock_generation\x18\x04 \x01(\x04R\x0elockGeneration\x12,\n" +
+	"\fpartition_id\x18\x03 \x01(\x04R\vpartitionId\x12,\n" +
+	"\x0flock_generation\x18\x04 \x01(\x04H\x00R\x0elockGeneration\x88\x01\x01\x12,\n" +
 	"\x05range\x18\x05 \x01(\v2\x16.Ydb.KeyValue.KeyRangeR\x05range\x12\x1f\n" +
 	"\vlimit_bytes\x18\x06 \x01(\x04R\n" +
 	"limitBytes\x12=\n" +
-	"\bpriority\x18\a \x01(\x0e2!.Ydb.KeyValue.Priorities.PriorityR\bpriority\"L\n" +
+	"\bpriority\x18\a \x01(\x0e2!.Ydb.KeyValue.Priorities.PriorityR\bpriorityB\x12\n" +
+	"\x10_lock_generation\"L\n" +
 	"\x11ReadRangeResponse\x127\n" +
 	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"\x99\x02\n" +
 	"\x0fReadRangeResult\x12>\n" +
@@ -5796,15 +4913,16 @@ const file_draft_protos_ydb_keyvalue_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\fR\x05value\x12,\n" +
 	"\x12creation_unix_time\x18\x04 \x01(\x04R\x10creationUnixTime\x12'\n" +
-	"\x0fstorage_channel\x18\x05 \x01(\rR\x0estorageChannel\"\x8d\x02\n" +
+	"\x0fstorage_channel\x18\x05 \x01(\rR\x0estorageChannel\"\xa6\x02\n" +
 	"\x10ListRangeRequest\x12J\n" +
 	"\x10operation_params\x18\x01 \x01(\v2\x1f.Ydb.Operations.OperationParamsR\x0foperationParams\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x12!\n" +
-	"\fpartition_id\x18\x03 \x01(\x04R\vpartitionId\x12'\n" +
-	"\x0flock_generation\x18\x04 \x01(\x04R\x0elockGeneration\x12,\n" +
+	"\fpartition_id\x18\x03 \x01(\x04R\vpartitionId\x12,\n" +
+	"\x0flock_generation\x18\x04 \x01(\x04H\x00R\x0elockGeneration\x88\x01\x01\x12,\n" +
 	"\x05range\x18\x05 \x01(\v2\x16.Ydb.KeyValue.KeyRangeR\x05range\x12\x1f\n" +
 	"\vlimit_bytes\x18\x06 \x01(\x04R\n" +
-	"limitBytes\"L\n" +
+	"limitBytesB\x12\n" +
+	"\x10_lock_generation\"L\n" +
 	"\x11ListRangeResponse\x127\n" +
 	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"\x96\x02\n" +
 	"\x0fListRangeResult\x127\n" +
@@ -5817,13 +4935,14 @@ const file_draft_protos_ydb_keyvalue_proto_rawDesc = "" +
 	"\n" +
 	"value_size\x18\x02 \x01(\rR\tvalueSize\x12,\n" +
 	"\x12creation_unix_time\x18\x03 \x01(\x04R\x10creationUnixTime\x12'\n" +
-	"\x0fstorage_channel\x18\x04 \x01(\rR\x0estorageChannel\"\xf5\x01\n" +
+	"\x0fstorage_channel\x18\x04 \x01(\rR\x0estorageChannel\"\x8e\x02\n" +
 	"\x1eGetStorageChannelStatusRequest\x12J\n" +
 	"\x10operation_params\x18\x01 \x01(\v2\x1f.Ydb.Operations.OperationParamsR\x0foperationParams\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x12!\n" +
-	"\fpartition_id\x18\x03 \x01(\x04R\vpartitionId\x12'\n" +
-	"\x0flock_generation\x18\x04 \x01(\x04R\x0elockGeneration\x12'\n" +
-	"\x0fstorage_channel\x18\x05 \x03(\rR\x0estorageChannel\"Z\n" +
+	"\fpartition_id\x18\x03 \x01(\x04R\vpartitionId\x12,\n" +
+	"\x0flock_generation\x18\x04 \x01(\x04H\x00R\x0elockGeneration\x88\x01\x01\x12'\n" +
+	"\x0fstorage_channel\x18\x05 \x03(\rR\x0estorageChannelB\x12\n" +
+	"\x10_lock_generation\"Z\n" +
 	"\x1fGetStorageChannelStatusResponse\x127\n" +
 	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"\x8c\x01\n" +
 	"\x1dGetStorageChannelStatusResult\x12R\n" +
@@ -5868,8 +4987,8 @@ const file_draft_protos_ydb_keyvalue_proto_rawDesc = "" +
 	"\x19ListLocalPartitionsResult\x12\x12\n" +
 	"\x04path\x18\x01 \x01(\tR\x04path\x12\x17\n" +
 	"\anode_id\x18\x02 \x01(\x04R\x06nodeId\x12#\n" +
-	"\rpartition_ids\x18\x03 \x03(\x04R\fpartitionIdsBp\n" +
-	" tech.ydb.proto.draft.keyvalue.v1ZAgithub.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_KeyValue\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\rpartition_ids\x18\x03 \x03(\x04R\fpartitionIdsBh\n" +
+	" tech.ydb.proto.draft.keyvalue.v1ZAgithub.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_KeyValue\xf8\x01\x01b\x06proto3"
 
 var file_draft_protos_ydb_keyvalue_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_draft_protos_ydb_keyvalue_proto_msgTypes = make([]protoimpl.MessageInfo, 46)
@@ -5984,17 +5103,22 @@ func file_draft_protos_ydb_keyvalue_proto_init() {
 		return
 	}
 	file_draft_protos_ydb_keyvalue_proto_msgTypes[3].OneofWrappers = []any{
-		(*KeyRange_FromKeyInclusive)(nil),
-		(*KeyRange_FromKeyExclusive)(nil),
-		(*KeyRange_ToKeyInclusive)(nil),
-		(*KeyRange_ToKeyExclusive)(nil),
+		(*keyRange_FromKeyInclusive)(nil),
+		(*keyRange_FromKeyExclusive)(nil),
+		(*keyRange_ToKeyInclusive)(nil),
+		(*keyRange_ToKeyExclusive)(nil),
 	}
+	file_draft_protos_ydb_keyvalue_proto_msgTypes[7].OneofWrappers = []any{}
+	file_draft_protos_ydb_keyvalue_proto_msgTypes[10].OneofWrappers = []any{}
+	file_draft_protos_ydb_keyvalue_proto_msgTypes[13].OneofWrappers = []any{}
+	file_draft_protos_ydb_keyvalue_proto_msgTypes[16].OneofWrappers = []any{}
+	file_draft_protos_ydb_keyvalue_proto_msgTypes[19].OneofWrappers = []any{}
 	file_draft_protos_ydb_keyvalue_proto_msgTypes[38].OneofWrappers = []any{
-		(*ExecuteTransactionRequest_Command_DeleteRange_)(nil),
-		(*ExecuteTransactionRequest_Command_Rename_)(nil),
-		(*ExecuteTransactionRequest_Command_CopyRange_)(nil),
-		(*ExecuteTransactionRequest_Command_Concat_)(nil),
-		(*ExecuteTransactionRequest_Command_Write_)(nil),
+		(*executeTransactionRequest_Command_DeleteRange_)(nil),
+		(*executeTransactionRequest_Command_Rename_)(nil),
+		(*executeTransactionRequest_Command_CopyRange_)(nil),
+		(*executeTransactionRequest_Command_Concat_)(nil),
+		(*executeTransactionRequest_Command_Write_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

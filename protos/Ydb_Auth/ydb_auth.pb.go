@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: protos/ydb_auth.proto
 
-//go:build !protoopaque
-
 package Ydb_Auth
 
 import (
 	Ydb_Operations "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -25,12 +22,12 @@ const (
 )
 
 type LoginRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	User            *string                         `protobuf:"bytes,2,opt,name=user" json:"user,omitempty"`
-	Password        *string                         `protobuf:"bytes,3,opt,name=password" json:"password,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_User            string                          `protobuf:"bytes,2,opt,name=user,proto3"`
+	xxx_hidden_Password        string                          `protobuf:"bytes,3,opt,name=password,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *LoginRequest) Reset() {
@@ -60,94 +57,71 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 func (x *LoginRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *LoginRequest) GetUser() string {
-	if x != nil && x.User != nil {
-		return *x.User
+	if x != nil {
+		return x.xxx_hidden_User
 	}
 	return ""
 }
 
 func (x *LoginRequest) GetPassword() string {
-	if x != nil && x.Password != nil {
-		return *x.Password
+	if x != nil {
+		return x.xxx_hidden_Password
 	}
 	return ""
 }
 
 func (x *LoginRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *LoginRequest) SetUser(v string) {
-	x.User = &v
+	x.xxx_hidden_User = v
 }
 
 func (x *LoginRequest) SetPassword(v string) {
-	x.Password = &v
+	x.xxx_hidden_Password = v
 }
 
 func (x *LoginRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *LoginRequest) HasUser() bool {
-	if x == nil {
-		return false
-	}
-	return x.User != nil
-}
-
-func (x *LoginRequest) HasPassword() bool {
-	if x == nil {
-		return false
-	}
-	return x.Password != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *LoginRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *LoginRequest) ClearUser() {
-	x.User = nil
-}
-
-func (x *LoginRequest) ClearPassword() {
-	x.Password = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type LoginRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	User            *string
-	Password        *string
+	User            string
+	Password        string
 }
 
 func (b0 LoginRequest_builder) Build() *LoginRequest {
 	m0 := &LoginRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.User = b.User
-	x.Password = b.Password
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_User = b.User
+	x.xxx_hidden_Password = b.Password
 	return m0
 }
 
 type LoginResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// After successfull completion must contain LoginResult.
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *LoginResponse) Reset() {
@@ -177,24 +151,24 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 
 func (x *LoginResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *LoginResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *LoginResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *LoginResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type LoginResponse_builder struct {
@@ -208,15 +182,15 @@ func (b0 LoginResponse_builder) Build() *LoginResponse {
 	m0 := &LoginResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type LoginResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Token         *string                `protobuf:"bytes,1,opt,name=token" json:"token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Token string                 `protobuf:"bytes,1,opt,name=token,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *LoginResult) Reset() {
@@ -245,38 +219,27 @@ func (x *LoginResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *LoginResult) GetToken() string {
-	if x != nil && x.Token != nil {
-		return *x.Token
+	if x != nil {
+		return x.xxx_hidden_Token
 	}
 	return ""
 }
 
 func (x *LoginResult) SetToken(v string) {
-	x.Token = &v
-}
-
-func (x *LoginResult) HasToken() bool {
-	if x == nil {
-		return false
-	}
-	return x.Token != nil
-}
-
-func (x *LoginResult) ClearToken() {
-	x.Token = nil
+	x.xxx_hidden_Token = v
 }
 
 type LoginResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Token *string
+	Token string
 }
 
 func (b0 LoginResult_builder) Build() *LoginResult {
 	m0 := &LoginResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Token = b.Token
+	x.xxx_hidden_Token = b.Token
 	return m0
 }
 
@@ -284,7 +247,7 @@ var File_protos_ydb_auth_proto protoreflect.FileDescriptor
 
 const file_protos_ydb_auth_proto_rawDesc = "" +
 	"\n" +
-	"\x15protos/ydb_auth.proto\x12\bYdb.Auth\x1a\x1aprotos/ydb_operation.proto\x1a!google/protobuf/go_features.proto\"\x8a\x01\n" +
+	"\x15protos/ydb_auth.proto\x12\bYdb.Auth\x1a\x1aprotos/ydb_operation.proto\"\x8a\x01\n" +
 	"\fLoginRequest\x12J\n" +
 	"\x10operation_params\x18\x01 \x01(\v2\x1f.Ydb.Operations.OperationParamsR\x0foperationParams\x12\x12\n" +
 	"\x04user\x18\x02 \x01(\tR\x04user\x12\x1a\n" +
@@ -292,8 +255,8 @@ const file_protos_ydb_auth_proto_rawDesc = "" +
 	"\rLoginResponse\x127\n" +
 	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"#\n" +
 	"\vLoginResult\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05tokenBY\n" +
-	"\x13tech.ydb.proto.authZ7github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Auth\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x05token\x18\x01 \x01(\tR\x05tokenBQ\n" +
+	"\x13tech.ydb.proto.authZ7github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Auth\xf8\x01\x01b\x06proto3"
 
 var file_protos_ydb_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_protos_ydb_auth_proto_goTypes = []any{

@@ -4,8 +4,6 @@
 // 	protoc        v6.30.2
 // source: protos/ydb_scheme.proto
 
-//go:build !protoopaque
-
 package Ydb_Scheme
 
 import (
@@ -13,7 +11,6 @@ import (
 	Ydb_Operations "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -44,6 +41,9 @@ const (
 	Entry_EXTERNAL_TABLE       Entry_Type = 18
 	Entry_EXTERNAL_DATA_SOURCE Entry_Type = 19
 	Entry_VIEW                 Entry_Type = 20
+	Entry_RESOURCE_POOL        Entry_Type = 21
+	Entry_TRANSFER             Entry_Type = 23
+	Entry_SYS_VIEW             Entry_Type = 24
 )
 
 // Enum value maps for Entry_Type.
@@ -65,6 +65,9 @@ var (
 		18: "EXTERNAL_TABLE",
 		19: "EXTERNAL_DATA_SOURCE",
 		20: "VIEW",
+		21: "RESOURCE_POOL",
+		23: "TRANSFER",
+		24: "SYS_VIEW",
 	}
 	Entry_Type_value = map[string]int32{
 		"TYPE_UNSPECIFIED":     0,
@@ -83,6 +86,9 @@ var (
 		"EXTERNAL_TABLE":       18,
 		"EXTERNAL_DATA_SOURCE": 19,
 		"VIEW":                 20,
+		"RESOURCE_POOL":        21,
+		"TRANSFER":             23,
+		"SYS_VIEW":             24,
 	}
 )
 
@@ -111,11 +117,11 @@ func (x Entry_Type) Number() protoreflect.EnumNumber {
 // Create directory.
 // All intermediate directories must be created
 type MakeDirectoryRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	Path            *string                         `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *MakeDirectoryRequest) Reset() {
@@ -145,69 +151,58 @@ func (x *MakeDirectoryRequest) ProtoReflect() protoreflect.Message {
 
 func (x *MakeDirectoryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *MakeDirectoryRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *MakeDirectoryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *MakeDirectoryRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *MakeDirectoryRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *MakeDirectoryRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *MakeDirectoryRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *MakeDirectoryRequest) ClearPath() {
-	x.Path = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type MakeDirectoryRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	Path            *string
+	Path            string
 }
 
 func (b0 MakeDirectoryRequest_builder) Build() *MakeDirectoryRequest {
 	m0 := &MakeDirectoryRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
 	return m0
 }
 
 type MakeDirectoryResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *MakeDirectoryResponse) Reset() {
@@ -237,24 +232,24 @@ func (x *MakeDirectoryResponse) ProtoReflect() protoreflect.Message {
 
 func (x *MakeDirectoryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *MakeDirectoryResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *MakeDirectoryResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *MakeDirectoryResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type MakeDirectoryResponse_builder struct {
@@ -267,17 +262,17 @@ func (b0 MakeDirectoryResponse_builder) Build() *MakeDirectoryResponse {
 	m0 := &MakeDirectoryResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 // Remove directory
 type RemoveDirectoryRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	Path            *string                         `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *RemoveDirectoryRequest) Reset() {
@@ -307,69 +302,58 @@ func (x *RemoveDirectoryRequest) ProtoReflect() protoreflect.Message {
 
 func (x *RemoveDirectoryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *RemoveDirectoryRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *RemoveDirectoryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *RemoveDirectoryRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *RemoveDirectoryRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *RemoveDirectoryRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *RemoveDirectoryRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *RemoveDirectoryRequest) ClearPath() {
-	x.Path = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type RemoveDirectoryRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	Path            *string
+	Path            string
 }
 
 func (b0 RemoveDirectoryRequest_builder) Build() *RemoveDirectoryRequest {
 	m0 := &RemoveDirectoryRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
 	return m0
 }
 
 type RemoveDirectoryResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *RemoveDirectoryResponse) Reset() {
@@ -399,24 +383,24 @@ func (x *RemoveDirectoryResponse) ProtoReflect() protoreflect.Message {
 
 func (x *RemoveDirectoryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *RemoveDirectoryResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *RemoveDirectoryResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *RemoveDirectoryResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type RemoveDirectoryResponse_builder struct {
@@ -429,17 +413,17 @@ func (b0 RemoveDirectoryResponse_builder) Build() *RemoveDirectoryResponse {
 	m0 := &RemoveDirectoryResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 // List directory
 type ListDirectoryRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	Path            *string                         `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListDirectoryRequest) Reset() {
@@ -469,70 +453,58 @@ func (x *ListDirectoryRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ListDirectoryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListDirectoryRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *ListDirectoryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ListDirectoryRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *ListDirectoryRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ListDirectoryRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ListDirectoryRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ListDirectoryRequest) ClearPath() {
-	x.Path = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type ListDirectoryRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	Path            *string
+	Path            string
 }
 
 func (b0 ListDirectoryRequest_builder) Build() *ListDirectoryRequest {
 	m0 := &ListDirectoryRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
 	return m0
 }
 
 type ListDirectoryResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Holds ListDirectoryResult in case of successful call
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListDirectoryResponse) Reset() {
@@ -562,24 +534,24 @@ func (x *ListDirectoryResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ListDirectoryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ListDirectoryResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ListDirectoryResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ListDirectoryResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ListDirectoryResponse_builder struct {
@@ -593,17 +565,16 @@ func (b0 ListDirectoryResponse_builder) Build() *ListDirectoryResponse {
 	m0 := &ListDirectoryResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type Permissions struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// SID (Security ID) of user or group
-	Subject         *string  `protobuf:"bytes,1,opt,name=subject" json:"subject,omitempty"`
-	PermissionNames []string `protobuf:"bytes,2,rep,name=permission_names,json=permissionNames" json:"permission_names,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Subject         string                 `protobuf:"bytes,1,opt,name=subject,proto3"`
+	xxx_hidden_PermissionNames []string               `protobuf:"bytes,2,rep,name=permission_names,json=permissionNames,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *Permissions) Reset() {
@@ -632,43 +603,32 @@ func (x *Permissions) ProtoReflect() protoreflect.Message {
 }
 
 func (x *Permissions) GetSubject() string {
-	if x != nil && x.Subject != nil {
-		return *x.Subject
+	if x != nil {
+		return x.xxx_hidden_Subject
 	}
 	return ""
 }
 
 func (x *Permissions) GetPermissionNames() []string {
 	if x != nil {
-		return x.PermissionNames
+		return x.xxx_hidden_PermissionNames
 	}
 	return nil
 }
 
 func (x *Permissions) SetSubject(v string) {
-	x.Subject = &v
+	x.xxx_hidden_Subject = v
 }
 
 func (x *Permissions) SetPermissionNames(v []string) {
-	x.PermissionNames = v
-}
-
-func (x *Permissions) HasSubject() bool {
-	if x == nil {
-		return false
-	}
-	return x.Subject != nil
-}
-
-func (x *Permissions) ClearSubject() {
-	x.Subject = nil
+	x.xxx_hidden_PermissionNames = v
 }
 
 type Permissions_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// SID (Security ID) of user or group
-	Subject         *string
+	Subject         string
 	PermissionNames []string
 }
 
@@ -676,29 +636,22 @@ func (b0 Permissions_builder) Build() *Permissions {
 	m0 := &Permissions{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Subject = b.Subject
-	x.PermissionNames = b.PermissionNames
+	x.xxx_hidden_Subject = b.Subject
+	x.xxx_hidden_PermissionNames = b.PermissionNames
 	return m0
 }
 
 type Entry struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Name of scheme entry (dir2 of /dir1/dir2)
-	Name *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	// SID (Security ID) of user or group
-	Owner                *string        `protobuf:"bytes,2,opt,name=owner" json:"owner,omitempty"`
-	Type                 *Entry_Type    `protobuf:"varint,5,opt,name=type,enum=Ydb.Scheme.Entry_Type" json:"type,omitempty"`
-	EffectivePermissions []*Permissions `protobuf:"bytes,6,rep,name=effective_permissions,json=effectivePermissions" json:"effective_permissions,omitempty"`
-	Permissions          []*Permissions `protobuf:"bytes,7,rep,name=permissions" json:"permissions,omitempty"`
-	// Size of entry in bytes. Currently filled for:
-	// - TABLE;
-	// - DATABASE.
-	// Empty (zero) in other cases.
-	SizeBytes *uint64 `protobuf:"varint,8,opt,name=size_bytes,json=sizeBytes" json:"size_bytes,omitempty"`
-	// Virtual timestamp when the object was created
-	CreatedAt     *Ydb.VirtualTimestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt" json:"created_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name                 string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Owner                string                 `protobuf:"bytes,2,opt,name=owner,proto3"`
+	xxx_hidden_Type                 Entry_Type             `protobuf:"varint,5,opt,name=type,proto3,enum=Ydb.Scheme.Entry_Type"`
+	xxx_hidden_EffectivePermissions *[]*Permissions        `protobuf:"bytes,6,rep,name=effective_permissions,json=effectivePermissions,proto3"`
+	xxx_hidden_Permissions          *[]*Permissions        `protobuf:"bytes,7,rep,name=permissions,proto3"`
+	xxx_hidden_SizeBytes            uint64                 `protobuf:"varint,8,opt,name=size_bytes,json=sizeBytes,proto3"`
+	xxx_hidden_CreatedAt            *Ydb.VirtualTimestamp  `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *Entry) Reset() {
@@ -727,152 +680,112 @@ func (x *Entry) ProtoReflect() protoreflect.Message {
 }
 
 func (x *Entry) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *Entry) GetOwner() string {
-	if x != nil && x.Owner != nil {
-		return *x.Owner
+	if x != nil {
+		return x.xxx_hidden_Owner
 	}
 	return ""
 }
 
 func (x *Entry) GetType() Entry_Type {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.xxx_hidden_Type
 	}
 	return Entry_TYPE_UNSPECIFIED
 }
 
 func (x *Entry) GetEffectivePermissions() []*Permissions {
 	if x != nil {
-		return x.EffectivePermissions
+		if x.xxx_hidden_EffectivePermissions != nil {
+			return *x.xxx_hidden_EffectivePermissions
+		}
 	}
 	return nil
 }
 
 func (x *Entry) GetPermissions() []*Permissions {
 	if x != nil {
-		return x.Permissions
+		if x.xxx_hidden_Permissions != nil {
+			return *x.xxx_hidden_Permissions
+		}
 	}
 	return nil
 }
 
 func (x *Entry) GetSizeBytes() uint64 {
-	if x != nil && x.SizeBytes != nil {
-		return *x.SizeBytes
+	if x != nil {
+		return x.xxx_hidden_SizeBytes
 	}
 	return 0
 }
 
 func (x *Entry) GetCreatedAt() *Ydb.VirtualTimestamp {
 	if x != nil {
-		return x.CreatedAt
+		return x.xxx_hidden_CreatedAt
 	}
 	return nil
 }
 
 func (x *Entry) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *Entry) SetOwner(v string) {
-	x.Owner = &v
+	x.xxx_hidden_Owner = v
 }
 
 func (x *Entry) SetType(v Entry_Type) {
-	x.Type = &v
+	x.xxx_hidden_Type = v
 }
 
 func (x *Entry) SetEffectivePermissions(v []*Permissions) {
-	x.EffectivePermissions = v
+	x.xxx_hidden_EffectivePermissions = &v
 }
 
 func (x *Entry) SetPermissions(v []*Permissions) {
-	x.Permissions = v
+	x.xxx_hidden_Permissions = &v
 }
 
 func (x *Entry) SetSizeBytes(v uint64) {
-	x.SizeBytes = &v
+	x.xxx_hidden_SizeBytes = v
 }
 
 func (x *Entry) SetCreatedAt(v *Ydb.VirtualTimestamp) {
-	x.CreatedAt = v
-}
-
-func (x *Entry) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *Entry) HasOwner() bool {
-	if x == nil {
-		return false
-	}
-	return x.Owner != nil
-}
-
-func (x *Entry) HasType() bool {
-	if x == nil {
-		return false
-	}
-	return x.Type != nil
-}
-
-func (x *Entry) HasSizeBytes() bool {
-	if x == nil {
-		return false
-	}
-	return x.SizeBytes != nil
+	x.xxx_hidden_CreatedAt = v
 }
 
 func (x *Entry) HasCreatedAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.CreatedAt != nil
-}
-
-func (x *Entry) ClearName() {
-	x.Name = nil
-}
-
-func (x *Entry) ClearOwner() {
-	x.Owner = nil
-}
-
-func (x *Entry) ClearType() {
-	x.Type = nil
-}
-
-func (x *Entry) ClearSizeBytes() {
-	x.SizeBytes = nil
+	return x.xxx_hidden_CreatedAt != nil
 }
 
 func (x *Entry) ClearCreatedAt() {
-	x.CreatedAt = nil
+	x.xxx_hidden_CreatedAt = nil
 }
 
 type Entry_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Name of scheme entry (dir2 of /dir1/dir2)
-	Name *string
+	Name string
 	// SID (Security ID) of user or group
-	Owner                *string
-	Type                 *Entry_Type
+	Owner                string
+	Type                 Entry_Type
 	EffectivePermissions []*Permissions
 	Permissions          []*Permissions
 	// Size of entry in bytes. Currently filled for:
 	// - TABLE;
 	// - DATABASE.
 	// Empty (zero) in other cases.
-	SizeBytes *uint64
+	SizeBytes uint64
 	// Virtual timestamp when the object was created
 	CreatedAt *Ydb.VirtualTimestamp
 }
@@ -881,22 +794,22 @@ func (b0 Entry_builder) Build() *Entry {
 	m0 := &Entry{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Name = b.Name
-	x.Owner = b.Owner
-	x.Type = b.Type
-	x.EffectivePermissions = b.EffectivePermissions
-	x.Permissions = b.Permissions
-	x.SizeBytes = b.SizeBytes
-	x.CreatedAt = b.CreatedAt
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Owner = b.Owner
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_EffectivePermissions = &b.EffectivePermissions
+	x.xxx_hidden_Permissions = &b.Permissions
+	x.xxx_hidden_SizeBytes = b.SizeBytes
+	x.xxx_hidden_CreatedAt = b.CreatedAt
 	return m0
 }
 
 type ListDirectoryResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Self          *Entry                 `protobuf:"bytes,1,opt,name=self" json:"self,omitempty"`
-	Children      []*Entry               `protobuf:"bytes,2,rep,name=children" json:"children,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Self     *Entry                 `protobuf:"bytes,1,opt,name=self,proto3"`
+	xxx_hidden_Children *[]*Entry              `protobuf:"bytes,2,rep,name=children,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ListDirectoryResult) Reset() {
@@ -926,35 +839,37 @@ func (x *ListDirectoryResult) ProtoReflect() protoreflect.Message {
 
 func (x *ListDirectoryResult) GetSelf() *Entry {
 	if x != nil {
-		return x.Self
+		return x.xxx_hidden_Self
 	}
 	return nil
 }
 
 func (x *ListDirectoryResult) GetChildren() []*Entry {
 	if x != nil {
-		return x.Children
+		if x.xxx_hidden_Children != nil {
+			return *x.xxx_hidden_Children
+		}
 	}
 	return nil
 }
 
 func (x *ListDirectoryResult) SetSelf(v *Entry) {
-	x.Self = v
+	x.xxx_hidden_Self = v
 }
 
 func (x *ListDirectoryResult) SetChildren(v []*Entry) {
-	x.Children = v
+	x.xxx_hidden_Children = &v
 }
 
 func (x *ListDirectoryResult) HasSelf() bool {
 	if x == nil {
 		return false
 	}
-	return x.Self != nil
+	return x.xxx_hidden_Self != nil
 }
 
 func (x *ListDirectoryResult) ClearSelf() {
-	x.Self = nil
+	x.xxx_hidden_Self = nil
 }
 
 type ListDirectoryResult_builder struct {
@@ -968,18 +883,18 @@ func (b0 ListDirectoryResult_builder) Build() *ListDirectoryResult {
 	m0 := &ListDirectoryResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Self = b.Self
-	x.Children = b.Children
+	x.xxx_hidden_Self = b.Self
+	x.xxx_hidden_Children = &b.Children
 	return m0
 }
 
 // Returns information about object with given path
 type DescribePathRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	Path            *string                         `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,2,opt,name=path,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribePathRequest) Reset() {
@@ -1009,70 +924,58 @@ func (x *DescribePathRequest) ProtoReflect() protoreflect.Message {
 
 func (x *DescribePathRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribePathRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DescribePathRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DescribePathRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *DescribePathRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DescribePathRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DescribePathRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *DescribePathRequest) ClearPath() {
-	x.Path = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DescribePathRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	Path            *string
+	Path            string
 }
 
 func (b0 DescribePathRequest_builder) Build() *DescribePathRequest {
 	m0 := &DescribePathRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
 	return m0
 }
 
 type DescribePathResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Holds DescribePathResult in case of DescribePathResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribePathResponse) Reset() {
@@ -1102,24 +1005,24 @@ func (x *DescribePathResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DescribePathResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DescribePathResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DescribePathResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DescribePathResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DescribePathResponse_builder struct {
@@ -1133,15 +1036,15 @@ func (b0 DescribePathResponse_builder) Build() *DescribePathResponse {
 	m0 := &DescribePathResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DescribePathResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Self          *Entry                 `protobuf:"bytes,1,opt,name=self" json:"self,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Self *Entry                 `protobuf:"bytes,1,opt,name=self,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *DescribePathResult) Reset() {
@@ -1171,24 +1074,24 @@ func (x *DescribePathResult) ProtoReflect() protoreflect.Message {
 
 func (x *DescribePathResult) GetSelf() *Entry {
 	if x != nil {
-		return x.Self
+		return x.xxx_hidden_Self
 	}
 	return nil
 }
 
 func (x *DescribePathResult) SetSelf(v *Entry) {
-	x.Self = v
+	x.xxx_hidden_Self = v
 }
 
 func (x *DescribePathResult) HasSelf() bool {
 	if x == nil {
 		return false
 	}
-	return x.Self != nil
+	return x.xxx_hidden_Self != nil
 }
 
 func (x *DescribePathResult) ClearSelf() {
-	x.Self = nil
+	x.xxx_hidden_Self = nil
 }
 
 type DescribePathResult_builder struct {
@@ -1201,21 +1104,15 @@ func (b0 DescribePathResult_builder) Build() *DescribePathResult {
 	m0 := &DescribePathResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Self = b.Self
+	x.xxx_hidden_Self = b.Self
 	return m0
 }
 
 type PermissionsAction struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Types that are valid to be assigned to Action:
-	//
-	//	*PermissionsAction_Grant
-	//	*PermissionsAction_Revoke
-	//	*PermissionsAction_Set
-	//	*PermissionsAction_ChangeOwner
-	Action        isPermissionsAction_Action `protobuf_oneof:"action"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Action isPermissionsAction_Action `protobuf_oneof:"action"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *PermissionsAction) Reset() {
@@ -1243,16 +1140,9 @@ func (x *PermissionsAction) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *PermissionsAction) GetAction() isPermissionsAction_Action {
-	if x != nil {
-		return x.Action
-	}
-	return nil
-}
-
 func (x *PermissionsAction) GetGrant() *Permissions {
 	if x != nil {
-		if x, ok := x.Action.(*PermissionsAction_Grant); ok {
+		if x, ok := x.xxx_hidden_Action.(*permissionsAction_Grant); ok {
 			return x.Grant
 		}
 	}
@@ -1261,7 +1151,7 @@ func (x *PermissionsAction) GetGrant() *Permissions {
 
 func (x *PermissionsAction) GetRevoke() *Permissions {
 	if x != nil {
-		if x, ok := x.Action.(*PermissionsAction_Revoke); ok {
+		if x, ok := x.xxx_hidden_Action.(*permissionsAction_Revoke); ok {
 			return x.Revoke
 		}
 	}
@@ -1270,7 +1160,7 @@ func (x *PermissionsAction) GetRevoke() *Permissions {
 
 func (x *PermissionsAction) GetSet() *Permissions {
 	if x != nil {
-		if x, ok := x.Action.(*PermissionsAction_Set); ok {
+		if x, ok := x.xxx_hidden_Action.(*permissionsAction_Set); ok {
 			return x.Set
 		}
 	}
@@ -1279,7 +1169,7 @@ func (x *PermissionsAction) GetSet() *Permissions {
 
 func (x *PermissionsAction) GetChangeOwner() string {
 	if x != nil {
-		if x, ok := x.Action.(*PermissionsAction_ChangeOwner); ok {
+		if x, ok := x.xxx_hidden_Action.(*permissionsAction_ChangeOwner); ok {
 			return x.ChangeOwner
 		}
 	}
@@ -1288,44 +1178,44 @@ func (x *PermissionsAction) GetChangeOwner() string {
 
 func (x *PermissionsAction) SetGrant(v *Permissions) {
 	if v == nil {
-		x.Action = nil
+		x.xxx_hidden_Action = nil
 		return
 	}
-	x.Action = &PermissionsAction_Grant{v}
+	x.xxx_hidden_Action = &permissionsAction_Grant{v}
 }
 
 func (x *PermissionsAction) SetRevoke(v *Permissions) {
 	if v == nil {
-		x.Action = nil
+		x.xxx_hidden_Action = nil
 		return
 	}
-	x.Action = &PermissionsAction_Revoke{v}
+	x.xxx_hidden_Action = &permissionsAction_Revoke{v}
 }
 
 func (x *PermissionsAction) SetSet(v *Permissions) {
 	if v == nil {
-		x.Action = nil
+		x.xxx_hidden_Action = nil
 		return
 	}
-	x.Action = &PermissionsAction_Set{v}
+	x.xxx_hidden_Action = &permissionsAction_Set{v}
 }
 
 func (x *PermissionsAction) SetChangeOwner(v string) {
-	x.Action = &PermissionsAction_ChangeOwner{v}
+	x.xxx_hidden_Action = &permissionsAction_ChangeOwner{v}
 }
 
 func (x *PermissionsAction) HasAction() bool {
 	if x == nil {
 		return false
 	}
-	return x.Action != nil
+	return x.xxx_hidden_Action != nil
 }
 
 func (x *PermissionsAction) HasGrant() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*PermissionsAction_Grant)
+	_, ok := x.xxx_hidden_Action.(*permissionsAction_Grant)
 	return ok
 }
 
@@ -1333,7 +1223,7 @@ func (x *PermissionsAction) HasRevoke() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*PermissionsAction_Revoke)
+	_, ok := x.xxx_hidden_Action.(*permissionsAction_Revoke)
 	return ok
 }
 
@@ -1341,7 +1231,7 @@ func (x *PermissionsAction) HasSet() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*PermissionsAction_Set)
+	_, ok := x.xxx_hidden_Action.(*permissionsAction_Set)
 	return ok
 }
 
@@ -1349,35 +1239,35 @@ func (x *PermissionsAction) HasChangeOwner() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*PermissionsAction_ChangeOwner)
+	_, ok := x.xxx_hidden_Action.(*permissionsAction_ChangeOwner)
 	return ok
 }
 
 func (x *PermissionsAction) ClearAction() {
-	x.Action = nil
+	x.xxx_hidden_Action = nil
 }
 
 func (x *PermissionsAction) ClearGrant() {
-	if _, ok := x.Action.(*PermissionsAction_Grant); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*permissionsAction_Grant); ok {
+		x.xxx_hidden_Action = nil
 	}
 }
 
 func (x *PermissionsAction) ClearRevoke() {
-	if _, ok := x.Action.(*PermissionsAction_Revoke); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*permissionsAction_Revoke); ok {
+		x.xxx_hidden_Action = nil
 	}
 }
 
 func (x *PermissionsAction) ClearSet() {
-	if _, ok := x.Action.(*PermissionsAction_Set); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*permissionsAction_Set); ok {
+		x.xxx_hidden_Action = nil
 	}
 }
 
 func (x *PermissionsAction) ClearChangeOwner() {
-	if _, ok := x.Action.(*PermissionsAction_ChangeOwner); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*permissionsAction_ChangeOwner); ok {
+		x.xxx_hidden_Action = nil
 	}
 }
 
@@ -1391,14 +1281,14 @@ func (x *PermissionsAction) WhichAction() case_PermissionsAction_Action {
 	if x == nil {
 		return PermissionsAction_Action_not_set_case
 	}
-	switch x.Action.(type) {
-	case *PermissionsAction_Grant:
+	switch x.xxx_hidden_Action.(type) {
+	case *permissionsAction_Grant:
 		return PermissionsAction_Grant_case
-	case *PermissionsAction_Revoke:
+	case *permissionsAction_Revoke:
 		return PermissionsAction_Revoke_case
-	case *PermissionsAction_Set:
+	case *permissionsAction_Set:
 		return PermissionsAction_Set_case
-	case *PermissionsAction_ChangeOwner:
+	case *permissionsAction_ChangeOwner:
 		return PermissionsAction_ChangeOwner_case
 	default:
 		return PermissionsAction_Action_not_set_case
@@ -1408,7 +1298,7 @@ func (x *PermissionsAction) WhichAction() case_PermissionsAction_Action {
 type PermissionsAction_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof Action:
+	// Fields of oneof xxx_hidden_Action:
 	// Grant permissions
 	Grant *Permissions
 	// Revoke permissions
@@ -1417,7 +1307,7 @@ type PermissionsAction_builder struct {
 	Set *Permissions
 	// New owner for object
 	ChangeOwner *string
-	// -- end of Action
+	// -- end of xxx_hidden_Action
 }
 
 func (b0 PermissionsAction_builder) Build() *PermissionsAction {
@@ -1425,16 +1315,16 @@ func (b0 PermissionsAction_builder) Build() *PermissionsAction {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Grant != nil {
-		x.Action = &PermissionsAction_Grant{b.Grant}
+		x.xxx_hidden_Action = &permissionsAction_Grant{b.Grant}
 	}
 	if b.Revoke != nil {
-		x.Action = &PermissionsAction_Revoke{b.Revoke}
+		x.xxx_hidden_Action = &permissionsAction_Revoke{b.Revoke}
 	}
 	if b.Set != nil {
-		x.Action = &PermissionsAction_Set{b.Set}
+		x.xxx_hidden_Action = &permissionsAction_Set{b.Set}
 	}
 	if b.ChangeOwner != nil {
-		x.Action = &PermissionsAction_ChangeOwner{*b.ChangeOwner}
+		x.xxx_hidden_Action = &permissionsAction_ChangeOwner{*b.ChangeOwner}
 	}
 	return m0
 }
@@ -1453,48 +1343,44 @@ type isPermissionsAction_Action interface {
 	isPermissionsAction_Action()
 }
 
-type PermissionsAction_Grant struct {
+type permissionsAction_Grant struct {
 	// Grant permissions
-	Grant *Permissions `protobuf:"bytes,1,opt,name=grant,oneof"`
+	Grant *Permissions `protobuf:"bytes,1,opt,name=grant,proto3,oneof"`
 }
 
-type PermissionsAction_Revoke struct {
+type permissionsAction_Revoke struct {
 	// Revoke permissions
-	Revoke *Permissions `protobuf:"bytes,2,opt,name=revoke,oneof"`
+	Revoke *Permissions `protobuf:"bytes,2,opt,name=revoke,proto3,oneof"`
 }
 
-type PermissionsAction_Set struct {
+type permissionsAction_Set struct {
 	// Rewrite permissions for given subject (last set win in case of multiple set for one subject)
-	Set *Permissions `protobuf:"bytes,3,opt,name=set,oneof"`
+	Set *Permissions `protobuf:"bytes,3,opt,name=set,proto3,oneof"`
 }
 
-type PermissionsAction_ChangeOwner struct {
+type permissionsAction_ChangeOwner struct {
 	// New owner for object
-	ChangeOwner string `protobuf:"bytes,4,opt,name=change_owner,json=changeOwner,oneof"`
+	ChangeOwner string `protobuf:"bytes,4,opt,name=change_owner,json=changeOwner,proto3,oneof"`
 }
 
-func (*PermissionsAction_Grant) isPermissionsAction_Action() {}
+func (*permissionsAction_Grant) isPermissionsAction_Action() {}
 
-func (*PermissionsAction_Revoke) isPermissionsAction_Action() {}
+func (*permissionsAction_Revoke) isPermissionsAction_Action() {}
 
-func (*PermissionsAction_Set) isPermissionsAction_Action() {}
+func (*permissionsAction_Set) isPermissionsAction_Action() {}
 
-func (*PermissionsAction_ChangeOwner) isPermissionsAction_Action() {}
+func (*permissionsAction_ChangeOwner) isPermissionsAction_Action() {}
 
 // Modify permissions of given object
 type ModifyPermissionsRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	Path            *string                         `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
-	Actions         []*PermissionsAction            `protobuf:"bytes,3,rep,name=actions" json:"actions,omitempty"`
-	// Clear all permissions on the object for all subjects
-	ClearPermissions *bool `protobuf:"varint,4,opt,name=clear_permissions,json=clearPermissions" json:"clear_permissions,omitempty"`
-	// Types that are valid to be assigned to Inheritance:
-	//
-	//	*ModifyPermissionsRequest_InterruptInheritance
-	Inheritance   isModifyPermissionsRequest_Inheritance `protobuf_oneof:"inheritance"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState                 `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams        `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Path             string                                 `protobuf:"bytes,2,opt,name=path,proto3"`
+	xxx_hidden_Actions          *[]*PermissionsAction                  `protobuf:"bytes,3,rep,name=actions,proto3"`
+	xxx_hidden_ClearPermissions bool                                   `protobuf:"varint,4,opt,name=clear_permissions,json=clearPermissions,proto3"`
+	xxx_hidden_Inheritance      isModifyPermissionsRequest_Inheritance `protobuf_oneof:"inheritance"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ModifyPermissionsRequest) Reset() {
@@ -1524,42 +1410,37 @@ func (x *ModifyPermissionsRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ModifyPermissionsRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ModifyPermissionsRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *ModifyPermissionsRequest) GetActions() []*PermissionsAction {
 	if x != nil {
-		return x.Actions
+		if x.xxx_hidden_Actions != nil {
+			return *x.xxx_hidden_Actions
+		}
 	}
 	return nil
 }
 
 func (x *ModifyPermissionsRequest) GetClearPermissions() bool {
-	if x != nil && x.ClearPermissions != nil {
-		return *x.ClearPermissions
+	if x != nil {
+		return x.xxx_hidden_ClearPermissions
 	}
 	return false
 }
 
-func (x *ModifyPermissionsRequest) GetInheritance() isModifyPermissionsRequest_Inheritance {
-	if x != nil {
-		return x.Inheritance
-	}
-	return nil
-}
-
 func (x *ModifyPermissionsRequest) GetInterruptInheritance() bool {
 	if x != nil {
-		if x, ok := x.Inheritance.(*ModifyPermissionsRequest_InterruptInheritance); ok {
+		if x, ok := x.xxx_hidden_Inheritance.(*modifyPermissionsRequest_InterruptInheritance); ok {
 			return x.InterruptInheritance
 		}
 	}
@@ -1567,80 +1448,58 @@ func (x *ModifyPermissionsRequest) GetInterruptInheritance() bool {
 }
 
 func (x *ModifyPermissionsRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ModifyPermissionsRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *ModifyPermissionsRequest) SetActions(v []*PermissionsAction) {
-	x.Actions = v
+	x.xxx_hidden_Actions = &v
 }
 
 func (x *ModifyPermissionsRequest) SetClearPermissions(v bool) {
-	x.ClearPermissions = &v
+	x.xxx_hidden_ClearPermissions = v
 }
 
 func (x *ModifyPermissionsRequest) SetInterruptInheritance(v bool) {
-	x.Inheritance = &ModifyPermissionsRequest_InterruptInheritance{v}
+	x.xxx_hidden_Inheritance = &modifyPermissionsRequest_InterruptInheritance{v}
 }
 
 func (x *ModifyPermissionsRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ModifyPermissionsRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *ModifyPermissionsRequest) HasClearPermissions() bool {
-	if x == nil {
-		return false
-	}
-	return x.ClearPermissions != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ModifyPermissionsRequest) HasInheritance() bool {
 	if x == nil {
 		return false
 	}
-	return x.Inheritance != nil
+	return x.xxx_hidden_Inheritance != nil
 }
 
 func (x *ModifyPermissionsRequest) HasInterruptInheritance() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Inheritance.(*ModifyPermissionsRequest_InterruptInheritance)
+	_, ok := x.xxx_hidden_Inheritance.(*modifyPermissionsRequest_InterruptInheritance)
 	return ok
 }
 
 func (x *ModifyPermissionsRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ModifyPermissionsRequest) ClearPath() {
-	x.Path = nil
-}
-
-func (x *ModifyPermissionsRequest) ClearClearPermissions() {
-	x.ClearPermissions = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ModifyPermissionsRequest) ClearInheritance() {
-	x.Inheritance = nil
+	x.xxx_hidden_Inheritance = nil
 }
 
 func (x *ModifyPermissionsRequest) ClearInterruptInheritance() {
-	if _, ok := x.Inheritance.(*ModifyPermissionsRequest_InterruptInheritance); ok {
-		x.Inheritance = nil
+	if _, ok := x.xxx_hidden_Inheritance.(*modifyPermissionsRequest_InterruptInheritance); ok {
+		x.xxx_hidden_Inheritance = nil
 	}
 }
 
@@ -1651,8 +1510,8 @@ func (x *ModifyPermissionsRequest) WhichInheritance() case_ModifyPermissionsRequ
 	if x == nil {
 		return ModifyPermissionsRequest_Inheritance_not_set_case
 	}
-	switch x.Inheritance.(type) {
-	case *ModifyPermissionsRequest_InterruptInheritance:
+	switch x.xxx_hidden_Inheritance.(type) {
+	case *modifyPermissionsRequest_InterruptInheritance:
 		return ModifyPermissionsRequest_InterruptInheritance_case
 	default:
 		return ModifyPermissionsRequest_Inheritance_not_set_case
@@ -1663,25 +1522,25 @@ type ModifyPermissionsRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	Path            *string
+	Path            string
 	Actions         []*PermissionsAction
 	// Clear all permissions on the object for all subjects
-	ClearPermissions *bool
-	// Fields of oneof Inheritance:
+	ClearPermissions bool
+	// Fields of oneof xxx_hidden_Inheritance:
 	InterruptInheritance *bool
-	// -- end of Inheritance
+	// -- end of xxx_hidden_Inheritance
 }
 
 func (b0 ModifyPermissionsRequest_builder) Build() *ModifyPermissionsRequest {
 	m0 := &ModifyPermissionsRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Path = b.Path
-	x.Actions = b.Actions
-	x.ClearPermissions = b.ClearPermissions
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_Actions = &b.Actions
+	x.xxx_hidden_ClearPermissions = b.ClearPermissions
 	if b.InterruptInheritance != nil {
-		x.Inheritance = &ModifyPermissionsRequest_InterruptInheritance{*b.InterruptInheritance}
+		x.xxx_hidden_Inheritance = &modifyPermissionsRequest_InterruptInheritance{*b.InterruptInheritance}
 	}
 	return m0
 }
@@ -1700,17 +1559,17 @@ type isModifyPermissionsRequest_Inheritance interface {
 	isModifyPermissionsRequest_Inheritance()
 }
 
-type ModifyPermissionsRequest_InterruptInheritance struct {
-	InterruptInheritance bool `protobuf:"varint,5,opt,name=interrupt_inheritance,json=interruptInheritance,oneof"`
+type modifyPermissionsRequest_InterruptInheritance struct {
+	InterruptInheritance bool `protobuf:"varint,5,opt,name=interrupt_inheritance,json=interruptInheritance,proto3,oneof"`
 }
 
-func (*ModifyPermissionsRequest_InterruptInheritance) isModifyPermissionsRequest_Inheritance() {}
+func (*modifyPermissionsRequest_InterruptInheritance) isModifyPermissionsRequest_Inheritance() {}
 
 type ModifyPermissionsResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ModifyPermissionsResponse) Reset() {
@@ -1740,24 +1599,24 @@ func (x *ModifyPermissionsResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ModifyPermissionsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ModifyPermissionsResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ModifyPermissionsResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ModifyPermissionsResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ModifyPermissionsResponse_builder struct {
@@ -1770,7 +1629,7 @@ func (b0 ModifyPermissionsResponse_builder) Build() *ModifyPermissionsResponse {
 	m0 := &ModifyPermissionsResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
@@ -1779,7 +1638,7 @@ var File_protos_ydb_scheme_proto protoreflect.FileDescriptor
 const file_protos_ydb_scheme_proto_rawDesc = "" +
 	"\n" +
 	"\x17protos/ydb_scheme.proto\x12\n" +
-	"Ydb.Scheme\x1a\x17protos/ydb_common.proto\x1a\x1aprotos/ydb_operation.proto\x1a!google/protobuf/go_features.proto\"v\n" +
+	"Ydb.Scheme\x1a\x17protos/ydb_common.proto\x1a\x1aprotos/ydb_operation.proto\"v\n" +
 	"\x14MakeDirectoryRequest\x12J\n" +
 	"\x10operation_params\x18\x01 \x01(\v2\x1f.Ydb.Operations.OperationParamsR\x0foperationParams\x12\x12\n" +
 	"\x04path\x18\x02 \x01(\tR\x04path\"P\n" +
@@ -1797,7 +1656,7 @@ const file_protos_ydb_scheme_proto_rawDesc = "" +
 	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"R\n" +
 	"\vPermissions\x12\x18\n" +
 	"\asubject\x18\x01 \x01(\tR\asubject\x12)\n" +
-	"\x10permission_names\x18\x02 \x03(\tR\x0fpermissionNames\"\xde\x04\n" +
+	"\x10permission_names\x18\x02 \x03(\tR\x0fpermissionNames\"\x8d\x05\n" +
 	"\x05Entry\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
 	"\x05owner\x18\x02 \x01(\tR\x05owner\x12*\n" +
@@ -1807,7 +1666,7 @@ const file_protos_ydb_scheme_proto_rawDesc = "" +
 	"\n" +
 	"size_bytes\x18\b \x01(\x04R\tsizeBytes\x124\n" +
 	"\n" +
-	"created_at\x18\t \x01(\v2\x15.Ydb.VirtualTimestampR\tcreatedAt\"\xa0\x02\n" +
+	"created_at\x18\t \x01(\v2\x15.Ydb.VirtualTimestampR\tcreatedAt\"\xcf\x02\n" +
 	"\x04Type\x12\x14\n" +
 	"\x10TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tDIRECTORY\x10\x01\x12\t\n" +
@@ -1824,7 +1683,10 @@ const file_protos_ydb_scheme_proto_rawDesc = "" +
 	"\x05TOPIC\x10\x11\x12\x12\n" +
 	"\x0eEXTERNAL_TABLE\x10\x12\x12\x18\n" +
 	"\x14EXTERNAL_DATA_SOURCE\x10\x13\x12\b\n" +
-	"\x04VIEW\x10\x14\"k\n" +
+	"\x04VIEW\x10\x14\x12\x11\n" +
+	"\rRESOURCE_POOL\x10\x15\x12\f\n" +
+	"\bTRANSFER\x10\x17\x12\f\n" +
+	"\bSYS_VIEW\x10\x18\"k\n" +
 	"\x13ListDirectoryResult\x12%\n" +
 	"\x04self\x18\x01 \x01(\v2\x11.Ydb.Scheme.EntryR\x04self\x12-\n" +
 	"\bchildren\x18\x02 \x03(\v2\x11.Ydb.Scheme.EntryR\bchildren\"u\n" +
@@ -1849,8 +1711,8 @@ const file_protos_ydb_scheme_proto_rawDesc = "" +
 	"\x15interrupt_inheritance\x18\x05 \x01(\bH\x00R\x14interruptInheritanceB\r\n" +
 	"\vinheritance\"T\n" +
 	"\x19ModifyPermissionsResponse\x127\n" +
-	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperationBt\n" +
-	"\x15tech.ydb.proto.schemeB\x15SchemeOperationProtosZ9github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Scheme\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperationBl\n" +
+	"\x15tech.ydb.proto.schemeB\x15SchemeOperationProtosZ9github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Scheme\xf8\x01\x01b\x06proto3"
 
 var file_protos_ydb_scheme_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_protos_ydb_scheme_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
@@ -1910,13 +1772,13 @@ func file_protos_ydb_scheme_proto_init() {
 		return
 	}
 	file_protos_ydb_scheme_proto_msgTypes[12].OneofWrappers = []any{
-		(*PermissionsAction_Grant)(nil),
-		(*PermissionsAction_Revoke)(nil),
-		(*PermissionsAction_Set)(nil),
-		(*PermissionsAction_ChangeOwner)(nil),
+		(*permissionsAction_Grant)(nil),
+		(*permissionsAction_Revoke)(nil),
+		(*permissionsAction_Set)(nil),
+		(*permissionsAction_ChangeOwner)(nil),
 	}
 	file_protos_ydb_scheme_proto_msgTypes[13].OneofWrappers = []any{
-		(*ModifyPermissionsRequest_InterruptInheritance)(nil),
+		(*modifyPermissionsRequest_InterruptInheritance)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

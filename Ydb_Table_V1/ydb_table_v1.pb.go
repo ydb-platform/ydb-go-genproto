@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: ydb_table_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_Table_V1
 
 import (
 	Ydb_Table "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Table"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,7 +25,7 @@ var File_ydb_table_v1_proto protoreflect.FileDescriptor
 
 const file_ydb_table_v1_proto_rawDesc = "" +
 	"\n" +
-	"\x12ydb_table_v1.proto\x12\fYdb.Table.V1\x1a\x16protos/ydb_table.proto\x1a!google/protobuf/go_features.proto2\xe9\x0e\n" +
+	"\x12ydb_table_v1.proto\x12\fYdb.Table.V1\x1a\x16protos/ydb_table.proto2\xb3\x11\n" +
 	"\fTableService\x12R\n" +
 	"\rCreateSession\x12\x1f.Ydb.Table.CreateSessionRequest\x1a .Ydb.Table.CreateSessionResponse\x12R\n" +
 	"\rDeleteSession\x12\x1f.Ydb.Table.DeleteSessionRequest\x1a .Ydb.Table.DeleteSessionResponse\x12F\n" +
@@ -54,54 +51,63 @@ const file_ydb_table_v1_proto_rawDesc = "" +
 	"\bReadRows\x12\x1a.Ydb.Table.ReadRowsRequest\x1a\x1b.Ydb.Table.ReadRowsResponse\x12I\n" +
 	"\n" +
 	"BulkUpsert\x12\x1c.Ydb.Table.BulkUpsertRequest\x1a\x1d.Ydb.Table.BulkUpsertResponse\x12j\n" +
-	"\x16StreamExecuteScanQuery\x12\".Ydb.Table.ExecuteScanQueryRequest\x1a*.Ydb.Table.ExecuteScanQueryPartialResponse0\x01BW\n" +
-	"\x17tech.ydb.proto.table.v1Z4github.com/ydb-platform/ydb-go-genproto/Ydb_Table_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x16StreamExecuteScanQuery\x12\".Ydb.Table.ExecuteScanQueryRequest\x1a*.Ydb.Table.ExecuteScanQueryPartialResponse0\x01\x12y\n" +
+	"\x1aDescribeExternalDataSource\x12,.Ydb.Table.DescribeExternalDataSourceRequest\x1a-.Ydb.Table.DescribeExternalDataSourceResponse\x12j\n" +
+	"\x15DescribeExternalTable\x12'.Ydb.Table.DescribeExternalTableRequest\x1a(.Ydb.Table.DescribeExternalTableResponse\x12a\n" +
+	"\x12DescribeSystemView\x12$.Ydb.Table.DescribeSystemViewRequest\x1a%.Ydb.Table.DescribeSystemViewResponseBO\n" +
+	"\x17tech.ydb.proto.table.v1Z4github.com/ydb-platform/ydb-go-genproto/Ydb_Table_V1b\x06proto3"
 
 var file_ydb_table_v1_proto_goTypes = []any{
-	(*Ydb_Table.CreateSessionRequest)(nil),            // 0: Ydb.Table.CreateSessionRequest
-	(*Ydb_Table.DeleteSessionRequest)(nil),            // 1: Ydb.Table.DeleteSessionRequest
-	(*Ydb_Table.KeepAliveRequest)(nil),                // 2: Ydb.Table.KeepAliveRequest
-	(*Ydb_Table.CreateTableRequest)(nil),              // 3: Ydb.Table.CreateTableRequest
-	(*Ydb_Table.DropTableRequest)(nil),                // 4: Ydb.Table.DropTableRequest
-	(*Ydb_Table.AlterTableRequest)(nil),               // 5: Ydb.Table.AlterTableRequest
-	(*Ydb_Table.CopyTableRequest)(nil),                // 6: Ydb.Table.CopyTableRequest
-	(*Ydb_Table.CopyTablesRequest)(nil),               // 7: Ydb.Table.CopyTablesRequest
-	(*Ydb_Table.RenameTablesRequest)(nil),             // 8: Ydb.Table.RenameTablesRequest
-	(*Ydb_Table.DescribeTableRequest)(nil),            // 9: Ydb.Table.DescribeTableRequest
-	(*Ydb_Table.ExplainDataQueryRequest)(nil),         // 10: Ydb.Table.ExplainDataQueryRequest
-	(*Ydb_Table.PrepareDataQueryRequest)(nil),         // 11: Ydb.Table.PrepareDataQueryRequest
-	(*Ydb_Table.ExecuteDataQueryRequest)(nil),         // 12: Ydb.Table.ExecuteDataQueryRequest
-	(*Ydb_Table.ExecuteSchemeQueryRequest)(nil),       // 13: Ydb.Table.ExecuteSchemeQueryRequest
-	(*Ydb_Table.BeginTransactionRequest)(nil),         // 14: Ydb.Table.BeginTransactionRequest
-	(*Ydb_Table.CommitTransactionRequest)(nil),        // 15: Ydb.Table.CommitTransactionRequest
-	(*Ydb_Table.RollbackTransactionRequest)(nil),      // 16: Ydb.Table.RollbackTransactionRequest
-	(*Ydb_Table.DescribeTableOptionsRequest)(nil),     // 17: Ydb.Table.DescribeTableOptionsRequest
-	(*Ydb_Table.ReadTableRequest)(nil),                // 18: Ydb.Table.ReadTableRequest
-	(*Ydb_Table.ReadRowsRequest)(nil),                 // 19: Ydb.Table.ReadRowsRequest
-	(*Ydb_Table.BulkUpsertRequest)(nil),               // 20: Ydb.Table.BulkUpsertRequest
-	(*Ydb_Table.ExecuteScanQueryRequest)(nil),         // 21: Ydb.Table.ExecuteScanQueryRequest
-	(*Ydb_Table.CreateSessionResponse)(nil),           // 22: Ydb.Table.CreateSessionResponse
-	(*Ydb_Table.DeleteSessionResponse)(nil),           // 23: Ydb.Table.DeleteSessionResponse
-	(*Ydb_Table.KeepAliveResponse)(nil),               // 24: Ydb.Table.KeepAliveResponse
-	(*Ydb_Table.CreateTableResponse)(nil),             // 25: Ydb.Table.CreateTableResponse
-	(*Ydb_Table.DropTableResponse)(nil),               // 26: Ydb.Table.DropTableResponse
-	(*Ydb_Table.AlterTableResponse)(nil),              // 27: Ydb.Table.AlterTableResponse
-	(*Ydb_Table.CopyTableResponse)(nil),               // 28: Ydb.Table.CopyTableResponse
-	(*Ydb_Table.CopyTablesResponse)(nil),              // 29: Ydb.Table.CopyTablesResponse
-	(*Ydb_Table.RenameTablesResponse)(nil),            // 30: Ydb.Table.RenameTablesResponse
-	(*Ydb_Table.DescribeTableResponse)(nil),           // 31: Ydb.Table.DescribeTableResponse
-	(*Ydb_Table.ExplainDataQueryResponse)(nil),        // 32: Ydb.Table.ExplainDataQueryResponse
-	(*Ydb_Table.PrepareDataQueryResponse)(nil),        // 33: Ydb.Table.PrepareDataQueryResponse
-	(*Ydb_Table.ExecuteDataQueryResponse)(nil),        // 34: Ydb.Table.ExecuteDataQueryResponse
-	(*Ydb_Table.ExecuteSchemeQueryResponse)(nil),      // 35: Ydb.Table.ExecuteSchemeQueryResponse
-	(*Ydb_Table.BeginTransactionResponse)(nil),        // 36: Ydb.Table.BeginTransactionResponse
-	(*Ydb_Table.CommitTransactionResponse)(nil),       // 37: Ydb.Table.CommitTransactionResponse
-	(*Ydb_Table.RollbackTransactionResponse)(nil),     // 38: Ydb.Table.RollbackTransactionResponse
-	(*Ydb_Table.DescribeTableOptionsResponse)(nil),    // 39: Ydb.Table.DescribeTableOptionsResponse
-	(*Ydb_Table.ReadTableResponse)(nil),               // 40: Ydb.Table.ReadTableResponse
-	(*Ydb_Table.ReadRowsResponse)(nil),                // 41: Ydb.Table.ReadRowsResponse
-	(*Ydb_Table.BulkUpsertResponse)(nil),              // 42: Ydb.Table.BulkUpsertResponse
-	(*Ydb_Table.ExecuteScanQueryPartialResponse)(nil), // 43: Ydb.Table.ExecuteScanQueryPartialResponse
+	(*Ydb_Table.CreateSessionRequest)(nil),               // 0: Ydb.Table.CreateSessionRequest
+	(*Ydb_Table.DeleteSessionRequest)(nil),               // 1: Ydb.Table.DeleteSessionRequest
+	(*Ydb_Table.KeepAliveRequest)(nil),                   // 2: Ydb.Table.KeepAliveRequest
+	(*Ydb_Table.CreateTableRequest)(nil),                 // 3: Ydb.Table.CreateTableRequest
+	(*Ydb_Table.DropTableRequest)(nil),                   // 4: Ydb.Table.DropTableRequest
+	(*Ydb_Table.AlterTableRequest)(nil),                  // 5: Ydb.Table.AlterTableRequest
+	(*Ydb_Table.CopyTableRequest)(nil),                   // 6: Ydb.Table.CopyTableRequest
+	(*Ydb_Table.CopyTablesRequest)(nil),                  // 7: Ydb.Table.CopyTablesRequest
+	(*Ydb_Table.RenameTablesRequest)(nil),                // 8: Ydb.Table.RenameTablesRequest
+	(*Ydb_Table.DescribeTableRequest)(nil),               // 9: Ydb.Table.DescribeTableRequest
+	(*Ydb_Table.ExplainDataQueryRequest)(nil),            // 10: Ydb.Table.ExplainDataQueryRequest
+	(*Ydb_Table.PrepareDataQueryRequest)(nil),            // 11: Ydb.Table.PrepareDataQueryRequest
+	(*Ydb_Table.ExecuteDataQueryRequest)(nil),            // 12: Ydb.Table.ExecuteDataQueryRequest
+	(*Ydb_Table.ExecuteSchemeQueryRequest)(nil),          // 13: Ydb.Table.ExecuteSchemeQueryRequest
+	(*Ydb_Table.BeginTransactionRequest)(nil),            // 14: Ydb.Table.BeginTransactionRequest
+	(*Ydb_Table.CommitTransactionRequest)(nil),           // 15: Ydb.Table.CommitTransactionRequest
+	(*Ydb_Table.RollbackTransactionRequest)(nil),         // 16: Ydb.Table.RollbackTransactionRequest
+	(*Ydb_Table.DescribeTableOptionsRequest)(nil),        // 17: Ydb.Table.DescribeTableOptionsRequest
+	(*Ydb_Table.ReadTableRequest)(nil),                   // 18: Ydb.Table.ReadTableRequest
+	(*Ydb_Table.ReadRowsRequest)(nil),                    // 19: Ydb.Table.ReadRowsRequest
+	(*Ydb_Table.BulkUpsertRequest)(nil),                  // 20: Ydb.Table.BulkUpsertRequest
+	(*Ydb_Table.ExecuteScanQueryRequest)(nil),            // 21: Ydb.Table.ExecuteScanQueryRequest
+	(*Ydb_Table.DescribeExternalDataSourceRequest)(nil),  // 22: Ydb.Table.DescribeExternalDataSourceRequest
+	(*Ydb_Table.DescribeExternalTableRequest)(nil),       // 23: Ydb.Table.DescribeExternalTableRequest
+	(*Ydb_Table.DescribeSystemViewRequest)(nil),          // 24: Ydb.Table.DescribeSystemViewRequest
+	(*Ydb_Table.CreateSessionResponse)(nil),              // 25: Ydb.Table.CreateSessionResponse
+	(*Ydb_Table.DeleteSessionResponse)(nil),              // 26: Ydb.Table.DeleteSessionResponse
+	(*Ydb_Table.KeepAliveResponse)(nil),                  // 27: Ydb.Table.KeepAliveResponse
+	(*Ydb_Table.CreateTableResponse)(nil),                // 28: Ydb.Table.CreateTableResponse
+	(*Ydb_Table.DropTableResponse)(nil),                  // 29: Ydb.Table.DropTableResponse
+	(*Ydb_Table.AlterTableResponse)(nil),                 // 30: Ydb.Table.AlterTableResponse
+	(*Ydb_Table.CopyTableResponse)(nil),                  // 31: Ydb.Table.CopyTableResponse
+	(*Ydb_Table.CopyTablesResponse)(nil),                 // 32: Ydb.Table.CopyTablesResponse
+	(*Ydb_Table.RenameTablesResponse)(nil),               // 33: Ydb.Table.RenameTablesResponse
+	(*Ydb_Table.DescribeTableResponse)(nil),              // 34: Ydb.Table.DescribeTableResponse
+	(*Ydb_Table.ExplainDataQueryResponse)(nil),           // 35: Ydb.Table.ExplainDataQueryResponse
+	(*Ydb_Table.PrepareDataQueryResponse)(nil),           // 36: Ydb.Table.PrepareDataQueryResponse
+	(*Ydb_Table.ExecuteDataQueryResponse)(nil),           // 37: Ydb.Table.ExecuteDataQueryResponse
+	(*Ydb_Table.ExecuteSchemeQueryResponse)(nil),         // 38: Ydb.Table.ExecuteSchemeQueryResponse
+	(*Ydb_Table.BeginTransactionResponse)(nil),           // 39: Ydb.Table.BeginTransactionResponse
+	(*Ydb_Table.CommitTransactionResponse)(nil),          // 40: Ydb.Table.CommitTransactionResponse
+	(*Ydb_Table.RollbackTransactionResponse)(nil),        // 41: Ydb.Table.RollbackTransactionResponse
+	(*Ydb_Table.DescribeTableOptionsResponse)(nil),       // 42: Ydb.Table.DescribeTableOptionsResponse
+	(*Ydb_Table.ReadTableResponse)(nil),                  // 43: Ydb.Table.ReadTableResponse
+	(*Ydb_Table.ReadRowsResponse)(nil),                   // 44: Ydb.Table.ReadRowsResponse
+	(*Ydb_Table.BulkUpsertResponse)(nil),                 // 45: Ydb.Table.BulkUpsertResponse
+	(*Ydb_Table.ExecuteScanQueryPartialResponse)(nil),    // 46: Ydb.Table.ExecuteScanQueryPartialResponse
+	(*Ydb_Table.DescribeExternalDataSourceResponse)(nil), // 47: Ydb.Table.DescribeExternalDataSourceResponse
+	(*Ydb_Table.DescribeExternalTableResponse)(nil),      // 48: Ydb.Table.DescribeExternalTableResponse
+	(*Ydb_Table.DescribeSystemViewResponse)(nil),         // 49: Ydb.Table.DescribeSystemViewResponse
 }
 var file_ydb_table_v1_proto_depIdxs = []int32{
 	0,  // 0: Ydb.Table.V1.TableService.CreateSession:input_type -> Ydb.Table.CreateSessionRequest
@@ -126,30 +132,36 @@ var file_ydb_table_v1_proto_depIdxs = []int32{
 	19, // 19: Ydb.Table.V1.TableService.ReadRows:input_type -> Ydb.Table.ReadRowsRequest
 	20, // 20: Ydb.Table.V1.TableService.BulkUpsert:input_type -> Ydb.Table.BulkUpsertRequest
 	21, // 21: Ydb.Table.V1.TableService.StreamExecuteScanQuery:input_type -> Ydb.Table.ExecuteScanQueryRequest
-	22, // 22: Ydb.Table.V1.TableService.CreateSession:output_type -> Ydb.Table.CreateSessionResponse
-	23, // 23: Ydb.Table.V1.TableService.DeleteSession:output_type -> Ydb.Table.DeleteSessionResponse
-	24, // 24: Ydb.Table.V1.TableService.KeepAlive:output_type -> Ydb.Table.KeepAliveResponse
-	25, // 25: Ydb.Table.V1.TableService.CreateTable:output_type -> Ydb.Table.CreateTableResponse
-	26, // 26: Ydb.Table.V1.TableService.DropTable:output_type -> Ydb.Table.DropTableResponse
-	27, // 27: Ydb.Table.V1.TableService.AlterTable:output_type -> Ydb.Table.AlterTableResponse
-	28, // 28: Ydb.Table.V1.TableService.CopyTable:output_type -> Ydb.Table.CopyTableResponse
-	29, // 29: Ydb.Table.V1.TableService.CopyTables:output_type -> Ydb.Table.CopyTablesResponse
-	30, // 30: Ydb.Table.V1.TableService.RenameTables:output_type -> Ydb.Table.RenameTablesResponse
-	31, // 31: Ydb.Table.V1.TableService.DescribeTable:output_type -> Ydb.Table.DescribeTableResponse
-	32, // 32: Ydb.Table.V1.TableService.ExplainDataQuery:output_type -> Ydb.Table.ExplainDataQueryResponse
-	33, // 33: Ydb.Table.V1.TableService.PrepareDataQuery:output_type -> Ydb.Table.PrepareDataQueryResponse
-	34, // 34: Ydb.Table.V1.TableService.ExecuteDataQuery:output_type -> Ydb.Table.ExecuteDataQueryResponse
-	35, // 35: Ydb.Table.V1.TableService.ExecuteSchemeQuery:output_type -> Ydb.Table.ExecuteSchemeQueryResponse
-	36, // 36: Ydb.Table.V1.TableService.BeginTransaction:output_type -> Ydb.Table.BeginTransactionResponse
-	37, // 37: Ydb.Table.V1.TableService.CommitTransaction:output_type -> Ydb.Table.CommitTransactionResponse
-	38, // 38: Ydb.Table.V1.TableService.RollbackTransaction:output_type -> Ydb.Table.RollbackTransactionResponse
-	39, // 39: Ydb.Table.V1.TableService.DescribeTableOptions:output_type -> Ydb.Table.DescribeTableOptionsResponse
-	40, // 40: Ydb.Table.V1.TableService.StreamReadTable:output_type -> Ydb.Table.ReadTableResponse
-	41, // 41: Ydb.Table.V1.TableService.ReadRows:output_type -> Ydb.Table.ReadRowsResponse
-	42, // 42: Ydb.Table.V1.TableService.BulkUpsert:output_type -> Ydb.Table.BulkUpsertResponse
-	43, // 43: Ydb.Table.V1.TableService.StreamExecuteScanQuery:output_type -> Ydb.Table.ExecuteScanQueryPartialResponse
-	22, // [22:44] is the sub-list for method output_type
-	0,  // [0:22] is the sub-list for method input_type
+	22, // 22: Ydb.Table.V1.TableService.DescribeExternalDataSource:input_type -> Ydb.Table.DescribeExternalDataSourceRequest
+	23, // 23: Ydb.Table.V1.TableService.DescribeExternalTable:input_type -> Ydb.Table.DescribeExternalTableRequest
+	24, // 24: Ydb.Table.V1.TableService.DescribeSystemView:input_type -> Ydb.Table.DescribeSystemViewRequest
+	25, // 25: Ydb.Table.V1.TableService.CreateSession:output_type -> Ydb.Table.CreateSessionResponse
+	26, // 26: Ydb.Table.V1.TableService.DeleteSession:output_type -> Ydb.Table.DeleteSessionResponse
+	27, // 27: Ydb.Table.V1.TableService.KeepAlive:output_type -> Ydb.Table.KeepAliveResponse
+	28, // 28: Ydb.Table.V1.TableService.CreateTable:output_type -> Ydb.Table.CreateTableResponse
+	29, // 29: Ydb.Table.V1.TableService.DropTable:output_type -> Ydb.Table.DropTableResponse
+	30, // 30: Ydb.Table.V1.TableService.AlterTable:output_type -> Ydb.Table.AlterTableResponse
+	31, // 31: Ydb.Table.V1.TableService.CopyTable:output_type -> Ydb.Table.CopyTableResponse
+	32, // 32: Ydb.Table.V1.TableService.CopyTables:output_type -> Ydb.Table.CopyTablesResponse
+	33, // 33: Ydb.Table.V1.TableService.RenameTables:output_type -> Ydb.Table.RenameTablesResponse
+	34, // 34: Ydb.Table.V1.TableService.DescribeTable:output_type -> Ydb.Table.DescribeTableResponse
+	35, // 35: Ydb.Table.V1.TableService.ExplainDataQuery:output_type -> Ydb.Table.ExplainDataQueryResponse
+	36, // 36: Ydb.Table.V1.TableService.PrepareDataQuery:output_type -> Ydb.Table.PrepareDataQueryResponse
+	37, // 37: Ydb.Table.V1.TableService.ExecuteDataQuery:output_type -> Ydb.Table.ExecuteDataQueryResponse
+	38, // 38: Ydb.Table.V1.TableService.ExecuteSchemeQuery:output_type -> Ydb.Table.ExecuteSchemeQueryResponse
+	39, // 39: Ydb.Table.V1.TableService.BeginTransaction:output_type -> Ydb.Table.BeginTransactionResponse
+	40, // 40: Ydb.Table.V1.TableService.CommitTransaction:output_type -> Ydb.Table.CommitTransactionResponse
+	41, // 41: Ydb.Table.V1.TableService.RollbackTransaction:output_type -> Ydb.Table.RollbackTransactionResponse
+	42, // 42: Ydb.Table.V1.TableService.DescribeTableOptions:output_type -> Ydb.Table.DescribeTableOptionsResponse
+	43, // 43: Ydb.Table.V1.TableService.StreamReadTable:output_type -> Ydb.Table.ReadTableResponse
+	44, // 44: Ydb.Table.V1.TableService.ReadRows:output_type -> Ydb.Table.ReadRowsResponse
+	45, // 45: Ydb.Table.V1.TableService.BulkUpsert:output_type -> Ydb.Table.BulkUpsertResponse
+	46, // 46: Ydb.Table.V1.TableService.StreamExecuteScanQuery:output_type -> Ydb.Table.ExecuteScanQueryPartialResponse
+	47, // 47: Ydb.Table.V1.TableService.DescribeExternalDataSource:output_type -> Ydb.Table.DescribeExternalDataSourceResponse
+	48, // 48: Ydb.Table.V1.TableService.DescribeExternalTable:output_type -> Ydb.Table.DescribeExternalTableResponse
+	49, // 49: Ydb.Table.V1.TableService.DescribeSystemView:output_type -> Ydb.Table.DescribeSystemViewResponse
+	25, // [25:50] is the sub-list for method output_type
+	0,  // [0:25] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name

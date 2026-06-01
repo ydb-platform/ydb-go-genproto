@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: draft/ydb_federated_query_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_FederatedQuery_V1
 
 import (
 	Ydb_FederatedQuery "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_FederatedQuery"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,7 +25,7 @@ var File_draft_ydb_federated_query_v1_proto protoreflect.FileDescriptor
 
 const file_draft_ydb_federated_query_v1_proto_rawDesc = "" +
 	"\n" +
-	"\"draft/ydb_federated_query_v1.proto\x12\x11FederatedQuery.V1\x1a&draft/protos/ydb_federated_query.proto\x1a!google/protobuf/go_features.proto2\xd6\x0f\n" +
+	"\"draft/ydb_federated_query_v1.proto\x12\x11FederatedQuery.V1\x1a&draft/protos/ydb_federated_query.proto2\xd6\x0f\n" +
 	"\x15FederatedQueryService\x12V\n" +
 	"\vCreateQuery\x12\".FederatedQuery.CreateQueryRequest\x1a#.FederatedQuery.CreateQueryResponse\x12V\n" +
 	"\vListQueries\x12\".FederatedQuery.ListQueriesRequest\x1a#.FederatedQuery.ListQueriesResponse\x12\\\n" +
@@ -50,8 +47,8 @@ const file_draft_ydb_federated_query_v1_proto_rawDesc = "" +
 	"\fListBindings\x12#.FederatedQuery.ListBindingsRequest\x1a$.FederatedQuery.ListBindingsResponse\x12b\n" +
 	"\x0fDescribeBinding\x12&.FederatedQuery.DescribeBindingRequest\x1a'.FederatedQuery.DescribeBindingResponse\x12\\\n" +
 	"\rModifyBinding\x12$.FederatedQuery.ModifyBindingRequest\x1a%.FederatedQuery.ModifyBindingResponse\x12\\\n" +
-	"\rDeleteBinding\x12$.FederatedQuery.DeleteBindingRequest\x1a%.FederatedQuery.DeleteBindingResponseBv\n" +
-	"'tech.ydb.proto.draft.federated.query.v1ZCgithub.com/ydb-platform/ydb-go-genproto/draft/Ydb_FederatedQuery_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\rDeleteBinding\x12$.FederatedQuery.DeleteBindingRequest\x1a%.FederatedQuery.DeleteBindingResponseBn\n" +
+	"'tech.ydb.proto.draft.federated.query.v1ZCgithub.com/ydb-platform/ydb-go-genproto/draft/Ydb_FederatedQuery_V1b\x06proto3"
 
 var file_draft_ydb_federated_query_v1_proto_goTypes = []any{
 	(*Ydb_FederatedQuery.CreateQueryRequest)(nil),         // 0: FederatedQuery.CreateQueryRequest

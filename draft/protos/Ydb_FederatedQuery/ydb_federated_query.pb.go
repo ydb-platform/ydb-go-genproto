@@ -4,8 +4,6 @@
 // 	protoc        v6.30.2
 // source: draft/protos/ydb_federated_query.proto
 
-//go:build !protoopaque
-
 package Ydb_FederatedQuery
 
 import (
@@ -14,7 +12,6 @@ import (
 	Ydb_Operations "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -445,18 +442,26 @@ const (
 	ConnectionSetting_OBJECT_STORAGE              ConnectionSetting_ConnectionType = 4
 	ConnectionSetting_MONITORING                  ConnectionSetting_ConnectionType = 5
 	ConnectionSetting_POSTGRESQL_CLUSTER          ConnectionSetting_ConnectionType = 6
+	ConnectionSetting_GREENPLUM_CLUSTER           ConnectionSetting_ConnectionType = 7
+	ConnectionSetting_MYSQL_CLUSTER               ConnectionSetting_ConnectionType = 8
+	ConnectionSetting_LOGGING                     ConnectionSetting_ConnectionType = 9
+	ConnectionSetting_ICEBERG                     ConnectionSetting_ConnectionType = 10
 )
 
 // Enum value maps for ConnectionSetting_ConnectionType.
 var (
 	ConnectionSetting_ConnectionType_name = map[int32]string{
-		0: "CONNECTION_TYPE_UNSPECIFIED",
-		1: "YDB_DATABASE",
-		2: "CLICKHOUSE_CLUSTER",
-		3: "DATA_STREAMS",
-		4: "OBJECT_STORAGE",
-		5: "MONITORING",
-		6: "POSTGRESQL_CLUSTER",
+		0:  "CONNECTION_TYPE_UNSPECIFIED",
+		1:  "YDB_DATABASE",
+		2:  "CLICKHOUSE_CLUSTER",
+		3:  "DATA_STREAMS",
+		4:  "OBJECT_STORAGE",
+		5:  "MONITORING",
+		6:  "POSTGRESQL_CLUSTER",
+		7:  "GREENPLUM_CLUSTER",
+		8:  "MYSQL_CLUSTER",
+		9:  "LOGGING",
+		10: "ICEBERG",
 	}
 	ConnectionSetting_ConnectionType_value = map[string]int32{
 		"CONNECTION_TYPE_UNSPECIFIED": 0,
@@ -466,6 +471,10 @@ var (
 		"OBJECT_STORAGE":              4,
 		"MONITORING":                  5,
 		"POSTGRESQL_CLUSTER":          6,
+		"GREENPLUM_CLUSTER":           7,
+		"MYSQL_CLUSTER":               8,
+		"LOGGING":                     9,
+		"ICEBERG":                     10,
 	}
 )
 
@@ -536,10 +545,10 @@ func (x BindingSetting_BindingType) Number() protoreflect.EnumNumber {
 }
 
 type Acl struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Visibility    *Acl_Visibility        `protobuf:"varint,1,opt,name=visibility,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Visibility Acl_Visibility         `protobuf:"varint,1,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Acl) Reset() {
@@ -568,59 +577,42 @@ func (x *Acl) ProtoReflect() protoreflect.Message {
 }
 
 func (x *Acl) GetVisibility() Acl_Visibility {
-	if x != nil && x.Visibility != nil {
-		return *x.Visibility
+	if x != nil {
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
 func (x *Acl) SetVisibility(v Acl_Visibility) {
-	x.Visibility = &v
-}
-
-func (x *Acl) HasVisibility() bool {
-	if x == nil {
-		return false
-	}
-	return x.Visibility != nil
-}
-
-func (x *Acl) ClearVisibility() {
-	x.Visibility = nil
+	x.xxx_hidden_Visibility = v
 }
 
 type Acl_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Visibility *Acl_Visibility
+	Visibility Acl_Visibility
 }
 
 func (b0 Acl_builder) Build() *Acl {
 	m0 := &Acl{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Visibility = b.Visibility
+	x.xxx_hidden_Visibility = b.Visibility
 	return m0
 }
 
 type Limits struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	VcpuRateLimit *int64                 `protobuf:"varint,1,opt,name=vcpu_rate_limit,json=vcpuRateLimit" json:"vcpu_rate_limit,omitempty"` // 0.01 vcpu per second
-	FlowRateLimit *int64                 `protobuf:"varint,2,opt,name=flow_rate_limit,json=flowRateLimit" json:"flow_rate_limit,omitempty"` // Bytes per second
-	VcpuTimeLimit *int64                 `protobuf:"varint,3,opt,name=vcpu_time_limit,json=vcpuTimeLimit" json:"vcpu_time_limit,omitempty"` // Milliseconds per second
-	// Used only for analytics queries
-	MaxResultSize *int64 `protobuf:"varint,4,opt,name=max_result_size,json=maxResultSize" json:"max_result_size,omitempty"` // Bytes
-	MaxResultRows *int64 `protobuf:"varint,5,opt,name=max_result_rows,json=maxResultRows" json:"max_result_rows,omitempty"` // Count
-	// Common limits
-	MemoryLimit *int64               `protobuf:"varint,6,opt,name=memory_limit,json=memoryLimit" json:"memory_limit,omitempty"` // Bytes
-	ResultTtl   *durationpb.Duration `protobuf:"bytes,7,opt,name=result_ttl,json=resultTtl" json:"result_ttl,omitempty"`
-	// Types that are valid to be assigned to Timeout:
-	//
-	//	*Limits_ExecutionTimeout
-	//	*Limits_ExecutionDeadline
-	Timeout       isLimits_Timeout `protobuf_oneof:"timeout"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_VcpuRateLimit int64                  `protobuf:"varint,1,opt,name=vcpu_rate_limit,json=vcpuRateLimit,proto3"`
+	xxx_hidden_FlowRateLimit int64                  `protobuf:"varint,2,opt,name=flow_rate_limit,json=flowRateLimit,proto3"`
+	xxx_hidden_VcpuTimeLimit int64                  `protobuf:"varint,3,opt,name=vcpu_time_limit,json=vcpuTimeLimit,proto3"`
+	xxx_hidden_MaxResultSize int64                  `protobuf:"varint,4,opt,name=max_result_size,json=maxResultSize,proto3"`
+	xxx_hidden_MaxResultRows int64                  `protobuf:"varint,5,opt,name=max_result_rows,json=maxResultRows,proto3"`
+	xxx_hidden_MemoryLimit   int64                  `protobuf:"varint,6,opt,name=memory_limit,json=memoryLimit,proto3"`
+	xxx_hidden_ResultTtl     *durationpb.Duration   `protobuf:"bytes,7,opt,name=result_ttl,json=resultTtl,proto3"`
+	xxx_hidden_Timeout       isLimits_Timeout       `protobuf_oneof:"timeout"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *Limits) Reset() {
@@ -649,64 +641,57 @@ func (x *Limits) ProtoReflect() protoreflect.Message {
 }
 
 func (x *Limits) GetVcpuRateLimit() int64 {
-	if x != nil && x.VcpuRateLimit != nil {
-		return *x.VcpuRateLimit
+	if x != nil {
+		return x.xxx_hidden_VcpuRateLimit
 	}
 	return 0
 }
 
 func (x *Limits) GetFlowRateLimit() int64 {
-	if x != nil && x.FlowRateLimit != nil {
-		return *x.FlowRateLimit
+	if x != nil {
+		return x.xxx_hidden_FlowRateLimit
 	}
 	return 0
 }
 
 func (x *Limits) GetVcpuTimeLimit() int64 {
-	if x != nil && x.VcpuTimeLimit != nil {
-		return *x.VcpuTimeLimit
+	if x != nil {
+		return x.xxx_hidden_VcpuTimeLimit
 	}
 	return 0
 }
 
 func (x *Limits) GetMaxResultSize() int64 {
-	if x != nil && x.MaxResultSize != nil {
-		return *x.MaxResultSize
+	if x != nil {
+		return x.xxx_hidden_MaxResultSize
 	}
 	return 0
 }
 
 func (x *Limits) GetMaxResultRows() int64 {
-	if x != nil && x.MaxResultRows != nil {
-		return *x.MaxResultRows
+	if x != nil {
+		return x.xxx_hidden_MaxResultRows
 	}
 	return 0
 }
 
 func (x *Limits) GetMemoryLimit() int64 {
-	if x != nil && x.MemoryLimit != nil {
-		return *x.MemoryLimit
+	if x != nil {
+		return x.xxx_hidden_MemoryLimit
 	}
 	return 0
 }
 
 func (x *Limits) GetResultTtl() *durationpb.Duration {
 	if x != nil {
-		return x.ResultTtl
-	}
-	return nil
-}
-
-func (x *Limits) GetTimeout() isLimits_Timeout {
-	if x != nil {
-		return x.Timeout
+		return x.xxx_hidden_ResultTtl
 	}
 	return nil
 }
 
 func (x *Limits) GetExecutionTimeout() *durationpb.Duration {
 	if x != nil {
-		if x, ok := x.Timeout.(*Limits_ExecutionTimeout); ok {
+		if x, ok := x.xxx_hidden_Timeout.(*limits_ExecutionTimeout); ok {
 			return x.ExecutionTimeout
 		}
 	}
@@ -715,7 +700,7 @@ func (x *Limits) GetExecutionTimeout() *durationpb.Duration {
 
 func (x *Limits) GetExecutionDeadline() *timestamppb.Timestamp {
 	if x != nil {
-		if x, ok := x.Timeout.(*Limits_ExecutionDeadline); ok {
+		if x, ok := x.xxx_hidden_Timeout.(*limits_ExecutionDeadline); ok {
 			return x.ExecutionDeadline
 		}
 	}
@@ -723,110 +708,68 @@ func (x *Limits) GetExecutionDeadline() *timestamppb.Timestamp {
 }
 
 func (x *Limits) SetVcpuRateLimit(v int64) {
-	x.VcpuRateLimit = &v
+	x.xxx_hidden_VcpuRateLimit = v
 }
 
 func (x *Limits) SetFlowRateLimit(v int64) {
-	x.FlowRateLimit = &v
+	x.xxx_hidden_FlowRateLimit = v
 }
 
 func (x *Limits) SetVcpuTimeLimit(v int64) {
-	x.VcpuTimeLimit = &v
+	x.xxx_hidden_VcpuTimeLimit = v
 }
 
 func (x *Limits) SetMaxResultSize(v int64) {
-	x.MaxResultSize = &v
+	x.xxx_hidden_MaxResultSize = v
 }
 
 func (x *Limits) SetMaxResultRows(v int64) {
-	x.MaxResultRows = &v
+	x.xxx_hidden_MaxResultRows = v
 }
 
 func (x *Limits) SetMemoryLimit(v int64) {
-	x.MemoryLimit = &v
+	x.xxx_hidden_MemoryLimit = v
 }
 
 func (x *Limits) SetResultTtl(v *durationpb.Duration) {
-	x.ResultTtl = v
+	x.xxx_hidden_ResultTtl = v
 }
 
 func (x *Limits) SetExecutionTimeout(v *durationpb.Duration) {
 	if v == nil {
-		x.Timeout = nil
+		x.xxx_hidden_Timeout = nil
 		return
 	}
-	x.Timeout = &Limits_ExecutionTimeout{v}
+	x.xxx_hidden_Timeout = &limits_ExecutionTimeout{v}
 }
 
 func (x *Limits) SetExecutionDeadline(v *timestamppb.Timestamp) {
 	if v == nil {
-		x.Timeout = nil
+		x.xxx_hidden_Timeout = nil
 		return
 	}
-	x.Timeout = &Limits_ExecutionDeadline{v}
-}
-
-func (x *Limits) HasVcpuRateLimit() bool {
-	if x == nil {
-		return false
-	}
-	return x.VcpuRateLimit != nil
-}
-
-func (x *Limits) HasFlowRateLimit() bool {
-	if x == nil {
-		return false
-	}
-	return x.FlowRateLimit != nil
-}
-
-func (x *Limits) HasVcpuTimeLimit() bool {
-	if x == nil {
-		return false
-	}
-	return x.VcpuTimeLimit != nil
-}
-
-func (x *Limits) HasMaxResultSize() bool {
-	if x == nil {
-		return false
-	}
-	return x.MaxResultSize != nil
-}
-
-func (x *Limits) HasMaxResultRows() bool {
-	if x == nil {
-		return false
-	}
-	return x.MaxResultRows != nil
-}
-
-func (x *Limits) HasMemoryLimit() bool {
-	if x == nil {
-		return false
-	}
-	return x.MemoryLimit != nil
+	x.xxx_hidden_Timeout = &limits_ExecutionDeadline{v}
 }
 
 func (x *Limits) HasResultTtl() bool {
 	if x == nil {
 		return false
 	}
-	return x.ResultTtl != nil
+	return x.xxx_hidden_ResultTtl != nil
 }
 
 func (x *Limits) HasTimeout() bool {
 	if x == nil {
 		return false
 	}
-	return x.Timeout != nil
+	return x.xxx_hidden_Timeout != nil
 }
 
 func (x *Limits) HasExecutionTimeout() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Timeout.(*Limits_ExecutionTimeout)
+	_, ok := x.xxx_hidden_Timeout.(*limits_ExecutionTimeout)
 	return ok
 }
 
@@ -834,51 +777,27 @@ func (x *Limits) HasExecutionDeadline() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Timeout.(*Limits_ExecutionDeadline)
+	_, ok := x.xxx_hidden_Timeout.(*limits_ExecutionDeadline)
 	return ok
 }
 
-func (x *Limits) ClearVcpuRateLimit() {
-	x.VcpuRateLimit = nil
-}
-
-func (x *Limits) ClearFlowRateLimit() {
-	x.FlowRateLimit = nil
-}
-
-func (x *Limits) ClearVcpuTimeLimit() {
-	x.VcpuTimeLimit = nil
-}
-
-func (x *Limits) ClearMaxResultSize() {
-	x.MaxResultSize = nil
-}
-
-func (x *Limits) ClearMaxResultRows() {
-	x.MaxResultRows = nil
-}
-
-func (x *Limits) ClearMemoryLimit() {
-	x.MemoryLimit = nil
-}
-
 func (x *Limits) ClearResultTtl() {
-	x.ResultTtl = nil
+	x.xxx_hidden_ResultTtl = nil
 }
 
 func (x *Limits) ClearTimeout() {
-	x.Timeout = nil
+	x.xxx_hidden_Timeout = nil
 }
 
 func (x *Limits) ClearExecutionTimeout() {
-	if _, ok := x.Timeout.(*Limits_ExecutionTimeout); ok {
-		x.Timeout = nil
+	if _, ok := x.xxx_hidden_Timeout.(*limits_ExecutionTimeout); ok {
+		x.xxx_hidden_Timeout = nil
 	}
 }
 
 func (x *Limits) ClearExecutionDeadline() {
-	if _, ok := x.Timeout.(*Limits_ExecutionDeadline); ok {
-		x.Timeout = nil
+	if _, ok := x.xxx_hidden_Timeout.(*limits_ExecutionDeadline); ok {
+		x.xxx_hidden_Timeout = nil
 	}
 }
 
@@ -890,10 +809,10 @@ func (x *Limits) WhichTimeout() case_Limits_Timeout {
 	if x == nil {
 		return Limits_Timeout_not_set_case
 	}
-	switch x.Timeout.(type) {
-	case *Limits_ExecutionTimeout:
+	switch x.xxx_hidden_Timeout.(type) {
+	case *limits_ExecutionTimeout:
 		return Limits_ExecutionTimeout_case
-	case *Limits_ExecutionDeadline:
+	case *limits_ExecutionDeadline:
 		return Limits_ExecutionDeadline_case
 	default:
 		return Limits_Timeout_not_set_case
@@ -903,37 +822,37 @@ func (x *Limits) WhichTimeout() case_Limits_Timeout {
 type Limits_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	VcpuRateLimit *int64
-	FlowRateLimit *int64
-	VcpuTimeLimit *int64
+	VcpuRateLimit int64
+	FlowRateLimit int64
+	VcpuTimeLimit int64
 	// Used only for analytics queries
-	MaxResultSize *int64
-	MaxResultRows *int64
+	MaxResultSize int64
+	MaxResultRows int64
 	// Common limits
-	MemoryLimit *int64
+	MemoryLimit int64
 	ResultTtl   *durationpb.Duration
-	// Fields of oneof Timeout:
+	// Fields of oneof xxx_hidden_Timeout:
 	ExecutionTimeout  *durationpb.Duration
 	ExecutionDeadline *timestamppb.Timestamp
-	// -- end of Timeout
+	// -- end of xxx_hidden_Timeout
 }
 
 func (b0 Limits_builder) Build() *Limits {
 	m0 := &Limits{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.VcpuRateLimit = b.VcpuRateLimit
-	x.FlowRateLimit = b.FlowRateLimit
-	x.VcpuTimeLimit = b.VcpuTimeLimit
-	x.MaxResultSize = b.MaxResultSize
-	x.MaxResultRows = b.MaxResultRows
-	x.MemoryLimit = b.MemoryLimit
-	x.ResultTtl = b.ResultTtl
+	x.xxx_hidden_VcpuRateLimit = b.VcpuRateLimit
+	x.xxx_hidden_FlowRateLimit = b.FlowRateLimit
+	x.xxx_hidden_VcpuTimeLimit = b.VcpuTimeLimit
+	x.xxx_hidden_MaxResultSize = b.MaxResultSize
+	x.xxx_hidden_MaxResultRows = b.MaxResultRows
+	x.xxx_hidden_MemoryLimit = b.MemoryLimit
+	x.xxx_hidden_ResultTtl = b.ResultTtl
 	if b.ExecutionTimeout != nil {
-		x.Timeout = &Limits_ExecutionTimeout{b.ExecutionTimeout}
+		x.xxx_hidden_Timeout = &limits_ExecutionTimeout{b.ExecutionTimeout}
 	}
 	if b.ExecutionDeadline != nil {
-		x.Timeout = &Limits_ExecutionDeadline{b.ExecutionDeadline}
+		x.xxx_hidden_Timeout = &limits_ExecutionDeadline{b.ExecutionDeadline}
 	}
 	return m0
 }
@@ -952,31 +871,24 @@ type isLimits_Timeout interface {
 	isLimits_Timeout()
 }
 
-type Limits_ExecutionTimeout struct {
-	ExecutionTimeout *durationpb.Duration `protobuf:"bytes,8,opt,name=execution_timeout,json=executionTimeout,oneof"`
+type limits_ExecutionTimeout struct {
+	ExecutionTimeout *durationpb.Duration `protobuf:"bytes,8,opt,name=execution_timeout,json=executionTimeout,proto3,oneof"`
 }
 
-type Limits_ExecutionDeadline struct {
-	ExecutionDeadline *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=execution_deadline,json=executionDeadline,oneof"`
+type limits_ExecutionDeadline struct {
+	ExecutionDeadline *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=execution_deadline,json=executionDeadline,proto3,oneof"`
 }
 
-func (*Limits_ExecutionTimeout) isLimits_Timeout() {}
+func (*limits_ExecutionTimeout) isLimits_Timeout() {}
 
-func (*Limits_ExecutionDeadline) isLimits_Timeout() {}
+func (*limits_ExecutionDeadline) isLimits_Timeout() {}
 
 // For streaming queries only
 type StreamingDisposition struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Types that are valid to be assigned to Disposition:
-	//
-	//	*StreamingDisposition_Oldest
-	//	*StreamingDisposition_Fresh
-	//	*StreamingDisposition_FromTime_
-	//	*StreamingDisposition_TimeAgo_
-	//	*StreamingDisposition_FromLastCheckpoint_
-	Disposition   isStreamingDisposition_Disposition `protobuf_oneof:"disposition"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState             `protogen:"opaque.v1"`
+	xxx_hidden_Disposition isStreamingDisposition_Disposition `protobuf_oneof:"disposition"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *StreamingDisposition) Reset() {
@@ -1004,16 +916,9 @@ func (x *StreamingDisposition) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *StreamingDisposition) GetDisposition() isStreamingDisposition_Disposition {
-	if x != nil {
-		return x.Disposition
-	}
-	return nil
-}
-
 func (x *StreamingDisposition) GetOldest() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.Disposition.(*StreamingDisposition_Oldest); ok {
+		if x, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Oldest); ok {
 			return x.Oldest
 		}
 	}
@@ -1022,7 +927,7 @@ func (x *StreamingDisposition) GetOldest() *emptypb.Empty {
 
 func (x *StreamingDisposition) GetFresh() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.Disposition.(*StreamingDisposition_Fresh); ok {
+		if x, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Fresh); ok {
 			return x.Fresh
 		}
 	}
@@ -1031,7 +936,7 @@ func (x *StreamingDisposition) GetFresh() *emptypb.Empty {
 
 func (x *StreamingDisposition) GetFromTime() *StreamingDisposition_FromTime {
 	if x != nil {
-		if x, ok := x.Disposition.(*StreamingDisposition_FromTime_); ok {
+		if x, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromTime_); ok {
 			return x.FromTime
 		}
 	}
@@ -1040,7 +945,7 @@ func (x *StreamingDisposition) GetFromTime() *StreamingDisposition_FromTime {
 
 func (x *StreamingDisposition) GetTimeAgo() *StreamingDisposition_TimeAgo {
 	if x != nil {
-		if x, ok := x.Disposition.(*StreamingDisposition_TimeAgo_); ok {
+		if x, ok := x.xxx_hidden_Disposition.(*streamingDisposition_TimeAgo_); ok {
 			return x.TimeAgo
 		}
 	}
@@ -1049,7 +954,7 @@ func (x *StreamingDisposition) GetTimeAgo() *StreamingDisposition_TimeAgo {
 
 func (x *StreamingDisposition) GetFromLastCheckpoint() *StreamingDisposition_FromLastCheckpoint {
 	if x != nil {
-		if x, ok := x.Disposition.(*StreamingDisposition_FromLastCheckpoint_); ok {
+		if x, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromLastCheckpoint_); ok {
 			return x.FromLastCheckpoint
 		}
 	}
@@ -1058,56 +963,56 @@ func (x *StreamingDisposition) GetFromLastCheckpoint() *StreamingDisposition_Fro
 
 func (x *StreamingDisposition) SetOldest(v *emptypb.Empty) {
 	if v == nil {
-		x.Disposition = nil
+		x.xxx_hidden_Disposition = nil
 		return
 	}
-	x.Disposition = &StreamingDisposition_Oldest{v}
+	x.xxx_hidden_Disposition = &streamingDisposition_Oldest{v}
 }
 
 func (x *StreamingDisposition) SetFresh(v *emptypb.Empty) {
 	if v == nil {
-		x.Disposition = nil
+		x.xxx_hidden_Disposition = nil
 		return
 	}
-	x.Disposition = &StreamingDisposition_Fresh{v}
+	x.xxx_hidden_Disposition = &streamingDisposition_Fresh{v}
 }
 
 func (x *StreamingDisposition) SetFromTime(v *StreamingDisposition_FromTime) {
 	if v == nil {
-		x.Disposition = nil
+		x.xxx_hidden_Disposition = nil
 		return
 	}
-	x.Disposition = &StreamingDisposition_FromTime_{v}
+	x.xxx_hidden_Disposition = &streamingDisposition_FromTime_{v}
 }
 
 func (x *StreamingDisposition) SetTimeAgo(v *StreamingDisposition_TimeAgo) {
 	if v == nil {
-		x.Disposition = nil
+		x.xxx_hidden_Disposition = nil
 		return
 	}
-	x.Disposition = &StreamingDisposition_TimeAgo_{v}
+	x.xxx_hidden_Disposition = &streamingDisposition_TimeAgo_{v}
 }
 
 func (x *StreamingDisposition) SetFromLastCheckpoint(v *StreamingDisposition_FromLastCheckpoint) {
 	if v == nil {
-		x.Disposition = nil
+		x.xxx_hidden_Disposition = nil
 		return
 	}
-	x.Disposition = &StreamingDisposition_FromLastCheckpoint_{v}
+	x.xxx_hidden_Disposition = &streamingDisposition_FromLastCheckpoint_{v}
 }
 
 func (x *StreamingDisposition) HasDisposition() bool {
 	if x == nil {
 		return false
 	}
-	return x.Disposition != nil
+	return x.xxx_hidden_Disposition != nil
 }
 
 func (x *StreamingDisposition) HasOldest() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Disposition.(*StreamingDisposition_Oldest)
+	_, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Oldest)
 	return ok
 }
 
@@ -1115,7 +1020,7 @@ func (x *StreamingDisposition) HasFresh() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Disposition.(*StreamingDisposition_Fresh)
+	_, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Fresh)
 	return ok
 }
 
@@ -1123,7 +1028,7 @@ func (x *StreamingDisposition) HasFromTime() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Disposition.(*StreamingDisposition_FromTime_)
+	_, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromTime_)
 	return ok
 }
 
@@ -1131,7 +1036,7 @@ func (x *StreamingDisposition) HasTimeAgo() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Disposition.(*StreamingDisposition_TimeAgo_)
+	_, ok := x.xxx_hidden_Disposition.(*streamingDisposition_TimeAgo_)
 	return ok
 }
 
@@ -1139,41 +1044,41 @@ func (x *StreamingDisposition) HasFromLastCheckpoint() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Disposition.(*StreamingDisposition_FromLastCheckpoint_)
+	_, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromLastCheckpoint_)
 	return ok
 }
 
 func (x *StreamingDisposition) ClearDisposition() {
-	x.Disposition = nil
+	x.xxx_hidden_Disposition = nil
 }
 
 func (x *StreamingDisposition) ClearOldest() {
-	if _, ok := x.Disposition.(*StreamingDisposition_Oldest); ok {
-		x.Disposition = nil
+	if _, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Oldest); ok {
+		x.xxx_hidden_Disposition = nil
 	}
 }
 
 func (x *StreamingDisposition) ClearFresh() {
-	if _, ok := x.Disposition.(*StreamingDisposition_Fresh); ok {
-		x.Disposition = nil
+	if _, ok := x.xxx_hidden_Disposition.(*streamingDisposition_Fresh); ok {
+		x.xxx_hidden_Disposition = nil
 	}
 }
 
 func (x *StreamingDisposition) ClearFromTime() {
-	if _, ok := x.Disposition.(*StreamingDisposition_FromTime_); ok {
-		x.Disposition = nil
+	if _, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromTime_); ok {
+		x.xxx_hidden_Disposition = nil
 	}
 }
 
 func (x *StreamingDisposition) ClearTimeAgo() {
-	if _, ok := x.Disposition.(*StreamingDisposition_TimeAgo_); ok {
-		x.Disposition = nil
+	if _, ok := x.xxx_hidden_Disposition.(*streamingDisposition_TimeAgo_); ok {
+		x.xxx_hidden_Disposition = nil
 	}
 }
 
 func (x *StreamingDisposition) ClearFromLastCheckpoint() {
-	if _, ok := x.Disposition.(*StreamingDisposition_FromLastCheckpoint_); ok {
-		x.Disposition = nil
+	if _, ok := x.xxx_hidden_Disposition.(*streamingDisposition_FromLastCheckpoint_); ok {
+		x.xxx_hidden_Disposition = nil
 	}
 }
 
@@ -1188,16 +1093,16 @@ func (x *StreamingDisposition) WhichDisposition() case_StreamingDisposition_Disp
 	if x == nil {
 		return StreamingDisposition_Disposition_not_set_case
 	}
-	switch x.Disposition.(type) {
-	case *StreamingDisposition_Oldest:
+	switch x.xxx_hidden_Disposition.(type) {
+	case *streamingDisposition_Oldest:
 		return StreamingDisposition_Oldest_case
-	case *StreamingDisposition_Fresh:
+	case *streamingDisposition_Fresh:
 		return StreamingDisposition_Fresh_case
-	case *StreamingDisposition_FromTime_:
+	case *streamingDisposition_FromTime_:
 		return StreamingDisposition_FromTime_case
-	case *StreamingDisposition_TimeAgo_:
+	case *streamingDisposition_TimeAgo_:
 		return StreamingDisposition_TimeAgo_case
-	case *StreamingDisposition_FromLastCheckpoint_:
+	case *streamingDisposition_FromLastCheckpoint_:
 		return StreamingDisposition_FromLastCheckpoint_case
 	default:
 		return StreamingDisposition_Disposition_not_set_case
@@ -1207,13 +1112,13 @@ func (x *StreamingDisposition) WhichDisposition() case_StreamingDisposition_Disp
 type StreamingDisposition_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof Disposition:
+	// Fields of oneof xxx_hidden_Disposition:
 	Oldest             *emptypb.Empty
 	Fresh              *emptypb.Empty
 	FromTime           *StreamingDisposition_FromTime
 	TimeAgo            *StreamingDisposition_TimeAgo
 	FromLastCheckpoint *StreamingDisposition_FromLastCheckpoint
-	// -- end of Disposition
+	// -- end of xxx_hidden_Disposition
 }
 
 func (b0 StreamingDisposition_builder) Build() *StreamingDisposition {
@@ -1221,19 +1126,19 @@ func (b0 StreamingDisposition_builder) Build() *StreamingDisposition {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Oldest != nil {
-		x.Disposition = &StreamingDisposition_Oldest{b.Oldest}
+		x.xxx_hidden_Disposition = &streamingDisposition_Oldest{b.Oldest}
 	}
 	if b.Fresh != nil {
-		x.Disposition = &StreamingDisposition_Fresh{b.Fresh}
+		x.xxx_hidden_Disposition = &streamingDisposition_Fresh{b.Fresh}
 	}
 	if b.FromTime != nil {
-		x.Disposition = &StreamingDisposition_FromTime_{b.FromTime}
+		x.xxx_hidden_Disposition = &streamingDisposition_FromTime_{b.FromTime}
 	}
 	if b.TimeAgo != nil {
-		x.Disposition = &StreamingDisposition_TimeAgo_{b.TimeAgo}
+		x.xxx_hidden_Disposition = &streamingDisposition_TimeAgo_{b.TimeAgo}
 	}
 	if b.FromLastCheckpoint != nil {
-		x.Disposition = &StreamingDisposition_FromLastCheckpoint_{b.FromLastCheckpoint}
+		x.xxx_hidden_Disposition = &streamingDisposition_FromLastCheckpoint_{b.FromLastCheckpoint}
 	}
 	return m0
 }
@@ -1252,55 +1157,51 @@ type isStreamingDisposition_Disposition interface {
 	isStreamingDisposition_Disposition()
 }
 
-type StreamingDisposition_Oldest struct {
-	Oldest *emptypb.Empty `protobuf:"bytes,1,opt,name=oldest,oneof"` // Start processing with the oldest offset
+type streamingDisposition_Oldest struct {
+	Oldest *emptypb.Empty `protobuf:"bytes,1,opt,name=oldest,proto3,oneof"` // Start processing with the oldest offset
 }
 
-type StreamingDisposition_Fresh struct {
-	Fresh *emptypb.Empty `protobuf:"bytes,2,opt,name=fresh,oneof"` // Start processing with the fresh offset
+type streamingDisposition_Fresh struct {
+	Fresh *emptypb.Empty `protobuf:"bytes,2,opt,name=fresh,proto3,oneof"` // Start processing with the fresh offset
 }
 
-type StreamingDisposition_FromTime_ struct {
-	FromTime *StreamingDisposition_FromTime `protobuf:"bytes,3,opt,name=from_time,json=fromTime,oneof"` // Start processing with offset from the specified time
+type streamingDisposition_FromTime_ struct {
+	FromTime *StreamingDisposition_FromTime `protobuf:"bytes,3,opt,name=from_time,json=fromTime,proto3,oneof"` // Start processing with offset from the specified time
 }
 
-type StreamingDisposition_TimeAgo_ struct {
-	TimeAgo *StreamingDisposition_TimeAgo `protobuf:"bytes,4,opt,name=time_ago,json=timeAgo,oneof"` // Start processing with offset some time ago
+type streamingDisposition_TimeAgo_ struct {
+	TimeAgo *StreamingDisposition_TimeAgo `protobuf:"bytes,4,opt,name=time_ago,json=timeAgo,proto3,oneof"` // Start processing with offset some time ago
 }
 
-type StreamingDisposition_FromLastCheckpoint_ struct {
-	FromLastCheckpoint *StreamingDisposition_FromLastCheckpoint `protobuf:"bytes,5,opt,name=from_last_checkpoint,json=fromLastCheckpoint,oneof"` // Start processing with offset which corresponds to the last checkpoint
+type streamingDisposition_FromLastCheckpoint_ struct {
+	FromLastCheckpoint *StreamingDisposition_FromLastCheckpoint `protobuf:"bytes,5,opt,name=from_last_checkpoint,json=fromLastCheckpoint,proto3,oneof"` // Start processing with offset which corresponds to the last checkpoint
 }
 
-func (*StreamingDisposition_Oldest) isStreamingDisposition_Disposition() {}
+func (*streamingDisposition_Oldest) isStreamingDisposition_Disposition() {}
 
-func (*StreamingDisposition_Fresh) isStreamingDisposition_Disposition() {}
+func (*streamingDisposition_Fresh) isStreamingDisposition_Disposition() {}
 
-func (*StreamingDisposition_FromTime_) isStreamingDisposition_Disposition() {}
+func (*streamingDisposition_FromTime_) isStreamingDisposition_Disposition() {}
 
-func (*StreamingDisposition_TimeAgo_) isStreamingDisposition_Disposition() {}
+func (*streamingDisposition_TimeAgo_) isStreamingDisposition_Disposition() {}
 
-func (*StreamingDisposition_FromLastCheckpoint_) isStreamingDisposition_Disposition() {}
+func (*streamingDisposition_FromLastCheckpoint_) isStreamingDisposition_Disposition() {}
 
 // Query information that the subject can change
 type QueryContent struct {
-	state       protoimpl.MessageState  `protogen:"hybrid.v1"`
-	Type        *QueryContent_QueryType `protobuf:"varint,1,opt,name=type,enum=FederatedQuery.QueryContent_QueryType" json:"type,omitempty"`
-	Name        *string                 `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Acl         *Acl                    `protobuf:"bytes,3,opt,name=acl" json:"acl,omitempty"`
-	Limits      *Limits                 `protobuf:"bytes,4,opt,name=limits" json:"limits,omitempty"`
-	Text        *string                 `protobuf:"bytes,5,opt,name=text" json:"text,omitempty"`               // The text of the query itself
-	Automatic   *bool                   `protobuf:"varint,6,opt,name=automatic" json:"automatic,omitempty"`    // Is used for queries that are created by automatic systems (robots, jdbc driver, ...)
-	Description *string                 `protobuf:"bytes,7,opt,name=description" json:"description,omitempty"` // Description of the query, there can be any text
-	// Specified settings for query's executor
-	// Well known settings are:
-	// "executor" - type of executor for this query
-	ExecutionSettings map[string]string `protobuf:"bytes,10,rep,name=execution_settings,json=executionSettings" json:"execution_settings,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Syntax of the text
-	// By default it is "yql", but additional syntax "pg" (PostreSQL SQL frontend) is supported as well
-	Syntax        *QueryContent_QuerySyntax `protobuf:"varint,11,opt,name=syntax,enum=FederatedQuery.QueryContent_QuerySyntax" json:"syntax,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                        protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Type              QueryContent_QueryType     `protobuf:"varint,1,opt,name=type,proto3,enum=FederatedQuery.QueryContent_QueryType"`
+	xxx_hidden_Name              string                     `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_Acl               *Acl                       `protobuf:"bytes,3,opt,name=acl,proto3"`
+	xxx_hidden_Limits            *Limits                    `protobuf:"bytes,4,opt,name=limits,proto3"`
+	xxx_hidden_Text              string                     `protobuf:"bytes,5,opt,name=text,proto3"`
+	xxx_hidden_Automatic         bool                       `protobuf:"varint,6,opt,name=automatic,proto3"`
+	xxx_hidden_Description       string                     `protobuf:"bytes,7,opt,name=description,proto3"`
+	xxx_hidden_ExecutionSettings map[string]string          `protobuf:"bytes,10,rep,name=execution_settings,json=executionSettings,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_Syntax            QueryContent_QuerySyntax   `protobuf:"varint,11,opt,name=syntax,proto3,enum=FederatedQuery.QueryContent_QuerySyntax"`
+	xxx_hidden_Parameters        map[string]*Ydb.TypedValue `protobuf:"bytes,12,rep,name=parameters,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *QueryContent) Reset() {
@@ -1329,237 +1230,185 @@ func (x *QueryContent) ProtoReflect() protoreflect.Message {
 }
 
 func (x *QueryContent) GetType() QueryContent_QueryType {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.xxx_hidden_Type
 	}
 	return QueryContent_QUERY_TYPE_UNSPECIFIED
 }
 
 func (x *QueryContent) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *QueryContent) GetAcl() *Acl {
 	if x != nil {
-		return x.Acl
+		return x.xxx_hidden_Acl
 	}
 	return nil
 }
 
 func (x *QueryContent) GetLimits() *Limits {
 	if x != nil {
-		return x.Limits
+		return x.xxx_hidden_Limits
 	}
 	return nil
 }
 
 func (x *QueryContent) GetText() string {
-	if x != nil && x.Text != nil {
-		return *x.Text
+	if x != nil {
+		return x.xxx_hidden_Text
 	}
 	return ""
 }
 
 func (x *QueryContent) GetAutomatic() bool {
-	if x != nil && x.Automatic != nil {
-		return *x.Automatic
+	if x != nil {
+		return x.xxx_hidden_Automatic
 	}
 	return false
 }
 
 func (x *QueryContent) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
 func (x *QueryContent) GetExecutionSettings() map[string]string {
 	if x != nil {
-		return x.ExecutionSettings
+		return x.xxx_hidden_ExecutionSettings
 	}
 	return nil
 }
 
 func (x *QueryContent) GetSyntax() QueryContent_QuerySyntax {
-	if x != nil && x.Syntax != nil {
-		return *x.Syntax
+	if x != nil {
+		return x.xxx_hidden_Syntax
 	}
 	return QueryContent_QUERY_SYNTAX_UNSPECIFIED
 }
 
+func (x *QueryContent) GetParameters() map[string]*Ydb.TypedValue {
+	if x != nil {
+		return x.xxx_hidden_Parameters
+	}
+	return nil
+}
+
 func (x *QueryContent) SetType(v QueryContent_QueryType) {
-	x.Type = &v
+	x.xxx_hidden_Type = v
 }
 
 func (x *QueryContent) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *QueryContent) SetAcl(v *Acl) {
-	x.Acl = v
+	x.xxx_hidden_Acl = v
 }
 
 func (x *QueryContent) SetLimits(v *Limits) {
-	x.Limits = v
+	x.xxx_hidden_Limits = v
 }
 
 func (x *QueryContent) SetText(v string) {
-	x.Text = &v
+	x.xxx_hidden_Text = v
 }
 
 func (x *QueryContent) SetAutomatic(v bool) {
-	x.Automatic = &v
+	x.xxx_hidden_Automatic = v
 }
 
 func (x *QueryContent) SetDescription(v string) {
-	x.Description = &v
+	x.xxx_hidden_Description = v
 }
 
 func (x *QueryContent) SetExecutionSettings(v map[string]string) {
-	x.ExecutionSettings = v
+	x.xxx_hidden_ExecutionSettings = v
 }
 
 func (x *QueryContent) SetSyntax(v QueryContent_QuerySyntax) {
-	x.Syntax = &v
+	x.xxx_hidden_Syntax = v
 }
 
-func (x *QueryContent) HasType() bool {
-	if x == nil {
-		return false
-	}
-	return x.Type != nil
-}
-
-func (x *QueryContent) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
+func (x *QueryContent) SetParameters(v map[string]*Ydb.TypedValue) {
+	x.xxx_hidden_Parameters = v
 }
 
 func (x *QueryContent) HasAcl() bool {
 	if x == nil {
 		return false
 	}
-	return x.Acl != nil
+	return x.xxx_hidden_Acl != nil
 }
 
 func (x *QueryContent) HasLimits() bool {
 	if x == nil {
 		return false
 	}
-	return x.Limits != nil
-}
-
-func (x *QueryContent) HasText() bool {
-	if x == nil {
-		return false
-	}
-	return x.Text != nil
-}
-
-func (x *QueryContent) HasAutomatic() bool {
-	if x == nil {
-		return false
-	}
-	return x.Automatic != nil
-}
-
-func (x *QueryContent) HasDescription() bool {
-	if x == nil {
-		return false
-	}
-	return x.Description != nil
-}
-
-func (x *QueryContent) HasSyntax() bool {
-	if x == nil {
-		return false
-	}
-	return x.Syntax != nil
-}
-
-func (x *QueryContent) ClearType() {
-	x.Type = nil
-}
-
-func (x *QueryContent) ClearName() {
-	x.Name = nil
+	return x.xxx_hidden_Limits != nil
 }
 
 func (x *QueryContent) ClearAcl() {
-	x.Acl = nil
+	x.xxx_hidden_Acl = nil
 }
 
 func (x *QueryContent) ClearLimits() {
-	x.Limits = nil
-}
-
-func (x *QueryContent) ClearText() {
-	x.Text = nil
-}
-
-func (x *QueryContent) ClearAutomatic() {
-	x.Automatic = nil
-}
-
-func (x *QueryContent) ClearDescription() {
-	x.Description = nil
-}
-
-func (x *QueryContent) ClearSyntax() {
-	x.Syntax = nil
+	x.xxx_hidden_Limits = nil
 }
 
 type QueryContent_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Type        *QueryContent_QueryType
-	Name        *string
+	Type        QueryContent_QueryType
+	Name        string
 	Acl         *Acl
 	Limits      *Limits
-	Text        *string
-	Automatic   *bool
-	Description *string
+	Text        string
+	Automatic   bool
+	Description string
 	// Specified settings for query's executor
 	// Well known settings are:
 	// "executor" - type of executor for this query
 	ExecutionSettings map[string]string
 	// Syntax of the text
-	// By default it is "yql", but additional syntax "pg" (PostreSQL SQL frontend) is supported as well
-	Syntax *QueryContent_QuerySyntax
+	// By default it is "yql", but additional syntax "pg" (PostgreSQL SQL frontend) is supported as well
+	Syntax QueryContent_QuerySyntax
+	// Map of query parameters
+	Parameters map[string]*Ydb.TypedValue
 }
 
 func (b0 QueryContent_builder) Build() *QueryContent {
 	m0 := &QueryContent{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Type = b.Type
-	x.Name = b.Name
-	x.Acl = b.Acl
-	x.Limits = b.Limits
-	x.Text = b.Text
-	x.Automatic = b.Automatic
-	x.Description = b.Description
-	x.ExecutionSettings = b.ExecutionSettings
-	x.Syntax = b.Syntax
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Acl = b.Acl
+	x.xxx_hidden_Limits = b.Limits
+	x.xxx_hidden_Text = b.Text
+	x.xxx_hidden_Automatic = b.Automatic
+	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_ExecutionSettings = b.ExecutionSettings
+	x.xxx_hidden_Syntax = b.Syntax
+	x.xxx_hidden_Parameters = b.Parameters
 	return m0
 }
 
 type CommonMeta struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
-	CreatedBy     *string                `protobuf:"bytes,2,opt,name=created_by,json=createdBy" json:"created_by,omitempty"`
-	ModifiedBy    *string                `protobuf:"bytes,3,opt,name=modified_by,json=modifiedBy" json:"modified_by,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt" json:"created_at,omitempty"`
-	ModifiedAt    *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=modified_at,json=modifiedAt" json:"modified_at,omitempty"`
-	Revision      *int64                 `protobuf:"varint,6,opt,name=revision" json:"revision,omitempty"` // Entity version, increases with each change
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id         string                 `protobuf:"bytes,1,opt,name=id,proto3"`
+	xxx_hidden_CreatedBy  string                 `protobuf:"bytes,2,opt,name=created_by,json=createdBy,proto3"`
+	xxx_hidden_ModifiedBy string                 `protobuf:"bytes,3,opt,name=modified_by,json=modifiedBy,proto3"`
+	xxx_hidden_CreatedAt  *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3"`
+	xxx_hidden_ModifiedAt *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=modified_at,json=modifiedAt,proto3"`
+	xxx_hidden_Revision   int64                  `protobuf:"varint,6,opt,name=revision,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *CommonMeta) Reset() {
@@ -1588,189 +1437,134 @@ func (x *CommonMeta) ProtoReflect() protoreflect.Message {
 }
 
 func (x *CommonMeta) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *CommonMeta) GetCreatedBy() string {
-	if x != nil && x.CreatedBy != nil {
-		return *x.CreatedBy
+	if x != nil {
+		return x.xxx_hidden_CreatedBy
 	}
 	return ""
 }
 
 func (x *CommonMeta) GetModifiedBy() string {
-	if x != nil && x.ModifiedBy != nil {
-		return *x.ModifiedBy
+	if x != nil {
+		return x.xxx_hidden_ModifiedBy
 	}
 	return ""
 }
 
 func (x *CommonMeta) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.CreatedAt
+		return x.xxx_hidden_CreatedAt
 	}
 	return nil
 }
 
 func (x *CommonMeta) GetModifiedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ModifiedAt
+		return x.xxx_hidden_ModifiedAt
 	}
 	return nil
 }
 
 func (x *CommonMeta) GetRevision() int64 {
-	if x != nil && x.Revision != nil {
-		return *x.Revision
+	if x != nil {
+		return x.xxx_hidden_Revision
 	}
 	return 0
 }
 
 func (x *CommonMeta) SetId(v string) {
-	x.Id = &v
+	x.xxx_hidden_Id = v
 }
 
 func (x *CommonMeta) SetCreatedBy(v string) {
-	x.CreatedBy = &v
+	x.xxx_hidden_CreatedBy = v
 }
 
 func (x *CommonMeta) SetModifiedBy(v string) {
-	x.ModifiedBy = &v
+	x.xxx_hidden_ModifiedBy = v
 }
 
 func (x *CommonMeta) SetCreatedAt(v *timestamppb.Timestamp) {
-	x.CreatedAt = v
+	x.xxx_hidden_CreatedAt = v
 }
 
 func (x *CommonMeta) SetModifiedAt(v *timestamppb.Timestamp) {
-	x.ModifiedAt = v
+	x.xxx_hidden_ModifiedAt = v
 }
 
 func (x *CommonMeta) SetRevision(v int64) {
-	x.Revision = &v
-}
-
-func (x *CommonMeta) HasId() bool {
-	if x == nil {
-		return false
-	}
-	return x.Id != nil
-}
-
-func (x *CommonMeta) HasCreatedBy() bool {
-	if x == nil {
-		return false
-	}
-	return x.CreatedBy != nil
-}
-
-func (x *CommonMeta) HasModifiedBy() bool {
-	if x == nil {
-		return false
-	}
-	return x.ModifiedBy != nil
+	x.xxx_hidden_Revision = v
 }
 
 func (x *CommonMeta) HasCreatedAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.CreatedAt != nil
+	return x.xxx_hidden_CreatedAt != nil
 }
 
 func (x *CommonMeta) HasModifiedAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.ModifiedAt != nil
-}
-
-func (x *CommonMeta) HasRevision() bool {
-	if x == nil {
-		return false
-	}
-	return x.Revision != nil
-}
-
-func (x *CommonMeta) ClearId() {
-	x.Id = nil
-}
-
-func (x *CommonMeta) ClearCreatedBy() {
-	x.CreatedBy = nil
-}
-
-func (x *CommonMeta) ClearModifiedBy() {
-	x.ModifiedBy = nil
+	return x.xxx_hidden_ModifiedAt != nil
 }
 
 func (x *CommonMeta) ClearCreatedAt() {
-	x.CreatedAt = nil
+	x.xxx_hidden_CreatedAt = nil
 }
 
 func (x *CommonMeta) ClearModifiedAt() {
-	x.ModifiedAt = nil
-}
-
-func (x *CommonMeta) ClearRevision() {
-	x.Revision = nil
+	x.xxx_hidden_ModifiedAt = nil
 }
 
 type CommonMeta_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Id         *string
-	CreatedBy  *string
-	ModifiedBy *string
+	Id         string
+	CreatedBy  string
+	ModifiedBy string
 	CreatedAt  *timestamppb.Timestamp
 	ModifiedAt *timestamppb.Timestamp
-	Revision   *int64
+	Revision   int64
 }
 
 func (b0 CommonMeta_builder) Build() *CommonMeta {
 	m0 := &CommonMeta{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
-	x.CreatedBy = b.CreatedBy
-	x.ModifiedBy = b.ModifiedBy
-	x.CreatedAt = b.CreatedAt
-	x.ModifiedAt = b.ModifiedAt
-	x.Revision = b.Revision
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_CreatedBy = b.CreatedBy
+	x.xxx_hidden_ModifiedBy = b.ModifiedBy
+	x.xxx_hidden_CreatedAt = b.CreatedAt
+	x.xxx_hidden_ModifiedAt = b.ModifiedAt
+	x.xxx_hidden_Revision = b.Revision
 	return m0
 }
 
 type QueryMeta struct {
-	state  protoimpl.MessageState `protogen:"hybrid.v1"`
-	Common *CommonMeta            `protobuf:"bytes,1,opt,name=common" json:"common,omitempty"`
-	// Timeline (submitted_at <= started_at <= finished_at)
-	//
-	//	sumbitted_at
-	//	           \ -> started_at
-	//	                            \ -> finished_at
-	SubmittedAt          *timestamppb.Timestamp   `protobuf:"bytes,14,opt,name=submitted_at,json=submittedAt" json:"submitted_at,omitempty"` // Time when the query was queued for execution
-	StartedAt            *timestamppb.Timestamp   `protobuf:"bytes,2,opt,name=started_at,json=startedAt" json:"started_at,omitempty"`        // Start time of query execution
-	FinishedAt           *timestamppb.Timestamp   `protobuf:"bytes,3,opt,name=finished_at,json=finishedAt" json:"finished_at,omitempty"`     // Query completition time
-	ExecuteMode          *ExecuteMode             `protobuf:"varint,4,opt,name=execute_mode,json=executeMode,enum=FederatedQuery.ExecuteMode" json:"execute_mode,omitempty"`
-	Status               *QueryMeta_ComputeStatus `protobuf:"varint,5,opt,name=status,enum=FederatedQuery.QueryMeta_ComputeStatus" json:"status,omitempty"`
-	LastJobQueryRevision *int64                   `protobuf:"varint,6,opt,name=last_job_query_revision,json=lastJobQueryRevision" json:"last_job_query_revision,omitempty"`
-	LastJobId            *string                  `protobuf:"bytes,7,opt,name=last_job_id,json=lastJobId" json:"last_job_id,omitempty"`
-	ExpireAt             *timestamppb.Timestamp   `protobuf:"bytes,8,opt,name=expire_at,json=expireAt" json:"expire_at,omitempty"`
-	ResultExpireAt       *timestamppb.Timestamp   `protobuf:"bytes,9,opt,name=result_expire_at,json=resultExpireAt" json:"result_expire_at,omitempty"`
-	StartedBy            *string                  `protobuf:"bytes,10,opt,name=started_by,json=startedBy" json:"started_by,omitempty"`
-	// Types that are valid to be assigned to Action:
-	//
-	//	*QueryMeta_AbortedBy
-	//	*QueryMeta_PausedBy
-	Action isQueryMeta_Action `protobuf_oneof:"action"`
-	// One of the versions of this query has fully saved checkpoint.
-	// If this flag is not set streaming disposition mode "from last checkpoint" can't be used.
-	HasSavedCheckpoints *bool `protobuf:"varint,13,opt,name=has_saved_checkpoints,json=hasSavedCheckpoints" json:"has_saved_checkpoints,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                           protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Common               *CommonMeta             `protobuf:"bytes,1,opt,name=common,proto3"`
+	xxx_hidden_SubmittedAt          *timestamppb.Timestamp  `protobuf:"bytes,14,opt,name=submitted_at,json=submittedAt,proto3"`
+	xxx_hidden_StartedAt            *timestamppb.Timestamp  `protobuf:"bytes,2,opt,name=started_at,json=startedAt,proto3"`
+	xxx_hidden_FinishedAt           *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=finished_at,json=finishedAt,proto3"`
+	xxx_hidden_ExecuteMode          ExecuteMode             `protobuf:"varint,4,opt,name=execute_mode,json=executeMode,proto3,enum=FederatedQuery.ExecuteMode"`
+	xxx_hidden_Status               QueryMeta_ComputeStatus `protobuf:"varint,5,opt,name=status,proto3,enum=FederatedQuery.QueryMeta_ComputeStatus"`
+	xxx_hidden_LastJobQueryRevision int64                   `protobuf:"varint,6,opt,name=last_job_query_revision,json=lastJobQueryRevision,proto3"`
+	xxx_hidden_LastJobId            string                  `protobuf:"bytes,7,opt,name=last_job_id,json=lastJobId,proto3"`
+	xxx_hidden_ExpireAt             *timestamppb.Timestamp  `protobuf:"bytes,8,opt,name=expire_at,json=expireAt,proto3"`
+	xxx_hidden_ResultExpireAt       *timestamppb.Timestamp  `protobuf:"bytes,9,opt,name=result_expire_at,json=resultExpireAt,proto3"`
+	xxx_hidden_StartedBy            string                  `protobuf:"bytes,10,opt,name=started_by,json=startedBy,proto3"`
+	xxx_hidden_Action               isQueryMeta_Action      `protobuf_oneof:"action"`
+	xxx_hidden_HasSavedCheckpoints  bool                    `protobuf:"varint,13,opt,name=has_saved_checkpoints,json=hasSavedCheckpoints,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *QueryMeta) Reset() {
@@ -1800,91 +1594,84 @@ func (x *QueryMeta) ProtoReflect() protoreflect.Message {
 
 func (x *QueryMeta) GetCommon() *CommonMeta {
 	if x != nil {
-		return x.Common
+		return x.xxx_hidden_Common
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetSubmittedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.SubmittedAt
+		return x.xxx_hidden_SubmittedAt
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetStartedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.StartedAt
+		return x.xxx_hidden_StartedAt
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetFinishedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.FinishedAt
+		return x.xxx_hidden_FinishedAt
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetExecuteMode() ExecuteMode {
-	if x != nil && x.ExecuteMode != nil {
-		return *x.ExecuteMode
+	if x != nil {
+		return x.xxx_hidden_ExecuteMode
 	}
 	return ExecuteMode_EXECUTE_MODE_UNSPECIFIED
 }
 
 func (x *QueryMeta) GetStatus() QueryMeta_ComputeStatus {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return QueryMeta_COMPUTE_STATUS_UNSPECIFIED
 }
 
 func (x *QueryMeta) GetLastJobQueryRevision() int64 {
-	if x != nil && x.LastJobQueryRevision != nil {
-		return *x.LastJobQueryRevision
+	if x != nil {
+		return x.xxx_hidden_LastJobQueryRevision
 	}
 	return 0
 }
 
 func (x *QueryMeta) GetLastJobId() string {
-	if x != nil && x.LastJobId != nil {
-		return *x.LastJobId
+	if x != nil {
+		return x.xxx_hidden_LastJobId
 	}
 	return ""
 }
 
 func (x *QueryMeta) GetExpireAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ExpireAt
+		return x.xxx_hidden_ExpireAt
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetResultExpireAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ResultExpireAt
+		return x.xxx_hidden_ResultExpireAt
 	}
 	return nil
 }
 
 func (x *QueryMeta) GetStartedBy() string {
-	if x != nil && x.StartedBy != nil {
-		return *x.StartedBy
+	if x != nil {
+		return x.xxx_hidden_StartedBy
 	}
 	return ""
 }
 
-func (x *QueryMeta) GetAction() isQueryMeta_Action {
-	if x != nil {
-		return x.Action
-	}
-	return nil
-}
-
 func (x *QueryMeta) GetAbortedBy() string {
 	if x != nil {
-		if x, ok := x.Action.(*QueryMeta_AbortedBy); ok {
+		if x, ok := x.xxx_hidden_Action.(*queryMeta_AbortedBy); ok {
 			return x.AbortedBy
 		}
 	}
@@ -1893,7 +1680,7 @@ func (x *QueryMeta) GetAbortedBy() string {
 
 func (x *QueryMeta) GetPausedBy() string {
 	if x != nil {
-		if x, ok := x.Action.(*QueryMeta_PausedBy); ok {
+		if x, ok := x.xxx_hidden_Action.(*queryMeta_PausedBy); ok {
 			return x.PausedBy
 		}
 	}
@@ -1901,157 +1688,122 @@ func (x *QueryMeta) GetPausedBy() string {
 }
 
 func (x *QueryMeta) GetHasSavedCheckpoints() bool {
-	if x != nil && x.HasSavedCheckpoints != nil {
-		return *x.HasSavedCheckpoints
+	if x != nil {
+		return x.xxx_hidden_HasSavedCheckpoints
 	}
 	return false
 }
 
 func (x *QueryMeta) SetCommon(v *CommonMeta) {
-	x.Common = v
+	x.xxx_hidden_Common = v
 }
 
 func (x *QueryMeta) SetSubmittedAt(v *timestamppb.Timestamp) {
-	x.SubmittedAt = v
+	x.xxx_hidden_SubmittedAt = v
 }
 
 func (x *QueryMeta) SetStartedAt(v *timestamppb.Timestamp) {
-	x.StartedAt = v
+	x.xxx_hidden_StartedAt = v
 }
 
 func (x *QueryMeta) SetFinishedAt(v *timestamppb.Timestamp) {
-	x.FinishedAt = v
+	x.xxx_hidden_FinishedAt = v
 }
 
 func (x *QueryMeta) SetExecuteMode(v ExecuteMode) {
-	x.ExecuteMode = &v
+	x.xxx_hidden_ExecuteMode = v
 }
 
 func (x *QueryMeta) SetStatus(v QueryMeta_ComputeStatus) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *QueryMeta) SetLastJobQueryRevision(v int64) {
-	x.LastJobQueryRevision = &v
+	x.xxx_hidden_LastJobQueryRevision = v
 }
 
 func (x *QueryMeta) SetLastJobId(v string) {
-	x.LastJobId = &v
+	x.xxx_hidden_LastJobId = v
 }
 
 func (x *QueryMeta) SetExpireAt(v *timestamppb.Timestamp) {
-	x.ExpireAt = v
+	x.xxx_hidden_ExpireAt = v
 }
 
 func (x *QueryMeta) SetResultExpireAt(v *timestamppb.Timestamp) {
-	x.ResultExpireAt = v
+	x.xxx_hidden_ResultExpireAt = v
 }
 
 func (x *QueryMeta) SetStartedBy(v string) {
-	x.StartedBy = &v
+	x.xxx_hidden_StartedBy = v
 }
 
 func (x *QueryMeta) SetAbortedBy(v string) {
-	x.Action = &QueryMeta_AbortedBy{v}
+	x.xxx_hidden_Action = &queryMeta_AbortedBy{v}
 }
 
 func (x *QueryMeta) SetPausedBy(v string) {
-	x.Action = &QueryMeta_PausedBy{v}
+	x.xxx_hidden_Action = &queryMeta_PausedBy{v}
 }
 
 func (x *QueryMeta) SetHasSavedCheckpoints(v bool) {
-	x.HasSavedCheckpoints = &v
+	x.xxx_hidden_HasSavedCheckpoints = v
 }
 
 func (x *QueryMeta) HasCommon() bool {
 	if x == nil {
 		return false
 	}
-	return x.Common != nil
+	return x.xxx_hidden_Common != nil
 }
 
 func (x *QueryMeta) HasSubmittedAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.SubmittedAt != nil
+	return x.xxx_hidden_SubmittedAt != nil
 }
 
 func (x *QueryMeta) HasStartedAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.StartedAt != nil
+	return x.xxx_hidden_StartedAt != nil
 }
 
 func (x *QueryMeta) HasFinishedAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.FinishedAt != nil
-}
-
-func (x *QueryMeta) HasExecuteMode() bool {
-	if x == nil {
-		return false
-	}
-	return x.ExecuteMode != nil
-}
-
-func (x *QueryMeta) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
-}
-
-func (x *QueryMeta) HasLastJobQueryRevision() bool {
-	if x == nil {
-		return false
-	}
-	return x.LastJobQueryRevision != nil
-}
-
-func (x *QueryMeta) HasLastJobId() bool {
-	if x == nil {
-		return false
-	}
-	return x.LastJobId != nil
+	return x.xxx_hidden_FinishedAt != nil
 }
 
 func (x *QueryMeta) HasExpireAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.ExpireAt != nil
+	return x.xxx_hidden_ExpireAt != nil
 }
 
 func (x *QueryMeta) HasResultExpireAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.ResultExpireAt != nil
-}
-
-func (x *QueryMeta) HasStartedBy() bool {
-	if x == nil {
-		return false
-	}
-	return x.StartedBy != nil
+	return x.xxx_hidden_ResultExpireAt != nil
 }
 
 func (x *QueryMeta) HasAction() bool {
 	if x == nil {
 		return false
 	}
-	return x.Action != nil
+	return x.xxx_hidden_Action != nil
 }
 
 func (x *QueryMeta) HasAbortedBy() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*QueryMeta_AbortedBy)
+	_, ok := x.xxx_hidden_Action.(*queryMeta_AbortedBy)
 	return ok
 }
 
@@ -2059,79 +1811,48 @@ func (x *QueryMeta) HasPausedBy() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*QueryMeta_PausedBy)
+	_, ok := x.xxx_hidden_Action.(*queryMeta_PausedBy)
 	return ok
 }
 
-func (x *QueryMeta) HasHasSavedCheckpoints() bool {
-	if x == nil {
-		return false
-	}
-	return x.HasSavedCheckpoints != nil
-}
-
 func (x *QueryMeta) ClearCommon() {
-	x.Common = nil
+	x.xxx_hidden_Common = nil
 }
 
 func (x *QueryMeta) ClearSubmittedAt() {
-	x.SubmittedAt = nil
+	x.xxx_hidden_SubmittedAt = nil
 }
 
 func (x *QueryMeta) ClearStartedAt() {
-	x.StartedAt = nil
+	x.xxx_hidden_StartedAt = nil
 }
 
 func (x *QueryMeta) ClearFinishedAt() {
-	x.FinishedAt = nil
-}
-
-func (x *QueryMeta) ClearExecuteMode() {
-	x.ExecuteMode = nil
-}
-
-func (x *QueryMeta) ClearStatus() {
-	x.Status = nil
-}
-
-func (x *QueryMeta) ClearLastJobQueryRevision() {
-	x.LastJobQueryRevision = nil
-}
-
-func (x *QueryMeta) ClearLastJobId() {
-	x.LastJobId = nil
+	x.xxx_hidden_FinishedAt = nil
 }
 
 func (x *QueryMeta) ClearExpireAt() {
-	x.ExpireAt = nil
+	x.xxx_hidden_ExpireAt = nil
 }
 
 func (x *QueryMeta) ClearResultExpireAt() {
-	x.ResultExpireAt = nil
-}
-
-func (x *QueryMeta) ClearStartedBy() {
-	x.StartedBy = nil
+	x.xxx_hidden_ResultExpireAt = nil
 }
 
 func (x *QueryMeta) ClearAction() {
-	x.Action = nil
+	x.xxx_hidden_Action = nil
 }
 
 func (x *QueryMeta) ClearAbortedBy() {
-	if _, ok := x.Action.(*QueryMeta_AbortedBy); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*queryMeta_AbortedBy); ok {
+		x.xxx_hidden_Action = nil
 	}
 }
 
 func (x *QueryMeta) ClearPausedBy() {
-	if _, ok := x.Action.(*QueryMeta_PausedBy); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*queryMeta_PausedBy); ok {
+		x.xxx_hidden_Action = nil
 	}
-}
-
-func (x *QueryMeta) ClearHasSavedCheckpoints() {
-	x.HasSavedCheckpoints = nil
 }
 
 const QueryMeta_Action_not_set_case case_QueryMeta_Action = 0
@@ -2142,10 +1863,10 @@ func (x *QueryMeta) WhichAction() case_QueryMeta_Action {
 	if x == nil {
 		return QueryMeta_Action_not_set_case
 	}
-	switch x.Action.(type) {
-	case *QueryMeta_AbortedBy:
+	switch x.xxx_hidden_Action.(type) {
+	case *queryMeta_AbortedBy:
 		return QueryMeta_AbortedBy_case
-	case *QueryMeta_PausedBy:
+	case *queryMeta_PausedBy:
 		return QueryMeta_PausedBy_case
 	default:
 		return QueryMeta_Action_not_set_case
@@ -2164,44 +1885,44 @@ type QueryMeta_builder struct {
 	SubmittedAt          *timestamppb.Timestamp
 	StartedAt            *timestamppb.Timestamp
 	FinishedAt           *timestamppb.Timestamp
-	ExecuteMode          *ExecuteMode
-	Status               *QueryMeta_ComputeStatus
-	LastJobQueryRevision *int64
-	LastJobId            *string
+	ExecuteMode          ExecuteMode
+	Status               QueryMeta_ComputeStatus
+	LastJobQueryRevision int64
+	LastJobId            string
 	ExpireAt             *timestamppb.Timestamp
 	ResultExpireAt       *timestamppb.Timestamp
-	StartedBy            *string
-	// Fields of oneof Action:
+	StartedBy            string
+	// Fields of oneof xxx_hidden_Action:
 	AbortedBy *string
 	PausedBy  *string
-	// -- end of Action
+	// -- end of xxx_hidden_Action
 	// One of the versions of this query has fully saved checkpoint.
 	// If this flag is not set streaming disposition mode "from last checkpoint" can't be used.
-	HasSavedCheckpoints *bool
+	HasSavedCheckpoints bool
 }
 
 func (b0 QueryMeta_builder) Build() *QueryMeta {
 	m0 := &QueryMeta{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Common = b.Common
-	x.SubmittedAt = b.SubmittedAt
-	x.StartedAt = b.StartedAt
-	x.FinishedAt = b.FinishedAt
-	x.ExecuteMode = b.ExecuteMode
-	x.Status = b.Status
-	x.LastJobQueryRevision = b.LastJobQueryRevision
-	x.LastJobId = b.LastJobId
-	x.ExpireAt = b.ExpireAt
-	x.ResultExpireAt = b.ResultExpireAt
-	x.StartedBy = b.StartedBy
+	x.xxx_hidden_Common = b.Common
+	x.xxx_hidden_SubmittedAt = b.SubmittedAt
+	x.xxx_hidden_StartedAt = b.StartedAt
+	x.xxx_hidden_FinishedAt = b.FinishedAt
+	x.xxx_hidden_ExecuteMode = b.ExecuteMode
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_LastJobQueryRevision = b.LastJobQueryRevision
+	x.xxx_hidden_LastJobId = b.LastJobId
+	x.xxx_hidden_ExpireAt = b.ExpireAt
+	x.xxx_hidden_ResultExpireAt = b.ResultExpireAt
+	x.xxx_hidden_StartedBy = b.StartedBy
 	if b.AbortedBy != nil {
-		x.Action = &QueryMeta_AbortedBy{*b.AbortedBy}
+		x.xxx_hidden_Action = &queryMeta_AbortedBy{*b.AbortedBy}
 	}
 	if b.PausedBy != nil {
-		x.Action = &QueryMeta_PausedBy{*b.PausedBy}
+		x.xxx_hidden_Action = &queryMeta_PausedBy{*b.PausedBy}
 	}
-	x.HasSavedCheckpoints = b.HasSavedCheckpoints
+	x.xxx_hidden_HasSavedCheckpoints = b.HasSavedCheckpoints
 	return m0
 }
 
@@ -2219,27 +1940,27 @@ type isQueryMeta_Action interface {
 	isQueryMeta_Action()
 }
 
-type QueryMeta_AbortedBy struct {
-	AbortedBy string `protobuf:"bytes,11,opt,name=aborted_by,json=abortedBy,oneof"`
+type queryMeta_AbortedBy struct {
+	AbortedBy string `protobuf:"bytes,11,opt,name=aborted_by,json=abortedBy,proto3,oneof"`
 }
 
-type QueryMeta_PausedBy struct {
-	PausedBy string `protobuf:"bytes,12,opt,name=paused_by,json=pausedBy,oneof"`
+type queryMeta_PausedBy struct {
+	PausedBy string `protobuf:"bytes,12,opt,name=paused_by,json=pausedBy,proto3,oneof"`
 }
 
-func (*QueryMeta_AbortedBy) isQueryMeta_Action() {}
+func (*queryMeta_AbortedBy) isQueryMeta_Action() {}
 
-func (*QueryMeta_PausedBy) isQueryMeta_Action() {}
+func (*queryMeta_PausedBy) isQueryMeta_Action() {}
 
 type BriefQuery struct {
-	state         protoimpl.MessageState  `protogen:"hybrid.v1"`
-	Type          *QueryContent_QueryType `protobuf:"varint,1,opt,name=type,enum=FederatedQuery.QueryContent_QueryType" json:"type,omitempty"`
-	Name          *string                 `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	Meta          *QueryMeta              `protobuf:"bytes,3,opt,name=meta" json:"meta,omitempty"`
-	Visibility    *Acl_Visibility         `protobuf:"varint,4,opt,name=visibility,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	Automatic     *bool                   `protobuf:"varint,5,opt,name=automatic" json:"automatic,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Type       QueryContent_QueryType `protobuf:"varint,1,opt,name=type,proto3,enum=FederatedQuery.QueryContent_QueryType"`
+	xxx_hidden_Name       string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_Meta       *QueryMeta             `protobuf:"bytes,3,opt,name=meta,proto3"`
+	xxx_hidden_Visibility Acl_Visibility         `protobuf:"varint,4,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	xxx_hidden_Automatic  bool                   `protobuf:"varint,5,opt,name=automatic,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *BriefQuery) Reset() {
@@ -2268,142 +1989,98 @@ func (x *BriefQuery) ProtoReflect() protoreflect.Message {
 }
 
 func (x *BriefQuery) GetType() QueryContent_QueryType {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.xxx_hidden_Type
 	}
 	return QueryContent_QUERY_TYPE_UNSPECIFIED
 }
 
 func (x *BriefQuery) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *BriefQuery) GetMeta() *QueryMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *BriefQuery) GetVisibility() Acl_Visibility {
-	if x != nil && x.Visibility != nil {
-		return *x.Visibility
+	if x != nil {
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
 func (x *BriefQuery) GetAutomatic() bool {
-	if x != nil && x.Automatic != nil {
-		return *x.Automatic
+	if x != nil {
+		return x.xxx_hidden_Automatic
 	}
 	return false
 }
 
 func (x *BriefQuery) SetType(v QueryContent_QueryType) {
-	x.Type = &v
+	x.xxx_hidden_Type = v
 }
 
 func (x *BriefQuery) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *BriefQuery) SetMeta(v *QueryMeta) {
-	x.Meta = v
+	x.xxx_hidden_Meta = v
 }
 
 func (x *BriefQuery) SetVisibility(v Acl_Visibility) {
-	x.Visibility = &v
+	x.xxx_hidden_Visibility = v
 }
 
 func (x *BriefQuery) SetAutomatic(v bool) {
-	x.Automatic = &v
-}
-
-func (x *BriefQuery) HasType() bool {
-	if x == nil {
-		return false
-	}
-	return x.Type != nil
-}
-
-func (x *BriefQuery) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
+	x.xxx_hidden_Automatic = v
 }
 
 func (x *BriefQuery) HasMeta() bool {
 	if x == nil {
 		return false
 	}
-	return x.Meta != nil
-}
-
-func (x *BriefQuery) HasVisibility() bool {
-	if x == nil {
-		return false
-	}
-	return x.Visibility != nil
-}
-
-func (x *BriefQuery) HasAutomatic() bool {
-	if x == nil {
-		return false
-	}
-	return x.Automatic != nil
-}
-
-func (x *BriefQuery) ClearType() {
-	x.Type = nil
-}
-
-func (x *BriefQuery) ClearName() {
-	x.Name = nil
+	return x.xxx_hidden_Meta != nil
 }
 
 func (x *BriefQuery) ClearMeta() {
-	x.Meta = nil
-}
-
-func (x *BriefQuery) ClearVisibility() {
-	x.Visibility = nil
-}
-
-func (x *BriefQuery) ClearAutomatic() {
-	x.Automatic = nil
+	x.xxx_hidden_Meta = nil
 }
 
 type BriefQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Type       *QueryContent_QueryType
-	Name       *string
+	Type       QueryContent_QueryType
+	Name       string
 	Meta       *QueryMeta
-	Visibility *Acl_Visibility
-	Automatic  *bool
+	Visibility Acl_Visibility
+	Automatic  bool
 }
 
 func (b0 BriefQuery_builder) Build() *BriefQuery {
 	m0 := &BriefQuery{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Type = b.Type
-	x.Name = b.Name
-	x.Meta = b.Meta
-	x.Visibility = b.Visibility
-	x.Automatic = b.Automatic
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Meta = b.Meta
+	x.xxx_hidden_Visibility = b.Visibility
+	x.xxx_hidden_Automatic = b.Automatic
 	return m0
 }
 
 type QueryPlan struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Json          *string                `protobuf:"bytes,1,opt,name=json" json:"json,omitempty"` // No validation because generated on server side
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Json string                 `protobuf:"bytes,1,opt,name=json,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *QueryPlan) Reset() {
@@ -2432,46 +2109,35 @@ func (x *QueryPlan) ProtoReflect() protoreflect.Message {
 }
 
 func (x *QueryPlan) GetJson() string {
-	if x != nil && x.Json != nil {
-		return *x.Json
+	if x != nil {
+		return x.xxx_hidden_Json
 	}
 	return ""
 }
 
 func (x *QueryPlan) SetJson(v string) {
-	x.Json = &v
-}
-
-func (x *QueryPlan) HasJson() bool {
-	if x == nil {
-		return false
-	}
-	return x.Json != nil
-}
-
-func (x *QueryPlan) ClearJson() {
-	x.Json = nil
+	x.xxx_hidden_Json = v
 }
 
 type QueryPlan_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Json *string
+	Json string
 }
 
 func (b0 QueryPlan_builder) Build() *QueryPlan {
 	m0 := &QueryPlan{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Json = b.Json
+	x.xxx_hidden_Json = b.Json
 	return m0
 }
 
 type QueryAst struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Data          *string                `protobuf:"bytes,1,opt,name=data" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Data string                 `protobuf:"bytes,1,opt,name=data,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *QueryAst) Reset() {
@@ -2500,48 +2166,37 @@ func (x *QueryAst) ProtoReflect() protoreflect.Message {
 }
 
 func (x *QueryAst) GetData() string {
-	if x != nil && x.Data != nil {
-		return *x.Data
+	if x != nil {
+		return x.xxx_hidden_Data
 	}
 	return ""
 }
 
 func (x *QueryAst) SetData(v string) {
-	x.Data = &v
-}
-
-func (x *QueryAst) HasData() bool {
-	if x == nil {
-		return false
-	}
-	return x.Data != nil
-}
-
-func (x *QueryAst) ClearData() {
-	x.Data = nil
+	x.xxx_hidden_Data = v
 }
 
 type QueryAst_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Data *string
+	Data string
 }
 
 func (b0 QueryAst_builder) Build() *QueryAst {
 	m0 := &QueryAst{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Data = b.Data
+	x.xxx_hidden_Data = b.Data
 	return m0
 }
 
 type ResultSetMeta struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Column        []*Ydb.Column          `protobuf:"bytes,1,rep,name=column" json:"column,omitempty"`
-	RowsCount     *int64                 `protobuf:"varint,2,opt,name=rows_count,json=rowsCount" json:"rows_count,omitempty"`
-	Truncated     *bool                  `protobuf:"varint,3,opt,name=truncated" json:"truncated,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Column    *[]*Ydb.Column         `protobuf:"bytes,1,rep,name=column,proto3"`
+	xxx_hidden_RowsCount int64                  `protobuf:"varint,2,opt,name=rows_count,json=rowsCount,proto3"`
+	xxx_hidden_Truncated bool                   `protobuf:"varint,3,opt,name=truncated,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ResultSetMeta) Reset() {
@@ -2571,94 +2226,132 @@ func (x *ResultSetMeta) ProtoReflect() protoreflect.Message {
 
 func (x *ResultSetMeta) GetColumn() []*Ydb.Column {
 	if x != nil {
-		return x.Column
+		if x.xxx_hidden_Column != nil {
+			return *x.xxx_hidden_Column
+		}
 	}
 	return nil
 }
 
 func (x *ResultSetMeta) GetRowsCount() int64 {
-	if x != nil && x.RowsCount != nil {
-		return *x.RowsCount
+	if x != nil {
+		return x.xxx_hidden_RowsCount
 	}
 	return 0
 }
 
 func (x *ResultSetMeta) GetTruncated() bool {
-	if x != nil && x.Truncated != nil {
-		return *x.Truncated
+	if x != nil {
+		return x.xxx_hidden_Truncated
 	}
 	return false
 }
 
 func (x *ResultSetMeta) SetColumn(v []*Ydb.Column) {
-	x.Column = v
+	x.xxx_hidden_Column = &v
 }
 
 func (x *ResultSetMeta) SetRowsCount(v int64) {
-	x.RowsCount = &v
+	x.xxx_hidden_RowsCount = v
 }
 
 func (x *ResultSetMeta) SetTruncated(v bool) {
-	x.Truncated = &v
-}
-
-func (x *ResultSetMeta) HasRowsCount() bool {
-	if x == nil {
-		return false
-	}
-	return x.RowsCount != nil
-}
-
-func (x *ResultSetMeta) HasTruncated() bool {
-	if x == nil {
-		return false
-	}
-	return x.Truncated != nil
-}
-
-func (x *ResultSetMeta) ClearRowsCount() {
-	x.RowsCount = nil
-}
-
-func (x *ResultSetMeta) ClearTruncated() {
-	x.Truncated = nil
+	x.xxx_hidden_Truncated = v
 }
 
 type ResultSetMeta_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Column    []*Ydb.Column
-	RowsCount *int64
-	Truncated *bool
+	RowsCount int64
+	Truncated bool
 }
 
 func (b0 ResultSetMeta_builder) Build() *ResultSetMeta {
 	m0 := &ResultSetMeta{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Column = b.Column
-	x.RowsCount = b.RowsCount
-	x.Truncated = b.Truncated
+	x.xxx_hidden_Column = &b.Column
+	x.xxx_hidden_RowsCount = b.RowsCount
+	x.xxx_hidden_Truncated = b.Truncated
 	return m0
 }
 
-type Query struct {
-	state          protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Meta           *QueryMeta                `protobuf:"bytes,1,opt,name=meta" json:"meta,omitempty"`
-	Content        *QueryContent             `protobuf:"bytes,2,opt,name=content" json:"content,omitempty"`
-	Plan           *QueryPlan                `protobuf:"bytes,3,opt,name=plan" json:"plan,omitempty"`
-	Issue          []*Ydb_Issue.IssueMessage `protobuf:"bytes,4,rep,name=issue" json:"issue,omitempty"`
-	TransientIssue []*Ydb_Issue.IssueMessage `protobuf:"bytes,5,rep,name=transient_issue,json=transientIssue" json:"transient_issue,omitempty"`
-	Statistics     *QueryStatistics          `protobuf:"bytes,6,opt,name=statistics" json:"statistics,omitempty"`
-	ResultSetMeta  []*ResultSetMeta          `protobuf:"bytes,7,rep,name=result_set_meta,json=resultSetMeta" json:"result_set_meta,omitempty"`
-	Ast            *QueryAst                 `protobuf:"bytes,8,opt,name=ast" json:"ast,omitempty"`
+type QueryTimeline struct {
+	state          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Svg string                 `protobuf:"bytes,1,opt,name=svg,proto3"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
 
+func (x *QueryTimeline) Reset() {
+	*x = QueryTimeline{}
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QueryTimeline) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QueryTimeline) ProtoMessage() {}
+
+func (x *QueryTimeline) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *QueryTimeline) GetSvg() string {
+	if x != nil {
+		return x.xxx_hidden_Svg
+	}
+	return ""
+}
+
+func (x *QueryTimeline) SetSvg(v string) {
+	x.xxx_hidden_Svg = v
+}
+
+type QueryTimeline_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Svg string
+}
+
+func (b0 QueryTimeline_builder) Build() *QueryTimeline {
+	m0 := &QueryTimeline{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Svg = b.Svg
+	return m0
+}
+
+type Query struct {
+	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Meta           *QueryMeta                 `protobuf:"bytes,1,opt,name=meta,proto3"`
+	xxx_hidden_Content        *QueryContent              `protobuf:"bytes,2,opt,name=content,proto3"`
+	xxx_hidden_Plan           *QueryPlan                 `protobuf:"bytes,3,opt,name=plan,proto3"`
+	xxx_hidden_Issue          *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,4,rep,name=issue,proto3"`
+	xxx_hidden_TransientIssue *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,5,rep,name=transient_issue,json=transientIssue,proto3"`
+	xxx_hidden_Statistics     *QueryStatistics           `protobuf:"bytes,6,opt,name=statistics,proto3"`
+	xxx_hidden_ResultSetMeta  *[]*ResultSetMeta          `protobuf:"bytes,7,rep,name=result_set_meta,json=resultSetMeta,proto3"`
+	xxx_hidden_Ast            *QueryAst                  `protobuf:"bytes,8,opt,name=ast,proto3"`
+	xxx_hidden_Timeline       *QueryTimeline             `protobuf:"bytes,9,opt,name=timeline,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
+}
+
 func (x *Query) Reset() {
 	*x = Query{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[10]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2670,7 +2363,7 @@ func (x *Query) String() string {
 func (*Query) ProtoMessage() {}
 
 func (x *Query) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[10]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2683,145 +2376,173 @@ func (x *Query) ProtoReflect() protoreflect.Message {
 
 func (x *Query) GetMeta() *QueryMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *Query) GetContent() *QueryContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *Query) GetPlan() *QueryPlan {
 	if x != nil {
-		return x.Plan
+		return x.xxx_hidden_Plan
 	}
 	return nil
 }
 
 func (x *Query) GetIssue() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issue
+		if x.xxx_hidden_Issue != nil {
+			return *x.xxx_hidden_Issue
+		}
 	}
 	return nil
 }
 
 func (x *Query) GetTransientIssue() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.TransientIssue
+		if x.xxx_hidden_TransientIssue != nil {
+			return *x.xxx_hidden_TransientIssue
+		}
 	}
 	return nil
 }
 
 func (x *Query) GetStatistics() *QueryStatistics {
 	if x != nil {
-		return x.Statistics
+		return x.xxx_hidden_Statistics
 	}
 	return nil
 }
 
 func (x *Query) GetResultSetMeta() []*ResultSetMeta {
 	if x != nil {
-		return x.ResultSetMeta
+		if x.xxx_hidden_ResultSetMeta != nil {
+			return *x.xxx_hidden_ResultSetMeta
+		}
 	}
 	return nil
 }
 
 func (x *Query) GetAst() *QueryAst {
 	if x != nil {
-		return x.Ast
+		return x.xxx_hidden_Ast
+	}
+	return nil
+}
+
+func (x *Query) GetTimeline() *QueryTimeline {
+	if x != nil {
+		return x.xxx_hidden_Timeline
 	}
 	return nil
 }
 
 func (x *Query) SetMeta(v *QueryMeta) {
-	x.Meta = v
+	x.xxx_hidden_Meta = v
 }
 
 func (x *Query) SetContent(v *QueryContent) {
-	x.Content = v
+	x.xxx_hidden_Content = v
 }
 
 func (x *Query) SetPlan(v *QueryPlan) {
-	x.Plan = v
+	x.xxx_hidden_Plan = v
 }
 
 func (x *Query) SetIssue(v []*Ydb_Issue.IssueMessage) {
-	x.Issue = v
+	x.xxx_hidden_Issue = &v
 }
 
 func (x *Query) SetTransientIssue(v []*Ydb_Issue.IssueMessage) {
-	x.TransientIssue = v
+	x.xxx_hidden_TransientIssue = &v
 }
 
 func (x *Query) SetStatistics(v *QueryStatistics) {
-	x.Statistics = v
+	x.xxx_hidden_Statistics = v
 }
 
 func (x *Query) SetResultSetMeta(v []*ResultSetMeta) {
-	x.ResultSetMeta = v
+	x.xxx_hidden_ResultSetMeta = &v
 }
 
 func (x *Query) SetAst(v *QueryAst) {
-	x.Ast = v
+	x.xxx_hidden_Ast = v
+}
+
+func (x *Query) SetTimeline(v *QueryTimeline) {
+	x.xxx_hidden_Timeline = v
 }
 
 func (x *Query) HasMeta() bool {
 	if x == nil {
 		return false
 	}
-	return x.Meta != nil
+	return x.xxx_hidden_Meta != nil
 }
 
 func (x *Query) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return x.Content != nil
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *Query) HasPlan() bool {
 	if x == nil {
 		return false
 	}
-	return x.Plan != nil
+	return x.xxx_hidden_Plan != nil
 }
 
 func (x *Query) HasStatistics() bool {
 	if x == nil {
 		return false
 	}
-	return x.Statistics != nil
+	return x.xxx_hidden_Statistics != nil
 }
 
 func (x *Query) HasAst() bool {
 	if x == nil {
 		return false
 	}
-	return x.Ast != nil
+	return x.xxx_hidden_Ast != nil
+}
+
+func (x *Query) HasTimeline() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Timeline != nil
 }
 
 func (x *Query) ClearMeta() {
-	x.Meta = nil
+	x.xxx_hidden_Meta = nil
 }
 
 func (x *Query) ClearContent() {
-	x.Content = nil
+	x.xxx_hidden_Content = nil
 }
 
 func (x *Query) ClearPlan() {
-	x.Plan = nil
+	x.xxx_hidden_Plan = nil
 }
 
 func (x *Query) ClearStatistics() {
-	x.Statistics = nil
+	x.xxx_hidden_Statistics = nil
 }
 
 func (x *Query) ClearAst() {
-	x.Ast = nil
+	x.xxx_hidden_Ast = nil
+}
+
+func (x *Query) ClearTimeline() {
+	x.xxx_hidden_Timeline = nil
 }
 
 type Query_builder struct {
@@ -2835,33 +2556,35 @@ type Query_builder struct {
 	Statistics     *QueryStatistics
 	ResultSetMeta  []*ResultSetMeta
 	Ast            *QueryAst
+	Timeline       *QueryTimeline
 }
 
 func (b0 Query_builder) Build() *Query {
 	m0 := &Query{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Meta = b.Meta
-	x.Content = b.Content
-	x.Plan = b.Plan
-	x.Issue = b.Issue
-	x.TransientIssue = b.TransientIssue
-	x.Statistics = b.Statistics
-	x.ResultSetMeta = b.ResultSetMeta
-	x.Ast = b.Ast
+	x.xxx_hidden_Meta = b.Meta
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_Plan = b.Plan
+	x.xxx_hidden_Issue = &b.Issue
+	x.xxx_hidden_TransientIssue = &b.TransientIssue
+	x.xxx_hidden_Statistics = b.Statistics
+	x.xxx_hidden_ResultSetMeta = &b.ResultSetMeta
+	x.xxx_hidden_Ast = b.Ast
+	x.xxx_hidden_Timeline = b.Timeline
 	return m0
 }
 
 type QueryStatistics struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Json          *string                `protobuf:"bytes,1,opt,name=json" json:"json,omitempty"` // No validation because generated on server side
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Json string                 `protobuf:"bytes,1,opt,name=json,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *QueryStatistics) Reset() {
 	*x = QueryStatistics{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[11]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2873,7 +2596,7 @@ func (x *QueryStatistics) String() string {
 func (*QueryStatistics) ProtoMessage() {}
 
 func (x *QueryStatistics) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[11]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2885,56 +2608,45 @@ func (x *QueryStatistics) ProtoReflect() protoreflect.Message {
 }
 
 func (x *QueryStatistics) GetJson() string {
-	if x != nil && x.Json != nil {
-		return *x.Json
+	if x != nil {
+		return x.xxx_hidden_Json
 	}
 	return ""
 }
 
 func (x *QueryStatistics) SetJson(v string) {
-	x.Json = &v
-}
-
-func (x *QueryStatistics) HasJson() bool {
-	if x == nil {
-		return false
-	}
-	return x.Json != nil
-}
-
-func (x *QueryStatistics) ClearJson() {
-	x.Json = nil
+	x.xxx_hidden_Json = v
 }
 
 type QueryStatistics_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Json *string
+	Json string
 }
 
 func (b0 QueryStatistics_builder) Build() *QueryStatistics {
 	m0 := &QueryStatistics{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Json = b.Json
+	x.xxx_hidden_Json = b.Json
 	return m0
 }
 
 // Create a new query
 type CreateQueryRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	Content         *QueryContent                   `protobuf:"bytes,2,opt,name=content" json:"content,omitempty"`
-	ExecuteMode     *ExecuteMode                    `protobuf:"varint,3,opt,name=execute_mode,json=executeMode,enum=FederatedQuery.ExecuteMode" json:"execute_mode,omitempty"`
-	Disposition     *StreamingDisposition           `protobuf:"bytes,4,opt,name=disposition" json:"disposition,omitempty"`
-	IdempotencyKey  *string                         `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey" json:"idempotency_key,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Content         *QueryContent                   `protobuf:"bytes,2,opt,name=content,proto3"`
+	xxx_hidden_ExecuteMode     ExecuteMode                     `protobuf:"varint,3,opt,name=execute_mode,json=executeMode,proto3,enum=FederatedQuery.ExecuteMode"`
+	xxx_hidden_Disposition     *StreamingDisposition           `protobuf:"bytes,4,opt,name=disposition,proto3"`
+	xxx_hidden_IdempotencyKey  string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateQueryRequest) Reset() {
 	*x = CreateQueryRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[12]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2946,7 +2658,7 @@ func (x *CreateQueryRequest) String() string {
 func (*CreateQueryRequest) ProtoMessage() {}
 
 func (x *CreateQueryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[12]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2959,112 +2671,90 @@ func (x *CreateQueryRequest) ProtoReflect() protoreflect.Message {
 
 func (x *CreateQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateQueryRequest) GetContent() *QueryContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *CreateQueryRequest) GetExecuteMode() ExecuteMode {
-	if x != nil && x.ExecuteMode != nil {
-		return *x.ExecuteMode
+	if x != nil {
+		return x.xxx_hidden_ExecuteMode
 	}
 	return ExecuteMode_EXECUTE_MODE_UNSPECIFIED
 }
 
 func (x *CreateQueryRequest) GetDisposition() *StreamingDisposition {
 	if x != nil {
-		return x.Disposition
+		return x.xxx_hidden_Disposition
 	}
 	return nil
 }
 
 func (x *CreateQueryRequest) GetIdempotencyKey() string {
-	if x != nil && x.IdempotencyKey != nil {
-		return *x.IdempotencyKey
+	if x != nil {
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *CreateQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *CreateQueryRequest) SetContent(v *QueryContent) {
-	x.Content = v
+	x.xxx_hidden_Content = v
 }
 
 func (x *CreateQueryRequest) SetExecuteMode(v ExecuteMode) {
-	x.ExecuteMode = &v
+	x.xxx_hidden_ExecuteMode = v
 }
 
 func (x *CreateQueryRequest) SetDisposition(v *StreamingDisposition) {
-	x.Disposition = v
+	x.xxx_hidden_Disposition = v
 }
 
 func (x *CreateQueryRequest) SetIdempotencyKey(v string) {
-	x.IdempotencyKey = &v
+	x.xxx_hidden_IdempotencyKey = v
 }
 
 func (x *CreateQueryRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *CreateQueryRequest) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return x.Content != nil
-}
-
-func (x *CreateQueryRequest) HasExecuteMode() bool {
-	if x == nil {
-		return false
-	}
-	return x.ExecuteMode != nil
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *CreateQueryRequest) HasDisposition() bool {
 	if x == nil {
 		return false
 	}
-	return x.Disposition != nil
-}
-
-func (x *CreateQueryRequest) HasIdempotencyKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.IdempotencyKey != nil
+	return x.xxx_hidden_Disposition != nil
 }
 
 func (x *CreateQueryRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *CreateQueryRequest) ClearContent() {
-	x.Content = nil
-}
-
-func (x *CreateQueryRequest) ClearExecuteMode() {
-	x.ExecuteMode = nil
+	x.xxx_hidden_Content = nil
 }
 
 func (x *CreateQueryRequest) ClearDisposition() {
-	x.Disposition = nil
-}
-
-func (x *CreateQueryRequest) ClearIdempotencyKey() {
-	x.IdempotencyKey = nil
+	x.xxx_hidden_Disposition = nil
 }
 
 type CreateQueryRequest_builder struct {
@@ -3072,33 +2762,33 @@ type CreateQueryRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	Content         *QueryContent
-	ExecuteMode     *ExecuteMode
+	ExecuteMode     ExecuteMode
 	Disposition     *StreamingDisposition
-	IdempotencyKey  *string
+	IdempotencyKey  string
 }
 
 func (b0 CreateQueryRequest_builder) Build() *CreateQueryRequest {
 	m0 := &CreateQueryRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Content = b.Content
-	x.ExecuteMode = b.ExecuteMode
-	x.Disposition = b.Disposition
-	x.IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_ExecuteMode = b.ExecuteMode
+	x.xxx_hidden_Disposition = b.Disposition
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
 	return m0
 }
 
 type CreateQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // CreateQueryResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateQueryResponse) Reset() {
 	*x = CreateQueryResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[13]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3110,7 +2800,7 @@ func (x *CreateQueryResponse) String() string {
 func (*CreateQueryResponse) ProtoMessage() {}
 
 func (x *CreateQueryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[13]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3123,24 +2813,24 @@ func (x *CreateQueryResponse) ProtoReflect() protoreflect.Message {
 
 func (x *CreateQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *CreateQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *CreateQueryResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *CreateQueryResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type CreateQueryResponse_builder struct {
@@ -3153,20 +2843,20 @@ func (b0 CreateQueryResponse_builder) Build() *CreateQueryResponse {
 	m0 := &CreateQueryResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type CreateQueryResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	QueryId       *string                `protobuf:"bytes,1,opt,name=query_id,json=queryId" json:"query_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_QueryId string                 `protobuf:"bytes,1,opt,name=query_id,json=queryId,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *CreateQueryResult) Reset() {
 	*x = CreateQueryResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[14]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3178,7 +2868,7 @@ func (x *CreateQueryResult) String() string {
 func (*CreateQueryResult) ProtoMessage() {}
 
 func (x *CreateQueryResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[14]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3190,55 +2880,44 @@ func (x *CreateQueryResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *CreateQueryResult) GetQueryId() string {
-	if x != nil && x.QueryId != nil {
-		return *x.QueryId
+	if x != nil {
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *CreateQueryResult) SetQueryId(v string) {
-	x.QueryId = &v
-}
-
-func (x *CreateQueryResult) HasQueryId() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryId != nil
-}
-
-func (x *CreateQueryResult) ClearQueryId() {
-	x.QueryId = nil
+	x.xxx_hidden_QueryId = v
 }
 
 type CreateQueryResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	QueryId *string
+	QueryId string
 }
 
 func (b0 CreateQueryResult_builder) Build() *CreateQueryResult {
 	m0 := &CreateQueryResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.QueryId = b.QueryId
+	x.xxx_hidden_QueryId = b.QueryId
 	return m0
 }
 
 // Getting brief information about queries
 type ListQueriesRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	PageToken       *string                         `protobuf:"bytes,2,opt,name=page_token,json=pageToken" json:"page_token,omitempty"`
-	Limit           *int32                          `protobuf:"varint,3,opt,name=limit" json:"limit,omitempty"`
-	Filter          *ListQueriesRequest_Filter      `protobuf:"bytes,4,opt,name=filter" json:"filter,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3"`
+	xxx_hidden_Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3"`
+	xxx_hidden_Filter          *ListQueriesRequest_Filter      `protobuf:"bytes,4,opt,name=filter,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListQueriesRequest) Reset() {
 	*x = ListQueriesRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[15]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3250,7 +2929,7 @@ func (x *ListQueriesRequest) String() string {
 func (*ListQueriesRequest) ProtoMessage() {}
 
 func (x *ListQueriesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[15]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3263,98 +2942,76 @@ func (x *ListQueriesRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ListQueriesRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListQueriesRequest) GetPageToken() string {
-	if x != nil && x.PageToken != nil {
-		return *x.PageToken
+	if x != nil {
+		return x.xxx_hidden_PageToken
 	}
 	return ""
 }
 
 func (x *ListQueriesRequest) GetLimit() int32 {
-	if x != nil && x.Limit != nil {
-		return *x.Limit
+	if x != nil {
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
 func (x *ListQueriesRequest) GetFilter() *ListQueriesRequest_Filter {
 	if x != nil {
-		return x.Filter
+		return x.xxx_hidden_Filter
 	}
 	return nil
 }
 
 func (x *ListQueriesRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ListQueriesRequest) SetPageToken(v string) {
-	x.PageToken = &v
+	x.xxx_hidden_PageToken = v
 }
 
 func (x *ListQueriesRequest) SetLimit(v int32) {
-	x.Limit = &v
+	x.xxx_hidden_Limit = v
 }
 
 func (x *ListQueriesRequest) SetFilter(v *ListQueriesRequest_Filter) {
-	x.Filter = v
+	x.xxx_hidden_Filter = v
 }
 
 func (x *ListQueriesRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ListQueriesRequest) HasPageToken() bool {
-	if x == nil {
-		return false
-	}
-	return x.PageToken != nil
-}
-
-func (x *ListQueriesRequest) HasLimit() bool {
-	if x == nil {
-		return false
-	}
-	return x.Limit != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ListQueriesRequest) HasFilter() bool {
 	if x == nil {
 		return false
 	}
-	return x.Filter != nil
+	return x.xxx_hidden_Filter != nil
 }
 
 func (x *ListQueriesRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ListQueriesRequest) ClearPageToken() {
-	x.PageToken = nil
-}
-
-func (x *ListQueriesRequest) ClearLimit() {
-	x.Limit = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ListQueriesRequest) ClearFilter() {
-	x.Filter = nil
+	x.xxx_hidden_Filter = nil
 }
 
 type ListQueriesRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	PageToken       *string
-	Limit           *int32
+	PageToken       string
+	Limit           int32
 	Filter          *ListQueriesRequest_Filter
 }
 
@@ -3362,23 +3019,23 @@ func (b0 ListQueriesRequest_builder) Build() *ListQueriesRequest {
 	m0 := &ListQueriesRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.PageToken = b.PageToken
-	x.Limit = b.Limit
-	x.Filter = b.Filter
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_PageToken = b.PageToken
+	x.xxx_hidden_Limit = b.Limit
+	x.xxx_hidden_Filter = b.Filter
 	return m0
 }
 
 type ListQueriesResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // ListQueriesResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListQueriesResponse) Reset() {
 	*x = ListQueriesResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[16]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3390,7 +3047,7 @@ func (x *ListQueriesResponse) String() string {
 func (*ListQueriesResponse) ProtoMessage() {}
 
 func (x *ListQueriesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[16]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3403,24 +3060,24 @@ func (x *ListQueriesResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ListQueriesResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ListQueriesResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ListQueriesResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ListQueriesResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ListQueriesResponse_builder struct {
@@ -3433,21 +3090,21 @@ func (b0 ListQueriesResponse_builder) Build() *ListQueriesResponse {
 	m0 := &ListQueriesResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ListQueriesResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Query         []*BriefQuery          `protobuf:"bytes,1,rep,name=query" json:"query,omitempty"`
-	NextPageToken *string                `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Query         *[]*BriefQuery         `protobuf:"bytes,1,rep,name=query,proto3"`
+	xxx_hidden_NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListQueriesResult) Reset() {
 	*x = ListQueriesResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[17]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3459,7 +3116,7 @@ func (x *ListQueriesResult) String() string {
 func (*ListQueriesResult) ProtoMessage() {}
 
 func (x *ListQueriesResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[17]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3472,65 +3129,56 @@ func (x *ListQueriesResult) ProtoReflect() protoreflect.Message {
 
 func (x *ListQueriesResult) GetQuery() []*BriefQuery {
 	if x != nil {
-		return x.Query
+		if x.xxx_hidden_Query != nil {
+			return *x.xxx_hidden_Query
+		}
 	}
 	return nil
 }
 
 func (x *ListQueriesResult) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.xxx_hidden_NextPageToken
 	}
 	return ""
 }
 
 func (x *ListQueriesResult) SetQuery(v []*BriefQuery) {
-	x.Query = v
+	x.xxx_hidden_Query = &v
 }
 
 func (x *ListQueriesResult) SetNextPageToken(v string) {
-	x.NextPageToken = &v
-}
-
-func (x *ListQueriesResult) HasNextPageToken() bool {
-	if x == nil {
-		return false
-	}
-	return x.NextPageToken != nil
-}
-
-func (x *ListQueriesResult) ClearNextPageToken() {
-	x.NextPageToken = nil
+	x.xxx_hidden_NextPageToken = v
 }
 
 type ListQueriesResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Query         []*BriefQuery
-	NextPageToken *string
+	NextPageToken string
 }
 
 func (b0 ListQueriesResult_builder) Build() *ListQueriesResult {
 	m0 := &ListQueriesResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Query = b.Query
-	x.NextPageToken = b.NextPageToken
+	x.xxx_hidden_Query = &b.Query
+	x.xxx_hidden_NextPageToken = b.NextPageToken
 	return m0
 }
 
 // Getting complete information about the query
 type DescribeQueryRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	QueryId         *string                         `protobuf:"bytes,2,opt,name=query_id,json=queryId" json:"query_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId         string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeQueryRequest) Reset() {
 	*x = DescribeQueryRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[18]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3542,7 +3190,7 @@ func (x *DescribeQueryRequest) String() string {
 func (*DescribeQueryRequest) ProtoMessage() {}
 
 func (x *DescribeQueryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[18]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3555,74 +3203,63 @@ func (x *DescribeQueryRequest) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeQueryRequest) GetQueryId() string {
-	if x != nil && x.QueryId != nil {
-		return *x.QueryId
+	if x != nil {
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *DescribeQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DescribeQueryRequest) SetQueryId(v string) {
-	x.QueryId = &v
+	x.xxx_hidden_QueryId = v
 }
 
 func (x *DescribeQueryRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DescribeQueryRequest) HasQueryId() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DescribeQueryRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *DescribeQueryRequest) ClearQueryId() {
-	x.QueryId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DescribeQueryRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	QueryId         *string
+	QueryId         string
 }
 
 func (b0 DescribeQueryRequest_builder) Build() *DescribeQueryRequest {
 	m0 := &DescribeQueryRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.QueryId = b.QueryId
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
 	return m0
 }
 
 type DescribeQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // DescribeQueryResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeQueryResponse) Reset() {
 	*x = DescribeQueryResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[19]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3634,7 +3271,7 @@ func (x *DescribeQueryResponse) String() string {
 func (*DescribeQueryResponse) ProtoMessage() {}
 
 func (x *DescribeQueryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[19]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3647,24 +3284,24 @@ func (x *DescribeQueryResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DescribeQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DescribeQueryResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DescribeQueryResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DescribeQueryResponse_builder struct {
@@ -3677,20 +3314,20 @@ func (b0 DescribeQueryResponse_builder) Build() *DescribeQueryResponse {
 	m0 := &DescribeQueryResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DescribeQueryResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Query         *Query                 `protobuf:"bytes,1,opt,name=query" json:"query,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Query *Query                 `protobuf:"bytes,1,opt,name=query,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *DescribeQueryResult) Reset() {
 	*x = DescribeQueryResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[20]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3702,7 +3339,7 @@ func (x *DescribeQueryResult) String() string {
 func (*DescribeQueryResult) ProtoMessage() {}
 
 func (x *DescribeQueryResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[20]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3715,24 +3352,24 @@ func (x *DescribeQueryResult) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeQueryResult) GetQuery() *Query {
 	if x != nil {
-		return x.Query
+		return x.xxx_hidden_Query
 	}
 	return nil
 }
 
 func (x *DescribeQueryResult) SetQuery(v *Query) {
-	x.Query = v
+	x.xxx_hidden_Query = v
 }
 
 func (x *DescribeQueryResult) HasQuery() bool {
 	if x == nil {
 		return false
 	}
-	return x.Query != nil
+	return x.xxx_hidden_Query != nil
 }
 
 func (x *DescribeQueryResult) ClearQuery() {
-	x.Query = nil
+	x.xxx_hidden_Query = nil
 }
 
 type DescribeQueryResult_builder struct {
@@ -3745,22 +3382,22 @@ func (b0 DescribeQueryResult_builder) Build() *DescribeQueryResult {
 	m0 := &DescribeQueryResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Query = b.Query
+	x.xxx_hidden_Query = b.Query
 	return m0
 }
 
 // Getting status of the query
 type GetQueryStatusRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	QueryId         *string                         `protobuf:"bytes,2,opt,name=query_id,json=queryId" json:"query_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId         string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetQueryStatusRequest) Reset() {
 	*x = GetQueryStatusRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[21]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3772,7 +3409,7 @@ func (x *GetQueryStatusRequest) String() string {
 func (*GetQueryStatusRequest) ProtoMessage() {}
 
 func (x *GetQueryStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[21]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3785,74 +3422,63 @@ func (x *GetQueryStatusRequest) ProtoReflect() protoreflect.Message {
 
 func (x *GetQueryStatusRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *GetQueryStatusRequest) GetQueryId() string {
-	if x != nil && x.QueryId != nil {
-		return *x.QueryId
+	if x != nil {
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *GetQueryStatusRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *GetQueryStatusRequest) SetQueryId(v string) {
-	x.QueryId = &v
+	x.xxx_hidden_QueryId = v
 }
 
 func (x *GetQueryStatusRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *GetQueryStatusRequest) HasQueryId() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *GetQueryStatusRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *GetQueryStatusRequest) ClearQueryId() {
-	x.QueryId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type GetQueryStatusRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	QueryId         *string
+	QueryId         string
 }
 
 func (b0 GetQueryStatusRequest_builder) Build() *GetQueryStatusRequest {
 	m0 := &GetQueryStatusRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.QueryId = b.QueryId
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
 	return m0
 }
 
 type GetQueryStatusResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // GetQueryStatusResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetQueryStatusResponse) Reset() {
 	*x = GetQueryStatusResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[22]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3864,7 +3490,7 @@ func (x *GetQueryStatusResponse) String() string {
 func (*GetQueryStatusResponse) ProtoMessage() {}
 
 func (x *GetQueryStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[22]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3877,24 +3503,24 @@ func (x *GetQueryStatusResponse) ProtoReflect() protoreflect.Message {
 
 func (x *GetQueryStatusResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *GetQueryStatusResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *GetQueryStatusResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *GetQueryStatusResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type GetQueryStatusResponse_builder struct {
@@ -3907,21 +3533,21 @@ func (b0 GetQueryStatusResponse_builder) Build() *GetQueryStatusResponse {
 	m0 := &GetQueryStatusResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type GetQueryStatusResult struct {
-	state         protoimpl.MessageState   `protogen:"hybrid.v1"`
-	Status        *QueryMeta_ComputeStatus `protobuf:"varint,1,opt,name=status,enum=FederatedQuery.QueryMeta_ComputeStatus" json:"status,omitempty"`
-	MetaRevision  *int64                   `protobuf:"varint,2,opt,name=meta_revision,json=metaRevision" json:"meta_revision,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Status       QueryMeta_ComputeStatus `protobuf:"varint,1,opt,name=status,proto3,enum=FederatedQuery.QueryMeta_ComputeStatus"`
+	xxx_hidden_MetaRevision int64                   `protobuf:"varint,2,opt,name=meta_revision,json=metaRevision,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *GetQueryStatusResult) Reset() {
 	*x = GetQueryStatusResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[23]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3933,7 +3559,7 @@ func (x *GetQueryStatusResult) String() string {
 func (*GetQueryStatusResult) ProtoMessage() {}
 
 func (x *GetQueryStatusResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[23]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3945,79 +3571,57 @@ func (x *GetQueryStatusResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *GetQueryStatusResult) GetStatus() QueryMeta_ComputeStatus {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return QueryMeta_COMPUTE_STATUS_UNSPECIFIED
 }
 
 func (x *GetQueryStatusResult) GetMetaRevision() int64 {
-	if x != nil && x.MetaRevision != nil {
-		return *x.MetaRevision
+	if x != nil {
+		return x.xxx_hidden_MetaRevision
 	}
 	return 0
 }
 
 func (x *GetQueryStatusResult) SetStatus(v QueryMeta_ComputeStatus) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *GetQueryStatusResult) SetMetaRevision(v int64) {
-	x.MetaRevision = &v
-}
-
-func (x *GetQueryStatusResult) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
-}
-
-func (x *GetQueryStatusResult) HasMetaRevision() bool {
-	if x == nil {
-		return false
-	}
-	return x.MetaRevision != nil
-}
-
-func (x *GetQueryStatusResult) ClearStatus() {
-	x.Status = nil
-}
-
-func (x *GetQueryStatusResult) ClearMetaRevision() {
-	x.MetaRevision = nil
+	x.xxx_hidden_MetaRevision = v
 }
 
 type GetQueryStatusResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Status       *QueryMeta_ComputeStatus
-	MetaRevision *int64
+	Status       QueryMeta_ComputeStatus
+	MetaRevision int64
 }
 
 func (b0 GetQueryStatusResult_builder) Build() *GetQueryStatusResult {
 	m0 := &GetQueryStatusResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Status = b.Status
-	x.MetaRevision = b.MetaRevision
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_MetaRevision = b.MetaRevision
 	return m0
 }
 
 // Complete removal of query. Recovery of the query after this operation is not possible
 type DeleteQueryRequest struct {
-	state            protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	QueryId          *string                         `protobuf:"bytes,2,opt,name=query_id,json=queryId" json:"query_id,omitempty"`
-	PreviousRevision *int64                          `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision" json:"previous_revision,omitempty"`
-	IdempotencyKey   *string                         `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId          string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *DeleteQueryRequest) Reset() {
 	*x = DeleteQueryRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[24]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4029,7 +3633,7 @@ func (x *DeleteQueryRequest) String() string {
 func (*DeleteQueryRequest) ProtoMessage() {}
 
 func (x *DeleteQueryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[24]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4042,122 +3646,89 @@ func (x *DeleteQueryRequest) ProtoReflect() protoreflect.Message {
 
 func (x *DeleteQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DeleteQueryRequest) GetQueryId() string {
-	if x != nil && x.QueryId != nil {
-		return *x.QueryId
+	if x != nil {
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *DeleteQueryRequest) GetPreviousRevision() int64 {
-	if x != nil && x.PreviousRevision != nil {
-		return *x.PreviousRevision
+	if x != nil {
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *DeleteQueryRequest) GetIdempotencyKey() string {
-	if x != nil && x.IdempotencyKey != nil {
-		return *x.IdempotencyKey
+	if x != nil {
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *DeleteQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DeleteQueryRequest) SetQueryId(v string) {
-	x.QueryId = &v
+	x.xxx_hidden_QueryId = v
 }
 
 func (x *DeleteQueryRequest) SetPreviousRevision(v int64) {
-	x.PreviousRevision = &v
+	x.xxx_hidden_PreviousRevision = v
 }
 
 func (x *DeleteQueryRequest) SetIdempotencyKey(v string) {
-	x.IdempotencyKey = &v
+	x.xxx_hidden_IdempotencyKey = v
 }
 
 func (x *DeleteQueryRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DeleteQueryRequest) HasQueryId() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryId != nil
-}
-
-func (x *DeleteQueryRequest) HasPreviousRevision() bool {
-	if x == nil {
-		return false
-	}
-	return x.PreviousRevision != nil
-}
-
-func (x *DeleteQueryRequest) HasIdempotencyKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.IdempotencyKey != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DeleteQueryRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *DeleteQueryRequest) ClearQueryId() {
-	x.QueryId = nil
-}
-
-func (x *DeleteQueryRequest) ClearPreviousRevision() {
-	x.PreviousRevision = nil
-}
-
-func (x *DeleteQueryRequest) ClearIdempotencyKey() {
-	x.IdempotencyKey = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DeleteQueryRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams  *Ydb_Operations.OperationParams
-	QueryId          *string
-	PreviousRevision *int64
-	IdempotencyKey   *string
+	QueryId          string
+	PreviousRevision int64
+	IdempotencyKey   string
 }
 
 func (b0 DeleteQueryRequest_builder) Build() *DeleteQueryRequest {
 	m0 := &DeleteQueryRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.QueryId = b.QueryId
-	x.PreviousRevision = b.PreviousRevision
-	x.IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
 	return m0
 }
 
 type DeleteQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // DeleteQueryResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DeleteQueryResponse) Reset() {
 	*x = DeleteQueryResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[25]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4169,7 +3740,7 @@ func (x *DeleteQueryResponse) String() string {
 func (*DeleteQueryResponse) ProtoMessage() {}
 
 func (x *DeleteQueryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[25]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4182,24 +3753,24 @@ func (x *DeleteQueryResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DeleteQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DeleteQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DeleteQueryResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DeleteQueryResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DeleteQueryResponse_builder struct {
@@ -4212,19 +3783,19 @@ func (b0 DeleteQueryResponse_builder) Build() *DeleteQueryResponse {
 	m0 := &DeleteQueryResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DeleteQueryResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteQueryResult) Reset() {
 	*x = DeleteQueryResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[26]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4236,7 +3807,7 @@ func (x *DeleteQueryResult) String() string {
 func (*DeleteQueryResult) ProtoMessage() {}
 
 func (x *DeleteQueryResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[26]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4261,22 +3832,22 @@ func (b0 DeleteQueryResult_builder) Build() *DeleteQueryResult {
 
 // Change query information with launch policy option. All fields must be filled in the request. The query changes completely
 type ModifyQueryRequest struct {
-	state            protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	QueryId          *string                         `protobuf:"bytes,2,opt,name=query_id,json=queryId" json:"query_id,omitempty"`
-	Content          *QueryContent                   `protobuf:"bytes,3,opt,name=content" json:"content,omitempty"`
-	ExecuteMode      *ExecuteMode                    `protobuf:"varint,4,opt,name=execute_mode,json=executeMode,enum=FederatedQuery.ExecuteMode" json:"execute_mode,omitempty"`
-	Disposition      *StreamingDisposition           `protobuf:"bytes,5,opt,name=disposition" json:"disposition,omitempty"`
-	StateLoadMode    *StateLoadMode                  `protobuf:"varint,6,opt,name=state_load_mode,json=stateLoadMode,enum=FederatedQuery.StateLoadMode" json:"state_load_mode,omitempty"`
-	PreviousRevision *int64                          `protobuf:"varint,7,opt,name=previous_revision,json=previousRevision" json:"previous_revision,omitempty"`
-	IdempotencyKey   *string                         `protobuf:"bytes,8,opt,name=idempotency_key,json=idempotencyKey" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId          string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_Content          *QueryContent                   `protobuf:"bytes,3,opt,name=content,proto3"`
+	xxx_hidden_ExecuteMode      ExecuteMode                     `protobuf:"varint,4,opt,name=execute_mode,json=executeMode,proto3,enum=FederatedQuery.ExecuteMode"`
+	xxx_hidden_Disposition      *StreamingDisposition           `protobuf:"bytes,5,opt,name=disposition,proto3"`
+	xxx_hidden_StateLoadMode    StateLoadMode                   `protobuf:"varint,6,opt,name=state_load_mode,json=stateLoadMode,proto3,enum=FederatedQuery.StateLoadMode"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,7,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,8,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ModifyQueryRequest) Reset() {
 	*x = ModifyQueryRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[27]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4288,7 +3859,7 @@ func (x *ModifyQueryRequest) String() string {
 func (*ModifyQueryRequest) ProtoMessage() {}
 
 func (x *ModifyQueryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[27]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4301,218 +3872,163 @@ func (x *ModifyQueryRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ModifyQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ModifyQueryRequest) GetQueryId() string {
-	if x != nil && x.QueryId != nil {
-		return *x.QueryId
+	if x != nil {
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *ModifyQueryRequest) GetContent() *QueryContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *ModifyQueryRequest) GetExecuteMode() ExecuteMode {
-	if x != nil && x.ExecuteMode != nil {
-		return *x.ExecuteMode
+	if x != nil {
+		return x.xxx_hidden_ExecuteMode
 	}
 	return ExecuteMode_EXECUTE_MODE_UNSPECIFIED
 }
 
 func (x *ModifyQueryRequest) GetDisposition() *StreamingDisposition {
 	if x != nil {
-		return x.Disposition
+		return x.xxx_hidden_Disposition
 	}
 	return nil
 }
 
 func (x *ModifyQueryRequest) GetStateLoadMode() StateLoadMode {
-	if x != nil && x.StateLoadMode != nil {
-		return *x.StateLoadMode
+	if x != nil {
+		return x.xxx_hidden_StateLoadMode
 	}
 	return StateLoadMode_STATE_LOAD_MODE_UNSPECIFIED
 }
 
 func (x *ModifyQueryRequest) GetPreviousRevision() int64 {
-	if x != nil && x.PreviousRevision != nil {
-		return *x.PreviousRevision
+	if x != nil {
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *ModifyQueryRequest) GetIdempotencyKey() string {
-	if x != nil && x.IdempotencyKey != nil {
-		return *x.IdempotencyKey
+	if x != nil {
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *ModifyQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ModifyQueryRequest) SetQueryId(v string) {
-	x.QueryId = &v
+	x.xxx_hidden_QueryId = v
 }
 
 func (x *ModifyQueryRequest) SetContent(v *QueryContent) {
-	x.Content = v
+	x.xxx_hidden_Content = v
 }
 
 func (x *ModifyQueryRequest) SetExecuteMode(v ExecuteMode) {
-	x.ExecuteMode = &v
+	x.xxx_hidden_ExecuteMode = v
 }
 
 func (x *ModifyQueryRequest) SetDisposition(v *StreamingDisposition) {
-	x.Disposition = v
+	x.xxx_hidden_Disposition = v
 }
 
 func (x *ModifyQueryRequest) SetStateLoadMode(v StateLoadMode) {
-	x.StateLoadMode = &v
+	x.xxx_hidden_StateLoadMode = v
 }
 
 func (x *ModifyQueryRequest) SetPreviousRevision(v int64) {
-	x.PreviousRevision = &v
+	x.xxx_hidden_PreviousRevision = v
 }
 
 func (x *ModifyQueryRequest) SetIdempotencyKey(v string) {
-	x.IdempotencyKey = &v
+	x.xxx_hidden_IdempotencyKey = v
 }
 
 func (x *ModifyQueryRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ModifyQueryRequest) HasQueryId() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ModifyQueryRequest) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return x.Content != nil
-}
-
-func (x *ModifyQueryRequest) HasExecuteMode() bool {
-	if x == nil {
-		return false
-	}
-	return x.ExecuteMode != nil
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *ModifyQueryRequest) HasDisposition() bool {
 	if x == nil {
 		return false
 	}
-	return x.Disposition != nil
-}
-
-func (x *ModifyQueryRequest) HasStateLoadMode() bool {
-	if x == nil {
-		return false
-	}
-	return x.StateLoadMode != nil
-}
-
-func (x *ModifyQueryRequest) HasPreviousRevision() bool {
-	if x == nil {
-		return false
-	}
-	return x.PreviousRevision != nil
-}
-
-func (x *ModifyQueryRequest) HasIdempotencyKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.IdempotencyKey != nil
+	return x.xxx_hidden_Disposition != nil
 }
 
 func (x *ModifyQueryRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ModifyQueryRequest) ClearQueryId() {
-	x.QueryId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ModifyQueryRequest) ClearContent() {
-	x.Content = nil
-}
-
-func (x *ModifyQueryRequest) ClearExecuteMode() {
-	x.ExecuteMode = nil
+	x.xxx_hidden_Content = nil
 }
 
 func (x *ModifyQueryRequest) ClearDisposition() {
-	x.Disposition = nil
-}
-
-func (x *ModifyQueryRequest) ClearStateLoadMode() {
-	x.StateLoadMode = nil
-}
-
-func (x *ModifyQueryRequest) ClearPreviousRevision() {
-	x.PreviousRevision = nil
-}
-
-func (x *ModifyQueryRequest) ClearIdempotencyKey() {
-	x.IdempotencyKey = nil
+	x.xxx_hidden_Disposition = nil
 }
 
 type ModifyQueryRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams  *Ydb_Operations.OperationParams
-	QueryId          *string
+	QueryId          string
 	Content          *QueryContent
-	ExecuteMode      *ExecuteMode
+	ExecuteMode      ExecuteMode
 	Disposition      *StreamingDisposition
-	StateLoadMode    *StateLoadMode
-	PreviousRevision *int64
-	IdempotencyKey   *string
+	StateLoadMode    StateLoadMode
+	PreviousRevision int64
+	IdempotencyKey   string
 }
 
 func (b0 ModifyQueryRequest_builder) Build() *ModifyQueryRequest {
 	m0 := &ModifyQueryRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.QueryId = b.QueryId
-	x.Content = b.Content
-	x.ExecuteMode = b.ExecuteMode
-	x.Disposition = b.Disposition
-	x.StateLoadMode = b.StateLoadMode
-	x.PreviousRevision = b.PreviousRevision
-	x.IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_ExecuteMode = b.ExecuteMode
+	x.xxx_hidden_Disposition = b.Disposition
+	x.xxx_hidden_StateLoadMode = b.StateLoadMode
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
 	return m0
 }
 
 type ModifyQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // ModifyQueryResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ModifyQueryResponse) Reset() {
 	*x = ModifyQueryResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[28]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4524,7 +4040,7 @@ func (x *ModifyQueryResponse) String() string {
 func (*ModifyQueryResponse) ProtoMessage() {}
 
 func (x *ModifyQueryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[28]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4537,24 +4053,24 @@ func (x *ModifyQueryResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ModifyQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ModifyQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ModifyQueryResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ModifyQueryResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ModifyQueryResponse_builder struct {
@@ -4567,19 +4083,19 @@ func (b0 ModifyQueryResponse_builder) Build() *ModifyQueryResponse {
 	m0 := &ModifyQueryResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ModifyQueryResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ModifyQueryResult) Reset() {
 	*x = ModifyQueryResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[29]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4591,7 +4107,7 @@ func (x *ModifyQueryResult) String() string {
 func (*ModifyQueryResult) ProtoMessage() {}
 
 func (x *ModifyQueryResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[29]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4616,19 +4132,19 @@ func (b0 ModifyQueryResult_builder) Build() *ModifyQueryResult {
 
 // Managing query status (pause, abort, resume, ...)
 type ControlQueryRequest struct {
-	state            protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	QueryId          *string                         `protobuf:"bytes,2,opt,name=query_id,json=queryId" json:"query_id,omitempty"`
-	Action           *QueryAction                    `protobuf:"varint,3,opt,name=action,enum=FederatedQuery.QueryAction" json:"action,omitempty"`
-	PreviousRevision *int64                          `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision" json:"previous_revision,omitempty"`
-	IdempotencyKey   *string                         `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId          string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_Action           QueryAction                     `protobuf:"varint,3,opt,name=action,proto3,enum=FederatedQuery.QueryAction"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ControlQueryRequest) Reset() {
 	*x = ControlQueryRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[30]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4640,7 +4156,7 @@ func (x *ControlQueryRequest) String() string {
 func (*ControlQueryRequest) ProtoMessage() {}
 
 func (x *ControlQueryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[30]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4653,146 +4169,102 @@ func (x *ControlQueryRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ControlQueryRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ControlQueryRequest) GetQueryId() string {
-	if x != nil && x.QueryId != nil {
-		return *x.QueryId
+	if x != nil {
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *ControlQueryRequest) GetAction() QueryAction {
-	if x != nil && x.Action != nil {
-		return *x.Action
+	if x != nil {
+		return x.xxx_hidden_Action
 	}
 	return QueryAction_QUERY_ACTION_UNSPECIFIED
 }
 
 func (x *ControlQueryRequest) GetPreviousRevision() int64 {
-	if x != nil && x.PreviousRevision != nil {
-		return *x.PreviousRevision
+	if x != nil {
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *ControlQueryRequest) GetIdempotencyKey() string {
-	if x != nil && x.IdempotencyKey != nil {
-		return *x.IdempotencyKey
+	if x != nil {
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *ControlQueryRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ControlQueryRequest) SetQueryId(v string) {
-	x.QueryId = &v
+	x.xxx_hidden_QueryId = v
 }
 
 func (x *ControlQueryRequest) SetAction(v QueryAction) {
-	x.Action = &v
+	x.xxx_hidden_Action = v
 }
 
 func (x *ControlQueryRequest) SetPreviousRevision(v int64) {
-	x.PreviousRevision = &v
+	x.xxx_hidden_PreviousRevision = v
 }
 
 func (x *ControlQueryRequest) SetIdempotencyKey(v string) {
-	x.IdempotencyKey = &v
+	x.xxx_hidden_IdempotencyKey = v
 }
 
 func (x *ControlQueryRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ControlQueryRequest) HasQueryId() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryId != nil
-}
-
-func (x *ControlQueryRequest) HasAction() bool {
-	if x == nil {
-		return false
-	}
-	return x.Action != nil
-}
-
-func (x *ControlQueryRequest) HasPreviousRevision() bool {
-	if x == nil {
-		return false
-	}
-	return x.PreviousRevision != nil
-}
-
-func (x *ControlQueryRequest) HasIdempotencyKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.IdempotencyKey != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ControlQueryRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ControlQueryRequest) ClearQueryId() {
-	x.QueryId = nil
-}
-
-func (x *ControlQueryRequest) ClearAction() {
-	x.Action = nil
-}
-
-func (x *ControlQueryRequest) ClearPreviousRevision() {
-	x.PreviousRevision = nil
-}
-
-func (x *ControlQueryRequest) ClearIdempotencyKey() {
-	x.IdempotencyKey = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type ControlQueryRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams  *Ydb_Operations.OperationParams
-	QueryId          *string
-	Action           *QueryAction
-	PreviousRevision *int64
-	IdempotencyKey   *string
+	QueryId          string
+	Action           QueryAction
+	PreviousRevision int64
+	IdempotencyKey   string
 }
 
 func (b0 ControlQueryRequest_builder) Build() *ControlQueryRequest {
 	m0 := &ControlQueryRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.QueryId = b.QueryId
-	x.Action = b.Action
-	x.PreviousRevision = b.PreviousRevision
-	x.IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_Action = b.Action
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
 	return m0
 }
 
 type ControlQueryResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // ControlQueryResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ControlQueryResponse) Reset() {
 	*x = ControlQueryResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[31]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4804,7 +4276,7 @@ func (x *ControlQueryResponse) String() string {
 func (*ControlQueryResponse) ProtoMessage() {}
 
 func (x *ControlQueryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[31]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4817,24 +4289,24 @@ func (x *ControlQueryResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ControlQueryResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ControlQueryResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ControlQueryResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ControlQueryResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ControlQueryResponse_builder struct {
@@ -4847,19 +4319,19 @@ func (b0 ControlQueryResponse_builder) Build() *ControlQueryResponse {
 	m0 := &ControlQueryResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ControlQueryResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ControlQueryResult) Reset() {
 	*x = ControlQueryResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[32]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4871,7 +4343,7 @@ func (x *ControlQueryResult) String() string {
 func (*ControlQueryResult) ProtoMessage() {}
 
 func (x *ControlQueryResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[32]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4895,20 +4367,20 @@ func (b0 ControlQueryResult_builder) Build() *ControlQueryResult {
 }
 
 type BriefJob struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Meta          *CommonMeta            `protobuf:"bytes,1,opt,name=meta" json:"meta,omitempty"`
-	QueryMeta     *QueryMeta             `protobuf:"bytes,3,opt,name=query_meta,json=queryMeta" json:"query_meta,omitempty"`
-	QueryName     *string                `protobuf:"bytes,9,opt,name=query_name,json=queryName" json:"query_name,omitempty"`
-	Visibility    *Acl_Visibility        `protobuf:"varint,10,opt,name=visibility,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	Automatic     *bool                  `protobuf:"varint,11,opt,name=automatic" json:"automatic,omitempty"`
-	ExpireAt      *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=expire_at,json=expireAt" json:"expire_at,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Meta       *CommonMeta            `protobuf:"bytes,1,opt,name=meta,proto3"`
+	xxx_hidden_QueryMeta  *QueryMeta             `protobuf:"bytes,3,opt,name=query_meta,json=queryMeta,proto3"`
+	xxx_hidden_QueryName  string                 `protobuf:"bytes,9,opt,name=query_name,json=queryName,proto3"`
+	xxx_hidden_Visibility Acl_Visibility         `protobuf:"varint,10,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	xxx_hidden_Automatic  bool                   `protobuf:"varint,11,opt,name=automatic,proto3"`
+	xxx_hidden_ExpireAt   *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=expire_at,json=expireAt,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *BriefJob) Reset() {
 	*x = BriefJob{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[33]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4920,7 +4392,7 @@ func (x *BriefJob) String() string {
 func (*BriefJob) ProtoMessage() {}
 
 func (x *BriefJob) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[33]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4933,134 +4405,101 @@ func (x *BriefJob) ProtoReflect() protoreflect.Message {
 
 func (x *BriefJob) GetMeta() *CommonMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *BriefJob) GetQueryMeta() *QueryMeta {
 	if x != nil {
-		return x.QueryMeta
+		return x.xxx_hidden_QueryMeta
 	}
 	return nil
 }
 
 func (x *BriefJob) GetQueryName() string {
-	if x != nil && x.QueryName != nil {
-		return *x.QueryName
+	if x != nil {
+		return x.xxx_hidden_QueryName
 	}
 	return ""
 }
 
 func (x *BriefJob) GetVisibility() Acl_Visibility {
-	if x != nil && x.Visibility != nil {
-		return *x.Visibility
+	if x != nil {
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
 func (x *BriefJob) GetAutomatic() bool {
-	if x != nil && x.Automatic != nil {
-		return *x.Automatic
+	if x != nil {
+		return x.xxx_hidden_Automatic
 	}
 	return false
 }
 
 func (x *BriefJob) GetExpireAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ExpireAt
+		return x.xxx_hidden_ExpireAt
 	}
 	return nil
 }
 
 func (x *BriefJob) SetMeta(v *CommonMeta) {
-	x.Meta = v
+	x.xxx_hidden_Meta = v
 }
 
 func (x *BriefJob) SetQueryMeta(v *QueryMeta) {
-	x.QueryMeta = v
+	x.xxx_hidden_QueryMeta = v
 }
 
 func (x *BriefJob) SetQueryName(v string) {
-	x.QueryName = &v
+	x.xxx_hidden_QueryName = v
 }
 
 func (x *BriefJob) SetVisibility(v Acl_Visibility) {
-	x.Visibility = &v
+	x.xxx_hidden_Visibility = v
 }
 
 func (x *BriefJob) SetAutomatic(v bool) {
-	x.Automatic = &v
+	x.xxx_hidden_Automatic = v
 }
 
 func (x *BriefJob) SetExpireAt(v *timestamppb.Timestamp) {
-	x.ExpireAt = v
+	x.xxx_hidden_ExpireAt = v
 }
 
 func (x *BriefJob) HasMeta() bool {
 	if x == nil {
 		return false
 	}
-	return x.Meta != nil
+	return x.xxx_hidden_Meta != nil
 }
 
 func (x *BriefJob) HasQueryMeta() bool {
 	if x == nil {
 		return false
 	}
-	return x.QueryMeta != nil
-}
-
-func (x *BriefJob) HasQueryName() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryName != nil
-}
-
-func (x *BriefJob) HasVisibility() bool {
-	if x == nil {
-		return false
-	}
-	return x.Visibility != nil
-}
-
-func (x *BriefJob) HasAutomatic() bool {
-	if x == nil {
-		return false
-	}
-	return x.Automatic != nil
+	return x.xxx_hidden_QueryMeta != nil
 }
 
 func (x *BriefJob) HasExpireAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.ExpireAt != nil
+	return x.xxx_hidden_ExpireAt != nil
 }
 
 func (x *BriefJob) ClearMeta() {
-	x.Meta = nil
+	x.xxx_hidden_Meta = nil
 }
 
 func (x *BriefJob) ClearQueryMeta() {
-	x.QueryMeta = nil
-}
-
-func (x *BriefJob) ClearQueryName() {
-	x.QueryName = nil
-}
-
-func (x *BriefJob) ClearVisibility() {
-	x.Visibility = nil
-}
-
-func (x *BriefJob) ClearAutomatic() {
-	x.Automatic = nil
+	x.xxx_hidden_QueryMeta = nil
 }
 
 func (x *BriefJob) ClearExpireAt() {
-	x.ExpireAt = nil
+	x.xxx_hidden_ExpireAt = nil
 }
 
 type BriefJob_builder struct {
@@ -5068,9 +4507,9 @@ type BriefJob_builder struct {
 
 	Meta       *CommonMeta
 	QueryMeta  *QueryMeta
-	QueryName  *string
-	Visibility *Acl_Visibility
-	Automatic  *bool
+	QueryName  string
+	Visibility Acl_Visibility
+	Automatic  bool
 	ExpireAt   *timestamppb.Timestamp
 }
 
@@ -5078,37 +4517,38 @@ func (b0 BriefJob_builder) Build() *BriefJob {
 	m0 := &BriefJob{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Meta = b.Meta
-	x.QueryMeta = b.QueryMeta
-	x.QueryName = b.QueryName
-	x.Visibility = b.Visibility
-	x.Automatic = b.Automatic
-	x.ExpireAt = b.ExpireAt
+	x.xxx_hidden_Meta = b.Meta
+	x.xxx_hidden_QueryMeta = b.QueryMeta
+	x.xxx_hidden_QueryName = b.QueryName
+	x.xxx_hidden_Visibility = b.Visibility
+	x.xxx_hidden_Automatic = b.Automatic
+	x.xxx_hidden_ExpireAt = b.ExpireAt
 	return m0
 }
 
 type Job struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Meta          *CommonMeta               `protobuf:"bytes,1,opt,name=meta" json:"meta,omitempty"`
-	Text          *string                   `protobuf:"bytes,2,opt,name=text" json:"text,omitempty"`
-	QueryMeta     *QueryMeta                `protobuf:"bytes,3,opt,name=query_meta,json=queryMeta" json:"query_meta,omitempty"`
-	Plan          *QueryPlan                `protobuf:"bytes,4,opt,name=plan" json:"plan,omitempty"`
-	Issue         []*Ydb_Issue.IssueMessage `protobuf:"bytes,5,rep,name=issue" json:"issue,omitempty"`
-	Statistics    *QueryStatistics          `protobuf:"bytes,6,opt,name=statistics" json:"statistics,omitempty"`
-	ResultSetMeta []*ResultSetMeta          `protobuf:"bytes,7,rep,name=result_set_meta,json=resultSetMeta" json:"result_set_meta,omitempty"`
-	Ast           *QueryAst                 `protobuf:"bytes,8,opt,name=ast" json:"ast,omitempty"`
-	QueryName     *string                   `protobuf:"bytes,9,opt,name=query_name,json=queryName" json:"query_name,omitempty"`
-	Acl           *Acl                      `protobuf:"bytes,10,opt,name=acl" json:"acl,omitempty"`
-	Automatic     *bool                     `protobuf:"varint,11,opt,name=automatic" json:"automatic,omitempty"`
-	ExpireAt      *timestamppb.Timestamp    `protobuf:"bytes,12,opt,name=expire_at,json=expireAt" json:"expire_at,omitempty"`
-	Syntax        *QueryContent_QuerySyntax `protobuf:"varint,13,opt,name=syntax,enum=FederatedQuery.QueryContent_QuerySyntax" json:"syntax,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Meta          *CommonMeta                `protobuf:"bytes,1,opt,name=meta,proto3"`
+	xxx_hidden_Text          string                     `protobuf:"bytes,2,opt,name=text,proto3"`
+	xxx_hidden_QueryMeta     *QueryMeta                 `protobuf:"bytes,3,opt,name=query_meta,json=queryMeta,proto3"`
+	xxx_hidden_Plan          *QueryPlan                 `protobuf:"bytes,4,opt,name=plan,proto3"`
+	xxx_hidden_Issue         *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,5,rep,name=issue,proto3"`
+	xxx_hidden_Statistics    *QueryStatistics           `protobuf:"bytes,6,opt,name=statistics,proto3"`
+	xxx_hidden_ResultSetMeta *[]*ResultSetMeta          `protobuf:"bytes,7,rep,name=result_set_meta,json=resultSetMeta,proto3"`
+	xxx_hidden_Ast           *QueryAst                  `protobuf:"bytes,8,opt,name=ast,proto3"`
+	xxx_hidden_QueryName     string                     `protobuf:"bytes,9,opt,name=query_name,json=queryName,proto3"`
+	xxx_hidden_Acl           *Acl                       `protobuf:"bytes,10,opt,name=acl,proto3"`
+	xxx_hidden_Automatic     bool                       `protobuf:"varint,11,opt,name=automatic,proto3"`
+	xxx_hidden_ExpireAt      *timestamppb.Timestamp     `protobuf:"bytes,12,opt,name=expire_at,json=expireAt,proto3"`
+	xxx_hidden_Syntax        QueryContent_QuerySyntax   `protobuf:"varint,13,opt,name=syntax,proto3,enum=FederatedQuery.QueryContent_QuerySyntax"`
+	xxx_hidden_Parameters    map[string]*Ydb.TypedValue `protobuf:"bytes,14,rep,name=parameters,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *Job) Reset() {
 	*x = Job{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[34]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5120,7 +4560,7 @@ func (x *Job) String() string {
 func (*Job) ProtoMessage() {}
 
 func (x *Job) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[34]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5133,321 +4573,294 @@ func (x *Job) ProtoReflect() protoreflect.Message {
 
 func (x *Job) GetMeta() *CommonMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *Job) GetText() string {
-	if x != nil && x.Text != nil {
-		return *x.Text
+	if x != nil {
+		return x.xxx_hidden_Text
 	}
 	return ""
 }
 
 func (x *Job) GetQueryMeta() *QueryMeta {
 	if x != nil {
-		return x.QueryMeta
+		return x.xxx_hidden_QueryMeta
 	}
 	return nil
 }
 
 func (x *Job) GetPlan() *QueryPlan {
 	if x != nil {
-		return x.Plan
+		return x.xxx_hidden_Plan
 	}
 	return nil
 }
 
 func (x *Job) GetIssue() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issue
+		if x.xxx_hidden_Issue != nil {
+			return *x.xxx_hidden_Issue
+		}
 	}
 	return nil
 }
 
 func (x *Job) GetStatistics() *QueryStatistics {
 	if x != nil {
-		return x.Statistics
+		return x.xxx_hidden_Statistics
 	}
 	return nil
 }
 
 func (x *Job) GetResultSetMeta() []*ResultSetMeta {
 	if x != nil {
-		return x.ResultSetMeta
+		if x.xxx_hidden_ResultSetMeta != nil {
+			return *x.xxx_hidden_ResultSetMeta
+		}
 	}
 	return nil
 }
 
 func (x *Job) GetAst() *QueryAst {
 	if x != nil {
-		return x.Ast
+		return x.xxx_hidden_Ast
 	}
 	return nil
 }
 
 func (x *Job) GetQueryName() string {
-	if x != nil && x.QueryName != nil {
-		return *x.QueryName
+	if x != nil {
+		return x.xxx_hidden_QueryName
 	}
 	return ""
 }
 
 func (x *Job) GetAcl() *Acl {
 	if x != nil {
-		return x.Acl
+		return x.xxx_hidden_Acl
 	}
 	return nil
 }
 
 func (x *Job) GetAutomatic() bool {
-	if x != nil && x.Automatic != nil {
-		return *x.Automatic
+	if x != nil {
+		return x.xxx_hidden_Automatic
 	}
 	return false
 }
 
 func (x *Job) GetExpireAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.ExpireAt
+		return x.xxx_hidden_ExpireAt
 	}
 	return nil
 }
 
 func (x *Job) GetSyntax() QueryContent_QuerySyntax {
-	if x != nil && x.Syntax != nil {
-		return *x.Syntax
+	if x != nil {
+		return x.xxx_hidden_Syntax
 	}
 	return QueryContent_QUERY_SYNTAX_UNSPECIFIED
 }
 
+func (x *Job) GetParameters() map[string]*Ydb.TypedValue {
+	if x != nil {
+		return x.xxx_hidden_Parameters
+	}
+	return nil
+}
+
 func (x *Job) SetMeta(v *CommonMeta) {
-	x.Meta = v
+	x.xxx_hidden_Meta = v
 }
 
 func (x *Job) SetText(v string) {
-	x.Text = &v
+	x.xxx_hidden_Text = v
 }
 
 func (x *Job) SetQueryMeta(v *QueryMeta) {
-	x.QueryMeta = v
+	x.xxx_hidden_QueryMeta = v
 }
 
 func (x *Job) SetPlan(v *QueryPlan) {
-	x.Plan = v
+	x.xxx_hidden_Plan = v
 }
 
 func (x *Job) SetIssue(v []*Ydb_Issue.IssueMessage) {
-	x.Issue = v
+	x.xxx_hidden_Issue = &v
 }
 
 func (x *Job) SetStatistics(v *QueryStatistics) {
-	x.Statistics = v
+	x.xxx_hidden_Statistics = v
 }
 
 func (x *Job) SetResultSetMeta(v []*ResultSetMeta) {
-	x.ResultSetMeta = v
+	x.xxx_hidden_ResultSetMeta = &v
 }
 
 func (x *Job) SetAst(v *QueryAst) {
-	x.Ast = v
+	x.xxx_hidden_Ast = v
 }
 
 func (x *Job) SetQueryName(v string) {
-	x.QueryName = &v
+	x.xxx_hidden_QueryName = v
 }
 
 func (x *Job) SetAcl(v *Acl) {
-	x.Acl = v
+	x.xxx_hidden_Acl = v
 }
 
 func (x *Job) SetAutomatic(v bool) {
-	x.Automatic = &v
+	x.xxx_hidden_Automatic = v
 }
 
 func (x *Job) SetExpireAt(v *timestamppb.Timestamp) {
-	x.ExpireAt = v
+	x.xxx_hidden_ExpireAt = v
 }
 
 func (x *Job) SetSyntax(v QueryContent_QuerySyntax) {
-	x.Syntax = &v
+	x.xxx_hidden_Syntax = v
+}
+
+func (x *Job) SetParameters(v map[string]*Ydb.TypedValue) {
+	x.xxx_hidden_Parameters = v
 }
 
 func (x *Job) HasMeta() bool {
 	if x == nil {
 		return false
 	}
-	return x.Meta != nil
-}
-
-func (x *Job) HasText() bool {
-	if x == nil {
-		return false
-	}
-	return x.Text != nil
+	return x.xxx_hidden_Meta != nil
 }
 
 func (x *Job) HasQueryMeta() bool {
 	if x == nil {
 		return false
 	}
-	return x.QueryMeta != nil
+	return x.xxx_hidden_QueryMeta != nil
 }
 
 func (x *Job) HasPlan() bool {
 	if x == nil {
 		return false
 	}
-	return x.Plan != nil
+	return x.xxx_hidden_Plan != nil
 }
 
 func (x *Job) HasStatistics() bool {
 	if x == nil {
 		return false
 	}
-	return x.Statistics != nil
+	return x.xxx_hidden_Statistics != nil
 }
 
 func (x *Job) HasAst() bool {
 	if x == nil {
 		return false
 	}
-	return x.Ast != nil
-}
-
-func (x *Job) HasQueryName() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryName != nil
+	return x.xxx_hidden_Ast != nil
 }
 
 func (x *Job) HasAcl() bool {
 	if x == nil {
 		return false
 	}
-	return x.Acl != nil
-}
-
-func (x *Job) HasAutomatic() bool {
-	if x == nil {
-		return false
-	}
-	return x.Automatic != nil
+	return x.xxx_hidden_Acl != nil
 }
 
 func (x *Job) HasExpireAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.ExpireAt != nil
-}
-
-func (x *Job) HasSyntax() bool {
-	if x == nil {
-		return false
-	}
-	return x.Syntax != nil
+	return x.xxx_hidden_ExpireAt != nil
 }
 
 func (x *Job) ClearMeta() {
-	x.Meta = nil
-}
-
-func (x *Job) ClearText() {
-	x.Text = nil
+	x.xxx_hidden_Meta = nil
 }
 
 func (x *Job) ClearQueryMeta() {
-	x.QueryMeta = nil
+	x.xxx_hidden_QueryMeta = nil
 }
 
 func (x *Job) ClearPlan() {
-	x.Plan = nil
+	x.xxx_hidden_Plan = nil
 }
 
 func (x *Job) ClearStatistics() {
-	x.Statistics = nil
+	x.xxx_hidden_Statistics = nil
 }
 
 func (x *Job) ClearAst() {
-	x.Ast = nil
-}
-
-func (x *Job) ClearQueryName() {
-	x.QueryName = nil
+	x.xxx_hidden_Ast = nil
 }
 
 func (x *Job) ClearAcl() {
-	x.Acl = nil
-}
-
-func (x *Job) ClearAutomatic() {
-	x.Automatic = nil
+	x.xxx_hidden_Acl = nil
 }
 
 func (x *Job) ClearExpireAt() {
-	x.ExpireAt = nil
-}
-
-func (x *Job) ClearSyntax() {
-	x.Syntax = nil
+	x.xxx_hidden_ExpireAt = nil
 }
 
 type Job_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Meta          *CommonMeta
-	Text          *string
+	Text          string
 	QueryMeta     *QueryMeta
 	Plan          *QueryPlan
 	Issue         []*Ydb_Issue.IssueMessage
 	Statistics    *QueryStatistics
 	ResultSetMeta []*ResultSetMeta
 	Ast           *QueryAst
-	QueryName     *string
+	QueryName     string
 	Acl           *Acl
-	Automatic     *bool
+	Automatic     bool
 	ExpireAt      *timestamppb.Timestamp
-	Syntax        *QueryContent_QuerySyntax
+	Syntax        QueryContent_QuerySyntax
+	Parameters    map[string]*Ydb.TypedValue
 }
 
 func (b0 Job_builder) Build() *Job {
 	m0 := &Job{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Meta = b.Meta
-	x.Text = b.Text
-	x.QueryMeta = b.QueryMeta
-	x.Plan = b.Plan
-	x.Issue = b.Issue
-	x.Statistics = b.Statistics
-	x.ResultSetMeta = b.ResultSetMeta
-	x.Ast = b.Ast
-	x.QueryName = b.QueryName
-	x.Acl = b.Acl
-	x.Automatic = b.Automatic
-	x.ExpireAt = b.ExpireAt
-	x.Syntax = b.Syntax
+	x.xxx_hidden_Meta = b.Meta
+	x.xxx_hidden_Text = b.Text
+	x.xxx_hidden_QueryMeta = b.QueryMeta
+	x.xxx_hidden_Plan = b.Plan
+	x.xxx_hidden_Issue = &b.Issue
+	x.xxx_hidden_Statistics = b.Statistics
+	x.xxx_hidden_ResultSetMeta = &b.ResultSetMeta
+	x.xxx_hidden_Ast = b.Ast
+	x.xxx_hidden_QueryName = b.QueryName
+	x.xxx_hidden_Acl = b.Acl
+	x.xxx_hidden_Automatic = b.Automatic
+	x.xxx_hidden_ExpireAt = b.ExpireAt
+	x.xxx_hidden_Syntax = b.Syntax
+	x.xxx_hidden_Parameters = b.Parameters
 	return m0
 }
 
 // Information about recent query runs
 type ListJobsRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	PageToken       *string                         `protobuf:"bytes,2,opt,name=page_token,json=pageToken" json:"page_token,omitempty"`
-	Limit           *int32                          `protobuf:"varint,3,opt,name=limit" json:"limit,omitempty"`
-	QueryId         *string                         `protobuf:"bytes,5,opt,name=query_id,json=queryId" json:"query_id,omitempty"` // deprecated
-	Filter          *ListJobsRequest_Filter         `protobuf:"bytes,4,opt,name=filter" json:"filter,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3"`
+	xxx_hidden_Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3"`
+	xxx_hidden_QueryId         string                          `protobuf:"bytes,5,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_Filter          *ListJobsRequest_Filter         `protobuf:"bytes,4,opt,name=filter,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListJobsRequest) Reset() {
 	*x = ListJobsRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[35]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5459,7 +4872,7 @@ func (x *ListJobsRequest) String() string {
 func (*ListJobsRequest) ProtoMessage() {}
 
 func (x *ListJobsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[35]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5472,121 +4885,88 @@ func (x *ListJobsRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ListJobsRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListJobsRequest) GetPageToken() string {
-	if x != nil && x.PageToken != nil {
-		return *x.PageToken
+	if x != nil {
+		return x.xxx_hidden_PageToken
 	}
 	return ""
 }
 
 func (x *ListJobsRequest) GetLimit() int32 {
-	if x != nil && x.Limit != nil {
-		return *x.Limit
+	if x != nil {
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
 func (x *ListJobsRequest) GetQueryId() string {
-	if x != nil && x.QueryId != nil {
-		return *x.QueryId
+	if x != nil {
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *ListJobsRequest) GetFilter() *ListJobsRequest_Filter {
 	if x != nil {
-		return x.Filter
+		return x.xxx_hidden_Filter
 	}
 	return nil
 }
 
 func (x *ListJobsRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ListJobsRequest) SetPageToken(v string) {
-	x.PageToken = &v
+	x.xxx_hidden_PageToken = v
 }
 
 func (x *ListJobsRequest) SetLimit(v int32) {
-	x.Limit = &v
+	x.xxx_hidden_Limit = v
 }
 
 func (x *ListJobsRequest) SetQueryId(v string) {
-	x.QueryId = &v
+	x.xxx_hidden_QueryId = v
 }
 
 func (x *ListJobsRequest) SetFilter(v *ListJobsRequest_Filter) {
-	x.Filter = v
+	x.xxx_hidden_Filter = v
 }
 
 func (x *ListJobsRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ListJobsRequest) HasPageToken() bool {
-	if x == nil {
-		return false
-	}
-	return x.PageToken != nil
-}
-
-func (x *ListJobsRequest) HasLimit() bool {
-	if x == nil {
-		return false
-	}
-	return x.Limit != nil
-}
-
-func (x *ListJobsRequest) HasQueryId() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ListJobsRequest) HasFilter() bool {
 	if x == nil {
 		return false
 	}
-	return x.Filter != nil
+	return x.xxx_hidden_Filter != nil
 }
 
 func (x *ListJobsRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ListJobsRequest) ClearPageToken() {
-	x.PageToken = nil
-}
-
-func (x *ListJobsRequest) ClearLimit() {
-	x.Limit = nil
-}
-
-func (x *ListJobsRequest) ClearQueryId() {
-	x.QueryId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ListJobsRequest) ClearFilter() {
-	x.Filter = nil
+	x.xxx_hidden_Filter = nil
 }
 
 type ListJobsRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	PageToken       *string
-	Limit           *int32
-	QueryId         *string
+	PageToken       string
+	Limit           int32
+	QueryId         string
 	Filter          *ListJobsRequest_Filter
 }
 
@@ -5594,24 +4974,24 @@ func (b0 ListJobsRequest_builder) Build() *ListJobsRequest {
 	m0 := &ListJobsRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.PageToken = b.PageToken
-	x.Limit = b.Limit
-	x.QueryId = b.QueryId
-	x.Filter = b.Filter
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_PageToken = b.PageToken
+	x.xxx_hidden_Limit = b.Limit
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_Filter = b.Filter
 	return m0
 }
 
 type ListJobsResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // ListJobsResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListJobsResponse) Reset() {
 	*x = ListJobsResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[36]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5623,7 +5003,7 @@ func (x *ListJobsResponse) String() string {
 func (*ListJobsResponse) ProtoMessage() {}
 
 func (x *ListJobsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[36]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5636,24 +5016,24 @@ func (x *ListJobsResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ListJobsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ListJobsResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ListJobsResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ListJobsResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ListJobsResponse_builder struct {
@@ -5666,21 +5046,21 @@ func (b0 ListJobsResponse_builder) Build() *ListJobsResponse {
 	m0 := &ListJobsResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ListJobsResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Job           []*BriefJob            `protobuf:"bytes,1,rep,name=job" json:"job,omitempty"`
-	NextPageToken *string                `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Job           *[]*BriefJob           `protobuf:"bytes,1,rep,name=job,proto3"`
+	xxx_hidden_NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListJobsResult) Reset() {
 	*x = ListJobsResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[37]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5692,7 +5072,7 @@ func (x *ListJobsResult) String() string {
 func (*ListJobsResult) ProtoMessage() {}
 
 func (x *ListJobsResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[37]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5705,65 +5085,56 @@ func (x *ListJobsResult) ProtoReflect() protoreflect.Message {
 
 func (x *ListJobsResult) GetJob() []*BriefJob {
 	if x != nil {
-		return x.Job
+		if x.xxx_hidden_Job != nil {
+			return *x.xxx_hidden_Job
+		}
 	}
 	return nil
 }
 
 func (x *ListJobsResult) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.xxx_hidden_NextPageToken
 	}
 	return ""
 }
 
 func (x *ListJobsResult) SetJob(v []*BriefJob) {
-	x.Job = v
+	x.xxx_hidden_Job = &v
 }
 
 func (x *ListJobsResult) SetNextPageToken(v string) {
-	x.NextPageToken = &v
-}
-
-func (x *ListJobsResult) HasNextPageToken() bool {
-	if x == nil {
-		return false
-	}
-	return x.NextPageToken != nil
-}
-
-func (x *ListJobsResult) ClearNextPageToken() {
-	x.NextPageToken = nil
+	x.xxx_hidden_NextPageToken = v
 }
 
 type ListJobsResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Job           []*BriefJob
-	NextPageToken *string
+	NextPageToken string
 }
 
 func (b0 ListJobsResult_builder) Build() *ListJobsResult {
 	m0 := &ListJobsResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Job = b.Job
-	x.NextPageToken = b.NextPageToken
+	x.xxx_hidden_Job = &b.Job
+	x.xxx_hidden_NextPageToken = b.NextPageToken
 	return m0
 }
 
 // Getting information about the job
 type DescribeJobRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	JobId           *string                         `protobuf:"bytes,2,opt,name=job_id,json=jobId" json:"job_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_JobId           string                          `protobuf:"bytes,2,opt,name=job_id,json=jobId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeJobRequest) Reset() {
 	*x = DescribeJobRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[38]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5775,7 +5146,7 @@ func (x *DescribeJobRequest) String() string {
 func (*DescribeJobRequest) ProtoMessage() {}
 
 func (x *DescribeJobRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[38]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5788,74 +5159,63 @@ func (x *DescribeJobRequest) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeJobRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeJobRequest) GetJobId() string {
-	if x != nil && x.JobId != nil {
-		return *x.JobId
+	if x != nil {
+		return x.xxx_hidden_JobId
 	}
 	return ""
 }
 
 func (x *DescribeJobRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DescribeJobRequest) SetJobId(v string) {
-	x.JobId = &v
+	x.xxx_hidden_JobId = v
 }
 
 func (x *DescribeJobRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DescribeJobRequest) HasJobId() bool {
-	if x == nil {
-		return false
-	}
-	return x.JobId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DescribeJobRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *DescribeJobRequest) ClearJobId() {
-	x.JobId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DescribeJobRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	JobId           *string
+	JobId           string
 }
 
 func (b0 DescribeJobRequest_builder) Build() *DescribeJobRequest {
 	m0 := &DescribeJobRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.JobId = b.JobId
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_JobId = b.JobId
 	return m0
 }
 
 type DescribeJobResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // DescribeJobResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeJobResponse) Reset() {
 	*x = DescribeJobResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[39]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5867,7 +5227,7 @@ func (x *DescribeJobResponse) String() string {
 func (*DescribeJobResponse) ProtoMessage() {}
 
 func (x *DescribeJobResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[39]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5880,24 +5240,24 @@ func (x *DescribeJobResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeJobResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DescribeJobResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DescribeJobResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DescribeJobResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DescribeJobResponse_builder struct {
@@ -5910,20 +5270,20 @@ func (b0 DescribeJobResponse_builder) Build() *DescribeJobResponse {
 	m0 := &DescribeJobResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DescribeJobResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Job           *Job                   `protobuf:"bytes,1,opt,name=job" json:"job,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Job *Job                   `protobuf:"bytes,1,opt,name=job,proto3"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *DescribeJobResult) Reset() {
 	*x = DescribeJobResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[40]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5935,7 +5295,7 @@ func (x *DescribeJobResult) String() string {
 func (*DescribeJobResult) ProtoMessage() {}
 
 func (x *DescribeJobResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[40]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5948,24 +5308,24 @@ func (x *DescribeJobResult) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeJobResult) GetJob() *Job {
 	if x != nil {
-		return x.Job
+		return x.xxx_hidden_Job
 	}
 	return nil
 }
 
 func (x *DescribeJobResult) SetJob(v *Job) {
-	x.Job = v
+	x.xxx_hidden_Job = v
 }
 
 func (x *DescribeJobResult) HasJob() bool {
 	if x == nil {
 		return false
 	}
-	return x.Job != nil
+	return x.xxx_hidden_Job != nil
 }
 
 func (x *DescribeJobResult) ClearJob() {
-	x.Job = nil
+	x.xxx_hidden_Job = nil
 }
 
 type DescribeJobResult_builder struct {
@@ -5978,19 +5338,19 @@ func (b0 DescribeJobResult_builder) Build() *DescribeJobResult {
 	m0 := &DescribeJobResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Job = b.Job
+	x.xxx_hidden_Job = b.Job
 	return m0
 }
 
 type CurrentIAMTokenAuth struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CurrentIAMTokenAuth) Reset() {
 	*x = CurrentIAMTokenAuth{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[41]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6002,7 +5362,7 @@ func (x *CurrentIAMTokenAuth) String() string {
 func (*CurrentIAMTokenAuth) ProtoMessage() {}
 
 func (x *CurrentIAMTokenAuth) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[41]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6026,14 +5386,14 @@ func (b0 CurrentIAMTokenAuth_builder) Build() *CurrentIAMTokenAuth {
 }
 
 type NoneAuth struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *NoneAuth) Reset() {
 	*x = NoneAuth{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[42]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6045,7 +5405,7 @@ func (x *NoneAuth) String() string {
 func (*NoneAuth) ProtoMessage() {}
 
 func (x *NoneAuth) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[42]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6069,15 +5429,15 @@ func (b0 NoneAuth_builder) Build() *NoneAuth {
 }
 
 type ServiceAccountAuth struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Id            *string                `protobuf:"bytes,1,opt,name=id" json:"id,omitempty"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id string                 `protobuf:"bytes,1,opt,name=id,proto3"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ServiceAccountAuth) Reset() {
 	*x = ServiceAccountAuth{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[43]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6089,7 +5449,7 @@ func (x *ServiceAccountAuth) String() string {
 func (*ServiceAccountAuth) ProtoMessage() {}
 
 func (x *ServiceAccountAuth) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[43]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6101,56 +5461,97 @@ func (x *ServiceAccountAuth) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ServiceAccountAuth) GetId() string {
-	if x != nil && x.Id != nil {
-		return *x.Id
+	if x != nil {
+		return x.xxx_hidden_Id
 	}
 	return ""
 }
 
 func (x *ServiceAccountAuth) SetId(v string) {
-	x.Id = &v
-}
-
-func (x *ServiceAccountAuth) HasId() bool {
-	if x == nil {
-		return false
-	}
-	return x.Id != nil
-}
-
-func (x *ServiceAccountAuth) ClearId() {
-	x.Id = nil
+	x.xxx_hidden_Id = v
 }
 
 type ServiceAccountAuth_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Id *string
+	Id string
 }
 
 func (b0 ServiceAccountAuth_builder) Build() *ServiceAccountAuth {
 	m0 := &ServiceAccountAuth{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Id = b.Id
+	x.xxx_hidden_Id = b.Id
+	return m0
+}
+
+type TokenAuth struct {
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Token string                 `protobuf:"bytes,1,opt,name=token,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *TokenAuth) Reset() {
+	*x = TokenAuth{}
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TokenAuth) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TokenAuth) ProtoMessage() {}
+
+func (x *TokenAuth) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *TokenAuth) GetToken() string {
+	if x != nil {
+		return x.xxx_hidden_Token
+	}
+	return ""
+}
+
+func (x *TokenAuth) SetToken(v string) {
+	x.xxx_hidden_Token = v
+}
+
+type TokenAuth_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Token string
+}
+
+func (b0 TokenAuth_builder) Build() *TokenAuth {
+	m0 := &TokenAuth{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Token = b.Token
 	return m0
 }
 
 type IamAuth struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Types that are valid to be assigned to Identity:
-	//
-	//	*IamAuth_CurrentIam
-	//	*IamAuth_ServiceAccount
-	//	*IamAuth_None
-	Identity      isIamAuth_Identity `protobuf_oneof:"identity"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Identity isIamAuth_Identity     `protobuf_oneof:"identity"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *IamAuth) Reset() {
 	*x = IamAuth{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[44]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6162,7 +5563,7 @@ func (x *IamAuth) String() string {
 func (*IamAuth) ProtoMessage() {}
 
 func (x *IamAuth) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[44]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6173,16 +5574,9 @@ func (x *IamAuth) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *IamAuth) GetIdentity() isIamAuth_Identity {
-	if x != nil {
-		return x.Identity
-	}
-	return nil
-}
-
 func (x *IamAuth) GetCurrentIam() *CurrentIAMTokenAuth {
 	if x != nil {
-		if x, ok := x.Identity.(*IamAuth_CurrentIam); ok {
+		if x, ok := x.xxx_hidden_Identity.(*iamAuth_CurrentIam); ok {
 			return x.CurrentIam
 		}
 	}
@@ -6191,7 +5585,7 @@ func (x *IamAuth) GetCurrentIam() *CurrentIAMTokenAuth {
 
 func (x *IamAuth) GetServiceAccount() *ServiceAccountAuth {
 	if x != nil {
-		if x, ok := x.Identity.(*IamAuth_ServiceAccount); ok {
+		if x, ok := x.xxx_hidden_Identity.(*iamAuth_ServiceAccount); ok {
 			return x.ServiceAccount
 		}
 	}
@@ -6200,8 +5594,17 @@ func (x *IamAuth) GetServiceAccount() *ServiceAccountAuth {
 
 func (x *IamAuth) GetNone() *NoneAuth {
 	if x != nil {
-		if x, ok := x.Identity.(*IamAuth_None); ok {
+		if x, ok := x.xxx_hidden_Identity.(*iamAuth_None); ok {
 			return x.None
+		}
+	}
+	return nil
+}
+
+func (x *IamAuth) GetToken() *TokenAuth {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Identity.(*iamAuth_Token); ok {
+			return x.Token
 		}
 	}
 	return nil
@@ -6209,40 +5612,48 @@ func (x *IamAuth) GetNone() *NoneAuth {
 
 func (x *IamAuth) SetCurrentIam(v *CurrentIAMTokenAuth) {
 	if v == nil {
-		x.Identity = nil
+		x.xxx_hidden_Identity = nil
 		return
 	}
-	x.Identity = &IamAuth_CurrentIam{v}
+	x.xxx_hidden_Identity = &iamAuth_CurrentIam{v}
 }
 
 func (x *IamAuth) SetServiceAccount(v *ServiceAccountAuth) {
 	if v == nil {
-		x.Identity = nil
+		x.xxx_hidden_Identity = nil
 		return
 	}
-	x.Identity = &IamAuth_ServiceAccount{v}
+	x.xxx_hidden_Identity = &iamAuth_ServiceAccount{v}
 }
 
 func (x *IamAuth) SetNone(v *NoneAuth) {
 	if v == nil {
-		x.Identity = nil
+		x.xxx_hidden_Identity = nil
 		return
 	}
-	x.Identity = &IamAuth_None{v}
+	x.xxx_hidden_Identity = &iamAuth_None{v}
+}
+
+func (x *IamAuth) SetToken(v *TokenAuth) {
+	if v == nil {
+		x.xxx_hidden_Identity = nil
+		return
+	}
+	x.xxx_hidden_Identity = &iamAuth_Token{v}
 }
 
 func (x *IamAuth) HasIdentity() bool {
 	if x == nil {
 		return false
 	}
-	return x.Identity != nil
+	return x.xxx_hidden_Identity != nil
 }
 
 func (x *IamAuth) HasCurrentIam() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Identity.(*IamAuth_CurrentIam)
+	_, ok := x.xxx_hidden_Identity.(*iamAuth_CurrentIam)
 	return ok
 }
 
@@ -6250,7 +5661,7 @@ func (x *IamAuth) HasServiceAccount() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Identity.(*IamAuth_ServiceAccount)
+	_, ok := x.xxx_hidden_Identity.(*iamAuth_ServiceAccount)
 	return ok
 }
 
@@ -6258,29 +5669,43 @@ func (x *IamAuth) HasNone() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Identity.(*IamAuth_None)
+	_, ok := x.xxx_hidden_Identity.(*iamAuth_None)
+	return ok
+}
+
+func (x *IamAuth) HasToken() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Identity.(*iamAuth_Token)
 	return ok
 }
 
 func (x *IamAuth) ClearIdentity() {
-	x.Identity = nil
+	x.xxx_hidden_Identity = nil
 }
 
 func (x *IamAuth) ClearCurrentIam() {
-	if _, ok := x.Identity.(*IamAuth_CurrentIam); ok {
-		x.Identity = nil
+	if _, ok := x.xxx_hidden_Identity.(*iamAuth_CurrentIam); ok {
+		x.xxx_hidden_Identity = nil
 	}
 }
 
 func (x *IamAuth) ClearServiceAccount() {
-	if _, ok := x.Identity.(*IamAuth_ServiceAccount); ok {
-		x.Identity = nil
+	if _, ok := x.xxx_hidden_Identity.(*iamAuth_ServiceAccount); ok {
+		x.xxx_hidden_Identity = nil
 	}
 }
 
 func (x *IamAuth) ClearNone() {
-	if _, ok := x.Identity.(*IamAuth_None); ok {
-		x.Identity = nil
+	if _, ok := x.xxx_hidden_Identity.(*iamAuth_None); ok {
+		x.xxx_hidden_Identity = nil
+	}
+}
+
+func (x *IamAuth) ClearToken() {
+	if _, ok := x.xxx_hidden_Identity.(*iamAuth_Token); ok {
+		x.xxx_hidden_Identity = nil
 	}
 }
 
@@ -6288,18 +5713,21 @@ const IamAuth_Identity_not_set_case case_IamAuth_Identity = 0
 const IamAuth_CurrentIam_case case_IamAuth_Identity = 1
 const IamAuth_ServiceAccount_case case_IamAuth_Identity = 2
 const IamAuth_None_case case_IamAuth_Identity = 3
+const IamAuth_Token_case case_IamAuth_Identity = 4
 
 func (x *IamAuth) WhichIdentity() case_IamAuth_Identity {
 	if x == nil {
 		return IamAuth_Identity_not_set_case
 	}
-	switch x.Identity.(type) {
-	case *IamAuth_CurrentIam:
+	switch x.xxx_hidden_Identity.(type) {
+	case *iamAuth_CurrentIam:
 		return IamAuth_CurrentIam_case
-	case *IamAuth_ServiceAccount:
+	case *iamAuth_ServiceAccount:
 		return IamAuth_ServiceAccount_case
-	case *IamAuth_None:
+	case *iamAuth_None:
 		return IamAuth_None_case
+	case *iamAuth_Token:
+		return IamAuth_Token_case
 	default:
 		return IamAuth_Identity_not_set_case
 	}
@@ -6308,11 +5736,12 @@ func (x *IamAuth) WhichIdentity() case_IamAuth_Identity {
 type IamAuth_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof Identity:
+	// Fields of oneof xxx_hidden_Identity:
 	CurrentIam     *CurrentIAMTokenAuth
 	ServiceAccount *ServiceAccountAuth
 	None           *NoneAuth
-	// -- end of Identity
+	Token          *TokenAuth
+	// -- end of xxx_hidden_Identity
 }
 
 func (b0 IamAuth_builder) Build() *IamAuth {
@@ -6320,13 +5749,16 @@ func (b0 IamAuth_builder) Build() *IamAuth {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.CurrentIam != nil {
-		x.Identity = &IamAuth_CurrentIam{b.CurrentIam}
+		x.xxx_hidden_Identity = &iamAuth_CurrentIam{b.CurrentIam}
 	}
 	if b.ServiceAccount != nil {
-		x.Identity = &IamAuth_ServiceAccount{b.ServiceAccount}
+		x.xxx_hidden_Identity = &iamAuth_ServiceAccount{b.ServiceAccount}
 	}
 	if b.None != nil {
-		x.Identity = &IamAuth_None{b.None}
+		x.xxx_hidden_Identity = &iamAuth_None{b.None}
+	}
+	if b.Token != nil {
+		x.xxx_hidden_Identity = &iamAuth_Token{b.Token}
 	}
 	return m0
 }
@@ -6334,7 +5766,7 @@ func (b0 IamAuth_builder) Build() *IamAuth {
 type case_IamAuth_Identity protoreflect.FieldNumber
 
 func (x case_IamAuth_Identity) String() string {
-	md := file_draft_protos_ydb_federated_query_proto_msgTypes[44].Descriptor()
+	md := file_draft_protos_ydb_federated_query_proto_msgTypes[46].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -6345,39 +5777,45 @@ type isIamAuth_Identity interface {
 	isIamAuth_Identity()
 }
 
-type IamAuth_CurrentIam struct {
-	CurrentIam *CurrentIAMTokenAuth `protobuf:"bytes,1,opt,name=current_iam,json=currentIam,oneof"`
+type iamAuth_CurrentIam struct {
+	CurrentIam *CurrentIAMTokenAuth `protobuf:"bytes,1,opt,name=current_iam,json=currentIam,proto3,oneof"`
 }
 
-type IamAuth_ServiceAccount struct {
-	ServiceAccount *ServiceAccountAuth `protobuf:"bytes,2,opt,name=service_account,json=serviceAccount,oneof"`
+type iamAuth_ServiceAccount struct {
+	ServiceAccount *ServiceAccountAuth `protobuf:"bytes,2,opt,name=service_account,json=serviceAccount,proto3,oneof"`
 }
 
-type IamAuth_None struct {
-	None *NoneAuth `protobuf:"bytes,3,opt,name=none,oneof"`
+type iamAuth_None struct {
+	None *NoneAuth `protobuf:"bytes,3,opt,name=none,proto3,oneof"`
 }
 
-func (*IamAuth_CurrentIam) isIamAuth_Identity() {}
+type iamAuth_Token struct {
+	Token *TokenAuth `protobuf:"bytes,4,opt,name=token,proto3,oneof"`
+}
 
-func (*IamAuth_ServiceAccount) isIamAuth_Identity() {}
+func (*iamAuth_CurrentIam) isIamAuth_Identity() {}
 
-func (*IamAuth_None) isIamAuth_Identity() {}
+func (*iamAuth_ServiceAccount) isIamAuth_Identity() {}
+
+func (*iamAuth_None) isIamAuth_Identity() {}
+
+func (*iamAuth_Token) isIamAuth_Identity() {}
 
 type DataStreams struct {
-	state      protoimpl.MessageState `protogen:"hybrid.v1"`
-	DatabaseId *string                `protobuf:"bytes,1,opt,name=database_id,json=databaseId" json:"database_id,omitempty"`
-	Auth       *IamAuth               `protobuf:"bytes,2,opt,name=auth" json:"auth,omitempty"`
-	// for internal usage
-	Endpoint      *string `protobuf:"bytes,3,opt,name=endpoint" json:"endpoint,omitempty"`
-	Database      *string `protobuf:"bytes,4,opt,name=database" json:"database,omitempty"`
-	Secure        *bool   `protobuf:"varint,5,opt,name=secure" json:"secure,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DatabaseId    string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3"`
+	xxx_hidden_Auth          *IamAuth               `protobuf:"bytes,2,opt,name=auth,proto3"`
+	xxx_hidden_Endpoint      string                 `protobuf:"bytes,3,opt,name=endpoint,proto3"`
+	xxx_hidden_Database      string                 `protobuf:"bytes,4,opt,name=database,proto3"`
+	xxx_hidden_Secure        bool                   `protobuf:"varint,5,opt,name=secure,proto3"`
+	xxx_hidden_SharedReading bool                   `protobuf:"varint,6,opt,name=shared_reading,json=sharedReading,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *DataStreams) Reset() {
 	*x = DataStreams{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[45]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6389,7 +5827,7 @@ func (x *DataStreams) String() string {
 func (*DataStreams) ProtoMessage() {}
 
 func (x *DataStreams) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[45]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6401,150 +5839,119 @@ func (x *DataStreams) ProtoReflect() protoreflect.Message {
 }
 
 func (x *DataStreams) GetDatabaseId() string {
-	if x != nil && x.DatabaseId != nil {
-		return *x.DatabaseId
+	if x != nil {
+		return x.xxx_hidden_DatabaseId
 	}
 	return ""
 }
 
 func (x *DataStreams) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
 func (x *DataStreams) GetEndpoint() string {
-	if x != nil && x.Endpoint != nil {
-		return *x.Endpoint
+	if x != nil {
+		return x.xxx_hidden_Endpoint
 	}
 	return ""
 }
 
 func (x *DataStreams) GetDatabase() string {
-	if x != nil && x.Database != nil {
-		return *x.Database
+	if x != nil {
+		return x.xxx_hidden_Database
 	}
 	return ""
 }
 
 func (x *DataStreams) GetSecure() bool {
-	if x != nil && x.Secure != nil {
-		return *x.Secure
+	if x != nil {
+		return x.xxx_hidden_Secure
+	}
+	return false
+}
+
+func (x *DataStreams) GetSharedReading() bool {
+	if x != nil {
+		return x.xxx_hidden_SharedReading
 	}
 	return false
 }
 
 func (x *DataStreams) SetDatabaseId(v string) {
-	x.DatabaseId = &v
+	x.xxx_hidden_DatabaseId = v
 }
 
 func (x *DataStreams) SetAuth(v *IamAuth) {
-	x.Auth = v
+	x.xxx_hidden_Auth = v
 }
 
 func (x *DataStreams) SetEndpoint(v string) {
-	x.Endpoint = &v
+	x.xxx_hidden_Endpoint = v
 }
 
 func (x *DataStreams) SetDatabase(v string) {
-	x.Database = &v
+	x.xxx_hidden_Database = v
 }
 
 func (x *DataStreams) SetSecure(v bool) {
-	x.Secure = &v
+	x.xxx_hidden_Secure = v
 }
 
-func (x *DataStreams) HasDatabaseId() bool {
-	if x == nil {
-		return false
-	}
-	return x.DatabaseId != nil
+func (x *DataStreams) SetSharedReading(v bool) {
+	x.xxx_hidden_SharedReading = v
 }
 
 func (x *DataStreams) HasAuth() bool {
 	if x == nil {
 		return false
 	}
-	return x.Auth != nil
-}
-
-func (x *DataStreams) HasEndpoint() bool {
-	if x == nil {
-		return false
-	}
-	return x.Endpoint != nil
-}
-
-func (x *DataStreams) HasDatabase() bool {
-	if x == nil {
-		return false
-	}
-	return x.Database != nil
-}
-
-func (x *DataStreams) HasSecure() bool {
-	if x == nil {
-		return false
-	}
-	return x.Secure != nil
-}
-
-func (x *DataStreams) ClearDatabaseId() {
-	x.DatabaseId = nil
+	return x.xxx_hidden_Auth != nil
 }
 
 func (x *DataStreams) ClearAuth() {
-	x.Auth = nil
-}
-
-func (x *DataStreams) ClearEndpoint() {
-	x.Endpoint = nil
-}
-
-func (x *DataStreams) ClearDatabase() {
-	x.Database = nil
-}
-
-func (x *DataStreams) ClearSecure() {
-	x.Secure = nil
+	x.xxx_hidden_Auth = nil
 }
 
 type DataStreams_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	DatabaseId *string
+	DatabaseId string
 	Auth       *IamAuth
 	// for internal usage
-	Endpoint *string
-	Database *string
-	Secure   *bool
+	Endpoint      string
+	Database      string
+	Secure        bool
+	SharedReading bool
 }
 
 func (b0 DataStreams_builder) Build() *DataStreams {
 	m0 := &DataStreams{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.DatabaseId = b.DatabaseId
-	x.Auth = b.Auth
-	x.Endpoint = b.Endpoint
-	x.Database = b.Database
-	x.Secure = b.Secure
+	x.xxx_hidden_DatabaseId = b.DatabaseId
+	x.xxx_hidden_Auth = b.Auth
+	x.xxx_hidden_Endpoint = b.Endpoint
+	x.xxx_hidden_Database = b.Database
+	x.xxx_hidden_Secure = b.Secure
+	x.xxx_hidden_SharedReading = b.SharedReading
 	return m0
 }
 
 type Monitoring struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Project       *string                `protobuf:"bytes,1,opt,name=project" json:"project,omitempty"`
-	Cluster       *string                `protobuf:"bytes,2,opt,name=cluster" json:"cluster,omitempty"`
-	Auth          *IamAuth               `protobuf:"bytes,3,opt,name=auth" json:"auth,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Project string                 `protobuf:"bytes,1,opt,name=project,proto3"`
+	xxx_hidden_Cluster string                 `protobuf:"bytes,2,opt,name=cluster,proto3"`
+	xxx_hidden_Auth    *IamAuth               `protobuf:"bytes,3,opt,name=auth,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Monitoring) Reset() {
 	*x = Monitoring{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[46]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6556,7 +5963,7 @@ func (x *Monitoring) String() string {
 func (*Monitoring) ProtoMessage() {}
 
 func (x *Monitoring) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[46]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6568,76 +5975,54 @@ func (x *Monitoring) ProtoReflect() protoreflect.Message {
 }
 
 func (x *Monitoring) GetProject() string {
-	if x != nil && x.Project != nil {
-		return *x.Project
+	if x != nil {
+		return x.xxx_hidden_Project
 	}
 	return ""
 }
 
 func (x *Monitoring) GetCluster() string {
-	if x != nil && x.Cluster != nil {
-		return *x.Cluster
+	if x != nil {
+		return x.xxx_hidden_Cluster
 	}
 	return ""
 }
 
 func (x *Monitoring) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
 func (x *Monitoring) SetProject(v string) {
-	x.Project = &v
+	x.xxx_hidden_Project = v
 }
 
 func (x *Monitoring) SetCluster(v string) {
-	x.Cluster = &v
+	x.xxx_hidden_Cluster = v
 }
 
 func (x *Monitoring) SetAuth(v *IamAuth) {
-	x.Auth = v
-}
-
-func (x *Monitoring) HasProject() bool {
-	if x == nil {
-		return false
-	}
-	return x.Project != nil
-}
-
-func (x *Monitoring) HasCluster() bool {
-	if x == nil {
-		return false
-	}
-	return x.Cluster != nil
+	x.xxx_hidden_Auth = v
 }
 
 func (x *Monitoring) HasAuth() bool {
 	if x == nil {
 		return false
 	}
-	return x.Auth != nil
-}
-
-func (x *Monitoring) ClearProject() {
-	x.Project = nil
-}
-
-func (x *Monitoring) ClearCluster() {
-	x.Cluster = nil
+	return x.xxx_hidden_Auth != nil
 }
 
 func (x *Monitoring) ClearAuth() {
-	x.Auth = nil
+	x.xxx_hidden_Auth = nil
 }
 
 type Monitoring_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Project *string
-	Cluster *string
+	Project string
+	Cluster string
 	Auth    *IamAuth
 }
 
@@ -6645,27 +6030,26 @@ func (b0 Monitoring_builder) Build() *Monitoring {
 	m0 := &Monitoring{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Project = b.Project
-	x.Cluster = b.Cluster
-	x.Auth = b.Auth
+	x.xxx_hidden_Project = b.Project
+	x.xxx_hidden_Cluster = b.Cluster
+	x.xxx_hidden_Auth = b.Auth
 	return m0
 }
 
 type YdbDatabase struct {
-	state      protoimpl.MessageState `protogen:"hybrid.v1"`
-	DatabaseId *string                `protobuf:"bytes,1,opt,name=database_id,json=databaseId" json:"database_id,omitempty"`
-	Auth       *IamAuth               `protobuf:"bytes,2,opt,name=auth" json:"auth,omitempty"`
-	// for internal usage
-	Endpoint      *string `protobuf:"bytes,3,opt,name=endpoint" json:"endpoint,omitempty"`
-	Database      *string `protobuf:"bytes,4,opt,name=database" json:"database,omitempty"`
-	Secure        *bool   `protobuf:"varint,5,opt,name=secure" json:"secure,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DatabaseId string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3"`
+	xxx_hidden_Auth       *IamAuth               `protobuf:"bytes,2,opt,name=auth,proto3"`
+	xxx_hidden_Endpoint   string                 `protobuf:"bytes,3,opt,name=endpoint,proto3"`
+	xxx_hidden_Database   string                 `protobuf:"bytes,4,opt,name=database,proto3"`
+	xxx_hidden_Secure     bool                   `protobuf:"varint,5,opt,name=secure,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *YdbDatabase) Reset() {
 	*x = YdbDatabase{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[47]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6677,7 +6061,7 @@ func (x *YdbDatabase) String() string {
 func (*YdbDatabase) ProtoMessage() {}
 
 func (x *YdbDatabase) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[47]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6689,156 +6073,111 @@ func (x *YdbDatabase) ProtoReflect() protoreflect.Message {
 }
 
 func (x *YdbDatabase) GetDatabaseId() string {
-	if x != nil && x.DatabaseId != nil {
-		return *x.DatabaseId
+	if x != nil {
+		return x.xxx_hidden_DatabaseId
 	}
 	return ""
 }
 
 func (x *YdbDatabase) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
 func (x *YdbDatabase) GetEndpoint() string {
-	if x != nil && x.Endpoint != nil {
-		return *x.Endpoint
+	if x != nil {
+		return x.xxx_hidden_Endpoint
 	}
 	return ""
 }
 
 func (x *YdbDatabase) GetDatabase() string {
-	if x != nil && x.Database != nil {
-		return *x.Database
+	if x != nil {
+		return x.xxx_hidden_Database
 	}
 	return ""
 }
 
 func (x *YdbDatabase) GetSecure() bool {
-	if x != nil && x.Secure != nil {
-		return *x.Secure
+	if x != nil {
+		return x.xxx_hidden_Secure
 	}
 	return false
 }
 
 func (x *YdbDatabase) SetDatabaseId(v string) {
-	x.DatabaseId = &v
+	x.xxx_hidden_DatabaseId = v
 }
 
 func (x *YdbDatabase) SetAuth(v *IamAuth) {
-	x.Auth = v
+	x.xxx_hidden_Auth = v
 }
 
 func (x *YdbDatabase) SetEndpoint(v string) {
-	x.Endpoint = &v
+	x.xxx_hidden_Endpoint = v
 }
 
 func (x *YdbDatabase) SetDatabase(v string) {
-	x.Database = &v
+	x.xxx_hidden_Database = v
 }
 
 func (x *YdbDatabase) SetSecure(v bool) {
-	x.Secure = &v
-}
-
-func (x *YdbDatabase) HasDatabaseId() bool {
-	if x == nil {
-		return false
-	}
-	return x.DatabaseId != nil
+	x.xxx_hidden_Secure = v
 }
 
 func (x *YdbDatabase) HasAuth() bool {
 	if x == nil {
 		return false
 	}
-	return x.Auth != nil
-}
-
-func (x *YdbDatabase) HasEndpoint() bool {
-	if x == nil {
-		return false
-	}
-	return x.Endpoint != nil
-}
-
-func (x *YdbDatabase) HasDatabase() bool {
-	if x == nil {
-		return false
-	}
-	return x.Database != nil
-}
-
-func (x *YdbDatabase) HasSecure() bool {
-	if x == nil {
-		return false
-	}
-	return x.Secure != nil
-}
-
-func (x *YdbDatabase) ClearDatabaseId() {
-	x.DatabaseId = nil
+	return x.xxx_hidden_Auth != nil
 }
 
 func (x *YdbDatabase) ClearAuth() {
-	x.Auth = nil
-}
-
-func (x *YdbDatabase) ClearEndpoint() {
-	x.Endpoint = nil
-}
-
-func (x *YdbDatabase) ClearDatabase() {
-	x.Database = nil
-}
-
-func (x *YdbDatabase) ClearSecure() {
-	x.Secure = nil
+	x.xxx_hidden_Auth = nil
 }
 
 type YdbDatabase_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	DatabaseId *string
+	DatabaseId string
 	Auth       *IamAuth
 	// for internal usage
-	Endpoint *string
-	Database *string
-	Secure   *bool
+	Endpoint string
+	Database string
+	Secure   bool
 }
 
 func (b0 YdbDatabase_builder) Build() *YdbDatabase {
 	m0 := &YdbDatabase{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.DatabaseId = b.DatabaseId
-	x.Auth = b.Auth
-	x.Endpoint = b.Endpoint
-	x.Database = b.Database
-	x.Secure = b.Secure
+	x.xxx_hidden_DatabaseId = b.DatabaseId
+	x.xxx_hidden_Auth = b.Auth
+	x.xxx_hidden_Endpoint = b.Endpoint
+	x.xxx_hidden_Database = b.Database
+	x.xxx_hidden_Secure = b.Secure
 	return m0
 }
 
 type ClickHouseCluster struct {
-	state        protoimpl.MessageState `protogen:"hybrid.v1"`
-	DatabaseId   *string                `protobuf:"bytes,1,opt,name=database_id,json=databaseId" json:"database_id,omitempty"`
-	DatabaseName *string                `protobuf:"bytes,8,opt,name=database_name,json=databaseName" json:"database_name,omitempty"`
-	Login        *string                `protobuf:"bytes,2,opt,name=login" json:"login,omitempty"`
-	Password     *string                `protobuf:"bytes,3,opt,name=password" json:"password,omitempty"`
-	Auth         *IamAuth               `protobuf:"bytes,4,opt,name=auth" json:"auth,omitempty"`
-	// for internal usage
-	Host          *string `protobuf:"bytes,5,opt,name=host" json:"host,omitempty"`
-	Port          *int32  `protobuf:"varint,6,opt,name=port" json:"port,omitempty"`
-	Secure        *bool   `protobuf:"varint,7,opt,name=secure" json:"secure,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DatabaseId   string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3"`
+	xxx_hidden_DatabaseName string                 `protobuf:"bytes,8,opt,name=database_name,json=databaseName,proto3"`
+	xxx_hidden_Login        string                 `protobuf:"bytes,2,opt,name=login,proto3"`
+	xxx_hidden_Password     string                 `protobuf:"bytes,3,opt,name=password,proto3"`
+	xxx_hidden_Auth         *IamAuth               `protobuf:"bytes,4,opt,name=auth,proto3"`
+	xxx_hidden_Host         string                 `protobuf:"bytes,5,opt,name=host,proto3"`
+	xxx_hidden_Port         int32                  `protobuf:"varint,6,opt,name=port,proto3"`
+	xxx_hidden_Secure       bool                   `protobuf:"varint,7,opt,name=secure,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ClickHouseCluster) Reset() {
 	*x = ClickHouseCluster{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[48]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6850,7 +6189,7 @@ func (x *ClickHouseCluster) String() string {
 func (*ClickHouseCluster) ProtoMessage() {}
 
 func (x *ClickHouseCluster) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[48]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6862,221 +6201,144 @@ func (x *ClickHouseCluster) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ClickHouseCluster) GetDatabaseId() string {
-	if x != nil && x.DatabaseId != nil {
-		return *x.DatabaseId
+	if x != nil {
+		return x.xxx_hidden_DatabaseId
 	}
 	return ""
 }
 
 func (x *ClickHouseCluster) GetDatabaseName() string {
-	if x != nil && x.DatabaseName != nil {
-		return *x.DatabaseName
+	if x != nil {
+		return x.xxx_hidden_DatabaseName
 	}
 	return ""
 }
 
 func (x *ClickHouseCluster) GetLogin() string {
-	if x != nil && x.Login != nil {
-		return *x.Login
+	if x != nil {
+		return x.xxx_hidden_Login
 	}
 	return ""
 }
 
 func (x *ClickHouseCluster) GetPassword() string {
-	if x != nil && x.Password != nil {
-		return *x.Password
+	if x != nil {
+		return x.xxx_hidden_Password
 	}
 	return ""
 }
 
 func (x *ClickHouseCluster) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
 func (x *ClickHouseCluster) GetHost() string {
-	if x != nil && x.Host != nil {
-		return *x.Host
+	if x != nil {
+		return x.xxx_hidden_Host
 	}
 	return ""
 }
 
 func (x *ClickHouseCluster) GetPort() int32 {
-	if x != nil && x.Port != nil {
-		return *x.Port
+	if x != nil {
+		return x.xxx_hidden_Port
 	}
 	return 0
 }
 
 func (x *ClickHouseCluster) GetSecure() bool {
-	if x != nil && x.Secure != nil {
-		return *x.Secure
+	if x != nil {
+		return x.xxx_hidden_Secure
 	}
 	return false
 }
 
 func (x *ClickHouseCluster) SetDatabaseId(v string) {
-	x.DatabaseId = &v
+	x.xxx_hidden_DatabaseId = v
 }
 
 func (x *ClickHouseCluster) SetDatabaseName(v string) {
-	x.DatabaseName = &v
+	x.xxx_hidden_DatabaseName = v
 }
 
 func (x *ClickHouseCluster) SetLogin(v string) {
-	x.Login = &v
+	x.xxx_hidden_Login = v
 }
 
 func (x *ClickHouseCluster) SetPassword(v string) {
-	x.Password = &v
+	x.xxx_hidden_Password = v
 }
 
 func (x *ClickHouseCluster) SetAuth(v *IamAuth) {
-	x.Auth = v
+	x.xxx_hidden_Auth = v
 }
 
 func (x *ClickHouseCluster) SetHost(v string) {
-	x.Host = &v
+	x.xxx_hidden_Host = v
 }
 
 func (x *ClickHouseCluster) SetPort(v int32) {
-	x.Port = &v
+	x.xxx_hidden_Port = v
 }
 
 func (x *ClickHouseCluster) SetSecure(v bool) {
-	x.Secure = &v
-}
-
-func (x *ClickHouseCluster) HasDatabaseId() bool {
-	if x == nil {
-		return false
-	}
-	return x.DatabaseId != nil
-}
-
-func (x *ClickHouseCluster) HasDatabaseName() bool {
-	if x == nil {
-		return false
-	}
-	return x.DatabaseName != nil
-}
-
-func (x *ClickHouseCluster) HasLogin() bool {
-	if x == nil {
-		return false
-	}
-	return x.Login != nil
-}
-
-func (x *ClickHouseCluster) HasPassword() bool {
-	if x == nil {
-		return false
-	}
-	return x.Password != nil
+	x.xxx_hidden_Secure = v
 }
 
 func (x *ClickHouseCluster) HasAuth() bool {
 	if x == nil {
 		return false
 	}
-	return x.Auth != nil
-}
-
-func (x *ClickHouseCluster) HasHost() bool {
-	if x == nil {
-		return false
-	}
-	return x.Host != nil
-}
-
-func (x *ClickHouseCluster) HasPort() bool {
-	if x == nil {
-		return false
-	}
-	return x.Port != nil
-}
-
-func (x *ClickHouseCluster) HasSecure() bool {
-	if x == nil {
-		return false
-	}
-	return x.Secure != nil
-}
-
-func (x *ClickHouseCluster) ClearDatabaseId() {
-	x.DatabaseId = nil
-}
-
-func (x *ClickHouseCluster) ClearDatabaseName() {
-	x.DatabaseName = nil
-}
-
-func (x *ClickHouseCluster) ClearLogin() {
-	x.Login = nil
-}
-
-func (x *ClickHouseCluster) ClearPassword() {
-	x.Password = nil
+	return x.xxx_hidden_Auth != nil
 }
 
 func (x *ClickHouseCluster) ClearAuth() {
-	x.Auth = nil
-}
-
-func (x *ClickHouseCluster) ClearHost() {
-	x.Host = nil
-}
-
-func (x *ClickHouseCluster) ClearPort() {
-	x.Port = nil
-}
-
-func (x *ClickHouseCluster) ClearSecure() {
-	x.Secure = nil
+	x.xxx_hidden_Auth = nil
 }
 
 type ClickHouseCluster_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	DatabaseId   *string
-	DatabaseName *string
-	Login        *string
-	Password     *string
+	DatabaseId   string
+	DatabaseName string
+	Login        string
+	Password     string
 	Auth         *IamAuth
 	// for internal usage
-	Host   *string
-	Port   *int32
-	Secure *bool
+	Host   string
+	Port   int32
+	Secure bool
 }
 
 func (b0 ClickHouseCluster_builder) Build() *ClickHouseCluster {
 	m0 := &ClickHouseCluster{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.DatabaseId = b.DatabaseId
-	x.DatabaseName = b.DatabaseName
-	x.Login = b.Login
-	x.Password = b.Password
-	x.Auth = b.Auth
-	x.Host = b.Host
-	x.Port = b.Port
-	x.Secure = b.Secure
+	x.xxx_hidden_DatabaseId = b.DatabaseId
+	x.xxx_hidden_DatabaseName = b.DatabaseName
+	x.xxx_hidden_Login = b.Login
+	x.xxx_hidden_Password = b.Password
+	x.xxx_hidden_Auth = b.Auth
+	x.xxx_hidden_Host = b.Host
+	x.xxx_hidden_Port = b.Port
+	x.xxx_hidden_Secure = b.Secure
 	return m0
 }
 
 type ObjectStorageConnection struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Bucket        *string                `protobuf:"bytes,1,opt,name=bucket" json:"bucket,omitempty"`
-	Auth          *IamAuth               `protobuf:"bytes,2,opt,name=auth" json:"auth,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Bucket string                 `protobuf:"bytes,1,opt,name=bucket,proto3"`
+	xxx_hidden_Auth   *IamAuth               `protobuf:"bytes,2,opt,name=auth,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ObjectStorageConnection) Reset() {
 	*x = ObjectStorageConnection{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[49]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7088,7 +6350,7 @@ func (x *ObjectStorageConnection) String() string {
 func (*ObjectStorageConnection) ProtoMessage() {}
 
 func (x *ObjectStorageConnection) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[49]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7100,53 +6362,42 @@ func (x *ObjectStorageConnection) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ObjectStorageConnection) GetBucket() string {
-	if x != nil && x.Bucket != nil {
-		return *x.Bucket
+	if x != nil {
+		return x.xxx_hidden_Bucket
 	}
 	return ""
 }
 
 func (x *ObjectStorageConnection) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
 func (x *ObjectStorageConnection) SetBucket(v string) {
-	x.Bucket = &v
+	x.xxx_hidden_Bucket = v
 }
 
 func (x *ObjectStorageConnection) SetAuth(v *IamAuth) {
-	x.Auth = v
-}
-
-func (x *ObjectStorageConnection) HasBucket() bool {
-	if x == nil {
-		return false
-	}
-	return x.Bucket != nil
+	x.xxx_hidden_Auth = v
 }
 
 func (x *ObjectStorageConnection) HasAuth() bool {
 	if x == nil {
 		return false
 	}
-	return x.Auth != nil
-}
-
-func (x *ObjectStorageConnection) ClearBucket() {
-	x.Bucket = nil
+	return x.xxx_hidden_Auth != nil
 }
 
 func (x *ObjectStorageConnection) ClearAuth() {
-	x.Auth = nil
+	x.xxx_hidden_Auth = nil
 }
 
 type ObjectStorageConnection_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Bucket *string
+	Bucket string
 	Auth   *IamAuth
 }
 
@@ -7154,30 +6405,29 @@ func (b0 ObjectStorageConnection_builder) Build() *ObjectStorageConnection {
 	m0 := &ObjectStorageConnection{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Bucket = b.Bucket
-	x.Auth = b.Auth
+	x.xxx_hidden_Bucket = b.Bucket
+	x.xxx_hidden_Auth = b.Auth
 	return m0
 }
 
 type PostgreSQLCluster struct {
-	state        protoimpl.MessageState `protogen:"hybrid.v1"`
-	DatabaseId   *string                `protobuf:"bytes,1,opt,name=database_id,json=databaseId" json:"database_id,omitempty"`
-	DatabaseName *string                `protobuf:"bytes,8,opt,name=database_name,json=databaseName" json:"database_name,omitempty"`
-	Login        *string                `protobuf:"bytes,2,opt,name=login" json:"login,omitempty"`
-	Password     *string                `protobuf:"bytes,3,opt,name=password" json:"password,omitempty"`
-	Schema       *string                `protobuf:"bytes,9,opt,name=schema" json:"schema,omitempty"`
-	Auth         *IamAuth               `protobuf:"bytes,4,opt,name=auth" json:"auth,omitempty"`
-	// Just for the sake of simmetry with existing ClickHouse code
-	Host          *string `protobuf:"bytes,5,opt,name=host" json:"host,omitempty"`
-	Port          *int32  `protobuf:"varint,6,opt,name=port" json:"port,omitempty"`
-	Secure        *bool   `protobuf:"varint,7,opt,name=secure" json:"secure,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DatabaseId   string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3"`
+	xxx_hidden_DatabaseName string                 `protobuf:"bytes,8,opt,name=database_name,json=databaseName,proto3"`
+	xxx_hidden_Login        string                 `protobuf:"bytes,2,opt,name=login,proto3"`
+	xxx_hidden_Password     string                 `protobuf:"bytes,3,opt,name=password,proto3"`
+	xxx_hidden_Schema       string                 `protobuf:"bytes,9,opt,name=schema,proto3"`
+	xxx_hidden_Auth         *IamAuth               `protobuf:"bytes,4,opt,name=auth,proto3"`
+	xxx_hidden_Host         string                 `protobuf:"bytes,5,opt,name=host,proto3"`
+	xxx_hidden_Port         int32                  `protobuf:"varint,6,opt,name=port,proto3"`
+	xxx_hidden_Secure       bool                   `protobuf:"varint,7,opt,name=secure,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *PostgreSQLCluster) Reset() {
 	*x = PostgreSQLCluster{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[50]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7189,7 +6439,7 @@ func (x *PostgreSQLCluster) String() string {
 func (*PostgreSQLCluster) ProtoMessage() {}
 
 func (x *PostgreSQLCluster) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[50]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7201,252 +6451,921 @@ func (x *PostgreSQLCluster) ProtoReflect() protoreflect.Message {
 }
 
 func (x *PostgreSQLCluster) GetDatabaseId() string {
-	if x != nil && x.DatabaseId != nil {
-		return *x.DatabaseId
+	if x != nil {
+		return x.xxx_hidden_DatabaseId
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetDatabaseName() string {
-	if x != nil && x.DatabaseName != nil {
-		return *x.DatabaseName
+	if x != nil {
+		return x.xxx_hidden_DatabaseName
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetLogin() string {
-	if x != nil && x.Login != nil {
-		return *x.Login
+	if x != nil {
+		return x.xxx_hidden_Login
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetPassword() string {
-	if x != nil && x.Password != nil {
-		return *x.Password
+	if x != nil {
+		return x.xxx_hidden_Password
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetSchema() string {
-	if x != nil && x.Schema != nil {
-		return *x.Schema
+	if x != nil {
+		return x.xxx_hidden_Schema
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetAuth() *IamAuth {
 	if x != nil {
-		return x.Auth
+		return x.xxx_hidden_Auth
 	}
 	return nil
 }
 
 func (x *PostgreSQLCluster) GetHost() string {
-	if x != nil && x.Host != nil {
-		return *x.Host
+	if x != nil {
+		return x.xxx_hidden_Host
 	}
 	return ""
 }
 
 func (x *PostgreSQLCluster) GetPort() int32 {
-	if x != nil && x.Port != nil {
-		return *x.Port
+	if x != nil {
+		return x.xxx_hidden_Port
 	}
 	return 0
 }
 
 func (x *PostgreSQLCluster) GetSecure() bool {
-	if x != nil && x.Secure != nil {
-		return *x.Secure
+	if x != nil {
+		return x.xxx_hidden_Secure
 	}
 	return false
 }
 
 func (x *PostgreSQLCluster) SetDatabaseId(v string) {
-	x.DatabaseId = &v
+	x.xxx_hidden_DatabaseId = v
 }
 
 func (x *PostgreSQLCluster) SetDatabaseName(v string) {
-	x.DatabaseName = &v
+	x.xxx_hidden_DatabaseName = v
 }
 
 func (x *PostgreSQLCluster) SetLogin(v string) {
-	x.Login = &v
+	x.xxx_hidden_Login = v
 }
 
 func (x *PostgreSQLCluster) SetPassword(v string) {
-	x.Password = &v
+	x.xxx_hidden_Password = v
 }
 
 func (x *PostgreSQLCluster) SetSchema(v string) {
-	x.Schema = &v
+	x.xxx_hidden_Schema = v
 }
 
 func (x *PostgreSQLCluster) SetAuth(v *IamAuth) {
-	x.Auth = v
+	x.xxx_hidden_Auth = v
 }
 
 func (x *PostgreSQLCluster) SetHost(v string) {
-	x.Host = &v
+	x.xxx_hidden_Host = v
 }
 
 func (x *PostgreSQLCluster) SetPort(v int32) {
-	x.Port = &v
+	x.xxx_hidden_Port = v
 }
 
 func (x *PostgreSQLCluster) SetSecure(v bool) {
-	x.Secure = &v
-}
-
-func (x *PostgreSQLCluster) HasDatabaseId() bool {
-	if x == nil {
-		return false
-	}
-	return x.DatabaseId != nil
-}
-
-func (x *PostgreSQLCluster) HasDatabaseName() bool {
-	if x == nil {
-		return false
-	}
-	return x.DatabaseName != nil
-}
-
-func (x *PostgreSQLCluster) HasLogin() bool {
-	if x == nil {
-		return false
-	}
-	return x.Login != nil
-}
-
-func (x *PostgreSQLCluster) HasPassword() bool {
-	if x == nil {
-		return false
-	}
-	return x.Password != nil
-}
-
-func (x *PostgreSQLCluster) HasSchema() bool {
-	if x == nil {
-		return false
-	}
-	return x.Schema != nil
+	x.xxx_hidden_Secure = v
 }
 
 func (x *PostgreSQLCluster) HasAuth() bool {
 	if x == nil {
 		return false
 	}
-	return x.Auth != nil
-}
-
-func (x *PostgreSQLCluster) HasHost() bool {
-	if x == nil {
-		return false
-	}
-	return x.Host != nil
-}
-
-func (x *PostgreSQLCluster) HasPort() bool {
-	if x == nil {
-		return false
-	}
-	return x.Port != nil
-}
-
-func (x *PostgreSQLCluster) HasSecure() bool {
-	if x == nil {
-		return false
-	}
-	return x.Secure != nil
-}
-
-func (x *PostgreSQLCluster) ClearDatabaseId() {
-	x.DatabaseId = nil
-}
-
-func (x *PostgreSQLCluster) ClearDatabaseName() {
-	x.DatabaseName = nil
-}
-
-func (x *PostgreSQLCluster) ClearLogin() {
-	x.Login = nil
-}
-
-func (x *PostgreSQLCluster) ClearPassword() {
-	x.Password = nil
-}
-
-func (x *PostgreSQLCluster) ClearSchema() {
-	x.Schema = nil
+	return x.xxx_hidden_Auth != nil
 }
 
 func (x *PostgreSQLCluster) ClearAuth() {
-	x.Auth = nil
-}
-
-func (x *PostgreSQLCluster) ClearHost() {
-	x.Host = nil
-}
-
-func (x *PostgreSQLCluster) ClearPort() {
-	x.Port = nil
-}
-
-func (x *PostgreSQLCluster) ClearSecure() {
-	x.Secure = nil
+	x.xxx_hidden_Auth = nil
 }
 
 type PostgreSQLCluster_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	DatabaseId   *string
-	DatabaseName *string
-	Login        *string
-	Password     *string
-	Schema       *string
+	DatabaseId   string
+	DatabaseName string
+	Login        string
+	Password     string
+	Schema       string
 	Auth         *IamAuth
 	// Just for the sake of simmetry with existing ClickHouse code
-	Host   *string
-	Port   *int32
-	Secure *bool
+	Host   string
+	Port   int32
+	Secure bool
 }
 
 func (b0 PostgreSQLCluster_builder) Build() *PostgreSQLCluster {
 	m0 := &PostgreSQLCluster{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.DatabaseId = b.DatabaseId
-	x.DatabaseName = b.DatabaseName
-	x.Login = b.Login
-	x.Password = b.Password
-	x.Schema = b.Schema
-	x.Auth = b.Auth
-	x.Host = b.Host
-	x.Port = b.Port
-	x.Secure = b.Secure
+	x.xxx_hidden_DatabaseId = b.DatabaseId
+	x.xxx_hidden_DatabaseName = b.DatabaseName
+	x.xxx_hidden_Login = b.Login
+	x.xxx_hidden_Password = b.Password
+	x.xxx_hidden_Schema = b.Schema
+	x.xxx_hidden_Auth = b.Auth
+	x.xxx_hidden_Host = b.Host
+	x.xxx_hidden_Port = b.Port
+	x.xxx_hidden_Secure = b.Secure
+	return m0
+}
+
+type GreenplumCluster struct {
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DatabaseId   string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3"`
+	xxx_hidden_DatabaseName string                 `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3"`
+	xxx_hidden_Login        string                 `protobuf:"bytes,3,opt,name=login,proto3"`
+	xxx_hidden_Password     string                 `protobuf:"bytes,4,opt,name=password,proto3"`
+	xxx_hidden_Schema       string                 `protobuf:"bytes,5,opt,name=schema,proto3"`
+	xxx_hidden_Auth         *IamAuth               `protobuf:"bytes,6,opt,name=auth,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *GreenplumCluster) Reset() {
+	*x = GreenplumCluster{}
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GreenplumCluster) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GreenplumCluster) ProtoMessage() {}
+
+func (x *GreenplumCluster) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *GreenplumCluster) GetDatabaseId() string {
+	if x != nil {
+		return x.xxx_hidden_DatabaseId
+	}
+	return ""
+}
+
+func (x *GreenplumCluster) GetDatabaseName() string {
+	if x != nil {
+		return x.xxx_hidden_DatabaseName
+	}
+	return ""
+}
+
+func (x *GreenplumCluster) GetLogin() string {
+	if x != nil {
+		return x.xxx_hidden_Login
+	}
+	return ""
+}
+
+func (x *GreenplumCluster) GetPassword() string {
+	if x != nil {
+		return x.xxx_hidden_Password
+	}
+	return ""
+}
+
+func (x *GreenplumCluster) GetSchema() string {
+	if x != nil {
+		return x.xxx_hidden_Schema
+	}
+	return ""
+}
+
+func (x *GreenplumCluster) GetAuth() *IamAuth {
+	if x != nil {
+		return x.xxx_hidden_Auth
+	}
+	return nil
+}
+
+func (x *GreenplumCluster) SetDatabaseId(v string) {
+	x.xxx_hidden_DatabaseId = v
+}
+
+func (x *GreenplumCluster) SetDatabaseName(v string) {
+	x.xxx_hidden_DatabaseName = v
+}
+
+func (x *GreenplumCluster) SetLogin(v string) {
+	x.xxx_hidden_Login = v
+}
+
+func (x *GreenplumCluster) SetPassword(v string) {
+	x.xxx_hidden_Password = v
+}
+
+func (x *GreenplumCluster) SetSchema(v string) {
+	x.xxx_hidden_Schema = v
+}
+
+func (x *GreenplumCluster) SetAuth(v *IamAuth) {
+	x.xxx_hidden_Auth = v
+}
+
+func (x *GreenplumCluster) HasAuth() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Auth != nil
+}
+
+func (x *GreenplumCluster) ClearAuth() {
+	x.xxx_hidden_Auth = nil
+}
+
+type GreenplumCluster_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	DatabaseId   string
+	DatabaseName string
+	Login        string
+	Password     string
+	Schema       string
+	Auth         *IamAuth
+}
+
+func (b0 GreenplumCluster_builder) Build() *GreenplumCluster {
+	m0 := &GreenplumCluster{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_DatabaseId = b.DatabaseId
+	x.xxx_hidden_DatabaseName = b.DatabaseName
+	x.xxx_hidden_Login = b.Login
+	x.xxx_hidden_Password = b.Password
+	x.xxx_hidden_Schema = b.Schema
+	x.xxx_hidden_Auth = b.Auth
+	return m0
+}
+
+type MySQLCluster struct {
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DatabaseId   string                 `protobuf:"bytes,1,opt,name=database_id,json=databaseId,proto3"`
+	xxx_hidden_DatabaseName string                 `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3"`
+	xxx_hidden_Login        string                 `protobuf:"bytes,3,opt,name=login,proto3"`
+	xxx_hidden_Password     string                 `protobuf:"bytes,4,opt,name=password,proto3"`
+	xxx_hidden_Auth         *IamAuth               `protobuf:"bytes,5,opt,name=auth,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *MySQLCluster) Reset() {
+	*x = MySQLCluster{}
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MySQLCluster) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MySQLCluster) ProtoMessage() {}
+
+func (x *MySQLCluster) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *MySQLCluster) GetDatabaseId() string {
+	if x != nil {
+		return x.xxx_hidden_DatabaseId
+	}
+	return ""
+}
+
+func (x *MySQLCluster) GetDatabaseName() string {
+	if x != nil {
+		return x.xxx_hidden_DatabaseName
+	}
+	return ""
+}
+
+func (x *MySQLCluster) GetLogin() string {
+	if x != nil {
+		return x.xxx_hidden_Login
+	}
+	return ""
+}
+
+func (x *MySQLCluster) GetPassword() string {
+	if x != nil {
+		return x.xxx_hidden_Password
+	}
+	return ""
+}
+
+func (x *MySQLCluster) GetAuth() *IamAuth {
+	if x != nil {
+		return x.xxx_hidden_Auth
+	}
+	return nil
+}
+
+func (x *MySQLCluster) SetDatabaseId(v string) {
+	x.xxx_hidden_DatabaseId = v
+}
+
+func (x *MySQLCluster) SetDatabaseName(v string) {
+	x.xxx_hidden_DatabaseName = v
+}
+
+func (x *MySQLCluster) SetLogin(v string) {
+	x.xxx_hidden_Login = v
+}
+
+func (x *MySQLCluster) SetPassword(v string) {
+	x.xxx_hidden_Password = v
+}
+
+func (x *MySQLCluster) SetAuth(v *IamAuth) {
+	x.xxx_hidden_Auth = v
+}
+
+func (x *MySQLCluster) HasAuth() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Auth != nil
+}
+
+func (x *MySQLCluster) ClearAuth() {
+	x.xxx_hidden_Auth = nil
+}
+
+type MySQLCluster_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	DatabaseId   string
+	DatabaseName string
+	Login        string
+	Password     string
+	Auth         *IamAuth
+}
+
+func (b0 MySQLCluster_builder) Build() *MySQLCluster {
+	m0 := &MySQLCluster{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_DatabaseId = b.DatabaseId
+	x.xxx_hidden_DatabaseName = b.DatabaseName
+	x.xxx_hidden_Login = b.Login
+	x.xxx_hidden_Password = b.Password
+	x.xxx_hidden_Auth = b.Auth
+	return m0
+}
+
+type Logging struct {
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_FolderId string                 `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3"`
+	xxx_hidden_Auth     *IamAuth               `protobuf:"bytes,2,opt,name=auth,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *Logging) Reset() {
+	*x = Logging{}
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Logging) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Logging) ProtoMessage() {}
+
+func (x *Logging) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Logging) GetFolderId() string {
+	if x != nil {
+		return x.xxx_hidden_FolderId
+	}
+	return ""
+}
+
+func (x *Logging) GetAuth() *IamAuth {
+	if x != nil {
+		return x.xxx_hidden_Auth
+	}
+	return nil
+}
+
+func (x *Logging) SetFolderId(v string) {
+	x.xxx_hidden_FolderId = v
+}
+
+func (x *Logging) SetAuth(v *IamAuth) {
+	x.xxx_hidden_Auth = v
+}
+
+func (x *Logging) HasAuth() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Auth != nil
+}
+
+func (x *Logging) ClearAuth() {
+	x.xxx_hidden_Auth = nil
+}
+
+type Logging_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	FolderId string
+	Auth     *IamAuth
+}
+
+func (b0 Logging_builder) Build() *Logging {
+	m0 := &Logging{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_FolderId = b.FolderId
+	x.xxx_hidden_Auth = b.Auth
+	return m0
+}
+
+// TIcebergWarehouse represents settings specific to iceberg warehouse
+type IcebergWarehouse struct {
+	state              protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Payload isIcebergWarehouse_Payload `protobuf_oneof:"payload"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *IcebergWarehouse) Reset() {
+	*x = IcebergWarehouse{}
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[56]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IcebergWarehouse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IcebergWarehouse) ProtoMessage() {}
+
+func (x *IcebergWarehouse) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[56]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *IcebergWarehouse) GetS3() *IcebergWarehouse_S3 {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Payload.(*icebergWarehouse_S3_); ok {
+			return x.S3
+		}
+	}
+	return nil
+}
+
+func (x *IcebergWarehouse) SetS3(v *IcebergWarehouse_S3) {
+	if v == nil {
+		x.xxx_hidden_Payload = nil
+		return
+	}
+	x.xxx_hidden_Payload = &icebergWarehouse_S3_{v}
+}
+
+func (x *IcebergWarehouse) HasPayload() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Payload != nil
+}
+
+func (x *IcebergWarehouse) HasS3() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Payload.(*icebergWarehouse_S3_)
+	return ok
+}
+
+func (x *IcebergWarehouse) ClearPayload() {
+	x.xxx_hidden_Payload = nil
+}
+
+func (x *IcebergWarehouse) ClearS3() {
+	if _, ok := x.xxx_hidden_Payload.(*icebergWarehouse_S3_); ok {
+		x.xxx_hidden_Payload = nil
+	}
+}
+
+const IcebergWarehouse_Payload_not_set_case case_IcebergWarehouse_Payload = 0
+const IcebergWarehouse_S3_case case_IcebergWarehouse_Payload = 1
+
+func (x *IcebergWarehouse) WhichPayload() case_IcebergWarehouse_Payload {
+	if x == nil {
+		return IcebergWarehouse_Payload_not_set_case
+	}
+	switch x.xxx_hidden_Payload.(type) {
+	case *icebergWarehouse_S3_:
+		return IcebergWarehouse_S3_case
+	default:
+		return IcebergWarehouse_Payload_not_set_case
+	}
+}
+
+type IcebergWarehouse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Payload:
+	S3 *IcebergWarehouse_S3
+	// -- end of xxx_hidden_Payload
+}
+
+func (b0 IcebergWarehouse_builder) Build() *IcebergWarehouse {
+	m0 := &IcebergWarehouse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.S3 != nil {
+		x.xxx_hidden_Payload = &icebergWarehouse_S3_{b.S3}
+	}
+	return m0
+}
+
+type case_IcebergWarehouse_Payload protoreflect.FieldNumber
+
+func (x case_IcebergWarehouse_Payload) String() string {
+	md := file_draft_protos_ydb_federated_query_proto_msgTypes[56].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isIcebergWarehouse_Payload interface {
+	isIcebergWarehouse_Payload()
+}
+
+type icebergWarehouse_S3_ struct {
+	S3 *IcebergWarehouse_S3 `protobuf:"bytes,1,opt,name=s3,proto3,oneof"`
+}
+
+func (*icebergWarehouse_S3_) isIcebergWarehouse_Payload() {}
+
+// TIcebergCatalog represents settings specific to iceberg catalog
+type IcebergCatalog struct {
+	state              protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Payload isIcebergCatalog_Payload `protobuf_oneof:"payload"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *IcebergCatalog) Reset() {
+	*x = IcebergCatalog{}
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[57]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IcebergCatalog) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IcebergCatalog) ProtoMessage() {}
+
+func (x *IcebergCatalog) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[57]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *IcebergCatalog) GetHadoop() *IcebergCatalog_Hadoop {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Payload.(*icebergCatalog_Hadoop_); ok {
+			return x.Hadoop
+		}
+	}
+	return nil
+}
+
+func (x *IcebergCatalog) GetHiveMetastore() *IcebergCatalog_HiveMetastore {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Payload.(*icebergCatalog_HiveMetastore_); ok {
+			return x.HiveMetastore
+		}
+	}
+	return nil
+}
+
+func (x *IcebergCatalog) SetHadoop(v *IcebergCatalog_Hadoop) {
+	if v == nil {
+		x.xxx_hidden_Payload = nil
+		return
+	}
+	x.xxx_hidden_Payload = &icebergCatalog_Hadoop_{v}
+}
+
+func (x *IcebergCatalog) SetHiveMetastore(v *IcebergCatalog_HiveMetastore) {
+	if v == nil {
+		x.xxx_hidden_Payload = nil
+		return
+	}
+	x.xxx_hidden_Payload = &icebergCatalog_HiveMetastore_{v}
+}
+
+func (x *IcebergCatalog) HasPayload() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Payload != nil
+}
+
+func (x *IcebergCatalog) HasHadoop() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Payload.(*icebergCatalog_Hadoop_)
+	return ok
+}
+
+func (x *IcebergCatalog) HasHiveMetastore() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Payload.(*icebergCatalog_HiveMetastore_)
+	return ok
+}
+
+func (x *IcebergCatalog) ClearPayload() {
+	x.xxx_hidden_Payload = nil
+}
+
+func (x *IcebergCatalog) ClearHadoop() {
+	if _, ok := x.xxx_hidden_Payload.(*icebergCatalog_Hadoop_); ok {
+		x.xxx_hidden_Payload = nil
+	}
+}
+
+func (x *IcebergCatalog) ClearHiveMetastore() {
+	if _, ok := x.xxx_hidden_Payload.(*icebergCatalog_HiveMetastore_); ok {
+		x.xxx_hidden_Payload = nil
+	}
+}
+
+const IcebergCatalog_Payload_not_set_case case_IcebergCatalog_Payload = 0
+const IcebergCatalog_Hadoop_case case_IcebergCatalog_Payload = 1
+const IcebergCatalog_HiveMetastore_case case_IcebergCatalog_Payload = 2
+
+func (x *IcebergCatalog) WhichPayload() case_IcebergCatalog_Payload {
+	if x == nil {
+		return IcebergCatalog_Payload_not_set_case
+	}
+	switch x.xxx_hidden_Payload.(type) {
+	case *icebergCatalog_Hadoop_:
+		return IcebergCatalog_Hadoop_case
+	case *icebergCatalog_HiveMetastore_:
+		return IcebergCatalog_HiveMetastore_case
+	default:
+		return IcebergCatalog_Payload_not_set_case
+	}
+}
+
+type IcebergCatalog_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Payload:
+	Hadoop        *IcebergCatalog_Hadoop
+	HiveMetastore *IcebergCatalog_HiveMetastore
+	// -- end of xxx_hidden_Payload
+}
+
+func (b0 IcebergCatalog_builder) Build() *IcebergCatalog {
+	m0 := &IcebergCatalog{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Hadoop != nil {
+		x.xxx_hidden_Payload = &icebergCatalog_Hadoop_{b.Hadoop}
+	}
+	if b.HiveMetastore != nil {
+		x.xxx_hidden_Payload = &icebergCatalog_HiveMetastore_{b.HiveMetastore}
+	}
+	return m0
+}
+
+type case_IcebergCatalog_Payload protoreflect.FieldNumber
+
+func (x case_IcebergCatalog_Payload) String() string {
+	md := file_draft_protos_ydb_federated_query_proto_msgTypes[57].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isIcebergCatalog_Payload interface {
+	isIcebergCatalog_Payload()
+}
+
+type icebergCatalog_Hadoop_ struct {
+	Hadoop *IcebergCatalog_Hadoop `protobuf:"bytes,1,opt,name=hadoop,proto3,oneof"`
+}
+
+type icebergCatalog_HiveMetastore_ struct {
+	HiveMetastore *IcebergCatalog_HiveMetastore `protobuf:"bytes,2,opt,name=hive_metastore,json=hiveMetastore,proto3,oneof"`
+}
+
+func (*icebergCatalog_Hadoop_) isIcebergCatalog_Payload() {}
+
+func (*icebergCatalog_HiveMetastore_) isIcebergCatalog_Payload() {}
+
+type Iceberg struct {
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_WarehouseAuth *IamAuth               `protobuf:"bytes,2,opt,name=warehouse_auth,json=warehouseAuth,proto3"`
+	xxx_hidden_Warehouse     *IcebergWarehouse      `protobuf:"bytes,3,opt,name=warehouse,proto3"`
+	xxx_hidden_Catalog       *IcebergCatalog        `protobuf:"bytes,4,opt,name=catalog,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *Iceberg) Reset() {
+	*x = Iceberg{}
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[58]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Iceberg) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Iceberg) ProtoMessage() {}
+
+func (x *Iceberg) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[58]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Iceberg) GetWarehouseAuth() *IamAuth {
+	if x != nil {
+		return x.xxx_hidden_WarehouseAuth
+	}
+	return nil
+}
+
+func (x *Iceberg) GetWarehouse() *IcebergWarehouse {
+	if x != nil {
+		return x.xxx_hidden_Warehouse
+	}
+	return nil
+}
+
+func (x *Iceberg) GetCatalog() *IcebergCatalog {
+	if x != nil {
+		return x.xxx_hidden_Catalog
+	}
+	return nil
+}
+
+func (x *Iceberg) SetWarehouseAuth(v *IamAuth) {
+	x.xxx_hidden_WarehouseAuth = v
+}
+
+func (x *Iceberg) SetWarehouse(v *IcebergWarehouse) {
+	x.xxx_hidden_Warehouse = v
+}
+
+func (x *Iceberg) SetCatalog(v *IcebergCatalog) {
+	x.xxx_hidden_Catalog = v
+}
+
+func (x *Iceberg) HasWarehouseAuth() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_WarehouseAuth != nil
+}
+
+func (x *Iceberg) HasWarehouse() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Warehouse != nil
+}
+
+func (x *Iceberg) HasCatalog() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Catalog != nil
+}
+
+func (x *Iceberg) ClearWarehouseAuth() {
+	x.xxx_hidden_WarehouseAuth = nil
+}
+
+func (x *Iceberg) ClearWarehouse() {
+	x.xxx_hidden_Warehouse = nil
+}
+
+func (x *Iceberg) ClearCatalog() {
+	x.xxx_hidden_Catalog = nil
+}
+
+type Iceberg_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// credentials to access a warehouse
+	WarehouseAuth *IamAuth
+	// warehouse config
+	Warehouse *IcebergWarehouse
+	// catalog config
+	Catalog *IcebergCatalog
+}
+
+func (b0 Iceberg_builder) Build() *Iceberg {
+	m0 := &Iceberg{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_WarehouseAuth = b.WarehouseAuth
+	x.xxx_hidden_Warehouse = b.Warehouse
+	x.xxx_hidden_Catalog = b.Catalog
 	return m0
 }
 
 type ConnectionSetting struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Types that are valid to be assigned to Connection:
-	//
-	//	*ConnectionSetting_YdbDatabase
-	//	*ConnectionSetting_ClickhouseCluster
-	//	*ConnectionSetting_DataStreams
-	//	*ConnectionSetting_ObjectStorage
-	//	*ConnectionSetting_Monitoring
-	//	*ConnectionSetting_PostgresqlCluster
-	Connection    isConnectionSetting_Connection `protobuf_oneof:"connection"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState         `protogen:"opaque.v1"`
+	xxx_hidden_Connection isConnectionSetting_Connection `protobuf_oneof:"connection"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ConnectionSetting) Reset() {
 	*x = ConnectionSetting{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[51]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7458,7 +7377,7 @@ func (x *ConnectionSetting) String() string {
 func (*ConnectionSetting) ProtoMessage() {}
 
 func (x *ConnectionSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[51]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7469,16 +7388,9 @@ func (x *ConnectionSetting) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *ConnectionSetting) GetConnection() isConnectionSetting_Connection {
-	if x != nil {
-		return x.Connection
-	}
-	return nil
-}
-
 func (x *ConnectionSetting) GetYdbDatabase() *YdbDatabase {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_YdbDatabase); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_YdbDatabase); ok {
 			return x.YdbDatabase
 		}
 	}
@@ -7487,7 +7399,7 @@ func (x *ConnectionSetting) GetYdbDatabase() *YdbDatabase {
 
 func (x *ConnectionSetting) GetClickhouseCluster() *ClickHouseCluster {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_ClickhouseCluster); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_ClickhouseCluster); ok {
 			return x.ClickhouseCluster
 		}
 	}
@@ -7496,7 +7408,7 @@ func (x *ConnectionSetting) GetClickhouseCluster() *ClickHouseCluster {
 
 func (x *ConnectionSetting) GetDataStreams() *DataStreams {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_DataStreams); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_DataStreams); ok {
 			return x.DataStreams
 		}
 	}
@@ -7505,7 +7417,7 @@ func (x *ConnectionSetting) GetDataStreams() *DataStreams {
 
 func (x *ConnectionSetting) GetObjectStorage() *ObjectStorageConnection {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_ObjectStorage); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_ObjectStorage); ok {
 			return x.ObjectStorage
 		}
 	}
@@ -7514,7 +7426,7 @@ func (x *ConnectionSetting) GetObjectStorage() *ObjectStorageConnection {
 
 func (x *ConnectionSetting) GetMonitoring() *Monitoring {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_Monitoring); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_Monitoring); ok {
 			return x.Monitoring
 		}
 	}
@@ -7523,8 +7435,44 @@ func (x *ConnectionSetting) GetMonitoring() *Monitoring {
 
 func (x *ConnectionSetting) GetPostgresqlCluster() *PostgreSQLCluster {
 	if x != nil {
-		if x, ok := x.Connection.(*ConnectionSetting_PostgresqlCluster); ok {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_PostgresqlCluster); ok {
 			return x.PostgresqlCluster
+		}
+	}
+	return nil
+}
+
+func (x *ConnectionSetting) GetGreenplumCluster() *GreenplumCluster {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_GreenplumCluster); ok {
+			return x.GreenplumCluster
+		}
+	}
+	return nil
+}
+
+func (x *ConnectionSetting) GetMysqlCluster() *MySQLCluster {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_MysqlCluster); ok {
+			return x.MysqlCluster
+		}
+	}
+	return nil
+}
+
+func (x *ConnectionSetting) GetLogging() *Logging {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_Logging); ok {
+			return x.Logging
+		}
+	}
+	return nil
+}
+
+func (x *ConnectionSetting) GetIceberg() *Iceberg {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Connection.(*connectionSetting_Iceberg); ok {
+			return x.Iceberg
 		}
 	}
 	return nil
@@ -7532,64 +7480,96 @@ func (x *ConnectionSetting) GetPostgresqlCluster() *PostgreSQLCluster {
 
 func (x *ConnectionSetting) SetYdbDatabase(v *YdbDatabase) {
 	if v == nil {
-		x.Connection = nil
+		x.xxx_hidden_Connection = nil
 		return
 	}
-	x.Connection = &ConnectionSetting_YdbDatabase{v}
+	x.xxx_hidden_Connection = &connectionSetting_YdbDatabase{v}
 }
 
 func (x *ConnectionSetting) SetClickhouseCluster(v *ClickHouseCluster) {
 	if v == nil {
-		x.Connection = nil
+		x.xxx_hidden_Connection = nil
 		return
 	}
-	x.Connection = &ConnectionSetting_ClickhouseCluster{v}
+	x.xxx_hidden_Connection = &connectionSetting_ClickhouseCluster{v}
 }
 
 func (x *ConnectionSetting) SetDataStreams(v *DataStreams) {
 	if v == nil {
-		x.Connection = nil
+		x.xxx_hidden_Connection = nil
 		return
 	}
-	x.Connection = &ConnectionSetting_DataStreams{v}
+	x.xxx_hidden_Connection = &connectionSetting_DataStreams{v}
 }
 
 func (x *ConnectionSetting) SetObjectStorage(v *ObjectStorageConnection) {
 	if v == nil {
-		x.Connection = nil
+		x.xxx_hidden_Connection = nil
 		return
 	}
-	x.Connection = &ConnectionSetting_ObjectStorage{v}
+	x.xxx_hidden_Connection = &connectionSetting_ObjectStorage{v}
 }
 
 func (x *ConnectionSetting) SetMonitoring(v *Monitoring) {
 	if v == nil {
-		x.Connection = nil
+		x.xxx_hidden_Connection = nil
 		return
 	}
-	x.Connection = &ConnectionSetting_Monitoring{v}
+	x.xxx_hidden_Connection = &connectionSetting_Monitoring{v}
 }
 
 func (x *ConnectionSetting) SetPostgresqlCluster(v *PostgreSQLCluster) {
 	if v == nil {
-		x.Connection = nil
+		x.xxx_hidden_Connection = nil
 		return
 	}
-	x.Connection = &ConnectionSetting_PostgresqlCluster{v}
+	x.xxx_hidden_Connection = &connectionSetting_PostgresqlCluster{v}
+}
+
+func (x *ConnectionSetting) SetGreenplumCluster(v *GreenplumCluster) {
+	if v == nil {
+		x.xxx_hidden_Connection = nil
+		return
+	}
+	x.xxx_hidden_Connection = &connectionSetting_GreenplumCluster{v}
+}
+
+func (x *ConnectionSetting) SetMysqlCluster(v *MySQLCluster) {
+	if v == nil {
+		x.xxx_hidden_Connection = nil
+		return
+	}
+	x.xxx_hidden_Connection = &connectionSetting_MysqlCluster{v}
+}
+
+func (x *ConnectionSetting) SetLogging(v *Logging) {
+	if v == nil {
+		x.xxx_hidden_Connection = nil
+		return
+	}
+	x.xxx_hidden_Connection = &connectionSetting_Logging{v}
+}
+
+func (x *ConnectionSetting) SetIceberg(v *Iceberg) {
+	if v == nil {
+		x.xxx_hidden_Connection = nil
+		return
+	}
+	x.xxx_hidden_Connection = &connectionSetting_Iceberg{v}
 }
 
 func (x *ConnectionSetting) HasConnection() bool {
 	if x == nil {
 		return false
 	}
-	return x.Connection != nil
+	return x.xxx_hidden_Connection != nil
 }
 
 func (x *ConnectionSetting) HasYdbDatabase() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Connection.(*ConnectionSetting_YdbDatabase)
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_YdbDatabase)
 	return ok
 }
 
@@ -7597,7 +7577,7 @@ func (x *ConnectionSetting) HasClickhouseCluster() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Connection.(*ConnectionSetting_ClickhouseCluster)
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_ClickhouseCluster)
 	return ok
 }
 
@@ -7605,7 +7585,7 @@ func (x *ConnectionSetting) HasDataStreams() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Connection.(*ConnectionSetting_DataStreams)
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_DataStreams)
 	return ok
 }
 
@@ -7613,7 +7593,7 @@ func (x *ConnectionSetting) HasObjectStorage() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Connection.(*ConnectionSetting_ObjectStorage)
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_ObjectStorage)
 	return ok
 }
 
@@ -7621,7 +7601,7 @@ func (x *ConnectionSetting) HasMonitoring() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Connection.(*ConnectionSetting_Monitoring)
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_Monitoring)
 	return ok
 }
 
@@ -7629,47 +7609,103 @@ func (x *ConnectionSetting) HasPostgresqlCluster() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Connection.(*ConnectionSetting_PostgresqlCluster)
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_PostgresqlCluster)
+	return ok
+}
+
+func (x *ConnectionSetting) HasGreenplumCluster() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_GreenplumCluster)
+	return ok
+}
+
+func (x *ConnectionSetting) HasMysqlCluster() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_MysqlCluster)
+	return ok
+}
+
+func (x *ConnectionSetting) HasLogging() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_Logging)
+	return ok
+}
+
+func (x *ConnectionSetting) HasIceberg() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Connection.(*connectionSetting_Iceberg)
 	return ok
 }
 
 func (x *ConnectionSetting) ClearConnection() {
-	x.Connection = nil
+	x.xxx_hidden_Connection = nil
 }
 
 func (x *ConnectionSetting) ClearYdbDatabase() {
-	if _, ok := x.Connection.(*ConnectionSetting_YdbDatabase); ok {
-		x.Connection = nil
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_YdbDatabase); ok {
+		x.xxx_hidden_Connection = nil
 	}
 }
 
 func (x *ConnectionSetting) ClearClickhouseCluster() {
-	if _, ok := x.Connection.(*ConnectionSetting_ClickhouseCluster); ok {
-		x.Connection = nil
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_ClickhouseCluster); ok {
+		x.xxx_hidden_Connection = nil
 	}
 }
 
 func (x *ConnectionSetting) ClearDataStreams() {
-	if _, ok := x.Connection.(*ConnectionSetting_DataStreams); ok {
-		x.Connection = nil
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_DataStreams); ok {
+		x.xxx_hidden_Connection = nil
 	}
 }
 
 func (x *ConnectionSetting) ClearObjectStorage() {
-	if _, ok := x.Connection.(*ConnectionSetting_ObjectStorage); ok {
-		x.Connection = nil
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_ObjectStorage); ok {
+		x.xxx_hidden_Connection = nil
 	}
 }
 
 func (x *ConnectionSetting) ClearMonitoring() {
-	if _, ok := x.Connection.(*ConnectionSetting_Monitoring); ok {
-		x.Connection = nil
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_Monitoring); ok {
+		x.xxx_hidden_Connection = nil
 	}
 }
 
 func (x *ConnectionSetting) ClearPostgresqlCluster() {
-	if _, ok := x.Connection.(*ConnectionSetting_PostgresqlCluster); ok {
-		x.Connection = nil
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_PostgresqlCluster); ok {
+		x.xxx_hidden_Connection = nil
+	}
+}
+
+func (x *ConnectionSetting) ClearGreenplumCluster() {
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_GreenplumCluster); ok {
+		x.xxx_hidden_Connection = nil
+	}
+}
+
+func (x *ConnectionSetting) ClearMysqlCluster() {
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_MysqlCluster); ok {
+		x.xxx_hidden_Connection = nil
+	}
+}
+
+func (x *ConnectionSetting) ClearLogging() {
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_Logging); ok {
+		x.xxx_hidden_Connection = nil
+	}
+}
+
+func (x *ConnectionSetting) ClearIceberg() {
+	if _, ok := x.xxx_hidden_Connection.(*connectionSetting_Iceberg); ok {
+		x.xxx_hidden_Connection = nil
 	}
 }
 
@@ -7680,24 +7716,36 @@ const ConnectionSetting_DataStreams_case case_ConnectionSetting_Connection = 3
 const ConnectionSetting_ObjectStorage_case case_ConnectionSetting_Connection = 4
 const ConnectionSetting_Monitoring_case case_ConnectionSetting_Connection = 5
 const ConnectionSetting_PostgresqlCluster_case case_ConnectionSetting_Connection = 6
+const ConnectionSetting_GreenplumCluster_case case_ConnectionSetting_Connection = 7
+const ConnectionSetting_MysqlCluster_case case_ConnectionSetting_Connection = 8
+const ConnectionSetting_Logging_case case_ConnectionSetting_Connection = 9
+const ConnectionSetting_Iceberg_case case_ConnectionSetting_Connection = 10
 
 func (x *ConnectionSetting) WhichConnection() case_ConnectionSetting_Connection {
 	if x == nil {
 		return ConnectionSetting_Connection_not_set_case
 	}
-	switch x.Connection.(type) {
-	case *ConnectionSetting_YdbDatabase:
+	switch x.xxx_hidden_Connection.(type) {
+	case *connectionSetting_YdbDatabase:
 		return ConnectionSetting_YdbDatabase_case
-	case *ConnectionSetting_ClickhouseCluster:
+	case *connectionSetting_ClickhouseCluster:
 		return ConnectionSetting_ClickhouseCluster_case
-	case *ConnectionSetting_DataStreams:
+	case *connectionSetting_DataStreams:
 		return ConnectionSetting_DataStreams_case
-	case *ConnectionSetting_ObjectStorage:
+	case *connectionSetting_ObjectStorage:
 		return ConnectionSetting_ObjectStorage_case
-	case *ConnectionSetting_Monitoring:
+	case *connectionSetting_Monitoring:
 		return ConnectionSetting_Monitoring_case
-	case *ConnectionSetting_PostgresqlCluster:
+	case *connectionSetting_PostgresqlCluster:
 		return ConnectionSetting_PostgresqlCluster_case
+	case *connectionSetting_GreenplumCluster:
+		return ConnectionSetting_GreenplumCluster_case
+	case *connectionSetting_MysqlCluster:
+		return ConnectionSetting_MysqlCluster_case
+	case *connectionSetting_Logging:
+		return ConnectionSetting_Logging_case
+	case *connectionSetting_Iceberg:
+		return ConnectionSetting_Iceberg_case
 	default:
 		return ConnectionSetting_Connection_not_set_case
 	}
@@ -7706,14 +7754,18 @@ func (x *ConnectionSetting) WhichConnection() case_ConnectionSetting_Connection 
 type ConnectionSetting_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof Connection:
+	// Fields of oneof xxx_hidden_Connection:
 	YdbDatabase       *YdbDatabase
 	ClickhouseCluster *ClickHouseCluster
 	DataStreams       *DataStreams
 	ObjectStorage     *ObjectStorageConnection
 	Monitoring        *Monitoring
 	PostgresqlCluster *PostgreSQLCluster
-	// -- end of Connection
+	GreenplumCluster  *GreenplumCluster
+	MysqlCluster      *MySQLCluster
+	Logging           *Logging
+	Iceberg           *Iceberg
+	// -- end of xxx_hidden_Connection
 }
 
 func (b0 ConnectionSetting_builder) Build() *ConnectionSetting {
@@ -7721,22 +7773,34 @@ func (b0 ConnectionSetting_builder) Build() *ConnectionSetting {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.YdbDatabase != nil {
-		x.Connection = &ConnectionSetting_YdbDatabase{b.YdbDatabase}
+		x.xxx_hidden_Connection = &connectionSetting_YdbDatabase{b.YdbDatabase}
 	}
 	if b.ClickhouseCluster != nil {
-		x.Connection = &ConnectionSetting_ClickhouseCluster{b.ClickhouseCluster}
+		x.xxx_hidden_Connection = &connectionSetting_ClickhouseCluster{b.ClickhouseCluster}
 	}
 	if b.DataStreams != nil {
-		x.Connection = &ConnectionSetting_DataStreams{b.DataStreams}
+		x.xxx_hidden_Connection = &connectionSetting_DataStreams{b.DataStreams}
 	}
 	if b.ObjectStorage != nil {
-		x.Connection = &ConnectionSetting_ObjectStorage{b.ObjectStorage}
+		x.xxx_hidden_Connection = &connectionSetting_ObjectStorage{b.ObjectStorage}
 	}
 	if b.Monitoring != nil {
-		x.Connection = &ConnectionSetting_Monitoring{b.Monitoring}
+		x.xxx_hidden_Connection = &connectionSetting_Monitoring{b.Monitoring}
 	}
 	if b.PostgresqlCluster != nil {
-		x.Connection = &ConnectionSetting_PostgresqlCluster{b.PostgresqlCluster}
+		x.xxx_hidden_Connection = &connectionSetting_PostgresqlCluster{b.PostgresqlCluster}
+	}
+	if b.GreenplumCluster != nil {
+		x.xxx_hidden_Connection = &connectionSetting_GreenplumCluster{b.GreenplumCluster}
+	}
+	if b.MysqlCluster != nil {
+		x.xxx_hidden_Connection = &connectionSetting_MysqlCluster{b.MysqlCluster}
+	}
+	if b.Logging != nil {
+		x.xxx_hidden_Connection = &connectionSetting_Logging{b.Logging}
+	}
+	if b.Iceberg != nil {
+		x.xxx_hidden_Connection = &connectionSetting_Iceberg{b.Iceberg}
 	}
 	return m0
 }
@@ -7744,7 +7808,7 @@ func (b0 ConnectionSetting_builder) Build() *ConnectionSetting {
 type case_ConnectionSetting_Connection protoreflect.FieldNumber
 
 func (x case_ConnectionSetting_Connection) String() string {
-	md := file_draft_protos_ydb_federated_query_proto_msgTypes[51].Descriptor()
+	md := file_draft_protos_ydb_federated_query_proto_msgTypes[59].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -7755,55 +7819,79 @@ type isConnectionSetting_Connection interface {
 	isConnectionSetting_Connection()
 }
 
-type ConnectionSetting_YdbDatabase struct {
-	YdbDatabase *YdbDatabase `protobuf:"bytes,1,opt,name=ydb_database,json=ydbDatabase,oneof"`
+type connectionSetting_YdbDatabase struct {
+	YdbDatabase *YdbDatabase `protobuf:"bytes,1,opt,name=ydb_database,json=ydbDatabase,proto3,oneof"`
 }
 
-type ConnectionSetting_ClickhouseCluster struct {
-	ClickhouseCluster *ClickHouseCluster `protobuf:"bytes,2,opt,name=clickhouse_cluster,json=clickhouseCluster,oneof"`
+type connectionSetting_ClickhouseCluster struct {
+	ClickhouseCluster *ClickHouseCluster `protobuf:"bytes,2,opt,name=clickhouse_cluster,json=clickhouseCluster,proto3,oneof"`
 }
 
-type ConnectionSetting_DataStreams struct {
-	DataStreams *DataStreams `protobuf:"bytes,3,opt,name=data_streams,json=dataStreams,oneof"`
+type connectionSetting_DataStreams struct {
+	DataStreams *DataStreams `protobuf:"bytes,3,opt,name=data_streams,json=dataStreams,proto3,oneof"`
 }
 
-type ConnectionSetting_ObjectStorage struct {
-	ObjectStorage *ObjectStorageConnection `protobuf:"bytes,4,opt,name=object_storage,json=objectStorage,oneof"`
+type connectionSetting_ObjectStorage struct {
+	ObjectStorage *ObjectStorageConnection `protobuf:"bytes,4,opt,name=object_storage,json=objectStorage,proto3,oneof"`
 }
 
-type ConnectionSetting_Monitoring struct {
-	Monitoring *Monitoring `protobuf:"bytes,5,opt,name=monitoring,oneof"`
+type connectionSetting_Monitoring struct {
+	Monitoring *Monitoring `protobuf:"bytes,5,opt,name=monitoring,proto3,oneof"`
 }
 
-type ConnectionSetting_PostgresqlCluster struct {
-	PostgresqlCluster *PostgreSQLCluster `protobuf:"bytes,6,opt,name=postgresql_cluster,json=postgresqlCluster,oneof"`
+type connectionSetting_PostgresqlCluster struct {
+	PostgresqlCluster *PostgreSQLCluster `protobuf:"bytes,6,opt,name=postgresql_cluster,json=postgresqlCluster,proto3,oneof"`
 }
 
-func (*ConnectionSetting_YdbDatabase) isConnectionSetting_Connection() {}
+type connectionSetting_GreenplumCluster struct {
+	GreenplumCluster *GreenplumCluster `protobuf:"bytes,7,opt,name=greenplum_cluster,json=greenplumCluster,proto3,oneof"`
+}
 
-func (*ConnectionSetting_ClickhouseCluster) isConnectionSetting_Connection() {}
+type connectionSetting_MysqlCluster struct {
+	MysqlCluster *MySQLCluster `protobuf:"bytes,8,opt,name=mysql_cluster,json=mysqlCluster,proto3,oneof"`
+}
 
-func (*ConnectionSetting_DataStreams) isConnectionSetting_Connection() {}
+type connectionSetting_Logging struct {
+	Logging *Logging `protobuf:"bytes,9,opt,name=logging,proto3,oneof"`
+}
 
-func (*ConnectionSetting_ObjectStorage) isConnectionSetting_Connection() {}
+type connectionSetting_Iceberg struct {
+	Iceberg *Iceberg `protobuf:"bytes,10,opt,name=iceberg,proto3,oneof"`
+}
 
-func (*ConnectionSetting_Monitoring) isConnectionSetting_Connection() {}
+func (*connectionSetting_YdbDatabase) isConnectionSetting_Connection() {}
 
-func (*ConnectionSetting_PostgresqlCluster) isConnectionSetting_Connection() {}
+func (*connectionSetting_ClickhouseCluster) isConnectionSetting_Connection() {}
+
+func (*connectionSetting_DataStreams) isConnectionSetting_Connection() {}
+
+func (*connectionSetting_ObjectStorage) isConnectionSetting_Connection() {}
+
+func (*connectionSetting_Monitoring) isConnectionSetting_Connection() {}
+
+func (*connectionSetting_PostgresqlCluster) isConnectionSetting_Connection() {}
+
+func (*connectionSetting_GreenplumCluster) isConnectionSetting_Connection() {}
+
+func (*connectionSetting_MysqlCluster) isConnectionSetting_Connection() {}
+
+func (*connectionSetting_Logging) isConnectionSetting_Connection() {}
+
+func (*connectionSetting_Iceberg) isConnectionSetting_Connection() {}
 
 type ConnectionContent struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Setting       *ConnectionSetting     `protobuf:"bytes,2,opt,name=setting" json:"setting,omitempty"`
-	Acl           *Acl                   `protobuf:"bytes,3,opt,name=acl" json:"acl,omitempty"`
-	Description   *string                `protobuf:"bytes,4,opt,name=description" json:"description,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name        string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Setting     *ConnectionSetting     `protobuf:"bytes,2,opt,name=setting,proto3"`
+	xxx_hidden_Acl         *Acl                   `protobuf:"bytes,3,opt,name=acl,proto3"`
+	xxx_hidden_Description string                 `protobuf:"bytes,4,opt,name=description,proto3"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ConnectionContent) Reset() {
 	*x = ConnectionContent{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[52]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7815,7 +7903,7 @@ func (x *ConnectionContent) String() string {
 func (*ConnectionContent) ProtoMessage() {}
 
 func (x *ConnectionContent) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[52]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7827,124 +7915,102 @@ func (x *ConnectionContent) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ConnectionContent) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ConnectionContent) GetSetting() *ConnectionSetting {
 	if x != nil {
-		return x.Setting
+		return x.xxx_hidden_Setting
 	}
 	return nil
 }
 
 func (x *ConnectionContent) GetAcl() *Acl {
 	if x != nil {
-		return x.Acl
+		return x.xxx_hidden_Acl
 	}
 	return nil
 }
 
 func (x *ConnectionContent) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
 func (x *ConnectionContent) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *ConnectionContent) SetSetting(v *ConnectionSetting) {
-	x.Setting = v
+	x.xxx_hidden_Setting = v
 }
 
 func (x *ConnectionContent) SetAcl(v *Acl) {
-	x.Acl = v
+	x.xxx_hidden_Acl = v
 }
 
 func (x *ConnectionContent) SetDescription(v string) {
-	x.Description = &v
-}
-
-func (x *ConnectionContent) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
+	x.xxx_hidden_Description = v
 }
 
 func (x *ConnectionContent) HasSetting() bool {
 	if x == nil {
 		return false
 	}
-	return x.Setting != nil
+	return x.xxx_hidden_Setting != nil
 }
 
 func (x *ConnectionContent) HasAcl() bool {
 	if x == nil {
 		return false
 	}
-	return x.Acl != nil
-}
-
-func (x *ConnectionContent) HasDescription() bool {
-	if x == nil {
-		return false
-	}
-	return x.Description != nil
-}
-
-func (x *ConnectionContent) ClearName() {
-	x.Name = nil
+	return x.xxx_hidden_Acl != nil
 }
 
 func (x *ConnectionContent) ClearSetting() {
-	x.Setting = nil
+	x.xxx_hidden_Setting = nil
 }
 
 func (x *ConnectionContent) ClearAcl() {
-	x.Acl = nil
-}
-
-func (x *ConnectionContent) ClearDescription() {
-	x.Description = nil
+	x.xxx_hidden_Acl = nil
 }
 
 type ConnectionContent_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Name        *string
+	Name        string
 	Setting     *ConnectionSetting
 	Acl         *Acl
-	Description *string
+	Description string
 }
 
 func (b0 ConnectionContent_builder) Build() *ConnectionContent {
 	m0 := &ConnectionContent{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Name = b.Name
-	x.Setting = b.Setting
-	x.Acl = b.Acl
-	x.Description = b.Description
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Setting = b.Setting
+	x.xxx_hidden_Acl = b.Acl
+	x.xxx_hidden_Description = b.Description
 	return m0
 }
 
 type Connection struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Content       *ConnectionContent     `protobuf:"bytes,1,opt,name=content" json:"content,omitempty"`
-	Meta          *CommonMeta            `protobuf:"bytes,2,opt,name=meta" json:"meta,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Content *ConnectionContent     `protobuf:"bytes,1,opt,name=content,proto3"`
+	xxx_hidden_Meta    *CommonMeta            `protobuf:"bytes,2,opt,name=meta,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Connection) Reset() {
 	*x = Connection{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[53]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7956,7 +8022,7 @@ func (x *Connection) String() string {
 func (*Connection) ProtoMessage() {}
 
 func (x *Connection) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[53]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7969,46 +8035,46 @@ func (x *Connection) ProtoReflect() protoreflect.Message {
 
 func (x *Connection) GetContent() *ConnectionContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *Connection) GetMeta() *CommonMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *Connection) SetContent(v *ConnectionContent) {
-	x.Content = v
+	x.xxx_hidden_Content = v
 }
 
 func (x *Connection) SetMeta(v *CommonMeta) {
-	x.Meta = v
+	x.xxx_hidden_Meta = v
 }
 
 func (x *Connection) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return x.Content != nil
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *Connection) HasMeta() bool {
 	if x == nil {
 		return false
 	}
-	return x.Meta != nil
+	return x.xxx_hidden_Meta != nil
 }
 
 func (x *Connection) ClearContent() {
-	x.Content = nil
+	x.xxx_hidden_Content = nil
 }
 
 func (x *Connection) ClearMeta() {
-	x.Meta = nil
+	x.xxx_hidden_Meta = nil
 }
 
 type Connection_builder struct {
@@ -8022,24 +8088,24 @@ func (b0 Connection_builder) Build() *Connection {
 	m0 := &Connection{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Content = b.Content
-	x.Meta = b.Meta
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_Meta = b.Meta
 	return m0
 }
 
 // Create a new connection
 type CreateConnectionRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	Content         *ConnectionContent              `protobuf:"bytes,2,opt,name=content" json:"content,omitempty"`
-	IdempotencyKey  *string                         `protobuf:"bytes,3,opt,name=idempotency_key,json=idempotencyKey" json:"idempotency_key,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Content         *ConnectionContent              `protobuf:"bytes,2,opt,name=content,proto3"`
+	xxx_hidden_IdempotencyKey  string                          `protobuf:"bytes,3,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateConnectionRequest) Reset() {
 	*x = CreateConnectionRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[54]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8051,7 +8117,7 @@ func (x *CreateConnectionRequest) String() string {
 func (*CreateConnectionRequest) ProtoMessage() {}
 
 func (x *CreateConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[54]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8064,68 +8130,57 @@ func (x *CreateConnectionRequest) ProtoReflect() protoreflect.Message {
 
 func (x *CreateConnectionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateConnectionRequest) GetContent() *ConnectionContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *CreateConnectionRequest) GetIdempotencyKey() string {
-	if x != nil && x.IdempotencyKey != nil {
-		return *x.IdempotencyKey
+	if x != nil {
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *CreateConnectionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *CreateConnectionRequest) SetContent(v *ConnectionContent) {
-	x.Content = v
+	x.xxx_hidden_Content = v
 }
 
 func (x *CreateConnectionRequest) SetIdempotencyKey(v string) {
-	x.IdempotencyKey = &v
+	x.xxx_hidden_IdempotencyKey = v
 }
 
 func (x *CreateConnectionRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *CreateConnectionRequest) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return x.Content != nil
-}
-
-func (x *CreateConnectionRequest) HasIdempotencyKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.IdempotencyKey != nil
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *CreateConnectionRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *CreateConnectionRequest) ClearContent() {
-	x.Content = nil
-}
-
-func (x *CreateConnectionRequest) ClearIdempotencyKey() {
-	x.IdempotencyKey = nil
+	x.xxx_hidden_Content = nil
 }
 
 type CreateConnectionRequest_builder struct {
@@ -8133,29 +8188,29 @@ type CreateConnectionRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	Content         *ConnectionContent
-	IdempotencyKey  *string
+	IdempotencyKey  string
 }
 
 func (b0 CreateConnectionRequest_builder) Build() *CreateConnectionRequest {
 	m0 := &CreateConnectionRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Content = b.Content
-	x.IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
 	return m0
 }
 
 type CreateConnectionResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // CreateConnectionResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateConnectionResponse) Reset() {
 	*x = CreateConnectionResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[55]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8167,7 +8222,7 @@ func (x *CreateConnectionResponse) String() string {
 func (*CreateConnectionResponse) ProtoMessage() {}
 
 func (x *CreateConnectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[55]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8180,24 +8235,24 @@ func (x *CreateConnectionResponse) ProtoReflect() protoreflect.Message {
 
 func (x *CreateConnectionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *CreateConnectionResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *CreateConnectionResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *CreateConnectionResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type CreateConnectionResponse_builder struct {
@@ -8210,20 +8265,20 @@ func (b0 CreateConnectionResponse_builder) Build() *CreateConnectionResponse {
 	m0 := &CreateConnectionResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type CreateConnectionResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	ConnectionId  *string                `protobuf:"bytes,1,opt,name=connection_id,json=connectionId" json:"connection_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ConnectionId string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *CreateConnectionResult) Reset() {
 	*x = CreateConnectionResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[56]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8235,7 +8290,7 @@ func (x *CreateConnectionResult) String() string {
 func (*CreateConnectionResult) ProtoMessage() {}
 
 func (x *CreateConnectionResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[56]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8247,55 +8302,44 @@ func (x *CreateConnectionResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *CreateConnectionResult) GetConnectionId() string {
-	if x != nil && x.ConnectionId != nil {
-		return *x.ConnectionId
+	if x != nil {
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *CreateConnectionResult) SetConnectionId(v string) {
-	x.ConnectionId = &v
-}
-
-func (x *CreateConnectionResult) HasConnectionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ConnectionId != nil
-}
-
-func (x *CreateConnectionResult) ClearConnectionId() {
-	x.ConnectionId = nil
+	x.xxx_hidden_ConnectionId = v
 }
 
 type CreateConnectionResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ConnectionId *string
+	ConnectionId string
 }
 
 func (b0 CreateConnectionResult_builder) Build() *CreateConnectionResult {
 	m0 := &CreateConnectionResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ConnectionId = b.ConnectionId
+	x.xxx_hidden_ConnectionId = b.ConnectionId
 	return m0
 }
 
 // Getting information about connections
 type ListConnectionsRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	PageToken       *string                         `protobuf:"bytes,2,opt,name=page_token,json=pageToken" json:"page_token,omitempty"`
-	Limit           *int32                          `protobuf:"varint,3,opt,name=limit" json:"limit,omitempty"`
-	Filter          *ListConnectionsRequest_Filter  `protobuf:"bytes,4,opt,name=filter" json:"filter,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3"`
+	xxx_hidden_Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3"`
+	xxx_hidden_Filter          *ListConnectionsRequest_Filter  `protobuf:"bytes,4,opt,name=filter,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListConnectionsRequest) Reset() {
 	*x = ListConnectionsRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[57]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8307,7 +8351,7 @@ func (x *ListConnectionsRequest) String() string {
 func (*ListConnectionsRequest) ProtoMessage() {}
 
 func (x *ListConnectionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[57]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8320,98 +8364,76 @@ func (x *ListConnectionsRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ListConnectionsRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListConnectionsRequest) GetPageToken() string {
-	if x != nil && x.PageToken != nil {
-		return *x.PageToken
+	if x != nil {
+		return x.xxx_hidden_PageToken
 	}
 	return ""
 }
 
 func (x *ListConnectionsRequest) GetLimit() int32 {
-	if x != nil && x.Limit != nil {
-		return *x.Limit
+	if x != nil {
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
 func (x *ListConnectionsRequest) GetFilter() *ListConnectionsRequest_Filter {
 	if x != nil {
-		return x.Filter
+		return x.xxx_hidden_Filter
 	}
 	return nil
 }
 
 func (x *ListConnectionsRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ListConnectionsRequest) SetPageToken(v string) {
-	x.PageToken = &v
+	x.xxx_hidden_PageToken = v
 }
 
 func (x *ListConnectionsRequest) SetLimit(v int32) {
-	x.Limit = &v
+	x.xxx_hidden_Limit = v
 }
 
 func (x *ListConnectionsRequest) SetFilter(v *ListConnectionsRequest_Filter) {
-	x.Filter = v
+	x.xxx_hidden_Filter = v
 }
 
 func (x *ListConnectionsRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ListConnectionsRequest) HasPageToken() bool {
-	if x == nil {
-		return false
-	}
-	return x.PageToken != nil
-}
-
-func (x *ListConnectionsRequest) HasLimit() bool {
-	if x == nil {
-		return false
-	}
-	return x.Limit != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ListConnectionsRequest) HasFilter() bool {
 	if x == nil {
 		return false
 	}
-	return x.Filter != nil
+	return x.xxx_hidden_Filter != nil
 }
 
 func (x *ListConnectionsRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ListConnectionsRequest) ClearPageToken() {
-	x.PageToken = nil
-}
-
-func (x *ListConnectionsRequest) ClearLimit() {
-	x.Limit = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ListConnectionsRequest) ClearFilter() {
-	x.Filter = nil
+	x.xxx_hidden_Filter = nil
 }
 
 type ListConnectionsRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	PageToken       *string
-	Limit           *int32
+	PageToken       string
+	Limit           int32
 	Filter          *ListConnectionsRequest_Filter
 }
 
@@ -8419,23 +8441,23 @@ func (b0 ListConnectionsRequest_builder) Build() *ListConnectionsRequest {
 	m0 := &ListConnectionsRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.PageToken = b.PageToken
-	x.Limit = b.Limit
-	x.Filter = b.Filter
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_PageToken = b.PageToken
+	x.xxx_hidden_Limit = b.Limit
+	x.xxx_hidden_Filter = b.Filter
 	return m0
 }
 
 type ListConnectionsResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // ListConnectionsResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListConnectionsResponse) Reset() {
 	*x = ListConnectionsResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[58]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8447,7 +8469,7 @@ func (x *ListConnectionsResponse) String() string {
 func (*ListConnectionsResponse) ProtoMessage() {}
 
 func (x *ListConnectionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[58]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8460,24 +8482,24 @@ func (x *ListConnectionsResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ListConnectionsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ListConnectionsResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ListConnectionsResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ListConnectionsResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ListConnectionsResponse_builder struct {
@@ -8490,21 +8512,21 @@ func (b0 ListConnectionsResponse_builder) Build() *ListConnectionsResponse {
 	m0 := &ListConnectionsResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ListConnectionsResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Connection    []*Connection          `protobuf:"bytes,1,rep,name=connection" json:"connection,omitempty"`
-	NextPageToken *string                `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Connection    *[]*Connection         `protobuf:"bytes,1,rep,name=connection,proto3"`
+	xxx_hidden_NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListConnectionsResult) Reset() {
 	*x = ListConnectionsResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[59]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8516,7 +8538,7 @@ func (x *ListConnectionsResult) String() string {
 func (*ListConnectionsResult) ProtoMessage() {}
 
 func (x *ListConnectionsResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[59]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8529,65 +8551,56 @@ func (x *ListConnectionsResult) ProtoReflect() protoreflect.Message {
 
 func (x *ListConnectionsResult) GetConnection() []*Connection {
 	if x != nil {
-		return x.Connection
+		if x.xxx_hidden_Connection != nil {
+			return *x.xxx_hidden_Connection
+		}
 	}
 	return nil
 }
 
 func (x *ListConnectionsResult) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.xxx_hidden_NextPageToken
 	}
 	return ""
 }
 
 func (x *ListConnectionsResult) SetConnection(v []*Connection) {
-	x.Connection = v
+	x.xxx_hidden_Connection = &v
 }
 
 func (x *ListConnectionsResult) SetNextPageToken(v string) {
-	x.NextPageToken = &v
-}
-
-func (x *ListConnectionsResult) HasNextPageToken() bool {
-	if x == nil {
-		return false
-	}
-	return x.NextPageToken != nil
-}
-
-func (x *ListConnectionsResult) ClearNextPageToken() {
-	x.NextPageToken = nil
+	x.xxx_hidden_NextPageToken = v
 }
 
 type ListConnectionsResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Connection    []*Connection
-	NextPageToken *string
+	NextPageToken string
 }
 
 func (b0 ListConnectionsResult_builder) Build() *ListConnectionsResult {
 	m0 := &ListConnectionsResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Connection = b.Connection
-	x.NextPageToken = b.NextPageToken
+	x.xxx_hidden_Connection = &b.Connection
+	x.xxx_hidden_NextPageToken = b.NextPageToken
 	return m0
 }
 
 // Getting information about the connection
 type DescribeConnectionRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	ConnectionId    *string                         `protobuf:"bytes,2,opt,name=connection_id,json=connectionId" json:"connection_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_ConnectionId    string                          `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeConnectionRequest) Reset() {
 	*x = DescribeConnectionRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[60]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8599,7 +8612,7 @@ func (x *DescribeConnectionRequest) String() string {
 func (*DescribeConnectionRequest) ProtoMessage() {}
 
 func (x *DescribeConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[60]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8612,74 +8625,63 @@ func (x *DescribeConnectionRequest) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeConnectionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeConnectionRequest) GetConnectionId() string {
-	if x != nil && x.ConnectionId != nil {
-		return *x.ConnectionId
+	if x != nil {
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *DescribeConnectionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DescribeConnectionRequest) SetConnectionId(v string) {
-	x.ConnectionId = &v
+	x.xxx_hidden_ConnectionId = v
 }
 
 func (x *DescribeConnectionRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DescribeConnectionRequest) HasConnectionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ConnectionId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DescribeConnectionRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *DescribeConnectionRequest) ClearConnectionId() {
-	x.ConnectionId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DescribeConnectionRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	ConnectionId    *string
+	ConnectionId    string
 }
 
 func (b0 DescribeConnectionRequest_builder) Build() *DescribeConnectionRequest {
 	m0 := &DescribeConnectionRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.ConnectionId = b.ConnectionId
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_ConnectionId = b.ConnectionId
 	return m0
 }
 
 type DescribeConnectionResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // DescribeConnectionResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeConnectionResponse) Reset() {
 	*x = DescribeConnectionResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[61]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8691,7 +8693,7 @@ func (x *DescribeConnectionResponse) String() string {
 func (*DescribeConnectionResponse) ProtoMessage() {}
 
 func (x *DescribeConnectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[61]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8704,24 +8706,24 @@ func (x *DescribeConnectionResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeConnectionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DescribeConnectionResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DescribeConnectionResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DescribeConnectionResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DescribeConnectionResponse_builder struct {
@@ -8734,20 +8736,20 @@ func (b0 DescribeConnectionResponse_builder) Build() *DescribeConnectionResponse
 	m0 := &DescribeConnectionResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DescribeConnectionResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Connection    *Connection            `protobuf:"bytes,1,opt,name=connection" json:"connection,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Connection *Connection            `protobuf:"bytes,1,opt,name=connection,proto3"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *DescribeConnectionResult) Reset() {
 	*x = DescribeConnectionResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[62]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8759,7 +8761,7 @@ func (x *DescribeConnectionResult) String() string {
 func (*DescribeConnectionResult) ProtoMessage() {}
 
 func (x *DescribeConnectionResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[62]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8772,24 +8774,24 @@ func (x *DescribeConnectionResult) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeConnectionResult) GetConnection() *Connection {
 	if x != nil {
-		return x.Connection
+		return x.xxx_hidden_Connection
 	}
 	return nil
 }
 
 func (x *DescribeConnectionResult) SetConnection(v *Connection) {
-	x.Connection = v
+	x.xxx_hidden_Connection = v
 }
 
 func (x *DescribeConnectionResult) HasConnection() bool {
 	if x == nil {
 		return false
 	}
-	return x.Connection != nil
+	return x.xxx_hidden_Connection != nil
 }
 
 func (x *DescribeConnectionResult) ClearConnection() {
-	x.Connection = nil
+	x.xxx_hidden_Connection = nil
 }
 
 type DescribeConnectionResult_builder struct {
@@ -8802,25 +8804,25 @@ func (b0 DescribeConnectionResult_builder) Build() *DescribeConnectionResult {
 	m0 := &DescribeConnectionResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Connection = b.Connection
+	x.xxx_hidden_Connection = b.Connection
 	return m0
 }
 
 // Change connection information. All fields must be filled in the request. The connection changes completely
 type ModifyConnectionRequest struct {
-	state            protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	ConnectionId     *string                         `protobuf:"bytes,2,opt,name=connection_id,json=connectionId" json:"connection_id,omitempty"`
-	Content          *ConnectionContent              `protobuf:"bytes,3,opt,name=content" json:"content,omitempty"`
-	PreviousRevision *int64                          `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision" json:"previous_revision,omitempty"`
-	IdempotencyKey   *string                         `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_ConnectionId     string                          `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3"`
+	xxx_hidden_Content          *ConnectionContent              `protobuf:"bytes,3,opt,name=content,proto3"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ModifyConnectionRequest) Reset() {
 	*x = ModifyConnectionRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[63]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8832,7 +8834,7 @@ func (x *ModifyConnectionRequest) String() string {
 func (*ModifyConnectionRequest) ProtoMessage() {}
 
 func (x *ModifyConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[63]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8845,146 +8847,113 @@ func (x *ModifyConnectionRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ModifyConnectionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ModifyConnectionRequest) GetConnectionId() string {
-	if x != nil && x.ConnectionId != nil {
-		return *x.ConnectionId
+	if x != nil {
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *ModifyConnectionRequest) GetContent() *ConnectionContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *ModifyConnectionRequest) GetPreviousRevision() int64 {
-	if x != nil && x.PreviousRevision != nil {
-		return *x.PreviousRevision
+	if x != nil {
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *ModifyConnectionRequest) GetIdempotencyKey() string {
-	if x != nil && x.IdempotencyKey != nil {
-		return *x.IdempotencyKey
+	if x != nil {
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *ModifyConnectionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ModifyConnectionRequest) SetConnectionId(v string) {
-	x.ConnectionId = &v
+	x.xxx_hidden_ConnectionId = v
 }
 
 func (x *ModifyConnectionRequest) SetContent(v *ConnectionContent) {
-	x.Content = v
+	x.xxx_hidden_Content = v
 }
 
 func (x *ModifyConnectionRequest) SetPreviousRevision(v int64) {
-	x.PreviousRevision = &v
+	x.xxx_hidden_PreviousRevision = v
 }
 
 func (x *ModifyConnectionRequest) SetIdempotencyKey(v string) {
-	x.IdempotencyKey = &v
+	x.xxx_hidden_IdempotencyKey = v
 }
 
 func (x *ModifyConnectionRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ModifyConnectionRequest) HasConnectionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ConnectionId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ModifyConnectionRequest) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return x.Content != nil
-}
-
-func (x *ModifyConnectionRequest) HasPreviousRevision() bool {
-	if x == nil {
-		return false
-	}
-	return x.PreviousRevision != nil
-}
-
-func (x *ModifyConnectionRequest) HasIdempotencyKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.IdempotencyKey != nil
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *ModifyConnectionRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ModifyConnectionRequest) ClearConnectionId() {
-	x.ConnectionId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ModifyConnectionRequest) ClearContent() {
-	x.Content = nil
-}
-
-func (x *ModifyConnectionRequest) ClearPreviousRevision() {
-	x.PreviousRevision = nil
-}
-
-func (x *ModifyConnectionRequest) ClearIdempotencyKey() {
-	x.IdempotencyKey = nil
+	x.xxx_hidden_Content = nil
 }
 
 type ModifyConnectionRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams  *Ydb_Operations.OperationParams
-	ConnectionId     *string
+	ConnectionId     string
 	Content          *ConnectionContent
-	PreviousRevision *int64
-	IdempotencyKey   *string
+	PreviousRevision int64
+	IdempotencyKey   string
 }
 
 func (b0 ModifyConnectionRequest_builder) Build() *ModifyConnectionRequest {
 	m0 := &ModifyConnectionRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.ConnectionId = b.ConnectionId
-	x.Content = b.Content
-	x.PreviousRevision = b.PreviousRevision
-	x.IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
 	return m0
 }
 
 type ModifyConnectionResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // ModifyConnectionResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ModifyConnectionResponse) Reset() {
 	*x = ModifyConnectionResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[64]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8996,7 +8965,7 @@ func (x *ModifyConnectionResponse) String() string {
 func (*ModifyConnectionResponse) ProtoMessage() {}
 
 func (x *ModifyConnectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[64]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9009,24 +8978,24 @@ func (x *ModifyConnectionResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ModifyConnectionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ModifyConnectionResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ModifyConnectionResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ModifyConnectionResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ModifyConnectionResponse_builder struct {
@@ -9039,19 +9008,19 @@ func (b0 ModifyConnectionResponse_builder) Build() *ModifyConnectionResponse {
 	m0 := &ModifyConnectionResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ModifyConnectionResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ModifyConnectionResult) Reset() {
 	*x = ModifyConnectionResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[65]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9063,7 +9032,7 @@ func (x *ModifyConnectionResult) String() string {
 func (*ModifyConnectionResult) ProtoMessage() {}
 
 func (x *ModifyConnectionResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[65]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9088,18 +9057,18 @@ func (b0 ModifyConnectionResult_builder) Build() *ModifyConnectionResult {
 
 // Complete removal of connection. Recovery of the connection after this operation is not possible
 type DeleteConnectionRequest struct {
-	state            protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	ConnectionId     *string                         `protobuf:"bytes,2,opt,name=connection_id,json=connectionId" json:"connection_id,omitempty"`
-	PreviousRevision *int64                          `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision" json:"previous_revision,omitempty"`
-	IdempotencyKey   *string                         `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_ConnectionId     string                          `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *DeleteConnectionRequest) Reset() {
 	*x = DeleteConnectionRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[66]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9111,7 +9080,7 @@ func (x *DeleteConnectionRequest) String() string {
 func (*DeleteConnectionRequest) ProtoMessage() {}
 
 func (x *DeleteConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[66]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9124,122 +9093,89 @@ func (x *DeleteConnectionRequest) ProtoReflect() protoreflect.Message {
 
 func (x *DeleteConnectionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DeleteConnectionRequest) GetConnectionId() string {
-	if x != nil && x.ConnectionId != nil {
-		return *x.ConnectionId
+	if x != nil {
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *DeleteConnectionRequest) GetPreviousRevision() int64 {
-	if x != nil && x.PreviousRevision != nil {
-		return *x.PreviousRevision
+	if x != nil {
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *DeleteConnectionRequest) GetIdempotencyKey() string {
-	if x != nil && x.IdempotencyKey != nil {
-		return *x.IdempotencyKey
+	if x != nil {
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *DeleteConnectionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DeleteConnectionRequest) SetConnectionId(v string) {
-	x.ConnectionId = &v
+	x.xxx_hidden_ConnectionId = v
 }
 
 func (x *DeleteConnectionRequest) SetPreviousRevision(v int64) {
-	x.PreviousRevision = &v
+	x.xxx_hidden_PreviousRevision = v
 }
 
 func (x *DeleteConnectionRequest) SetIdempotencyKey(v string) {
-	x.IdempotencyKey = &v
+	x.xxx_hidden_IdempotencyKey = v
 }
 
 func (x *DeleteConnectionRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DeleteConnectionRequest) HasConnectionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ConnectionId != nil
-}
-
-func (x *DeleteConnectionRequest) HasPreviousRevision() bool {
-	if x == nil {
-		return false
-	}
-	return x.PreviousRevision != nil
-}
-
-func (x *DeleteConnectionRequest) HasIdempotencyKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.IdempotencyKey != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DeleteConnectionRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *DeleteConnectionRequest) ClearConnectionId() {
-	x.ConnectionId = nil
-}
-
-func (x *DeleteConnectionRequest) ClearPreviousRevision() {
-	x.PreviousRevision = nil
-}
-
-func (x *DeleteConnectionRequest) ClearIdempotencyKey() {
-	x.IdempotencyKey = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DeleteConnectionRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams  *Ydb_Operations.OperationParams
-	ConnectionId     *string
-	PreviousRevision *int64
-	IdempotencyKey   *string
+	ConnectionId     string
+	PreviousRevision int64
+	IdempotencyKey   string
 }
 
 func (b0 DeleteConnectionRequest_builder) Build() *DeleteConnectionRequest {
 	m0 := &DeleteConnectionRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.ConnectionId = b.ConnectionId
-	x.PreviousRevision = b.PreviousRevision
-	x.IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
 	return m0
 }
 
 type DeleteConnectionResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // DeleteConnectionResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DeleteConnectionResponse) Reset() {
 	*x = DeleteConnectionResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[67]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9251,7 +9187,7 @@ func (x *DeleteConnectionResponse) String() string {
 func (*DeleteConnectionResponse) ProtoMessage() {}
 
 func (x *DeleteConnectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[67]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9264,24 +9200,24 @@ func (x *DeleteConnectionResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DeleteConnectionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DeleteConnectionResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DeleteConnectionResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DeleteConnectionResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DeleteConnectionResponse_builder struct {
@@ -9294,19 +9230,19 @@ func (b0 DeleteConnectionResponse_builder) Build() *DeleteConnectionResponse {
 	m0 := &DeleteConnectionResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DeleteConnectionResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteConnectionResult) Reset() {
 	*x = DeleteConnectionResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[68]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9318,7 +9254,7 @@ func (x *DeleteConnectionResult) String() string {
 func (*DeleteConnectionResult) ProtoMessage() {}
 
 func (x *DeleteConnectionResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[68]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9342,16 +9278,16 @@ func (b0 DeleteConnectionResult_builder) Build() *DeleteConnectionResult {
 }
 
 type TestConnectionRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	Setting         *ConnectionSetting              `protobuf:"bytes,2,opt,name=setting" json:"setting,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Setting         *ConnectionSetting              `protobuf:"bytes,2,opt,name=setting,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *TestConnectionRequest) Reset() {
 	*x = TestConnectionRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[69]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9363,7 +9299,7 @@ func (x *TestConnectionRequest) String() string {
 func (*TestConnectionRequest) ProtoMessage() {}
 
 func (x *TestConnectionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[69]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9376,46 +9312,46 @@ func (x *TestConnectionRequest) ProtoReflect() protoreflect.Message {
 
 func (x *TestConnectionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *TestConnectionRequest) GetSetting() *ConnectionSetting {
 	if x != nil {
-		return x.Setting
+		return x.xxx_hidden_Setting
 	}
 	return nil
 }
 
 func (x *TestConnectionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *TestConnectionRequest) SetSetting(v *ConnectionSetting) {
-	x.Setting = v
+	x.xxx_hidden_Setting = v
 }
 
 func (x *TestConnectionRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *TestConnectionRequest) HasSetting() bool {
 	if x == nil {
 		return false
 	}
-	return x.Setting != nil
+	return x.xxx_hidden_Setting != nil
 }
 
 func (x *TestConnectionRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *TestConnectionRequest) ClearSetting() {
-	x.Setting = nil
+	x.xxx_hidden_Setting = nil
 }
 
 type TestConnectionRequest_builder struct {
@@ -9429,21 +9365,21 @@ func (b0 TestConnectionRequest_builder) Build() *TestConnectionRequest {
 	m0 := &TestConnectionRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Setting = b.Setting
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Setting = b.Setting
 	return m0
 }
 
 type TestConnectionResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // TestConnectionResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *TestConnectionResponse) Reset() {
 	*x = TestConnectionResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[70]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9455,7 +9391,7 @@ func (x *TestConnectionResponse) String() string {
 func (*TestConnectionResponse) ProtoMessage() {}
 
 func (x *TestConnectionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[70]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9468,24 +9404,24 @@ func (x *TestConnectionResponse) ProtoReflect() protoreflect.Message {
 
 func (x *TestConnectionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *TestConnectionResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *TestConnectionResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *TestConnectionResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type TestConnectionResponse_builder struct {
@@ -9498,19 +9434,19 @@ func (b0 TestConnectionResponse_builder) Build() *TestConnectionResponse {
 	m0 := &TestConnectionResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type TestConnectionResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TestConnectionResult) Reset() {
 	*x = TestConnectionResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[71]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9522,7 +9458,7 @@ func (x *TestConnectionResult) String() string {
 func (*TestConnectionResult) ProtoMessage() {}
 
 func (x *TestConnectionResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[71]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9547,19 +9483,19 @@ func (b0 TestConnectionResult_builder) Build() *TestConnectionResult {
 
 // Getting the result of the query execution
 type GetResultDataRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	QueryId         *string                         `protobuf:"bytes,2,opt,name=query_id,json=queryId" json:"query_id,omitempty"`
-	ResultSetIndex  *int32                          `protobuf:"varint,3,opt,name=result_set_index,json=resultSetIndex" json:"result_set_index,omitempty"`
-	Offset          *int64                          `protobuf:"varint,4,opt,name=offset" json:"offset,omitempty"`
-	Limit           *int64                          `protobuf:"varint,5,opt,name=limit" json:"limit,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_QueryId         string                          `protobuf:"bytes,2,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_ResultSetIndex  int32                           `protobuf:"varint,3,opt,name=result_set_index,json=resultSetIndex,proto3"`
+	xxx_hidden_Offset          int64                           `protobuf:"varint,4,opt,name=offset,proto3"`
+	xxx_hidden_Limit           int64                           `protobuf:"varint,5,opt,name=limit,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetResultDataRequest) Reset() {
 	*x = GetResultDataRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[72]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9571,7 +9507,7 @@ func (x *GetResultDataRequest) String() string {
 func (*GetResultDataRequest) ProtoMessage() {}
 
 func (x *GetResultDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[72]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9584,146 +9520,102 @@ func (x *GetResultDataRequest) ProtoReflect() protoreflect.Message {
 
 func (x *GetResultDataRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *GetResultDataRequest) GetQueryId() string {
-	if x != nil && x.QueryId != nil {
-		return *x.QueryId
+	if x != nil {
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *GetResultDataRequest) GetResultSetIndex() int32 {
-	if x != nil && x.ResultSetIndex != nil {
-		return *x.ResultSetIndex
+	if x != nil {
+		return x.xxx_hidden_ResultSetIndex
 	}
 	return 0
 }
 
 func (x *GetResultDataRequest) GetOffset() int64 {
-	if x != nil && x.Offset != nil {
-		return *x.Offset
+	if x != nil {
+		return x.xxx_hidden_Offset
 	}
 	return 0
 }
 
 func (x *GetResultDataRequest) GetLimit() int64 {
-	if x != nil && x.Limit != nil {
-		return *x.Limit
+	if x != nil {
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
 func (x *GetResultDataRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *GetResultDataRequest) SetQueryId(v string) {
-	x.QueryId = &v
+	x.xxx_hidden_QueryId = v
 }
 
 func (x *GetResultDataRequest) SetResultSetIndex(v int32) {
-	x.ResultSetIndex = &v
+	x.xxx_hidden_ResultSetIndex = v
 }
 
 func (x *GetResultDataRequest) SetOffset(v int64) {
-	x.Offset = &v
+	x.xxx_hidden_Offset = v
 }
 
 func (x *GetResultDataRequest) SetLimit(v int64) {
-	x.Limit = &v
+	x.xxx_hidden_Limit = v
 }
 
 func (x *GetResultDataRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *GetResultDataRequest) HasQueryId() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryId != nil
-}
-
-func (x *GetResultDataRequest) HasResultSetIndex() bool {
-	if x == nil {
-		return false
-	}
-	return x.ResultSetIndex != nil
-}
-
-func (x *GetResultDataRequest) HasOffset() bool {
-	if x == nil {
-		return false
-	}
-	return x.Offset != nil
-}
-
-func (x *GetResultDataRequest) HasLimit() bool {
-	if x == nil {
-		return false
-	}
-	return x.Limit != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *GetResultDataRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *GetResultDataRequest) ClearQueryId() {
-	x.QueryId = nil
-}
-
-func (x *GetResultDataRequest) ClearResultSetIndex() {
-	x.ResultSetIndex = nil
-}
-
-func (x *GetResultDataRequest) ClearOffset() {
-	x.Offset = nil
-}
-
-func (x *GetResultDataRequest) ClearLimit() {
-	x.Limit = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type GetResultDataRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	QueryId         *string
-	ResultSetIndex  *int32
-	Offset          *int64
-	Limit           *int64
+	QueryId         string
+	ResultSetIndex  int32
+	Offset          int64
+	Limit           int64
 }
 
 func (b0 GetResultDataRequest_builder) Build() *GetResultDataRequest {
 	m0 := &GetResultDataRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.QueryId = b.QueryId
-	x.ResultSetIndex = b.ResultSetIndex
-	x.Offset = b.Offset
-	x.Limit = b.Limit
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_ResultSetIndex = b.ResultSetIndex
+	x.xxx_hidden_Offset = b.Offset
+	x.xxx_hidden_Limit = b.Limit
 	return m0
 }
 
 type GetResultDataResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // GetResultDataResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetResultDataResponse) Reset() {
 	*x = GetResultDataResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[73]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9735,7 +9627,7 @@ func (x *GetResultDataResponse) String() string {
 func (*GetResultDataResponse) ProtoMessage() {}
 
 func (x *GetResultDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[73]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9748,24 +9640,24 @@ func (x *GetResultDataResponse) ProtoReflect() protoreflect.Message {
 
 func (x *GetResultDataResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *GetResultDataResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *GetResultDataResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *GetResultDataResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type GetResultDataResponse_builder struct {
@@ -9778,20 +9670,20 @@ func (b0 GetResultDataResponse_builder) Build() *GetResultDataResponse {
 	m0 := &GetResultDataResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type GetResultDataResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	ResultSet     *Ydb.ResultSet         `protobuf:"bytes,1,opt,name=result_set,json=resultSet" json:"result_set,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ResultSet *Ydb.ResultSet         `protobuf:"bytes,1,opt,name=result_set,json=resultSet,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetResultDataResult) Reset() {
 	*x = GetResultDataResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[74]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9803,7 +9695,7 @@ func (x *GetResultDataResult) String() string {
 func (*GetResultDataResult) ProtoMessage() {}
 
 func (x *GetResultDataResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[74]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9816,24 +9708,24 @@ func (x *GetResultDataResult) ProtoReflect() protoreflect.Message {
 
 func (x *GetResultDataResult) GetResultSet() *Ydb.ResultSet {
 	if x != nil {
-		return x.ResultSet
+		return x.xxx_hidden_ResultSet
 	}
 	return nil
 }
 
 func (x *GetResultDataResult) SetResultSet(v *Ydb.ResultSet) {
-	x.ResultSet = v
+	x.xxx_hidden_ResultSet = v
 }
 
 func (x *GetResultDataResult) HasResultSet() bool {
 	if x == nil {
 		return false
 	}
-	return x.ResultSet != nil
+	return x.xxx_hidden_ResultSet != nil
 }
 
 func (x *GetResultDataResult) ClearResultSet() {
-	x.ResultSet = nil
+	x.xxx_hidden_ResultSet = nil
 }
 
 type GetResultDataResult_builder struct {
@@ -9846,20 +9738,20 @@ func (b0 GetResultDataResult_builder) Build() *GetResultDataResult {
 	m0 := &GetResultDataResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ResultSet = b.ResultSet
+	x.xxx_hidden_ResultSet = b.ResultSet
 	return m0
 }
 
 type Schema struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Column        []*Ydb.Column          `protobuf:"bytes,1,rep,name=column" json:"column,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Column *[]*Ydb.Column         `protobuf:"bytes,1,rep,name=column,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *Schema) Reset() {
 	*x = Schema{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[75]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9871,7 +9763,7 @@ func (x *Schema) String() string {
 func (*Schema) ProtoMessage() {}
 
 func (x *Schema) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[75]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9884,13 +9776,15 @@ func (x *Schema) ProtoReflect() protoreflect.Message {
 
 func (x *Schema) GetColumn() []*Ydb.Column {
 	if x != nil {
-		return x.Column
+		if x.xxx_hidden_Column != nil {
+			return *x.xxx_hidden_Column
+		}
 	}
 	return nil
 }
 
 func (x *Schema) SetColumn(v []*Ydb.Column) {
-	x.Column = v
+	x.xxx_hidden_Column = &v
 }
 
 type Schema_builder struct {
@@ -9903,24 +9797,24 @@ func (b0 Schema_builder) Build() *Schema {
 	m0 := &Schema{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Column = b.Column
+	x.xxx_hidden_Column = &b.Column
 	return m0
 }
 
 type DataStreamsBinding struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	StreamName    *string                `protobuf:"bytes,1,opt,name=stream_name,json=streamName" json:"stream_name,omitempty"`
-	Format        *string                `protobuf:"bytes,2,opt,name=format" json:"format,omitempty"`
-	Compression   *string                `protobuf:"bytes,3,opt,name=compression" json:"compression,omitempty"`
-	Schema        *Schema                `protobuf:"bytes,4,opt,name=schema" json:"schema,omitempty"`
-	FormatSetting map[string]string      `protobuf:"bytes,5,rep,name=format_setting,json=formatSetting" json:"format_setting,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StreamName    string                 `protobuf:"bytes,1,opt,name=stream_name,json=streamName,proto3"`
+	xxx_hidden_Format        string                 `protobuf:"bytes,2,opt,name=format,proto3"`
+	xxx_hidden_Compression   string                 `protobuf:"bytes,3,opt,name=compression,proto3"`
+	xxx_hidden_Schema        *Schema                `protobuf:"bytes,4,opt,name=schema,proto3"`
+	xxx_hidden_FormatSetting map[string]string      `protobuf:"bytes,5,rep,name=format_setting,json=formatSetting,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *DataStreamsBinding) Reset() {
 	*x = DataStreamsBinding{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[76]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9932,7 +9826,7 @@ func (x *DataStreamsBinding) String() string {
 func (*DataStreamsBinding) ProtoMessage() {}
 
 func (x *DataStreamsBinding) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[76]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9944,110 +9838,77 @@ func (x *DataStreamsBinding) ProtoReflect() protoreflect.Message {
 }
 
 func (x *DataStreamsBinding) GetStreamName() string {
-	if x != nil && x.StreamName != nil {
-		return *x.StreamName
+	if x != nil {
+		return x.xxx_hidden_StreamName
 	}
 	return ""
 }
 
 func (x *DataStreamsBinding) GetFormat() string {
-	if x != nil && x.Format != nil {
-		return *x.Format
+	if x != nil {
+		return x.xxx_hidden_Format
 	}
 	return ""
 }
 
 func (x *DataStreamsBinding) GetCompression() string {
-	if x != nil && x.Compression != nil {
-		return *x.Compression
+	if x != nil {
+		return x.xxx_hidden_Compression
 	}
 	return ""
 }
 
 func (x *DataStreamsBinding) GetSchema() *Schema {
 	if x != nil {
-		return x.Schema
+		return x.xxx_hidden_Schema
 	}
 	return nil
 }
 
 func (x *DataStreamsBinding) GetFormatSetting() map[string]string {
 	if x != nil {
-		return x.FormatSetting
+		return x.xxx_hidden_FormatSetting
 	}
 	return nil
 }
 
 func (x *DataStreamsBinding) SetStreamName(v string) {
-	x.StreamName = &v
+	x.xxx_hidden_StreamName = v
 }
 
 func (x *DataStreamsBinding) SetFormat(v string) {
-	x.Format = &v
+	x.xxx_hidden_Format = v
 }
 
 func (x *DataStreamsBinding) SetCompression(v string) {
-	x.Compression = &v
+	x.xxx_hidden_Compression = v
 }
 
 func (x *DataStreamsBinding) SetSchema(v *Schema) {
-	x.Schema = v
+	x.xxx_hidden_Schema = v
 }
 
 func (x *DataStreamsBinding) SetFormatSetting(v map[string]string) {
-	x.FormatSetting = v
-}
-
-func (x *DataStreamsBinding) HasStreamName() bool {
-	if x == nil {
-		return false
-	}
-	return x.StreamName != nil
-}
-
-func (x *DataStreamsBinding) HasFormat() bool {
-	if x == nil {
-		return false
-	}
-	return x.Format != nil
-}
-
-func (x *DataStreamsBinding) HasCompression() bool {
-	if x == nil {
-		return false
-	}
-	return x.Compression != nil
+	x.xxx_hidden_FormatSetting = v
 }
 
 func (x *DataStreamsBinding) HasSchema() bool {
 	if x == nil {
 		return false
 	}
-	return x.Schema != nil
-}
-
-func (x *DataStreamsBinding) ClearStreamName() {
-	x.StreamName = nil
-}
-
-func (x *DataStreamsBinding) ClearFormat() {
-	x.Format = nil
-}
-
-func (x *DataStreamsBinding) ClearCompression() {
-	x.Compression = nil
+	return x.xxx_hidden_Schema != nil
 }
 
 func (x *DataStreamsBinding) ClearSchema() {
-	x.Schema = nil
+	x.xxx_hidden_Schema = nil
 }
 
 type DataStreamsBinding_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	StreamName    *string
-	Format        *string
-	Compression   *string
+	StreamName    string
+	Format        string
+	Compression   string
 	Schema        *Schema
 	FormatSetting map[string]string
 }
@@ -10056,24 +9917,24 @@ func (b0 DataStreamsBinding_builder) Build() *DataStreamsBinding {
 	m0 := &DataStreamsBinding{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.StreamName = b.StreamName
-	x.Format = b.Format
-	x.Compression = b.Compression
-	x.Schema = b.Schema
-	x.FormatSetting = b.FormatSetting
+	x.xxx_hidden_StreamName = b.StreamName
+	x.xxx_hidden_Format = b.Format
+	x.xxx_hidden_Compression = b.Compression
+	x.xxx_hidden_Schema = b.Schema
+	x.xxx_hidden_FormatSetting = b.FormatSetting
 	return m0
 }
 
 type ObjectStorageBinding struct {
-	state         protoimpl.MessageState         `protogen:"hybrid.v1"`
-	Subset        []*ObjectStorageBinding_Subset `protobuf:"bytes,1,rep,name=subset" json:"subset,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Subset *[]*ObjectStorageBinding_Subset `protobuf:"bytes,1,rep,name=subset,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ObjectStorageBinding) Reset() {
 	*x = ObjectStorageBinding{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[77]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10085,7 +9946,7 @@ func (x *ObjectStorageBinding) String() string {
 func (*ObjectStorageBinding) ProtoMessage() {}
 
 func (x *ObjectStorageBinding) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[77]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10098,13 +9959,15 @@ func (x *ObjectStorageBinding) ProtoReflect() protoreflect.Message {
 
 func (x *ObjectStorageBinding) GetSubset() []*ObjectStorageBinding_Subset {
 	if x != nil {
-		return x.Subset
+		if x.xxx_hidden_Subset != nil {
+			return *x.xxx_hidden_Subset
+		}
 	}
 	return nil
 }
 
 func (x *ObjectStorageBinding) SetSubset(v []*ObjectStorageBinding_Subset) {
-	x.Subset = v
+	x.xxx_hidden_Subset = &v
 }
 
 type ObjectStorageBinding_builder struct {
@@ -10117,24 +9980,20 @@ func (b0 ObjectStorageBinding_builder) Build() *ObjectStorageBinding {
 	m0 := &ObjectStorageBinding{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Subset = b.Subset
+	x.xxx_hidden_Subset = &b.Subset
 	return m0
 }
 
 type BindingSetting struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Types that are valid to be assigned to Binding:
-	//
-	//	*BindingSetting_DataStreams
-	//	*BindingSetting_ObjectStorage
-	Binding       isBindingSetting_Binding `protobuf_oneof:"binding"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Binding isBindingSetting_Binding `protobuf_oneof:"binding"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *BindingSetting) Reset() {
 	*x = BindingSetting{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[78]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10146,7 +10005,7 @@ func (x *BindingSetting) String() string {
 func (*BindingSetting) ProtoMessage() {}
 
 func (x *BindingSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[78]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10157,16 +10016,9 @@ func (x *BindingSetting) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *BindingSetting) GetBinding() isBindingSetting_Binding {
-	if x != nil {
-		return x.Binding
-	}
-	return nil
-}
-
 func (x *BindingSetting) GetDataStreams() *DataStreamsBinding {
 	if x != nil {
-		if x, ok := x.Binding.(*BindingSetting_DataStreams); ok {
+		if x, ok := x.xxx_hidden_Binding.(*bindingSetting_DataStreams); ok {
 			return x.DataStreams
 		}
 	}
@@ -10175,7 +10027,7 @@ func (x *BindingSetting) GetDataStreams() *DataStreamsBinding {
 
 func (x *BindingSetting) GetObjectStorage() *ObjectStorageBinding {
 	if x != nil {
-		if x, ok := x.Binding.(*BindingSetting_ObjectStorage); ok {
+		if x, ok := x.xxx_hidden_Binding.(*bindingSetting_ObjectStorage); ok {
 			return x.ObjectStorage
 		}
 	}
@@ -10184,32 +10036,32 @@ func (x *BindingSetting) GetObjectStorage() *ObjectStorageBinding {
 
 func (x *BindingSetting) SetDataStreams(v *DataStreamsBinding) {
 	if v == nil {
-		x.Binding = nil
+		x.xxx_hidden_Binding = nil
 		return
 	}
-	x.Binding = &BindingSetting_DataStreams{v}
+	x.xxx_hidden_Binding = &bindingSetting_DataStreams{v}
 }
 
 func (x *BindingSetting) SetObjectStorage(v *ObjectStorageBinding) {
 	if v == nil {
-		x.Binding = nil
+		x.xxx_hidden_Binding = nil
 		return
 	}
-	x.Binding = &BindingSetting_ObjectStorage{v}
+	x.xxx_hidden_Binding = &bindingSetting_ObjectStorage{v}
 }
 
 func (x *BindingSetting) HasBinding() bool {
 	if x == nil {
 		return false
 	}
-	return x.Binding != nil
+	return x.xxx_hidden_Binding != nil
 }
 
 func (x *BindingSetting) HasDataStreams() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Binding.(*BindingSetting_DataStreams)
+	_, ok := x.xxx_hidden_Binding.(*bindingSetting_DataStreams)
 	return ok
 }
 
@@ -10217,23 +10069,23 @@ func (x *BindingSetting) HasObjectStorage() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Binding.(*BindingSetting_ObjectStorage)
+	_, ok := x.xxx_hidden_Binding.(*bindingSetting_ObjectStorage)
 	return ok
 }
 
 func (x *BindingSetting) ClearBinding() {
-	x.Binding = nil
+	x.xxx_hidden_Binding = nil
 }
 
 func (x *BindingSetting) ClearDataStreams() {
-	if _, ok := x.Binding.(*BindingSetting_DataStreams); ok {
-		x.Binding = nil
+	if _, ok := x.xxx_hidden_Binding.(*bindingSetting_DataStreams); ok {
+		x.xxx_hidden_Binding = nil
 	}
 }
 
 func (x *BindingSetting) ClearObjectStorage() {
-	if _, ok := x.Binding.(*BindingSetting_ObjectStorage); ok {
-		x.Binding = nil
+	if _, ok := x.xxx_hidden_Binding.(*bindingSetting_ObjectStorage); ok {
+		x.xxx_hidden_Binding = nil
 	}
 }
 
@@ -10245,10 +10097,10 @@ func (x *BindingSetting) WhichBinding() case_BindingSetting_Binding {
 	if x == nil {
 		return BindingSetting_Binding_not_set_case
 	}
-	switch x.Binding.(type) {
-	case *BindingSetting_DataStreams:
+	switch x.xxx_hidden_Binding.(type) {
+	case *bindingSetting_DataStreams:
 		return BindingSetting_DataStreams_case
-	case *BindingSetting_ObjectStorage:
+	case *bindingSetting_ObjectStorage:
 		return BindingSetting_ObjectStorage_case
 	default:
 		return BindingSetting_Binding_not_set_case
@@ -10258,10 +10110,10 @@ func (x *BindingSetting) WhichBinding() case_BindingSetting_Binding {
 type BindingSetting_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof Binding:
+	// Fields of oneof xxx_hidden_Binding:
 	DataStreams   *DataStreamsBinding
 	ObjectStorage *ObjectStorageBinding
-	// -- end of Binding
+	// -- end of xxx_hidden_Binding
 }
 
 func (b0 BindingSetting_builder) Build() *BindingSetting {
@@ -10269,10 +10121,10 @@ func (b0 BindingSetting_builder) Build() *BindingSetting {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.DataStreams != nil {
-		x.Binding = &BindingSetting_DataStreams{b.DataStreams}
+		x.xxx_hidden_Binding = &bindingSetting_DataStreams{b.DataStreams}
 	}
 	if b.ObjectStorage != nil {
-		x.Binding = &BindingSetting_ObjectStorage{b.ObjectStorage}
+		x.xxx_hidden_Binding = &bindingSetting_ObjectStorage{b.ObjectStorage}
 	}
 	return m0
 }
@@ -10280,7 +10132,7 @@ func (b0 BindingSetting_builder) Build() *BindingSetting {
 type case_BindingSetting_Binding protoreflect.FieldNumber
 
 func (x case_BindingSetting_Binding) String() string {
-	md := file_draft_protos_ydb_federated_query_proto_msgTypes[78].Descriptor()
+	md := file_draft_protos_ydb_federated_query_proto_msgTypes[86].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -10291,32 +10143,32 @@ type isBindingSetting_Binding interface {
 	isBindingSetting_Binding()
 }
 
-type BindingSetting_DataStreams struct {
-	DataStreams *DataStreamsBinding `protobuf:"bytes,1,opt,name=data_streams,json=dataStreams,oneof"`
+type bindingSetting_DataStreams struct {
+	DataStreams *DataStreamsBinding `protobuf:"bytes,1,opt,name=data_streams,json=dataStreams,proto3,oneof"`
 }
 
-type BindingSetting_ObjectStorage struct {
-	ObjectStorage *ObjectStorageBinding `protobuf:"bytes,2,opt,name=object_storage,json=objectStorage,oneof"`
+type bindingSetting_ObjectStorage struct {
+	ObjectStorage *ObjectStorageBinding `protobuf:"bytes,2,opt,name=object_storage,json=objectStorage,proto3,oneof"`
 }
 
-func (*BindingSetting_DataStreams) isBindingSetting_Binding() {}
+func (*bindingSetting_DataStreams) isBindingSetting_Binding() {}
 
-func (*BindingSetting_ObjectStorage) isBindingSetting_Binding() {}
+func (*bindingSetting_ObjectStorage) isBindingSetting_Binding() {}
 
 type BriefBinding struct {
-	state         protoimpl.MessageState      `protogen:"hybrid.v1"`
-	Name          *string                     `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	ConnectionId  *string                     `protobuf:"bytes,2,opt,name=connection_id,json=connectionId" json:"connection_id,omitempty"`
-	Meta          *CommonMeta                 `protobuf:"bytes,3,opt,name=meta" json:"meta,omitempty"`
-	Type          *BindingSetting_BindingType `protobuf:"varint,4,opt,name=type,enum=FederatedQuery.BindingSetting_BindingType" json:"type,omitempty"`
-	Visibility    *Acl_Visibility             `protobuf:"varint,5,opt,name=visibility,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Name         string                     `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_ConnectionId string                     `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3"`
+	xxx_hidden_Meta         *CommonMeta                `protobuf:"bytes,3,opt,name=meta,proto3"`
+	xxx_hidden_Type         BindingSetting_BindingType `protobuf:"varint,4,opt,name=type,proto3,enum=FederatedQuery.BindingSetting_BindingType"`
+	xxx_hidden_Visibility   Acl_Visibility             `protobuf:"varint,5,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *BriefBinding) Reset() {
 	*x = BriefBinding{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[79]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10328,7 +10180,7 @@ func (x *BriefBinding) String() string {
 func (*BriefBinding) ProtoMessage() {}
 
 func (x *BriefBinding) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[79]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10340,151 +10192,107 @@ func (x *BriefBinding) ProtoReflect() protoreflect.Message {
 }
 
 func (x *BriefBinding) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *BriefBinding) GetConnectionId() string {
-	if x != nil && x.ConnectionId != nil {
-		return *x.ConnectionId
+	if x != nil {
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *BriefBinding) GetMeta() *CommonMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *BriefBinding) GetType() BindingSetting_BindingType {
-	if x != nil && x.Type != nil {
-		return *x.Type
+	if x != nil {
+		return x.xxx_hidden_Type
 	}
 	return BindingSetting_BINDING_TYPE_UNSPECIFIED
 }
 
 func (x *BriefBinding) GetVisibility() Acl_Visibility {
-	if x != nil && x.Visibility != nil {
-		return *x.Visibility
+	if x != nil {
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
 func (x *BriefBinding) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *BriefBinding) SetConnectionId(v string) {
-	x.ConnectionId = &v
+	x.xxx_hidden_ConnectionId = v
 }
 
 func (x *BriefBinding) SetMeta(v *CommonMeta) {
-	x.Meta = v
+	x.xxx_hidden_Meta = v
 }
 
 func (x *BriefBinding) SetType(v BindingSetting_BindingType) {
-	x.Type = &v
+	x.xxx_hidden_Type = v
 }
 
 func (x *BriefBinding) SetVisibility(v Acl_Visibility) {
-	x.Visibility = &v
-}
-
-func (x *BriefBinding) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *BriefBinding) HasConnectionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ConnectionId != nil
+	x.xxx_hidden_Visibility = v
 }
 
 func (x *BriefBinding) HasMeta() bool {
 	if x == nil {
 		return false
 	}
-	return x.Meta != nil
-}
-
-func (x *BriefBinding) HasType() bool {
-	if x == nil {
-		return false
-	}
-	return x.Type != nil
-}
-
-func (x *BriefBinding) HasVisibility() bool {
-	if x == nil {
-		return false
-	}
-	return x.Visibility != nil
-}
-
-func (x *BriefBinding) ClearName() {
-	x.Name = nil
-}
-
-func (x *BriefBinding) ClearConnectionId() {
-	x.ConnectionId = nil
+	return x.xxx_hidden_Meta != nil
 }
 
 func (x *BriefBinding) ClearMeta() {
-	x.Meta = nil
-}
-
-func (x *BriefBinding) ClearType() {
-	x.Type = nil
-}
-
-func (x *BriefBinding) ClearVisibility() {
-	x.Visibility = nil
+	x.xxx_hidden_Meta = nil
 }
 
 type BriefBinding_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Name         *string
-	ConnectionId *string
+	Name         string
+	ConnectionId string
 	Meta         *CommonMeta
-	Type         *BindingSetting_BindingType
-	Visibility   *Acl_Visibility
+	Type         BindingSetting_BindingType
+	Visibility   Acl_Visibility
 }
 
 func (b0 BriefBinding_builder) Build() *BriefBinding {
 	m0 := &BriefBinding{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Name = b.Name
-	x.ConnectionId = b.ConnectionId
-	x.Meta = b.Meta
-	x.Type = b.Type
-	x.Visibility = b.Visibility
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	x.xxx_hidden_Meta = b.Meta
+	x.xxx_hidden_Type = b.Type
+	x.xxx_hidden_Visibility = b.Visibility
 	return m0
 }
 
 type BindingContent struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Name          *string                `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	ConnectionId  *string                `protobuf:"bytes,2,opt,name=connection_id,json=connectionId" json:"connection_id,omitempty"`
-	Setting       *BindingSetting        `protobuf:"bytes,3,opt,name=setting" json:"setting,omitempty"`
-	Acl           *Acl                   `protobuf:"bytes,4,opt,name=acl" json:"acl,omitempty"`
-	Description   *string                `protobuf:"bytes,5,opt,name=description" json:"description,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name         string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_ConnectionId string                 `protobuf:"bytes,2,opt,name=connection_id,json=connectionId,proto3"`
+	xxx_hidden_Setting      *BindingSetting        `protobuf:"bytes,3,opt,name=setting,proto3"`
+	xxx_hidden_Acl          *Acl                   `protobuf:"bytes,4,opt,name=acl,proto3"`
+	xxx_hidden_Description  string                 `protobuf:"bytes,5,opt,name=description,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *BindingContent) Reset() {
 	*x = BindingContent{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[80]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10496,7 +10304,7 @@ func (x *BindingContent) String() string {
 func (*BindingContent) ProtoMessage() {}
 
 func (x *BindingContent) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[80]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10508,148 +10316,115 @@ func (x *BindingContent) ProtoReflect() protoreflect.Message {
 }
 
 func (x *BindingContent) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *BindingContent) GetConnectionId() string {
-	if x != nil && x.ConnectionId != nil {
-		return *x.ConnectionId
+	if x != nil {
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *BindingContent) GetSetting() *BindingSetting {
 	if x != nil {
-		return x.Setting
+		return x.xxx_hidden_Setting
 	}
 	return nil
 }
 
 func (x *BindingContent) GetAcl() *Acl {
 	if x != nil {
-		return x.Acl
+		return x.xxx_hidden_Acl
 	}
 	return nil
 }
 
 func (x *BindingContent) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
 func (x *BindingContent) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *BindingContent) SetConnectionId(v string) {
-	x.ConnectionId = &v
+	x.xxx_hidden_ConnectionId = v
 }
 
 func (x *BindingContent) SetSetting(v *BindingSetting) {
-	x.Setting = v
+	x.xxx_hidden_Setting = v
 }
 
 func (x *BindingContent) SetAcl(v *Acl) {
-	x.Acl = v
+	x.xxx_hidden_Acl = v
 }
 
 func (x *BindingContent) SetDescription(v string) {
-	x.Description = &v
-}
-
-func (x *BindingContent) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *BindingContent) HasConnectionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ConnectionId != nil
+	x.xxx_hidden_Description = v
 }
 
 func (x *BindingContent) HasSetting() bool {
 	if x == nil {
 		return false
 	}
-	return x.Setting != nil
+	return x.xxx_hidden_Setting != nil
 }
 
 func (x *BindingContent) HasAcl() bool {
 	if x == nil {
 		return false
 	}
-	return x.Acl != nil
-}
-
-func (x *BindingContent) HasDescription() bool {
-	if x == nil {
-		return false
-	}
-	return x.Description != nil
-}
-
-func (x *BindingContent) ClearName() {
-	x.Name = nil
-}
-
-func (x *BindingContent) ClearConnectionId() {
-	x.ConnectionId = nil
+	return x.xxx_hidden_Acl != nil
 }
 
 func (x *BindingContent) ClearSetting() {
-	x.Setting = nil
+	x.xxx_hidden_Setting = nil
 }
 
 func (x *BindingContent) ClearAcl() {
-	x.Acl = nil
-}
-
-func (x *BindingContent) ClearDescription() {
-	x.Description = nil
+	x.xxx_hidden_Acl = nil
 }
 
 type BindingContent_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Name         *string
-	ConnectionId *string
+	Name         string
+	ConnectionId string
 	Setting      *BindingSetting
 	Acl          *Acl
-	Description  *string
+	Description  string
 }
 
 func (b0 BindingContent_builder) Build() *BindingContent {
 	m0 := &BindingContent{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Name = b.Name
-	x.ConnectionId = b.ConnectionId
-	x.Setting = b.Setting
-	x.Acl = b.Acl
-	x.Description = b.Description
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	x.xxx_hidden_Setting = b.Setting
+	x.xxx_hidden_Acl = b.Acl
+	x.xxx_hidden_Description = b.Description
 	return m0
 }
 
 type Binding struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Content       *BindingContent        `protobuf:"bytes,1,opt,name=content" json:"content,omitempty"`
-	Meta          *CommonMeta            `protobuf:"bytes,2,opt,name=meta" json:"meta,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Content *BindingContent        `protobuf:"bytes,1,opt,name=content,proto3"`
+	xxx_hidden_Meta    *CommonMeta            `protobuf:"bytes,2,opt,name=meta,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Binding) Reset() {
 	*x = Binding{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[81]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10661,7 +10436,7 @@ func (x *Binding) String() string {
 func (*Binding) ProtoMessage() {}
 
 func (x *Binding) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[81]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10674,46 +10449,46 @@ func (x *Binding) ProtoReflect() protoreflect.Message {
 
 func (x *Binding) GetContent() *BindingContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *Binding) GetMeta() *CommonMeta {
 	if x != nil {
-		return x.Meta
+		return x.xxx_hidden_Meta
 	}
 	return nil
 }
 
 func (x *Binding) SetContent(v *BindingContent) {
-	x.Content = v
+	x.xxx_hidden_Content = v
 }
 
 func (x *Binding) SetMeta(v *CommonMeta) {
-	x.Meta = v
+	x.xxx_hidden_Meta = v
 }
 
 func (x *Binding) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return x.Content != nil
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *Binding) HasMeta() bool {
 	if x == nil {
 		return false
 	}
-	return x.Meta != nil
+	return x.xxx_hidden_Meta != nil
 }
 
 func (x *Binding) ClearContent() {
-	x.Content = nil
+	x.xxx_hidden_Content = nil
 }
 
 func (x *Binding) ClearMeta() {
-	x.Meta = nil
+	x.xxx_hidden_Meta = nil
 }
 
 type Binding_builder struct {
@@ -10727,24 +10502,24 @@ func (b0 Binding_builder) Build() *Binding {
 	m0 := &Binding{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Content = b.Content
-	x.Meta = b.Meta
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_Meta = b.Meta
 	return m0
 }
 
 // Create a new binding
 type CreateBindingRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	Content         *BindingContent                 `protobuf:"bytes,2,opt,name=content" json:"content,omitempty"`
-	IdempotencyKey  *string                         `protobuf:"bytes,3,opt,name=idempotency_key,json=idempotencyKey" json:"idempotency_key,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_Content         *BindingContent                 `protobuf:"bytes,2,opt,name=content,proto3"`
+	xxx_hidden_IdempotencyKey  string                          `protobuf:"bytes,3,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateBindingRequest) Reset() {
 	*x = CreateBindingRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[82]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10756,7 +10531,7 @@ func (x *CreateBindingRequest) String() string {
 func (*CreateBindingRequest) ProtoMessage() {}
 
 func (x *CreateBindingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[82]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10769,68 +10544,57 @@ func (x *CreateBindingRequest) ProtoReflect() protoreflect.Message {
 
 func (x *CreateBindingRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateBindingRequest) GetContent() *BindingContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *CreateBindingRequest) GetIdempotencyKey() string {
-	if x != nil && x.IdempotencyKey != nil {
-		return *x.IdempotencyKey
+	if x != nil {
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *CreateBindingRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *CreateBindingRequest) SetContent(v *BindingContent) {
-	x.Content = v
+	x.xxx_hidden_Content = v
 }
 
 func (x *CreateBindingRequest) SetIdempotencyKey(v string) {
-	x.IdempotencyKey = &v
+	x.xxx_hidden_IdempotencyKey = v
 }
 
 func (x *CreateBindingRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *CreateBindingRequest) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return x.Content != nil
-}
-
-func (x *CreateBindingRequest) HasIdempotencyKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.IdempotencyKey != nil
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *CreateBindingRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *CreateBindingRequest) ClearContent() {
-	x.Content = nil
-}
-
-func (x *CreateBindingRequest) ClearIdempotencyKey() {
-	x.IdempotencyKey = nil
+	x.xxx_hidden_Content = nil
 }
 
 type CreateBindingRequest_builder struct {
@@ -10838,29 +10602,29 @@ type CreateBindingRequest_builder struct {
 
 	OperationParams *Ydb_Operations.OperationParams
 	Content         *BindingContent
-	IdempotencyKey  *string
+	IdempotencyKey  string
 }
 
 func (b0 CreateBindingRequest_builder) Build() *CreateBindingRequest {
 	m0 := &CreateBindingRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.Content = b.Content
-	x.IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
 	return m0
 }
 
 type CreateBindingResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // CreateBindingResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateBindingResponse) Reset() {
 	*x = CreateBindingResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[83]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10872,7 +10636,7 @@ func (x *CreateBindingResponse) String() string {
 func (*CreateBindingResponse) ProtoMessage() {}
 
 func (x *CreateBindingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[83]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10885,24 +10649,24 @@ func (x *CreateBindingResponse) ProtoReflect() protoreflect.Message {
 
 func (x *CreateBindingResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *CreateBindingResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *CreateBindingResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *CreateBindingResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type CreateBindingResponse_builder struct {
@@ -10915,20 +10679,20 @@ func (b0 CreateBindingResponse_builder) Build() *CreateBindingResponse {
 	m0 := &CreateBindingResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type CreateBindingResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	BindingId     *string                `protobuf:"bytes,1,opt,name=binding_id,json=bindingId" json:"binding_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_BindingId string                 `protobuf:"bytes,1,opt,name=binding_id,json=bindingId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateBindingResult) Reset() {
 	*x = CreateBindingResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[84]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10940,7 +10704,7 @@ func (x *CreateBindingResult) String() string {
 func (*CreateBindingResult) ProtoMessage() {}
 
 func (x *CreateBindingResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[84]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10952,55 +10716,44 @@ func (x *CreateBindingResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *CreateBindingResult) GetBindingId() string {
-	if x != nil && x.BindingId != nil {
-		return *x.BindingId
+	if x != nil {
+		return x.xxx_hidden_BindingId
 	}
 	return ""
 }
 
 func (x *CreateBindingResult) SetBindingId(v string) {
-	x.BindingId = &v
-}
-
-func (x *CreateBindingResult) HasBindingId() bool {
-	if x == nil {
-		return false
-	}
-	return x.BindingId != nil
-}
-
-func (x *CreateBindingResult) ClearBindingId() {
-	x.BindingId = nil
+	x.xxx_hidden_BindingId = v
 }
 
 type CreateBindingResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	BindingId *string
+	BindingId string
 }
 
 func (b0 CreateBindingResult_builder) Build() *CreateBindingResult {
 	m0 := &CreateBindingResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.BindingId = b.BindingId
+	x.xxx_hidden_BindingId = b.BindingId
 	return m0
 }
 
 // Getting information about bindings
 type ListBindingsRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	PageToken       *string                         `protobuf:"bytes,2,opt,name=page_token,json=pageToken" json:"page_token,omitempty"`
-	Limit           *int32                          `protobuf:"varint,3,opt,name=limit" json:"limit,omitempty"`
-	Filter          *ListBindingsRequest_Filter     `protobuf:"bytes,4,opt,name=filter" json:"filter,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_PageToken       string                          `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3"`
+	xxx_hidden_Limit           int32                           `protobuf:"varint,3,opt,name=limit,proto3"`
+	xxx_hidden_Filter          *ListBindingsRequest_Filter     `protobuf:"bytes,4,opt,name=filter,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListBindingsRequest) Reset() {
 	*x = ListBindingsRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[85]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11012,7 +10765,7 @@ func (x *ListBindingsRequest) String() string {
 func (*ListBindingsRequest) ProtoMessage() {}
 
 func (x *ListBindingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[85]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11025,98 +10778,76 @@ func (x *ListBindingsRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ListBindingsRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListBindingsRequest) GetPageToken() string {
-	if x != nil && x.PageToken != nil {
-		return *x.PageToken
+	if x != nil {
+		return x.xxx_hidden_PageToken
 	}
 	return ""
 }
 
 func (x *ListBindingsRequest) GetLimit() int32 {
-	if x != nil && x.Limit != nil {
-		return *x.Limit
+	if x != nil {
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
 func (x *ListBindingsRequest) GetFilter() *ListBindingsRequest_Filter {
 	if x != nil {
-		return x.Filter
+		return x.xxx_hidden_Filter
 	}
 	return nil
 }
 
 func (x *ListBindingsRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ListBindingsRequest) SetPageToken(v string) {
-	x.PageToken = &v
+	x.xxx_hidden_PageToken = v
 }
 
 func (x *ListBindingsRequest) SetLimit(v int32) {
-	x.Limit = &v
+	x.xxx_hidden_Limit = v
 }
 
 func (x *ListBindingsRequest) SetFilter(v *ListBindingsRequest_Filter) {
-	x.Filter = v
+	x.xxx_hidden_Filter = v
 }
 
 func (x *ListBindingsRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ListBindingsRequest) HasPageToken() bool {
-	if x == nil {
-		return false
-	}
-	return x.PageToken != nil
-}
-
-func (x *ListBindingsRequest) HasLimit() bool {
-	if x == nil {
-		return false
-	}
-	return x.Limit != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ListBindingsRequest) HasFilter() bool {
 	if x == nil {
 		return false
 	}
-	return x.Filter != nil
+	return x.xxx_hidden_Filter != nil
 }
 
 func (x *ListBindingsRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ListBindingsRequest) ClearPageToken() {
-	x.PageToken = nil
-}
-
-func (x *ListBindingsRequest) ClearLimit() {
-	x.Limit = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ListBindingsRequest) ClearFilter() {
-	x.Filter = nil
+	x.xxx_hidden_Filter = nil
 }
 
 type ListBindingsRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	PageToken       *string
-	Limit           *int32
+	PageToken       string
+	Limit           int32
 	Filter          *ListBindingsRequest_Filter
 }
 
@@ -11124,23 +10855,23 @@ func (b0 ListBindingsRequest_builder) Build() *ListBindingsRequest {
 	m0 := &ListBindingsRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.PageToken = b.PageToken
-	x.Limit = b.Limit
-	x.Filter = b.Filter
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_PageToken = b.PageToken
+	x.xxx_hidden_Limit = b.Limit
+	x.xxx_hidden_Filter = b.Filter
 	return m0
 }
 
 type ListBindingsResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // ListBindingsResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListBindingsResponse) Reset() {
 	*x = ListBindingsResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[86]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11152,7 +10883,7 @@ func (x *ListBindingsResponse) String() string {
 func (*ListBindingsResponse) ProtoMessage() {}
 
 func (x *ListBindingsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[86]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11165,24 +10896,24 @@ func (x *ListBindingsResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ListBindingsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ListBindingsResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ListBindingsResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ListBindingsResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ListBindingsResponse_builder struct {
@@ -11195,21 +10926,21 @@ func (b0 ListBindingsResponse_builder) Build() *ListBindingsResponse {
 	m0 := &ListBindingsResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ListBindingsResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Binding       []*BriefBinding        `protobuf:"bytes,1,rep,name=binding" json:"binding,omitempty"`
-	NextPageToken *string                `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Binding       *[]*BriefBinding       `protobuf:"bytes,1,rep,name=binding,proto3"`
+	xxx_hidden_NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ListBindingsResult) Reset() {
 	*x = ListBindingsResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[87]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11221,7 +10952,7 @@ func (x *ListBindingsResult) String() string {
 func (*ListBindingsResult) ProtoMessage() {}
 
 func (x *ListBindingsResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[87]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11234,65 +10965,56 @@ func (x *ListBindingsResult) ProtoReflect() protoreflect.Message {
 
 func (x *ListBindingsResult) GetBinding() []*BriefBinding {
 	if x != nil {
-		return x.Binding
+		if x.xxx_hidden_Binding != nil {
+			return *x.xxx_hidden_Binding
+		}
 	}
 	return nil
 }
 
 func (x *ListBindingsResult) GetNextPageToken() string {
-	if x != nil && x.NextPageToken != nil {
-		return *x.NextPageToken
+	if x != nil {
+		return x.xxx_hidden_NextPageToken
 	}
 	return ""
 }
 
 func (x *ListBindingsResult) SetBinding(v []*BriefBinding) {
-	x.Binding = v
+	x.xxx_hidden_Binding = &v
 }
 
 func (x *ListBindingsResult) SetNextPageToken(v string) {
-	x.NextPageToken = &v
-}
-
-func (x *ListBindingsResult) HasNextPageToken() bool {
-	if x == nil {
-		return false
-	}
-	return x.NextPageToken != nil
-}
-
-func (x *ListBindingsResult) ClearNextPageToken() {
-	x.NextPageToken = nil
+	x.xxx_hidden_NextPageToken = v
 }
 
 type ListBindingsResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Binding       []*BriefBinding
-	NextPageToken *string
+	NextPageToken string
 }
 
 func (b0 ListBindingsResult_builder) Build() *ListBindingsResult {
 	m0 := &ListBindingsResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Binding = b.Binding
-	x.NextPageToken = b.NextPageToken
+	x.xxx_hidden_Binding = &b.Binding
+	x.xxx_hidden_NextPageToken = b.NextPageToken
 	return m0
 }
 
 // Getting information about the binding
 type DescribeBindingRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	BindingId       *string                         `protobuf:"bytes,2,opt,name=binding_id,json=bindingId" json:"binding_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_BindingId       string                          `protobuf:"bytes,2,opt,name=binding_id,json=bindingId,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeBindingRequest) Reset() {
 	*x = DescribeBindingRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[88]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11304,7 +11026,7 @@ func (x *DescribeBindingRequest) String() string {
 func (*DescribeBindingRequest) ProtoMessage() {}
 
 func (x *DescribeBindingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[88]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11317,74 +11039,63 @@ func (x *DescribeBindingRequest) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeBindingRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeBindingRequest) GetBindingId() string {
-	if x != nil && x.BindingId != nil {
-		return *x.BindingId
+	if x != nil {
+		return x.xxx_hidden_BindingId
 	}
 	return ""
 }
 
 func (x *DescribeBindingRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DescribeBindingRequest) SetBindingId(v string) {
-	x.BindingId = &v
+	x.xxx_hidden_BindingId = v
 }
 
 func (x *DescribeBindingRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DescribeBindingRequest) HasBindingId() bool {
-	if x == nil {
-		return false
-	}
-	return x.BindingId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DescribeBindingRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *DescribeBindingRequest) ClearBindingId() {
-	x.BindingId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DescribeBindingRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	BindingId       *string
+	BindingId       string
 }
 
 func (b0 DescribeBindingRequest_builder) Build() *DescribeBindingRequest {
 	m0 := &DescribeBindingRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.BindingId = b.BindingId
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_BindingId = b.BindingId
 	return m0
 }
 
 type DescribeBindingResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // DescribeBindingResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeBindingResponse) Reset() {
 	*x = DescribeBindingResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[89]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11396,7 +11107,7 @@ func (x *DescribeBindingResponse) String() string {
 func (*DescribeBindingResponse) ProtoMessage() {}
 
 func (x *DescribeBindingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[89]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11409,24 +11120,24 @@ func (x *DescribeBindingResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeBindingResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DescribeBindingResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DescribeBindingResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DescribeBindingResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DescribeBindingResponse_builder struct {
@@ -11439,20 +11150,20 @@ func (b0 DescribeBindingResponse_builder) Build() *DescribeBindingResponse {
 	m0 := &DescribeBindingResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DescribeBindingResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Binding       *Binding               `protobuf:"bytes,1,opt,name=binding" json:"binding,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Binding *Binding               `protobuf:"bytes,1,opt,name=binding,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *DescribeBindingResult) Reset() {
 	*x = DescribeBindingResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[90]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11464,7 +11175,7 @@ func (x *DescribeBindingResult) String() string {
 func (*DescribeBindingResult) ProtoMessage() {}
 
 func (x *DescribeBindingResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[90]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11477,24 +11188,24 @@ func (x *DescribeBindingResult) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeBindingResult) GetBinding() *Binding {
 	if x != nil {
-		return x.Binding
+		return x.xxx_hidden_Binding
 	}
 	return nil
 }
 
 func (x *DescribeBindingResult) SetBinding(v *Binding) {
-	x.Binding = v
+	x.xxx_hidden_Binding = v
 }
 
 func (x *DescribeBindingResult) HasBinding() bool {
 	if x == nil {
 		return false
 	}
-	return x.Binding != nil
+	return x.xxx_hidden_Binding != nil
 }
 
 func (x *DescribeBindingResult) ClearBinding() {
-	x.Binding = nil
+	x.xxx_hidden_Binding = nil
 }
 
 type DescribeBindingResult_builder struct {
@@ -11507,25 +11218,25 @@ func (b0 DescribeBindingResult_builder) Build() *DescribeBindingResult {
 	m0 := &DescribeBindingResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Binding = b.Binding
+	x.xxx_hidden_Binding = b.Binding
 	return m0
 }
 
 // Change binding information. All fields must be filled in the request. The binding changes completely
 type ModifyBindingRequest struct {
-	state            protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	BindingId        *string                         `protobuf:"bytes,2,opt,name=binding_id,json=bindingId" json:"binding_id,omitempty"`
-	Content          *BindingContent                 `protobuf:"bytes,3,opt,name=content" json:"content,omitempty"`
-	PreviousRevision *int64                          `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision" json:"previous_revision,omitempty"`
-	IdempotencyKey   *string                         `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_BindingId        string                          `protobuf:"bytes,2,opt,name=binding_id,json=bindingId,proto3"`
+	xxx_hidden_Content          *BindingContent                 `protobuf:"bytes,3,opt,name=content,proto3"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,4,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,5,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *ModifyBindingRequest) Reset() {
 	*x = ModifyBindingRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[91]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11537,7 +11248,7 @@ func (x *ModifyBindingRequest) String() string {
 func (*ModifyBindingRequest) ProtoMessage() {}
 
 func (x *ModifyBindingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[91]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11550,146 +11261,113 @@ func (x *ModifyBindingRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ModifyBindingRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ModifyBindingRequest) GetBindingId() string {
-	if x != nil && x.BindingId != nil {
-		return *x.BindingId
+	if x != nil {
+		return x.xxx_hidden_BindingId
 	}
 	return ""
 }
 
 func (x *ModifyBindingRequest) GetContent() *BindingContent {
 	if x != nil {
-		return x.Content
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
 func (x *ModifyBindingRequest) GetPreviousRevision() int64 {
-	if x != nil && x.PreviousRevision != nil {
-		return *x.PreviousRevision
+	if x != nil {
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *ModifyBindingRequest) GetIdempotencyKey() string {
-	if x != nil && x.IdempotencyKey != nil {
-		return *x.IdempotencyKey
+	if x != nil {
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *ModifyBindingRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ModifyBindingRequest) SetBindingId(v string) {
-	x.BindingId = &v
+	x.xxx_hidden_BindingId = v
 }
 
 func (x *ModifyBindingRequest) SetContent(v *BindingContent) {
-	x.Content = v
+	x.xxx_hidden_Content = v
 }
 
 func (x *ModifyBindingRequest) SetPreviousRevision(v int64) {
-	x.PreviousRevision = &v
+	x.xxx_hidden_PreviousRevision = v
 }
 
 func (x *ModifyBindingRequest) SetIdempotencyKey(v string) {
-	x.IdempotencyKey = &v
+	x.xxx_hidden_IdempotencyKey = v
 }
 
 func (x *ModifyBindingRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *ModifyBindingRequest) HasBindingId() bool {
-	if x == nil {
-		return false
-	}
-	return x.BindingId != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ModifyBindingRequest) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return x.Content != nil
-}
-
-func (x *ModifyBindingRequest) HasPreviousRevision() bool {
-	if x == nil {
-		return false
-	}
-	return x.PreviousRevision != nil
-}
-
-func (x *ModifyBindingRequest) HasIdempotencyKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.IdempotencyKey != nil
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *ModifyBindingRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *ModifyBindingRequest) ClearBindingId() {
-	x.BindingId = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ModifyBindingRequest) ClearContent() {
-	x.Content = nil
-}
-
-func (x *ModifyBindingRequest) ClearPreviousRevision() {
-	x.PreviousRevision = nil
-}
-
-func (x *ModifyBindingRequest) ClearIdempotencyKey() {
-	x.IdempotencyKey = nil
+	x.xxx_hidden_Content = nil
 }
 
 type ModifyBindingRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams  *Ydb_Operations.OperationParams
-	BindingId        *string
+	BindingId        string
 	Content          *BindingContent
-	PreviousRevision *int64
-	IdempotencyKey   *string
+	PreviousRevision int64
+	IdempotencyKey   string
 }
 
 func (b0 ModifyBindingRequest_builder) Build() *ModifyBindingRequest {
 	m0 := &ModifyBindingRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.BindingId = b.BindingId
-	x.Content = b.Content
-	x.PreviousRevision = b.PreviousRevision
-	x.IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_BindingId = b.BindingId
+	x.xxx_hidden_Content = b.Content
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
 	return m0
 }
 
 type ModifyBindingResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // ModifyBindingResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ModifyBindingResponse) Reset() {
 	*x = ModifyBindingResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[92]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11701,7 +11379,7 @@ func (x *ModifyBindingResponse) String() string {
 func (*ModifyBindingResponse) ProtoMessage() {}
 
 func (x *ModifyBindingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[92]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11714,24 +11392,24 @@ func (x *ModifyBindingResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ModifyBindingResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ModifyBindingResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ModifyBindingResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ModifyBindingResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ModifyBindingResponse_builder struct {
@@ -11744,19 +11422,19 @@ func (b0 ModifyBindingResponse_builder) Build() *ModifyBindingResponse {
 	m0 := &ModifyBindingResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ModifyBindingResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ModifyBindingResult) Reset() {
 	*x = ModifyBindingResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[93]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11768,7 +11446,7 @@ func (x *ModifyBindingResult) String() string {
 func (*ModifyBindingResult) ProtoMessage() {}
 
 func (x *ModifyBindingResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[93]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11793,18 +11471,18 @@ func (b0 ModifyBindingResult_builder) Build() *ModifyBindingResult {
 
 // Complete removal of binding. Recovery of the binding after this operation is not possible
 type DeleteBindingRequest struct {
-	state            protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	BindingId        *string                         `protobuf:"bytes,2,opt,name=binding_id,json=bindingId" json:"binding_id,omitempty"`
-	PreviousRevision *int64                          `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision" json:"previous_revision,omitempty"`
-	IdempotencyKey   *string                         `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey" json:"idempotency_key,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                       protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams  *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_BindingId        string                          `protobuf:"bytes,2,opt,name=binding_id,json=bindingId,proto3"`
+	xxx_hidden_PreviousRevision int64                           `protobuf:"varint,3,opt,name=previous_revision,json=previousRevision,proto3"`
+	xxx_hidden_IdempotencyKey   string                          `protobuf:"bytes,4,opt,name=idempotency_key,json=idempotencyKey,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *DeleteBindingRequest) Reset() {
 	*x = DeleteBindingRequest{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[94]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11816,7 +11494,7 @@ func (x *DeleteBindingRequest) String() string {
 func (*DeleteBindingRequest) ProtoMessage() {}
 
 func (x *DeleteBindingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[94]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11829,122 +11507,89 @@ func (x *DeleteBindingRequest) ProtoReflect() protoreflect.Message {
 
 func (x *DeleteBindingRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DeleteBindingRequest) GetBindingId() string {
-	if x != nil && x.BindingId != nil {
-		return *x.BindingId
+	if x != nil {
+		return x.xxx_hidden_BindingId
 	}
 	return ""
 }
 
 func (x *DeleteBindingRequest) GetPreviousRevision() int64 {
-	if x != nil && x.PreviousRevision != nil {
-		return *x.PreviousRevision
+	if x != nil {
+		return x.xxx_hidden_PreviousRevision
 	}
 	return 0
 }
 
 func (x *DeleteBindingRequest) GetIdempotencyKey() string {
-	if x != nil && x.IdempotencyKey != nil {
-		return *x.IdempotencyKey
+	if x != nil {
+		return x.xxx_hidden_IdempotencyKey
 	}
 	return ""
 }
 
 func (x *DeleteBindingRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DeleteBindingRequest) SetBindingId(v string) {
-	x.BindingId = &v
+	x.xxx_hidden_BindingId = v
 }
 
 func (x *DeleteBindingRequest) SetPreviousRevision(v int64) {
-	x.PreviousRevision = &v
+	x.xxx_hidden_PreviousRevision = v
 }
 
 func (x *DeleteBindingRequest) SetIdempotencyKey(v string) {
-	x.IdempotencyKey = &v
+	x.xxx_hidden_IdempotencyKey = v
 }
 
 func (x *DeleteBindingRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DeleteBindingRequest) HasBindingId() bool {
-	if x == nil {
-		return false
-	}
-	return x.BindingId != nil
-}
-
-func (x *DeleteBindingRequest) HasPreviousRevision() bool {
-	if x == nil {
-		return false
-	}
-	return x.PreviousRevision != nil
-}
-
-func (x *DeleteBindingRequest) HasIdempotencyKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.IdempotencyKey != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DeleteBindingRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *DeleteBindingRequest) ClearBindingId() {
-	x.BindingId = nil
-}
-
-func (x *DeleteBindingRequest) ClearPreviousRevision() {
-	x.PreviousRevision = nil
-}
-
-func (x *DeleteBindingRequest) ClearIdempotencyKey() {
-	x.IdempotencyKey = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DeleteBindingRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams  *Ydb_Operations.OperationParams
-	BindingId        *string
-	PreviousRevision *int64
-	IdempotencyKey   *string
+	BindingId        string
+	PreviousRevision int64
+	IdempotencyKey   string
 }
 
 func (b0 DeleteBindingRequest_builder) Build() *DeleteBindingRequest {
 	m0 := &DeleteBindingRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.BindingId = b.BindingId
-	x.PreviousRevision = b.PreviousRevision
-	x.IdempotencyKey = b.IdempotencyKey
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_BindingId = b.BindingId
+	x.xxx_hidden_PreviousRevision = b.PreviousRevision
+	x.xxx_hidden_IdempotencyKey = b.IdempotencyKey
 	return m0
 }
 
 type DeleteBindingResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"` // DeleteBindingResult
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DeleteBindingResponse) Reset() {
 	*x = DeleteBindingResponse{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[95]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11956,7 +11601,7 @@ func (x *DeleteBindingResponse) String() string {
 func (*DeleteBindingResponse) ProtoMessage() {}
 
 func (x *DeleteBindingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[95]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11969,24 +11614,24 @@ func (x *DeleteBindingResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DeleteBindingResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DeleteBindingResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DeleteBindingResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DeleteBindingResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DeleteBindingResponse_builder struct {
@@ -11999,19 +11644,19 @@ func (b0 DeleteBindingResponse_builder) Build() *DeleteBindingResponse {
 	m0 := &DeleteBindingResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DeleteBindingResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteBindingResult) Reset() {
 	*x = DeleteBindingResult{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[96]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12023,7 +11668,7 @@ func (x *DeleteBindingResult) String() string {
 func (*DeleteBindingResult) ProtoMessage() {}
 
 func (x *DeleteBindingResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[96]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12047,15 +11692,15 @@ func (b0 DeleteBindingResult_builder) Build() *DeleteBindingResult {
 }
 
 type StreamingDisposition_FromTime struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp" json:"timestamp,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Timestamp *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *StreamingDisposition_FromTime) Reset() {
 	*x = StreamingDisposition_FromTime{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[97]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12067,7 +11712,7 @@ func (x *StreamingDisposition_FromTime) String() string {
 func (*StreamingDisposition_FromTime) ProtoMessage() {}
 
 func (x *StreamingDisposition_FromTime) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[97]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12080,24 +11725,24 @@ func (x *StreamingDisposition_FromTime) ProtoReflect() protoreflect.Message {
 
 func (x *StreamingDisposition_FromTime) GetTimestamp() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Timestamp
+		return x.xxx_hidden_Timestamp
 	}
 	return nil
 }
 
 func (x *StreamingDisposition_FromTime) SetTimestamp(v *timestamppb.Timestamp) {
-	x.Timestamp = v
+	x.xxx_hidden_Timestamp = v
 }
 
 func (x *StreamingDisposition_FromTime) HasTimestamp() bool {
 	if x == nil {
 		return false
 	}
-	return x.Timestamp != nil
+	return x.xxx_hidden_Timestamp != nil
 }
 
 func (x *StreamingDisposition_FromTime) ClearTimestamp() {
-	x.Timestamp = nil
+	x.xxx_hidden_Timestamp = nil
 }
 
 type StreamingDisposition_FromTime_builder struct {
@@ -12110,20 +11755,20 @@ func (b0 StreamingDisposition_FromTime_builder) Build() *StreamingDisposition_Fr
 	m0 := &StreamingDisposition_FromTime{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Timestamp = b.Timestamp
+	x.xxx_hidden_Timestamp = b.Timestamp
 	return m0
 }
 
 type StreamingDisposition_TimeAgo struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Duration      *durationpb.Duration   `protobuf:"bytes,1,opt,name=duration" json:"duration,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Duration *durationpb.Duration   `protobuf:"bytes,1,opt,name=duration,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *StreamingDisposition_TimeAgo) Reset() {
 	*x = StreamingDisposition_TimeAgo{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[98]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12135,7 +11780,7 @@ func (x *StreamingDisposition_TimeAgo) String() string {
 func (*StreamingDisposition_TimeAgo) ProtoMessage() {}
 
 func (x *StreamingDisposition_TimeAgo) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[98]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12148,24 +11793,24 @@ func (x *StreamingDisposition_TimeAgo) ProtoReflect() protoreflect.Message {
 
 func (x *StreamingDisposition_TimeAgo) GetDuration() *durationpb.Duration {
 	if x != nil {
-		return x.Duration
+		return x.xxx_hidden_Duration
 	}
 	return nil
 }
 
 func (x *StreamingDisposition_TimeAgo) SetDuration(v *durationpb.Duration) {
-	x.Duration = v
+	x.xxx_hidden_Duration = v
 }
 
 func (x *StreamingDisposition_TimeAgo) HasDuration() bool {
 	if x == nil {
 		return false
 	}
-	return x.Duration != nil
+	return x.xxx_hidden_Duration != nil
 }
 
 func (x *StreamingDisposition_TimeAgo) ClearDuration() {
-	x.Duration = nil
+	x.xxx_hidden_Duration = nil
 }
 
 type StreamingDisposition_TimeAgo_builder struct {
@@ -12178,24 +11823,20 @@ func (b0 StreamingDisposition_TimeAgo_builder) Build() *StreamingDisposition_Tim
 	m0 := &StreamingDisposition_TimeAgo{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Duration = b.Duration
+	x.xxx_hidden_Duration = b.Duration
 	return m0
 }
 
 type StreamingDisposition_FromLastCheckpoint struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// By default if new query streams set doesn't equal to old query streams set,
-	// error will occur and query won't be allowed to load offsets for streams for the last checkpoint.
-	// If this flag is set all offsets that can be matched with previous query checkpoint will be matched.
-	// Others will use "fresh" streaming disposition.
-	Force         *bool `protobuf:"varint,1,opt,name=force" json:"force,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Force bool                   `protobuf:"varint,1,opt,name=force,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *StreamingDisposition_FromLastCheckpoint) Reset() {
 	*x = StreamingDisposition_FromLastCheckpoint{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[99]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12207,7 +11848,7 @@ func (x *StreamingDisposition_FromLastCheckpoint) String() string {
 func (*StreamingDisposition_FromLastCheckpoint) ProtoMessage() {}
 
 func (x *StreamingDisposition_FromLastCheckpoint) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[99]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12219,25 +11860,14 @@ func (x *StreamingDisposition_FromLastCheckpoint) ProtoReflect() protoreflect.Me
 }
 
 func (x *StreamingDisposition_FromLastCheckpoint) GetForce() bool {
-	if x != nil && x.Force != nil {
-		return *x.Force
+	if x != nil {
+		return x.xxx_hidden_Force
 	}
 	return false
 }
 
 func (x *StreamingDisposition_FromLastCheckpoint) SetForce(v bool) {
-	x.Force = &v
-}
-
-func (x *StreamingDisposition_FromLastCheckpoint) HasForce() bool {
-	if x == nil {
-		return false
-	}
-	return x.Force != nil
-}
-
-func (x *StreamingDisposition_FromLastCheckpoint) ClearForce() {
-	x.Force = nil
+	x.xxx_hidden_Force = v
 }
 
 type StreamingDisposition_FromLastCheckpoint_builder struct {
@@ -12247,33 +11877,33 @@ type StreamingDisposition_FromLastCheckpoint_builder struct {
 	// error will occur and query won't be allowed to load offsets for streams for the last checkpoint.
 	// If this flag is set all offsets that can be matched with previous query checkpoint will be matched.
 	// Others will use "fresh" streaming disposition.
-	Force *bool
+	Force bool
 }
 
 func (b0 StreamingDisposition_FromLastCheckpoint_builder) Build() *StreamingDisposition_FromLastCheckpoint {
 	m0 := &StreamingDisposition_FromLastCheckpoint{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Force = b.Force
+	x.xxx_hidden_Force = b.Force
 	return m0
 }
 
 type ListQueriesRequest_Filter struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	QueryType     *QueryContent_QueryType   `protobuf:"varint,1,opt,name=query_type,json=queryType,enum=FederatedQuery.QueryContent_QueryType" json:"query_type,omitempty"`
-	Status        []QueryMeta_ComputeStatus `protobuf:"varint,2,rep,packed,name=status,enum=FederatedQuery.QueryMeta_ComputeStatus" json:"status,omitempty"`
-	Mode          []ExecuteMode             `protobuf:"varint,3,rep,packed,name=mode,enum=FederatedQuery.ExecuteMode" json:"mode,omitempty"`
-	Name          *string                   `protobuf:"bytes,4,opt,name=name" json:"name,omitempty"` // queries whose name contains the filter.name substring
-	CreatedByMe   *bool                     `protobuf:"varint,5,opt,name=created_by_me,json=createdByMe" json:"created_by_me,omitempty"`
-	Visibility    *Acl_Visibility           `protobuf:"varint,6,opt,name=visibility,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	Automatic     *AutomaticType            `protobuf:"varint,7,opt,name=automatic,enum=FederatedQuery.AutomaticType" json:"automatic,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_QueryType   QueryContent_QueryType    `protobuf:"varint,1,opt,name=query_type,json=queryType,proto3,enum=FederatedQuery.QueryContent_QueryType"`
+	xxx_hidden_Status      []QueryMeta_ComputeStatus `protobuf:"varint,2,rep,packed,name=status,proto3,enum=FederatedQuery.QueryMeta_ComputeStatus"`
+	xxx_hidden_Mode        []ExecuteMode             `protobuf:"varint,3,rep,packed,name=mode,proto3,enum=FederatedQuery.ExecuteMode"`
+	xxx_hidden_Name        string                    `protobuf:"bytes,4,opt,name=name,proto3"`
+	xxx_hidden_CreatedByMe bool                      `protobuf:"varint,5,opt,name=created_by_me,json=createdByMe,proto3"`
+	xxx_hidden_Visibility  Acl_Visibility            `protobuf:"varint,6,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	xxx_hidden_Automatic   AutomaticType             `protobuf:"varint,7,opt,name=automatic,proto3,enum=FederatedQuery.AutomaticType"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListQueriesRequest_Filter) Reset() {
 	*x = ListQueriesRequest_Filter{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[101]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12285,7 +11915,7 @@ func (x *ListQueriesRequest_Filter) String() string {
 func (*ListQueriesRequest_Filter) ProtoMessage() {}
 
 func (x *ListQueriesRequest_Filter) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[101]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12297,174 +11927,119 @@ func (x *ListQueriesRequest_Filter) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ListQueriesRequest_Filter) GetQueryType() QueryContent_QueryType {
-	if x != nil && x.QueryType != nil {
-		return *x.QueryType
+	if x != nil {
+		return x.xxx_hidden_QueryType
 	}
 	return QueryContent_QUERY_TYPE_UNSPECIFIED
 }
 
 func (x *ListQueriesRequest_Filter) GetStatus() []QueryMeta_ComputeStatus {
 	if x != nil {
-		return x.Status
+		return x.xxx_hidden_Status
 	}
 	return nil
 }
 
 func (x *ListQueriesRequest_Filter) GetMode() []ExecuteMode {
 	if x != nil {
-		return x.Mode
+		return x.xxx_hidden_Mode
 	}
 	return nil
 }
 
 func (x *ListQueriesRequest_Filter) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ListQueriesRequest_Filter) GetCreatedByMe() bool {
-	if x != nil && x.CreatedByMe != nil {
-		return *x.CreatedByMe
+	if x != nil {
+		return x.xxx_hidden_CreatedByMe
 	}
 	return false
 }
 
 func (x *ListQueriesRequest_Filter) GetVisibility() Acl_Visibility {
-	if x != nil && x.Visibility != nil {
-		return *x.Visibility
+	if x != nil {
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
 func (x *ListQueriesRequest_Filter) GetAutomatic() AutomaticType {
-	if x != nil && x.Automatic != nil {
-		return *x.Automatic
+	if x != nil {
+		return x.xxx_hidden_Automatic
 	}
 	return AutomaticType_AUTOMATIC_TYPE_UNSPECIFIED
 }
 
 func (x *ListQueriesRequest_Filter) SetQueryType(v QueryContent_QueryType) {
-	x.QueryType = &v
+	x.xxx_hidden_QueryType = v
 }
 
 func (x *ListQueriesRequest_Filter) SetStatus(v []QueryMeta_ComputeStatus) {
-	x.Status = v
+	x.xxx_hidden_Status = v
 }
 
 func (x *ListQueriesRequest_Filter) SetMode(v []ExecuteMode) {
-	x.Mode = v
+	x.xxx_hidden_Mode = v
 }
 
 func (x *ListQueriesRequest_Filter) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *ListQueriesRequest_Filter) SetCreatedByMe(v bool) {
-	x.CreatedByMe = &v
+	x.xxx_hidden_CreatedByMe = v
 }
 
 func (x *ListQueriesRequest_Filter) SetVisibility(v Acl_Visibility) {
-	x.Visibility = &v
+	x.xxx_hidden_Visibility = v
 }
 
 func (x *ListQueriesRequest_Filter) SetAutomatic(v AutomaticType) {
-	x.Automatic = &v
-}
-
-func (x *ListQueriesRequest_Filter) HasQueryType() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryType != nil
-}
-
-func (x *ListQueriesRequest_Filter) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *ListQueriesRequest_Filter) HasCreatedByMe() bool {
-	if x == nil {
-		return false
-	}
-	return x.CreatedByMe != nil
-}
-
-func (x *ListQueriesRequest_Filter) HasVisibility() bool {
-	if x == nil {
-		return false
-	}
-	return x.Visibility != nil
-}
-
-func (x *ListQueriesRequest_Filter) HasAutomatic() bool {
-	if x == nil {
-		return false
-	}
-	return x.Automatic != nil
-}
-
-func (x *ListQueriesRequest_Filter) ClearQueryType() {
-	x.QueryType = nil
-}
-
-func (x *ListQueriesRequest_Filter) ClearName() {
-	x.Name = nil
-}
-
-func (x *ListQueriesRequest_Filter) ClearCreatedByMe() {
-	x.CreatedByMe = nil
-}
-
-func (x *ListQueriesRequest_Filter) ClearVisibility() {
-	x.Visibility = nil
-}
-
-func (x *ListQueriesRequest_Filter) ClearAutomatic() {
-	x.Automatic = nil
+	x.xxx_hidden_Automatic = v
 }
 
 type ListQueriesRequest_Filter_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	QueryType   *QueryContent_QueryType
+	QueryType   QueryContent_QueryType
 	Status      []QueryMeta_ComputeStatus
 	Mode        []ExecuteMode
-	Name        *string
-	CreatedByMe *bool
-	Visibility  *Acl_Visibility
-	Automatic   *AutomaticType
+	Name        string
+	CreatedByMe bool
+	Visibility  Acl_Visibility
+	Automatic   AutomaticType
 }
 
 func (b0 ListQueriesRequest_Filter_builder) Build() *ListQueriesRequest_Filter {
 	m0 := &ListQueriesRequest_Filter{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.QueryType = b.QueryType
-	x.Status = b.Status
-	x.Mode = b.Mode
-	x.Name = b.Name
-	x.CreatedByMe = b.CreatedByMe
-	x.Visibility = b.Visibility
-	x.Automatic = b.Automatic
+	x.xxx_hidden_QueryType = b.QueryType
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Mode = b.Mode
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_CreatedByMe = b.CreatedByMe
+	x.xxx_hidden_Visibility = b.Visibility
+	x.xxx_hidden_Automatic = b.Automatic
 	return m0
 }
 
 type ListJobsRequest_Filter struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	QueryId       *string                `protobuf:"bytes,1,opt,name=query_id,json=queryId" json:"query_id,omitempty"`
-	CreatedByMe   *bool                  `protobuf:"varint,2,opt,name=created_by_me,json=createdByMe" json:"created_by_me,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_QueryId     string                 `protobuf:"bytes,1,opt,name=query_id,json=queryId,proto3"`
+	xxx_hidden_CreatedByMe bool                   `protobuf:"varint,2,opt,name=created_by_me,json=createdByMe,proto3"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ListJobsRequest_Filter) Reset() {
 	*x = ListJobsRequest_Filter{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[102]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[112]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12476,7 +12051,7 @@ func (x *ListJobsRequest_Filter) String() string {
 func (*ListJobsRequest_Filter) ProtoMessage() {}
 
 func (x *ListJobsRequest_Filter) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[102]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[112]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12488,78 +12063,369 @@ func (x *ListJobsRequest_Filter) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ListJobsRequest_Filter) GetQueryId() string {
-	if x != nil && x.QueryId != nil {
-		return *x.QueryId
+	if x != nil {
+		return x.xxx_hidden_QueryId
 	}
 	return ""
 }
 
 func (x *ListJobsRequest_Filter) GetCreatedByMe() bool {
-	if x != nil && x.CreatedByMe != nil {
-		return *x.CreatedByMe
+	if x != nil {
+		return x.xxx_hidden_CreatedByMe
 	}
 	return false
 }
 
 func (x *ListJobsRequest_Filter) SetQueryId(v string) {
-	x.QueryId = &v
+	x.xxx_hidden_QueryId = v
 }
 
 func (x *ListJobsRequest_Filter) SetCreatedByMe(v bool) {
-	x.CreatedByMe = &v
-}
-
-func (x *ListJobsRequest_Filter) HasQueryId() bool {
-	if x == nil {
-		return false
-	}
-	return x.QueryId != nil
-}
-
-func (x *ListJobsRequest_Filter) HasCreatedByMe() bool {
-	if x == nil {
-		return false
-	}
-	return x.CreatedByMe != nil
-}
-
-func (x *ListJobsRequest_Filter) ClearQueryId() {
-	x.QueryId = nil
-}
-
-func (x *ListJobsRequest_Filter) ClearCreatedByMe() {
-	x.CreatedByMe = nil
+	x.xxx_hidden_CreatedByMe = v
 }
 
 type ListJobsRequest_Filter_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	QueryId     *string
-	CreatedByMe *bool
+	QueryId     string
+	CreatedByMe bool
 }
 
 func (b0 ListJobsRequest_Filter_builder) Build() *ListJobsRequest_Filter {
 	m0 := &ListJobsRequest_Filter{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.QueryId = b.QueryId
-	x.CreatedByMe = b.CreatedByMe
+	x.xxx_hidden_QueryId = b.QueryId
+	x.xxx_hidden_CreatedByMe = b.CreatedByMe
+	return m0
+}
+
+// Iceberg data located in a S3 storage
+type IcebergWarehouse_S3 struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Bucket      *string                `protobuf:"bytes,1,opt,name=bucket,proto3,oneof"`
+	xxx_hidden_Path        *string                `protobuf:"bytes,2,opt,name=path,proto3,oneof"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *IcebergWarehouse_S3) Reset() {
+	*x = IcebergWarehouse_S3{}
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[113]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IcebergWarehouse_S3) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IcebergWarehouse_S3) ProtoMessage() {}
+
+func (x *IcebergWarehouse_S3) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[113]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *IcebergWarehouse_S3) GetBucket() string {
+	if x != nil {
+		if x.xxx_hidden_Bucket != nil {
+			return *x.xxx_hidden_Bucket
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *IcebergWarehouse_S3) GetPath() string {
+	if x != nil {
+		if x.xxx_hidden_Path != nil {
+			return *x.xxx_hidden_Path
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *IcebergWarehouse_S3) SetBucket(v string) {
+	x.xxx_hidden_Bucket = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *IcebergWarehouse_S3) SetPath(v string) {
+	x.xxx_hidden_Path = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *IcebergWarehouse_S3) HasBucket() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *IcebergWarehouse_S3) HasPath() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *IcebergWarehouse_S3) ClearBucket() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Bucket = nil
+}
+
+func (x *IcebergWarehouse_S3) ClearPath() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Path = nil
+}
+
+type IcebergWarehouse_S3_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Bucket in a storage
+	// e.g., s3a://iceberg-bucket
+	Bucket *string
+	// Path in a bucket
+	// e.g., /storage
+	Path *string
+}
+
+func (b0 IcebergWarehouse_S3_builder) Build() *IcebergWarehouse_S3 {
+	m0 := &IcebergWarehouse_S3{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Bucket != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Bucket = b.Bucket
+	}
+	if b.Path != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Path = b.Path
+	}
+	return m0
+}
+
+// Hadoop Iceberg Catalog which is built on top of a storage
+type IcebergCatalog_Hadoop struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Directory   *string                `protobuf:"bytes,1,opt,name=directory,proto3,oneof"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *IcebergCatalog_Hadoop) Reset() {
+	*x = IcebergCatalog_Hadoop{}
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[114]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IcebergCatalog_Hadoop) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IcebergCatalog_Hadoop) ProtoMessage() {}
+
+func (x *IcebergCatalog_Hadoop) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[114]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *IcebergCatalog_Hadoop) GetDirectory() string {
+	if x != nil {
+		if x.xxx_hidden_Directory != nil {
+			return *x.xxx_hidden_Directory
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *IcebergCatalog_Hadoop) SetDirectory(v string) {
+	x.xxx_hidden_Directory = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *IcebergCatalog_Hadoop) HasDirectory() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *IcebergCatalog_Hadoop) ClearDirectory() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Directory = nil
+}
+
+type IcebergCatalog_Hadoop_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Directory where iceberg tables are located. In case of a S3 storage the location
+	// will be "S3.uri + S3.path + Hadoop.path", e.g., if "Hadoop.path" is equal "warehouse" then
+	// the final location will be "s3a://iceberg-bucket/storage/warehouse"
+	Directory *string
+}
+
+func (b0 IcebergCatalog_Hadoop_builder) Build() *IcebergCatalog_Hadoop {
+	m0 := &IcebergCatalog_Hadoop{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Directory != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Directory = b.Directory
+	}
+	return m0
+}
+
+// Hive Iceberg Catalog which is based on a Hive Metastore
+type IcebergCatalog_HiveMetastore struct {
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Uri          *string                `protobuf:"bytes,1,opt,name=uri,proto3,oneof"`
+	xxx_hidden_DatabaseName *string                `protobuf:"bytes,2,opt,name=database_name,json=databaseName,proto3,oneof"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *IcebergCatalog_HiveMetastore) Reset() {
+	*x = IcebergCatalog_HiveMetastore{}
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[115]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *IcebergCatalog_HiveMetastore) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*IcebergCatalog_HiveMetastore) ProtoMessage() {}
+
+func (x *IcebergCatalog_HiveMetastore) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[115]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *IcebergCatalog_HiveMetastore) GetUri() string {
+	if x != nil {
+		if x.xxx_hidden_Uri != nil {
+			return *x.xxx_hidden_Uri
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *IcebergCatalog_HiveMetastore) GetDatabaseName() string {
+	if x != nil {
+		if x.xxx_hidden_DatabaseName != nil {
+			return *x.xxx_hidden_DatabaseName
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *IcebergCatalog_HiveMetastore) SetUri(v string) {
+	x.xxx_hidden_Uri = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *IcebergCatalog_HiveMetastore) SetDatabaseName(v string) {
+	x.xxx_hidden_DatabaseName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *IcebergCatalog_HiveMetastore) HasUri() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *IcebergCatalog_HiveMetastore) HasDatabaseName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *IcebergCatalog_HiveMetastore) ClearUri() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Uri = nil
+}
+
+func (x *IcebergCatalog_HiveMetastore) ClearDatabaseName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_DatabaseName = nil
+}
+
+type IcebergCatalog_HiveMetastore_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Location of a hive metastore
+	// e.g., thrift://host:9083/
+	Uri *string
+	// Hive metastore database which holds iceberg namespace
+	DatabaseName *string
+}
+
+func (b0 IcebergCatalog_HiveMetastore_builder) Build() *IcebergCatalog_HiveMetastore {
+	m0 := &IcebergCatalog_HiveMetastore{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Uri != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Uri = b.Uri
+	}
+	if b.DatabaseName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_DatabaseName = b.DatabaseName
+	}
 	return m0
 }
 
 type ListConnectionsRequest_Filter struct {
-	state          protoimpl.MessageState            `protogen:"hybrid.v1"`
-	Name           *string                           `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"` // connections whose name contains the filter.name substring
-	CreatedByMe    *bool                             `protobuf:"varint,2,opt,name=created_by_me,json=createdByMe" json:"created_by_me,omitempty"`
-	ConnectionType *ConnectionSetting_ConnectionType `protobuf:"varint,3,opt,name=connection_type,json=connectionType,enum=FederatedQuery.ConnectionSetting_ConnectionType" json:"connection_type,omitempty"`
-	Visibility     *Acl_Visibility                   `protobuf:"varint,4,opt,name=visibility,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState           `protogen:"opaque.v1"`
+	xxx_hidden_Name           string                           `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_CreatedByMe    bool                             `protobuf:"varint,2,opt,name=created_by_me,json=createdByMe,proto3"`
+	xxx_hidden_ConnectionType ConnectionSetting_ConnectionType `protobuf:"varint,3,opt,name=connection_type,json=connectionType,proto3,enum=FederatedQuery.ConnectionSetting_ConnectionType"`
+	xxx_hidden_Visibility     Acl_Visibility                   `protobuf:"varint,4,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ListConnectionsRequest_Filter) Reset() {
 	*x = ListConnectionsRequest_Filter{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[103]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[116]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12571,7 +12437,7 @@ func (x *ListConnectionsRequest_Filter) String() string {
 func (*ListConnectionsRequest_Filter) ProtoMessage() {}
 
 func (x *ListConnectionsRequest_Filter) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[103]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[116]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12583,163 +12449,85 @@ func (x *ListConnectionsRequest_Filter) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ListConnectionsRequest_Filter) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ListConnectionsRequest_Filter) GetCreatedByMe() bool {
-	if x != nil && x.CreatedByMe != nil {
-		return *x.CreatedByMe
+	if x != nil {
+		return x.xxx_hidden_CreatedByMe
 	}
 	return false
 }
 
 func (x *ListConnectionsRequest_Filter) GetConnectionType() ConnectionSetting_ConnectionType {
-	if x != nil && x.ConnectionType != nil {
-		return *x.ConnectionType
+	if x != nil {
+		return x.xxx_hidden_ConnectionType
 	}
 	return ConnectionSetting_CONNECTION_TYPE_UNSPECIFIED
 }
 
 func (x *ListConnectionsRequest_Filter) GetVisibility() Acl_Visibility {
-	if x != nil && x.Visibility != nil {
-		return *x.Visibility
+	if x != nil {
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
 func (x *ListConnectionsRequest_Filter) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *ListConnectionsRequest_Filter) SetCreatedByMe(v bool) {
-	x.CreatedByMe = &v
+	x.xxx_hidden_CreatedByMe = v
 }
 
 func (x *ListConnectionsRequest_Filter) SetConnectionType(v ConnectionSetting_ConnectionType) {
-	x.ConnectionType = &v
+	x.xxx_hidden_ConnectionType = v
 }
 
 func (x *ListConnectionsRequest_Filter) SetVisibility(v Acl_Visibility) {
-	x.Visibility = &v
-}
-
-func (x *ListConnectionsRequest_Filter) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *ListConnectionsRequest_Filter) HasCreatedByMe() bool {
-	if x == nil {
-		return false
-	}
-	return x.CreatedByMe != nil
-}
-
-func (x *ListConnectionsRequest_Filter) HasConnectionType() bool {
-	if x == nil {
-		return false
-	}
-	return x.ConnectionType != nil
-}
-
-func (x *ListConnectionsRequest_Filter) HasVisibility() bool {
-	if x == nil {
-		return false
-	}
-	return x.Visibility != nil
-}
-
-func (x *ListConnectionsRequest_Filter) ClearName() {
-	x.Name = nil
-}
-
-func (x *ListConnectionsRequest_Filter) ClearCreatedByMe() {
-	x.CreatedByMe = nil
-}
-
-func (x *ListConnectionsRequest_Filter) ClearConnectionType() {
-	x.ConnectionType = nil
-}
-
-func (x *ListConnectionsRequest_Filter) ClearVisibility() {
-	x.Visibility = nil
+	x.xxx_hidden_Visibility = v
 }
 
 type ListConnectionsRequest_Filter_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Name           *string
-	CreatedByMe    *bool
-	ConnectionType *ConnectionSetting_ConnectionType
-	Visibility     *Acl_Visibility
+	Name           string
+	CreatedByMe    bool
+	ConnectionType ConnectionSetting_ConnectionType
+	Visibility     Acl_Visibility
 }
 
 func (b0 ListConnectionsRequest_Filter_builder) Build() *ListConnectionsRequest_Filter {
 	m0 := &ListConnectionsRequest_Filter{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Name = b.Name
-	x.CreatedByMe = b.CreatedByMe
-	x.ConnectionType = b.ConnectionType
-	x.Visibility = b.Visibility
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_CreatedByMe = b.CreatedByMe
+	x.xxx_hidden_ConnectionType = b.ConnectionType
+	x.xxx_hidden_Visibility = b.Visibility
 	return m0
 }
 
 type ObjectStorageBinding_Subset struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	PathPattern   *string                `protobuf:"bytes,1,opt,name=path_pattern,json=pathPattern" json:"path_pattern,omitempty"`
-	Format        *string                `protobuf:"bytes,2,opt,name=format" json:"format,omitempty"`
-	FormatSetting map[string]string      `protobuf:"bytes,3,rep,name=format_setting,json=formatSetting" json:"format_setting,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Compression   *string                `protobuf:"bytes,4,opt,name=compression" json:"compression,omitempty"`
-	Schema        *Schema                `protobuf:"bytes,5,opt,name=schema" json:"schema,omitempty"`
-	// Partition projection is used to speed up the processing of highly partitioned
-	// storages and automate the management of partitions. In partition projection, partition values and
-	// locations are calculated from configuration rather than read from an object storage. Depending on the
-	// specific characteristics of the query and underlying data, partition projection can significantly
-	// reduce query execution time if it uses partitioning constraints on partition metadata retrieval. Similar
-	// functionality is implemented in Athena: https://docs.aws.amazon.com/athena/latest/ug/partition-projection.html
-	// Only enum, integer and date types are supported for path generation. When using projection, there must
-	// be at least one element in partitioned_by. This behavior is introduced for symmetric query usage and
-	// compatibility with Athena behavior.
-	//
-	// Example:
-	// projection = {
-	// "projection.enabled" : "true", // used to enable and disable partitioning
-	// "projection.city.type" : "enum", // to generate the city column, the enum type will be used (enumeration of objects separated by commas)
-	// "projection.city.values" : "Washington,Roma", // column values city Washington or Roma
-	// "projection.code.type" : "enum", // to generate the code column, the enum type will be used (enumeration of objects separated by commas)
-	// "projection.code.values" : "0,1", // column values code 0 or 1
-	// "storage.location.template" : "/${city}/${code}/${device_id}" // the template to which the generated values will be substituted
-	// }
-	// partitioned_by = [ "city", "device_id" ] // a subset of columns that are included in partitioning
-	// - If storage.location.template and partitioned_by are specified together, then the rule from storage.location.template will be used.
-	// - If only partitioned_by is specified, then the Hive Metastore format will be used for storage.location.template: "/city=${city}/device_id=${device_id}"
-	// The list of paths that correspond to described projection and partitioned_by values are:
-	// "/Washington/0/${device_id}", "/Washington/1/${device_id}", "/Roma/0/${device_id}", "/Roma/1/${device_id}"
-	Projection map[string]string `protobuf:"bytes,6,rep,name=projection" json:"projection,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// By separating the data, it is possible to limit the amount of data scanned by each query, thereby improving
-	// performance and reducing costs. Therefore, user data is partition by key (in practice, this is a partition by time).
-	// The partitioned_by defines the keys on which to partition data. The columns described in partitioned_by
-	// must be specified in the schema. If projection is not specified, the template will be generated according to
-	// partitioned_by. Similar functionality is implemented in Athena: https://docs.aws.amazon.com/athena/latest/ug/partitions.html
-	//
-	// Example:
-	// partitioned_by = [ "city", "code", "device_id" ]
-	// The corresponding storage.location.template will be as follows:
-	// "/city=${city}/code=${code}/device_id=${device_id}"
-	PartitionedBy []string `protobuf:"bytes,7,rep,name=partitioned_by,json=partitionedBy" json:"partitioned_by,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_PathPattern   string                 `protobuf:"bytes,1,opt,name=path_pattern,json=pathPattern,proto3"`
+	xxx_hidden_Format        string                 `protobuf:"bytes,2,opt,name=format,proto3"`
+	xxx_hidden_FormatSetting map[string]string      `protobuf:"bytes,3,rep,name=format_setting,json=formatSetting,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_Compression   string                 `protobuf:"bytes,4,opt,name=compression,proto3"`
+	xxx_hidden_Schema        *Schema                `protobuf:"bytes,5,opt,name=schema,proto3"`
+	xxx_hidden_Projection    map[string]string      `protobuf:"bytes,6,rep,name=projection,proto3" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_PartitionedBy []string               `protobuf:"bytes,7,rep,name=partitioned_by,json=partitionedBy,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ObjectStorageBinding_Subset) Reset() {
 	*x = ObjectStorageBinding_Subset{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[105]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[118]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12751,7 +12539,7 @@ func (x *ObjectStorageBinding_Subset) String() string {
 func (*ObjectStorageBinding_Subset) ProtoMessage() {}
 
 func (x *ObjectStorageBinding_Subset) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[105]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[118]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12763,133 +12551,100 @@ func (x *ObjectStorageBinding_Subset) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ObjectStorageBinding_Subset) GetPathPattern() string {
-	if x != nil && x.PathPattern != nil {
-		return *x.PathPattern
+	if x != nil {
+		return x.xxx_hidden_PathPattern
 	}
 	return ""
 }
 
 func (x *ObjectStorageBinding_Subset) GetFormat() string {
-	if x != nil && x.Format != nil {
-		return *x.Format
+	if x != nil {
+		return x.xxx_hidden_Format
 	}
 	return ""
 }
 
 func (x *ObjectStorageBinding_Subset) GetFormatSetting() map[string]string {
 	if x != nil {
-		return x.FormatSetting
+		return x.xxx_hidden_FormatSetting
 	}
 	return nil
 }
 
 func (x *ObjectStorageBinding_Subset) GetCompression() string {
-	if x != nil && x.Compression != nil {
-		return *x.Compression
+	if x != nil {
+		return x.xxx_hidden_Compression
 	}
 	return ""
 }
 
 func (x *ObjectStorageBinding_Subset) GetSchema() *Schema {
 	if x != nil {
-		return x.Schema
+		return x.xxx_hidden_Schema
 	}
 	return nil
 }
 
 func (x *ObjectStorageBinding_Subset) GetProjection() map[string]string {
 	if x != nil {
-		return x.Projection
+		return x.xxx_hidden_Projection
 	}
 	return nil
 }
 
 func (x *ObjectStorageBinding_Subset) GetPartitionedBy() []string {
 	if x != nil {
-		return x.PartitionedBy
+		return x.xxx_hidden_PartitionedBy
 	}
 	return nil
 }
 
 func (x *ObjectStorageBinding_Subset) SetPathPattern(v string) {
-	x.PathPattern = &v
+	x.xxx_hidden_PathPattern = v
 }
 
 func (x *ObjectStorageBinding_Subset) SetFormat(v string) {
-	x.Format = &v
+	x.xxx_hidden_Format = v
 }
 
 func (x *ObjectStorageBinding_Subset) SetFormatSetting(v map[string]string) {
-	x.FormatSetting = v
+	x.xxx_hidden_FormatSetting = v
 }
 
 func (x *ObjectStorageBinding_Subset) SetCompression(v string) {
-	x.Compression = &v
+	x.xxx_hidden_Compression = v
 }
 
 func (x *ObjectStorageBinding_Subset) SetSchema(v *Schema) {
-	x.Schema = v
+	x.xxx_hidden_Schema = v
 }
 
 func (x *ObjectStorageBinding_Subset) SetProjection(v map[string]string) {
-	x.Projection = v
+	x.xxx_hidden_Projection = v
 }
 
 func (x *ObjectStorageBinding_Subset) SetPartitionedBy(v []string) {
-	x.PartitionedBy = v
-}
-
-func (x *ObjectStorageBinding_Subset) HasPathPattern() bool {
-	if x == nil {
-		return false
-	}
-	return x.PathPattern != nil
-}
-
-func (x *ObjectStorageBinding_Subset) HasFormat() bool {
-	if x == nil {
-		return false
-	}
-	return x.Format != nil
-}
-
-func (x *ObjectStorageBinding_Subset) HasCompression() bool {
-	if x == nil {
-		return false
-	}
-	return x.Compression != nil
+	x.xxx_hidden_PartitionedBy = v
 }
 
 func (x *ObjectStorageBinding_Subset) HasSchema() bool {
 	if x == nil {
 		return false
 	}
-	return x.Schema != nil
-}
-
-func (x *ObjectStorageBinding_Subset) ClearPathPattern() {
-	x.PathPattern = nil
-}
-
-func (x *ObjectStorageBinding_Subset) ClearFormat() {
-	x.Format = nil
-}
-
-func (x *ObjectStorageBinding_Subset) ClearCompression() {
-	x.Compression = nil
+	return x.xxx_hidden_Schema != nil
 }
 
 func (x *ObjectStorageBinding_Subset) ClearSchema() {
-	x.Schema = nil
+	x.xxx_hidden_Schema = nil
 }
 
 type ObjectStorageBinding_Subset_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	PathPattern   *string
-	Format        *string
+	PathPattern   string
+	Format        string
 	FormatSetting map[string]string
-	Compression   *string
+	Compression   string
 	Schema        *Schema
 	// Partition projection is used to speed up the processing of highly partitioned
 	// storages and automate the management of partitions. In partition projection, partition values and
@@ -12933,29 +12688,29 @@ func (b0 ObjectStorageBinding_Subset_builder) Build() *ObjectStorageBinding_Subs
 	m0 := &ObjectStorageBinding_Subset{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.PathPattern = b.PathPattern
-	x.Format = b.Format
-	x.FormatSetting = b.FormatSetting
-	x.Compression = b.Compression
-	x.Schema = b.Schema
-	x.Projection = b.Projection
-	x.PartitionedBy = b.PartitionedBy
+	x.xxx_hidden_PathPattern = b.PathPattern
+	x.xxx_hidden_Format = b.Format
+	x.xxx_hidden_FormatSetting = b.FormatSetting
+	x.xxx_hidden_Compression = b.Compression
+	x.xxx_hidden_Schema = b.Schema
+	x.xxx_hidden_Projection = b.Projection
+	x.xxx_hidden_PartitionedBy = b.PartitionedBy
 	return m0
 }
 
 type ListBindingsRequest_Filter struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	ConnectionId  *string                `protobuf:"bytes,1,opt,name=connection_id,json=connectionId" json:"connection_id,omitempty"`
-	Name          *string                `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"` // bindings whose name contains the filter.name substring
-	CreatedByMe   *bool                  `protobuf:"varint,3,opt,name=created_by_me,json=createdByMe" json:"created_by_me,omitempty"`
-	Visibility    *Acl_Visibility        `protobuf:"varint,4,opt,name=visibility,enum=FederatedQuery.Acl_Visibility" json:"visibility,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ConnectionId string                 `protobuf:"bytes,1,opt,name=connection_id,json=connectionId,proto3"`
+	xxx_hidden_Name         string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_CreatedByMe  bool                   `protobuf:"varint,3,opt,name=created_by_me,json=createdByMe,proto3"`
+	xxx_hidden_Visibility   Acl_Visibility         `protobuf:"varint,4,opt,name=visibility,proto3,enum=FederatedQuery.Acl_Visibility"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ListBindingsRequest_Filter) Reset() {
 	*x = ListBindingsRequest_Filter{}
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[108]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[121]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12967,7 +12722,7 @@ func (x *ListBindingsRequest_Filter) String() string {
 func (*ListBindingsRequest_Filter) ProtoMessage() {}
 
 func (x *ListBindingsRequest_Filter) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[108]
+	mi := &file_draft_protos_ydb_federated_query_proto_msgTypes[121]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12979,110 +12734,66 @@ func (x *ListBindingsRequest_Filter) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ListBindingsRequest_Filter) GetConnectionId() string {
-	if x != nil && x.ConnectionId != nil {
-		return *x.ConnectionId
+	if x != nil {
+		return x.xxx_hidden_ConnectionId
 	}
 	return ""
 }
 
 func (x *ListBindingsRequest_Filter) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *ListBindingsRequest_Filter) GetCreatedByMe() bool {
-	if x != nil && x.CreatedByMe != nil {
-		return *x.CreatedByMe
+	if x != nil {
+		return x.xxx_hidden_CreatedByMe
 	}
 	return false
 }
 
 func (x *ListBindingsRequest_Filter) GetVisibility() Acl_Visibility {
-	if x != nil && x.Visibility != nil {
-		return *x.Visibility
+	if x != nil {
+		return x.xxx_hidden_Visibility
 	}
 	return Acl_VISIBILITY_UNSPECIFIED
 }
 
 func (x *ListBindingsRequest_Filter) SetConnectionId(v string) {
-	x.ConnectionId = &v
+	x.xxx_hidden_ConnectionId = v
 }
 
 func (x *ListBindingsRequest_Filter) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *ListBindingsRequest_Filter) SetCreatedByMe(v bool) {
-	x.CreatedByMe = &v
+	x.xxx_hidden_CreatedByMe = v
 }
 
 func (x *ListBindingsRequest_Filter) SetVisibility(v Acl_Visibility) {
-	x.Visibility = &v
-}
-
-func (x *ListBindingsRequest_Filter) HasConnectionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ConnectionId != nil
-}
-
-func (x *ListBindingsRequest_Filter) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *ListBindingsRequest_Filter) HasCreatedByMe() bool {
-	if x == nil {
-		return false
-	}
-	return x.CreatedByMe != nil
-}
-
-func (x *ListBindingsRequest_Filter) HasVisibility() bool {
-	if x == nil {
-		return false
-	}
-	return x.Visibility != nil
-}
-
-func (x *ListBindingsRequest_Filter) ClearConnectionId() {
-	x.ConnectionId = nil
-}
-
-func (x *ListBindingsRequest_Filter) ClearName() {
-	x.Name = nil
-}
-
-func (x *ListBindingsRequest_Filter) ClearCreatedByMe() {
-	x.CreatedByMe = nil
-}
-
-func (x *ListBindingsRequest_Filter) ClearVisibility() {
-	x.Visibility = nil
+	x.xxx_hidden_Visibility = v
 }
 
 type ListBindingsRequest_Filter_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ConnectionId *string
-	Name         *string
-	CreatedByMe  *bool
-	Visibility   *Acl_Visibility
+	ConnectionId string
+	Name         string
+	CreatedByMe  bool
+	Visibility   Acl_Visibility
 }
 
 func (b0 ListBindingsRequest_Filter_builder) Build() *ListBindingsRequest_Filter {
 	m0 := &ListBindingsRequest_Filter{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ConnectionId = b.ConnectionId
-	x.Name = b.Name
-	x.CreatedByMe = b.CreatedByMe
-	x.Visibility = b.Visibility
+	x.xxx_hidden_ConnectionId = b.ConnectionId
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_CreatedByMe = b.CreatedByMe
+	x.xxx_hidden_Visibility = b.Visibility
 	return m0
 }
 
@@ -13090,7 +12801,7 @@ var File_draft_protos_ydb_federated_query_proto protoreflect.FileDescriptor
 
 const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	"\n" +
-	"&draft/protos/ydb_federated_query.proto\x12\x0eFederatedQuery\x1a\"protos/annotations/sensitive.proto\x1a#protos/annotations/validation.proto\x1a\x1aprotos/ydb_operation.proto\x1a\x16protos/ydb_value.proto\x1a\x1eprotos/ydb_issue_message.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\"\x87\x01\n" +
+	"&draft/protos/ydb_federated_query.proto\x12\x0eFederatedQuery\x1a\"protos/annotations/sensitive.proto\x1a#protos/annotations/validation.proto\x1a\x1aprotos/ydb_operation.proto\x1a\x16protos/ydb_value.proto\x1a\x1eprotos/ydb_issue_message.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\x87\x01\n" +
 	"\x03Acl\x12>\n" +
 	"\n" +
 	"visibility\x18\x01 \x01(\x0e2\x1e.FederatedQuery.Acl.VisibilityR\n" +
@@ -13124,7 +12835,7 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	"\bduration\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\bduration\x1a*\n" +
 	"\x12FromLastCheckpoint\x12\x14\n" +
 	"\x05force\x18\x01 \x01(\bR\x05forceB\r\n" +
-	"\vdisposition\"\xb2\x05\n" +
+	"\vdisposition\"\xde\x06\n" +
 	"\fQueryContent\x12:\n" +
 	"\x04type\x18\x01 \x01(\x0e2&.FederatedQuery.QueryContent.QueryTypeR\x04type\x12\x1b\n" +
 	"\x04name\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\x04name\x12%\n" +
@@ -13138,10 +12849,18 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	" \x03(\v23.FederatedQuery.QueryContent.ExecutionSettingsEntryB\x13\xa2\xe6*\x03\x18\x80 \xaa\xe6*\b\n" +
 	"\x06\n" +
 	"\x04\b\x01\x10dR\x11executionSettings\x12@\n" +
-	"\x06syntax\x18\v \x01(\x0e2(.FederatedQuery.QueryContent.QuerySyntaxR\x06syntax\x1aD\n" +
+	"\x06syntax\x18\v \x01(\x0e2(.FederatedQuery.QueryContent.QuerySyntaxR\x06syntax\x12Z\n" +
+	"\n" +
+	"parameters\x18\f \x03(\v2,.FederatedQuery.QueryContent.ParametersEntryB\f\xaa\xe6*\b\n" +
+	"\x06\n" +
+	"\x04\b\x01\x10dR\n" +
+	"parameters\x1aD\n" +
 	"\x16ExecutionSettingsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"E\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aN\n" +
+	"\x0fParametersEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12%\n" +
+	"\x05value\x18\x02 \x01(\v2\x0f.Ydb.TypedValueR\x05value:\x028\x01\"E\n" +
 	"\tQueryType\x12\x1a\n" +
 	"\x16QUERY_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tANALYTICS\x10\x01\x12\r\n" +
@@ -13223,7 +12942,9 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	"\x06column\x18\x01 \x03(\v2\v.Ydb.ColumnR\x06column\x12'\n" +
 	"\n" +
 	"rows_count\x18\x02 \x01(\x03B\b\xb2\xe6*\x04>= 0R\trowsCount\x12\x1c\n" +
-	"\ttruncated\x18\x03 \x01(\bR\ttruncated\"\xc2\x03\n" +
+	"\ttruncated\x18\x03 \x01(\bR\ttruncated\"!\n" +
+	"\rQueryTimeline\x12\x10\n" +
+	"\x03svg\x18\x01 \x01(\tR\x03svg\"\xfd\x03\n" +
 	"\x05Query\x12-\n" +
 	"\x04meta\x18\x01 \x01(\v2\x19.FederatedQuery.QueryMetaR\x04meta\x126\n" +
 	"\acontent\x18\x02 \x01(\v2\x1c.FederatedQuery.QueryContentR\acontent\x12-\n" +
@@ -13234,7 +12955,8 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	"statistics\x18\x06 \x01(\v2\x1f.FederatedQuery.QueryStatisticsR\n" +
 	"statistics\x12E\n" +
 	"\x0fresult_set_meta\x18\a \x03(\v2\x1d.FederatedQuery.ResultSetMetaR\rresultSetMeta\x12*\n" +
-	"\x03ast\x18\b \x01(\v2\x18.FederatedQuery.QueryAstR\x03ast\"%\n" +
+	"\x03ast\x18\b \x01(\v2\x18.FederatedQuery.QueryAstR\x03ast\x129\n" +
+	"\btimeline\x18\t \x01(\v2\x1d.FederatedQuery.QueryTimelineR\btimeline\"%\n" +
 	"\x0fQueryStatistics\x12\x12\n" +
 	"\x04json\x18\x01 \x01(\tR\x04json\"\xd2\x02\n" +
 	"\x12CreateQueryRequest\x12J\n" +
@@ -13329,7 +13051,7 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	" \x01(\x0e2\x1e.FederatedQuery.Acl.VisibilityR\n" +
 	"visibility\x12\x1c\n" +
 	"\tautomatic\x18\v \x01(\bR\tautomatic\x127\n" +
-	"\texpire_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\bexpireAt\"\xf4\x04\n" +
+	"\texpire_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\bexpireAt\"\x89\x06\n" +
 	"\x03Job\x12.\n" +
 	"\x04meta\x18\x01 \x01(\v2\x1a.FederatedQuery.CommonMetaR\x04meta\x12\x12\n" +
 	"\x04text\x18\x02 \x01(\tR\x04text\x128\n" +
@@ -13348,7 +13070,13 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	" \x01(\v2\x13.FederatedQuery.AclR\x03acl\x12\x1c\n" +
 	"\tautomatic\x18\v \x01(\bR\tautomatic\x127\n" +
 	"\texpire_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\bexpireAt\x12@\n" +
-	"\x06syntax\x18\r \x01(\x0e2(.FederatedQuery.QueryContent.QuerySyntaxR\x06syntax\"\xd6\x02\n" +
+	"\x06syntax\x18\r \x01(\x0e2(.FederatedQuery.QueryContent.QuerySyntaxR\x06syntax\x12C\n" +
+	"\n" +
+	"parameters\x18\x0e \x03(\v2#.FederatedQuery.Job.ParametersEntryR\n" +
+	"parameters\x1aN\n" +
+	"\x0fParametersEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12%\n" +
+	"\x05value\x18\x02 \x01(\v2\x0f.Ydb.TypedValueR\x05value:\x028\x01\"\xd6\x02\n" +
 	"\x0fListJobsRequest\x12J\n" +
 	"\x10operation_params\x18\x01 \x01(\v2\x1f.Ydb.Operations.OperationParamsR\x0foperationParams\x12&\n" +
 	"\n" +
@@ -13376,21 +13104,25 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	"\n" +
 	"\bNoneAuth\"-\n" +
 	"\x12ServiceAccountAuth\x12\x17\n" +
-	"\x02id\x18\x01 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\x02id\"\xdc\x01\n" +
+	"\x02id\x18\x01 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\x02id\".\n" +
+	"\tTokenAuth\x12!\n" +
+	"\x05token\x18\x01 \x01(\tB\v\xa2\xe6*\x03\x18\x80\b\xb8\xe6*\x01R\x05token\"\x8f\x02\n" +
 	"\aIamAuth\x12F\n" +
 	"\vcurrent_iam\x18\x01 \x01(\v2#.FederatedQuery.CurrentIAMTokenAuthH\x00R\n" +
 	"currentIam\x12M\n" +
 	"\x0fservice_account\x18\x02 \x01(\v2\".FederatedQuery.ServiceAccountAuthH\x00R\x0eserviceAccount\x12.\n" +
-	"\x04none\x18\x03 \x01(\v2\x18.FederatedQuery.NoneAuthH\x00R\x04noneB\n" +
+	"\x04none\x18\x03 \x01(\v2\x18.FederatedQuery.NoneAuthH\x00R\x04none\x121\n" +
+	"\x05token\x18\x04 \x01(\v2\x19.FederatedQuery.TokenAuthH\x00R\x05tokenB\n" +
 	"\n" +
-	"\bidentity\"\xc6\x01\n" +
+	"\bidentity\"\xed\x01\n" +
 	"\vDataStreams\x12(\n" +
 	"\vdatabase_id\x18\x01 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\n" +
 	"databaseId\x12+\n" +
 	"\x04auth\x18\x02 \x01(\v2\x17.FederatedQuery.IamAuthR\x04auth\x12#\n" +
 	"\bendpoint\x18\x03 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\bendpoint\x12#\n" +
 	"\bdatabase\x18\x04 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\bdatabase\x12\x16\n" +
-	"\x06secure\x18\x05 \x01(\bR\x06secure\"\x7f\n" +
+	"\x06secure\x18\x05 \x01(\bR\x06secure\x12%\n" +
+	"\x0eshared_reading\x18\x06 \x01(\bR\rsharedReading\"\x7f\n" +
 	"\n" +
 	"Monitoring\x12!\n" +
 	"\aproject\x18\x01 \x01(\tB\a\xa2\xe6*\x03\x18\xc8\x01R\aproject\x12!\n" +
@@ -13428,7 +13160,50 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	"\x04host\x18\x05 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\x04host\x12\"\n" +
 	"\x04port\x18\x06 \x01(\x05B\x0e\xb2\xe6*\n" +
 	"[0; 65536]R\x04port\x12\x16\n" +
-	"\x06secure\x18\a \x01(\bR\x06secure\"\x89\x05\n" +
+	"\x06secure\x18\a \x01(\bR\x06secure\"\x84\x02\n" +
+	"\x10GreenplumCluster\x12(\n" +
+	"\vdatabase_id\x18\x01 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\n" +
+	"databaseId\x12,\n" +
+	"\rdatabase_name\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\fdatabaseName\x12!\n" +
+	"\x05login\x18\x03 \x01(\tB\v\xa2\xe6*\x03\x18\x80\b\xb8\xe6*\x01R\x05login\x12'\n" +
+	"\bpassword\x18\x04 \x01(\tB\v\xa2\xe6*\x03\x18\x80\b\xb8\xe6*\x01R\bpassword\x12\x1f\n" +
+	"\x06schema\x18\x05 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\x06schema\x12+\n" +
+	"\x04auth\x18\x06 \x01(\v2\x17.FederatedQuery.IamAuthR\x04auth\"\xdf\x01\n" +
+	"\fMySQLCluster\x12(\n" +
+	"\vdatabase_id\x18\x01 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\n" +
+	"databaseId\x12,\n" +
+	"\rdatabase_name\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bR\fdatabaseName\x12!\n" +
+	"\x05login\x18\x03 \x01(\tB\v\xa2\xe6*\x03\x18\x80\b\xb8\xe6*\x01R\x05login\x12'\n" +
+	"\bpassword\x18\x04 \x01(\tB\v\xa2\xe6*\x03\x18\x80\b\xb8\xe6*\x01R\bpassword\x12+\n" +
+	"\x04auth\x18\x05 \x01(\v2\x17.FederatedQuery.IamAuthR\x04auth\"S\n" +
+	"\aLogging\x12\x1b\n" +
+	"\tfolder_id\x18\x01 \x01(\tR\bfolderId\x12+\n" +
+	"\x04auth\x18\x02 \x01(\v2\x17.FederatedQuery.IamAuthR\x04auth\"\xb6\x01\n" +
+	"\x10IcebergWarehouse\x125\n" +
+	"\x02s3\x18\x01 \x01(\v2#.FederatedQuery.IcebergWarehouse.S3H\x00R\x02s3\x1a`\n" +
+	"\x02S3\x12$\n" +
+	"\x06bucket\x18\x01 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bH\x00R\x06bucket\x88\x01\x01\x12 \n" +
+	"\x04path\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bH\x01R\x04path\x88\x01\x01B\t\n" +
+	"\a_bucketB\a\n" +
+	"\x05_pathB\t\n" +
+	"\apayload\"\xf5\x02\n" +
+	"\x0eIcebergCatalog\x12?\n" +
+	"\x06hadoop\x18\x01 \x01(\v2%.FederatedQuery.IcebergCatalog.HadoopH\x00R\x06hadoop\x12U\n" +
+	"\x0ehive_metastore\x18\x02 \x01(\v2,.FederatedQuery.IcebergCatalog.HiveMetastoreH\x00R\rhiveMetastore\x1aB\n" +
+	"\x06Hadoop\x12*\n" +
+	"\tdirectory\x18\x01 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bH\x00R\tdirectory\x88\x01\x01B\f\n" +
+	"\n" +
+	"_directory\x1a|\n" +
+	"\rHiveMetastore\x12\x1e\n" +
+	"\x03uri\x18\x01 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bH\x00R\x03uri\x88\x01\x01\x121\n" +
+	"\rdatabase_name\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\x80\bH\x01R\fdatabaseName\x88\x01\x01B\x06\n" +
+	"\x04_uriB\x10\n" +
+	"\x0e_database_nameB\t\n" +
+	"\apayload\"\xc3\x01\n" +
+	"\aIceberg\x12>\n" +
+	"\x0ewarehouse_auth\x18\x02 \x01(\v2\x17.FederatedQuery.IamAuthR\rwarehouseAuth\x12>\n" +
+	"\twarehouse\x18\x03 \x01(\v2 .FederatedQuery.IcebergWarehouseR\twarehouse\x128\n" +
+	"\acatalog\x18\x04 \x01(\v2\x1e.FederatedQuery.IcebergCatalogR\acatalog\"\xcd\a\n" +
 	"\x11ConnectionSetting\x12@\n" +
 	"\fydb_database\x18\x01 \x01(\v2\x1b.FederatedQuery.YdbDatabaseH\x00R\vydbDatabase\x12R\n" +
 	"\x12clickhouse_cluster\x18\x02 \x01(\v2!.FederatedQuery.ClickHouseClusterH\x00R\x11clickhouseCluster\x12@\n" +
@@ -13437,7 +13212,12 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	"\n" +
 	"monitoring\x18\x05 \x01(\v2\x1a.FederatedQuery.MonitoringH\x00R\n" +
 	"monitoring\x12R\n" +
-	"\x12postgresql_cluster\x18\x06 \x01(\v2!.FederatedQuery.PostgreSQLClusterH\x00R\x11postgresqlCluster\"\xa9\x01\n" +
+	"\x12postgresql_cluster\x18\x06 \x01(\v2!.FederatedQuery.PostgreSQLClusterH\x00R\x11postgresqlCluster\x12O\n" +
+	"\x11greenplum_cluster\x18\a \x01(\v2 .FederatedQuery.GreenplumClusterH\x00R\x10greenplumCluster\x12C\n" +
+	"\rmysql_cluster\x18\b \x01(\v2\x1c.FederatedQuery.MySQLClusterH\x00R\fmysqlCluster\x123\n" +
+	"\alogging\x18\t \x01(\v2\x17.FederatedQuery.LoggingH\x00R\alogging\x123\n" +
+	"\aiceberg\x18\n" +
+	" \x01(\v2\x17.FederatedQuery.IcebergH\x00R\aiceberg\"\xed\x01\n" +
 	"\x0eConnectionType\x12\x1f\n" +
 	"\x1bCONNECTION_TYPE_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fYDB_DATABASE\x10\x01\x12\x16\n" +
@@ -13446,7 +13226,12 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	"\x0eOBJECT_STORAGE\x10\x04\x12\x0e\n" +
 	"\n" +
 	"MONITORING\x10\x05\x12\x16\n" +
-	"\x12POSTGRESQL_CLUSTER\x10\x06B\f\n" +
+	"\x12POSTGRESQL_CLUSTER\x10\x06\x12\x15\n" +
+	"\x11GREENPLUM_CLUSTER\x10\a\x12\x11\n" +
+	"\rMYSQL_CLUSTER\x10\b\x12\v\n" +
+	"\aLOGGING\x10\t\x12\v\n" +
+	"\aICEBERG\x10\n" +
+	"B\f\n" +
 	"\n" +
 	"connection\"\xc3\x01\n" +
 	"\x11ConnectionContent\x12\x1f\n" +
@@ -13677,11 +13462,11 @@ const file_draft_protos_ydb_federated_query_proto_rawDesc = "" +
 	"\rAutomaticType\x12\x1e\n" +
 	"\x1aAUTOMATIC_TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
 	"\tAUTOMATIC\x10\x01\x12\x11\n" +
-	"\rNOT_AUTOMATIC\x10\x02Bz\n" +
-	"$tech.ydb.proto.draft.federated.queryZGgithub.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_FederatedQuery\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\rNOT_AUTOMATIC\x10\x02Br\n" +
+	"$tech.ydb.proto.draft.federated.queryZGgithub.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_FederatedQuery\xf8\x01\x01b\x06proto3"
 
 var file_draft_protos_ydb_federated_query_proto_enumTypes = make([]protoimpl.EnumInfo, 10)
-var file_draft_protos_ydb_federated_query_proto_msgTypes = make([]protoimpl.MessageInfo, 109)
+var file_draft_protos_ydb_federated_query_proto_msgTypes = make([]protoimpl.MessageInfo, 122)
 var file_draft_protos_ydb_federated_query_proto_goTypes = []any{
 	(ExecuteMode)(0),                                // 0: FederatedQuery.ExecuteMode
 	(QueryAction)(0),                                // 1: FederatedQuery.QueryAction
@@ -13703,284 +13488,317 @@ var file_draft_protos_ydb_federated_query_proto_goTypes = []any{
 	(*QueryPlan)(nil),                               // 17: FederatedQuery.QueryPlan
 	(*QueryAst)(nil),                                // 18: FederatedQuery.QueryAst
 	(*ResultSetMeta)(nil),                           // 19: FederatedQuery.ResultSetMeta
-	(*Query)(nil),                                   // 20: FederatedQuery.Query
-	(*QueryStatistics)(nil),                         // 21: FederatedQuery.QueryStatistics
-	(*CreateQueryRequest)(nil),                      // 22: FederatedQuery.CreateQueryRequest
-	(*CreateQueryResponse)(nil),                     // 23: FederatedQuery.CreateQueryResponse
-	(*CreateQueryResult)(nil),                       // 24: FederatedQuery.CreateQueryResult
-	(*ListQueriesRequest)(nil),                      // 25: FederatedQuery.ListQueriesRequest
-	(*ListQueriesResponse)(nil),                     // 26: FederatedQuery.ListQueriesResponse
-	(*ListQueriesResult)(nil),                       // 27: FederatedQuery.ListQueriesResult
-	(*DescribeQueryRequest)(nil),                    // 28: FederatedQuery.DescribeQueryRequest
-	(*DescribeQueryResponse)(nil),                   // 29: FederatedQuery.DescribeQueryResponse
-	(*DescribeQueryResult)(nil),                     // 30: FederatedQuery.DescribeQueryResult
-	(*GetQueryStatusRequest)(nil),                   // 31: FederatedQuery.GetQueryStatusRequest
-	(*GetQueryStatusResponse)(nil),                  // 32: FederatedQuery.GetQueryStatusResponse
-	(*GetQueryStatusResult)(nil),                    // 33: FederatedQuery.GetQueryStatusResult
-	(*DeleteQueryRequest)(nil),                      // 34: FederatedQuery.DeleteQueryRequest
-	(*DeleteQueryResponse)(nil),                     // 35: FederatedQuery.DeleteQueryResponse
-	(*DeleteQueryResult)(nil),                       // 36: FederatedQuery.DeleteQueryResult
-	(*ModifyQueryRequest)(nil),                      // 37: FederatedQuery.ModifyQueryRequest
-	(*ModifyQueryResponse)(nil),                     // 38: FederatedQuery.ModifyQueryResponse
-	(*ModifyQueryResult)(nil),                       // 39: FederatedQuery.ModifyQueryResult
-	(*ControlQueryRequest)(nil),                     // 40: FederatedQuery.ControlQueryRequest
-	(*ControlQueryResponse)(nil),                    // 41: FederatedQuery.ControlQueryResponse
-	(*ControlQueryResult)(nil),                      // 42: FederatedQuery.ControlQueryResult
-	(*BriefJob)(nil),                                // 43: FederatedQuery.BriefJob
-	(*Job)(nil),                                     // 44: FederatedQuery.Job
-	(*ListJobsRequest)(nil),                         // 45: FederatedQuery.ListJobsRequest
-	(*ListJobsResponse)(nil),                        // 46: FederatedQuery.ListJobsResponse
-	(*ListJobsResult)(nil),                          // 47: FederatedQuery.ListJobsResult
-	(*DescribeJobRequest)(nil),                      // 48: FederatedQuery.DescribeJobRequest
-	(*DescribeJobResponse)(nil),                     // 49: FederatedQuery.DescribeJobResponse
-	(*DescribeJobResult)(nil),                       // 50: FederatedQuery.DescribeJobResult
-	(*CurrentIAMTokenAuth)(nil),                     // 51: FederatedQuery.CurrentIAMTokenAuth
-	(*NoneAuth)(nil),                                // 52: FederatedQuery.NoneAuth
-	(*ServiceAccountAuth)(nil),                      // 53: FederatedQuery.ServiceAccountAuth
-	(*IamAuth)(nil),                                 // 54: FederatedQuery.IamAuth
-	(*DataStreams)(nil),                             // 55: FederatedQuery.DataStreams
-	(*Monitoring)(nil),                              // 56: FederatedQuery.Monitoring
-	(*YdbDatabase)(nil),                             // 57: FederatedQuery.YdbDatabase
-	(*ClickHouseCluster)(nil),                       // 58: FederatedQuery.ClickHouseCluster
-	(*ObjectStorageConnection)(nil),                 // 59: FederatedQuery.ObjectStorageConnection
-	(*PostgreSQLCluster)(nil),                       // 60: FederatedQuery.PostgreSQLCluster
-	(*ConnectionSetting)(nil),                       // 61: FederatedQuery.ConnectionSetting
-	(*ConnectionContent)(nil),                       // 62: FederatedQuery.ConnectionContent
-	(*Connection)(nil),                              // 63: FederatedQuery.Connection
-	(*CreateConnectionRequest)(nil),                 // 64: FederatedQuery.CreateConnectionRequest
-	(*CreateConnectionResponse)(nil),                // 65: FederatedQuery.CreateConnectionResponse
-	(*CreateConnectionResult)(nil),                  // 66: FederatedQuery.CreateConnectionResult
-	(*ListConnectionsRequest)(nil),                  // 67: FederatedQuery.ListConnectionsRequest
-	(*ListConnectionsResponse)(nil),                 // 68: FederatedQuery.ListConnectionsResponse
-	(*ListConnectionsResult)(nil),                   // 69: FederatedQuery.ListConnectionsResult
-	(*DescribeConnectionRequest)(nil),               // 70: FederatedQuery.DescribeConnectionRequest
-	(*DescribeConnectionResponse)(nil),              // 71: FederatedQuery.DescribeConnectionResponse
-	(*DescribeConnectionResult)(nil),                // 72: FederatedQuery.DescribeConnectionResult
-	(*ModifyConnectionRequest)(nil),                 // 73: FederatedQuery.ModifyConnectionRequest
-	(*ModifyConnectionResponse)(nil),                // 74: FederatedQuery.ModifyConnectionResponse
-	(*ModifyConnectionResult)(nil),                  // 75: FederatedQuery.ModifyConnectionResult
-	(*DeleteConnectionRequest)(nil),                 // 76: FederatedQuery.DeleteConnectionRequest
-	(*DeleteConnectionResponse)(nil),                // 77: FederatedQuery.DeleteConnectionResponse
-	(*DeleteConnectionResult)(nil),                  // 78: FederatedQuery.DeleteConnectionResult
-	(*TestConnectionRequest)(nil),                   // 79: FederatedQuery.TestConnectionRequest
-	(*TestConnectionResponse)(nil),                  // 80: FederatedQuery.TestConnectionResponse
-	(*TestConnectionResult)(nil),                    // 81: FederatedQuery.TestConnectionResult
-	(*GetResultDataRequest)(nil),                    // 82: FederatedQuery.GetResultDataRequest
-	(*GetResultDataResponse)(nil),                   // 83: FederatedQuery.GetResultDataResponse
-	(*GetResultDataResult)(nil),                     // 84: FederatedQuery.GetResultDataResult
-	(*Schema)(nil),                                  // 85: FederatedQuery.Schema
-	(*DataStreamsBinding)(nil),                      // 86: FederatedQuery.DataStreamsBinding
-	(*ObjectStorageBinding)(nil),                    // 87: FederatedQuery.ObjectStorageBinding
-	(*BindingSetting)(nil),                          // 88: FederatedQuery.BindingSetting
-	(*BriefBinding)(nil),                            // 89: FederatedQuery.BriefBinding
-	(*BindingContent)(nil),                          // 90: FederatedQuery.BindingContent
-	(*Binding)(nil),                                 // 91: FederatedQuery.Binding
-	(*CreateBindingRequest)(nil),                    // 92: FederatedQuery.CreateBindingRequest
-	(*CreateBindingResponse)(nil),                   // 93: FederatedQuery.CreateBindingResponse
-	(*CreateBindingResult)(nil),                     // 94: FederatedQuery.CreateBindingResult
-	(*ListBindingsRequest)(nil),                     // 95: FederatedQuery.ListBindingsRequest
-	(*ListBindingsResponse)(nil),                    // 96: FederatedQuery.ListBindingsResponse
-	(*ListBindingsResult)(nil),                      // 97: FederatedQuery.ListBindingsResult
-	(*DescribeBindingRequest)(nil),                  // 98: FederatedQuery.DescribeBindingRequest
-	(*DescribeBindingResponse)(nil),                 // 99: FederatedQuery.DescribeBindingResponse
-	(*DescribeBindingResult)(nil),                   // 100: FederatedQuery.DescribeBindingResult
-	(*ModifyBindingRequest)(nil),                    // 101: FederatedQuery.ModifyBindingRequest
-	(*ModifyBindingResponse)(nil),                   // 102: FederatedQuery.ModifyBindingResponse
-	(*ModifyBindingResult)(nil),                     // 103: FederatedQuery.ModifyBindingResult
-	(*DeleteBindingRequest)(nil),                    // 104: FederatedQuery.DeleteBindingRequest
-	(*DeleteBindingResponse)(nil),                   // 105: FederatedQuery.DeleteBindingResponse
-	(*DeleteBindingResult)(nil),                     // 106: FederatedQuery.DeleteBindingResult
-	(*StreamingDisposition_FromTime)(nil),           // 107: FederatedQuery.StreamingDisposition.FromTime
-	(*StreamingDisposition_TimeAgo)(nil),            // 108: FederatedQuery.StreamingDisposition.TimeAgo
-	(*StreamingDisposition_FromLastCheckpoint)(nil), // 109: FederatedQuery.StreamingDisposition.FromLastCheckpoint
-	nil,                                    // 110: FederatedQuery.QueryContent.ExecutionSettingsEntry
-	(*ListQueriesRequest_Filter)(nil),      // 111: FederatedQuery.ListQueriesRequest.Filter
-	(*ListJobsRequest_Filter)(nil),         // 112: FederatedQuery.ListJobsRequest.Filter
-	(*ListConnectionsRequest_Filter)(nil),  // 113: FederatedQuery.ListConnectionsRequest.Filter
-	nil,                                    // 114: FederatedQuery.DataStreamsBinding.FormatSettingEntry
-	(*ObjectStorageBinding_Subset)(nil),    // 115: FederatedQuery.ObjectStorageBinding.Subset
-	nil,                                    // 116: FederatedQuery.ObjectStorageBinding.Subset.FormatSettingEntry
-	nil,                                    // 117: FederatedQuery.ObjectStorageBinding.Subset.ProjectionEntry
-	(*ListBindingsRequest_Filter)(nil),     // 118: FederatedQuery.ListBindingsRequest.Filter
-	(*durationpb.Duration)(nil),            // 119: google.protobuf.Duration
-	(*timestamppb.Timestamp)(nil),          // 120: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),                  // 121: google.protobuf.Empty
-	(*Ydb.Column)(nil),                     // 122: Ydb.Column
-	(*Ydb_Issue.IssueMessage)(nil),         // 123: Ydb.Issue.IssueMessage
-	(*Ydb_Operations.OperationParams)(nil), // 124: Ydb.Operations.OperationParams
-	(*Ydb_Operations.Operation)(nil),       // 125: Ydb.Operations.Operation
-	(*Ydb.ResultSet)(nil),                  // 126: Ydb.ResultSet
+	(*QueryTimeline)(nil),                           // 20: FederatedQuery.QueryTimeline
+	(*Query)(nil),                                   // 21: FederatedQuery.Query
+	(*QueryStatistics)(nil),                         // 22: FederatedQuery.QueryStatistics
+	(*CreateQueryRequest)(nil),                      // 23: FederatedQuery.CreateQueryRequest
+	(*CreateQueryResponse)(nil),                     // 24: FederatedQuery.CreateQueryResponse
+	(*CreateQueryResult)(nil),                       // 25: FederatedQuery.CreateQueryResult
+	(*ListQueriesRequest)(nil),                      // 26: FederatedQuery.ListQueriesRequest
+	(*ListQueriesResponse)(nil),                     // 27: FederatedQuery.ListQueriesResponse
+	(*ListQueriesResult)(nil),                       // 28: FederatedQuery.ListQueriesResult
+	(*DescribeQueryRequest)(nil),                    // 29: FederatedQuery.DescribeQueryRequest
+	(*DescribeQueryResponse)(nil),                   // 30: FederatedQuery.DescribeQueryResponse
+	(*DescribeQueryResult)(nil),                     // 31: FederatedQuery.DescribeQueryResult
+	(*GetQueryStatusRequest)(nil),                   // 32: FederatedQuery.GetQueryStatusRequest
+	(*GetQueryStatusResponse)(nil),                  // 33: FederatedQuery.GetQueryStatusResponse
+	(*GetQueryStatusResult)(nil),                    // 34: FederatedQuery.GetQueryStatusResult
+	(*DeleteQueryRequest)(nil),                      // 35: FederatedQuery.DeleteQueryRequest
+	(*DeleteQueryResponse)(nil),                     // 36: FederatedQuery.DeleteQueryResponse
+	(*DeleteQueryResult)(nil),                       // 37: FederatedQuery.DeleteQueryResult
+	(*ModifyQueryRequest)(nil),                      // 38: FederatedQuery.ModifyQueryRequest
+	(*ModifyQueryResponse)(nil),                     // 39: FederatedQuery.ModifyQueryResponse
+	(*ModifyQueryResult)(nil),                       // 40: FederatedQuery.ModifyQueryResult
+	(*ControlQueryRequest)(nil),                     // 41: FederatedQuery.ControlQueryRequest
+	(*ControlQueryResponse)(nil),                    // 42: FederatedQuery.ControlQueryResponse
+	(*ControlQueryResult)(nil),                      // 43: FederatedQuery.ControlQueryResult
+	(*BriefJob)(nil),                                // 44: FederatedQuery.BriefJob
+	(*Job)(nil),                                     // 45: FederatedQuery.Job
+	(*ListJobsRequest)(nil),                         // 46: FederatedQuery.ListJobsRequest
+	(*ListJobsResponse)(nil),                        // 47: FederatedQuery.ListJobsResponse
+	(*ListJobsResult)(nil),                          // 48: FederatedQuery.ListJobsResult
+	(*DescribeJobRequest)(nil),                      // 49: FederatedQuery.DescribeJobRequest
+	(*DescribeJobResponse)(nil),                     // 50: FederatedQuery.DescribeJobResponse
+	(*DescribeJobResult)(nil),                       // 51: FederatedQuery.DescribeJobResult
+	(*CurrentIAMTokenAuth)(nil),                     // 52: FederatedQuery.CurrentIAMTokenAuth
+	(*NoneAuth)(nil),                                // 53: FederatedQuery.NoneAuth
+	(*ServiceAccountAuth)(nil),                      // 54: FederatedQuery.ServiceAccountAuth
+	(*TokenAuth)(nil),                               // 55: FederatedQuery.TokenAuth
+	(*IamAuth)(nil),                                 // 56: FederatedQuery.IamAuth
+	(*DataStreams)(nil),                             // 57: FederatedQuery.DataStreams
+	(*Monitoring)(nil),                              // 58: FederatedQuery.Monitoring
+	(*YdbDatabase)(nil),                             // 59: FederatedQuery.YdbDatabase
+	(*ClickHouseCluster)(nil),                       // 60: FederatedQuery.ClickHouseCluster
+	(*ObjectStorageConnection)(nil),                 // 61: FederatedQuery.ObjectStorageConnection
+	(*PostgreSQLCluster)(nil),                       // 62: FederatedQuery.PostgreSQLCluster
+	(*GreenplumCluster)(nil),                        // 63: FederatedQuery.GreenplumCluster
+	(*MySQLCluster)(nil),                            // 64: FederatedQuery.MySQLCluster
+	(*Logging)(nil),                                 // 65: FederatedQuery.Logging
+	(*IcebergWarehouse)(nil),                        // 66: FederatedQuery.IcebergWarehouse
+	(*IcebergCatalog)(nil),                          // 67: FederatedQuery.IcebergCatalog
+	(*Iceberg)(nil),                                 // 68: FederatedQuery.Iceberg
+	(*ConnectionSetting)(nil),                       // 69: FederatedQuery.ConnectionSetting
+	(*ConnectionContent)(nil),                       // 70: FederatedQuery.ConnectionContent
+	(*Connection)(nil),                              // 71: FederatedQuery.Connection
+	(*CreateConnectionRequest)(nil),                 // 72: FederatedQuery.CreateConnectionRequest
+	(*CreateConnectionResponse)(nil),                // 73: FederatedQuery.CreateConnectionResponse
+	(*CreateConnectionResult)(nil),                  // 74: FederatedQuery.CreateConnectionResult
+	(*ListConnectionsRequest)(nil),                  // 75: FederatedQuery.ListConnectionsRequest
+	(*ListConnectionsResponse)(nil),                 // 76: FederatedQuery.ListConnectionsResponse
+	(*ListConnectionsResult)(nil),                   // 77: FederatedQuery.ListConnectionsResult
+	(*DescribeConnectionRequest)(nil),               // 78: FederatedQuery.DescribeConnectionRequest
+	(*DescribeConnectionResponse)(nil),              // 79: FederatedQuery.DescribeConnectionResponse
+	(*DescribeConnectionResult)(nil),                // 80: FederatedQuery.DescribeConnectionResult
+	(*ModifyConnectionRequest)(nil),                 // 81: FederatedQuery.ModifyConnectionRequest
+	(*ModifyConnectionResponse)(nil),                // 82: FederatedQuery.ModifyConnectionResponse
+	(*ModifyConnectionResult)(nil),                  // 83: FederatedQuery.ModifyConnectionResult
+	(*DeleteConnectionRequest)(nil),                 // 84: FederatedQuery.DeleteConnectionRequest
+	(*DeleteConnectionResponse)(nil),                // 85: FederatedQuery.DeleteConnectionResponse
+	(*DeleteConnectionResult)(nil),                  // 86: FederatedQuery.DeleteConnectionResult
+	(*TestConnectionRequest)(nil),                   // 87: FederatedQuery.TestConnectionRequest
+	(*TestConnectionResponse)(nil),                  // 88: FederatedQuery.TestConnectionResponse
+	(*TestConnectionResult)(nil),                    // 89: FederatedQuery.TestConnectionResult
+	(*GetResultDataRequest)(nil),                    // 90: FederatedQuery.GetResultDataRequest
+	(*GetResultDataResponse)(nil),                   // 91: FederatedQuery.GetResultDataResponse
+	(*GetResultDataResult)(nil),                     // 92: FederatedQuery.GetResultDataResult
+	(*Schema)(nil),                                  // 93: FederatedQuery.Schema
+	(*DataStreamsBinding)(nil),                      // 94: FederatedQuery.DataStreamsBinding
+	(*ObjectStorageBinding)(nil),                    // 95: FederatedQuery.ObjectStorageBinding
+	(*BindingSetting)(nil),                          // 96: FederatedQuery.BindingSetting
+	(*BriefBinding)(nil),                            // 97: FederatedQuery.BriefBinding
+	(*BindingContent)(nil),                          // 98: FederatedQuery.BindingContent
+	(*Binding)(nil),                                 // 99: FederatedQuery.Binding
+	(*CreateBindingRequest)(nil),                    // 100: FederatedQuery.CreateBindingRequest
+	(*CreateBindingResponse)(nil),                   // 101: FederatedQuery.CreateBindingResponse
+	(*CreateBindingResult)(nil),                     // 102: FederatedQuery.CreateBindingResult
+	(*ListBindingsRequest)(nil),                     // 103: FederatedQuery.ListBindingsRequest
+	(*ListBindingsResponse)(nil),                    // 104: FederatedQuery.ListBindingsResponse
+	(*ListBindingsResult)(nil),                      // 105: FederatedQuery.ListBindingsResult
+	(*DescribeBindingRequest)(nil),                  // 106: FederatedQuery.DescribeBindingRequest
+	(*DescribeBindingResponse)(nil),                 // 107: FederatedQuery.DescribeBindingResponse
+	(*DescribeBindingResult)(nil),                   // 108: FederatedQuery.DescribeBindingResult
+	(*ModifyBindingRequest)(nil),                    // 109: FederatedQuery.ModifyBindingRequest
+	(*ModifyBindingResponse)(nil),                   // 110: FederatedQuery.ModifyBindingResponse
+	(*ModifyBindingResult)(nil),                     // 111: FederatedQuery.ModifyBindingResult
+	(*DeleteBindingRequest)(nil),                    // 112: FederatedQuery.DeleteBindingRequest
+	(*DeleteBindingResponse)(nil),                   // 113: FederatedQuery.DeleteBindingResponse
+	(*DeleteBindingResult)(nil),                     // 114: FederatedQuery.DeleteBindingResult
+	(*StreamingDisposition_FromTime)(nil),           // 115: FederatedQuery.StreamingDisposition.FromTime
+	(*StreamingDisposition_TimeAgo)(nil),            // 116: FederatedQuery.StreamingDisposition.TimeAgo
+	(*StreamingDisposition_FromLastCheckpoint)(nil), // 117: FederatedQuery.StreamingDisposition.FromLastCheckpoint
+	nil,                                    // 118: FederatedQuery.QueryContent.ExecutionSettingsEntry
+	nil,                                    // 119: FederatedQuery.QueryContent.ParametersEntry
+	(*ListQueriesRequest_Filter)(nil),      // 120: FederatedQuery.ListQueriesRequest.Filter
+	nil,                                    // 121: FederatedQuery.Job.ParametersEntry
+	(*ListJobsRequest_Filter)(nil),         // 122: FederatedQuery.ListJobsRequest.Filter
+	(*IcebergWarehouse_S3)(nil),            // 123: FederatedQuery.IcebergWarehouse.S3
+	(*IcebergCatalog_Hadoop)(nil),          // 124: FederatedQuery.IcebergCatalog.Hadoop
+	(*IcebergCatalog_HiveMetastore)(nil),   // 125: FederatedQuery.IcebergCatalog.HiveMetastore
+	(*ListConnectionsRequest_Filter)(nil),  // 126: FederatedQuery.ListConnectionsRequest.Filter
+	nil,                                    // 127: FederatedQuery.DataStreamsBinding.FormatSettingEntry
+	(*ObjectStorageBinding_Subset)(nil),    // 128: FederatedQuery.ObjectStorageBinding.Subset
+	nil,                                    // 129: FederatedQuery.ObjectStorageBinding.Subset.FormatSettingEntry
+	nil,                                    // 130: FederatedQuery.ObjectStorageBinding.Subset.ProjectionEntry
+	(*ListBindingsRequest_Filter)(nil),     // 131: FederatedQuery.ListBindingsRequest.Filter
+	(*durationpb.Duration)(nil),            // 132: google.protobuf.Duration
+	(*timestamppb.Timestamp)(nil),          // 133: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),                  // 134: google.protobuf.Empty
+	(*Ydb.Column)(nil),                     // 135: Ydb.Column
+	(*Ydb_Issue.IssueMessage)(nil),         // 136: Ydb.Issue.IssueMessage
+	(*Ydb_Operations.OperationParams)(nil), // 137: Ydb.Operations.OperationParams
+	(*Ydb_Operations.Operation)(nil),       // 138: Ydb.Operations.Operation
+	(*Ydb.ResultSet)(nil),                  // 139: Ydb.ResultSet
+	(*Ydb.TypedValue)(nil),                 // 140: Ydb.TypedValue
 }
 var file_draft_protos_ydb_federated_query_proto_depIdxs = []int32{
 	4,   // 0: FederatedQuery.Acl.visibility:type_name -> FederatedQuery.Acl.Visibility
-	119, // 1: FederatedQuery.Limits.result_ttl:type_name -> google.protobuf.Duration
-	119, // 2: FederatedQuery.Limits.execution_timeout:type_name -> google.protobuf.Duration
-	120, // 3: FederatedQuery.Limits.execution_deadline:type_name -> google.protobuf.Timestamp
-	121, // 4: FederatedQuery.StreamingDisposition.oldest:type_name -> google.protobuf.Empty
-	121, // 5: FederatedQuery.StreamingDisposition.fresh:type_name -> google.protobuf.Empty
-	107, // 6: FederatedQuery.StreamingDisposition.from_time:type_name -> FederatedQuery.StreamingDisposition.FromTime
-	108, // 7: FederatedQuery.StreamingDisposition.time_ago:type_name -> FederatedQuery.StreamingDisposition.TimeAgo
-	109, // 8: FederatedQuery.StreamingDisposition.from_last_checkpoint:type_name -> FederatedQuery.StreamingDisposition.FromLastCheckpoint
+	132, // 1: FederatedQuery.Limits.result_ttl:type_name -> google.protobuf.Duration
+	132, // 2: FederatedQuery.Limits.execution_timeout:type_name -> google.protobuf.Duration
+	133, // 3: FederatedQuery.Limits.execution_deadline:type_name -> google.protobuf.Timestamp
+	134, // 4: FederatedQuery.StreamingDisposition.oldest:type_name -> google.protobuf.Empty
+	134, // 5: FederatedQuery.StreamingDisposition.fresh:type_name -> google.protobuf.Empty
+	115, // 6: FederatedQuery.StreamingDisposition.from_time:type_name -> FederatedQuery.StreamingDisposition.FromTime
+	116, // 7: FederatedQuery.StreamingDisposition.time_ago:type_name -> FederatedQuery.StreamingDisposition.TimeAgo
+	117, // 8: FederatedQuery.StreamingDisposition.from_last_checkpoint:type_name -> FederatedQuery.StreamingDisposition.FromLastCheckpoint
 	5,   // 9: FederatedQuery.QueryContent.type:type_name -> FederatedQuery.QueryContent.QueryType
 	10,  // 10: FederatedQuery.QueryContent.acl:type_name -> FederatedQuery.Acl
 	11,  // 11: FederatedQuery.QueryContent.limits:type_name -> FederatedQuery.Limits
-	110, // 12: FederatedQuery.QueryContent.execution_settings:type_name -> FederatedQuery.QueryContent.ExecutionSettingsEntry
+	118, // 12: FederatedQuery.QueryContent.execution_settings:type_name -> FederatedQuery.QueryContent.ExecutionSettingsEntry
 	6,   // 13: FederatedQuery.QueryContent.syntax:type_name -> FederatedQuery.QueryContent.QuerySyntax
-	120, // 14: FederatedQuery.CommonMeta.created_at:type_name -> google.protobuf.Timestamp
-	120, // 15: FederatedQuery.CommonMeta.modified_at:type_name -> google.protobuf.Timestamp
-	14,  // 16: FederatedQuery.QueryMeta.common:type_name -> FederatedQuery.CommonMeta
-	120, // 17: FederatedQuery.QueryMeta.submitted_at:type_name -> google.protobuf.Timestamp
-	120, // 18: FederatedQuery.QueryMeta.started_at:type_name -> google.protobuf.Timestamp
-	120, // 19: FederatedQuery.QueryMeta.finished_at:type_name -> google.protobuf.Timestamp
-	0,   // 20: FederatedQuery.QueryMeta.execute_mode:type_name -> FederatedQuery.ExecuteMode
-	7,   // 21: FederatedQuery.QueryMeta.status:type_name -> FederatedQuery.QueryMeta.ComputeStatus
-	120, // 22: FederatedQuery.QueryMeta.expire_at:type_name -> google.protobuf.Timestamp
-	120, // 23: FederatedQuery.QueryMeta.result_expire_at:type_name -> google.protobuf.Timestamp
-	5,   // 24: FederatedQuery.BriefQuery.type:type_name -> FederatedQuery.QueryContent.QueryType
-	15,  // 25: FederatedQuery.BriefQuery.meta:type_name -> FederatedQuery.QueryMeta
-	4,   // 26: FederatedQuery.BriefQuery.visibility:type_name -> FederatedQuery.Acl.Visibility
-	122, // 27: FederatedQuery.ResultSetMeta.column:type_name -> Ydb.Column
-	15,  // 28: FederatedQuery.Query.meta:type_name -> FederatedQuery.QueryMeta
-	13,  // 29: FederatedQuery.Query.content:type_name -> FederatedQuery.QueryContent
-	17,  // 30: FederatedQuery.Query.plan:type_name -> FederatedQuery.QueryPlan
-	123, // 31: FederatedQuery.Query.issue:type_name -> Ydb.Issue.IssueMessage
-	123, // 32: FederatedQuery.Query.transient_issue:type_name -> Ydb.Issue.IssueMessage
-	21,  // 33: FederatedQuery.Query.statistics:type_name -> FederatedQuery.QueryStatistics
-	19,  // 34: FederatedQuery.Query.result_set_meta:type_name -> FederatedQuery.ResultSetMeta
-	18,  // 35: FederatedQuery.Query.ast:type_name -> FederatedQuery.QueryAst
-	124, // 36: FederatedQuery.CreateQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	13,  // 37: FederatedQuery.CreateQueryRequest.content:type_name -> FederatedQuery.QueryContent
-	0,   // 38: FederatedQuery.CreateQueryRequest.execute_mode:type_name -> FederatedQuery.ExecuteMode
-	12,  // 39: FederatedQuery.CreateQueryRequest.disposition:type_name -> FederatedQuery.StreamingDisposition
-	125, // 40: FederatedQuery.CreateQueryResponse.operation:type_name -> Ydb.Operations.Operation
-	124, // 41: FederatedQuery.ListQueriesRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	111, // 42: FederatedQuery.ListQueriesRequest.filter:type_name -> FederatedQuery.ListQueriesRequest.Filter
-	125, // 43: FederatedQuery.ListQueriesResponse.operation:type_name -> Ydb.Operations.Operation
-	16,  // 44: FederatedQuery.ListQueriesResult.query:type_name -> FederatedQuery.BriefQuery
-	124, // 45: FederatedQuery.DescribeQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	125, // 46: FederatedQuery.DescribeQueryResponse.operation:type_name -> Ydb.Operations.Operation
-	20,  // 47: FederatedQuery.DescribeQueryResult.query:type_name -> FederatedQuery.Query
-	124, // 48: FederatedQuery.GetQueryStatusRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	125, // 49: FederatedQuery.GetQueryStatusResponse.operation:type_name -> Ydb.Operations.Operation
-	7,   // 50: FederatedQuery.GetQueryStatusResult.status:type_name -> FederatedQuery.QueryMeta.ComputeStatus
-	124, // 51: FederatedQuery.DeleteQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	125, // 52: FederatedQuery.DeleteQueryResponse.operation:type_name -> Ydb.Operations.Operation
-	124, // 53: FederatedQuery.ModifyQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	13,  // 54: FederatedQuery.ModifyQueryRequest.content:type_name -> FederatedQuery.QueryContent
-	0,   // 55: FederatedQuery.ModifyQueryRequest.execute_mode:type_name -> FederatedQuery.ExecuteMode
-	12,  // 56: FederatedQuery.ModifyQueryRequest.disposition:type_name -> FederatedQuery.StreamingDisposition
-	2,   // 57: FederatedQuery.ModifyQueryRequest.state_load_mode:type_name -> FederatedQuery.StateLoadMode
-	125, // 58: FederatedQuery.ModifyQueryResponse.operation:type_name -> Ydb.Operations.Operation
-	124, // 59: FederatedQuery.ControlQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	1,   // 60: FederatedQuery.ControlQueryRequest.action:type_name -> FederatedQuery.QueryAction
-	125, // 61: FederatedQuery.ControlQueryResponse.operation:type_name -> Ydb.Operations.Operation
-	14,  // 62: FederatedQuery.BriefJob.meta:type_name -> FederatedQuery.CommonMeta
-	15,  // 63: FederatedQuery.BriefJob.query_meta:type_name -> FederatedQuery.QueryMeta
-	4,   // 64: FederatedQuery.BriefJob.visibility:type_name -> FederatedQuery.Acl.Visibility
-	120, // 65: FederatedQuery.BriefJob.expire_at:type_name -> google.protobuf.Timestamp
-	14,  // 66: FederatedQuery.Job.meta:type_name -> FederatedQuery.CommonMeta
-	15,  // 67: FederatedQuery.Job.query_meta:type_name -> FederatedQuery.QueryMeta
-	17,  // 68: FederatedQuery.Job.plan:type_name -> FederatedQuery.QueryPlan
-	123, // 69: FederatedQuery.Job.issue:type_name -> Ydb.Issue.IssueMessage
-	21,  // 70: FederatedQuery.Job.statistics:type_name -> FederatedQuery.QueryStatistics
-	19,  // 71: FederatedQuery.Job.result_set_meta:type_name -> FederatedQuery.ResultSetMeta
-	18,  // 72: FederatedQuery.Job.ast:type_name -> FederatedQuery.QueryAst
-	10,  // 73: FederatedQuery.Job.acl:type_name -> FederatedQuery.Acl
-	120, // 74: FederatedQuery.Job.expire_at:type_name -> google.protobuf.Timestamp
-	6,   // 75: FederatedQuery.Job.syntax:type_name -> FederatedQuery.QueryContent.QuerySyntax
-	124, // 76: FederatedQuery.ListJobsRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	112, // 77: FederatedQuery.ListJobsRequest.filter:type_name -> FederatedQuery.ListJobsRequest.Filter
-	125, // 78: FederatedQuery.ListJobsResponse.operation:type_name -> Ydb.Operations.Operation
-	43,  // 79: FederatedQuery.ListJobsResult.job:type_name -> FederatedQuery.BriefJob
-	124, // 80: FederatedQuery.DescribeJobRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	125, // 81: FederatedQuery.DescribeJobResponse.operation:type_name -> Ydb.Operations.Operation
-	44,  // 82: FederatedQuery.DescribeJobResult.job:type_name -> FederatedQuery.Job
-	51,  // 83: FederatedQuery.IamAuth.current_iam:type_name -> FederatedQuery.CurrentIAMTokenAuth
-	53,  // 84: FederatedQuery.IamAuth.service_account:type_name -> FederatedQuery.ServiceAccountAuth
-	52,  // 85: FederatedQuery.IamAuth.none:type_name -> FederatedQuery.NoneAuth
-	54,  // 86: FederatedQuery.DataStreams.auth:type_name -> FederatedQuery.IamAuth
-	54,  // 87: FederatedQuery.Monitoring.auth:type_name -> FederatedQuery.IamAuth
-	54,  // 88: FederatedQuery.YdbDatabase.auth:type_name -> FederatedQuery.IamAuth
-	54,  // 89: FederatedQuery.ClickHouseCluster.auth:type_name -> FederatedQuery.IamAuth
-	54,  // 90: FederatedQuery.ObjectStorageConnection.auth:type_name -> FederatedQuery.IamAuth
-	54,  // 91: FederatedQuery.PostgreSQLCluster.auth:type_name -> FederatedQuery.IamAuth
-	57,  // 92: FederatedQuery.ConnectionSetting.ydb_database:type_name -> FederatedQuery.YdbDatabase
-	58,  // 93: FederatedQuery.ConnectionSetting.clickhouse_cluster:type_name -> FederatedQuery.ClickHouseCluster
-	55,  // 94: FederatedQuery.ConnectionSetting.data_streams:type_name -> FederatedQuery.DataStreams
-	59,  // 95: FederatedQuery.ConnectionSetting.object_storage:type_name -> FederatedQuery.ObjectStorageConnection
-	56,  // 96: FederatedQuery.ConnectionSetting.monitoring:type_name -> FederatedQuery.Monitoring
-	60,  // 97: FederatedQuery.ConnectionSetting.postgresql_cluster:type_name -> FederatedQuery.PostgreSQLCluster
-	61,  // 98: FederatedQuery.ConnectionContent.setting:type_name -> FederatedQuery.ConnectionSetting
-	10,  // 99: FederatedQuery.ConnectionContent.acl:type_name -> FederatedQuery.Acl
-	62,  // 100: FederatedQuery.Connection.content:type_name -> FederatedQuery.ConnectionContent
-	14,  // 101: FederatedQuery.Connection.meta:type_name -> FederatedQuery.CommonMeta
-	124, // 102: FederatedQuery.CreateConnectionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	62,  // 103: FederatedQuery.CreateConnectionRequest.content:type_name -> FederatedQuery.ConnectionContent
-	125, // 104: FederatedQuery.CreateConnectionResponse.operation:type_name -> Ydb.Operations.Operation
-	124, // 105: FederatedQuery.ListConnectionsRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	113, // 106: FederatedQuery.ListConnectionsRequest.filter:type_name -> FederatedQuery.ListConnectionsRequest.Filter
-	125, // 107: FederatedQuery.ListConnectionsResponse.operation:type_name -> Ydb.Operations.Operation
-	63,  // 108: FederatedQuery.ListConnectionsResult.connection:type_name -> FederatedQuery.Connection
-	124, // 109: FederatedQuery.DescribeConnectionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	125, // 110: FederatedQuery.DescribeConnectionResponse.operation:type_name -> Ydb.Operations.Operation
-	63,  // 111: FederatedQuery.DescribeConnectionResult.connection:type_name -> FederatedQuery.Connection
-	124, // 112: FederatedQuery.ModifyConnectionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	62,  // 113: FederatedQuery.ModifyConnectionRequest.content:type_name -> FederatedQuery.ConnectionContent
-	125, // 114: FederatedQuery.ModifyConnectionResponse.operation:type_name -> Ydb.Operations.Operation
-	124, // 115: FederatedQuery.DeleteConnectionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	125, // 116: FederatedQuery.DeleteConnectionResponse.operation:type_name -> Ydb.Operations.Operation
-	124, // 117: FederatedQuery.TestConnectionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	61,  // 118: FederatedQuery.TestConnectionRequest.setting:type_name -> FederatedQuery.ConnectionSetting
-	125, // 119: FederatedQuery.TestConnectionResponse.operation:type_name -> Ydb.Operations.Operation
-	124, // 120: FederatedQuery.GetResultDataRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	125, // 121: FederatedQuery.GetResultDataResponse.operation:type_name -> Ydb.Operations.Operation
-	126, // 122: FederatedQuery.GetResultDataResult.result_set:type_name -> Ydb.ResultSet
-	122, // 123: FederatedQuery.Schema.column:type_name -> Ydb.Column
-	85,  // 124: FederatedQuery.DataStreamsBinding.schema:type_name -> FederatedQuery.Schema
-	114, // 125: FederatedQuery.DataStreamsBinding.format_setting:type_name -> FederatedQuery.DataStreamsBinding.FormatSettingEntry
-	115, // 126: FederatedQuery.ObjectStorageBinding.subset:type_name -> FederatedQuery.ObjectStorageBinding.Subset
-	86,  // 127: FederatedQuery.BindingSetting.data_streams:type_name -> FederatedQuery.DataStreamsBinding
-	87,  // 128: FederatedQuery.BindingSetting.object_storage:type_name -> FederatedQuery.ObjectStorageBinding
-	14,  // 129: FederatedQuery.BriefBinding.meta:type_name -> FederatedQuery.CommonMeta
-	9,   // 130: FederatedQuery.BriefBinding.type:type_name -> FederatedQuery.BindingSetting.BindingType
-	4,   // 131: FederatedQuery.BriefBinding.visibility:type_name -> FederatedQuery.Acl.Visibility
-	88,  // 132: FederatedQuery.BindingContent.setting:type_name -> FederatedQuery.BindingSetting
-	10,  // 133: FederatedQuery.BindingContent.acl:type_name -> FederatedQuery.Acl
-	90,  // 134: FederatedQuery.Binding.content:type_name -> FederatedQuery.BindingContent
-	14,  // 135: FederatedQuery.Binding.meta:type_name -> FederatedQuery.CommonMeta
-	124, // 136: FederatedQuery.CreateBindingRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	90,  // 137: FederatedQuery.CreateBindingRequest.content:type_name -> FederatedQuery.BindingContent
-	125, // 138: FederatedQuery.CreateBindingResponse.operation:type_name -> Ydb.Operations.Operation
-	124, // 139: FederatedQuery.ListBindingsRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	118, // 140: FederatedQuery.ListBindingsRequest.filter:type_name -> FederatedQuery.ListBindingsRequest.Filter
-	125, // 141: FederatedQuery.ListBindingsResponse.operation:type_name -> Ydb.Operations.Operation
-	89,  // 142: FederatedQuery.ListBindingsResult.binding:type_name -> FederatedQuery.BriefBinding
-	124, // 143: FederatedQuery.DescribeBindingRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	125, // 144: FederatedQuery.DescribeBindingResponse.operation:type_name -> Ydb.Operations.Operation
-	91,  // 145: FederatedQuery.DescribeBindingResult.binding:type_name -> FederatedQuery.Binding
-	124, // 146: FederatedQuery.ModifyBindingRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	90,  // 147: FederatedQuery.ModifyBindingRequest.content:type_name -> FederatedQuery.BindingContent
-	125, // 148: FederatedQuery.ModifyBindingResponse.operation:type_name -> Ydb.Operations.Operation
-	124, // 149: FederatedQuery.DeleteBindingRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	125, // 150: FederatedQuery.DeleteBindingResponse.operation:type_name -> Ydb.Operations.Operation
-	120, // 151: FederatedQuery.StreamingDisposition.FromTime.timestamp:type_name -> google.protobuf.Timestamp
-	119, // 152: FederatedQuery.StreamingDisposition.TimeAgo.duration:type_name -> google.protobuf.Duration
-	5,   // 153: FederatedQuery.ListQueriesRequest.Filter.query_type:type_name -> FederatedQuery.QueryContent.QueryType
-	7,   // 154: FederatedQuery.ListQueriesRequest.Filter.status:type_name -> FederatedQuery.QueryMeta.ComputeStatus
-	0,   // 155: FederatedQuery.ListQueriesRequest.Filter.mode:type_name -> FederatedQuery.ExecuteMode
-	4,   // 156: FederatedQuery.ListQueriesRequest.Filter.visibility:type_name -> FederatedQuery.Acl.Visibility
-	3,   // 157: FederatedQuery.ListQueriesRequest.Filter.automatic:type_name -> FederatedQuery.AutomaticType
-	8,   // 158: FederatedQuery.ListConnectionsRequest.Filter.connection_type:type_name -> FederatedQuery.ConnectionSetting.ConnectionType
-	4,   // 159: FederatedQuery.ListConnectionsRequest.Filter.visibility:type_name -> FederatedQuery.Acl.Visibility
-	116, // 160: FederatedQuery.ObjectStorageBinding.Subset.format_setting:type_name -> FederatedQuery.ObjectStorageBinding.Subset.FormatSettingEntry
-	85,  // 161: FederatedQuery.ObjectStorageBinding.Subset.schema:type_name -> FederatedQuery.Schema
-	117, // 162: FederatedQuery.ObjectStorageBinding.Subset.projection:type_name -> FederatedQuery.ObjectStorageBinding.Subset.ProjectionEntry
-	4,   // 163: FederatedQuery.ListBindingsRequest.Filter.visibility:type_name -> FederatedQuery.Acl.Visibility
-	164, // [164:164] is the sub-list for method output_type
-	164, // [164:164] is the sub-list for method input_type
-	164, // [164:164] is the sub-list for extension type_name
-	164, // [164:164] is the sub-list for extension extendee
-	0,   // [0:164] is the sub-list for field type_name
+	119, // 14: FederatedQuery.QueryContent.parameters:type_name -> FederatedQuery.QueryContent.ParametersEntry
+	133, // 15: FederatedQuery.CommonMeta.created_at:type_name -> google.protobuf.Timestamp
+	133, // 16: FederatedQuery.CommonMeta.modified_at:type_name -> google.protobuf.Timestamp
+	14,  // 17: FederatedQuery.QueryMeta.common:type_name -> FederatedQuery.CommonMeta
+	133, // 18: FederatedQuery.QueryMeta.submitted_at:type_name -> google.protobuf.Timestamp
+	133, // 19: FederatedQuery.QueryMeta.started_at:type_name -> google.protobuf.Timestamp
+	133, // 20: FederatedQuery.QueryMeta.finished_at:type_name -> google.protobuf.Timestamp
+	0,   // 21: FederatedQuery.QueryMeta.execute_mode:type_name -> FederatedQuery.ExecuteMode
+	7,   // 22: FederatedQuery.QueryMeta.status:type_name -> FederatedQuery.QueryMeta.ComputeStatus
+	133, // 23: FederatedQuery.QueryMeta.expire_at:type_name -> google.protobuf.Timestamp
+	133, // 24: FederatedQuery.QueryMeta.result_expire_at:type_name -> google.protobuf.Timestamp
+	5,   // 25: FederatedQuery.BriefQuery.type:type_name -> FederatedQuery.QueryContent.QueryType
+	15,  // 26: FederatedQuery.BriefQuery.meta:type_name -> FederatedQuery.QueryMeta
+	4,   // 27: FederatedQuery.BriefQuery.visibility:type_name -> FederatedQuery.Acl.Visibility
+	135, // 28: FederatedQuery.ResultSetMeta.column:type_name -> Ydb.Column
+	15,  // 29: FederatedQuery.Query.meta:type_name -> FederatedQuery.QueryMeta
+	13,  // 30: FederatedQuery.Query.content:type_name -> FederatedQuery.QueryContent
+	17,  // 31: FederatedQuery.Query.plan:type_name -> FederatedQuery.QueryPlan
+	136, // 32: FederatedQuery.Query.issue:type_name -> Ydb.Issue.IssueMessage
+	136, // 33: FederatedQuery.Query.transient_issue:type_name -> Ydb.Issue.IssueMessage
+	22,  // 34: FederatedQuery.Query.statistics:type_name -> FederatedQuery.QueryStatistics
+	19,  // 35: FederatedQuery.Query.result_set_meta:type_name -> FederatedQuery.ResultSetMeta
+	18,  // 36: FederatedQuery.Query.ast:type_name -> FederatedQuery.QueryAst
+	20,  // 37: FederatedQuery.Query.timeline:type_name -> FederatedQuery.QueryTimeline
+	137, // 38: FederatedQuery.CreateQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	13,  // 39: FederatedQuery.CreateQueryRequest.content:type_name -> FederatedQuery.QueryContent
+	0,   // 40: FederatedQuery.CreateQueryRequest.execute_mode:type_name -> FederatedQuery.ExecuteMode
+	12,  // 41: FederatedQuery.CreateQueryRequest.disposition:type_name -> FederatedQuery.StreamingDisposition
+	138, // 42: FederatedQuery.CreateQueryResponse.operation:type_name -> Ydb.Operations.Operation
+	137, // 43: FederatedQuery.ListQueriesRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	120, // 44: FederatedQuery.ListQueriesRequest.filter:type_name -> FederatedQuery.ListQueriesRequest.Filter
+	138, // 45: FederatedQuery.ListQueriesResponse.operation:type_name -> Ydb.Operations.Operation
+	16,  // 46: FederatedQuery.ListQueriesResult.query:type_name -> FederatedQuery.BriefQuery
+	137, // 47: FederatedQuery.DescribeQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	138, // 48: FederatedQuery.DescribeQueryResponse.operation:type_name -> Ydb.Operations.Operation
+	21,  // 49: FederatedQuery.DescribeQueryResult.query:type_name -> FederatedQuery.Query
+	137, // 50: FederatedQuery.GetQueryStatusRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	138, // 51: FederatedQuery.GetQueryStatusResponse.operation:type_name -> Ydb.Operations.Operation
+	7,   // 52: FederatedQuery.GetQueryStatusResult.status:type_name -> FederatedQuery.QueryMeta.ComputeStatus
+	137, // 53: FederatedQuery.DeleteQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	138, // 54: FederatedQuery.DeleteQueryResponse.operation:type_name -> Ydb.Operations.Operation
+	137, // 55: FederatedQuery.ModifyQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	13,  // 56: FederatedQuery.ModifyQueryRequest.content:type_name -> FederatedQuery.QueryContent
+	0,   // 57: FederatedQuery.ModifyQueryRequest.execute_mode:type_name -> FederatedQuery.ExecuteMode
+	12,  // 58: FederatedQuery.ModifyQueryRequest.disposition:type_name -> FederatedQuery.StreamingDisposition
+	2,   // 59: FederatedQuery.ModifyQueryRequest.state_load_mode:type_name -> FederatedQuery.StateLoadMode
+	138, // 60: FederatedQuery.ModifyQueryResponse.operation:type_name -> Ydb.Operations.Operation
+	137, // 61: FederatedQuery.ControlQueryRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	1,   // 62: FederatedQuery.ControlQueryRequest.action:type_name -> FederatedQuery.QueryAction
+	138, // 63: FederatedQuery.ControlQueryResponse.operation:type_name -> Ydb.Operations.Operation
+	14,  // 64: FederatedQuery.BriefJob.meta:type_name -> FederatedQuery.CommonMeta
+	15,  // 65: FederatedQuery.BriefJob.query_meta:type_name -> FederatedQuery.QueryMeta
+	4,   // 66: FederatedQuery.BriefJob.visibility:type_name -> FederatedQuery.Acl.Visibility
+	133, // 67: FederatedQuery.BriefJob.expire_at:type_name -> google.protobuf.Timestamp
+	14,  // 68: FederatedQuery.Job.meta:type_name -> FederatedQuery.CommonMeta
+	15,  // 69: FederatedQuery.Job.query_meta:type_name -> FederatedQuery.QueryMeta
+	17,  // 70: FederatedQuery.Job.plan:type_name -> FederatedQuery.QueryPlan
+	136, // 71: FederatedQuery.Job.issue:type_name -> Ydb.Issue.IssueMessage
+	22,  // 72: FederatedQuery.Job.statistics:type_name -> FederatedQuery.QueryStatistics
+	19,  // 73: FederatedQuery.Job.result_set_meta:type_name -> FederatedQuery.ResultSetMeta
+	18,  // 74: FederatedQuery.Job.ast:type_name -> FederatedQuery.QueryAst
+	10,  // 75: FederatedQuery.Job.acl:type_name -> FederatedQuery.Acl
+	133, // 76: FederatedQuery.Job.expire_at:type_name -> google.protobuf.Timestamp
+	6,   // 77: FederatedQuery.Job.syntax:type_name -> FederatedQuery.QueryContent.QuerySyntax
+	121, // 78: FederatedQuery.Job.parameters:type_name -> FederatedQuery.Job.ParametersEntry
+	137, // 79: FederatedQuery.ListJobsRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	122, // 80: FederatedQuery.ListJobsRequest.filter:type_name -> FederatedQuery.ListJobsRequest.Filter
+	138, // 81: FederatedQuery.ListJobsResponse.operation:type_name -> Ydb.Operations.Operation
+	44,  // 82: FederatedQuery.ListJobsResult.job:type_name -> FederatedQuery.BriefJob
+	137, // 83: FederatedQuery.DescribeJobRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	138, // 84: FederatedQuery.DescribeJobResponse.operation:type_name -> Ydb.Operations.Operation
+	45,  // 85: FederatedQuery.DescribeJobResult.job:type_name -> FederatedQuery.Job
+	52,  // 86: FederatedQuery.IamAuth.current_iam:type_name -> FederatedQuery.CurrentIAMTokenAuth
+	54,  // 87: FederatedQuery.IamAuth.service_account:type_name -> FederatedQuery.ServiceAccountAuth
+	53,  // 88: FederatedQuery.IamAuth.none:type_name -> FederatedQuery.NoneAuth
+	55,  // 89: FederatedQuery.IamAuth.token:type_name -> FederatedQuery.TokenAuth
+	56,  // 90: FederatedQuery.DataStreams.auth:type_name -> FederatedQuery.IamAuth
+	56,  // 91: FederatedQuery.Monitoring.auth:type_name -> FederatedQuery.IamAuth
+	56,  // 92: FederatedQuery.YdbDatabase.auth:type_name -> FederatedQuery.IamAuth
+	56,  // 93: FederatedQuery.ClickHouseCluster.auth:type_name -> FederatedQuery.IamAuth
+	56,  // 94: FederatedQuery.ObjectStorageConnection.auth:type_name -> FederatedQuery.IamAuth
+	56,  // 95: FederatedQuery.PostgreSQLCluster.auth:type_name -> FederatedQuery.IamAuth
+	56,  // 96: FederatedQuery.GreenplumCluster.auth:type_name -> FederatedQuery.IamAuth
+	56,  // 97: FederatedQuery.MySQLCluster.auth:type_name -> FederatedQuery.IamAuth
+	56,  // 98: FederatedQuery.Logging.auth:type_name -> FederatedQuery.IamAuth
+	123, // 99: FederatedQuery.IcebergWarehouse.s3:type_name -> FederatedQuery.IcebergWarehouse.S3
+	124, // 100: FederatedQuery.IcebergCatalog.hadoop:type_name -> FederatedQuery.IcebergCatalog.Hadoop
+	125, // 101: FederatedQuery.IcebergCatalog.hive_metastore:type_name -> FederatedQuery.IcebergCatalog.HiveMetastore
+	56,  // 102: FederatedQuery.Iceberg.warehouse_auth:type_name -> FederatedQuery.IamAuth
+	66,  // 103: FederatedQuery.Iceberg.warehouse:type_name -> FederatedQuery.IcebergWarehouse
+	67,  // 104: FederatedQuery.Iceberg.catalog:type_name -> FederatedQuery.IcebergCatalog
+	59,  // 105: FederatedQuery.ConnectionSetting.ydb_database:type_name -> FederatedQuery.YdbDatabase
+	60,  // 106: FederatedQuery.ConnectionSetting.clickhouse_cluster:type_name -> FederatedQuery.ClickHouseCluster
+	57,  // 107: FederatedQuery.ConnectionSetting.data_streams:type_name -> FederatedQuery.DataStreams
+	61,  // 108: FederatedQuery.ConnectionSetting.object_storage:type_name -> FederatedQuery.ObjectStorageConnection
+	58,  // 109: FederatedQuery.ConnectionSetting.monitoring:type_name -> FederatedQuery.Monitoring
+	62,  // 110: FederatedQuery.ConnectionSetting.postgresql_cluster:type_name -> FederatedQuery.PostgreSQLCluster
+	63,  // 111: FederatedQuery.ConnectionSetting.greenplum_cluster:type_name -> FederatedQuery.GreenplumCluster
+	64,  // 112: FederatedQuery.ConnectionSetting.mysql_cluster:type_name -> FederatedQuery.MySQLCluster
+	65,  // 113: FederatedQuery.ConnectionSetting.logging:type_name -> FederatedQuery.Logging
+	68,  // 114: FederatedQuery.ConnectionSetting.iceberg:type_name -> FederatedQuery.Iceberg
+	69,  // 115: FederatedQuery.ConnectionContent.setting:type_name -> FederatedQuery.ConnectionSetting
+	10,  // 116: FederatedQuery.ConnectionContent.acl:type_name -> FederatedQuery.Acl
+	70,  // 117: FederatedQuery.Connection.content:type_name -> FederatedQuery.ConnectionContent
+	14,  // 118: FederatedQuery.Connection.meta:type_name -> FederatedQuery.CommonMeta
+	137, // 119: FederatedQuery.CreateConnectionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	70,  // 120: FederatedQuery.CreateConnectionRequest.content:type_name -> FederatedQuery.ConnectionContent
+	138, // 121: FederatedQuery.CreateConnectionResponse.operation:type_name -> Ydb.Operations.Operation
+	137, // 122: FederatedQuery.ListConnectionsRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	126, // 123: FederatedQuery.ListConnectionsRequest.filter:type_name -> FederatedQuery.ListConnectionsRequest.Filter
+	138, // 124: FederatedQuery.ListConnectionsResponse.operation:type_name -> Ydb.Operations.Operation
+	71,  // 125: FederatedQuery.ListConnectionsResult.connection:type_name -> FederatedQuery.Connection
+	137, // 126: FederatedQuery.DescribeConnectionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	138, // 127: FederatedQuery.DescribeConnectionResponse.operation:type_name -> Ydb.Operations.Operation
+	71,  // 128: FederatedQuery.DescribeConnectionResult.connection:type_name -> FederatedQuery.Connection
+	137, // 129: FederatedQuery.ModifyConnectionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	70,  // 130: FederatedQuery.ModifyConnectionRequest.content:type_name -> FederatedQuery.ConnectionContent
+	138, // 131: FederatedQuery.ModifyConnectionResponse.operation:type_name -> Ydb.Operations.Operation
+	137, // 132: FederatedQuery.DeleteConnectionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	138, // 133: FederatedQuery.DeleteConnectionResponse.operation:type_name -> Ydb.Operations.Operation
+	137, // 134: FederatedQuery.TestConnectionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	69,  // 135: FederatedQuery.TestConnectionRequest.setting:type_name -> FederatedQuery.ConnectionSetting
+	138, // 136: FederatedQuery.TestConnectionResponse.operation:type_name -> Ydb.Operations.Operation
+	137, // 137: FederatedQuery.GetResultDataRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	138, // 138: FederatedQuery.GetResultDataResponse.operation:type_name -> Ydb.Operations.Operation
+	139, // 139: FederatedQuery.GetResultDataResult.result_set:type_name -> Ydb.ResultSet
+	135, // 140: FederatedQuery.Schema.column:type_name -> Ydb.Column
+	93,  // 141: FederatedQuery.DataStreamsBinding.schema:type_name -> FederatedQuery.Schema
+	127, // 142: FederatedQuery.DataStreamsBinding.format_setting:type_name -> FederatedQuery.DataStreamsBinding.FormatSettingEntry
+	128, // 143: FederatedQuery.ObjectStorageBinding.subset:type_name -> FederatedQuery.ObjectStorageBinding.Subset
+	94,  // 144: FederatedQuery.BindingSetting.data_streams:type_name -> FederatedQuery.DataStreamsBinding
+	95,  // 145: FederatedQuery.BindingSetting.object_storage:type_name -> FederatedQuery.ObjectStorageBinding
+	14,  // 146: FederatedQuery.BriefBinding.meta:type_name -> FederatedQuery.CommonMeta
+	9,   // 147: FederatedQuery.BriefBinding.type:type_name -> FederatedQuery.BindingSetting.BindingType
+	4,   // 148: FederatedQuery.BriefBinding.visibility:type_name -> FederatedQuery.Acl.Visibility
+	96,  // 149: FederatedQuery.BindingContent.setting:type_name -> FederatedQuery.BindingSetting
+	10,  // 150: FederatedQuery.BindingContent.acl:type_name -> FederatedQuery.Acl
+	98,  // 151: FederatedQuery.Binding.content:type_name -> FederatedQuery.BindingContent
+	14,  // 152: FederatedQuery.Binding.meta:type_name -> FederatedQuery.CommonMeta
+	137, // 153: FederatedQuery.CreateBindingRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	98,  // 154: FederatedQuery.CreateBindingRequest.content:type_name -> FederatedQuery.BindingContent
+	138, // 155: FederatedQuery.CreateBindingResponse.operation:type_name -> Ydb.Operations.Operation
+	137, // 156: FederatedQuery.ListBindingsRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	131, // 157: FederatedQuery.ListBindingsRequest.filter:type_name -> FederatedQuery.ListBindingsRequest.Filter
+	138, // 158: FederatedQuery.ListBindingsResponse.operation:type_name -> Ydb.Operations.Operation
+	97,  // 159: FederatedQuery.ListBindingsResult.binding:type_name -> FederatedQuery.BriefBinding
+	137, // 160: FederatedQuery.DescribeBindingRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	138, // 161: FederatedQuery.DescribeBindingResponse.operation:type_name -> Ydb.Operations.Operation
+	99,  // 162: FederatedQuery.DescribeBindingResult.binding:type_name -> FederatedQuery.Binding
+	137, // 163: FederatedQuery.ModifyBindingRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	98,  // 164: FederatedQuery.ModifyBindingRequest.content:type_name -> FederatedQuery.BindingContent
+	138, // 165: FederatedQuery.ModifyBindingResponse.operation:type_name -> Ydb.Operations.Operation
+	137, // 166: FederatedQuery.DeleteBindingRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	138, // 167: FederatedQuery.DeleteBindingResponse.operation:type_name -> Ydb.Operations.Operation
+	133, // 168: FederatedQuery.StreamingDisposition.FromTime.timestamp:type_name -> google.protobuf.Timestamp
+	132, // 169: FederatedQuery.StreamingDisposition.TimeAgo.duration:type_name -> google.protobuf.Duration
+	140, // 170: FederatedQuery.QueryContent.ParametersEntry.value:type_name -> Ydb.TypedValue
+	5,   // 171: FederatedQuery.ListQueriesRequest.Filter.query_type:type_name -> FederatedQuery.QueryContent.QueryType
+	7,   // 172: FederatedQuery.ListQueriesRequest.Filter.status:type_name -> FederatedQuery.QueryMeta.ComputeStatus
+	0,   // 173: FederatedQuery.ListQueriesRequest.Filter.mode:type_name -> FederatedQuery.ExecuteMode
+	4,   // 174: FederatedQuery.ListQueriesRequest.Filter.visibility:type_name -> FederatedQuery.Acl.Visibility
+	3,   // 175: FederatedQuery.ListQueriesRequest.Filter.automatic:type_name -> FederatedQuery.AutomaticType
+	140, // 176: FederatedQuery.Job.ParametersEntry.value:type_name -> Ydb.TypedValue
+	8,   // 177: FederatedQuery.ListConnectionsRequest.Filter.connection_type:type_name -> FederatedQuery.ConnectionSetting.ConnectionType
+	4,   // 178: FederatedQuery.ListConnectionsRequest.Filter.visibility:type_name -> FederatedQuery.Acl.Visibility
+	129, // 179: FederatedQuery.ObjectStorageBinding.Subset.format_setting:type_name -> FederatedQuery.ObjectStorageBinding.Subset.FormatSettingEntry
+	93,  // 180: FederatedQuery.ObjectStorageBinding.Subset.schema:type_name -> FederatedQuery.Schema
+	130, // 181: FederatedQuery.ObjectStorageBinding.Subset.projection:type_name -> FederatedQuery.ObjectStorageBinding.Subset.ProjectionEntry
+	4,   // 182: FederatedQuery.ListBindingsRequest.Filter.visibility:type_name -> FederatedQuery.Acl.Visibility
+	183, // [183:183] is the sub-list for method output_type
+	183, // [183:183] is the sub-list for method input_type
+	183, // [183:183] is the sub-list for extension type_name
+	183, // [183:183] is the sub-list for extension extendee
+	0,   // [0:183] is the sub-list for field type_name
 }
 
 func init() { file_draft_protos_ydb_federated_query_proto_init() }
@@ -13989,44 +13807,59 @@ func file_draft_protos_ydb_federated_query_proto_init() {
 		return
 	}
 	file_draft_protos_ydb_federated_query_proto_msgTypes[1].OneofWrappers = []any{
-		(*Limits_ExecutionTimeout)(nil),
-		(*Limits_ExecutionDeadline)(nil),
+		(*limits_ExecutionTimeout)(nil),
+		(*limits_ExecutionDeadline)(nil),
 	}
 	file_draft_protos_ydb_federated_query_proto_msgTypes[2].OneofWrappers = []any{
-		(*StreamingDisposition_Oldest)(nil),
-		(*StreamingDisposition_Fresh)(nil),
-		(*StreamingDisposition_FromTime_)(nil),
-		(*StreamingDisposition_TimeAgo_)(nil),
-		(*StreamingDisposition_FromLastCheckpoint_)(nil),
+		(*streamingDisposition_Oldest)(nil),
+		(*streamingDisposition_Fresh)(nil),
+		(*streamingDisposition_FromTime_)(nil),
+		(*streamingDisposition_TimeAgo_)(nil),
+		(*streamingDisposition_FromLastCheckpoint_)(nil),
 	}
 	file_draft_protos_ydb_federated_query_proto_msgTypes[5].OneofWrappers = []any{
-		(*QueryMeta_AbortedBy)(nil),
-		(*QueryMeta_PausedBy)(nil),
+		(*queryMeta_AbortedBy)(nil),
+		(*queryMeta_PausedBy)(nil),
 	}
-	file_draft_protos_ydb_federated_query_proto_msgTypes[44].OneofWrappers = []any{
-		(*IamAuth_CurrentIam)(nil),
-		(*IamAuth_ServiceAccount)(nil),
-		(*IamAuth_None)(nil),
+	file_draft_protos_ydb_federated_query_proto_msgTypes[46].OneofWrappers = []any{
+		(*iamAuth_CurrentIam)(nil),
+		(*iamAuth_ServiceAccount)(nil),
+		(*iamAuth_None)(nil),
+		(*iamAuth_Token)(nil),
 	}
-	file_draft_protos_ydb_federated_query_proto_msgTypes[51].OneofWrappers = []any{
-		(*ConnectionSetting_YdbDatabase)(nil),
-		(*ConnectionSetting_ClickhouseCluster)(nil),
-		(*ConnectionSetting_DataStreams)(nil),
-		(*ConnectionSetting_ObjectStorage)(nil),
-		(*ConnectionSetting_Monitoring)(nil),
-		(*ConnectionSetting_PostgresqlCluster)(nil),
+	file_draft_protos_ydb_federated_query_proto_msgTypes[56].OneofWrappers = []any{
+		(*icebergWarehouse_S3_)(nil),
 	}
-	file_draft_protos_ydb_federated_query_proto_msgTypes[78].OneofWrappers = []any{
-		(*BindingSetting_DataStreams)(nil),
-		(*BindingSetting_ObjectStorage)(nil),
+	file_draft_protos_ydb_federated_query_proto_msgTypes[57].OneofWrappers = []any{
+		(*icebergCatalog_Hadoop_)(nil),
+		(*icebergCatalog_HiveMetastore_)(nil),
 	}
+	file_draft_protos_ydb_federated_query_proto_msgTypes[59].OneofWrappers = []any{
+		(*connectionSetting_YdbDatabase)(nil),
+		(*connectionSetting_ClickhouseCluster)(nil),
+		(*connectionSetting_DataStreams)(nil),
+		(*connectionSetting_ObjectStorage)(nil),
+		(*connectionSetting_Monitoring)(nil),
+		(*connectionSetting_PostgresqlCluster)(nil),
+		(*connectionSetting_GreenplumCluster)(nil),
+		(*connectionSetting_MysqlCluster)(nil),
+		(*connectionSetting_Logging)(nil),
+		(*connectionSetting_Iceberg)(nil),
+	}
+	file_draft_protos_ydb_federated_query_proto_msgTypes[86].OneofWrappers = []any{
+		(*bindingSetting_DataStreams)(nil),
+		(*bindingSetting_ObjectStorage)(nil),
+	}
+	file_draft_protos_ydb_federated_query_proto_msgTypes[113].OneofWrappers = []any{}
+	file_draft_protos_ydb_federated_query_proto_msgTypes[114].OneofWrappers = []any{}
+	file_draft_protos_ydb_federated_query_proto_msgTypes[115].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_draft_protos_ydb_federated_query_proto_rawDesc), len(file_draft_protos_ydb_federated_query_proto_rawDesc)),
 			NumEnums:      10,
-			NumMessages:   109,
+			NumMessages:   122,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

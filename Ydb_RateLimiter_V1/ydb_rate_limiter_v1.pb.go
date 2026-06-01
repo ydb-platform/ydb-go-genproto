@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: ydb_rate_limiter_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_RateLimiter_V1
 
 import (
 	Ydb_RateLimiter "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_RateLimiter"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,15 +25,15 @@ var File_ydb_rate_limiter_v1_proto protoreflect.FileDescriptor
 
 const file_ydb_rate_limiter_v1_proto_rawDesc = "" +
 	"\n" +
-	"\x19ydb_rate_limiter_v1.proto\x12\x12Ydb.RateLimiter.V1\x1a\x1dprotos/ydb_rate_limiter.proto\x1a!google/protobuf/go_features.proto2\xe3\x04\n" +
+	"\x19ydb_rate_limiter_v1.proto\x12\x12Ydb.RateLimiter.V1\x1a\x1dprotos/ydb_rate_limiter.proto2\xe3\x04\n" +
 	"\x12RateLimiterService\x12a\n" +
 	"\x0eCreateResource\x12&.Ydb.RateLimiter.CreateResourceRequest\x1a'.Ydb.RateLimiter.CreateResourceResponse\x12^\n" +
 	"\rAlterResource\x12%.Ydb.RateLimiter.AlterResourceRequest\x1a&.Ydb.RateLimiter.AlterResourceResponse\x12[\n" +
 	"\fDropResource\x12$.Ydb.RateLimiter.DropResourceRequest\x1a%.Ydb.RateLimiter.DropResourceResponse\x12^\n" +
 	"\rListResources\x12%.Ydb.RateLimiter.ListResourcesRequest\x1a&.Ydb.RateLimiter.ListResourcesResponse\x12g\n" +
 	"\x10DescribeResource\x12(.Ydb.RateLimiter.DescribeResourceRequest\x1a).Ydb.RateLimiter.DescribeResourceResponse\x12d\n" +
-	"\x0fAcquireResource\x12'.Ydb.RateLimiter.AcquireResourceRequest\x1a(.Ydb.RateLimiter.AcquireResourceResponseBw\n" +
-	"\x1etech.ydb.proto.rate_limiter.v1B\x0fRateLimiterGrpcP\x01Z:github.com/ydb-platform/ydb-go-genproto/Ydb_RateLimiter_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x0fAcquireResource\x12'.Ydb.RateLimiter.AcquireResourceRequest\x1a(.Ydb.RateLimiter.AcquireResourceResponseBo\n" +
+	"\x1etech.ydb.proto.rate_limiter.v1B\x0fRateLimiterGrpcP\x01Z:github.com/ydb-platform/ydb-go-genproto/Ydb_RateLimiter_V1b\x06proto3"
 
 var file_ydb_rate_limiter_v1_proto_goTypes = []any{
 	(*Ydb_RateLimiter.CreateResourceRequest)(nil),    // 0: Ydb.RateLimiter.CreateResourceRequest

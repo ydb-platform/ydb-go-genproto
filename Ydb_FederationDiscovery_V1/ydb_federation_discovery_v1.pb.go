@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: ydb_federation_discovery_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_FederationDiscovery_V1
 
 import (
 	Ydb_FederationDiscovery "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_FederationDiscovery"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,10 +25,10 @@ var File_ydb_federation_discovery_v1_proto protoreflect.FileDescriptor
 
 const file_ydb_federation_discovery_v1_proto_rawDesc = "" +
 	"\n" +
-	"!ydb_federation_discovery_v1.proto\x12\x1aYdb.FederationDiscovery.V1\x1a%protos/ydb_federation_discovery.proto\x1a!google/protobuf/go_features.proto2\xab\x01\n" +
+	"!ydb_federation_discovery_v1.proto\x12\x1aYdb.FederationDiscovery.V1\x1a%protos/ydb_federation_discovery.proto2\xab\x01\n" +
 	"\x1aFederationDiscoveryService\x12\x8c\x01\n" +
-	"\x17ListFederationDatabases\x127.Ydb.FederationDiscovery.ListFederationDatabasesRequest\x1a8.Ydb.FederationDiscovery.ListFederationDatabasesResponseBt\n" +
-	"&tech.ydb.proto.federation.discovery.v1ZBgithub.com/ydb-platform/ydb-go-genproto/Ydb_FederationDiscovery_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x17ListFederationDatabases\x127.Ydb.FederationDiscovery.ListFederationDatabasesRequest\x1a8.Ydb.FederationDiscovery.ListFederationDatabasesResponseBl\n" +
+	"&tech.ydb.proto.federation.discovery.v1ZBgithub.com/ydb-platform/ydb-go-genproto/Ydb_FederationDiscovery_V1b\x06proto3"
 
 var file_ydb_federation_discovery_v1_proto_goTypes = []any{
 	(*Ydb_FederationDiscovery.ListFederationDatabasesRequest)(nil),  // 0: Ydb.FederationDiscovery.ListFederationDatabasesRequest

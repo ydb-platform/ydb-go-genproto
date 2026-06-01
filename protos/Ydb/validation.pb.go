@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: protos/annotations/validation.proto
 
-//go:build !protoopaque
-
 package Ydb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -25,18 +22,10 @@ const (
 )
 
 type Limit struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Types that are valid to be assigned to Kind:
-	//
-	//	*Limit_Range_
-	//	*Limit_Lt
-	//	*Limit_Le
-	//	*Limit_Eq
-	//	*Limit_Ge
-	//	*Limit_Gt
-	Kind          isLimit_Kind `protobuf_oneof:"kind"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Kind isLimit_Kind           `protobuf_oneof:"kind"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *Limit) Reset() {
@@ -64,16 +53,9 @@ func (x *Limit) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Limit) GetKind() isLimit_Kind {
-	if x != nil {
-		return x.Kind
-	}
-	return nil
-}
-
 func (x *Limit) GetRange() *Limit_Range {
 	if x != nil {
-		if x, ok := x.Kind.(*Limit_Range_); ok {
+		if x, ok := x.xxx_hidden_Kind.(*limit_Range_); ok {
 			return x.Range
 		}
 	}
@@ -82,7 +64,7 @@ func (x *Limit) GetRange() *Limit_Range {
 
 func (x *Limit) GetLt() uint32 {
 	if x != nil {
-		if x, ok := x.Kind.(*Limit_Lt); ok {
+		if x, ok := x.xxx_hidden_Kind.(*limit_Lt); ok {
 			return x.Lt
 		}
 	}
@@ -91,7 +73,7 @@ func (x *Limit) GetLt() uint32 {
 
 func (x *Limit) GetLe() uint32 {
 	if x != nil {
-		if x, ok := x.Kind.(*Limit_Le); ok {
+		if x, ok := x.xxx_hidden_Kind.(*limit_Le); ok {
 			return x.Le
 		}
 	}
@@ -100,7 +82,7 @@ func (x *Limit) GetLe() uint32 {
 
 func (x *Limit) GetEq() uint32 {
 	if x != nil {
-		if x, ok := x.Kind.(*Limit_Eq); ok {
+		if x, ok := x.xxx_hidden_Kind.(*limit_Eq); ok {
 			return x.Eq
 		}
 	}
@@ -109,7 +91,7 @@ func (x *Limit) GetEq() uint32 {
 
 func (x *Limit) GetGe() uint32 {
 	if x != nil {
-		if x, ok := x.Kind.(*Limit_Ge); ok {
+		if x, ok := x.xxx_hidden_Kind.(*limit_Ge); ok {
 			return x.Ge
 		}
 	}
@@ -118,7 +100,7 @@ func (x *Limit) GetGe() uint32 {
 
 func (x *Limit) GetGt() uint32 {
 	if x != nil {
-		if x, ok := x.Kind.(*Limit_Gt); ok {
+		if x, ok := x.xxx_hidden_Kind.(*limit_Gt); ok {
 			return x.Gt
 		}
 	}
@@ -127,44 +109,44 @@ func (x *Limit) GetGt() uint32 {
 
 func (x *Limit) SetRange(v *Limit_Range) {
 	if v == nil {
-		x.Kind = nil
+		x.xxx_hidden_Kind = nil
 		return
 	}
-	x.Kind = &Limit_Range_{v}
+	x.xxx_hidden_Kind = &limit_Range_{v}
 }
 
 func (x *Limit) SetLt(v uint32) {
-	x.Kind = &Limit_Lt{v}
+	x.xxx_hidden_Kind = &limit_Lt{v}
 }
 
 func (x *Limit) SetLe(v uint32) {
-	x.Kind = &Limit_Le{v}
+	x.xxx_hidden_Kind = &limit_Le{v}
 }
 
 func (x *Limit) SetEq(v uint32) {
-	x.Kind = &Limit_Eq{v}
+	x.xxx_hidden_Kind = &limit_Eq{v}
 }
 
 func (x *Limit) SetGe(v uint32) {
-	x.Kind = &Limit_Ge{v}
+	x.xxx_hidden_Kind = &limit_Ge{v}
 }
 
 func (x *Limit) SetGt(v uint32) {
-	x.Kind = &Limit_Gt{v}
+	x.xxx_hidden_Kind = &limit_Gt{v}
 }
 
 func (x *Limit) HasKind() bool {
 	if x == nil {
 		return false
 	}
-	return x.Kind != nil
+	return x.xxx_hidden_Kind != nil
 }
 
 func (x *Limit) HasRange() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Kind.(*Limit_Range_)
+	_, ok := x.xxx_hidden_Kind.(*limit_Range_)
 	return ok
 }
 
@@ -172,7 +154,7 @@ func (x *Limit) HasLt() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Kind.(*Limit_Lt)
+	_, ok := x.xxx_hidden_Kind.(*limit_Lt)
 	return ok
 }
 
@@ -180,7 +162,7 @@ func (x *Limit) HasLe() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Kind.(*Limit_Le)
+	_, ok := x.xxx_hidden_Kind.(*limit_Le)
 	return ok
 }
 
@@ -188,7 +170,7 @@ func (x *Limit) HasEq() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Kind.(*Limit_Eq)
+	_, ok := x.xxx_hidden_Kind.(*limit_Eq)
 	return ok
 }
 
@@ -196,7 +178,7 @@ func (x *Limit) HasGe() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Kind.(*Limit_Ge)
+	_, ok := x.xxx_hidden_Kind.(*limit_Ge)
 	return ok
 }
 
@@ -204,47 +186,47 @@ func (x *Limit) HasGt() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Kind.(*Limit_Gt)
+	_, ok := x.xxx_hidden_Kind.(*limit_Gt)
 	return ok
 }
 
 func (x *Limit) ClearKind() {
-	x.Kind = nil
+	x.xxx_hidden_Kind = nil
 }
 
 func (x *Limit) ClearRange() {
-	if _, ok := x.Kind.(*Limit_Range_); ok {
-		x.Kind = nil
+	if _, ok := x.xxx_hidden_Kind.(*limit_Range_); ok {
+		x.xxx_hidden_Kind = nil
 	}
 }
 
 func (x *Limit) ClearLt() {
-	if _, ok := x.Kind.(*Limit_Lt); ok {
-		x.Kind = nil
+	if _, ok := x.xxx_hidden_Kind.(*limit_Lt); ok {
+		x.xxx_hidden_Kind = nil
 	}
 }
 
 func (x *Limit) ClearLe() {
-	if _, ok := x.Kind.(*Limit_Le); ok {
-		x.Kind = nil
+	if _, ok := x.xxx_hidden_Kind.(*limit_Le); ok {
+		x.xxx_hidden_Kind = nil
 	}
 }
 
 func (x *Limit) ClearEq() {
-	if _, ok := x.Kind.(*Limit_Eq); ok {
-		x.Kind = nil
+	if _, ok := x.xxx_hidden_Kind.(*limit_Eq); ok {
+		x.xxx_hidden_Kind = nil
 	}
 }
 
 func (x *Limit) ClearGe() {
-	if _, ok := x.Kind.(*Limit_Ge); ok {
-		x.Kind = nil
+	if _, ok := x.xxx_hidden_Kind.(*limit_Ge); ok {
+		x.xxx_hidden_Kind = nil
 	}
 }
 
 func (x *Limit) ClearGt() {
-	if _, ok := x.Kind.(*Limit_Gt); ok {
-		x.Kind = nil
+	if _, ok := x.xxx_hidden_Kind.(*limit_Gt); ok {
+		x.xxx_hidden_Kind = nil
 	}
 }
 
@@ -260,18 +242,18 @@ func (x *Limit) WhichKind() case_Limit_Kind {
 	if x == nil {
 		return Limit_Kind_not_set_case
 	}
-	switch x.Kind.(type) {
-	case *Limit_Range_:
+	switch x.xxx_hidden_Kind.(type) {
+	case *limit_Range_:
 		return Limit_Range_case
-	case *Limit_Lt:
+	case *limit_Lt:
 		return Limit_Lt_case
-	case *Limit_Le:
+	case *limit_Le:
 		return Limit_Le_case
-	case *Limit_Eq:
+	case *limit_Eq:
 		return Limit_Eq_case
-	case *Limit_Ge:
+	case *limit_Ge:
 		return Limit_Ge_case
-	case *Limit_Gt:
+	case *limit_Gt:
 		return Limit_Gt_case
 	default:
 		return Limit_Kind_not_set_case
@@ -281,14 +263,14 @@ func (x *Limit) WhichKind() case_Limit_Kind {
 type Limit_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof Kind:
+	// Fields of oneof xxx_hidden_Kind:
 	Range *Limit_Range
 	Lt    *uint32
 	Le    *uint32
 	Eq    *uint32
 	Ge    *uint32
 	Gt    *uint32
-	// -- end of Kind
+	// -- end of xxx_hidden_Kind
 }
 
 func (b0 Limit_builder) Build() *Limit {
@@ -296,22 +278,22 @@ func (b0 Limit_builder) Build() *Limit {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Range != nil {
-		x.Kind = &Limit_Range_{b.Range}
+		x.xxx_hidden_Kind = &limit_Range_{b.Range}
 	}
 	if b.Lt != nil {
-		x.Kind = &Limit_Lt{*b.Lt}
+		x.xxx_hidden_Kind = &limit_Lt{*b.Lt}
 	}
 	if b.Le != nil {
-		x.Kind = &Limit_Le{*b.Le}
+		x.xxx_hidden_Kind = &limit_Le{*b.Le}
 	}
 	if b.Eq != nil {
-		x.Kind = &Limit_Eq{*b.Eq}
+		x.xxx_hidden_Kind = &limit_Eq{*b.Eq}
 	}
 	if b.Ge != nil {
-		x.Kind = &Limit_Ge{*b.Ge}
+		x.xxx_hidden_Kind = &limit_Ge{*b.Ge}
 	}
 	if b.Gt != nil {
-		x.Kind = &Limit_Gt{*b.Gt}
+		x.xxx_hidden_Kind = &limit_Gt{*b.Gt}
 	}
 	return m0
 }
@@ -330,48 +312,48 @@ type isLimit_Kind interface {
 	isLimit_Kind()
 }
 
-type Limit_Range_ struct {
-	Range *Limit_Range `protobuf:"bytes,1,opt,name=range,oneof"`
+type limit_Range_ struct {
+	Range *Limit_Range `protobuf:"bytes,1,opt,name=range,proto3,oneof"`
 }
 
-type Limit_Lt struct {
-	Lt uint32 `protobuf:"varint,2,opt,name=lt,oneof"`
+type limit_Lt struct {
+	Lt uint32 `protobuf:"varint,2,opt,name=lt,proto3,oneof"`
 }
 
-type Limit_Le struct {
-	Le uint32 `protobuf:"varint,3,opt,name=le,oneof"`
+type limit_Le struct {
+	Le uint32 `protobuf:"varint,3,opt,name=le,proto3,oneof"`
 }
 
-type Limit_Eq struct {
-	Eq uint32 `protobuf:"varint,4,opt,name=eq,oneof"`
+type limit_Eq struct {
+	Eq uint32 `protobuf:"varint,4,opt,name=eq,proto3,oneof"`
 }
 
-type Limit_Ge struct {
-	Ge uint32 `protobuf:"varint,5,opt,name=ge,oneof"`
+type limit_Ge struct {
+	Ge uint32 `protobuf:"varint,5,opt,name=ge,proto3,oneof"`
 }
 
-type Limit_Gt struct {
-	Gt uint32 `protobuf:"varint,6,opt,name=gt,oneof"`
+type limit_Gt struct {
+	Gt uint32 `protobuf:"varint,6,opt,name=gt,proto3,oneof"`
 }
 
-func (*Limit_Range_) isLimit_Kind() {}
+func (*limit_Range_) isLimit_Kind() {}
 
-func (*Limit_Lt) isLimit_Kind() {}
+func (*limit_Lt) isLimit_Kind() {}
 
-func (*Limit_Le) isLimit_Kind() {}
+func (*limit_Le) isLimit_Kind() {}
 
-func (*Limit_Eq) isLimit_Kind() {}
+func (*limit_Eq) isLimit_Kind() {}
 
-func (*Limit_Ge) isLimit_Kind() {}
+func (*limit_Ge) isLimit_Kind() {}
 
-func (*Limit_Gt) isLimit_Kind() {}
+func (*limit_Gt) isLimit_Kind() {}
 
 type MapKey struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Length        *Limit                 `protobuf:"bytes,1,opt,name=length" json:"length,omitempty"`
-	Value         *string                `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Length *Limit                 `protobuf:"bytes,1,opt,name=length,proto3"`
+	xxx_hidden_Value  string                 `protobuf:"bytes,2,opt,name=value,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *MapKey) Reset() {
@@ -401,70 +383,59 @@ func (x *MapKey) ProtoReflect() protoreflect.Message {
 
 func (x *MapKey) GetLength() *Limit {
 	if x != nil {
-		return x.Length
+		return x.xxx_hidden_Length
 	}
 	return nil
 }
 
 func (x *MapKey) GetValue() string {
-	if x != nil && x.Value != nil {
-		return *x.Value
+	if x != nil {
+		return x.xxx_hidden_Value
 	}
 	return ""
 }
 
 func (x *MapKey) SetLength(v *Limit) {
-	x.Length = v
+	x.xxx_hidden_Length = v
 }
 
 func (x *MapKey) SetValue(v string) {
-	x.Value = &v
+	x.xxx_hidden_Value = v
 }
 
 func (x *MapKey) HasLength() bool {
 	if x == nil {
 		return false
 	}
-	return x.Length != nil
-}
-
-func (x *MapKey) HasValue() bool {
-	if x == nil {
-		return false
-	}
-	return x.Value != nil
+	return x.xxx_hidden_Length != nil
 }
 
 func (x *MapKey) ClearLength() {
-	x.Length = nil
-}
-
-func (x *MapKey) ClearValue() {
-	x.Value = nil
+	x.xxx_hidden_Length = nil
 }
 
 type MapKey_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Length *Limit
-	Value  *string
+	Value  string
 }
 
 func (b0 MapKey_builder) Build() *MapKey {
 	m0 := &MapKey{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Length = b.Length
-	x.Value = b.Value
+	x.xxx_hidden_Length = b.Length
+	x.xxx_hidden_Value = b.Value
 	return m0
 }
 
 type Limit_Range struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Min           *uint32                `protobuf:"varint,1,opt,name=min" json:"min,omitempty"`
-	Max           *uint32                `protobuf:"varint,2,opt,name=max" json:"max,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Min uint32                 `protobuf:"varint,1,opt,name=min,proto3"`
+	xxx_hidden_Max uint32                 `protobuf:"varint,2,opt,name=max,proto3"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *Limit_Range) Reset() {
@@ -493,62 +464,40 @@ func (x *Limit_Range) ProtoReflect() protoreflect.Message {
 }
 
 func (x *Limit_Range) GetMin() uint32 {
-	if x != nil && x.Min != nil {
-		return *x.Min
+	if x != nil {
+		return x.xxx_hidden_Min
 	}
 	return 0
 }
 
 func (x *Limit_Range) GetMax() uint32 {
-	if x != nil && x.Max != nil {
-		return *x.Max
+	if x != nil {
+		return x.xxx_hidden_Max
 	}
 	return 0
 }
 
 func (x *Limit_Range) SetMin(v uint32) {
-	x.Min = &v
+	x.xxx_hidden_Min = v
 }
 
 func (x *Limit_Range) SetMax(v uint32) {
-	x.Max = &v
-}
-
-func (x *Limit_Range) HasMin() bool {
-	if x == nil {
-		return false
-	}
-	return x.Min != nil
-}
-
-func (x *Limit_Range) HasMax() bool {
-	if x == nil {
-		return false
-	}
-	return x.Max != nil
-}
-
-func (x *Limit_Range) ClearMin() {
-	x.Min = nil
-}
-
-func (x *Limit_Range) ClearMax() {
-	x.Max = nil
+	x.xxx_hidden_Max = v
 }
 
 type Limit_Range_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Min *uint32
-	Max *uint32
+	Min uint32
+	Max uint32
 }
 
 func (b0 Limit_Range_builder) Build() *Limit_Range {
 	m0 := &Limit_Range{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Min = b.Min
-	x.Max = b.Max
+	x.xxx_hidden_Min = b.Min
+	x.xxx_hidden_Max = b.Max
 	return m0
 }
 
@@ -613,7 +562,7 @@ var File_protos_annotations_validation_proto protoreflect.FileDescriptor
 
 const file_protos_annotations_validation_proto_rawDesc = "" +
 	"\n" +
-	"#protos/annotations/validation.proto\x12\x03Ydb\x1a google/protobuf/descriptor.proto\x1a!google/protobuf/go_features.proto\"\xc0\x01\n" +
+	"#protos/annotations/validation.proto\x12\x03Ydb\x1a google/protobuf/descriptor.proto\"\xc0\x01\n" +
 	"\x05Limit\x12(\n" +
 	"\x05range\x18\x01 \x01(\v2\x10.Ydb.Limit.RangeH\x00R\x05range\x12\x10\n" +
 	"\x02lt\x18\x02 \x01(\rH\x00R\x02lt\x12\x10\n" +
@@ -635,8 +584,8 @@ const file_protos_annotations_validation_proto_rawDesc = "" +
 	"\x06length\x12\x1d.google.protobuf.FieldOptions\x18\xe4\xac\x05 \x01(\v2\n" +
 	".Ydb.LimitR\x06length:E\n" +
 	"\amap_key\x12\x1d.google.protobuf.FieldOptions\x18\xe5\xac\x05 \x01(\v2\v.Ydb.MapKeyR\x06mapKey:5\n" +
-	"\x05value\x12\x1d.google.protobuf.FieldOptions\x18\xe6\xac\x05 \x01(\tR\x05valueBO\n" +
-	"\x0etech.ydb.protoZ2github.com/ydb-platform/ydb-go-genproto/protos/Ydb\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x05value\x12\x1d.google.protobuf.FieldOptions\x18\xe6\xac\x05 \x01(\tR\x05valueBG\n" +
+	"\x0etech.ydb.protoZ2github.com/ydb-platform/ydb-go-genproto/protos/Ydb\xf8\x01\x01b\x06proto3"
 
 var file_protos_annotations_validation_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_protos_annotations_validation_proto_goTypes = []any{
@@ -669,12 +618,12 @@ func file_protos_annotations_validation_proto_init() {
 		return
 	}
 	file_protos_annotations_validation_proto_msgTypes[0].OneofWrappers = []any{
-		(*Limit_Range_)(nil),
-		(*Limit_Lt)(nil),
-		(*Limit_Le)(nil),
-		(*Limit_Eq)(nil),
-		(*Limit_Ge)(nil),
-		(*Limit_Gt)(nil),
+		(*limit_Range_)(nil),
+		(*limit_Lt)(nil),
+		(*limit_Le)(nil),
+		(*limit_Eq)(nil),
+		(*limit_Ge)(nil),
+		(*limit_Gt)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

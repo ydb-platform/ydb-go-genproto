@@ -4,8 +4,6 @@
 // 	protoc        v6.30.2
 // source: protos/ydb_coordination.proto
 
-//go:build !protoopaque
-
 package Ydb_Coordination
 
 import (
@@ -15,7 +13,6 @@ import (
 	Ydb_Scheme "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Scheme"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -128,7 +125,7 @@ func (x RateLimiterCountersMode) Number() protoreflect.EnumNumber {
 // *
 // Stub for unsupported messages
 type Unsupported struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -173,21 +170,15 @@ func (b0 Unsupported_builder) Build() *Unsupported {
 // *
 // Configuration settings for a coordination node
 type Config struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Initialized on creation, cannot be set
-	Path *string `protobuf:"bytes,1,opt,name=path" json:"path,omitempty"`
-	// Period in milliseconds for self-checks (default 1 second)
-	SelfCheckPeriodMillis *uint32 `protobuf:"varint,2,opt,name=self_check_period_millis,json=selfCheckPeriodMillis" json:"self_check_period_millis,omitempty"`
-	// Grace period for sessions on leader change (default 10 seconds)
-	SessionGracePeriodMillis *uint32 `protobuf:"varint,3,opt,name=session_grace_period_millis,json=sessionGracePeriodMillis" json:"session_grace_period_millis,omitempty"`
-	// Concistency mode for read operations
-	ReadConsistencyMode *ConsistencyMode `protobuf:"varint,4,opt,name=read_consistency_mode,json=readConsistencyMode,enum=Ydb.Coordination.ConsistencyMode" json:"read_consistency_mode,omitempty"`
-	// Consistency mode for attach operations
-	AttachConsistencyMode *ConsistencyMode `protobuf:"varint,5,opt,name=attach_consistency_mode,json=attachConsistencyMode,enum=Ydb.Coordination.ConsistencyMode" json:"attach_consistency_mode,omitempty"`
-	// Rate limiter counters mode
-	RateLimiterCountersMode *RateLimiterCountersMode `protobuf:"varint,6,opt,name=rate_limiter_counters_mode,json=rateLimiterCountersMode,enum=Ydb.Coordination.RateLimiterCountersMode" json:"rate_limiter_counters_mode,omitempty"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                               protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Path                     string                  `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_SelfCheckPeriodMillis    uint32                  `protobuf:"varint,2,opt,name=self_check_period_millis,json=selfCheckPeriodMillis,proto3"`
+	xxx_hidden_SessionGracePeriodMillis uint32                  `protobuf:"varint,3,opt,name=session_grace_period_millis,json=sessionGracePeriodMillis,proto3"`
+	xxx_hidden_ReadConsistencyMode      ConsistencyMode         `protobuf:"varint,4,opt,name=read_consistency_mode,json=readConsistencyMode,proto3,enum=Ydb.Coordination.ConsistencyMode"`
+	xxx_hidden_AttachConsistencyMode    ConsistencyMode         `protobuf:"varint,5,opt,name=attach_consistency_mode,json=attachConsistencyMode,proto3,enum=Ydb.Coordination.ConsistencyMode"`
+	xxx_hidden_RateLimiterCountersMode  RateLimiterCountersMode `protobuf:"varint,6,opt,name=rate_limiter_counters_mode,json=rateLimiterCountersMode,proto3,enum=Ydb.Coordination.RateLimiterCountersMode"`
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
 }
 
 func (x *Config) Reset() {
@@ -216,181 +207,111 @@ func (x *Config) ProtoReflect() protoreflect.Message {
 }
 
 func (x *Config) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *Config) GetSelfCheckPeriodMillis() uint32 {
-	if x != nil && x.SelfCheckPeriodMillis != nil {
-		return *x.SelfCheckPeriodMillis
+	if x != nil {
+		return x.xxx_hidden_SelfCheckPeriodMillis
 	}
 	return 0
 }
 
 func (x *Config) GetSessionGracePeriodMillis() uint32 {
-	if x != nil && x.SessionGracePeriodMillis != nil {
-		return *x.SessionGracePeriodMillis
+	if x != nil {
+		return x.xxx_hidden_SessionGracePeriodMillis
 	}
 	return 0
 }
 
 func (x *Config) GetReadConsistencyMode() ConsistencyMode {
-	if x != nil && x.ReadConsistencyMode != nil {
-		return *x.ReadConsistencyMode
+	if x != nil {
+		return x.xxx_hidden_ReadConsistencyMode
 	}
 	return ConsistencyMode_CONSISTENCY_MODE_UNSET
 }
 
 func (x *Config) GetAttachConsistencyMode() ConsistencyMode {
-	if x != nil && x.AttachConsistencyMode != nil {
-		return *x.AttachConsistencyMode
+	if x != nil {
+		return x.xxx_hidden_AttachConsistencyMode
 	}
 	return ConsistencyMode_CONSISTENCY_MODE_UNSET
 }
 
 func (x *Config) GetRateLimiterCountersMode() RateLimiterCountersMode {
-	if x != nil && x.RateLimiterCountersMode != nil {
-		return *x.RateLimiterCountersMode
+	if x != nil {
+		return x.xxx_hidden_RateLimiterCountersMode
 	}
 	return RateLimiterCountersMode_RATE_LIMITER_COUNTERS_MODE_UNSET
 }
 
 func (x *Config) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *Config) SetSelfCheckPeriodMillis(v uint32) {
-	x.SelfCheckPeriodMillis = &v
+	x.xxx_hidden_SelfCheckPeriodMillis = v
 }
 
 func (x *Config) SetSessionGracePeriodMillis(v uint32) {
-	x.SessionGracePeriodMillis = &v
+	x.xxx_hidden_SessionGracePeriodMillis = v
 }
 
 func (x *Config) SetReadConsistencyMode(v ConsistencyMode) {
-	x.ReadConsistencyMode = &v
+	x.xxx_hidden_ReadConsistencyMode = v
 }
 
 func (x *Config) SetAttachConsistencyMode(v ConsistencyMode) {
-	x.AttachConsistencyMode = &v
+	x.xxx_hidden_AttachConsistencyMode = v
 }
 
 func (x *Config) SetRateLimiterCountersMode(v RateLimiterCountersMode) {
-	x.RateLimiterCountersMode = &v
-}
-
-func (x *Config) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *Config) HasSelfCheckPeriodMillis() bool {
-	if x == nil {
-		return false
-	}
-	return x.SelfCheckPeriodMillis != nil
-}
-
-func (x *Config) HasSessionGracePeriodMillis() bool {
-	if x == nil {
-		return false
-	}
-	return x.SessionGracePeriodMillis != nil
-}
-
-func (x *Config) HasReadConsistencyMode() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReadConsistencyMode != nil
-}
-
-func (x *Config) HasAttachConsistencyMode() bool {
-	if x == nil {
-		return false
-	}
-	return x.AttachConsistencyMode != nil
-}
-
-func (x *Config) HasRateLimiterCountersMode() bool {
-	if x == nil {
-		return false
-	}
-	return x.RateLimiterCountersMode != nil
-}
-
-func (x *Config) ClearPath() {
-	x.Path = nil
-}
-
-func (x *Config) ClearSelfCheckPeriodMillis() {
-	x.SelfCheckPeriodMillis = nil
-}
-
-func (x *Config) ClearSessionGracePeriodMillis() {
-	x.SessionGracePeriodMillis = nil
-}
-
-func (x *Config) ClearReadConsistencyMode() {
-	x.ReadConsistencyMode = nil
-}
-
-func (x *Config) ClearAttachConsistencyMode() {
-	x.AttachConsistencyMode = nil
-}
-
-func (x *Config) ClearRateLimiterCountersMode() {
-	x.RateLimiterCountersMode = nil
+	x.xxx_hidden_RateLimiterCountersMode = v
 }
 
 type Config_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Initialized on creation, cannot be set
-	Path *string
+	Path string
 	// Period in milliseconds for self-checks (default 1 second)
-	SelfCheckPeriodMillis *uint32
+	SelfCheckPeriodMillis uint32
 	// Grace period for sessions on leader change (default 10 seconds)
-	SessionGracePeriodMillis *uint32
+	SessionGracePeriodMillis uint32
 	// Concistency mode for read operations
-	ReadConsistencyMode *ConsistencyMode
+	ReadConsistencyMode ConsistencyMode
 	// Consistency mode for attach operations
-	AttachConsistencyMode *ConsistencyMode
+	AttachConsistencyMode ConsistencyMode
 	// Rate limiter counters mode
-	RateLimiterCountersMode *RateLimiterCountersMode
+	RateLimiterCountersMode RateLimiterCountersMode
 }
 
 func (b0 Config_builder) Build() *Config {
 	m0 := &Config{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Path = b.Path
-	x.SelfCheckPeriodMillis = b.SelfCheckPeriodMillis
-	x.SessionGracePeriodMillis = b.SessionGracePeriodMillis
-	x.ReadConsistencyMode = b.ReadConsistencyMode
-	x.AttachConsistencyMode = b.AttachConsistencyMode
-	x.RateLimiterCountersMode = b.RateLimiterCountersMode
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_SelfCheckPeriodMillis = b.SelfCheckPeriodMillis
+	x.xxx_hidden_SessionGracePeriodMillis = b.SessionGracePeriodMillis
+	x.xxx_hidden_ReadConsistencyMode = b.ReadConsistencyMode
+	x.xxx_hidden_AttachConsistencyMode = b.AttachConsistencyMode
+	x.xxx_hidden_RateLimiterCountersMode = b.RateLimiterCountersMode
 	return m0
 }
 
 // *
 // Describes an active client session
 type SessionDescription struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Session id generated by the server
-	SessionId *uint64 `protobuf:"varint,1,opt,name=session_id,json=sessionId" json:"session_id,omitempty"`
-	// Expiration timeout of the session
-	TimeoutMillis *uint64 `protobuf:"varint,2,opt,name=timeout_millis,json=timeoutMillis" json:"timeout_millis,omitempty"`
-	// User-specified description of this session
-	Description *string `protobuf:"bytes,3,opt,name=description" json:"description,omitempty"`
-	// True if this session is currently attached to a client
-	Attached      *bool `protobuf:"varint,4,opt,name=attached" json:"attached,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId     uint64                 `protobuf:"varint,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TimeoutMillis uint64                 `protobuf:"varint,2,opt,name=timeout_millis,json=timeoutMillis,proto3"`
+	xxx_hidden_Description   string                 `protobuf:"bytes,3,opt,name=description,proto3"`
+	xxx_hidden_Attached      bool                   `protobuf:"varint,4,opt,name=attached,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *SessionDescription) Reset() {
@@ -419,133 +340,84 @@ func (x *SessionDescription) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionDescription) GetSessionId() uint64 {
-	if x != nil && x.SessionId != nil {
-		return *x.SessionId
+	if x != nil {
+		return x.xxx_hidden_SessionId
 	}
 	return 0
 }
 
 func (x *SessionDescription) GetTimeoutMillis() uint64 {
-	if x != nil && x.TimeoutMillis != nil {
-		return *x.TimeoutMillis
+	if x != nil {
+		return x.xxx_hidden_TimeoutMillis
 	}
 	return 0
 }
 
 func (x *SessionDescription) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
 func (x *SessionDescription) GetAttached() bool {
-	if x != nil && x.Attached != nil {
-		return *x.Attached
+	if x != nil {
+		return x.xxx_hidden_Attached
 	}
 	return false
 }
 
 func (x *SessionDescription) SetSessionId(v uint64) {
-	x.SessionId = &v
+	x.xxx_hidden_SessionId = v
 }
 
 func (x *SessionDescription) SetTimeoutMillis(v uint64) {
-	x.TimeoutMillis = &v
+	x.xxx_hidden_TimeoutMillis = v
 }
 
 func (x *SessionDescription) SetDescription(v string) {
-	x.Description = &v
+	x.xxx_hidden_Description = v
 }
 
 func (x *SessionDescription) SetAttached(v bool) {
-	x.Attached = &v
-}
-
-func (x *SessionDescription) HasSessionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.SessionId != nil
-}
-
-func (x *SessionDescription) HasTimeoutMillis() bool {
-	if x == nil {
-		return false
-	}
-	return x.TimeoutMillis != nil
-}
-
-func (x *SessionDescription) HasDescription() bool {
-	if x == nil {
-		return false
-	}
-	return x.Description != nil
-}
-
-func (x *SessionDescription) HasAttached() bool {
-	if x == nil {
-		return false
-	}
-	return x.Attached != nil
-}
-
-func (x *SessionDescription) ClearSessionId() {
-	x.SessionId = nil
-}
-
-func (x *SessionDescription) ClearTimeoutMillis() {
-	x.TimeoutMillis = nil
-}
-
-func (x *SessionDescription) ClearDescription() {
-	x.Description = nil
-}
-
-func (x *SessionDescription) ClearAttached() {
-	x.Attached = nil
+	x.xxx_hidden_Attached = v
 }
 
 type SessionDescription_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Session id generated by the server
-	SessionId *uint64
+	SessionId uint64
 	// Expiration timeout of the session
-	TimeoutMillis *uint64
+	TimeoutMillis uint64
 	// User-specified description of this session
-	Description *string
+	Description string
 	// True if this session is currently attached to a client
-	Attached *bool
+	Attached bool
 }
 
 func (b0 SessionDescription_builder) Build() *SessionDescription {
 	m0 := &SessionDescription{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.SessionId = b.SessionId
-	x.TimeoutMillis = b.TimeoutMillis
-	x.Description = b.Description
-	x.Attached = b.Attached
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TimeoutMillis = b.TimeoutMillis
+	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_Attached = b.Attached
 	return m0
 }
 
 // *
 // Describes an owner or a waiter of this semaphore
 type SemaphoreSession struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// A monotonically increasing id which determines locking order
-	OrderId *uint64 `protobuf:"varint,5,opt,name=order_id,json=orderId" json:"order_id,omitempty"`
-	// An id of the session which tried to acquire the semaphore
-	SessionId *uint64 `protobuf:"varint,1,opt,name=session_id,json=sessionId" json:"session_id,omitempty"`
-	// A timeout in milliseconds for operation in waiters queue
-	TimeoutMillis *uint64 `protobuf:"varint,2,opt,name=timeout_millis,json=timeoutMillis" json:"timeout_millis,omitempty"`
-	// Number of tokens for an acquire operation
-	Count *uint64 `protobuf:"varint,3,opt,name=count" json:"count,omitempty"`
-	// User-defined data attached to the acquire operation
-	Data          []byte `protobuf:"bytes,4,opt,name=data" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_OrderId       uint64                 `protobuf:"varint,5,opt,name=order_id,json=orderId,proto3"`
+	xxx_hidden_SessionId     uint64                 `protobuf:"varint,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TimeoutMillis uint64                 `protobuf:"varint,2,opt,name=timeout_millis,json=timeoutMillis,proto3"`
+	xxx_hidden_Count         uint64                 `protobuf:"varint,3,opt,name=count,proto3"`
+	xxx_hidden_Data          []byte                 `protobuf:"bytes,4,opt,name=data,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *SemaphoreSession) Reset() {
@@ -574,129 +446,74 @@ func (x *SemaphoreSession) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SemaphoreSession) GetOrderId() uint64 {
-	if x != nil && x.OrderId != nil {
-		return *x.OrderId
+	if x != nil {
+		return x.xxx_hidden_OrderId
 	}
 	return 0
 }
 
 func (x *SemaphoreSession) GetSessionId() uint64 {
-	if x != nil && x.SessionId != nil {
-		return *x.SessionId
+	if x != nil {
+		return x.xxx_hidden_SessionId
 	}
 	return 0
 }
 
 func (x *SemaphoreSession) GetTimeoutMillis() uint64 {
-	if x != nil && x.TimeoutMillis != nil {
-		return *x.TimeoutMillis
+	if x != nil {
+		return x.xxx_hidden_TimeoutMillis
 	}
 	return 0
 }
 
 func (x *SemaphoreSession) GetCount() uint64 {
-	if x != nil && x.Count != nil {
-		return *x.Count
+	if x != nil {
+		return x.xxx_hidden_Count
 	}
 	return 0
 }
 
 func (x *SemaphoreSession) GetData() []byte {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
 func (x *SemaphoreSession) SetOrderId(v uint64) {
-	x.OrderId = &v
+	x.xxx_hidden_OrderId = v
 }
 
 func (x *SemaphoreSession) SetSessionId(v uint64) {
-	x.SessionId = &v
+	x.xxx_hidden_SessionId = v
 }
 
 func (x *SemaphoreSession) SetTimeoutMillis(v uint64) {
-	x.TimeoutMillis = &v
+	x.xxx_hidden_TimeoutMillis = v
 }
 
 func (x *SemaphoreSession) SetCount(v uint64) {
-	x.Count = &v
+	x.xxx_hidden_Count = v
 }
 
 func (x *SemaphoreSession) SetData(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.Data = v
-}
-
-func (x *SemaphoreSession) HasOrderId() bool {
-	if x == nil {
-		return false
-	}
-	return x.OrderId != nil
-}
-
-func (x *SemaphoreSession) HasSessionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.SessionId != nil
-}
-
-func (x *SemaphoreSession) HasTimeoutMillis() bool {
-	if x == nil {
-		return false
-	}
-	return x.TimeoutMillis != nil
-}
-
-func (x *SemaphoreSession) HasCount() bool {
-	if x == nil {
-		return false
-	}
-	return x.Count != nil
-}
-
-func (x *SemaphoreSession) HasData() bool {
-	if x == nil {
-		return false
-	}
-	return x.Data != nil
-}
-
-func (x *SemaphoreSession) ClearOrderId() {
-	x.OrderId = nil
-}
-
-func (x *SemaphoreSession) ClearSessionId() {
-	x.SessionId = nil
-}
-
-func (x *SemaphoreSession) ClearTimeoutMillis() {
-	x.TimeoutMillis = nil
-}
-
-func (x *SemaphoreSession) ClearCount() {
-	x.Count = nil
-}
-
-func (x *SemaphoreSession) ClearData() {
-	x.Data = nil
+	x.xxx_hidden_Data = v
 }
 
 type SemaphoreSession_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// A monotonically increasing id which determines locking order
-	OrderId *uint64
+	OrderId uint64
 	// An id of the session which tried to acquire the semaphore
-	SessionId *uint64
+	SessionId uint64
 	// A timeout in milliseconds for operation in waiters queue
-	TimeoutMillis *uint64
+	TimeoutMillis uint64
 	// Number of tokens for an acquire operation
-	Count *uint64
+	Count uint64
 	// User-defined data attached to the acquire operation
 	Data []byte
 }
@@ -705,34 +522,27 @@ func (b0 SemaphoreSession_builder) Build() *SemaphoreSession {
 	m0 := &SemaphoreSession{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OrderId = b.OrderId
-	x.SessionId = b.SessionId
-	x.TimeoutMillis = b.TimeoutMillis
-	x.Count = b.Count
-	x.Data = b.Data
+	x.xxx_hidden_OrderId = b.OrderId
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TimeoutMillis = b.TimeoutMillis
+	x.xxx_hidden_Count = b.Count
+	x.xxx_hidden_Data = b.Data
 	return m0
 }
 
 // *
 // Describes the state of a semaphore
 type SemaphoreDescription struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Name of the semaphore
-	Name *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	// User-defined data attached to the semaphore
-	Data []byte `protobuf:"bytes,2,opt,name=data" json:"data,omitempty"`
-	// Number of tokens currently acquired by owners
-	Count *uint64 `protobuf:"varint,7,opt,name=count" json:"count,omitempty"`
-	// Maximum number of tokens that may acquired
-	Limit *uint64 `protobuf:"varint,3,opt,name=limit" json:"limit,omitempty"`
-	// Ephemeral semaphores are deleted when released by all owners and waiters
-	Ephemeral *bool `protobuf:"varint,4,opt,name=ephemeral" json:"ephemeral,omitempty"`
-	// A list of current owners of the semaphore
-	Owners []*SemaphoreSession `protobuf:"bytes,5,rep,name=owners" json:"owners,omitempty"`
-	// A list of current waiters on the semaphore
-	Waiters       []*SemaphoreSession `protobuf:"bytes,6,rep,name=waiters" json:"waiters,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name      string                 `protobuf:"bytes,1,opt,name=name,proto3"`
+	xxx_hidden_Data      []byte                 `protobuf:"bytes,2,opt,name=data,proto3"`
+	xxx_hidden_Count     uint64                 `protobuf:"varint,7,opt,name=count,proto3"`
+	xxx_hidden_Limit     uint64                 `protobuf:"varint,3,opt,name=limit,proto3"`
+	xxx_hidden_Ephemeral bool                   `protobuf:"varint,4,opt,name=ephemeral,proto3"`
+	xxx_hidden_Owners    *[]*SemaphoreSession   `protobuf:"bytes,5,rep,name=owners,proto3"`
+	xxx_hidden_Waiters   *[]*SemaphoreSession   `protobuf:"bytes,6,rep,name=waiters,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *SemaphoreDescription) Reset() {
@@ -761,153 +571,102 @@ func (x *SemaphoreDescription) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SemaphoreDescription) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *SemaphoreDescription) GetData() []byte {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
 func (x *SemaphoreDescription) GetCount() uint64 {
-	if x != nil && x.Count != nil {
-		return *x.Count
+	if x != nil {
+		return x.xxx_hidden_Count
 	}
 	return 0
 }
 
 func (x *SemaphoreDescription) GetLimit() uint64 {
-	if x != nil && x.Limit != nil {
-		return *x.Limit
+	if x != nil {
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
 func (x *SemaphoreDescription) GetEphemeral() bool {
-	if x != nil && x.Ephemeral != nil {
-		return *x.Ephemeral
+	if x != nil {
+		return x.xxx_hidden_Ephemeral
 	}
 	return false
 }
 
 func (x *SemaphoreDescription) GetOwners() []*SemaphoreSession {
 	if x != nil {
-		return x.Owners
+		if x.xxx_hidden_Owners != nil {
+			return *x.xxx_hidden_Owners
+		}
 	}
 	return nil
 }
 
 func (x *SemaphoreDescription) GetWaiters() []*SemaphoreSession {
 	if x != nil {
-		return x.Waiters
+		if x.xxx_hidden_Waiters != nil {
+			return *x.xxx_hidden_Waiters
+		}
 	}
 	return nil
 }
 
 func (x *SemaphoreDescription) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *SemaphoreDescription) SetData(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.Data = v
+	x.xxx_hidden_Data = v
 }
 
 func (x *SemaphoreDescription) SetCount(v uint64) {
-	x.Count = &v
+	x.xxx_hidden_Count = v
 }
 
 func (x *SemaphoreDescription) SetLimit(v uint64) {
-	x.Limit = &v
+	x.xxx_hidden_Limit = v
 }
 
 func (x *SemaphoreDescription) SetEphemeral(v bool) {
-	x.Ephemeral = &v
+	x.xxx_hidden_Ephemeral = v
 }
 
 func (x *SemaphoreDescription) SetOwners(v []*SemaphoreSession) {
-	x.Owners = v
+	x.xxx_hidden_Owners = &v
 }
 
 func (x *SemaphoreDescription) SetWaiters(v []*SemaphoreSession) {
-	x.Waiters = v
-}
-
-func (x *SemaphoreDescription) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *SemaphoreDescription) HasData() bool {
-	if x == nil {
-		return false
-	}
-	return x.Data != nil
-}
-
-func (x *SemaphoreDescription) HasCount() bool {
-	if x == nil {
-		return false
-	}
-	return x.Count != nil
-}
-
-func (x *SemaphoreDescription) HasLimit() bool {
-	if x == nil {
-		return false
-	}
-	return x.Limit != nil
-}
-
-func (x *SemaphoreDescription) HasEphemeral() bool {
-	if x == nil {
-		return false
-	}
-	return x.Ephemeral != nil
-}
-
-func (x *SemaphoreDescription) ClearName() {
-	x.Name = nil
-}
-
-func (x *SemaphoreDescription) ClearData() {
-	x.Data = nil
-}
-
-func (x *SemaphoreDescription) ClearCount() {
-	x.Count = nil
-}
-
-func (x *SemaphoreDescription) ClearLimit() {
-	x.Limit = nil
-}
-
-func (x *SemaphoreDescription) ClearEphemeral() {
-	x.Ephemeral = nil
+	x.xxx_hidden_Waiters = &v
 }
 
 type SemaphoreDescription_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Name of the semaphore
-	Name *string
+	Name string
 	// User-defined data attached to the semaphore
 	Data []byte
 	// Number of tokens currently acquired by owners
-	Count *uint64
+	Count uint64
 	// Maximum number of tokens that may acquired
-	Limit *uint64
+	Limit uint64
 	// Ephemeral semaphores are deleted when released by all owners and waiters
-	Ephemeral *bool
+	Ephemeral bool
 	// A list of current owners of the semaphore
 	Owners []*SemaphoreSession
 	// A list of current waiters on the semaphore
@@ -918,40 +677,23 @@ func (b0 SemaphoreDescription_builder) Build() *SemaphoreDescription {
 	m0 := &SemaphoreDescription{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Name = b.Name
-	x.Data = b.Data
-	x.Count = b.Count
-	x.Limit = b.Limit
-	x.Ephemeral = b.Ephemeral
-	x.Owners = b.Owners
-	x.Waiters = b.Waiters
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Data = b.Data
+	x.xxx_hidden_Count = b.Count
+	x.xxx_hidden_Limit = b.Limit
+	x.xxx_hidden_Ephemeral = b.Ephemeral
+	x.xxx_hidden_Owners = &b.Owners
+	x.xxx_hidden_Waiters = &b.Waiters
 	return m0
 }
 
 // *
 // Session request message sent from client to server
 type SessionRequest struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Types that are valid to be assigned to Request:
-	//
-	//	*SessionRequest_Ping
-	//	*SessionRequest_Pong
-	//	*SessionRequest_SessionStart_
-	//	*SessionRequest_SessionStop_
-	//	*SessionRequest_Unsupported_5
-	//	*SessionRequest_Unsupported_6
-	//	*SessionRequest_AcquireSemaphore_
-	//	*SessionRequest_ReleaseSemaphore_
-	//	*SessionRequest_DescribeSemaphore_
-	//	*SessionRequest_CreateSemaphore_
-	//	*SessionRequest_UpdateSemaphore_
-	//	*SessionRequest_DeleteSemaphore_
-	//	*SessionRequest_Unsupported_13
-	//	*SessionRequest_Unsupported_14
-	//	*SessionRequest_Unsupported_15
-	Request       isSessionRequest_Request `protobuf_oneof:"request"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Request isSessionRequest_Request `protobuf_oneof:"request"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *SessionRequest) Reset() {
@@ -979,16 +721,9 @@ func (x *SessionRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *SessionRequest) GetRequest() isSessionRequest_Request {
-	if x != nil {
-		return x.Request
-	}
-	return nil
-}
-
 func (x *SessionRequest) GetPing() *SessionRequest_PingPong {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_Ping); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_Ping); ok {
 			return x.Ping
 		}
 	}
@@ -997,7 +732,7 @@ func (x *SessionRequest) GetPing() *SessionRequest_PingPong {
 
 func (x *SessionRequest) GetPong() *SessionRequest_PingPong {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_Pong); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_Pong); ok {
 			return x.Pong
 		}
 	}
@@ -1006,7 +741,7 @@ func (x *SessionRequest) GetPong() *SessionRequest_PingPong {
 
 func (x *SessionRequest) GetSessionStart() *SessionRequest_SessionStart {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_SessionStart_); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_SessionStart_); ok {
 			return x.SessionStart
 		}
 	}
@@ -1015,7 +750,7 @@ func (x *SessionRequest) GetSessionStart() *SessionRequest_SessionStart {
 
 func (x *SessionRequest) GetSessionStop() *SessionRequest_SessionStop {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_SessionStop_); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_SessionStop_); ok {
 			return x.SessionStop
 		}
 	}
@@ -1024,7 +759,7 @@ func (x *SessionRequest) GetSessionStop() *SessionRequest_SessionStop {
 
 func (x *SessionRequest) GetUnsupported_5() *Unsupported {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_Unsupported_5); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_5); ok {
 			return x.Unsupported_5
 		}
 	}
@@ -1033,7 +768,7 @@ func (x *SessionRequest) GetUnsupported_5() *Unsupported {
 
 func (x *SessionRequest) GetUnsupported_6() *Unsupported {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_Unsupported_6); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_6); ok {
 			return x.Unsupported_6
 		}
 	}
@@ -1042,7 +777,7 @@ func (x *SessionRequest) GetUnsupported_6() *Unsupported {
 
 func (x *SessionRequest) GetAcquireSemaphore() *SessionRequest_AcquireSemaphore {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_AcquireSemaphore_); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_AcquireSemaphore_); ok {
 			return x.AcquireSemaphore
 		}
 	}
@@ -1051,7 +786,7 @@ func (x *SessionRequest) GetAcquireSemaphore() *SessionRequest_AcquireSemaphore 
 
 func (x *SessionRequest) GetReleaseSemaphore() *SessionRequest_ReleaseSemaphore {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_ReleaseSemaphore_); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_ReleaseSemaphore_); ok {
 			return x.ReleaseSemaphore
 		}
 	}
@@ -1060,7 +795,7 @@ func (x *SessionRequest) GetReleaseSemaphore() *SessionRequest_ReleaseSemaphore 
 
 func (x *SessionRequest) GetDescribeSemaphore() *SessionRequest_DescribeSemaphore {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_DescribeSemaphore_); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_DescribeSemaphore_); ok {
 			return x.DescribeSemaphore
 		}
 	}
@@ -1069,7 +804,7 @@ func (x *SessionRequest) GetDescribeSemaphore() *SessionRequest_DescribeSemaphor
 
 func (x *SessionRequest) GetCreateSemaphore() *SessionRequest_CreateSemaphore {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_CreateSemaphore_); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_CreateSemaphore_); ok {
 			return x.CreateSemaphore
 		}
 	}
@@ -1078,7 +813,7 @@ func (x *SessionRequest) GetCreateSemaphore() *SessionRequest_CreateSemaphore {
 
 func (x *SessionRequest) GetUpdateSemaphore() *SessionRequest_UpdateSemaphore {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_UpdateSemaphore_); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_UpdateSemaphore_); ok {
 			return x.UpdateSemaphore
 		}
 	}
@@ -1087,7 +822,7 @@ func (x *SessionRequest) GetUpdateSemaphore() *SessionRequest_UpdateSemaphore {
 
 func (x *SessionRequest) GetDeleteSemaphore() *SessionRequest_DeleteSemaphore {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_DeleteSemaphore_); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_DeleteSemaphore_); ok {
 			return x.DeleteSemaphore
 		}
 	}
@@ -1096,7 +831,7 @@ func (x *SessionRequest) GetDeleteSemaphore() *SessionRequest_DeleteSemaphore {
 
 func (x *SessionRequest) GetUnsupported_13() *Unsupported {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_Unsupported_13); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_13); ok {
 			return x.Unsupported_13
 		}
 	}
@@ -1105,7 +840,7 @@ func (x *SessionRequest) GetUnsupported_13() *Unsupported {
 
 func (x *SessionRequest) GetUnsupported_14() *Unsupported {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_Unsupported_14); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_14); ok {
 			return x.Unsupported_14
 		}
 	}
@@ -1114,7 +849,7 @@ func (x *SessionRequest) GetUnsupported_14() *Unsupported {
 
 func (x *SessionRequest) GetUnsupported_15() *Unsupported {
 	if x != nil {
-		if x, ok := x.Request.(*SessionRequest_Unsupported_15); ok {
+		if x, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_15); ok {
 			return x.Unsupported_15
 		}
 	}
@@ -1123,136 +858,136 @@ func (x *SessionRequest) GetUnsupported_15() *Unsupported {
 
 func (x *SessionRequest) SetPing(v *SessionRequest_PingPong) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_Ping{v}
+	x.xxx_hidden_Request = &sessionRequest_Ping{v}
 }
 
 func (x *SessionRequest) SetPong(v *SessionRequest_PingPong) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_Pong{v}
+	x.xxx_hidden_Request = &sessionRequest_Pong{v}
 }
 
 func (x *SessionRequest) SetSessionStart(v *SessionRequest_SessionStart) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_SessionStart_{v}
+	x.xxx_hidden_Request = &sessionRequest_SessionStart_{v}
 }
 
 func (x *SessionRequest) SetSessionStop(v *SessionRequest_SessionStop) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_SessionStop_{v}
+	x.xxx_hidden_Request = &sessionRequest_SessionStop_{v}
 }
 
 func (x *SessionRequest) SetUnsupported_5(v *Unsupported) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_Unsupported_5{v}
+	x.xxx_hidden_Request = &sessionRequest_Unsupported_5{v}
 }
 
 func (x *SessionRequest) SetUnsupported_6(v *Unsupported) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_Unsupported_6{v}
+	x.xxx_hidden_Request = &sessionRequest_Unsupported_6{v}
 }
 
 func (x *SessionRequest) SetAcquireSemaphore(v *SessionRequest_AcquireSemaphore) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_AcquireSemaphore_{v}
+	x.xxx_hidden_Request = &sessionRequest_AcquireSemaphore_{v}
 }
 
 func (x *SessionRequest) SetReleaseSemaphore(v *SessionRequest_ReleaseSemaphore) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_ReleaseSemaphore_{v}
+	x.xxx_hidden_Request = &sessionRequest_ReleaseSemaphore_{v}
 }
 
 func (x *SessionRequest) SetDescribeSemaphore(v *SessionRequest_DescribeSemaphore) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_DescribeSemaphore_{v}
+	x.xxx_hidden_Request = &sessionRequest_DescribeSemaphore_{v}
 }
 
 func (x *SessionRequest) SetCreateSemaphore(v *SessionRequest_CreateSemaphore) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_CreateSemaphore_{v}
+	x.xxx_hidden_Request = &sessionRequest_CreateSemaphore_{v}
 }
 
 func (x *SessionRequest) SetUpdateSemaphore(v *SessionRequest_UpdateSemaphore) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_UpdateSemaphore_{v}
+	x.xxx_hidden_Request = &sessionRequest_UpdateSemaphore_{v}
 }
 
 func (x *SessionRequest) SetDeleteSemaphore(v *SessionRequest_DeleteSemaphore) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_DeleteSemaphore_{v}
+	x.xxx_hidden_Request = &sessionRequest_DeleteSemaphore_{v}
 }
 
 func (x *SessionRequest) SetUnsupported_13(v *Unsupported) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_Unsupported_13{v}
+	x.xxx_hidden_Request = &sessionRequest_Unsupported_13{v}
 }
 
 func (x *SessionRequest) SetUnsupported_14(v *Unsupported) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_Unsupported_14{v}
+	x.xxx_hidden_Request = &sessionRequest_Unsupported_14{v}
 }
 
 func (x *SessionRequest) SetUnsupported_15(v *Unsupported) {
 	if v == nil {
-		x.Request = nil
+		x.xxx_hidden_Request = nil
 		return
 	}
-	x.Request = &SessionRequest_Unsupported_15{v}
+	x.xxx_hidden_Request = &sessionRequest_Unsupported_15{v}
 }
 
 func (x *SessionRequest) HasRequest() bool {
 	if x == nil {
 		return false
 	}
-	return x.Request != nil
+	return x.xxx_hidden_Request != nil
 }
 
 func (x *SessionRequest) HasPing() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_Ping)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_Ping)
 	return ok
 }
 
@@ -1260,7 +995,7 @@ func (x *SessionRequest) HasPong() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_Pong)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_Pong)
 	return ok
 }
 
@@ -1268,7 +1003,7 @@ func (x *SessionRequest) HasSessionStart() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_SessionStart_)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_SessionStart_)
 	return ok
 }
 
@@ -1276,7 +1011,7 @@ func (x *SessionRequest) HasSessionStop() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_SessionStop_)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_SessionStop_)
 	return ok
 }
 
@@ -1284,7 +1019,7 @@ func (x *SessionRequest) HasUnsupported_5() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_Unsupported_5)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_5)
 	return ok
 }
 
@@ -1292,7 +1027,7 @@ func (x *SessionRequest) HasUnsupported_6() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_Unsupported_6)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_6)
 	return ok
 }
 
@@ -1300,7 +1035,7 @@ func (x *SessionRequest) HasAcquireSemaphore() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_AcquireSemaphore_)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_AcquireSemaphore_)
 	return ok
 }
 
@@ -1308,7 +1043,7 @@ func (x *SessionRequest) HasReleaseSemaphore() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_ReleaseSemaphore_)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_ReleaseSemaphore_)
 	return ok
 }
 
@@ -1316,7 +1051,7 @@ func (x *SessionRequest) HasDescribeSemaphore() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_DescribeSemaphore_)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_DescribeSemaphore_)
 	return ok
 }
 
@@ -1324,7 +1059,7 @@ func (x *SessionRequest) HasCreateSemaphore() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_CreateSemaphore_)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_CreateSemaphore_)
 	return ok
 }
 
@@ -1332,7 +1067,7 @@ func (x *SessionRequest) HasUpdateSemaphore() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_UpdateSemaphore_)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_UpdateSemaphore_)
 	return ok
 }
 
@@ -1340,7 +1075,7 @@ func (x *SessionRequest) HasDeleteSemaphore() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_DeleteSemaphore_)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_DeleteSemaphore_)
 	return ok
 }
 
@@ -1348,7 +1083,7 @@ func (x *SessionRequest) HasUnsupported_13() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_Unsupported_13)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_13)
 	return ok
 }
 
@@ -1356,7 +1091,7 @@ func (x *SessionRequest) HasUnsupported_14() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_Unsupported_14)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_14)
 	return ok
 }
 
@@ -1364,101 +1099,101 @@ func (x *SessionRequest) HasUnsupported_15() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Request.(*SessionRequest_Unsupported_15)
+	_, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_15)
 	return ok
 }
 
 func (x *SessionRequest) ClearRequest() {
-	x.Request = nil
+	x.xxx_hidden_Request = nil
 }
 
 func (x *SessionRequest) ClearPing() {
-	if _, ok := x.Request.(*SessionRequest_Ping); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_Ping); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearPong() {
-	if _, ok := x.Request.(*SessionRequest_Pong); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_Pong); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearSessionStart() {
-	if _, ok := x.Request.(*SessionRequest_SessionStart_); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_SessionStart_); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearSessionStop() {
-	if _, ok := x.Request.(*SessionRequest_SessionStop_); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_SessionStop_); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearUnsupported_5() {
-	if _, ok := x.Request.(*SessionRequest_Unsupported_5); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_5); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearUnsupported_6() {
-	if _, ok := x.Request.(*SessionRequest_Unsupported_6); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_6); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearAcquireSemaphore() {
-	if _, ok := x.Request.(*SessionRequest_AcquireSemaphore_); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_AcquireSemaphore_); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearReleaseSemaphore() {
-	if _, ok := x.Request.(*SessionRequest_ReleaseSemaphore_); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_ReleaseSemaphore_); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearDescribeSemaphore() {
-	if _, ok := x.Request.(*SessionRequest_DescribeSemaphore_); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_DescribeSemaphore_); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearCreateSemaphore() {
-	if _, ok := x.Request.(*SessionRequest_CreateSemaphore_); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_CreateSemaphore_); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearUpdateSemaphore() {
-	if _, ok := x.Request.(*SessionRequest_UpdateSemaphore_); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_UpdateSemaphore_); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearDeleteSemaphore() {
-	if _, ok := x.Request.(*SessionRequest_DeleteSemaphore_); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_DeleteSemaphore_); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearUnsupported_13() {
-	if _, ok := x.Request.(*SessionRequest_Unsupported_13); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_13); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearUnsupported_14() {
-	if _, ok := x.Request.(*SessionRequest_Unsupported_14); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_14); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
 func (x *SessionRequest) ClearUnsupported_15() {
-	if _, ok := x.Request.(*SessionRequest_Unsupported_15); ok {
-		x.Request = nil
+	if _, ok := x.xxx_hidden_Request.(*sessionRequest_Unsupported_15); ok {
+		x.xxx_hidden_Request = nil
 	}
 }
 
@@ -1483,36 +1218,36 @@ func (x *SessionRequest) WhichRequest() case_SessionRequest_Request {
 	if x == nil {
 		return SessionRequest_Request_not_set_case
 	}
-	switch x.Request.(type) {
-	case *SessionRequest_Ping:
+	switch x.xxx_hidden_Request.(type) {
+	case *sessionRequest_Ping:
 		return SessionRequest_Ping_case
-	case *SessionRequest_Pong:
+	case *sessionRequest_Pong:
 		return SessionRequest_Pong_case
-	case *SessionRequest_SessionStart_:
+	case *sessionRequest_SessionStart_:
 		return SessionRequest_SessionStart_case
-	case *SessionRequest_SessionStop_:
+	case *sessionRequest_SessionStop_:
 		return SessionRequest_SessionStop_case
-	case *SessionRequest_Unsupported_5:
+	case *sessionRequest_Unsupported_5:
 		return SessionRequest_Unsupported_5_case
-	case *SessionRequest_Unsupported_6:
+	case *sessionRequest_Unsupported_6:
 		return SessionRequest_Unsupported_6_case
-	case *SessionRequest_AcquireSemaphore_:
+	case *sessionRequest_AcquireSemaphore_:
 		return SessionRequest_AcquireSemaphore_case
-	case *SessionRequest_ReleaseSemaphore_:
+	case *sessionRequest_ReleaseSemaphore_:
 		return SessionRequest_ReleaseSemaphore_case
-	case *SessionRequest_DescribeSemaphore_:
+	case *sessionRequest_DescribeSemaphore_:
 		return SessionRequest_DescribeSemaphore_case
-	case *SessionRequest_CreateSemaphore_:
+	case *sessionRequest_CreateSemaphore_:
 		return SessionRequest_CreateSemaphore_case
-	case *SessionRequest_UpdateSemaphore_:
+	case *sessionRequest_UpdateSemaphore_:
 		return SessionRequest_UpdateSemaphore_case
-	case *SessionRequest_DeleteSemaphore_:
+	case *sessionRequest_DeleteSemaphore_:
 		return SessionRequest_DeleteSemaphore_case
-	case *SessionRequest_Unsupported_13:
+	case *sessionRequest_Unsupported_13:
 		return SessionRequest_Unsupported_13_case
-	case *SessionRequest_Unsupported_14:
+	case *sessionRequest_Unsupported_14:
 		return SessionRequest_Unsupported_14_case
-	case *SessionRequest_Unsupported_15:
+	case *sessionRequest_Unsupported_15:
 		return SessionRequest_Unsupported_15_case
 	default:
 		return SessionRequest_Request_not_set_case
@@ -1522,7 +1257,7 @@ func (x *SessionRequest) WhichRequest() case_SessionRequest_Request {
 type SessionRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof Request:
+	// Fields of oneof xxx_hidden_Request:
 	Ping              *SessionRequest_PingPong
 	Pong              *SessionRequest_PingPong
 	SessionStart      *SessionRequest_SessionStart
@@ -1538,7 +1273,7 @@ type SessionRequest_builder struct {
 	Unsupported_13    *Unsupported
 	Unsupported_14    *Unsupported
 	Unsupported_15    *Unsupported
-	// -- end of Request
+	// -- end of xxx_hidden_Request
 }
 
 func (b0 SessionRequest_builder) Build() *SessionRequest {
@@ -1546,49 +1281,49 @@ func (b0 SessionRequest_builder) Build() *SessionRequest {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Ping != nil {
-		x.Request = &SessionRequest_Ping{b.Ping}
+		x.xxx_hidden_Request = &sessionRequest_Ping{b.Ping}
 	}
 	if b.Pong != nil {
-		x.Request = &SessionRequest_Pong{b.Pong}
+		x.xxx_hidden_Request = &sessionRequest_Pong{b.Pong}
 	}
 	if b.SessionStart != nil {
-		x.Request = &SessionRequest_SessionStart_{b.SessionStart}
+		x.xxx_hidden_Request = &sessionRequest_SessionStart_{b.SessionStart}
 	}
 	if b.SessionStop != nil {
-		x.Request = &SessionRequest_SessionStop_{b.SessionStop}
+		x.xxx_hidden_Request = &sessionRequest_SessionStop_{b.SessionStop}
 	}
 	if b.Unsupported_5 != nil {
-		x.Request = &SessionRequest_Unsupported_5{b.Unsupported_5}
+		x.xxx_hidden_Request = &sessionRequest_Unsupported_5{b.Unsupported_5}
 	}
 	if b.Unsupported_6 != nil {
-		x.Request = &SessionRequest_Unsupported_6{b.Unsupported_6}
+		x.xxx_hidden_Request = &sessionRequest_Unsupported_6{b.Unsupported_6}
 	}
 	if b.AcquireSemaphore != nil {
-		x.Request = &SessionRequest_AcquireSemaphore_{b.AcquireSemaphore}
+		x.xxx_hidden_Request = &sessionRequest_AcquireSemaphore_{b.AcquireSemaphore}
 	}
 	if b.ReleaseSemaphore != nil {
-		x.Request = &SessionRequest_ReleaseSemaphore_{b.ReleaseSemaphore}
+		x.xxx_hidden_Request = &sessionRequest_ReleaseSemaphore_{b.ReleaseSemaphore}
 	}
 	if b.DescribeSemaphore != nil {
-		x.Request = &SessionRequest_DescribeSemaphore_{b.DescribeSemaphore}
+		x.xxx_hidden_Request = &sessionRequest_DescribeSemaphore_{b.DescribeSemaphore}
 	}
 	if b.CreateSemaphore != nil {
-		x.Request = &SessionRequest_CreateSemaphore_{b.CreateSemaphore}
+		x.xxx_hidden_Request = &sessionRequest_CreateSemaphore_{b.CreateSemaphore}
 	}
 	if b.UpdateSemaphore != nil {
-		x.Request = &SessionRequest_UpdateSemaphore_{b.UpdateSemaphore}
+		x.xxx_hidden_Request = &sessionRequest_UpdateSemaphore_{b.UpdateSemaphore}
 	}
 	if b.DeleteSemaphore != nil {
-		x.Request = &SessionRequest_DeleteSemaphore_{b.DeleteSemaphore}
+		x.xxx_hidden_Request = &sessionRequest_DeleteSemaphore_{b.DeleteSemaphore}
 	}
 	if b.Unsupported_13 != nil {
-		x.Request = &SessionRequest_Unsupported_13{b.Unsupported_13}
+		x.xxx_hidden_Request = &sessionRequest_Unsupported_13{b.Unsupported_13}
 	}
 	if b.Unsupported_14 != nil {
-		x.Request = &SessionRequest_Unsupported_14{b.Unsupported_14}
+		x.xxx_hidden_Request = &sessionRequest_Unsupported_14{b.Unsupported_14}
 	}
 	if b.Unsupported_15 != nil {
-		x.Request = &SessionRequest_Unsupported_15{b.Unsupported_15}
+		x.xxx_hidden_Request = &sessionRequest_Unsupported_15{b.Unsupported_15}
 	}
 	return m0
 }
@@ -1607,123 +1342,103 @@ type isSessionRequest_Request interface {
 	isSessionRequest_Request()
 }
 
-type SessionRequest_Ping struct {
-	Ping *SessionRequest_PingPong `protobuf:"bytes,1,opt,name=ping,oneof"`
+type sessionRequest_Ping struct {
+	Ping *SessionRequest_PingPong `protobuf:"bytes,1,opt,name=ping,proto3,oneof"`
 }
 
-type SessionRequest_Pong struct {
-	Pong *SessionRequest_PingPong `protobuf:"bytes,2,opt,name=pong,oneof"`
+type sessionRequest_Pong struct {
+	Pong *SessionRequest_PingPong `protobuf:"bytes,2,opt,name=pong,proto3,oneof"`
 }
 
-type SessionRequest_SessionStart_ struct {
-	SessionStart *SessionRequest_SessionStart `protobuf:"bytes,3,opt,name=session_start,json=sessionStart,oneof"`
+type sessionRequest_SessionStart_ struct {
+	SessionStart *SessionRequest_SessionStart `protobuf:"bytes,3,opt,name=session_start,json=sessionStart,proto3,oneof"`
 }
 
-type SessionRequest_SessionStop_ struct {
-	SessionStop *SessionRequest_SessionStop `protobuf:"bytes,4,opt,name=session_stop,json=sessionStop,oneof"`
+type sessionRequest_SessionStop_ struct {
+	SessionStop *SessionRequest_SessionStop `protobuf:"bytes,4,opt,name=session_stop,json=sessionStop,proto3,oneof"`
 }
 
-type SessionRequest_Unsupported_5 struct {
-	Unsupported_5 *Unsupported `protobuf:"bytes,5,opt,name=unsupported_5,json=unsupported5,oneof"`
+type sessionRequest_Unsupported_5 struct {
+	Unsupported_5 *Unsupported `protobuf:"bytes,5,opt,name=unsupported_5,json=unsupported5,proto3,oneof"`
 }
 
-type SessionRequest_Unsupported_6 struct {
-	Unsupported_6 *Unsupported `protobuf:"bytes,6,opt,name=unsupported_6,json=unsupported6,oneof"`
+type sessionRequest_Unsupported_6 struct {
+	Unsupported_6 *Unsupported `protobuf:"bytes,6,opt,name=unsupported_6,json=unsupported6,proto3,oneof"`
 }
 
-type SessionRequest_AcquireSemaphore_ struct {
-	AcquireSemaphore *SessionRequest_AcquireSemaphore `protobuf:"bytes,7,opt,name=acquire_semaphore,json=acquireSemaphore,oneof"`
+type sessionRequest_AcquireSemaphore_ struct {
+	AcquireSemaphore *SessionRequest_AcquireSemaphore `protobuf:"bytes,7,opt,name=acquire_semaphore,json=acquireSemaphore,proto3,oneof"`
 }
 
-type SessionRequest_ReleaseSemaphore_ struct {
-	ReleaseSemaphore *SessionRequest_ReleaseSemaphore `protobuf:"bytes,8,opt,name=release_semaphore,json=releaseSemaphore,oneof"`
+type sessionRequest_ReleaseSemaphore_ struct {
+	ReleaseSemaphore *SessionRequest_ReleaseSemaphore `protobuf:"bytes,8,opt,name=release_semaphore,json=releaseSemaphore,proto3,oneof"`
 }
 
-type SessionRequest_DescribeSemaphore_ struct {
-	DescribeSemaphore *SessionRequest_DescribeSemaphore `protobuf:"bytes,9,opt,name=describe_semaphore,json=describeSemaphore,oneof"`
+type sessionRequest_DescribeSemaphore_ struct {
+	DescribeSemaphore *SessionRequest_DescribeSemaphore `protobuf:"bytes,9,opt,name=describe_semaphore,json=describeSemaphore,proto3,oneof"`
 }
 
-type SessionRequest_CreateSemaphore_ struct {
-	CreateSemaphore *SessionRequest_CreateSemaphore `protobuf:"bytes,10,opt,name=create_semaphore,json=createSemaphore,oneof"`
+type sessionRequest_CreateSemaphore_ struct {
+	CreateSemaphore *SessionRequest_CreateSemaphore `protobuf:"bytes,10,opt,name=create_semaphore,json=createSemaphore,proto3,oneof"`
 }
 
-type SessionRequest_UpdateSemaphore_ struct {
-	UpdateSemaphore *SessionRequest_UpdateSemaphore `protobuf:"bytes,11,opt,name=update_semaphore,json=updateSemaphore,oneof"`
+type sessionRequest_UpdateSemaphore_ struct {
+	UpdateSemaphore *SessionRequest_UpdateSemaphore `protobuf:"bytes,11,opt,name=update_semaphore,json=updateSemaphore,proto3,oneof"`
 }
 
-type SessionRequest_DeleteSemaphore_ struct {
-	DeleteSemaphore *SessionRequest_DeleteSemaphore `protobuf:"bytes,12,opt,name=delete_semaphore,json=deleteSemaphore,oneof"`
+type sessionRequest_DeleteSemaphore_ struct {
+	DeleteSemaphore *SessionRequest_DeleteSemaphore `protobuf:"bytes,12,opt,name=delete_semaphore,json=deleteSemaphore,proto3,oneof"`
 }
 
-type SessionRequest_Unsupported_13 struct {
-	Unsupported_13 *Unsupported `protobuf:"bytes,13,opt,name=unsupported_13,json=unsupported13,oneof"`
+type sessionRequest_Unsupported_13 struct {
+	Unsupported_13 *Unsupported `protobuf:"bytes,13,opt,name=unsupported_13,json=unsupported13,proto3,oneof"`
 }
 
-type SessionRequest_Unsupported_14 struct {
-	Unsupported_14 *Unsupported `protobuf:"bytes,14,opt,name=unsupported_14,json=unsupported14,oneof"`
+type sessionRequest_Unsupported_14 struct {
+	Unsupported_14 *Unsupported `protobuf:"bytes,14,opt,name=unsupported_14,json=unsupported14,proto3,oneof"`
 }
 
-type SessionRequest_Unsupported_15 struct {
-	Unsupported_15 *Unsupported `protobuf:"bytes,15,opt,name=unsupported_15,json=unsupported15,oneof"`
+type sessionRequest_Unsupported_15 struct {
+	Unsupported_15 *Unsupported `protobuf:"bytes,15,opt,name=unsupported_15,json=unsupported15,proto3,oneof"`
 }
 
-func (*SessionRequest_Ping) isSessionRequest_Request() {}
+func (*sessionRequest_Ping) isSessionRequest_Request() {}
 
-func (*SessionRequest_Pong) isSessionRequest_Request() {}
+func (*sessionRequest_Pong) isSessionRequest_Request() {}
 
-func (*SessionRequest_SessionStart_) isSessionRequest_Request() {}
+func (*sessionRequest_SessionStart_) isSessionRequest_Request() {}
 
-func (*SessionRequest_SessionStop_) isSessionRequest_Request() {}
+func (*sessionRequest_SessionStop_) isSessionRequest_Request() {}
 
-func (*SessionRequest_Unsupported_5) isSessionRequest_Request() {}
+func (*sessionRequest_Unsupported_5) isSessionRequest_Request() {}
 
-func (*SessionRequest_Unsupported_6) isSessionRequest_Request() {}
+func (*sessionRequest_Unsupported_6) isSessionRequest_Request() {}
 
-func (*SessionRequest_AcquireSemaphore_) isSessionRequest_Request() {}
+func (*sessionRequest_AcquireSemaphore_) isSessionRequest_Request() {}
 
-func (*SessionRequest_ReleaseSemaphore_) isSessionRequest_Request() {}
+func (*sessionRequest_ReleaseSemaphore_) isSessionRequest_Request() {}
 
-func (*SessionRequest_DescribeSemaphore_) isSessionRequest_Request() {}
+func (*sessionRequest_DescribeSemaphore_) isSessionRequest_Request() {}
 
-func (*SessionRequest_CreateSemaphore_) isSessionRequest_Request() {}
+func (*sessionRequest_CreateSemaphore_) isSessionRequest_Request() {}
 
-func (*SessionRequest_UpdateSemaphore_) isSessionRequest_Request() {}
+func (*sessionRequest_UpdateSemaphore_) isSessionRequest_Request() {}
 
-func (*SessionRequest_DeleteSemaphore_) isSessionRequest_Request() {}
+func (*sessionRequest_DeleteSemaphore_) isSessionRequest_Request() {}
 
-func (*SessionRequest_Unsupported_13) isSessionRequest_Request() {}
+func (*sessionRequest_Unsupported_13) isSessionRequest_Request() {}
 
-func (*SessionRequest_Unsupported_14) isSessionRequest_Request() {}
+func (*sessionRequest_Unsupported_14) isSessionRequest_Request() {}
 
-func (*SessionRequest_Unsupported_15) isSessionRequest_Request() {}
+func (*sessionRequest_Unsupported_15) isSessionRequest_Request() {}
 
 // *
 // Session response message sent from server to client
 type SessionResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Types that are valid to be assigned to Response:
-	//
-	//	*SessionResponse_Ping
-	//	*SessionResponse_Pong
-	//	*SessionResponse_Failure_
-	//	*SessionResponse_SessionStarted_
-	//	*SessionResponse_SessionStopped_
-	//	*SessionResponse_Unsupported_6
-	//	*SessionResponse_Unsupported_7
-	//	*SessionResponse_AcquireSemaphorePending_
-	//	*SessionResponse_AcquireSemaphoreResult_
-	//	*SessionResponse_ReleaseSemaphoreResult_
-	//	*SessionResponse_DescribeSemaphoreResult_
-	//	*SessionResponse_DescribeSemaphoreChanged_
-	//	*SessionResponse_CreateSemaphoreResult_
-	//	*SessionResponse_UpdateSemaphoreResult_
-	//	*SessionResponse_DeleteSemaphoreResult_
-	//	*SessionResponse_Unsupported_16
-	//	*SessionResponse_Unsupported_17
-	//	*SessionResponse_Unsupported_18
-	Response      isSessionResponse_Response `protobuf_oneof:"response"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Response isSessionResponse_Response `protobuf_oneof:"response"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *SessionResponse) Reset() {
@@ -1751,16 +1466,9 @@ func (x *SessionResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *SessionResponse) GetResponse() isSessionResponse_Response {
-	if x != nil {
-		return x.Response
-	}
-	return nil
-}
-
 func (x *SessionResponse) GetPing() *SessionResponse_PingPong {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_Ping); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_Ping); ok {
 			return x.Ping
 		}
 	}
@@ -1769,7 +1477,7 @@ func (x *SessionResponse) GetPing() *SessionResponse_PingPong {
 
 func (x *SessionResponse) GetPong() *SessionResponse_PingPong {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_Pong); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_Pong); ok {
 			return x.Pong
 		}
 	}
@@ -1778,7 +1486,7 @@ func (x *SessionResponse) GetPong() *SessionResponse_PingPong {
 
 func (x *SessionResponse) GetFailure() *SessionResponse_Failure {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_Failure_); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_Failure_); ok {
 			return x.Failure
 		}
 	}
@@ -1787,7 +1495,7 @@ func (x *SessionResponse) GetFailure() *SessionResponse_Failure {
 
 func (x *SessionResponse) GetSessionStarted() *SessionResponse_SessionStarted {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_SessionStarted_); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_SessionStarted_); ok {
 			return x.SessionStarted
 		}
 	}
@@ -1796,7 +1504,7 @@ func (x *SessionResponse) GetSessionStarted() *SessionResponse_SessionStarted {
 
 func (x *SessionResponse) GetSessionStopped() *SessionResponse_SessionStopped {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_SessionStopped_); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_SessionStopped_); ok {
 			return x.SessionStopped
 		}
 	}
@@ -1805,7 +1513,7 @@ func (x *SessionResponse) GetSessionStopped() *SessionResponse_SessionStopped {
 
 func (x *SessionResponse) GetUnsupported_6() *Unsupported {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_Unsupported_6); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_6); ok {
 			return x.Unsupported_6
 		}
 	}
@@ -1814,7 +1522,7 @@ func (x *SessionResponse) GetUnsupported_6() *Unsupported {
 
 func (x *SessionResponse) GetUnsupported_7() *Unsupported {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_Unsupported_7); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_7); ok {
 			return x.Unsupported_7
 		}
 	}
@@ -1823,7 +1531,7 @@ func (x *SessionResponse) GetUnsupported_7() *Unsupported {
 
 func (x *SessionResponse) GetAcquireSemaphorePending() *SessionResponse_AcquireSemaphorePending {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_AcquireSemaphorePending_); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_AcquireSemaphorePending_); ok {
 			return x.AcquireSemaphorePending
 		}
 	}
@@ -1832,7 +1540,7 @@ func (x *SessionResponse) GetAcquireSemaphorePending() *SessionResponse_AcquireS
 
 func (x *SessionResponse) GetAcquireSemaphoreResult() *SessionResponse_AcquireSemaphoreResult {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_AcquireSemaphoreResult_); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_AcquireSemaphoreResult_); ok {
 			return x.AcquireSemaphoreResult
 		}
 	}
@@ -1841,7 +1549,7 @@ func (x *SessionResponse) GetAcquireSemaphoreResult() *SessionResponse_AcquireSe
 
 func (x *SessionResponse) GetReleaseSemaphoreResult() *SessionResponse_ReleaseSemaphoreResult {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_ReleaseSemaphoreResult_); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_ReleaseSemaphoreResult_); ok {
 			return x.ReleaseSemaphoreResult
 		}
 	}
@@ -1850,7 +1558,7 @@ func (x *SessionResponse) GetReleaseSemaphoreResult() *SessionResponse_ReleaseSe
 
 func (x *SessionResponse) GetDescribeSemaphoreResult() *SessionResponse_DescribeSemaphoreResult {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_DescribeSemaphoreResult_); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_DescribeSemaphoreResult_); ok {
 			return x.DescribeSemaphoreResult
 		}
 	}
@@ -1859,7 +1567,7 @@ func (x *SessionResponse) GetDescribeSemaphoreResult() *SessionResponse_Describe
 
 func (x *SessionResponse) GetDescribeSemaphoreChanged() *SessionResponse_DescribeSemaphoreChanged {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_DescribeSemaphoreChanged_); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_DescribeSemaphoreChanged_); ok {
 			return x.DescribeSemaphoreChanged
 		}
 	}
@@ -1868,7 +1576,7 @@ func (x *SessionResponse) GetDescribeSemaphoreChanged() *SessionResponse_Describ
 
 func (x *SessionResponse) GetCreateSemaphoreResult() *SessionResponse_CreateSemaphoreResult {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_CreateSemaphoreResult_); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_CreateSemaphoreResult_); ok {
 			return x.CreateSemaphoreResult
 		}
 	}
@@ -1877,7 +1585,7 @@ func (x *SessionResponse) GetCreateSemaphoreResult() *SessionResponse_CreateSema
 
 func (x *SessionResponse) GetUpdateSemaphoreResult() *SessionResponse_UpdateSemaphoreResult {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_UpdateSemaphoreResult_); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_UpdateSemaphoreResult_); ok {
 			return x.UpdateSemaphoreResult
 		}
 	}
@@ -1886,7 +1594,7 @@ func (x *SessionResponse) GetUpdateSemaphoreResult() *SessionResponse_UpdateSema
 
 func (x *SessionResponse) GetDeleteSemaphoreResult() *SessionResponse_DeleteSemaphoreResult {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_DeleteSemaphoreResult_); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_DeleteSemaphoreResult_); ok {
 			return x.DeleteSemaphoreResult
 		}
 	}
@@ -1895,7 +1603,7 @@ func (x *SessionResponse) GetDeleteSemaphoreResult() *SessionResponse_DeleteSema
 
 func (x *SessionResponse) GetUnsupported_16() *Unsupported {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_Unsupported_16); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_16); ok {
 			return x.Unsupported_16
 		}
 	}
@@ -1904,7 +1612,7 @@ func (x *SessionResponse) GetUnsupported_16() *Unsupported {
 
 func (x *SessionResponse) GetUnsupported_17() *Unsupported {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_Unsupported_17); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_17); ok {
 			return x.Unsupported_17
 		}
 	}
@@ -1913,7 +1621,7 @@ func (x *SessionResponse) GetUnsupported_17() *Unsupported {
 
 func (x *SessionResponse) GetUnsupported_18() *Unsupported {
 	if x != nil {
-		if x, ok := x.Response.(*SessionResponse_Unsupported_18); ok {
+		if x, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_18); ok {
 			return x.Unsupported_18
 		}
 	}
@@ -1922,160 +1630,160 @@ func (x *SessionResponse) GetUnsupported_18() *Unsupported {
 
 func (x *SessionResponse) SetPing(v *SessionResponse_PingPong) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_Ping{v}
+	x.xxx_hidden_Response = &sessionResponse_Ping{v}
 }
 
 func (x *SessionResponse) SetPong(v *SessionResponse_PingPong) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_Pong{v}
+	x.xxx_hidden_Response = &sessionResponse_Pong{v}
 }
 
 func (x *SessionResponse) SetFailure(v *SessionResponse_Failure) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_Failure_{v}
+	x.xxx_hidden_Response = &sessionResponse_Failure_{v}
 }
 
 func (x *SessionResponse) SetSessionStarted(v *SessionResponse_SessionStarted) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_SessionStarted_{v}
+	x.xxx_hidden_Response = &sessionResponse_SessionStarted_{v}
 }
 
 func (x *SessionResponse) SetSessionStopped(v *SessionResponse_SessionStopped) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_SessionStopped_{v}
+	x.xxx_hidden_Response = &sessionResponse_SessionStopped_{v}
 }
 
 func (x *SessionResponse) SetUnsupported_6(v *Unsupported) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_Unsupported_6{v}
+	x.xxx_hidden_Response = &sessionResponse_Unsupported_6{v}
 }
 
 func (x *SessionResponse) SetUnsupported_7(v *Unsupported) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_Unsupported_7{v}
+	x.xxx_hidden_Response = &sessionResponse_Unsupported_7{v}
 }
 
 func (x *SessionResponse) SetAcquireSemaphorePending(v *SessionResponse_AcquireSemaphorePending) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_AcquireSemaphorePending_{v}
+	x.xxx_hidden_Response = &sessionResponse_AcquireSemaphorePending_{v}
 }
 
 func (x *SessionResponse) SetAcquireSemaphoreResult(v *SessionResponse_AcquireSemaphoreResult) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_AcquireSemaphoreResult_{v}
+	x.xxx_hidden_Response = &sessionResponse_AcquireSemaphoreResult_{v}
 }
 
 func (x *SessionResponse) SetReleaseSemaphoreResult(v *SessionResponse_ReleaseSemaphoreResult) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_ReleaseSemaphoreResult_{v}
+	x.xxx_hidden_Response = &sessionResponse_ReleaseSemaphoreResult_{v}
 }
 
 func (x *SessionResponse) SetDescribeSemaphoreResult(v *SessionResponse_DescribeSemaphoreResult) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_DescribeSemaphoreResult_{v}
+	x.xxx_hidden_Response = &sessionResponse_DescribeSemaphoreResult_{v}
 }
 
 func (x *SessionResponse) SetDescribeSemaphoreChanged(v *SessionResponse_DescribeSemaphoreChanged) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_DescribeSemaphoreChanged_{v}
+	x.xxx_hidden_Response = &sessionResponse_DescribeSemaphoreChanged_{v}
 }
 
 func (x *SessionResponse) SetCreateSemaphoreResult(v *SessionResponse_CreateSemaphoreResult) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_CreateSemaphoreResult_{v}
+	x.xxx_hidden_Response = &sessionResponse_CreateSemaphoreResult_{v}
 }
 
 func (x *SessionResponse) SetUpdateSemaphoreResult(v *SessionResponse_UpdateSemaphoreResult) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_UpdateSemaphoreResult_{v}
+	x.xxx_hidden_Response = &sessionResponse_UpdateSemaphoreResult_{v}
 }
 
 func (x *SessionResponse) SetDeleteSemaphoreResult(v *SessionResponse_DeleteSemaphoreResult) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_DeleteSemaphoreResult_{v}
+	x.xxx_hidden_Response = &sessionResponse_DeleteSemaphoreResult_{v}
 }
 
 func (x *SessionResponse) SetUnsupported_16(v *Unsupported) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_Unsupported_16{v}
+	x.xxx_hidden_Response = &sessionResponse_Unsupported_16{v}
 }
 
 func (x *SessionResponse) SetUnsupported_17(v *Unsupported) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_Unsupported_17{v}
+	x.xxx_hidden_Response = &sessionResponse_Unsupported_17{v}
 }
 
 func (x *SessionResponse) SetUnsupported_18(v *Unsupported) {
 	if v == nil {
-		x.Response = nil
+		x.xxx_hidden_Response = nil
 		return
 	}
-	x.Response = &SessionResponse_Unsupported_18{v}
+	x.xxx_hidden_Response = &sessionResponse_Unsupported_18{v}
 }
 
 func (x *SessionResponse) HasResponse() bool {
 	if x == nil {
 		return false
 	}
-	return x.Response != nil
+	return x.xxx_hidden_Response != nil
 }
 
 func (x *SessionResponse) HasPing() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_Ping)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_Ping)
 	return ok
 }
 
@@ -2083,7 +1791,7 @@ func (x *SessionResponse) HasPong() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_Pong)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_Pong)
 	return ok
 }
 
@@ -2091,7 +1799,7 @@ func (x *SessionResponse) HasFailure() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_Failure_)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_Failure_)
 	return ok
 }
 
@@ -2099,7 +1807,7 @@ func (x *SessionResponse) HasSessionStarted() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_SessionStarted_)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_SessionStarted_)
 	return ok
 }
 
@@ -2107,7 +1815,7 @@ func (x *SessionResponse) HasSessionStopped() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_SessionStopped_)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_SessionStopped_)
 	return ok
 }
 
@@ -2115,7 +1823,7 @@ func (x *SessionResponse) HasUnsupported_6() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_Unsupported_6)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_6)
 	return ok
 }
 
@@ -2123,7 +1831,7 @@ func (x *SessionResponse) HasUnsupported_7() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_Unsupported_7)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_7)
 	return ok
 }
 
@@ -2131,7 +1839,7 @@ func (x *SessionResponse) HasAcquireSemaphorePending() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_AcquireSemaphorePending_)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_AcquireSemaphorePending_)
 	return ok
 }
 
@@ -2139,7 +1847,7 @@ func (x *SessionResponse) HasAcquireSemaphoreResult() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_AcquireSemaphoreResult_)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_AcquireSemaphoreResult_)
 	return ok
 }
 
@@ -2147,7 +1855,7 @@ func (x *SessionResponse) HasReleaseSemaphoreResult() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_ReleaseSemaphoreResult_)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_ReleaseSemaphoreResult_)
 	return ok
 }
 
@@ -2155,7 +1863,7 @@ func (x *SessionResponse) HasDescribeSemaphoreResult() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_DescribeSemaphoreResult_)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_DescribeSemaphoreResult_)
 	return ok
 }
 
@@ -2163,7 +1871,7 @@ func (x *SessionResponse) HasDescribeSemaphoreChanged() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_DescribeSemaphoreChanged_)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_DescribeSemaphoreChanged_)
 	return ok
 }
 
@@ -2171,7 +1879,7 @@ func (x *SessionResponse) HasCreateSemaphoreResult() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_CreateSemaphoreResult_)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_CreateSemaphoreResult_)
 	return ok
 }
 
@@ -2179,7 +1887,7 @@ func (x *SessionResponse) HasUpdateSemaphoreResult() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_UpdateSemaphoreResult_)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_UpdateSemaphoreResult_)
 	return ok
 }
 
@@ -2187,7 +1895,7 @@ func (x *SessionResponse) HasDeleteSemaphoreResult() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_DeleteSemaphoreResult_)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_DeleteSemaphoreResult_)
 	return ok
 }
 
@@ -2195,7 +1903,7 @@ func (x *SessionResponse) HasUnsupported_16() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_Unsupported_16)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_16)
 	return ok
 }
 
@@ -2203,7 +1911,7 @@ func (x *SessionResponse) HasUnsupported_17() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_Unsupported_17)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_17)
 	return ok
 }
 
@@ -2211,119 +1919,119 @@ func (x *SessionResponse) HasUnsupported_18() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Response.(*SessionResponse_Unsupported_18)
+	_, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_18)
 	return ok
 }
 
 func (x *SessionResponse) ClearResponse() {
-	x.Response = nil
+	x.xxx_hidden_Response = nil
 }
 
 func (x *SessionResponse) ClearPing() {
-	if _, ok := x.Response.(*SessionResponse_Ping); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_Ping); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearPong() {
-	if _, ok := x.Response.(*SessionResponse_Pong); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_Pong); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearFailure() {
-	if _, ok := x.Response.(*SessionResponse_Failure_); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_Failure_); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearSessionStarted() {
-	if _, ok := x.Response.(*SessionResponse_SessionStarted_); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_SessionStarted_); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearSessionStopped() {
-	if _, ok := x.Response.(*SessionResponse_SessionStopped_); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_SessionStopped_); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearUnsupported_6() {
-	if _, ok := x.Response.(*SessionResponse_Unsupported_6); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_6); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearUnsupported_7() {
-	if _, ok := x.Response.(*SessionResponse_Unsupported_7); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_7); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearAcquireSemaphorePending() {
-	if _, ok := x.Response.(*SessionResponse_AcquireSemaphorePending_); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_AcquireSemaphorePending_); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearAcquireSemaphoreResult() {
-	if _, ok := x.Response.(*SessionResponse_AcquireSemaphoreResult_); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_AcquireSemaphoreResult_); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearReleaseSemaphoreResult() {
-	if _, ok := x.Response.(*SessionResponse_ReleaseSemaphoreResult_); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_ReleaseSemaphoreResult_); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearDescribeSemaphoreResult() {
-	if _, ok := x.Response.(*SessionResponse_DescribeSemaphoreResult_); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_DescribeSemaphoreResult_); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearDescribeSemaphoreChanged() {
-	if _, ok := x.Response.(*SessionResponse_DescribeSemaphoreChanged_); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_DescribeSemaphoreChanged_); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearCreateSemaphoreResult() {
-	if _, ok := x.Response.(*SessionResponse_CreateSemaphoreResult_); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_CreateSemaphoreResult_); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearUpdateSemaphoreResult() {
-	if _, ok := x.Response.(*SessionResponse_UpdateSemaphoreResult_); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_UpdateSemaphoreResult_); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearDeleteSemaphoreResult() {
-	if _, ok := x.Response.(*SessionResponse_DeleteSemaphoreResult_); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_DeleteSemaphoreResult_); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearUnsupported_16() {
-	if _, ok := x.Response.(*SessionResponse_Unsupported_16); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_16); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearUnsupported_17() {
-	if _, ok := x.Response.(*SessionResponse_Unsupported_17); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_17); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
 func (x *SessionResponse) ClearUnsupported_18() {
-	if _, ok := x.Response.(*SessionResponse_Unsupported_18); ok {
-		x.Response = nil
+	if _, ok := x.xxx_hidden_Response.(*sessionResponse_Unsupported_18); ok {
+		x.xxx_hidden_Response = nil
 	}
 }
 
@@ -2351,42 +2059,42 @@ func (x *SessionResponse) WhichResponse() case_SessionResponse_Response {
 	if x == nil {
 		return SessionResponse_Response_not_set_case
 	}
-	switch x.Response.(type) {
-	case *SessionResponse_Ping:
+	switch x.xxx_hidden_Response.(type) {
+	case *sessionResponse_Ping:
 		return SessionResponse_Ping_case
-	case *SessionResponse_Pong:
+	case *sessionResponse_Pong:
 		return SessionResponse_Pong_case
-	case *SessionResponse_Failure_:
+	case *sessionResponse_Failure_:
 		return SessionResponse_Failure_case
-	case *SessionResponse_SessionStarted_:
+	case *sessionResponse_SessionStarted_:
 		return SessionResponse_SessionStarted_case
-	case *SessionResponse_SessionStopped_:
+	case *sessionResponse_SessionStopped_:
 		return SessionResponse_SessionStopped_case
-	case *SessionResponse_Unsupported_6:
+	case *sessionResponse_Unsupported_6:
 		return SessionResponse_Unsupported_6_case
-	case *SessionResponse_Unsupported_7:
+	case *sessionResponse_Unsupported_7:
 		return SessionResponse_Unsupported_7_case
-	case *SessionResponse_AcquireSemaphorePending_:
+	case *sessionResponse_AcquireSemaphorePending_:
 		return SessionResponse_AcquireSemaphorePending_case
-	case *SessionResponse_AcquireSemaphoreResult_:
+	case *sessionResponse_AcquireSemaphoreResult_:
 		return SessionResponse_AcquireSemaphoreResult_case
-	case *SessionResponse_ReleaseSemaphoreResult_:
+	case *sessionResponse_ReleaseSemaphoreResult_:
 		return SessionResponse_ReleaseSemaphoreResult_case
-	case *SessionResponse_DescribeSemaphoreResult_:
+	case *sessionResponse_DescribeSemaphoreResult_:
 		return SessionResponse_DescribeSemaphoreResult_case
-	case *SessionResponse_DescribeSemaphoreChanged_:
+	case *sessionResponse_DescribeSemaphoreChanged_:
 		return SessionResponse_DescribeSemaphoreChanged_case
-	case *SessionResponse_CreateSemaphoreResult_:
+	case *sessionResponse_CreateSemaphoreResult_:
 		return SessionResponse_CreateSemaphoreResult_case
-	case *SessionResponse_UpdateSemaphoreResult_:
+	case *sessionResponse_UpdateSemaphoreResult_:
 		return SessionResponse_UpdateSemaphoreResult_case
-	case *SessionResponse_DeleteSemaphoreResult_:
+	case *sessionResponse_DeleteSemaphoreResult_:
 		return SessionResponse_DeleteSemaphoreResult_case
-	case *SessionResponse_Unsupported_16:
+	case *sessionResponse_Unsupported_16:
 		return SessionResponse_Unsupported_16_case
-	case *SessionResponse_Unsupported_17:
+	case *sessionResponse_Unsupported_17:
 		return SessionResponse_Unsupported_17_case
-	case *SessionResponse_Unsupported_18:
+	case *sessionResponse_Unsupported_18:
 		return SessionResponse_Unsupported_18_case
 	default:
 		return SessionResponse_Response_not_set_case
@@ -2396,7 +2104,7 @@ func (x *SessionResponse) WhichResponse() case_SessionResponse_Response {
 type SessionResponse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof Response:
+	// Fields of oneof xxx_hidden_Response:
 	Ping                     *SessionResponse_PingPong
 	Pong                     *SessionResponse_PingPong
 	Failure                  *SessionResponse_Failure
@@ -2415,7 +2123,7 @@ type SessionResponse_builder struct {
 	Unsupported_16           *Unsupported
 	Unsupported_17           *Unsupported
 	Unsupported_18           *Unsupported
-	// -- end of Response
+	// -- end of xxx_hidden_Response
 }
 
 func (b0 SessionResponse_builder) Build() *SessionResponse {
@@ -2423,58 +2131,58 @@ func (b0 SessionResponse_builder) Build() *SessionResponse {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Ping != nil {
-		x.Response = &SessionResponse_Ping{b.Ping}
+		x.xxx_hidden_Response = &sessionResponse_Ping{b.Ping}
 	}
 	if b.Pong != nil {
-		x.Response = &SessionResponse_Pong{b.Pong}
+		x.xxx_hidden_Response = &sessionResponse_Pong{b.Pong}
 	}
 	if b.Failure != nil {
-		x.Response = &SessionResponse_Failure_{b.Failure}
+		x.xxx_hidden_Response = &sessionResponse_Failure_{b.Failure}
 	}
 	if b.SessionStarted != nil {
-		x.Response = &SessionResponse_SessionStarted_{b.SessionStarted}
+		x.xxx_hidden_Response = &sessionResponse_SessionStarted_{b.SessionStarted}
 	}
 	if b.SessionStopped != nil {
-		x.Response = &SessionResponse_SessionStopped_{b.SessionStopped}
+		x.xxx_hidden_Response = &sessionResponse_SessionStopped_{b.SessionStopped}
 	}
 	if b.Unsupported_6 != nil {
-		x.Response = &SessionResponse_Unsupported_6{b.Unsupported_6}
+		x.xxx_hidden_Response = &sessionResponse_Unsupported_6{b.Unsupported_6}
 	}
 	if b.Unsupported_7 != nil {
-		x.Response = &SessionResponse_Unsupported_7{b.Unsupported_7}
+		x.xxx_hidden_Response = &sessionResponse_Unsupported_7{b.Unsupported_7}
 	}
 	if b.AcquireSemaphorePending != nil {
-		x.Response = &SessionResponse_AcquireSemaphorePending_{b.AcquireSemaphorePending}
+		x.xxx_hidden_Response = &sessionResponse_AcquireSemaphorePending_{b.AcquireSemaphorePending}
 	}
 	if b.AcquireSemaphoreResult != nil {
-		x.Response = &SessionResponse_AcquireSemaphoreResult_{b.AcquireSemaphoreResult}
+		x.xxx_hidden_Response = &sessionResponse_AcquireSemaphoreResult_{b.AcquireSemaphoreResult}
 	}
 	if b.ReleaseSemaphoreResult != nil {
-		x.Response = &SessionResponse_ReleaseSemaphoreResult_{b.ReleaseSemaphoreResult}
+		x.xxx_hidden_Response = &sessionResponse_ReleaseSemaphoreResult_{b.ReleaseSemaphoreResult}
 	}
 	if b.DescribeSemaphoreResult != nil {
-		x.Response = &SessionResponse_DescribeSemaphoreResult_{b.DescribeSemaphoreResult}
+		x.xxx_hidden_Response = &sessionResponse_DescribeSemaphoreResult_{b.DescribeSemaphoreResult}
 	}
 	if b.DescribeSemaphoreChanged != nil {
-		x.Response = &SessionResponse_DescribeSemaphoreChanged_{b.DescribeSemaphoreChanged}
+		x.xxx_hidden_Response = &sessionResponse_DescribeSemaphoreChanged_{b.DescribeSemaphoreChanged}
 	}
 	if b.CreateSemaphoreResult != nil {
-		x.Response = &SessionResponse_CreateSemaphoreResult_{b.CreateSemaphoreResult}
+		x.xxx_hidden_Response = &sessionResponse_CreateSemaphoreResult_{b.CreateSemaphoreResult}
 	}
 	if b.UpdateSemaphoreResult != nil {
-		x.Response = &SessionResponse_UpdateSemaphoreResult_{b.UpdateSemaphoreResult}
+		x.xxx_hidden_Response = &sessionResponse_UpdateSemaphoreResult_{b.UpdateSemaphoreResult}
 	}
 	if b.DeleteSemaphoreResult != nil {
-		x.Response = &SessionResponse_DeleteSemaphoreResult_{b.DeleteSemaphoreResult}
+		x.xxx_hidden_Response = &sessionResponse_DeleteSemaphoreResult_{b.DeleteSemaphoreResult}
 	}
 	if b.Unsupported_16 != nil {
-		x.Response = &SessionResponse_Unsupported_16{b.Unsupported_16}
+		x.xxx_hidden_Response = &sessionResponse_Unsupported_16{b.Unsupported_16}
 	}
 	if b.Unsupported_17 != nil {
-		x.Response = &SessionResponse_Unsupported_17{b.Unsupported_17}
+		x.xxx_hidden_Response = &sessionResponse_Unsupported_17{b.Unsupported_17}
 	}
 	if b.Unsupported_18 != nil {
-		x.Response = &SessionResponse_Unsupported_18{b.Unsupported_18}
+		x.xxx_hidden_Response = &sessionResponse_Unsupported_18{b.Unsupported_18}
 	}
 	return m0
 }
@@ -2493,121 +2201,121 @@ type isSessionResponse_Response interface {
 	isSessionResponse_Response()
 }
 
-type SessionResponse_Ping struct {
-	Ping *SessionResponse_PingPong `protobuf:"bytes,1,opt,name=ping,oneof"`
+type sessionResponse_Ping struct {
+	Ping *SessionResponse_PingPong `protobuf:"bytes,1,opt,name=ping,proto3,oneof"`
 }
 
-type SessionResponse_Pong struct {
-	Pong *SessionResponse_PingPong `protobuf:"bytes,2,opt,name=pong,oneof"`
+type sessionResponse_Pong struct {
+	Pong *SessionResponse_PingPong `protobuf:"bytes,2,opt,name=pong,proto3,oneof"`
 }
 
-type SessionResponse_Failure_ struct {
-	Failure *SessionResponse_Failure `protobuf:"bytes,3,opt,name=failure,oneof"`
+type sessionResponse_Failure_ struct {
+	Failure *SessionResponse_Failure `protobuf:"bytes,3,opt,name=failure,proto3,oneof"`
 }
 
-type SessionResponse_SessionStarted_ struct {
-	SessionStarted *SessionResponse_SessionStarted `protobuf:"bytes,4,opt,name=session_started,json=sessionStarted,oneof"`
+type sessionResponse_SessionStarted_ struct {
+	SessionStarted *SessionResponse_SessionStarted `protobuf:"bytes,4,opt,name=session_started,json=sessionStarted,proto3,oneof"`
 }
 
-type SessionResponse_SessionStopped_ struct {
-	SessionStopped *SessionResponse_SessionStopped `protobuf:"bytes,5,opt,name=session_stopped,json=sessionStopped,oneof"`
+type sessionResponse_SessionStopped_ struct {
+	SessionStopped *SessionResponse_SessionStopped `protobuf:"bytes,5,opt,name=session_stopped,json=sessionStopped,proto3,oneof"`
 }
 
-type SessionResponse_Unsupported_6 struct {
-	Unsupported_6 *Unsupported `protobuf:"bytes,6,opt,name=unsupported_6,json=unsupported6,oneof"`
+type sessionResponse_Unsupported_6 struct {
+	Unsupported_6 *Unsupported `protobuf:"bytes,6,opt,name=unsupported_6,json=unsupported6,proto3,oneof"`
 }
 
-type SessionResponse_Unsupported_7 struct {
-	Unsupported_7 *Unsupported `protobuf:"bytes,7,opt,name=unsupported_7,json=unsupported7,oneof"`
+type sessionResponse_Unsupported_7 struct {
+	Unsupported_7 *Unsupported `protobuf:"bytes,7,opt,name=unsupported_7,json=unsupported7,proto3,oneof"`
 }
 
-type SessionResponse_AcquireSemaphorePending_ struct {
-	AcquireSemaphorePending *SessionResponse_AcquireSemaphorePending `protobuf:"bytes,8,opt,name=acquire_semaphore_pending,json=acquireSemaphorePending,oneof"`
+type sessionResponse_AcquireSemaphorePending_ struct {
+	AcquireSemaphorePending *SessionResponse_AcquireSemaphorePending `protobuf:"bytes,8,opt,name=acquire_semaphore_pending,json=acquireSemaphorePending,proto3,oneof"`
 }
 
-type SessionResponse_AcquireSemaphoreResult_ struct {
-	AcquireSemaphoreResult *SessionResponse_AcquireSemaphoreResult `protobuf:"bytes,9,opt,name=acquire_semaphore_result,json=acquireSemaphoreResult,oneof"`
+type sessionResponse_AcquireSemaphoreResult_ struct {
+	AcquireSemaphoreResult *SessionResponse_AcquireSemaphoreResult `protobuf:"bytes,9,opt,name=acquire_semaphore_result,json=acquireSemaphoreResult,proto3,oneof"`
 }
 
-type SessionResponse_ReleaseSemaphoreResult_ struct {
-	ReleaseSemaphoreResult *SessionResponse_ReleaseSemaphoreResult `protobuf:"bytes,10,opt,name=release_semaphore_result,json=releaseSemaphoreResult,oneof"`
+type sessionResponse_ReleaseSemaphoreResult_ struct {
+	ReleaseSemaphoreResult *SessionResponse_ReleaseSemaphoreResult `protobuf:"bytes,10,opt,name=release_semaphore_result,json=releaseSemaphoreResult,proto3,oneof"`
 }
 
-type SessionResponse_DescribeSemaphoreResult_ struct {
-	DescribeSemaphoreResult *SessionResponse_DescribeSemaphoreResult `protobuf:"bytes,11,opt,name=describe_semaphore_result,json=describeSemaphoreResult,oneof"`
+type sessionResponse_DescribeSemaphoreResult_ struct {
+	DescribeSemaphoreResult *SessionResponse_DescribeSemaphoreResult `protobuf:"bytes,11,opt,name=describe_semaphore_result,json=describeSemaphoreResult,proto3,oneof"`
 }
 
-type SessionResponse_DescribeSemaphoreChanged_ struct {
-	DescribeSemaphoreChanged *SessionResponse_DescribeSemaphoreChanged `protobuf:"bytes,12,opt,name=describe_semaphore_changed,json=describeSemaphoreChanged,oneof"`
+type sessionResponse_DescribeSemaphoreChanged_ struct {
+	DescribeSemaphoreChanged *SessionResponse_DescribeSemaphoreChanged `protobuf:"bytes,12,opt,name=describe_semaphore_changed,json=describeSemaphoreChanged,proto3,oneof"`
 }
 
-type SessionResponse_CreateSemaphoreResult_ struct {
-	CreateSemaphoreResult *SessionResponse_CreateSemaphoreResult `protobuf:"bytes,13,opt,name=create_semaphore_result,json=createSemaphoreResult,oneof"`
+type sessionResponse_CreateSemaphoreResult_ struct {
+	CreateSemaphoreResult *SessionResponse_CreateSemaphoreResult `protobuf:"bytes,13,opt,name=create_semaphore_result,json=createSemaphoreResult,proto3,oneof"`
 }
 
-type SessionResponse_UpdateSemaphoreResult_ struct {
-	UpdateSemaphoreResult *SessionResponse_UpdateSemaphoreResult `protobuf:"bytes,14,opt,name=update_semaphore_result,json=updateSemaphoreResult,oneof"`
+type sessionResponse_UpdateSemaphoreResult_ struct {
+	UpdateSemaphoreResult *SessionResponse_UpdateSemaphoreResult `protobuf:"bytes,14,opt,name=update_semaphore_result,json=updateSemaphoreResult,proto3,oneof"`
 }
 
-type SessionResponse_DeleteSemaphoreResult_ struct {
-	DeleteSemaphoreResult *SessionResponse_DeleteSemaphoreResult `protobuf:"bytes,15,opt,name=delete_semaphore_result,json=deleteSemaphoreResult,oneof"`
+type sessionResponse_DeleteSemaphoreResult_ struct {
+	DeleteSemaphoreResult *SessionResponse_DeleteSemaphoreResult `protobuf:"bytes,15,opt,name=delete_semaphore_result,json=deleteSemaphoreResult,proto3,oneof"`
 }
 
-type SessionResponse_Unsupported_16 struct {
-	Unsupported_16 *Unsupported `protobuf:"bytes,16,opt,name=unsupported_16,json=unsupported16,oneof"`
+type sessionResponse_Unsupported_16 struct {
+	Unsupported_16 *Unsupported `protobuf:"bytes,16,opt,name=unsupported_16,json=unsupported16,proto3,oneof"`
 }
 
-type SessionResponse_Unsupported_17 struct {
-	Unsupported_17 *Unsupported `protobuf:"bytes,17,opt,name=unsupported_17,json=unsupported17,oneof"`
+type sessionResponse_Unsupported_17 struct {
+	Unsupported_17 *Unsupported `protobuf:"bytes,17,opt,name=unsupported_17,json=unsupported17,proto3,oneof"`
 }
 
-type SessionResponse_Unsupported_18 struct {
-	Unsupported_18 *Unsupported `protobuf:"bytes,18,opt,name=unsupported_18,json=unsupported18,oneof"`
+type sessionResponse_Unsupported_18 struct {
+	Unsupported_18 *Unsupported `protobuf:"bytes,18,opt,name=unsupported_18,json=unsupported18,proto3,oneof"`
 }
 
-func (*SessionResponse_Ping) isSessionResponse_Response() {}
+func (*sessionResponse_Ping) isSessionResponse_Response() {}
 
-func (*SessionResponse_Pong) isSessionResponse_Response() {}
+func (*sessionResponse_Pong) isSessionResponse_Response() {}
 
-func (*SessionResponse_Failure_) isSessionResponse_Response() {}
+func (*sessionResponse_Failure_) isSessionResponse_Response() {}
 
-func (*SessionResponse_SessionStarted_) isSessionResponse_Response() {}
+func (*sessionResponse_SessionStarted_) isSessionResponse_Response() {}
 
-func (*SessionResponse_SessionStopped_) isSessionResponse_Response() {}
+func (*sessionResponse_SessionStopped_) isSessionResponse_Response() {}
 
-func (*SessionResponse_Unsupported_6) isSessionResponse_Response() {}
+func (*sessionResponse_Unsupported_6) isSessionResponse_Response() {}
 
-func (*SessionResponse_Unsupported_7) isSessionResponse_Response() {}
+func (*sessionResponse_Unsupported_7) isSessionResponse_Response() {}
 
-func (*SessionResponse_AcquireSemaphorePending_) isSessionResponse_Response() {}
+func (*sessionResponse_AcquireSemaphorePending_) isSessionResponse_Response() {}
 
-func (*SessionResponse_AcquireSemaphoreResult_) isSessionResponse_Response() {}
+func (*sessionResponse_AcquireSemaphoreResult_) isSessionResponse_Response() {}
 
-func (*SessionResponse_ReleaseSemaphoreResult_) isSessionResponse_Response() {}
+func (*sessionResponse_ReleaseSemaphoreResult_) isSessionResponse_Response() {}
 
-func (*SessionResponse_DescribeSemaphoreResult_) isSessionResponse_Response() {}
+func (*sessionResponse_DescribeSemaphoreResult_) isSessionResponse_Response() {}
 
-func (*SessionResponse_DescribeSemaphoreChanged_) isSessionResponse_Response() {}
+func (*sessionResponse_DescribeSemaphoreChanged_) isSessionResponse_Response() {}
 
-func (*SessionResponse_CreateSemaphoreResult_) isSessionResponse_Response() {}
+func (*sessionResponse_CreateSemaphoreResult_) isSessionResponse_Response() {}
 
-func (*SessionResponse_UpdateSemaphoreResult_) isSessionResponse_Response() {}
+func (*sessionResponse_UpdateSemaphoreResult_) isSessionResponse_Response() {}
 
-func (*SessionResponse_DeleteSemaphoreResult_) isSessionResponse_Response() {}
+func (*sessionResponse_DeleteSemaphoreResult_) isSessionResponse_Response() {}
 
-func (*SessionResponse_Unsupported_16) isSessionResponse_Response() {}
+func (*sessionResponse_Unsupported_16) isSessionResponse_Response() {}
 
-func (*SessionResponse_Unsupported_17) isSessionResponse_Response() {}
+func (*sessionResponse_Unsupported_17) isSessionResponse_Response() {}
 
-func (*SessionResponse_Unsupported_18) isSessionResponse_Response() {}
+func (*sessionResponse_Unsupported_18) isSessionResponse_Response() {}
 
 type CreateNodeRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	Path            *string                         `protobuf:"bytes,1,opt,name=path" json:"path,omitempty"`
-	Config          *Config                         `protobuf:"bytes,2,opt,name=config" json:"config,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_Config          *Config                         `protobuf:"bytes,2,opt,name=config,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateNodeRequest) Reset() {
@@ -2636,75 +2344,64 @@ func (x *CreateNodeRequest) ProtoReflect() protoreflect.Message {
 }
 
 func (x *CreateNodeRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *CreateNodeRequest) GetConfig() *Config {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return nil
 }
 
 func (x *CreateNodeRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateNodeRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *CreateNodeRequest) SetConfig(v *Config) {
-	x.Config = v
+	x.xxx_hidden_Config = v
 }
 
 func (x *CreateNodeRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
-}
-
-func (x *CreateNodeRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *CreateNodeRequest) HasConfig() bool {
 	if x == nil {
 		return false
 	}
-	return x.Config != nil
+	return x.xxx_hidden_Config != nil
 }
 
 func (x *CreateNodeRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *CreateNodeRequest) ClearPath() {
-	x.Path = nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *CreateNodeRequest) ClearConfig() {
-	x.Config = nil
+	x.xxx_hidden_Config = nil
 }
 
 func (x *CreateNodeRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type CreateNodeRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Path            *string
+	Path            string
 	Config          *Config
 	OperationParams *Ydb_Operations.OperationParams
 }
@@ -2713,17 +2410,17 @@ func (b0 CreateNodeRequest_builder) Build() *CreateNodeRequest {
 	m0 := &CreateNodeRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Path = b.Path
-	x.Config = b.Config
-	x.OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_Config = b.Config
+	x.xxx_hidden_OperationParams = b.OperationParams
 	return m0
 }
 
 type CreateNodeResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateNodeResponse) Reset() {
@@ -2753,24 +2450,24 @@ func (x *CreateNodeResponse) ProtoReflect() protoreflect.Message {
 
 func (x *CreateNodeResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *CreateNodeResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *CreateNodeResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *CreateNodeResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type CreateNodeResponse_builder struct {
@@ -2783,17 +2480,17 @@ func (b0 CreateNodeResponse_builder) Build() *CreateNodeResponse {
 	m0 := &CreateNodeResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type AlterNodeRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	Path            *string                         `protobuf:"bytes,1,opt,name=path" json:"path,omitempty"`
-	Config          *Config                         `protobuf:"bytes,2,opt,name=config" json:"config,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_Config          *Config                         `protobuf:"bytes,2,opt,name=config,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,3,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *AlterNodeRequest) Reset() {
@@ -2822,75 +2519,64 @@ func (x *AlterNodeRequest) ProtoReflect() protoreflect.Message {
 }
 
 func (x *AlterNodeRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *AlterNodeRequest) GetConfig() *Config {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return nil
 }
 
 func (x *AlterNodeRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *AlterNodeRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *AlterNodeRequest) SetConfig(v *Config) {
-	x.Config = v
+	x.xxx_hidden_Config = v
 }
 
 func (x *AlterNodeRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
-}
-
-func (x *AlterNodeRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *AlterNodeRequest) HasConfig() bool {
 	if x == nil {
 		return false
 	}
-	return x.Config != nil
+	return x.xxx_hidden_Config != nil
 }
 
 func (x *AlterNodeRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *AlterNodeRequest) ClearPath() {
-	x.Path = nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *AlterNodeRequest) ClearConfig() {
-	x.Config = nil
+	x.xxx_hidden_Config = nil
 }
 
 func (x *AlterNodeRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type AlterNodeRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Path            *string
+	Path            string
 	Config          *Config
 	OperationParams *Ydb_Operations.OperationParams
 }
@@ -2899,17 +2585,17 @@ func (b0 AlterNodeRequest_builder) Build() *AlterNodeRequest {
 	m0 := &AlterNodeRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Path = b.Path
-	x.Config = b.Config
-	x.OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_Config = b.Config
+	x.xxx_hidden_OperationParams = b.OperationParams
 	return m0
 }
 
 type AlterNodeResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *AlterNodeResponse) Reset() {
@@ -2939,24 +2625,24 @@ func (x *AlterNodeResponse) ProtoReflect() protoreflect.Message {
 
 func (x *AlterNodeResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *AlterNodeResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *AlterNodeResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *AlterNodeResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type AlterNodeResponse_builder struct {
@@ -2969,16 +2655,16 @@ func (b0 AlterNodeResponse_builder) Build() *AlterNodeResponse {
 	m0 := &AlterNodeResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DropNodeRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	Path            *string                         `protobuf:"bytes,1,opt,name=path" json:"path,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DropNodeRequest) Reset() {
@@ -3007,53 +2693,42 @@ func (x *DropNodeRequest) ProtoReflect() protoreflect.Message {
 }
 
 func (x *DropNodeRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DropNodeRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DropNodeRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *DropNodeRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
-}
-
-func (x *DropNodeRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DropNodeRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DropNodeRequest) ClearPath() {
-	x.Path = nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DropNodeRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DropNodeRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Path            *string
+	Path            string
 	OperationParams *Ydb_Operations.OperationParams
 }
 
@@ -3061,16 +2736,16 @@ func (b0 DropNodeRequest_builder) Build() *DropNodeRequest {
 	m0 := &DropNodeRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Path = b.Path
-	x.OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
 	return m0
 }
 
 type DropNodeResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DropNodeResponse) Reset() {
@@ -3100,24 +2775,24 @@ func (x *DropNodeResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DropNodeResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DropNodeResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DropNodeResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DropNodeResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DropNodeResponse_builder struct {
@@ -3130,16 +2805,16 @@ func (b0 DropNodeResponse_builder) Build() *DropNodeResponse {
 	m0 := &DropNodeResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DescribeNodeRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	Path            *string                         `protobuf:"bytes,1,opt,name=path" json:"path,omitempty"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Path            string                          `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,2,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DescribeNodeRequest) Reset() {
@@ -3168,53 +2843,42 @@ func (x *DescribeNodeRequest) ProtoReflect() protoreflect.Message {
 }
 
 func (x *DescribeNodeRequest) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *DescribeNodeRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DescribeNodeRequest) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *DescribeNodeRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
-}
-
-func (x *DescribeNodeRequest) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DescribeNodeRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DescribeNodeRequest) ClearPath() {
-	x.Path = nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DescribeNodeRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DescribeNodeRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Path            *string
+	Path            string
 	OperationParams *Ydb_Operations.OperationParams
 }
 
@@ -3222,16 +2886,16 @@ func (b0 DescribeNodeRequest_builder) Build() *DescribeNodeRequest {
 	m0 := &DescribeNodeRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Path = b.Path
-	x.OperationParams = b.OperationParams
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_OperationParams = b.OperationParams
 	return m0
 }
 
 type DescribeNodeResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeNodeResponse) Reset() {
@@ -3261,24 +2925,24 @@ func (x *DescribeNodeResponse) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeNodeResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *DescribeNodeResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *DescribeNodeResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *DescribeNodeResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type DescribeNodeResponse_builder struct {
@@ -3291,16 +2955,16 @@ func (b0 DescribeNodeResponse_builder) Build() *DescribeNodeResponse {
 	m0 := &DescribeNodeResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DescribeNodeResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Self          *Ydb_Scheme.Entry      `protobuf:"bytes,1,opt,name=self" json:"self,omitempty"`
-	Config        *Config                `protobuf:"bytes,2,opt,name=config" json:"config,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Self   *Ydb_Scheme.Entry      `protobuf:"bytes,1,opt,name=self,proto3"`
+	xxx_hidden_Config *Config                `protobuf:"bytes,2,opt,name=config,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *DescribeNodeResult) Reset() {
@@ -3330,46 +2994,46 @@ func (x *DescribeNodeResult) ProtoReflect() protoreflect.Message {
 
 func (x *DescribeNodeResult) GetSelf() *Ydb_Scheme.Entry {
 	if x != nil {
-		return x.Self
+		return x.xxx_hidden_Self
 	}
 	return nil
 }
 
 func (x *DescribeNodeResult) GetConfig() *Config {
 	if x != nil {
-		return x.Config
+		return x.xxx_hidden_Config
 	}
 	return nil
 }
 
 func (x *DescribeNodeResult) SetSelf(v *Ydb_Scheme.Entry) {
-	x.Self = v
+	x.xxx_hidden_Self = v
 }
 
 func (x *DescribeNodeResult) SetConfig(v *Config) {
-	x.Config = v
+	x.xxx_hidden_Config = v
 }
 
 func (x *DescribeNodeResult) HasSelf() bool {
 	if x == nil {
 		return false
 	}
-	return x.Self != nil
+	return x.xxx_hidden_Self != nil
 }
 
 func (x *DescribeNodeResult) HasConfig() bool {
 	if x == nil {
 		return false
 	}
-	return x.Config != nil
+	return x.xxx_hidden_Config != nil
 }
 
 func (x *DescribeNodeResult) ClearSelf() {
-	x.Self = nil
+	x.xxx_hidden_Self = nil
 }
 
 func (x *DescribeNodeResult) ClearConfig() {
-	x.Config = nil
+	x.xxx_hidden_Config = nil
 }
 
 type DescribeNodeResult_builder struct {
@@ -3383,19 +3047,18 @@ func (b0 DescribeNodeResult_builder) Build() *DescribeNodeResult {
 	m0 := &DescribeNodeResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Self = b.Self
-	x.Config = b.Config
+	x.xxx_hidden_Self = b.Self
+	x.xxx_hidden_Config = b.Config
 	return m0
 }
 
 // *
 // Used for checking liveness of the connection
 type SessionRequest_PingPong struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Opaque number specified in the ping message is echoed in the pong message
-	Opaque        *uint64 `protobuf:"varint,1,opt,name=opaque" json:"opaque,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Opaque uint64                 `protobuf:"varint,1,opt,name=opaque,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *SessionRequest_PingPong) Reset() {
@@ -3424,62 +3087,43 @@ func (x *SessionRequest_PingPong) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionRequest_PingPong) GetOpaque() uint64 {
-	if x != nil && x.Opaque != nil {
-		return *x.Opaque
+	if x != nil {
+		return x.xxx_hidden_Opaque
 	}
 	return 0
 }
 
 func (x *SessionRequest_PingPong) SetOpaque(v uint64) {
-	x.Opaque = &v
-}
-
-func (x *SessionRequest_PingPong) HasOpaque() bool {
-	if x == nil {
-		return false
-	}
-	return x.Opaque != nil
-}
-
-func (x *SessionRequest_PingPong) ClearOpaque() {
-	x.Opaque = nil
+	x.xxx_hidden_Opaque = v
 }
 
 type SessionRequest_PingPong_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Opaque number specified in the ping message is echoed in the pong message
-	Opaque *uint64
+	Opaque uint64
 }
 
 func (b0 SessionRequest_PingPong_builder) Build() *SessionRequest_PingPong {
 	m0 := &SessionRequest_PingPong{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Opaque = b.Opaque
+	x.xxx_hidden_Opaque = b.Opaque
 	return m0
 }
 
 // *
 // First message used to start/restore a session
 type SessionRequest_SessionStart struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Path to a coordination node
-	Path *string `protobuf:"bytes,1,opt,name=path" json:"path,omitempty"`
-	// Non-zero when restoring a session, 0 when creating a new session
-	SessionId *uint64 `protobuf:"varint,2,opt,name=session_id,json=sessionId" json:"session_id,omitempty"`
-	// Timeout in milliseconds during which client may restore a detached session
-	TimeoutMillis *uint64 `protobuf:"varint,3,opt,name=timeout_millis,json=timeoutMillis" json:"timeout_millis,omitempty"`
-	// User-defined description that may be used to describe the client
-	Description *string `protobuf:"bytes,4,opt,name=description" json:"description,omitempty"`
-	// Monotonically increasing sequence number generated by the client
-	// When concurrent SessionStart requests are detected the one with
-	// the biggest sequence number will succeed
-	SeqNo *uint64 `protobuf:"varint,5,opt,name=seq_no,json=seqNo" json:"seq_no,omitempty"`
-	// Random bytes used to protect session from restore by other clients (max. 16 bytes)
-	ProtectionKey []byte `protobuf:"bytes,6,opt,name=protection_key,json=protectionKey" json:"protection_key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Path          string                 `protobuf:"bytes,1,opt,name=path,proto3"`
+	xxx_hidden_SessionId     uint64                 `protobuf:"varint,2,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TimeoutMillis uint64                 `protobuf:"varint,3,opt,name=timeout_millis,json=timeoutMillis,proto3"`
+	xxx_hidden_Description   string                 `protobuf:"bytes,4,opt,name=description,proto3"`
+	xxx_hidden_SeqNo         uint64                 `protobuf:"varint,5,opt,name=seq_no,json=seqNo,proto3"`
+	xxx_hidden_ProtectionKey []byte                 `protobuf:"bytes,6,opt,name=protection_key,json=protectionKey,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *SessionRequest_SessionStart) Reset() {
@@ -3508,155 +3152,89 @@ func (x *SessionRequest_SessionStart) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionRequest_SessionStart) GetPath() string {
-	if x != nil && x.Path != nil {
-		return *x.Path
+	if x != nil {
+		return x.xxx_hidden_Path
 	}
 	return ""
 }
 
 func (x *SessionRequest_SessionStart) GetSessionId() uint64 {
-	if x != nil && x.SessionId != nil {
-		return *x.SessionId
+	if x != nil {
+		return x.xxx_hidden_SessionId
 	}
 	return 0
 }
 
 func (x *SessionRequest_SessionStart) GetTimeoutMillis() uint64 {
-	if x != nil && x.TimeoutMillis != nil {
-		return *x.TimeoutMillis
+	if x != nil {
+		return x.xxx_hidden_TimeoutMillis
 	}
 	return 0
 }
 
 func (x *SessionRequest_SessionStart) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
 func (x *SessionRequest_SessionStart) GetSeqNo() uint64 {
-	if x != nil && x.SeqNo != nil {
-		return *x.SeqNo
+	if x != nil {
+		return x.xxx_hidden_SeqNo
 	}
 	return 0
 }
 
 func (x *SessionRequest_SessionStart) GetProtectionKey() []byte {
 	if x != nil {
-		return x.ProtectionKey
+		return x.xxx_hidden_ProtectionKey
 	}
 	return nil
 }
 
 func (x *SessionRequest_SessionStart) SetPath(v string) {
-	x.Path = &v
+	x.xxx_hidden_Path = v
 }
 
 func (x *SessionRequest_SessionStart) SetSessionId(v uint64) {
-	x.SessionId = &v
+	x.xxx_hidden_SessionId = v
 }
 
 func (x *SessionRequest_SessionStart) SetTimeoutMillis(v uint64) {
-	x.TimeoutMillis = &v
+	x.xxx_hidden_TimeoutMillis = v
 }
 
 func (x *SessionRequest_SessionStart) SetDescription(v string) {
-	x.Description = &v
+	x.xxx_hidden_Description = v
 }
 
 func (x *SessionRequest_SessionStart) SetSeqNo(v uint64) {
-	x.SeqNo = &v
+	x.xxx_hidden_SeqNo = v
 }
 
 func (x *SessionRequest_SessionStart) SetProtectionKey(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.ProtectionKey = v
-}
-
-func (x *SessionRequest_SessionStart) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	return x.Path != nil
-}
-
-func (x *SessionRequest_SessionStart) HasSessionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.SessionId != nil
-}
-
-func (x *SessionRequest_SessionStart) HasTimeoutMillis() bool {
-	if x == nil {
-		return false
-	}
-	return x.TimeoutMillis != nil
-}
-
-func (x *SessionRequest_SessionStart) HasDescription() bool {
-	if x == nil {
-		return false
-	}
-	return x.Description != nil
-}
-
-func (x *SessionRequest_SessionStart) HasSeqNo() bool {
-	if x == nil {
-		return false
-	}
-	return x.SeqNo != nil
-}
-
-func (x *SessionRequest_SessionStart) HasProtectionKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.ProtectionKey != nil
-}
-
-func (x *SessionRequest_SessionStart) ClearPath() {
-	x.Path = nil
-}
-
-func (x *SessionRequest_SessionStart) ClearSessionId() {
-	x.SessionId = nil
-}
-
-func (x *SessionRequest_SessionStart) ClearTimeoutMillis() {
-	x.TimeoutMillis = nil
-}
-
-func (x *SessionRequest_SessionStart) ClearDescription() {
-	x.Description = nil
-}
-
-func (x *SessionRequest_SessionStart) ClearSeqNo() {
-	x.SeqNo = nil
-}
-
-func (x *SessionRequest_SessionStart) ClearProtectionKey() {
-	x.ProtectionKey = nil
+	x.xxx_hidden_ProtectionKey = v
 }
 
 type SessionRequest_SessionStart_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Path to a coordination node
-	Path *string
+	Path string
 	// Non-zero when restoring a session, 0 when creating a new session
-	SessionId *uint64
+	SessionId uint64
 	// Timeout in milliseconds during which client may restore a detached session
-	TimeoutMillis *uint64
+	TimeoutMillis uint64
 	// User-defined description that may be used to describe the client
-	Description *string
+	Description string
 	// Monotonically increasing sequence number generated by the client
 	// When concurrent SessionStart requests are detected the one with
 	// the biggest sequence number will succeed
-	SeqNo *uint64
+	SeqNo uint64
 	// Random bytes used to protect session from restore by other clients (max. 16 bytes)
 	ProtectionKey []byte
 }
@@ -3665,19 +3243,19 @@ func (b0 SessionRequest_SessionStart_builder) Build() *SessionRequest_SessionSta
 	m0 := &SessionRequest_SessionStart{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Path = b.Path
-	x.SessionId = b.SessionId
-	x.TimeoutMillis = b.TimeoutMillis
-	x.Description = b.Description
-	x.SeqNo = b.SeqNo
-	x.ProtectionKey = b.ProtectionKey
+	x.xxx_hidden_Path = b.Path
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TimeoutMillis = b.TimeoutMillis
+	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_SeqNo = b.SeqNo
+	x.xxx_hidden_ProtectionKey = b.ProtectionKey
 	return m0
 }
 
 // *
 // Last message used to cleanly stop session before its timeout expires
 type SessionRequest_SessionStop struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -3727,23 +3305,15 @@ func (b0 SessionRequest_SessionStop_builder) Build() *SessionRequest_SessionStop
 // Later requests override previous operations with the same semaphore,
 // e.g. to reduce acquired count, change timeout or attached data.
 type SessionRequest_AcquireSemaphore struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Client-defined request id, echoed in the response
-	ReqId *uint64 `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	// Name of the semaphore to acquire
-	Name *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	// Timeout in milliseconds after which operation will fail
-	// if it's still waiting in the waiters queue
-	TimeoutMillis *uint64 `protobuf:"varint,3,opt,name=timeout_millis,json=timeoutMillis" json:"timeout_millis,omitempty"`
-	// Number of tokens to acquire on the semaphore
-	Count *uint64 `protobuf:"varint,4,opt,name=count" json:"count,omitempty"`
-	// User-defined binary data that may be attached to the operation
-	Data []byte `protobuf:"bytes,5,opt,name=data" json:"data,omitempty"`
-	// Ephemeral semaphores are created with the first acquire operation
-	// and automatically deleted with the last release operation
-	Ephemeral     *bool `protobuf:"varint,6,opt,name=ephemeral" json:"ephemeral,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ReqId         uint64                 `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Name          string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_TimeoutMillis uint64                 `protobuf:"varint,3,opt,name=timeout_millis,json=timeoutMillis,proto3"`
+	xxx_hidden_Count         uint64                 `protobuf:"varint,4,opt,name=count,proto3"`
+	xxx_hidden_Data          []byte                 `protobuf:"bytes,5,opt,name=data,proto3"`
+	xxx_hidden_Ephemeral     bool                   `protobuf:"varint,6,opt,name=ephemeral,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *SessionRequest_AcquireSemaphore) Reset() {
@@ -3772,169 +3342,103 @@ func (x *SessionRequest_AcquireSemaphore) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionRequest_AcquireSemaphore) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionRequest_AcquireSemaphore) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *SessionRequest_AcquireSemaphore) GetTimeoutMillis() uint64 {
-	if x != nil && x.TimeoutMillis != nil {
-		return *x.TimeoutMillis
+	if x != nil {
+		return x.xxx_hidden_TimeoutMillis
 	}
 	return 0
 }
 
 func (x *SessionRequest_AcquireSemaphore) GetCount() uint64 {
-	if x != nil && x.Count != nil {
-		return *x.Count
+	if x != nil {
+		return x.xxx_hidden_Count
 	}
 	return 0
 }
 
 func (x *SessionRequest_AcquireSemaphore) GetData() []byte {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
 func (x *SessionRequest_AcquireSemaphore) GetEphemeral() bool {
-	if x != nil && x.Ephemeral != nil {
-		return *x.Ephemeral
+	if x != nil {
+		return x.xxx_hidden_Ephemeral
 	}
 	return false
 }
 
 func (x *SessionRequest_AcquireSemaphore) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionRequest_AcquireSemaphore) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *SessionRequest_AcquireSemaphore) SetTimeoutMillis(v uint64) {
-	x.TimeoutMillis = &v
+	x.xxx_hidden_TimeoutMillis = v
 }
 
 func (x *SessionRequest_AcquireSemaphore) SetCount(v uint64) {
-	x.Count = &v
+	x.xxx_hidden_Count = v
 }
 
 func (x *SessionRequest_AcquireSemaphore) SetData(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.Data = v
+	x.xxx_hidden_Data = v
 }
 
 func (x *SessionRequest_AcquireSemaphore) SetEphemeral(v bool) {
-	x.Ephemeral = &v
-}
-
-func (x *SessionRequest_AcquireSemaphore) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionRequest_AcquireSemaphore) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *SessionRequest_AcquireSemaphore) HasTimeoutMillis() bool {
-	if x == nil {
-		return false
-	}
-	return x.TimeoutMillis != nil
-}
-
-func (x *SessionRequest_AcquireSemaphore) HasCount() bool {
-	if x == nil {
-		return false
-	}
-	return x.Count != nil
-}
-
-func (x *SessionRequest_AcquireSemaphore) HasData() bool {
-	if x == nil {
-		return false
-	}
-	return x.Data != nil
-}
-
-func (x *SessionRequest_AcquireSemaphore) HasEphemeral() bool {
-	if x == nil {
-		return false
-	}
-	return x.Ephemeral != nil
-}
-
-func (x *SessionRequest_AcquireSemaphore) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionRequest_AcquireSemaphore) ClearName() {
-	x.Name = nil
-}
-
-func (x *SessionRequest_AcquireSemaphore) ClearTimeoutMillis() {
-	x.TimeoutMillis = nil
-}
-
-func (x *SessionRequest_AcquireSemaphore) ClearCount() {
-	x.Count = nil
-}
-
-func (x *SessionRequest_AcquireSemaphore) ClearData() {
-	x.Data = nil
-}
-
-func (x *SessionRequest_AcquireSemaphore) ClearEphemeral() {
-	x.Ephemeral = nil
+	x.xxx_hidden_Ephemeral = v
 }
 
 type SessionRequest_AcquireSemaphore_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Client-defined request id, echoed in the response
-	ReqId *uint64
+	ReqId uint64
 	// Name of the semaphore to acquire
-	Name *string
+	Name string
 	// Timeout in milliseconds after which operation will fail
 	// if it's still waiting in the waiters queue
-	TimeoutMillis *uint64
+	TimeoutMillis uint64
 	// Number of tokens to acquire on the semaphore
-	Count *uint64
+	Count uint64
 	// User-defined binary data that may be attached to the operation
 	Data []byte
 	// Ephemeral semaphores are created with the first acquire operation
 	// and automatically deleted with the last release operation
-	Ephemeral *bool
+	Ephemeral bool
 }
 
 func (b0 SessionRequest_AcquireSemaphore_builder) Build() *SessionRequest_AcquireSemaphore {
 	m0 := &SessionRequest_AcquireSemaphore{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Name = b.Name
-	x.TimeoutMillis = b.TimeoutMillis
-	x.Count = b.Count
-	x.Data = b.Data
-	x.Ephemeral = b.Ephemeral
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_TimeoutMillis = b.TimeoutMillis
+	x.xxx_hidden_Count = b.Count
+	x.xxx_hidden_Data = b.Data
+	x.xxx_hidden_Ephemeral = b.Ephemeral
 	return m0
 }
 
@@ -3946,13 +3450,11 @@ func (b0 SessionRequest_AcquireSemaphore_builder) Build() *SessionRequest_Acquir
 // The release operation will either remove current session from waiters
 // queue or release an already owned semaphore.
 type SessionRequest_ReleaseSemaphore struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Client-defined request id, echoed in the response
-	ReqId *uint64 `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	// Name of the semaphore to release
-	Name          *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ReqId uint64                 `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Name  string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *SessionRequest_ReleaseSemaphore) Reset() {
@@ -3981,64 +3483,42 @@ func (x *SessionRequest_ReleaseSemaphore) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionRequest_ReleaseSemaphore) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionRequest_ReleaseSemaphore) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *SessionRequest_ReleaseSemaphore) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionRequest_ReleaseSemaphore) SetName(v string) {
-	x.Name = &v
-}
-
-func (x *SessionRequest_ReleaseSemaphore) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionRequest_ReleaseSemaphore) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *SessionRequest_ReleaseSemaphore) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionRequest_ReleaseSemaphore) ClearName() {
-	x.Name = nil
+	x.xxx_hidden_Name = v
 }
 
 type SessionRequest_ReleaseSemaphore_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Client-defined request id, echoed in the response
-	ReqId *uint64
+	ReqId uint64
 	// Name of the semaphore to release
-	Name *string
+	Name string
 }
 
 func (b0 SessionRequest_ReleaseSemaphore_builder) Build() *SessionRequest_ReleaseSemaphore {
 	m0 := &SessionRequest_ReleaseSemaphore{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Name = b.Name
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Name = b.Name
 	return m0
 }
 
@@ -4047,21 +3527,15 @@ func (b0 SessionRequest_ReleaseSemaphore_builder) Build() *SessionRequest_Releas
 //
 // WARNING: a describe operation will cancel previous watches on the same semaphore
 type SessionRequest_DescribeSemaphore struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Client-defined request id, echoed in the response
-	ReqId *uint64 `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	// Name of the semaphore to describe
-	Name *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	// Response will include owners list if true
-	IncludeOwners *bool `protobuf:"varint,3,opt,name=include_owners,json=includeOwners" json:"include_owners,omitempty"`
-	// Response will include waiters list if true
-	IncludeWaiters *bool `protobuf:"varint,4,opt,name=include_waiters,json=includeWaiters" json:"include_waiters,omitempty"`
-	// Watch for changes in semaphore data
-	WatchData *bool `protobuf:"varint,5,opt,name=watch_data,json=watchData" json:"watch_data,omitempty"`
-	// Watch for changes in semaphore owners (including owners data)
-	WatchOwners   *bool `protobuf:"varint,6,opt,name=watch_owners,json=watchOwners" json:"watch_owners,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ReqId          uint64                 `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Name           string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_IncludeOwners  bool                   `protobuf:"varint,3,opt,name=include_owners,json=includeOwners,proto3"`
+	xxx_hidden_IncludeWaiters bool                   `protobuf:"varint,4,opt,name=include_waiters,json=includeWaiters,proto3"`
+	xxx_hidden_WatchData      bool                   `protobuf:"varint,5,opt,name=watch_data,json=watchData,proto3"`
+	xxx_hidden_WatchOwners    bool                   `protobuf:"varint,6,opt,name=watch_owners,json=watchOwners,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *SessionRequest_DescribeSemaphore) Reset() {
@@ -4090,181 +3564,111 @@ func (x *SessionRequest_DescribeSemaphore) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionRequest_DescribeSemaphore) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionRequest_DescribeSemaphore) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *SessionRequest_DescribeSemaphore) GetIncludeOwners() bool {
-	if x != nil && x.IncludeOwners != nil {
-		return *x.IncludeOwners
+	if x != nil {
+		return x.xxx_hidden_IncludeOwners
 	}
 	return false
 }
 
 func (x *SessionRequest_DescribeSemaphore) GetIncludeWaiters() bool {
-	if x != nil && x.IncludeWaiters != nil {
-		return *x.IncludeWaiters
+	if x != nil {
+		return x.xxx_hidden_IncludeWaiters
 	}
 	return false
 }
 
 func (x *SessionRequest_DescribeSemaphore) GetWatchData() bool {
-	if x != nil && x.WatchData != nil {
-		return *x.WatchData
+	if x != nil {
+		return x.xxx_hidden_WatchData
 	}
 	return false
 }
 
 func (x *SessionRequest_DescribeSemaphore) GetWatchOwners() bool {
-	if x != nil && x.WatchOwners != nil {
-		return *x.WatchOwners
+	if x != nil {
+		return x.xxx_hidden_WatchOwners
 	}
 	return false
 }
 
 func (x *SessionRequest_DescribeSemaphore) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionRequest_DescribeSemaphore) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *SessionRequest_DescribeSemaphore) SetIncludeOwners(v bool) {
-	x.IncludeOwners = &v
+	x.xxx_hidden_IncludeOwners = v
 }
 
 func (x *SessionRequest_DescribeSemaphore) SetIncludeWaiters(v bool) {
-	x.IncludeWaiters = &v
+	x.xxx_hidden_IncludeWaiters = v
 }
 
 func (x *SessionRequest_DescribeSemaphore) SetWatchData(v bool) {
-	x.WatchData = &v
+	x.xxx_hidden_WatchData = v
 }
 
 func (x *SessionRequest_DescribeSemaphore) SetWatchOwners(v bool) {
-	x.WatchOwners = &v
-}
-
-func (x *SessionRequest_DescribeSemaphore) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionRequest_DescribeSemaphore) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *SessionRequest_DescribeSemaphore) HasIncludeOwners() bool {
-	if x == nil {
-		return false
-	}
-	return x.IncludeOwners != nil
-}
-
-func (x *SessionRequest_DescribeSemaphore) HasIncludeWaiters() bool {
-	if x == nil {
-		return false
-	}
-	return x.IncludeWaiters != nil
-}
-
-func (x *SessionRequest_DescribeSemaphore) HasWatchData() bool {
-	if x == nil {
-		return false
-	}
-	return x.WatchData != nil
-}
-
-func (x *SessionRequest_DescribeSemaphore) HasWatchOwners() bool {
-	if x == nil {
-		return false
-	}
-	return x.WatchOwners != nil
-}
-
-func (x *SessionRequest_DescribeSemaphore) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionRequest_DescribeSemaphore) ClearName() {
-	x.Name = nil
-}
-
-func (x *SessionRequest_DescribeSemaphore) ClearIncludeOwners() {
-	x.IncludeOwners = nil
-}
-
-func (x *SessionRequest_DescribeSemaphore) ClearIncludeWaiters() {
-	x.IncludeWaiters = nil
-}
-
-func (x *SessionRequest_DescribeSemaphore) ClearWatchData() {
-	x.WatchData = nil
-}
-
-func (x *SessionRequest_DescribeSemaphore) ClearWatchOwners() {
-	x.WatchOwners = nil
+	x.xxx_hidden_WatchOwners = v
 }
 
 type SessionRequest_DescribeSemaphore_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Client-defined request id, echoed in the response
-	ReqId *uint64
+	ReqId uint64
 	// Name of the semaphore to describe
-	Name *string
+	Name string
 	// Response will include owners list if true
-	IncludeOwners *bool
+	IncludeOwners bool
 	// Response will include waiters list if true
-	IncludeWaiters *bool
+	IncludeWaiters bool
 	// Watch for changes in semaphore data
-	WatchData *bool
+	WatchData bool
 	// Watch for changes in semaphore owners (including owners data)
-	WatchOwners *bool
+	WatchOwners bool
 }
 
 func (b0 SessionRequest_DescribeSemaphore_builder) Build() *SessionRequest_DescribeSemaphore {
 	m0 := &SessionRequest_DescribeSemaphore{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Name = b.Name
-	x.IncludeOwners = b.IncludeOwners
-	x.IncludeWaiters = b.IncludeWaiters
-	x.WatchData = b.WatchData
-	x.WatchOwners = b.WatchOwners
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_IncludeOwners = b.IncludeOwners
+	x.xxx_hidden_IncludeWaiters = b.IncludeWaiters
+	x.xxx_hidden_WatchData = b.WatchData
+	x.xxx_hidden_WatchOwners = b.WatchOwners
 	return m0
 }
 
 // *
 // Used to create a new semaphore
 type SessionRequest_CreateSemaphore struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Client-defined request id, echoed in the response
-	ReqId *uint64 `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	// Name of the semaphore to create
-	Name *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	// Number of tokens that may be acquired by sessions
-	Limit *uint64 `protobuf:"varint,3,opt,name=limit" json:"limit,omitempty"`
-	// User-defined data that is attached to the semaphore
-	Data          []byte `protobuf:"bytes,4,opt,name=data" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ReqId uint64                 `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Name  string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_Limit uint64                 `protobuf:"varint,3,opt,name=limit,proto3"`
+	xxx_hidden_Data  []byte                 `protobuf:"bytes,4,opt,name=data,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *SessionRequest_CreateSemaphore) Reset() {
@@ -4293,105 +3697,61 @@ func (x *SessionRequest_CreateSemaphore) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionRequest_CreateSemaphore) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionRequest_CreateSemaphore) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *SessionRequest_CreateSemaphore) GetLimit() uint64 {
-	if x != nil && x.Limit != nil {
-		return *x.Limit
+	if x != nil {
+		return x.xxx_hidden_Limit
 	}
 	return 0
 }
 
 func (x *SessionRequest_CreateSemaphore) GetData() []byte {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
 func (x *SessionRequest_CreateSemaphore) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionRequest_CreateSemaphore) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *SessionRequest_CreateSemaphore) SetLimit(v uint64) {
-	x.Limit = &v
+	x.xxx_hidden_Limit = v
 }
 
 func (x *SessionRequest_CreateSemaphore) SetData(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.Data = v
-}
-
-func (x *SessionRequest_CreateSemaphore) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionRequest_CreateSemaphore) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *SessionRequest_CreateSemaphore) HasLimit() bool {
-	if x == nil {
-		return false
-	}
-	return x.Limit != nil
-}
-
-func (x *SessionRequest_CreateSemaphore) HasData() bool {
-	if x == nil {
-		return false
-	}
-	return x.Data != nil
-}
-
-func (x *SessionRequest_CreateSemaphore) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionRequest_CreateSemaphore) ClearName() {
-	x.Name = nil
-}
-
-func (x *SessionRequest_CreateSemaphore) ClearLimit() {
-	x.Limit = nil
-}
-
-func (x *SessionRequest_CreateSemaphore) ClearData() {
-	x.Data = nil
+	x.xxx_hidden_Data = v
 }
 
 type SessionRequest_CreateSemaphore_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Client-defined request id, echoed in the response
-	ReqId *uint64
+	ReqId uint64
 	// Name of the semaphore to create
-	Name *string
+	Name string
 	// Number of tokens that may be acquired by sessions
-	Limit *uint64
+	Limit uint64
 	// User-defined data that is attached to the semaphore
 	Data []byte
 }
@@ -4400,25 +3760,22 @@ func (b0 SessionRequest_CreateSemaphore_builder) Build() *SessionRequest_CreateS
 	m0 := &SessionRequest_CreateSemaphore{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Name = b.Name
-	x.Limit = b.Limit
-	x.Data = b.Data
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Limit = b.Limit
+	x.xxx_hidden_Data = b.Data
 	return m0
 }
 
 // *
 // Used to change semaphore data
 type SessionRequest_UpdateSemaphore struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Client-defined request id, echoed in the response
-	ReqId *uint64 `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	// Name of the semaphore to update
-	Name *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	// User-defined data that is attached to the semaphore
-	Data          []byte `protobuf:"bytes,3,opt,name=data" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ReqId uint64                 `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Name  string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_Data  []byte                 `protobuf:"bytes,3,opt,name=data,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *SessionRequest_UpdateSemaphore) Reset() {
@@ -4447,81 +3804,48 @@ func (x *SessionRequest_UpdateSemaphore) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionRequest_UpdateSemaphore) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionRequest_UpdateSemaphore) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *SessionRequest_UpdateSemaphore) GetData() []byte {
 	if x != nil {
-		return x.Data
+		return x.xxx_hidden_Data
 	}
 	return nil
 }
 
 func (x *SessionRequest_UpdateSemaphore) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionRequest_UpdateSemaphore) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *SessionRequest_UpdateSemaphore) SetData(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.Data = v
-}
-
-func (x *SessionRequest_UpdateSemaphore) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionRequest_UpdateSemaphore) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *SessionRequest_UpdateSemaphore) HasData() bool {
-	if x == nil {
-		return false
-	}
-	return x.Data != nil
-}
-
-func (x *SessionRequest_UpdateSemaphore) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionRequest_UpdateSemaphore) ClearName() {
-	x.Name = nil
-}
-
-func (x *SessionRequest_UpdateSemaphore) ClearData() {
-	x.Data = nil
+	x.xxx_hidden_Data = v
 }
 
 type SessionRequest_UpdateSemaphore_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Client-defined request id, echoed in the response
-	ReqId *uint64
+	ReqId uint64
 	// Name of the semaphore to update
-	Name *string
+	Name string
 	// User-defined data that is attached to the semaphore
 	Data []byte
 }
@@ -4530,24 +3854,21 @@ func (b0 SessionRequest_UpdateSemaphore_builder) Build() *SessionRequest_UpdateS
 	m0 := &SessionRequest_UpdateSemaphore{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Name = b.Name
-	x.Data = b.Data
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Data = b.Data
 	return m0
 }
 
 // *
 // Used to delete an existing semaphore
 type SessionRequest_DeleteSemaphore struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Client-defined request id, echoed in the response
-	ReqId *uint64 `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	// Name of the semaphore to delete
-	Name *string `protobuf:"bytes,2,opt,name=name" json:"name,omitempty"`
-	// Will delete semaphore even if currently acquired by sessions
-	Force         *bool `protobuf:"varint,3,opt,name=force" json:"force,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ReqId uint64                 `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Name  string                 `protobuf:"bytes,2,opt,name=name,proto3"`
+	xxx_hidden_Force bool                   `protobuf:"varint,3,opt,name=force,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *SessionRequest_DeleteSemaphore) Reset() {
@@ -4576,100 +3897,66 @@ func (x *SessionRequest_DeleteSemaphore) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionRequest_DeleteSemaphore) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionRequest_DeleteSemaphore) GetName() string {
-	if x != nil && x.Name != nil {
-		return *x.Name
+	if x != nil {
+		return x.xxx_hidden_Name
 	}
 	return ""
 }
 
 func (x *SessionRequest_DeleteSemaphore) GetForce() bool {
-	if x != nil && x.Force != nil {
-		return *x.Force
+	if x != nil {
+		return x.xxx_hidden_Force
 	}
 	return false
 }
 
 func (x *SessionRequest_DeleteSemaphore) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionRequest_DeleteSemaphore) SetName(v string) {
-	x.Name = &v
+	x.xxx_hidden_Name = v
 }
 
 func (x *SessionRequest_DeleteSemaphore) SetForce(v bool) {
-	x.Force = &v
-}
-
-func (x *SessionRequest_DeleteSemaphore) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionRequest_DeleteSemaphore) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return x.Name != nil
-}
-
-func (x *SessionRequest_DeleteSemaphore) HasForce() bool {
-	if x == nil {
-		return false
-	}
-	return x.Force != nil
-}
-
-func (x *SessionRequest_DeleteSemaphore) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionRequest_DeleteSemaphore) ClearName() {
-	x.Name = nil
-}
-
-func (x *SessionRequest_DeleteSemaphore) ClearForce() {
-	x.Force = nil
+	x.xxx_hidden_Force = v
 }
 
 type SessionRequest_DeleteSemaphore_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Client-defined request id, echoed in the response
-	ReqId *uint64
+	ReqId uint64
 	// Name of the semaphore to delete
-	Name *string
+	Name string
 	// Will delete semaphore even if currently acquired by sessions
-	Force *bool
+	Force bool
 }
 
 func (b0 SessionRequest_DeleteSemaphore_builder) Build() *SessionRequest_DeleteSemaphore {
 	m0 := &SessionRequest_DeleteSemaphore{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Name = b.Name
-	x.Force = b.Force
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Force = b.Force
 	return m0
 }
 
 // *
 // Used for checking liveness of the connection
 type SessionResponse_PingPong struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Opaque number specified in the ping message is echoed in the pong message
-	Opaque        *uint64 `protobuf:"varint,1,opt,name=opaque" json:"opaque,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Opaque uint64                 `protobuf:"varint,1,opt,name=opaque,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *SessionResponse_PingPong) Reset() {
@@ -4698,50 +3985,39 @@ func (x *SessionResponse_PingPong) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionResponse_PingPong) GetOpaque() uint64 {
-	if x != nil && x.Opaque != nil {
-		return *x.Opaque
+	if x != nil {
+		return x.xxx_hidden_Opaque
 	}
 	return 0
 }
 
 func (x *SessionResponse_PingPong) SetOpaque(v uint64) {
-	x.Opaque = &v
-}
-
-func (x *SessionResponse_PingPong) HasOpaque() bool {
-	if x == nil {
-		return false
-	}
-	return x.Opaque != nil
-}
-
-func (x *SessionResponse_PingPong) ClearOpaque() {
-	x.Opaque = nil
+	x.xxx_hidden_Opaque = v
 }
 
 type SessionResponse_PingPong_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Opaque number specified in the ping message is echoed in the pong message
-	Opaque *uint64
+	Opaque uint64
 }
 
 func (b0 SessionResponse_PingPong_builder) Build() *SessionResponse_PingPong {
 	m0 := &SessionResponse_PingPong{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Opaque = b.Opaque
+	x.xxx_hidden_Opaque = b.Opaque
 	return m0
 }
 
 // *
 // Used to report connection and session level failures
 type SessionResponse_Failure struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Status        *Ydb.StatusIds_StatusCode `protobuf:"varint,1,opt,name=status,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues" json:"issues,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,1,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,2,rep,name=issues,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *SessionResponse_Failure) Reset() {
@@ -4770,42 +4046,33 @@ func (x *SessionResponse_Failure) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionResponse_Failure) GetStatus() Ydb.StatusIds_StatusCode {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *SessionResponse_Failure) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *SessionResponse_Failure) SetStatus(v Ydb.StatusIds_StatusCode) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *SessionResponse_Failure) SetIssues(v []*Ydb_Issue.IssueMessage) {
-	x.Issues = v
-}
-
-func (x *SessionResponse_Failure) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
-}
-
-func (x *SessionResponse_Failure) ClearStatus() {
-	x.Status = nil
+	x.xxx_hidden_Issues = &v
 }
 
 type SessionResponse_Failure_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Status *Ydb.StatusIds_StatusCode
+	Status Ydb.StatusIds_StatusCode
 	Issues []*Ydb_Issue.IssueMessage
 }
 
@@ -4813,21 +4080,19 @@ func (b0 SessionResponse_Failure_builder) Build() *SessionResponse_Failure {
 	m0 := &SessionResponse_Failure{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Status = b.Status
-	x.Issues = b.Issues
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
 	return m0
 }
 
 // *
 // Used to report a successful session create/restore operation
 type SessionResponse_SessionStarted struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// A server generation id that may be used for restoring the session
-	SessionId *uint64 `protobuf:"varint,1,opt,name=session_id,json=sessionId" json:"session_id,omitempty"`
-	// Timeout in milliseconds that will be used by the server
-	TimeoutMillis *uint64 `protobuf:"varint,2,opt,name=timeout_millis,json=timeoutMillis" json:"timeout_millis,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId     uint64                 `protobuf:"varint,1,opt,name=session_id,json=sessionId,proto3"`
+	xxx_hidden_TimeoutMillis uint64                 `protobuf:"varint,2,opt,name=timeout_millis,json=timeoutMillis,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *SessionResponse_SessionStarted) Reset() {
@@ -4856,74 +4121,52 @@ func (x *SessionResponse_SessionStarted) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionResponse_SessionStarted) GetSessionId() uint64 {
-	if x != nil && x.SessionId != nil {
-		return *x.SessionId
+	if x != nil {
+		return x.xxx_hidden_SessionId
 	}
 	return 0
 }
 
 func (x *SessionResponse_SessionStarted) GetTimeoutMillis() uint64 {
-	if x != nil && x.TimeoutMillis != nil {
-		return *x.TimeoutMillis
+	if x != nil {
+		return x.xxx_hidden_TimeoutMillis
 	}
 	return 0
 }
 
 func (x *SessionResponse_SessionStarted) SetSessionId(v uint64) {
-	x.SessionId = &v
+	x.xxx_hidden_SessionId = v
 }
 
 func (x *SessionResponse_SessionStarted) SetTimeoutMillis(v uint64) {
-	x.TimeoutMillis = &v
-}
-
-func (x *SessionResponse_SessionStarted) HasSessionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.SessionId != nil
-}
-
-func (x *SessionResponse_SessionStarted) HasTimeoutMillis() bool {
-	if x == nil {
-		return false
-	}
-	return x.TimeoutMillis != nil
-}
-
-func (x *SessionResponse_SessionStarted) ClearSessionId() {
-	x.SessionId = nil
-}
-
-func (x *SessionResponse_SessionStarted) ClearTimeoutMillis() {
-	x.TimeoutMillis = nil
+	x.xxx_hidden_TimeoutMillis = v
 }
 
 type SessionResponse_SessionStarted_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// A server generation id that may be used for restoring the session
-	SessionId *uint64
+	SessionId uint64
 	// Timeout in milliseconds that will be used by the server
-	TimeoutMillis *uint64
+	TimeoutMillis uint64
 }
 
 func (b0 SessionResponse_SessionStarted_builder) Build() *SessionResponse_SessionStarted {
 	m0 := &SessionResponse_SessionStarted{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.SessionId = b.SessionId
-	x.TimeoutMillis = b.TimeoutMillis
+	x.xxx_hidden_SessionId = b.SessionId
+	x.xxx_hidden_TimeoutMillis = b.TimeoutMillis
 	return m0
 }
 
 // *
 // Used to report a successful graceful termination of the session
 type SessionResponse_SessionStopped struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	SessionId     *uint64                `protobuf:"varint,1,opt,name=session_id,json=sessionId" json:"session_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SessionId uint64                 `protobuf:"varint,1,opt,name=session_id,json=sessionId,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *SessionResponse_SessionStopped) Reset() {
@@ -4952,48 +4195,37 @@ func (x *SessionResponse_SessionStopped) ProtoReflect() protoreflect.Message {
 }
 
 func (x *SessionResponse_SessionStopped) GetSessionId() uint64 {
-	if x != nil && x.SessionId != nil {
-		return *x.SessionId
+	if x != nil {
+		return x.xxx_hidden_SessionId
 	}
 	return 0
 }
 
 func (x *SessionResponse_SessionStopped) SetSessionId(v uint64) {
-	x.SessionId = &v
-}
-
-func (x *SessionResponse_SessionStopped) HasSessionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.SessionId != nil
-}
-
-func (x *SessionResponse_SessionStopped) ClearSessionId() {
-	x.SessionId = nil
+	x.xxx_hidden_SessionId = v
 }
 
 type SessionResponse_SessionStopped_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	SessionId *uint64
+	SessionId uint64
 }
 
 func (b0 SessionResponse_SessionStopped_builder) Build() *SessionResponse_SessionStopped {
 	m0 := &SessionResponse_SessionStopped{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.SessionId = b.SessionId
+	x.xxx_hidden_SessionId = b.SessionId
 	return m0
 }
 
 // *
 // Used by the server to report when an acquire operation is added to the waiters queue
 type SessionResponse_AcquireSemaphorePending struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	ReqId         *uint64                `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ReqId uint64                 `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *SessionResponse_AcquireSemaphorePending) Reset() {
@@ -5022,52 +4254,40 @@ func (x *SessionResponse_AcquireSemaphorePending) ProtoReflect() protoreflect.Me
 }
 
 func (x *SessionResponse_AcquireSemaphorePending) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionResponse_AcquireSemaphorePending) SetReqId(v uint64) {
-	x.ReqId = &v
-}
-
-func (x *SessionResponse_AcquireSemaphorePending) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionResponse_AcquireSemaphorePending) ClearReqId() {
-	x.ReqId = nil
+	x.xxx_hidden_ReqId = v
 }
 
 type SessionResponse_AcquireSemaphorePending_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ReqId *uint64
+	ReqId uint64
 }
 
 func (b0 SessionResponse_AcquireSemaphorePending_builder) Build() *SessionResponse_AcquireSemaphorePending {
 	m0 := &SessionResponse_AcquireSemaphorePending{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
+	x.xxx_hidden_ReqId = b.ReqId
 	return m0
 }
 
 // *
 // Used by the server to report the result of an acquire operation
 type SessionResponse_AcquireSemaphoreResult struct {
-	state  protoimpl.MessageState    `protogen:"hybrid.v1"`
-	ReqId  *uint64                   `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	Status *Ydb.StatusIds_StatusCode `protobuf:"varint,2,opt,name=status,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues" json:"issues,omitempty"`
-	// True if semaphore was acquired, false if acquire timed out
-	Acquired      *bool `protobuf:"varint,4,opt,name=acquired" json:"acquired,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ReqId    uint64                     `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Status   Ydb.StatusIds_StatusCode   `protobuf:"varint,2,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues   *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues,proto3"`
+	xxx_hidden_Acquired bool                       `protobuf:"varint,4,opt,name=acquired,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *SessionResponse_AcquireSemaphoreResult) Reset() {
@@ -5096,114 +4316,82 @@ func (x *SessionResponse_AcquireSemaphoreResult) ProtoReflect() protoreflect.Mes
 }
 
 func (x *SessionResponse_AcquireSemaphoreResult) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionResponse_AcquireSemaphoreResult) GetStatus() Ydb.StatusIds_StatusCode {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *SessionResponse_AcquireSemaphoreResult) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *SessionResponse_AcquireSemaphoreResult) GetAcquired() bool {
-	if x != nil && x.Acquired != nil {
-		return *x.Acquired
+	if x != nil {
+		return x.xxx_hidden_Acquired
 	}
 	return false
 }
 
 func (x *SessionResponse_AcquireSemaphoreResult) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionResponse_AcquireSemaphoreResult) SetStatus(v Ydb.StatusIds_StatusCode) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *SessionResponse_AcquireSemaphoreResult) SetIssues(v []*Ydb_Issue.IssueMessage) {
-	x.Issues = v
+	x.xxx_hidden_Issues = &v
 }
 
 func (x *SessionResponse_AcquireSemaphoreResult) SetAcquired(v bool) {
-	x.Acquired = &v
-}
-
-func (x *SessionResponse_AcquireSemaphoreResult) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionResponse_AcquireSemaphoreResult) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
-}
-
-func (x *SessionResponse_AcquireSemaphoreResult) HasAcquired() bool {
-	if x == nil {
-		return false
-	}
-	return x.Acquired != nil
-}
-
-func (x *SessionResponse_AcquireSemaphoreResult) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionResponse_AcquireSemaphoreResult) ClearStatus() {
-	x.Status = nil
-}
-
-func (x *SessionResponse_AcquireSemaphoreResult) ClearAcquired() {
-	x.Acquired = nil
+	x.xxx_hidden_Acquired = v
 }
 
 type SessionResponse_AcquireSemaphoreResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ReqId  *uint64
-	Status *Ydb.StatusIds_StatusCode
+	ReqId  uint64
+	Status Ydb.StatusIds_StatusCode
 	Issues []*Ydb_Issue.IssueMessage
 	// True if semaphore was acquired, false if acquire timed out
-	Acquired *bool
+	Acquired bool
 }
 
 func (b0 SessionResponse_AcquireSemaphoreResult_builder) Build() *SessionResponse_AcquireSemaphoreResult {
 	m0 := &SessionResponse_AcquireSemaphoreResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Status = b.Status
-	x.Issues = b.Issues
-	x.Acquired = b.Acquired
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_Acquired = b.Acquired
 	return m0
 }
 
 // *
 // Used by the server to report the result of a release operation
 type SessionResponse_ReleaseSemaphoreResult struct {
-	state  protoimpl.MessageState    `protogen:"hybrid.v1"`
-	ReqId  *uint64                   `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	Status *Ydb.StatusIds_StatusCode `protobuf:"varint,2,opt,name=status,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues []*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues" json:"issues,omitempty"`
-	// True if semaphore was released, false if there was no active acquire operation
-	Released      *bool `protobuf:"varint,4,opt,name=released" json:"released,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ReqId    uint64                     `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Status   Ydb.StatusIds_StatusCode   `protobuf:"varint,2,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues   *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues,proto3"`
+	xxx_hidden_Released bool                       `protobuf:"varint,4,opt,name=released,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *SessionResponse_ReleaseSemaphoreResult) Reset() {
@@ -5232,115 +4420,83 @@ func (x *SessionResponse_ReleaseSemaphoreResult) ProtoReflect() protoreflect.Mes
 }
 
 func (x *SessionResponse_ReleaseSemaphoreResult) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionResponse_ReleaseSemaphoreResult) GetStatus() Ydb.StatusIds_StatusCode {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *SessionResponse_ReleaseSemaphoreResult) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *SessionResponse_ReleaseSemaphoreResult) GetReleased() bool {
-	if x != nil && x.Released != nil {
-		return *x.Released
+	if x != nil {
+		return x.xxx_hidden_Released
 	}
 	return false
 }
 
 func (x *SessionResponse_ReleaseSemaphoreResult) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionResponse_ReleaseSemaphoreResult) SetStatus(v Ydb.StatusIds_StatusCode) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *SessionResponse_ReleaseSemaphoreResult) SetIssues(v []*Ydb_Issue.IssueMessage) {
-	x.Issues = v
+	x.xxx_hidden_Issues = &v
 }
 
 func (x *SessionResponse_ReleaseSemaphoreResult) SetReleased(v bool) {
-	x.Released = &v
-}
-
-func (x *SessionResponse_ReleaseSemaphoreResult) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionResponse_ReleaseSemaphoreResult) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
-}
-
-func (x *SessionResponse_ReleaseSemaphoreResult) HasReleased() bool {
-	if x == nil {
-		return false
-	}
-	return x.Released != nil
-}
-
-func (x *SessionResponse_ReleaseSemaphoreResult) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionResponse_ReleaseSemaphoreResult) ClearStatus() {
-	x.Status = nil
-}
-
-func (x *SessionResponse_ReleaseSemaphoreResult) ClearReleased() {
-	x.Released = nil
+	x.xxx_hidden_Released = v
 }
 
 type SessionResponse_ReleaseSemaphoreResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ReqId  *uint64
-	Status *Ydb.StatusIds_StatusCode
+	ReqId  uint64
+	Status Ydb.StatusIds_StatusCode
 	Issues []*Ydb_Issue.IssueMessage
 	// True if semaphore was released, false if there was no active acquire operation
-	Released *bool
+	Released bool
 }
 
 func (b0 SessionResponse_ReleaseSemaphoreResult_builder) Build() *SessionResponse_ReleaseSemaphoreResult {
 	m0 := &SessionResponse_ReleaseSemaphoreResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Status = b.Status
-	x.Issues = b.Issues
-	x.Released = b.Released
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_Released = b.Released
 	return m0
 }
 
 // *
 // The result of the describe operation
 type SessionResponse_DescribeSemaphoreResult struct {
-	state                protoimpl.MessageState    `protogen:"hybrid.v1"`
-	ReqId                *uint64                   `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	Status               *Ydb.StatusIds_StatusCode `protobuf:"varint,2,opt,name=status,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues               []*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues" json:"issues,omitempty"`
-	SemaphoreDescription *SemaphoreDescription     `protobuf:"bytes,4,opt,name=semaphore_description,json=semaphoreDescription" json:"semaphore_description,omitempty"`
-	// True if a watch has been added for the semaphore
-	WatchAdded    *bool `protobuf:"varint,5,opt,name=watch_added,json=watchAdded" json:"watch_added,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                           protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ReqId                uint64                     `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Status               Ydb.StatusIds_StatusCode   `protobuf:"varint,2,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues               *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues,proto3"`
+	xxx_hidden_SemaphoreDescription *SemaphoreDescription      `protobuf:"bytes,4,opt,name=semaphore_description,json=semaphoreDescription,proto3"`
+	xxx_hidden_WatchAdded           bool                       `protobuf:"varint,5,opt,name=watch_added,json=watchAdded,proto3"`
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) Reset() {
@@ -5369,136 +4525,105 @@ func (x *SessionResponse_DescribeSemaphoreResult) ProtoReflect() protoreflect.Me
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) GetStatus() Ydb.StatusIds_StatusCode {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) GetSemaphoreDescription() *SemaphoreDescription {
 	if x != nil {
-		return x.SemaphoreDescription
+		return x.xxx_hidden_SemaphoreDescription
 	}
 	return nil
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) GetWatchAdded() bool {
-	if x != nil && x.WatchAdded != nil {
-		return *x.WatchAdded
+	if x != nil {
+		return x.xxx_hidden_WatchAdded
 	}
 	return false
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) SetStatus(v Ydb.StatusIds_StatusCode) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) SetIssues(v []*Ydb_Issue.IssueMessage) {
-	x.Issues = v
+	x.xxx_hidden_Issues = &v
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) SetSemaphoreDescription(v *SemaphoreDescription) {
-	x.SemaphoreDescription = v
+	x.xxx_hidden_SemaphoreDescription = v
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) SetWatchAdded(v bool) {
-	x.WatchAdded = &v
-}
-
-func (x *SessionResponse_DescribeSemaphoreResult) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionResponse_DescribeSemaphoreResult) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
+	x.xxx_hidden_WatchAdded = v
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) HasSemaphoreDescription() bool {
 	if x == nil {
 		return false
 	}
-	return x.SemaphoreDescription != nil
-}
-
-func (x *SessionResponse_DescribeSemaphoreResult) HasWatchAdded() bool {
-	if x == nil {
-		return false
-	}
-	return x.WatchAdded != nil
-}
-
-func (x *SessionResponse_DescribeSemaphoreResult) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionResponse_DescribeSemaphoreResult) ClearStatus() {
-	x.Status = nil
+	return x.xxx_hidden_SemaphoreDescription != nil
 }
 
 func (x *SessionResponse_DescribeSemaphoreResult) ClearSemaphoreDescription() {
-	x.SemaphoreDescription = nil
-}
-
-func (x *SessionResponse_DescribeSemaphoreResult) ClearWatchAdded() {
-	x.WatchAdded = nil
+	x.xxx_hidden_SemaphoreDescription = nil
 }
 
 type SessionResponse_DescribeSemaphoreResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ReqId                *uint64
-	Status               *Ydb.StatusIds_StatusCode
+	ReqId                uint64
+	Status               Ydb.StatusIds_StatusCode
 	Issues               []*Ydb_Issue.IssueMessage
 	SemaphoreDescription *SemaphoreDescription
 	// True if a watch has been added for the semaphore
-	WatchAdded *bool
+	WatchAdded bool
 }
 
 func (b0 SessionResponse_DescribeSemaphoreResult_builder) Build() *SessionResponse_DescribeSemaphoreResult {
 	m0 := &SessionResponse_DescribeSemaphoreResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Status = b.Status
-	x.Issues = b.Issues
-	x.SemaphoreDescription = b.SemaphoreDescription
-	x.WatchAdded = b.WatchAdded
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
+	x.xxx_hidden_SemaphoreDescription = b.SemaphoreDescription
+	x.xxx_hidden_WatchAdded = b.WatchAdded
 	return m0
 }
 
 // *
 // Used to report a change in the watched semaphore
 type SessionResponse_DescribeSemaphoreChanged struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	ReqId         *uint64                `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	DataChanged   *bool                  `protobuf:"varint,2,opt,name=data_changed,json=dataChanged" json:"data_changed,omitempty"`
-	OwnersChanged *bool                  `protobuf:"varint,3,opt,name=owners_changed,json=ownersChanged" json:"owners_changed,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ReqId         uint64                 `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_DataChanged   bool                   `protobuf:"varint,2,opt,name=data_changed,json=dataChanged,proto3"`
+	xxx_hidden_OwnersChanged bool                   `protobuf:"varint,3,opt,name=owners_changed,json=ownersChanged,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *SessionResponse_DescribeSemaphoreChanged) Reset() {
@@ -5527,98 +4652,65 @@ func (x *SessionResponse_DescribeSemaphoreChanged) ProtoReflect() protoreflect.M
 }
 
 func (x *SessionResponse_DescribeSemaphoreChanged) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionResponse_DescribeSemaphoreChanged) GetDataChanged() bool {
-	if x != nil && x.DataChanged != nil {
-		return *x.DataChanged
+	if x != nil {
+		return x.xxx_hidden_DataChanged
 	}
 	return false
 }
 
 func (x *SessionResponse_DescribeSemaphoreChanged) GetOwnersChanged() bool {
-	if x != nil && x.OwnersChanged != nil {
-		return *x.OwnersChanged
+	if x != nil {
+		return x.xxx_hidden_OwnersChanged
 	}
 	return false
 }
 
 func (x *SessionResponse_DescribeSemaphoreChanged) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionResponse_DescribeSemaphoreChanged) SetDataChanged(v bool) {
-	x.DataChanged = &v
+	x.xxx_hidden_DataChanged = v
 }
 
 func (x *SessionResponse_DescribeSemaphoreChanged) SetOwnersChanged(v bool) {
-	x.OwnersChanged = &v
-}
-
-func (x *SessionResponse_DescribeSemaphoreChanged) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionResponse_DescribeSemaphoreChanged) HasDataChanged() bool {
-	if x == nil {
-		return false
-	}
-	return x.DataChanged != nil
-}
-
-func (x *SessionResponse_DescribeSemaphoreChanged) HasOwnersChanged() bool {
-	if x == nil {
-		return false
-	}
-	return x.OwnersChanged != nil
-}
-
-func (x *SessionResponse_DescribeSemaphoreChanged) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionResponse_DescribeSemaphoreChanged) ClearDataChanged() {
-	x.DataChanged = nil
-}
-
-func (x *SessionResponse_DescribeSemaphoreChanged) ClearOwnersChanged() {
-	x.OwnersChanged = nil
+	x.xxx_hidden_OwnersChanged = v
 }
 
 type SessionResponse_DescribeSemaphoreChanged_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ReqId         *uint64
-	DataChanged   *bool
-	OwnersChanged *bool
+	ReqId         uint64
+	DataChanged   bool
+	OwnersChanged bool
 }
 
 func (b0 SessionResponse_DescribeSemaphoreChanged_builder) Build() *SessionResponse_DescribeSemaphoreChanged {
 	m0 := &SessionResponse_DescribeSemaphoreChanged{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.DataChanged = b.DataChanged
-	x.OwnersChanged = b.OwnersChanged
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_DataChanged = b.DataChanged
+	x.xxx_hidden_OwnersChanged = b.OwnersChanged
 	return m0
 }
 
 // *
 // The result of semaphore creation
 type SessionResponse_CreateSemaphoreResult struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	ReqId         *uint64                   `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	Status        *Ydb.StatusIds_StatusCode `protobuf:"varint,2,opt,name=status,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues" json:"issues,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ReqId  uint64                     `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,2,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *SessionResponse_CreateSemaphoreResult) Reset() {
@@ -5647,65 +4739,45 @@ func (x *SessionResponse_CreateSemaphoreResult) ProtoReflect() protoreflect.Mess
 }
 
 func (x *SessionResponse_CreateSemaphoreResult) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionResponse_CreateSemaphoreResult) GetStatus() Ydb.StatusIds_StatusCode {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *SessionResponse_CreateSemaphoreResult) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *SessionResponse_CreateSemaphoreResult) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionResponse_CreateSemaphoreResult) SetStatus(v Ydb.StatusIds_StatusCode) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *SessionResponse_CreateSemaphoreResult) SetIssues(v []*Ydb_Issue.IssueMessage) {
-	x.Issues = v
-}
-
-func (x *SessionResponse_CreateSemaphoreResult) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionResponse_CreateSemaphoreResult) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
-}
-
-func (x *SessionResponse_CreateSemaphoreResult) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionResponse_CreateSemaphoreResult) ClearStatus() {
-	x.Status = nil
+	x.xxx_hidden_Issues = &v
 }
 
 type SessionResponse_CreateSemaphoreResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ReqId  *uint64
-	Status *Ydb.StatusIds_StatusCode
+	ReqId  uint64
+	Status Ydb.StatusIds_StatusCode
 	Issues []*Ydb_Issue.IssueMessage
 }
 
@@ -5713,21 +4785,21 @@ func (b0 SessionResponse_CreateSemaphoreResult_builder) Build() *SessionResponse
 	m0 := &SessionResponse_CreateSemaphoreResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Status = b.Status
-	x.Issues = b.Issues
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
 	return m0
 }
 
 // *
 // The result of semaphore update
 type SessionResponse_UpdateSemaphoreResult struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	ReqId         *uint64                   `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	Status        *Ydb.StatusIds_StatusCode `protobuf:"varint,2,opt,name=status,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues" json:"issues,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ReqId  uint64                     `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,2,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *SessionResponse_UpdateSemaphoreResult) Reset() {
@@ -5756,65 +4828,45 @@ func (x *SessionResponse_UpdateSemaphoreResult) ProtoReflect() protoreflect.Mess
 }
 
 func (x *SessionResponse_UpdateSemaphoreResult) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionResponse_UpdateSemaphoreResult) GetStatus() Ydb.StatusIds_StatusCode {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *SessionResponse_UpdateSemaphoreResult) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *SessionResponse_UpdateSemaphoreResult) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionResponse_UpdateSemaphoreResult) SetStatus(v Ydb.StatusIds_StatusCode) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *SessionResponse_UpdateSemaphoreResult) SetIssues(v []*Ydb_Issue.IssueMessage) {
-	x.Issues = v
-}
-
-func (x *SessionResponse_UpdateSemaphoreResult) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionResponse_UpdateSemaphoreResult) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
-}
-
-func (x *SessionResponse_UpdateSemaphoreResult) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionResponse_UpdateSemaphoreResult) ClearStatus() {
-	x.Status = nil
+	x.xxx_hidden_Issues = &v
 }
 
 type SessionResponse_UpdateSemaphoreResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ReqId  *uint64
-	Status *Ydb.StatusIds_StatusCode
+	ReqId  uint64
+	Status Ydb.StatusIds_StatusCode
 	Issues []*Ydb_Issue.IssueMessage
 }
 
@@ -5822,21 +4874,21 @@ func (b0 SessionResponse_UpdateSemaphoreResult_builder) Build() *SessionResponse
 	m0 := &SessionResponse_UpdateSemaphoreResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Status = b.Status
-	x.Issues = b.Issues
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
 	return m0
 }
 
 // *
 // The result of semaphore deletion
 type SessionResponse_DeleteSemaphoreResult struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	ReqId         *uint64                   `protobuf:"varint,1,opt,name=req_id,json=reqId" json:"req_id,omitempty"`
-	Status        *Ydb.StatusIds_StatusCode `protobuf:"varint,2,opt,name=status,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	Issues        []*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues" json:"issues,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ReqId  uint64                     `protobuf:"varint,1,opt,name=req_id,json=reqId,proto3"`
+	xxx_hidden_Status Ydb.StatusIds_StatusCode   `protobuf:"varint,2,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	xxx_hidden_Issues *[]*Ydb_Issue.IssueMessage `protobuf:"bytes,3,rep,name=issues,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *SessionResponse_DeleteSemaphoreResult) Reset() {
@@ -5865,65 +4917,45 @@ func (x *SessionResponse_DeleteSemaphoreResult) ProtoReflect() protoreflect.Mess
 }
 
 func (x *SessionResponse_DeleteSemaphoreResult) GetReqId() uint64 {
-	if x != nil && x.ReqId != nil {
-		return *x.ReqId
+	if x != nil {
+		return x.xxx_hidden_ReqId
 	}
 	return 0
 }
 
 func (x *SessionResponse_DeleteSemaphoreResult) GetStatus() Ydb.StatusIds_StatusCode {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *SessionResponse_DeleteSemaphoreResult) GetIssues() []*Ydb_Issue.IssueMessage {
 	if x != nil {
-		return x.Issues
+		if x.xxx_hidden_Issues != nil {
+			return *x.xxx_hidden_Issues
+		}
 	}
 	return nil
 }
 
 func (x *SessionResponse_DeleteSemaphoreResult) SetReqId(v uint64) {
-	x.ReqId = &v
+	x.xxx_hidden_ReqId = v
 }
 
 func (x *SessionResponse_DeleteSemaphoreResult) SetStatus(v Ydb.StatusIds_StatusCode) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *SessionResponse_DeleteSemaphoreResult) SetIssues(v []*Ydb_Issue.IssueMessage) {
-	x.Issues = v
-}
-
-func (x *SessionResponse_DeleteSemaphoreResult) HasReqId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReqId != nil
-}
-
-func (x *SessionResponse_DeleteSemaphoreResult) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
-}
-
-func (x *SessionResponse_DeleteSemaphoreResult) ClearReqId() {
-	x.ReqId = nil
-}
-
-func (x *SessionResponse_DeleteSemaphoreResult) ClearStatus() {
-	x.Status = nil
+	x.xxx_hidden_Issues = &v
 }
 
 type SessionResponse_DeleteSemaphoreResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ReqId  *uint64
-	Status *Ydb.StatusIds_StatusCode
+	ReqId  uint64
+	Status Ydb.StatusIds_StatusCode
 	Issues []*Ydb_Issue.IssueMessage
 }
 
@@ -5931,9 +4963,9 @@ func (b0 SessionResponse_DeleteSemaphoreResult_builder) Build() *SessionResponse
 	m0 := &SessionResponse_DeleteSemaphoreResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ReqId = b.ReqId
-	x.Status = b.Status
-	x.Issues = b.Issues
+	x.xxx_hidden_ReqId = b.ReqId
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Issues = &b.Issues
 	return m0
 }
 
@@ -5941,7 +4973,7 @@ var File_protos_ydb_coordination_proto protoreflect.FileDescriptor
 
 const file_protos_ydb_coordination_proto_rawDesc = "" +
 	"\n" +
-	"\x1dprotos/ydb_coordination.proto\x12\x10Ydb.Coordination\x1a\x1aprotos/ydb_operation.proto\x1a\x1dprotos/ydb_status_codes.proto\x1a\x1eprotos/ydb_issue_message.proto\x1a\x17protos/ydb_scheme.proto\x1a!google/protobuf/go_features.proto\"\r\n" +
+	"\x1dprotos/ydb_coordination.proto\x12\x10Ydb.Coordination\x1a\x1aprotos/ydb_operation.proto\x1a\x1dprotos/ydb_status_codes.proto\x1a\x1eprotos/ydb_issue_message.proto\x1a\x17protos/ydb_scheme.proto\"\r\n" +
 	"\vUnsupported\"\xae\x03\n" +
 	"\x06Config\x12\x12\n" +
 	"\x04path\x18\x01 \x01(\tR\x04path\x127\n" +
@@ -6132,8 +5164,8 @@ const file_protos_ydb_coordination_proto_rawDesc = "" +
 	"\x17RateLimiterCountersMode\x12$\n" +
 	" RATE_LIMITER_COUNTERS_MODE_UNSET\x10\x00\x12)\n" +
 	"%RATE_LIMITER_COUNTERS_MODE_AGGREGATED\x10\x01\x12'\n" +
-	"#RATE_LIMITER_COUNTERS_MODE_DETAILED\x10\x02B\x7f\n" +
-	"\x1btech.ydb.proto.coordinationB\x12CoordinationProtosP\x01Z?github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Coordination\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"#RATE_LIMITER_COUNTERS_MODE_DETAILED\x10\x02Bw\n" +
+	"\x1btech.ydb.proto.coordinationB\x12CoordinationProtosP\x01Z?github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Coordination\xf8\x01\x01b\x06proto3"
 
 var file_protos_ydb_coordination_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_protos_ydb_coordination_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
@@ -6262,41 +5294,41 @@ func file_protos_ydb_coordination_proto_init() {
 		return
 	}
 	file_protos_ydb_coordination_proto_msgTypes[5].OneofWrappers = []any{
-		(*SessionRequest_Ping)(nil),
-		(*SessionRequest_Pong)(nil),
-		(*SessionRequest_SessionStart_)(nil),
-		(*SessionRequest_SessionStop_)(nil),
-		(*SessionRequest_Unsupported_5)(nil),
-		(*SessionRequest_Unsupported_6)(nil),
-		(*SessionRequest_AcquireSemaphore_)(nil),
-		(*SessionRequest_ReleaseSemaphore_)(nil),
-		(*SessionRequest_DescribeSemaphore_)(nil),
-		(*SessionRequest_CreateSemaphore_)(nil),
-		(*SessionRequest_UpdateSemaphore_)(nil),
-		(*SessionRequest_DeleteSemaphore_)(nil),
-		(*SessionRequest_Unsupported_13)(nil),
-		(*SessionRequest_Unsupported_14)(nil),
-		(*SessionRequest_Unsupported_15)(nil),
+		(*sessionRequest_Ping)(nil),
+		(*sessionRequest_Pong)(nil),
+		(*sessionRequest_SessionStart_)(nil),
+		(*sessionRequest_SessionStop_)(nil),
+		(*sessionRequest_Unsupported_5)(nil),
+		(*sessionRequest_Unsupported_6)(nil),
+		(*sessionRequest_AcquireSemaphore_)(nil),
+		(*sessionRequest_ReleaseSemaphore_)(nil),
+		(*sessionRequest_DescribeSemaphore_)(nil),
+		(*sessionRequest_CreateSemaphore_)(nil),
+		(*sessionRequest_UpdateSemaphore_)(nil),
+		(*sessionRequest_DeleteSemaphore_)(nil),
+		(*sessionRequest_Unsupported_13)(nil),
+		(*sessionRequest_Unsupported_14)(nil),
+		(*sessionRequest_Unsupported_15)(nil),
 	}
 	file_protos_ydb_coordination_proto_msgTypes[6].OneofWrappers = []any{
-		(*SessionResponse_Ping)(nil),
-		(*SessionResponse_Pong)(nil),
-		(*SessionResponse_Failure_)(nil),
-		(*SessionResponse_SessionStarted_)(nil),
-		(*SessionResponse_SessionStopped_)(nil),
-		(*SessionResponse_Unsupported_6)(nil),
-		(*SessionResponse_Unsupported_7)(nil),
-		(*SessionResponse_AcquireSemaphorePending_)(nil),
-		(*SessionResponse_AcquireSemaphoreResult_)(nil),
-		(*SessionResponse_ReleaseSemaphoreResult_)(nil),
-		(*SessionResponse_DescribeSemaphoreResult_)(nil),
-		(*SessionResponse_DescribeSemaphoreChanged_)(nil),
-		(*SessionResponse_CreateSemaphoreResult_)(nil),
-		(*SessionResponse_UpdateSemaphoreResult_)(nil),
-		(*SessionResponse_DeleteSemaphoreResult_)(nil),
-		(*SessionResponse_Unsupported_16)(nil),
-		(*SessionResponse_Unsupported_17)(nil),
-		(*SessionResponse_Unsupported_18)(nil),
+		(*sessionResponse_Ping)(nil),
+		(*sessionResponse_Pong)(nil),
+		(*sessionResponse_Failure_)(nil),
+		(*sessionResponse_SessionStarted_)(nil),
+		(*sessionResponse_SessionStopped_)(nil),
+		(*sessionResponse_Unsupported_6)(nil),
+		(*sessionResponse_Unsupported_7)(nil),
+		(*sessionResponse_AcquireSemaphorePending_)(nil),
+		(*sessionResponse_AcquireSemaphoreResult_)(nil),
+		(*sessionResponse_ReleaseSemaphoreResult_)(nil),
+		(*sessionResponse_DescribeSemaphoreResult_)(nil),
+		(*sessionResponse_DescribeSemaphoreChanged_)(nil),
+		(*sessionResponse_CreateSemaphoreResult_)(nil),
+		(*sessionResponse_UpdateSemaphoreResult_)(nil),
+		(*sessionResponse_DeleteSemaphoreResult_)(nil),
+		(*sessionResponse_Unsupported_16)(nil),
+		(*sessionResponse_Unsupported_17)(nil),
+		(*sessionResponse_Unsupported_18)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

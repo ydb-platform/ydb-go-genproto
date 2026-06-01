@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: ydb_auth_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_Auth_V1
 
 import (
 	Ydb_Auth "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Auth"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,10 +25,10 @@ var File_ydb_auth_v1_proto protoreflect.FileDescriptor
 
 const file_ydb_auth_v1_proto_rawDesc = "" +
 	"\n" +
-	"\x11ydb_auth_v1.proto\x12\vYdb.Auth.V1\x1a\x15protos/ydb_auth.proto\x1a!google/protobuf/go_features.proto2G\n" +
+	"\x11ydb_auth_v1.proto\x12\vYdb.Auth.V1\x1a\x15protos/ydb_auth.proto2G\n" +
 	"\vAuthService\x128\n" +
-	"\x05Login\x12\x16.Ydb.Auth.LoginRequest\x1a\x17.Ydb.Auth.LoginResponseBU\n" +
-	"\x16tech.ydb.proto.auth.v1Z3github.com/ydb-platform/ydb-go-genproto/Ydb_Auth_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x05Login\x12\x16.Ydb.Auth.LoginRequest\x1a\x17.Ydb.Auth.LoginResponseBM\n" +
+	"\x16tech.ydb.proto.auth.v1Z3github.com/ydb-platform/ydb-go-genproto/Ydb_Auth_V1b\x06proto3"
 
 var file_ydb_auth_v1_proto_goTypes = []any{
 	(*Ydb_Auth.LoginRequest)(nil),  // 0: Ydb.Auth.LoginRequest

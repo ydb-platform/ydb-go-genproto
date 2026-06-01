@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: draft/ydb_object_storage_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_ObjectStorage_V1
 
 import (
 	Ydb_ObjectStorage "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_ObjectStorage"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,10 +25,10 @@ var File_draft_ydb_object_storage_v1_proto protoreflect.FileDescriptor
 
 const file_draft_ydb_object_storage_v1_proto_rawDesc = "" +
 	"\n" +
-	"!draft/ydb_object_storage_v1.proto\x12\x14Ydb.ObjectStorage.V1\x1a%draft/protos/ydb_object_storage.proto\x1a!google/protobuf/go_features.proto2e\n" +
+	"!draft/ydb_object_storage_v1.proto\x12\x14Ydb.ObjectStorage.V1\x1a%draft/protos/ydb_object_storage.proto2e\n" +
 	"\x14ObjectStorageService\x12M\n" +
-	"\x04List\x12!.Ydb.ObjectStorage.ListingRequest\x1a\".Ydb.ObjectStorage.ListingResponseBt\n" +
-	"&tech.ydb.proto.draft.object_storage.v1ZBgithub.com/ydb-platform/ydb-go-genproto/draft/Ydb_ObjectStorage_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x04List\x12!.Ydb.ObjectStorage.ListingRequest\x1a\".Ydb.ObjectStorage.ListingResponseBl\n" +
+	"&tech.ydb.proto.draft.object_storage.v1ZBgithub.com/ydb-platform/ydb-go-genproto/draft/Ydb_ObjectStorage_V1b\x06proto3"
 
 var file_draft_ydb_object_storage_v1_proto_goTypes = []any{
 	(*Ydb_ObjectStorage.ListingRequest)(nil),  // 0: Ydb.ObjectStorage.ListingRequest

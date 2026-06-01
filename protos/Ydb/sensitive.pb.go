@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: protos/annotations/sensitive.proto
 
-//go:build !protoopaque
-
 package Ydb
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -45,9 +42,9 @@ var File_protos_annotations_sensitive_proto protoreflect.FileDescriptor
 
 const file_protos_annotations_sensitive_proto_rawDesc = "" +
 	"\n" +
-	"\"protos/annotations/sensitive.proto\x12\x03Ydb\x1a google/protobuf/descriptor.proto\x1a!google/protobuf/go_features.proto:=\n" +
-	"\tsensitive\x12\x1d.google.protobuf.FieldOptions\x18\xe7\xac\x05 \x01(\bR\tsensitiveBO\n" +
-	"\x0etech.ydb.protoZ2github.com/ydb-platform/ydb-go-genproto/protos/Ydb\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\"protos/annotations/sensitive.proto\x12\x03Ydb\x1a google/protobuf/descriptor.proto:=\n" +
+	"\tsensitive\x12\x1d.google.protobuf.FieldOptions\x18\xe7\xac\x05 \x01(\bR\tsensitiveBG\n" +
+	"\x0etech.ydb.protoZ2github.com/ydb-platform/ydb-go-genproto/protos/Ydb\xf8\x01\x01b\x06proto3"
 
 var file_protos_annotations_sensitive_proto_goTypes = []any{
 	(*descriptorpb.FieldOptions)(nil), // 0: google.protobuf.FieldOptions

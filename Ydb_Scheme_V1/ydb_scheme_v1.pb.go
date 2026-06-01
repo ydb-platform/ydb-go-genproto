@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: ydb_scheme_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_Scheme_V1
 
 import (
 	Ydb_Scheme "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Scheme"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,14 +25,14 @@ var File_ydb_scheme_v1_proto protoreflect.FileDescriptor
 
 const file_ydb_scheme_v1_proto_rawDesc = "" +
 	"\n" +
-	"\x13ydb_scheme_v1.proto\x12\rYdb.Scheme.V1\x1a\x17protos/ydb_scheme.proto\x1a!google/protobuf/go_features.proto2\xcc\x03\n" +
+	"\x13ydb_scheme_v1.proto\x12\rYdb.Scheme.V1\x1a\x17protos/ydb_scheme.proto2\xcc\x03\n" +
 	"\rSchemeService\x12T\n" +
 	"\rMakeDirectory\x12 .Ydb.Scheme.MakeDirectoryRequest\x1a!.Ydb.Scheme.MakeDirectoryResponse\x12Z\n" +
 	"\x0fRemoveDirectory\x12\".Ydb.Scheme.RemoveDirectoryRequest\x1a#.Ydb.Scheme.RemoveDirectoryResponse\x12T\n" +
 	"\rListDirectory\x12 .Ydb.Scheme.ListDirectoryRequest\x1a!.Ydb.Scheme.ListDirectoryResponse\x12Q\n" +
 	"\fDescribePath\x12\x1f.Ydb.Scheme.DescribePathRequest\x1a .Ydb.Scheme.DescribePathResponse\x12`\n" +
-	"\x11ModifyPermissions\x12$.Ydb.Scheme.ModifyPermissionsRequest\x1a%.Ydb.Scheme.ModifyPermissionsResponseBY\n" +
-	"\x18tech.ydb.proto.scheme.v1Z5github.com/ydb-platform/ydb-go-genproto/Ydb_Scheme_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x11ModifyPermissions\x12$.Ydb.Scheme.ModifyPermissionsRequest\x1a%.Ydb.Scheme.ModifyPermissionsResponseBQ\n" +
+	"\x18tech.ydb.proto.scheme.v1Z5github.com/ydb-platform/ydb-go-genproto/Ydb_Scheme_V1b\x06proto3"
 
 var file_ydb_scheme_v1_proto_goTypes = []any{
 	(*Ydb_Scheme.MakeDirectoryRequest)(nil),      // 0: Ydb.Scheme.MakeDirectoryRequest

@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: ydb_cms_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_Cms_V1
 
 import (
 	Ydb_Cms "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Cms"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -29,7 +26,7 @@ var File_ydb_cms_v1_proto protoreflect.FileDescriptor
 const file_ydb_cms_v1_proto_rawDesc = "" +
 	"\n" +
 	"\x10ydb_cms_v1.proto\x12\n" +
-	"Ydb.Cms.V1\x1a\x14protos/ydb_cms.proto\x1a!google/protobuf/go_features.proto2\x9c\x04\n" +
+	"Ydb.Cms.V1\x1a\x14protos/ydb_cms.proto2\x9c\x04\n" +
 	"\n" +
 	"CmsService\x12Q\n" +
 	"\x0eCreateDatabase\x12\x1e.Ydb.Cms.CreateDatabaseRequest\x1a\x1f.Ydb.Cms.CreateDatabaseResponse\x12Z\n" +
@@ -37,8 +34,8 @@ const file_ydb_cms_v1_proto_rawDesc = "" +
 	"\rAlterDatabase\x12\x1d.Ydb.Cms.AlterDatabaseRequest\x1a\x1e.Ydb.Cms.AlterDatabaseResponse\x12N\n" +
 	"\rListDatabases\x12\x1d.Ydb.Cms.ListDatabasesRequest\x1a\x1e.Ydb.Cms.ListDatabasesResponse\x12Q\n" +
 	"\x0eRemoveDatabase\x12\x1e.Ydb.Cms.RemoveDatabaseRequest\x1a\x1f.Ydb.Cms.RemoveDatabaseResponse\x12l\n" +
-	"\x17DescribeDatabaseOptions\x12'.Ydb.Cms.DescribeDatabaseOptionsRequest\x1a(.Ydb.Cms.DescribeDatabaseOptionsResponseBS\n" +
-	"\x15tech.ydb.proto.cms.v1Z2github.com/ydb-platform/ydb-go-genproto/Ydb_Cms_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x17DescribeDatabaseOptions\x12'.Ydb.Cms.DescribeDatabaseOptionsRequest\x1a(.Ydb.Cms.DescribeDatabaseOptionsResponseBK\n" +
+	"\x15tech.ydb.proto.cms.v1Z2github.com/ydb-platform/ydb-go-genproto/Ydb_Cms_V1b\x06proto3"
 
 var file_ydb_cms_v1_proto_goTypes = []any{
 	(*Ydb_Cms.CreateDatabaseRequest)(nil),           // 0: Ydb.Cms.CreateDatabaseRequest

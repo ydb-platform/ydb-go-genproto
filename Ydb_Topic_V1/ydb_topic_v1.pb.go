@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: ydb_topic_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_Topic_V1
 
 import (
 	Ydb_Topic "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Topic"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,7 +25,7 @@ var File_ydb_topic_v1_proto protoreflect.FileDescriptor
 
 const file_ydb_topic_v1_proto_rawDesc = "" +
 	"\n" +
-	"\x12ydb_topic_v1.proto\x12\fYdb.Topic.V1\x1a\x16protos/ydb_topic.proto\x1a!google/protobuf/go_features.proto2\xb7\x06\n" +
+	"\x12ydb_topic_v1.proto\x12\fYdb.Topic.V1\x1a\x16protos/ydb_topic.proto2\xb7\x06\n" +
 	"\fTopicService\x12e\n" +
 	"\vStreamWrite\x12(.Ydb.Topic.StreamWriteMessage.FromClient\x1a(.Ydb.Topic.StreamWriteMessage.FromServer(\x010\x01\x12b\n" +
 	"\n" +
@@ -40,8 +37,8 @@ const file_ydb_topic_v1_proto_rawDesc = "" +
 	"\x10DescribeConsumer\x12\".Ydb.Topic.DescribeConsumerRequest\x1a#.Ydb.Topic.DescribeConsumerResponse\x12I\n" +
 	"\n" +
 	"AlterTopic\x12\x1c.Ydb.Topic.AlterTopicRequest\x1a\x1d.Ydb.Topic.AlterTopicResponse\x12F\n" +
-	"\tDropTopic\x12\x1b.Ydb.Topic.DropTopicRequest\x1a\x1c.Ydb.Topic.DropTopicResponseBZ\n" +
-	"\x17tech.ydb.proto.topic.v1Z4github.com/ydb-platform/ydb-go-genproto/Ydb_Topic_V1\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\tDropTopic\x12\x1b.Ydb.Topic.DropTopicRequest\x1a\x1c.Ydb.Topic.DropTopicResponseBR\n" +
+	"\x17tech.ydb.proto.topic.v1Z4github.com/ydb-platform/ydb-go-genproto/Ydb_Topic_V1\xf8\x01\x01b\x06proto3"
 
 var file_ydb_topic_v1_proto_goTypes = []any{
 	(*Ydb_Topic.StreamWriteMessage_FromClient)(nil),      // 0: Ydb.Topic.StreamWriteMessage.FromClient

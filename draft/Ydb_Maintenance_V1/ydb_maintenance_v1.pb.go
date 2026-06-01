@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: draft/ydb_maintenance_v1.proto
 
-//go:build !protoopaque
-
 package Ydb_Maintenance_V1
 
 import (
 	Ydb_Maintenance "github.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Maintenance"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -28,7 +25,7 @@ var File_draft_ydb_maintenance_v1_proto protoreflect.FileDescriptor
 
 const file_draft_ydb_maintenance_v1_proto_rawDesc = "" +
 	"\n" +
-	"\x1edraft/ydb_maintenance_v1.proto\x12\x12Ydb.Maintenance.V1\x1a\"draft/protos/ydb_maintenance.proto\x1a!google/protobuf/go_features.proto2\x9c\x06\n" +
+	"\x1edraft/ydb_maintenance_v1.proto\x12\x12Ydb.Maintenance.V1\x1a\"draft/protos/ydb_maintenance.proto2\x9c\x06\n" +
 	"\x12MaintenanceService\x12g\n" +
 	"\x10ListClusterNodes\x12(.Ydb.Maintenance.ListClusterNodesRequest\x1a).Ydb.Maintenance.ListClusterNodesResponse\x12p\n" +
 	"\x15CreateMaintenanceTask\x12-.Ydb.Maintenance.CreateMaintenanceTaskRequest\x1a(.Ydb.Maintenance.MaintenanceTaskResponse\x12r\n" +
@@ -36,8 +33,8 @@ const file_draft_ydb_maintenance_v1_proto_rawDesc = "" +
 	"\x12GetMaintenanceTask\x12*.Ydb.Maintenance.GetMaintenanceTaskRequest\x1a+.Ydb.Maintenance.GetMaintenanceTaskResponse\x12s\n" +
 	"\x14ListMaintenanceTasks\x12,.Ydb.Maintenance.ListMaintenanceTasksRequest\x1a-.Ydb.Maintenance.ListMaintenanceTasksResponse\x12r\n" +
 	"\x13DropMaintenanceTask\x12+.Ydb.Maintenance.DropMaintenanceTaskRequest\x1a..Ydb.Maintenance.ManageMaintenanceTaskResponse\x12_\n" +
-	"\x0eCompleteAction\x12&.Ydb.Maintenance.CompleteActionRequest\x1a%.Ydb.Maintenance.ManageActionResponseBl\n" +
-	" tech.ydb.proto.draft.maintenanceZ@github.com/ydb-platform/ydb-go-genproto/draft/Ydb_Maintenance_V1\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x0eCompleteAction\x12&.Ydb.Maintenance.CompleteActionRequest\x1a%.Ydb.Maintenance.ManageActionResponseBd\n" +
+	" tech.ydb.proto.draft.maintenanceZ@github.com/ydb-platform/ydb-go-genproto/draft/Ydb_Maintenance_V1b\x06proto3"
 
 var file_draft_ydb_maintenance_v1_proto_goTypes = []any{
 	(*Ydb_Maintenance.ListClusterNodesRequest)(nil),       // 0: Ydb.Maintenance.ListClusterNodesRequest

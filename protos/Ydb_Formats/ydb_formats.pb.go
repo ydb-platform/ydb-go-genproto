@@ -4,14 +4,11 @@
 // 	protoc        v6.30.2
 // source: protos/ydb_formats.proto
 
-//go:build !protoopaque
-
 package Ydb_Formats
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -23,11 +20,62 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ArrowFormatSettings_CompressionCodec_Type int32
+
+const (
+	// Unspecified mode, corresponds to TYPE_NONE
+	ArrowFormatSettings_CompressionCodec_TYPE_UNSPECIFIED ArrowFormatSettings_CompressionCodec_Type = 0
+	// Binary data without compression
+	ArrowFormatSettings_CompressionCodec_TYPE_NONE ArrowFormatSettings_CompressionCodec_Type = 1
+	// Zstandard compression
+	ArrowFormatSettings_CompressionCodec_TYPE_ZSTD ArrowFormatSettings_CompressionCodec_Type = 2
+	// LZ4 frame compression
+	ArrowFormatSettings_CompressionCodec_TYPE_LZ4_FRAME ArrowFormatSettings_CompressionCodec_Type = 3
+)
+
+// Enum value maps for ArrowFormatSettings_CompressionCodec_Type.
+var (
+	ArrowFormatSettings_CompressionCodec_Type_name = map[int32]string{
+		0: "TYPE_UNSPECIFIED",
+		1: "TYPE_NONE",
+		2: "TYPE_ZSTD",
+		3: "TYPE_LZ4_FRAME",
+	}
+	ArrowFormatSettings_CompressionCodec_Type_value = map[string]int32{
+		"TYPE_UNSPECIFIED": 0,
+		"TYPE_NONE":        1,
+		"TYPE_ZSTD":        2,
+		"TYPE_LZ4_FRAME":   3,
+	}
+)
+
+func (x ArrowFormatSettings_CompressionCodec_Type) Enum() *ArrowFormatSettings_CompressionCodec_Type {
+	p := new(ArrowFormatSettings_CompressionCodec_Type)
+	*p = x
+	return p
+}
+
+func (x ArrowFormatSettings_CompressionCodec_Type) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ArrowFormatSettings_CompressionCodec_Type) Descriptor() protoreflect.EnumDescriptor {
+	return file_protos_ydb_formats_proto_enumTypes[0].Descriptor()
+}
+
+func (ArrowFormatSettings_CompressionCodec_Type) Type() protoreflect.EnumType {
+	return &file_protos_ydb_formats_proto_enumTypes[0]
+}
+
+func (x ArrowFormatSettings_CompressionCodec_Type) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
 type ArrowBatchSettings struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Schema        []byte                 `protobuf:"bytes,1,opt,name=schema" json:"schema,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Schema []byte                 `protobuf:"bytes,1,opt,name=schema,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *ArrowBatchSettings) Reset() {
@@ -57,7 +105,7 @@ func (x *ArrowBatchSettings) ProtoReflect() protoreflect.Message {
 
 func (x *ArrowBatchSettings) GetSchema() []byte {
 	if x != nil {
-		return x.Schema
+		return x.xxx_hidden_Schema
 	}
 	return nil
 }
@@ -66,18 +114,7 @@ func (x *ArrowBatchSettings) SetSchema(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.Schema = v
-}
-
-func (x *ArrowBatchSettings) HasSchema() bool {
-	if x == nil {
-		return false
-	}
-	return x.Schema != nil
-}
-
-func (x *ArrowBatchSettings) ClearSchema() {
-	x.Schema = nil
+	x.xxx_hidden_Schema = v
 }
 
 type ArrowBatchSettings_builder struct {
@@ -90,23 +127,19 @@ func (b0 ArrowBatchSettings_builder) Build() *ArrowBatchSettings {
 	m0 := &ArrowBatchSettings{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Schema = b.Schema
+	x.xxx_hidden_Schema = b.Schema
 	return m0
 }
 
 type CsvSettings struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Number of rows to skip before CSV data. It should be present only in the first upsert of CSV file.
-	SkipRows *uint32 `protobuf:"varint,1,opt,name=skip_rows,json=skipRows" json:"skip_rows,omitempty"`
-	// Fields delimiter in CSV file. It's "," if not set.
-	Delimiter []byte `protobuf:"bytes,2,opt,name=delimiter" json:"delimiter,omitempty"`
-	// String value that would be interpreted as NULL.
-	NullValue []byte `protobuf:"bytes,3,opt,name=null_value,json=nullValue" json:"null_value,omitempty"`
-	// First not skipped line is a CSV header (list of column names).
-	Header        *bool                `protobuf:"varint,4,opt,name=header" json:"header,omitempty"`
-	Quoting       *CsvSettings_Quoting `protobuf:"bytes,5,opt,name=quoting" json:"quoting,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_SkipRows  uint32                 `protobuf:"varint,1,opt,name=skip_rows,json=skipRows,proto3"`
+	xxx_hidden_Delimiter []byte                 `protobuf:"bytes,2,opt,name=delimiter,proto3"`
+	xxx_hidden_NullValue []byte                 `protobuf:"bytes,3,opt,name=null_value,json=nullValue,proto3"`
+	xxx_hidden_Header    bool                   `protobuf:"varint,4,opt,name=header,proto3"`
+	xxx_hidden_Quoting   *CsvSettings_Quoting   `protobuf:"bytes,5,opt,name=quoting,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CsvSettings) Reset() {
@@ -135,132 +168,88 @@ func (x *CsvSettings) ProtoReflect() protoreflect.Message {
 }
 
 func (x *CsvSettings) GetSkipRows() uint32 {
-	if x != nil && x.SkipRows != nil {
-		return *x.SkipRows
+	if x != nil {
+		return x.xxx_hidden_SkipRows
 	}
 	return 0
 }
 
 func (x *CsvSettings) GetDelimiter() []byte {
 	if x != nil {
-		return x.Delimiter
+		return x.xxx_hidden_Delimiter
 	}
 	return nil
 }
 
 func (x *CsvSettings) GetNullValue() []byte {
 	if x != nil {
-		return x.NullValue
+		return x.xxx_hidden_NullValue
 	}
 	return nil
 }
 
 func (x *CsvSettings) GetHeader() bool {
-	if x != nil && x.Header != nil {
-		return *x.Header
+	if x != nil {
+		return x.xxx_hidden_Header
 	}
 	return false
 }
 
 func (x *CsvSettings) GetQuoting() *CsvSettings_Quoting {
 	if x != nil {
-		return x.Quoting
+		return x.xxx_hidden_Quoting
 	}
 	return nil
 }
 
 func (x *CsvSettings) SetSkipRows(v uint32) {
-	x.SkipRows = &v
+	x.xxx_hidden_SkipRows = v
 }
 
 func (x *CsvSettings) SetDelimiter(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.Delimiter = v
+	x.xxx_hidden_Delimiter = v
 }
 
 func (x *CsvSettings) SetNullValue(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.NullValue = v
+	x.xxx_hidden_NullValue = v
 }
 
 func (x *CsvSettings) SetHeader(v bool) {
-	x.Header = &v
+	x.xxx_hidden_Header = v
 }
 
 func (x *CsvSettings) SetQuoting(v *CsvSettings_Quoting) {
-	x.Quoting = v
-}
-
-func (x *CsvSettings) HasSkipRows() bool {
-	if x == nil {
-		return false
-	}
-	return x.SkipRows != nil
-}
-
-func (x *CsvSettings) HasDelimiter() bool {
-	if x == nil {
-		return false
-	}
-	return x.Delimiter != nil
-}
-
-func (x *CsvSettings) HasNullValue() bool {
-	if x == nil {
-		return false
-	}
-	return x.NullValue != nil
-}
-
-func (x *CsvSettings) HasHeader() bool {
-	if x == nil {
-		return false
-	}
-	return x.Header != nil
+	x.xxx_hidden_Quoting = v
 }
 
 func (x *CsvSettings) HasQuoting() bool {
 	if x == nil {
 		return false
 	}
-	return x.Quoting != nil
-}
-
-func (x *CsvSettings) ClearSkipRows() {
-	x.SkipRows = nil
-}
-
-func (x *CsvSettings) ClearDelimiter() {
-	x.Delimiter = nil
-}
-
-func (x *CsvSettings) ClearNullValue() {
-	x.NullValue = nil
-}
-
-func (x *CsvSettings) ClearHeader() {
-	x.Header = nil
+	return x.xxx_hidden_Quoting != nil
 }
 
 func (x *CsvSettings) ClearQuoting() {
-	x.Quoting = nil
+	x.xxx_hidden_Quoting = nil
 }
 
 type CsvSettings_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Number of rows to skip before CSV data. It should be present only in the first upsert of CSV file.
-	SkipRows *uint32
+	SkipRows uint32
 	// Fields delimiter in CSV file. It's "," if not set.
 	Delimiter []byte
 	// String value that would be interpreted as NULL.
 	NullValue []byte
 	// First not skipped line is a CSV header (list of column names).
-	Header  *bool
+	Header  bool
 	Quoting *CsvSettings_Quoting
 }
 
@@ -268,37 +257,38 @@ func (b0 CsvSettings_builder) Build() *CsvSettings {
 	m0 := &CsvSettings{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.SkipRows = b.SkipRows
-	x.Delimiter = b.Delimiter
-	x.NullValue = b.NullValue
-	x.Header = b.Header
-	x.Quoting = b.Quoting
+	x.xxx_hidden_SkipRows = b.SkipRows
+	x.xxx_hidden_Delimiter = b.Delimiter
+	x.xxx_hidden_NullValue = b.NullValue
+	x.xxx_hidden_Header = b.Header
+	x.xxx_hidden_Quoting = b.Quoting
 	return m0
 }
 
-type CsvSettings_Quoting struct {
-	state               protoimpl.MessageState `protogen:"hybrid.v1"`
-	Disabled            *bool                  `protobuf:"varint,1,opt,name=disabled" json:"disabled,omitempty"`
-	QuoteChar           []byte                 `protobuf:"bytes,2,opt,name=quote_char,json=quoteChar" json:"quote_char,omitempty"`
-	DoubleQuoteDisabled *bool                  `protobuf:"varint,3,opt,name=double_quote_disabled,json=doubleQuoteDisabled" json:"double_quote_disabled,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+// *
+// ArrowFormatSettings is settings for Ydb.ResultSet.Format.FORMAT_ARROW in Ydb.Query.ExecuteQueryRequest.
+// It is used to configure compression for record batches in Ydb.ResultSet.data field.
+type ArrowFormatSettings struct {
+	state                       protoimpl.MessageState                `protogen:"opaque.v1"`
+	xxx_hidden_CompressionCodec *ArrowFormatSettings_CompressionCodec `protobuf:"bytes,1,opt,name=compression_codec,json=compressionCodec,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
-func (x *CsvSettings_Quoting) Reset() {
-	*x = CsvSettings_Quoting{}
+func (x *ArrowFormatSettings) Reset() {
+	*x = ArrowFormatSettings{}
 	mi := &file_protos_ydb_formats_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CsvSettings_Quoting) String() string {
+func (x *ArrowFormatSettings) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CsvSettings_Quoting) ProtoMessage() {}
+func (*ArrowFormatSettings) ProtoMessage() {}
 
-func (x *CsvSettings_Quoting) ProtoReflect() protoreflect.Message {
+func (x *ArrowFormatSettings) ProtoReflect() protoreflect.Message {
 	mi := &file_protos_ydb_formats_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -310,90 +300,285 @@ func (x *CsvSettings_Quoting) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+func (x *ArrowFormatSettings) GetCompressionCodec() *ArrowFormatSettings_CompressionCodec {
+	if x != nil {
+		return x.xxx_hidden_CompressionCodec
+	}
+	return nil
+}
+
+func (x *ArrowFormatSettings) SetCompressionCodec(v *ArrowFormatSettings_CompressionCodec) {
+	x.xxx_hidden_CompressionCodec = v
+}
+
+func (x *ArrowFormatSettings) HasCompressionCodec() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CompressionCodec != nil
+}
+
+func (x *ArrowFormatSettings) ClearCompressionCodec() {
+	x.xxx_hidden_CompressionCodec = nil
+}
+
+type ArrowFormatSettings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Codec for compressing binary data in Ydb.ResultSet.data field
+	CompressionCodec *ArrowFormatSettings_CompressionCodec
+}
+
+func (b0 ArrowFormatSettings_builder) Build() *ArrowFormatSettings {
+	m0 := &ArrowFormatSettings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_CompressionCodec = b.CompressionCodec
+	return m0
+}
+
+// *
+// ArrowFormatMeta is a metadata for Ydb.ResultSet.Format.FORMAT_ARROW in Ydb.ResultSet.
+// It is used to get the schema of the Arrow record batch.
+type ArrowFormatMeta struct {
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Schema []byte                 `protobuf:"bytes,1,opt,name=schema,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *ArrowFormatMeta) Reset() {
+	*x = ArrowFormatMeta{}
+	mi := &file_protos_ydb_formats_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArrowFormatMeta) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArrowFormatMeta) ProtoMessage() {}
+
+func (x *ArrowFormatMeta) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_formats_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ArrowFormatMeta) GetSchema() []byte {
+	if x != nil {
+		return x.xxx_hidden_Schema
+	}
+	return nil
+}
+
+func (x *ArrowFormatMeta) SetSchema(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Schema = v
+}
+
+type ArrowFormatMeta_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Schema of the arrow batch of the result.
+	// May be empty for custom Ydb.Query.SchemaInclusionMode
+	Schema []byte
+}
+
+func (b0 ArrowFormatMeta_builder) Build() *ArrowFormatMeta {
+	m0 := &ArrowFormatMeta{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Schema = b.Schema
+	return m0
+}
+
+type CsvSettings_Quoting struct {
+	state                          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Disabled            bool                   `protobuf:"varint,1,opt,name=disabled,proto3"`
+	xxx_hidden_QuoteChar           []byte                 `protobuf:"bytes,2,opt,name=quote_char,json=quoteChar,proto3"`
+	xxx_hidden_DoubleQuoteDisabled bool                   `protobuf:"varint,3,opt,name=double_quote_disabled,json=doubleQuoteDisabled,proto3"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
+}
+
+func (x *CsvSettings_Quoting) Reset() {
+	*x = CsvSettings_Quoting{}
+	mi := &file_protos_ydb_formats_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CsvSettings_Quoting) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CsvSettings_Quoting) ProtoMessage() {}
+
+func (x *CsvSettings_Quoting) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_formats_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
 func (x *CsvSettings_Quoting) GetDisabled() bool {
-	if x != nil && x.Disabled != nil {
-		return *x.Disabled
+	if x != nil {
+		return x.xxx_hidden_Disabled
 	}
 	return false
 }
 
 func (x *CsvSettings_Quoting) GetQuoteChar() []byte {
 	if x != nil {
-		return x.QuoteChar
+		return x.xxx_hidden_QuoteChar
 	}
 	return nil
 }
 
 func (x *CsvSettings_Quoting) GetDoubleQuoteDisabled() bool {
-	if x != nil && x.DoubleQuoteDisabled != nil {
-		return *x.DoubleQuoteDisabled
+	if x != nil {
+		return x.xxx_hidden_DoubleQuoteDisabled
 	}
 	return false
 }
 
 func (x *CsvSettings_Quoting) SetDisabled(v bool) {
-	x.Disabled = &v
+	x.xxx_hidden_Disabled = v
 }
 
 func (x *CsvSettings_Quoting) SetQuoteChar(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.QuoteChar = v
+	x.xxx_hidden_QuoteChar = v
 }
 
 func (x *CsvSettings_Quoting) SetDoubleQuoteDisabled(v bool) {
-	x.DoubleQuoteDisabled = &v
-}
-
-func (x *CsvSettings_Quoting) HasDisabled() bool {
-	if x == nil {
-		return false
-	}
-	return x.Disabled != nil
-}
-
-func (x *CsvSettings_Quoting) HasQuoteChar() bool {
-	if x == nil {
-		return false
-	}
-	return x.QuoteChar != nil
-}
-
-func (x *CsvSettings_Quoting) HasDoubleQuoteDisabled() bool {
-	if x == nil {
-		return false
-	}
-	return x.DoubleQuoteDisabled != nil
-}
-
-func (x *CsvSettings_Quoting) ClearDisabled() {
-	x.Disabled = nil
-}
-
-func (x *CsvSettings_Quoting) ClearQuoteChar() {
-	x.QuoteChar = nil
-}
-
-func (x *CsvSettings_Quoting) ClearDoubleQuoteDisabled() {
-	x.DoubleQuoteDisabled = nil
+	x.xxx_hidden_DoubleQuoteDisabled = v
 }
 
 type CsvSettings_Quoting_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Disabled            *bool
+	Disabled            bool
 	QuoteChar           []byte
-	DoubleQuoteDisabled *bool
+	DoubleQuoteDisabled bool
 }
 
 func (b0 CsvSettings_Quoting_builder) Build() *CsvSettings_Quoting {
 	m0 := &CsvSettings_Quoting{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Disabled = b.Disabled
-	x.QuoteChar = b.QuoteChar
-	x.DoubleQuoteDisabled = b.DoubleQuoteDisabled
+	x.xxx_hidden_Disabled = b.Disabled
+	x.xxx_hidden_QuoteChar = b.QuoteChar
+	x.xxx_hidden_DoubleQuoteDisabled = b.DoubleQuoteDisabled
+	return m0
+}
+
+type ArrowFormatSettings_CompressionCodec struct {
+	state                  protoimpl.MessageState                    `protogen:"opaque.v1"`
+	xxx_hidden_Type        ArrowFormatSettings_CompressionCodec_Type `protobuf:"varint,1,opt,name=type,proto3,enum=Ydb.Formats.ArrowFormatSettings_CompressionCodec_Type"`
+	xxx_hidden_Level       int32                                     `protobuf:"varint,2,opt,name=level,proto3,oneof"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ArrowFormatSettings_CompressionCodec) Reset() {
+	*x = ArrowFormatSettings_CompressionCodec{}
+	mi := &file_protos_ydb_formats_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ArrowFormatSettings_CompressionCodec) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArrowFormatSettings_CompressionCodec) ProtoMessage() {}
+
+func (x *ArrowFormatSettings_CompressionCodec) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_ydb_formats_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ArrowFormatSettings_CompressionCodec) GetType() ArrowFormatSettings_CompressionCodec_Type {
+	if x != nil {
+		return x.xxx_hidden_Type
+	}
+	return ArrowFormatSettings_CompressionCodec_TYPE_UNSPECIFIED
+}
+
+func (x *ArrowFormatSettings_CompressionCodec) GetLevel() int32 {
+	if x != nil {
+		return x.xxx_hidden_Level
+	}
+	return 0
+}
+
+func (x *ArrowFormatSettings_CompressionCodec) SetType(v ArrowFormatSettings_CompressionCodec_Type) {
+	x.xxx_hidden_Type = v
+}
+
+func (x *ArrowFormatSettings_CompressionCodec) SetLevel(v int32) {
+	x.xxx_hidden_Level = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *ArrowFormatSettings_CompressionCodec) HasLevel() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *ArrowFormatSettings_CompressionCodec) ClearLevel() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Level = 0
+}
+
+type ArrowFormatSettings_CompressionCodec_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Type of the compression codec
+	Type ArrowFormatSettings_CompressionCodec_Type
+	// Compression level for the codec.
+	// If is not specified, the default level of the codec type is used.
+	Level *int32
+}
+
+func (b0 ArrowFormatSettings_CompressionCodec_builder) Build() *ArrowFormatSettings_CompressionCodec {
+	m0 := &ArrowFormatSettings_CompressionCodec{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Type = b.Type
+	if b.Level != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Level = *b.Level
+	}
 	return m0
 }
 
@@ -401,7 +586,7 @@ var File_protos_ydb_formats_proto protoreflect.FileDescriptor
 
 const file_protos_ydb_formats_proto_rawDesc = "" +
 	"\n" +
-	"\x18protos/ydb_formats.proto\x12\vYdb.Formats\x1a!google/protobuf/go_features.proto\",\n" +
+	"\x18protos/ydb_formats.proto\x12\vYdb.Formats\",\n" +
 	"\x12ArrowBatchSettings\x12\x16\n" +
 	"\x06schema\x18\x01 \x01(\fR\x06schema\"\xb5\x02\n" +
 	"\vCsvSettings\x12\x1b\n" +
@@ -415,22 +600,42 @@ const file_protos_ydb_formats_proto_rawDesc = "" +
 	"\bdisabled\x18\x01 \x01(\bR\bdisabled\x12\x1d\n" +
 	"\n" +
 	"quote_char\x18\x02 \x01(\fR\tquoteChar\x122\n" +
-	"\x15double_quote_disabled\x18\x03 \x01(\bR\x13doubleQuoteDisabledB_\n" +
-	"\x16tech.ydb.proto.formatsZ:github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Formats\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x15double_quote_disabled\x18\x03 \x01(\bR\x13doubleQuoteDisabled\"\xcb\x02\n" +
+	"\x13ArrowFormatSettings\x12^\n" +
+	"\x11compression_codec\x18\x01 \x01(\v21.Ydb.Formats.ArrowFormatSettings.CompressionCodecR\x10compressionCodec\x1a\xd3\x01\n" +
+	"\x10CompressionCodec\x12J\n" +
+	"\x04type\x18\x01 \x01(\x0e26.Ydb.Formats.ArrowFormatSettings.CompressionCodec.TypeR\x04type\x12\x19\n" +
+	"\x05level\x18\x02 \x01(\x05H\x00R\x05level\x88\x01\x01\"N\n" +
+	"\x04Type\x12\x14\n" +
+	"\x10TYPE_UNSPECIFIED\x10\x00\x12\r\n" +
+	"\tTYPE_NONE\x10\x01\x12\r\n" +
+	"\tTYPE_ZSTD\x10\x02\x12\x12\n" +
+	"\x0eTYPE_LZ4_FRAME\x10\x03B\b\n" +
+	"\x06_level\")\n" +
+	"\x0fArrowFormatMeta\x12\x16\n" +
+	"\x06schema\x18\x01 \x01(\fR\x06schemaBW\n" +
+	"\x16tech.ydb.proto.formatsZ:github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Formats\xf8\x01\x01b\x06proto3"
 
-var file_protos_ydb_formats_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_protos_ydb_formats_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_protos_ydb_formats_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_protos_ydb_formats_proto_goTypes = []any{
-	(*ArrowBatchSettings)(nil),  // 0: Ydb.Formats.ArrowBatchSettings
-	(*CsvSettings)(nil),         // 1: Ydb.Formats.CsvSettings
-	(*CsvSettings_Quoting)(nil), // 2: Ydb.Formats.CsvSettings.Quoting
+	(ArrowFormatSettings_CompressionCodec_Type)(0), // 0: Ydb.Formats.ArrowFormatSettings.CompressionCodec.Type
+	(*ArrowBatchSettings)(nil),                     // 1: Ydb.Formats.ArrowBatchSettings
+	(*CsvSettings)(nil),                            // 2: Ydb.Formats.CsvSettings
+	(*ArrowFormatSettings)(nil),                    // 3: Ydb.Formats.ArrowFormatSettings
+	(*ArrowFormatMeta)(nil),                        // 4: Ydb.Formats.ArrowFormatMeta
+	(*CsvSettings_Quoting)(nil),                    // 5: Ydb.Formats.CsvSettings.Quoting
+	(*ArrowFormatSettings_CompressionCodec)(nil),   // 6: Ydb.Formats.ArrowFormatSettings.CompressionCodec
 }
 var file_protos_ydb_formats_proto_depIdxs = []int32{
-	2, // 0: Ydb.Formats.CsvSettings.quoting:type_name -> Ydb.Formats.CsvSettings.Quoting
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	5, // 0: Ydb.Formats.CsvSettings.quoting:type_name -> Ydb.Formats.CsvSettings.Quoting
+	6, // 1: Ydb.Formats.ArrowFormatSettings.compression_codec:type_name -> Ydb.Formats.ArrowFormatSettings.CompressionCodec
+	0, // 2: Ydb.Formats.ArrowFormatSettings.CompressionCodec.type:type_name -> Ydb.Formats.ArrowFormatSettings.CompressionCodec.Type
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_protos_ydb_formats_proto_init() }
@@ -438,18 +643,20 @@ func file_protos_ydb_formats_proto_init() {
 	if File_protos_ydb_formats_proto != nil {
 		return
 	}
+	file_protos_ydb_formats_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protos_ydb_formats_proto_rawDesc), len(file_protos_ydb_formats_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   3,
+			NumEnums:      1,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_protos_ydb_formats_proto_goTypes,
 		DependencyIndexes: file_protos_ydb_formats_proto_depIdxs,
+		EnumInfos:         file_protos_ydb_formats_proto_enumTypes,
 		MessageInfos:      file_protos_ydb_formats_proto_msgTypes,
 	}.Build()
 	File_protos_ydb_formats_proto = out.File

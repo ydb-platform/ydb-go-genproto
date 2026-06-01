@@ -4,8 +4,6 @@
 // 	protoc        v6.30.2
 // source: draft/protos/ydb_maintenance.proto
 
-//go:build !protoopaque
-
 package Ydb_Maintenance
 
 import (
@@ -14,7 +12,6 @@ import (
 	Ydb_Operations "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
@@ -99,6 +96,11 @@ const (
 	// Ignore any storage group & state storage checks.
 	// Using this mode might cause data unavailability.
 	AvailabilityMode_AVAILABILITY_MODE_FORCE AvailabilityMode = 3
+	// In this mode:
+	// - attempts to apply AVAILABILITY_MODE_STRONG;
+	// - if strong constraints cannot be satisfied, falls back to AVAILABILITY_MODE_WEAK;
+	// - never escalates to AVAILABILITY_MODE_FORCE.
+	AvailabilityMode_AVAILABILITY_MODE_SMART AvailabilityMode = 4
 )
 
 // Enum value maps for AvailabilityMode.
@@ -108,12 +110,14 @@ var (
 		1: "AVAILABILITY_MODE_STRONG",
 		2: "AVAILABILITY_MODE_WEAK",
 		3: "AVAILABILITY_MODE_FORCE",
+		4: "AVAILABILITY_MODE_SMART",
 	}
 	AvailabilityMode_value = map[string]int32{
 		"AVAILABILITY_MODE_UNSPECIFIED": 0,
 		"AVAILABILITY_MODE_STRONG":      1,
 		"AVAILABILITY_MODE_WEAK":        2,
 		"AVAILABILITY_MODE_FORCE":       3,
+		"AVAILABILITY_MODE_SMART":       4,
 	}
 )
 
@@ -147,6 +151,8 @@ const (
 	ActionState_ACTION_STATUS_PENDING ActionState_ActionStatus = 1
 	// Action performed: e.g. lock is taken.
 	ActionState_ACTION_STATUS_PERFORMED ActionState_ActionStatus = 2
+	// Action is currently in progress
+	ActionState_ACTION_STATUS_IN_PROGRESS ActionState_ActionStatus = 3
 )
 
 // Enum value maps for ActionState_ActionStatus.
@@ -155,11 +161,13 @@ var (
 		0: "ACTION_STATUS_UNSPECIFIED",
 		1: "ACTION_STATUS_PENDING",
 		2: "ACTION_STATUS_PERFORMED",
+		3: "ACTION_STATUS_IN_PROGRESS",
 	}
 	ActionState_ActionStatus_value = map[string]int32{
 		"ACTION_STATUS_UNSPECIFIED": 0,
 		"ACTION_STATUS_PENDING":     1,
 		"ACTION_STATUS_PERFORMED":   2,
+		"ACTION_STATUS_IN_PROGRESS": 3,
 	}
 )
 
@@ -256,24 +264,17 @@ func (x ActionState_ActionReason) Number() protoreflect.EnumNumber {
 }
 
 type Node struct {
-	state    protoimpl.MessageState      `protogen:"hybrid.v1"`
-	NodeId   *uint32                     `protobuf:"varint,1,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
-	Host     *string                     `protobuf:"bytes,2,opt,name=host" json:"host,omitempty"`
-	Port     *uint32                     `protobuf:"varint,3,opt,name=port" json:"port,omitempty"`
-	Location *Ydb_Discovery.NodeLocation `protobuf:"bytes,4,opt,name=location" json:"location,omitempty"`
-	State    *ItemState                  `protobuf:"varint,5,opt,name=state,enum=Ydb.Maintenance.ItemState" json:"state,omitempty"`
-	// Types that are valid to be assigned to Type:
-	//
-	//	*Node_Storage
-	//	*Node_Dynamic
-	Type isNode_Type `protobuf_oneof:"type"`
-	// start_time defines time when node was registered in cms.
-	StartTime *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=start_time,json=startTime" json:"start_time,omitempty"`
-	// version defines YDB version for current Node.
-	// For example, 'ydb-stable-24-1'.
-	Version       *string `protobuf:"bytes,9,opt,name=version" json:"version,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState      `protogen:"opaque.v1"`
+	xxx_hidden_NodeId    uint32                      `protobuf:"varint,1,opt,name=node_id,json=nodeId,proto3"`
+	xxx_hidden_Host      string                      `protobuf:"bytes,2,opt,name=host,proto3"`
+	xxx_hidden_Port      uint32                      `protobuf:"varint,3,opt,name=port,proto3"`
+	xxx_hidden_Location  *Ydb_Discovery.NodeLocation `protobuf:"bytes,4,opt,name=location,proto3"`
+	xxx_hidden_State     ItemState                   `protobuf:"varint,5,opt,name=state,proto3,enum=Ydb.Maintenance.ItemState"`
+	xxx_hidden_Type      isNode_Type                 `protobuf_oneof:"type"`
+	xxx_hidden_StartTime *timestamppb.Timestamp      `protobuf:"bytes,8,opt,name=start_time,json=startTime,proto3"`
+	xxx_hidden_Version   string                      `protobuf:"bytes,9,opt,name=version,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Node) Reset() {
@@ -302,50 +303,43 @@ func (x *Node) ProtoReflect() protoreflect.Message {
 }
 
 func (x *Node) GetNodeId() uint32 {
-	if x != nil && x.NodeId != nil {
-		return *x.NodeId
+	if x != nil {
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *Node) GetHost() string {
-	if x != nil && x.Host != nil {
-		return *x.Host
+	if x != nil {
+		return x.xxx_hidden_Host
 	}
 	return ""
 }
 
 func (x *Node) GetPort() uint32 {
-	if x != nil && x.Port != nil {
-		return *x.Port
+	if x != nil {
+		return x.xxx_hidden_Port
 	}
 	return 0
 }
 
 func (x *Node) GetLocation() *Ydb_Discovery.NodeLocation {
 	if x != nil {
-		return x.Location
+		return x.xxx_hidden_Location
 	}
 	return nil
 }
 
 func (x *Node) GetState() ItemState {
-	if x != nil && x.State != nil {
-		return *x.State
+	if x != nil {
+		return x.xxx_hidden_State
 	}
 	return ItemState_ITEM_STATE_UNSPECIFIED
 }
 
-func (x *Node) GetType() isNode_Type {
-	if x != nil {
-		return x.Type
-	}
-	return nil
-}
-
 func (x *Node) GetStorage() *Node_StorageNode {
 	if x != nil {
-		if x, ok := x.Type.(*Node_Storage); ok {
+		if x, ok := x.xxx_hidden_Type.(*node_Storage); ok {
 			return x.Storage
 		}
 	}
@@ -354,7 +348,7 @@ func (x *Node) GetStorage() *Node_StorageNode {
 
 func (x *Node) GetDynamic() *Node_DynamicNode {
 	if x != nil {
-		if x, ok := x.Type.(*Node_Dynamic); ok {
+		if x, ok := x.xxx_hidden_Type.(*node_Dynamic); ok {
 			return x.Dynamic
 		}
 	}
@@ -363,109 +357,81 @@ func (x *Node) GetDynamic() *Node_DynamicNode {
 
 func (x *Node) GetStartTime() *timestamppb.Timestamp {
 	if x != nil {
-		return x.StartTime
+		return x.xxx_hidden_StartTime
 	}
 	return nil
 }
 
 func (x *Node) GetVersion() string {
-	if x != nil && x.Version != nil {
-		return *x.Version
+	if x != nil {
+		return x.xxx_hidden_Version
 	}
 	return ""
 }
 
 func (x *Node) SetNodeId(v uint32) {
-	x.NodeId = &v
+	x.xxx_hidden_NodeId = v
 }
 
 func (x *Node) SetHost(v string) {
-	x.Host = &v
+	x.xxx_hidden_Host = v
 }
 
 func (x *Node) SetPort(v uint32) {
-	x.Port = &v
+	x.xxx_hidden_Port = v
 }
 
 func (x *Node) SetLocation(v *Ydb_Discovery.NodeLocation) {
-	x.Location = v
+	x.xxx_hidden_Location = v
 }
 
 func (x *Node) SetState(v ItemState) {
-	x.State = &v
+	x.xxx_hidden_State = v
 }
 
 func (x *Node) SetStorage(v *Node_StorageNode) {
 	if v == nil {
-		x.Type = nil
+		x.xxx_hidden_Type = nil
 		return
 	}
-	x.Type = &Node_Storage{v}
+	x.xxx_hidden_Type = &node_Storage{v}
 }
 
 func (x *Node) SetDynamic(v *Node_DynamicNode) {
 	if v == nil {
-		x.Type = nil
+		x.xxx_hidden_Type = nil
 		return
 	}
-	x.Type = &Node_Dynamic{v}
+	x.xxx_hidden_Type = &node_Dynamic{v}
 }
 
 func (x *Node) SetStartTime(v *timestamppb.Timestamp) {
-	x.StartTime = v
+	x.xxx_hidden_StartTime = v
 }
 
 func (x *Node) SetVersion(v string) {
-	x.Version = &v
-}
-
-func (x *Node) HasNodeId() bool {
-	if x == nil {
-		return false
-	}
-	return x.NodeId != nil
-}
-
-func (x *Node) HasHost() bool {
-	if x == nil {
-		return false
-	}
-	return x.Host != nil
-}
-
-func (x *Node) HasPort() bool {
-	if x == nil {
-		return false
-	}
-	return x.Port != nil
+	x.xxx_hidden_Version = v
 }
 
 func (x *Node) HasLocation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Location != nil
-}
-
-func (x *Node) HasState() bool {
-	if x == nil {
-		return false
-	}
-	return x.State != nil
+	return x.xxx_hidden_Location != nil
 }
 
 func (x *Node) HasType() bool {
 	if x == nil {
 		return false
 	}
-	return x.Type != nil
+	return x.xxx_hidden_Type != nil
 }
 
 func (x *Node) HasStorage() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Type.(*Node_Storage)
+	_, ok := x.xxx_hidden_Type.(*node_Storage)
 	return ok
 }
 
@@ -473,7 +439,7 @@ func (x *Node) HasDynamic() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Type.(*Node_Dynamic)
+	_, ok := x.xxx_hidden_Type.(*node_Dynamic)
 	return ok
 }
 
@@ -481,58 +447,31 @@ func (x *Node) HasStartTime() bool {
 	if x == nil {
 		return false
 	}
-	return x.StartTime != nil
-}
-
-func (x *Node) HasVersion() bool {
-	if x == nil {
-		return false
-	}
-	return x.Version != nil
-}
-
-func (x *Node) ClearNodeId() {
-	x.NodeId = nil
-}
-
-func (x *Node) ClearHost() {
-	x.Host = nil
-}
-
-func (x *Node) ClearPort() {
-	x.Port = nil
+	return x.xxx_hidden_StartTime != nil
 }
 
 func (x *Node) ClearLocation() {
-	x.Location = nil
-}
-
-func (x *Node) ClearState() {
-	x.State = nil
+	x.xxx_hidden_Location = nil
 }
 
 func (x *Node) ClearType() {
-	x.Type = nil
+	x.xxx_hidden_Type = nil
 }
 
 func (x *Node) ClearStorage() {
-	if _, ok := x.Type.(*Node_Storage); ok {
-		x.Type = nil
+	if _, ok := x.xxx_hidden_Type.(*node_Storage); ok {
+		x.xxx_hidden_Type = nil
 	}
 }
 
 func (x *Node) ClearDynamic() {
-	if _, ok := x.Type.(*Node_Dynamic); ok {
-		x.Type = nil
+	if _, ok := x.xxx_hidden_Type.(*node_Dynamic); ok {
+		x.xxx_hidden_Type = nil
 	}
 }
 
 func (x *Node) ClearStartTime() {
-	x.StartTime = nil
-}
-
-func (x *Node) ClearVersion() {
-	x.Version = nil
+	x.xxx_hidden_StartTime = nil
 }
 
 const Node_Type_not_set_case case_Node_Type = 0
@@ -543,10 +482,10 @@ func (x *Node) WhichType() case_Node_Type {
 	if x == nil {
 		return Node_Type_not_set_case
 	}
-	switch x.Type.(type) {
-	case *Node_Storage:
+	switch x.xxx_hidden_Type.(type) {
+	case *node_Storage:
 		return Node_Storage_case
-	case *Node_Dynamic:
+	case *node_Dynamic:
 		return Node_Dynamic_case
 	default:
 		return Node_Type_not_set_case
@@ -556,39 +495,39 @@ func (x *Node) WhichType() case_Node_Type {
 type Node_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	NodeId   *uint32
-	Host     *string
-	Port     *uint32
+	NodeId   uint32
+	Host     string
+	Port     uint32
 	Location *Ydb_Discovery.NodeLocation
-	State    *ItemState
-	// Fields of oneof Type:
+	State    ItemState
+	// Fields of oneof xxx_hidden_Type:
 	Storage *Node_StorageNode
 	Dynamic *Node_DynamicNode
-	// -- end of Type
+	// -- end of xxx_hidden_Type
 	// start_time defines time when node was registered in cms.
 	StartTime *timestamppb.Timestamp
 	// version defines YDB version for current Node.
 	// For example, 'ydb-stable-24-1'.
-	Version *string
+	Version string
 }
 
 func (b0 Node_builder) Build() *Node {
 	m0 := &Node{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.NodeId = b.NodeId
-	x.Host = b.Host
-	x.Port = b.Port
-	x.Location = b.Location
-	x.State = b.State
+	x.xxx_hidden_NodeId = b.NodeId
+	x.xxx_hidden_Host = b.Host
+	x.xxx_hidden_Port = b.Port
+	x.xxx_hidden_Location = b.Location
+	x.xxx_hidden_State = b.State
 	if b.Storage != nil {
-		x.Type = &Node_Storage{b.Storage}
+		x.xxx_hidden_Type = &node_Storage{b.Storage}
 	}
 	if b.Dynamic != nil {
-		x.Type = &Node_Dynamic{b.Dynamic}
+		x.xxx_hidden_Type = &node_Dynamic{b.Dynamic}
 	}
-	x.StartTime = b.StartTime
-	x.Version = b.Version
+	x.xxx_hidden_StartTime = b.StartTime
+	x.xxx_hidden_Version = b.Version
 	return m0
 }
 
@@ -606,23 +545,23 @@ type isNode_Type interface {
 	isNode_Type()
 }
 
-type Node_Storage struct {
-	Storage *Node_StorageNode `protobuf:"bytes,6,opt,name=storage,oneof"`
+type node_Storage struct {
+	Storage *Node_StorageNode `protobuf:"bytes,6,opt,name=storage,proto3,oneof"`
 }
 
-type Node_Dynamic struct {
-	Dynamic *Node_DynamicNode `protobuf:"bytes,7,opt,name=dynamic,oneof"`
+type node_Dynamic struct {
+	Dynamic *Node_DynamicNode `protobuf:"bytes,7,opt,name=dynamic,proto3,oneof"`
 }
 
-func (*Node_Storage) isNode_Type() {}
+func (*node_Storage) isNode_Type() {}
 
-func (*Node_Dynamic) isNode_Type() {}
+func (*node_Dynamic) isNode_Type() {}
 
 type ListClusterNodesRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListClusterNodesRequest) Reset() {
@@ -652,24 +591,24 @@ func (x *ListClusterNodesRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ListClusterNodesRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListClusterNodesRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ListClusterNodesRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ListClusterNodesRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type ListClusterNodesRequest_builder struct {
@@ -682,15 +621,15 @@ func (b0 ListClusterNodesRequest_builder) Build() *ListClusterNodesRequest {
 	m0 := &ListClusterNodesRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
+	x.xxx_hidden_OperationParams = b.OperationParams
 	return m0
 }
 
 type ListClusterNodesResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Nodes         []*Node                `protobuf:"bytes,1,rep,name=nodes" json:"nodes,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Nodes *[]*Node               `protobuf:"bytes,1,rep,name=nodes,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ListClusterNodesResult) Reset() {
@@ -720,13 +659,15 @@ func (x *ListClusterNodesResult) ProtoReflect() protoreflect.Message {
 
 func (x *ListClusterNodesResult) GetNodes() []*Node {
 	if x != nil {
-		return x.Nodes
+		if x.xxx_hidden_Nodes != nil {
+			return *x.xxx_hidden_Nodes
+		}
 	}
 	return nil
 }
 
 func (x *ListClusterNodesResult) SetNodes(v []*Node) {
-	x.Nodes = v
+	x.xxx_hidden_Nodes = &v
 }
 
 type ListClusterNodesResult_builder struct {
@@ -739,16 +680,15 @@ func (b0 ListClusterNodesResult_builder) Build() *ListClusterNodesResult {
 	m0 := &ListClusterNodesResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Nodes = b.Nodes
+	x.xxx_hidden_Nodes = &b.Nodes
 	return m0
 }
 
 type ListClusterNodesResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// operation.result = ListClusterNodesResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListClusterNodesResponse) Reset() {
@@ -778,24 +718,24 @@ func (x *ListClusterNodesResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ListClusterNodesResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ListClusterNodesResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ListClusterNodesResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ListClusterNodesResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ListClusterNodesResponse_builder struct {
@@ -809,23 +749,19 @@ func (b0 ListClusterNodesResponse_builder) Build() *ListClusterNodesResponse {
 	m0 := &ListClusterNodesResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type MaintenanceTaskOptions struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// User-defined _unique_ task identifier.
-	TaskUid *string `protobuf:"bytes,1,opt,name=task_uid,json=taskUid" json:"task_uid,omitempty"`
-	// User-defined description.
-	Description *string `protobuf:"bytes,2,opt,name=description" json:"description,omitempty"`
-	// Availability mode.
-	AvailabilityMode *AvailabilityMode `protobuf:"varint,3,opt,name=availability_mode,json=availabilityMode,enum=Ydb.Maintenance.AvailabilityMode" json:"availability_mode,omitempty"`
-	DryRun           *bool             `protobuf:"varint,4,opt,name=dry_run,json=dryRun" json:"dry_run,omitempty"`
-	// Priority of the task. Lower value indicates higher priority.
-	Priority      *int32 `protobuf:"varint,5,opt,name=priority" json:"priority,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskUid          string                 `protobuf:"bytes,1,opt,name=task_uid,json=taskUid,proto3"`
+	xxx_hidden_Description      string                 `protobuf:"bytes,2,opt,name=description,proto3"`
+	xxx_hidden_AvailabilityMode AvailabilityMode       `protobuf:"varint,3,opt,name=availability_mode,json=availabilityMode,proto3,enum=Ydb.Maintenance.AvailabilityMode"`
+	xxx_hidden_DryRun           bool                   `protobuf:"varint,4,opt,name=dry_run,json=dryRun,proto3"`
+	xxx_hidden_Priority         int32                  `protobuf:"varint,5,opt,name=priority,proto3"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *MaintenanceTaskOptions) Reset() {
@@ -854,151 +790,92 @@ func (x *MaintenanceTaskOptions) ProtoReflect() protoreflect.Message {
 }
 
 func (x *MaintenanceTaskOptions) GetTaskUid() string {
-	if x != nil && x.TaskUid != nil {
-		return *x.TaskUid
+	if x != nil {
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
 func (x *MaintenanceTaskOptions) GetDescription() string {
-	if x != nil && x.Description != nil {
-		return *x.Description
+	if x != nil {
+		return x.xxx_hidden_Description
 	}
 	return ""
 }
 
 func (x *MaintenanceTaskOptions) GetAvailabilityMode() AvailabilityMode {
-	if x != nil && x.AvailabilityMode != nil {
-		return *x.AvailabilityMode
+	if x != nil {
+		return x.xxx_hidden_AvailabilityMode
 	}
 	return AvailabilityMode_AVAILABILITY_MODE_UNSPECIFIED
 }
 
 func (x *MaintenanceTaskOptions) GetDryRun() bool {
-	if x != nil && x.DryRun != nil {
-		return *x.DryRun
+	if x != nil {
+		return x.xxx_hidden_DryRun
 	}
 	return false
 }
 
 func (x *MaintenanceTaskOptions) GetPriority() int32 {
-	if x != nil && x.Priority != nil {
-		return *x.Priority
+	if x != nil {
+		return x.xxx_hidden_Priority
 	}
 	return 0
 }
 
 func (x *MaintenanceTaskOptions) SetTaskUid(v string) {
-	x.TaskUid = &v
+	x.xxx_hidden_TaskUid = v
 }
 
 func (x *MaintenanceTaskOptions) SetDescription(v string) {
-	x.Description = &v
+	x.xxx_hidden_Description = v
 }
 
 func (x *MaintenanceTaskOptions) SetAvailabilityMode(v AvailabilityMode) {
-	x.AvailabilityMode = &v
+	x.xxx_hidden_AvailabilityMode = v
 }
 
 func (x *MaintenanceTaskOptions) SetDryRun(v bool) {
-	x.DryRun = &v
+	x.xxx_hidden_DryRun = v
 }
 
 func (x *MaintenanceTaskOptions) SetPriority(v int32) {
-	x.Priority = &v
-}
-
-func (x *MaintenanceTaskOptions) HasTaskUid() bool {
-	if x == nil {
-		return false
-	}
-	return x.TaskUid != nil
-}
-
-func (x *MaintenanceTaskOptions) HasDescription() bool {
-	if x == nil {
-		return false
-	}
-	return x.Description != nil
-}
-
-func (x *MaintenanceTaskOptions) HasAvailabilityMode() bool {
-	if x == nil {
-		return false
-	}
-	return x.AvailabilityMode != nil
-}
-
-func (x *MaintenanceTaskOptions) HasDryRun() bool {
-	if x == nil {
-		return false
-	}
-	return x.DryRun != nil
-}
-
-func (x *MaintenanceTaskOptions) HasPriority() bool {
-	if x == nil {
-		return false
-	}
-	return x.Priority != nil
-}
-
-func (x *MaintenanceTaskOptions) ClearTaskUid() {
-	x.TaskUid = nil
-}
-
-func (x *MaintenanceTaskOptions) ClearDescription() {
-	x.Description = nil
-}
-
-func (x *MaintenanceTaskOptions) ClearAvailabilityMode() {
-	x.AvailabilityMode = nil
-}
-
-func (x *MaintenanceTaskOptions) ClearDryRun() {
-	x.DryRun = nil
-}
-
-func (x *MaintenanceTaskOptions) ClearPriority() {
-	x.Priority = nil
+	x.xxx_hidden_Priority = v
 }
 
 type MaintenanceTaskOptions_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// User-defined _unique_ task identifier.
-	TaskUid *string
+	TaskUid string
 	// User-defined description.
-	Description *string
+	Description string
 	// Availability mode.
-	AvailabilityMode *AvailabilityMode
-	DryRun           *bool
+	AvailabilityMode AvailabilityMode
+	DryRun           bool
 	// Priority of the task. Lower value indicates higher priority.
-	Priority *int32
+	Priority int32
 }
 
 func (b0 MaintenanceTaskOptions_builder) Build() *MaintenanceTaskOptions {
 	m0 := &MaintenanceTaskOptions{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.TaskUid = b.TaskUid
-	x.Description = b.Description
-	x.AvailabilityMode = b.AvailabilityMode
-	x.DryRun = b.DryRun
-	x.Priority = b.Priority
+	x.xxx_hidden_TaskUid = b.TaskUid
+	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_AvailabilityMode = b.AvailabilityMode
+	x.xxx_hidden_DryRun = b.DryRun
+	x.xxx_hidden_Priority = b.Priority
 	return m0
 }
 
 // Used to describe the scope of a single action.
 type ActionScope struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Types that are valid to be assigned to Scope:
-	//
-	//	*ActionScope_NodeId
-	//	*ActionScope_Host
-	Scope         isActionScope_Scope `protobuf_oneof:"scope"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Scope isActionScope_Scope    `protobuf_oneof:"scope"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *ActionScope) Reset() {
@@ -1026,16 +903,9 @@ func (x *ActionScope) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *ActionScope) GetScope() isActionScope_Scope {
-	if x != nil {
-		return x.Scope
-	}
-	return nil
-}
-
 func (x *ActionScope) GetNodeId() uint32 {
 	if x != nil {
-		if x, ok := x.Scope.(*ActionScope_NodeId); ok {
+		if x, ok := x.xxx_hidden_Scope.(*actionScope_NodeId); ok {
 			return x.NodeId
 		}
 	}
@@ -1044,33 +914,50 @@ func (x *ActionScope) GetNodeId() uint32 {
 
 func (x *ActionScope) GetHost() string {
 	if x != nil {
-		if x, ok := x.Scope.(*ActionScope_Host); ok {
+		if x, ok := x.xxx_hidden_Scope.(*actionScope_Host); ok {
 			return x.Host
 		}
 	}
 	return ""
 }
 
+func (x *ActionScope) GetPdisk() *ActionScope_PDisk {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Scope.(*actionScope_Pdisk); ok {
+			return x.Pdisk
+		}
+	}
+	return nil
+}
+
 func (x *ActionScope) SetNodeId(v uint32) {
-	x.Scope = &ActionScope_NodeId{v}
+	x.xxx_hidden_Scope = &actionScope_NodeId{v}
 }
 
 func (x *ActionScope) SetHost(v string) {
-	x.Scope = &ActionScope_Host{v}
+	x.xxx_hidden_Scope = &actionScope_Host{v}
+}
+
+func (x *ActionScope) SetPdisk(v *ActionScope_PDisk) {
+	if v == nil {
+		x.xxx_hidden_Scope = nil
+		return
+	}
+	x.xxx_hidden_Scope = &actionScope_Pdisk{v}
 }
 
 func (x *ActionScope) HasScope() bool {
 	if x == nil {
 		return false
 	}
-	return x.Scope != nil
+	return x.xxx_hidden_Scope != nil
 }
 
 func (x *ActionScope) HasNodeId() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Scope.(*ActionScope_NodeId)
+	_, ok := x.xxx_hidden_Scope.(*actionScope_NodeId)
 	return ok
 }
 
@@ -1078,39 +965,56 @@ func (x *ActionScope) HasHost() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Scope.(*ActionScope_Host)
+	_, ok := x.xxx_hidden_Scope.(*actionScope_Host)
+	return ok
+}
+
+func (x *ActionScope) HasPdisk() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Scope.(*actionScope_Pdisk)
 	return ok
 }
 
 func (x *ActionScope) ClearScope() {
-	x.Scope = nil
+	x.xxx_hidden_Scope = nil
 }
 
 func (x *ActionScope) ClearNodeId() {
-	if _, ok := x.Scope.(*ActionScope_NodeId); ok {
-		x.Scope = nil
+	if _, ok := x.xxx_hidden_Scope.(*actionScope_NodeId); ok {
+		x.xxx_hidden_Scope = nil
 	}
 }
 
 func (x *ActionScope) ClearHost() {
-	if _, ok := x.Scope.(*ActionScope_Host); ok {
-		x.Scope = nil
+	if _, ok := x.xxx_hidden_Scope.(*actionScope_Host); ok {
+		x.xxx_hidden_Scope = nil
+	}
+}
+
+func (x *ActionScope) ClearPdisk() {
+	if _, ok := x.xxx_hidden_Scope.(*actionScope_Pdisk); ok {
+		x.xxx_hidden_Scope = nil
 	}
 }
 
 const ActionScope_Scope_not_set_case case_ActionScope_Scope = 0
 const ActionScope_NodeId_case case_ActionScope_Scope = 1
 const ActionScope_Host_case case_ActionScope_Scope = 2
+const ActionScope_Pdisk_case case_ActionScope_Scope = 3
 
 func (x *ActionScope) WhichScope() case_ActionScope_Scope {
 	if x == nil {
 		return ActionScope_Scope_not_set_case
 	}
-	switch x.Scope.(type) {
-	case *ActionScope_NodeId:
+	switch x.xxx_hidden_Scope.(type) {
+	case *actionScope_NodeId:
 		return ActionScope_NodeId_case
-	case *ActionScope_Host:
+	case *actionScope_Host:
 		return ActionScope_Host_case
+	case *actionScope_Pdisk:
+		return ActionScope_Pdisk_case
 	default:
 		return ActionScope_Scope_not_set_case
 	}
@@ -1119,10 +1023,11 @@ func (x *ActionScope) WhichScope() case_ActionScope_Scope {
 type ActionScope_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof Scope:
+	// Fields of oneof xxx_hidden_Scope:
 	NodeId *uint32
 	Host   *string
-	// -- end of Scope
+	Pdisk  *ActionScope_PDisk
+	// -- end of xxx_hidden_Scope
 }
 
 func (b0 ActionScope_builder) Build() *ActionScope {
@@ -1130,10 +1035,13 @@ func (b0 ActionScope_builder) Build() *ActionScope {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.NodeId != nil {
-		x.Scope = &ActionScope_NodeId{*b.NodeId}
+		x.xxx_hidden_Scope = &actionScope_NodeId{*b.NodeId}
 	}
 	if b.Host != nil {
-		x.Scope = &ActionScope_Host{*b.Host}
+		x.xxx_hidden_Scope = &actionScope_Host{*b.Host}
+	}
+	if b.Pdisk != nil {
+		x.xxx_hidden_Scope = &actionScope_Pdisk{b.Pdisk}
 	}
 	return m0
 }
@@ -1152,25 +1060,31 @@ type isActionScope_Scope interface {
 	isActionScope_Scope()
 }
 
-type ActionScope_NodeId struct {
-	NodeId uint32 `protobuf:"varint,1,opt,name=node_id,json=nodeId,oneof"`
+type actionScope_NodeId struct {
+	NodeId uint32 `protobuf:"varint,1,opt,name=node_id,json=nodeId,proto3,oneof"`
 }
 
-type ActionScope_Host struct {
-	Host string `protobuf:"bytes,2,opt,name=host,oneof"`
+type actionScope_Host struct {
+	Host string `protobuf:"bytes,2,opt,name=host,proto3,oneof"`
 }
 
-func (*ActionScope_NodeId) isActionScope_Scope() {}
+type actionScope_Pdisk struct {
+	Pdisk *ActionScope_PDisk `protobuf:"bytes,3,opt,name=pdisk,proto3,oneof"`
+}
 
-func (*ActionScope_Host) isActionScope_Scope() {}
+func (*actionScope_NodeId) isActionScope_Scope() {}
+
+func (*actionScope_Host) isActionScope_Scope() {}
+
+func (*actionScope_Pdisk) isActionScope_Scope() {}
 
 // Taking an exclusive lock to perform maintenance.
 type LockAction struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Scope         *ActionScope           `protobuf:"bytes,1,opt,name=scope" json:"scope,omitempty"`
-	Duration      *durationpb.Duration   `protobuf:"bytes,2,opt,name=duration" json:"duration,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Scope    *ActionScope           `protobuf:"bytes,1,opt,name=scope,proto3"`
+	xxx_hidden_Duration *durationpb.Duration   `protobuf:"bytes,2,opt,name=duration,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *LockAction) Reset() {
@@ -1200,46 +1114,46 @@ func (x *LockAction) ProtoReflect() protoreflect.Message {
 
 func (x *LockAction) GetScope() *ActionScope {
 	if x != nil {
-		return x.Scope
+		return x.xxx_hidden_Scope
 	}
 	return nil
 }
 
 func (x *LockAction) GetDuration() *durationpb.Duration {
 	if x != nil {
-		return x.Duration
+		return x.xxx_hidden_Duration
 	}
 	return nil
 }
 
 func (x *LockAction) SetScope(v *ActionScope) {
-	x.Scope = v
+	x.xxx_hidden_Scope = v
 }
 
 func (x *LockAction) SetDuration(v *durationpb.Duration) {
-	x.Duration = v
+	x.xxx_hidden_Duration = v
 }
 
 func (x *LockAction) HasScope() bool {
 	if x == nil {
 		return false
 	}
-	return x.Scope != nil
+	return x.xxx_hidden_Scope != nil
 }
 
 func (x *LockAction) HasDuration() bool {
 	if x == nil {
 		return false
 	}
-	return x.Duration != nil
+	return x.xxx_hidden_Duration != nil
 }
 
 func (x *LockAction) ClearScope() {
-	x.Scope = nil
+	x.xxx_hidden_Scope = nil
 }
 
 func (x *LockAction) ClearDuration() {
-	x.Duration = nil
+	x.xxx_hidden_Duration = nil
 }
 
 type LockAction_builder struct {
@@ -1253,35 +1167,33 @@ func (b0 LockAction_builder) Build() *LockAction {
 	m0 := &LockAction{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Scope = b.Scope
-	x.Duration = b.Duration
+	x.xxx_hidden_Scope = b.Scope
+	x.xxx_hidden_Duration = b.Duration
 	return m0
 }
 
-type Action struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Types that are valid to be assigned to Action:
-	//
-	//	*Action_LockAction
-	Action        isAction_Action `protobuf_oneof:"action"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+// Moving tablets away.
+type DrainAction struct {
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Scope *ActionScope           `protobuf:"bytes,1,opt,name=scope,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
-func (x *Action) Reset() {
-	*x = Action{}
+func (x *DrainAction) Reset() {
+	*x = DrainAction{}
 	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Action) String() string {
+func (x *DrainAction) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Action) ProtoMessage() {}
+func (*DrainAction) ProtoMessage() {}
 
-func (x *Action) ProtoReflect() protoreflect.Message {
+func (x *DrainAction) ProtoReflect() protoreflect.Message {
 	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1293,17 +1205,165 @@ func (x *Action) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Action) GetAction() isAction_Action {
+func (x *DrainAction) GetScope() *ActionScope {
 	if x != nil {
-		return x.Action
+		return x.xxx_hidden_Scope
 	}
 	return nil
 }
 
+func (x *DrainAction) SetScope(v *ActionScope) {
+	x.xxx_hidden_Scope = v
+}
+
+func (x *DrainAction) HasScope() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Scope != nil
+}
+
+func (x *DrainAction) ClearScope() {
+	x.xxx_hidden_Scope = nil
+}
+
+type DrainAction_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Scope *ActionScope
+}
+
+func (b0 DrainAction_builder) Build() *DrainAction {
+	m0 := &DrainAction{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Scope = b.Scope
+	return m0
+}
+
+// Ensuring no new tablets run there.
+type CordonAction struct {
+	state            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Scope *ActionScope           `protobuf:"bytes,1,opt,name=scope,proto3"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *CordonAction) Reset() {
+	*x = CordonAction{}
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CordonAction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CordonAction) ProtoMessage() {}
+
+func (x *CordonAction) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *CordonAction) GetScope() *ActionScope {
+	if x != nil {
+		return x.xxx_hidden_Scope
+	}
+	return nil
+}
+
+func (x *CordonAction) SetScope(v *ActionScope) {
+	x.xxx_hidden_Scope = v
+}
+
+func (x *CordonAction) HasScope() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Scope != nil
+}
+
+func (x *CordonAction) ClearScope() {
+	x.xxx_hidden_Scope = nil
+}
+
+type CordonAction_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Scope *ActionScope
+}
+
+func (b0 CordonAction_builder) Build() *CordonAction {
+	m0 := &CordonAction{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Scope = b.Scope
+	return m0
+}
+
+type Action struct {
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Action isAction_Action        `protobuf_oneof:"action"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *Action) Reset() {
+	*x = Action{}
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Action) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Action) ProtoMessage() {}
+
+func (x *Action) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
 func (x *Action) GetLockAction() *LockAction {
 	if x != nil {
-		if x, ok := x.Action.(*Action_LockAction); ok {
+		if x, ok := x.xxx_hidden_Action.(*action_LockAction); ok {
 			return x.LockAction
+		}
+	}
+	return nil
+}
+
+func (x *Action) GetDrainAction() *DrainAction {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Action.(*action_DrainAction); ok {
+			return x.DrainAction
+		}
+	}
+	return nil
+}
+
+func (x *Action) GetCordonAction() *CordonAction {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Action.(*action_CordonAction); ok {
+			return x.CordonAction
 		}
 	}
 	return nil
@@ -1311,47 +1371,97 @@ func (x *Action) GetLockAction() *LockAction {
 
 func (x *Action) SetLockAction(v *LockAction) {
 	if v == nil {
-		x.Action = nil
+		x.xxx_hidden_Action = nil
 		return
 	}
-	x.Action = &Action_LockAction{v}
+	x.xxx_hidden_Action = &action_LockAction{v}
+}
+
+func (x *Action) SetDrainAction(v *DrainAction) {
+	if v == nil {
+		x.xxx_hidden_Action = nil
+		return
+	}
+	x.xxx_hidden_Action = &action_DrainAction{v}
+}
+
+func (x *Action) SetCordonAction(v *CordonAction) {
+	if v == nil {
+		x.xxx_hidden_Action = nil
+		return
+	}
+	x.xxx_hidden_Action = &action_CordonAction{v}
 }
 
 func (x *Action) HasAction() bool {
 	if x == nil {
 		return false
 	}
-	return x.Action != nil
+	return x.xxx_hidden_Action != nil
 }
 
 func (x *Action) HasLockAction() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.Action.(*Action_LockAction)
+	_, ok := x.xxx_hidden_Action.(*action_LockAction)
+	return ok
+}
+
+func (x *Action) HasDrainAction() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Action.(*action_DrainAction)
+	return ok
+}
+
+func (x *Action) HasCordonAction() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Action.(*action_CordonAction)
 	return ok
 }
 
 func (x *Action) ClearAction() {
-	x.Action = nil
+	x.xxx_hidden_Action = nil
 }
 
 func (x *Action) ClearLockAction() {
-	if _, ok := x.Action.(*Action_LockAction); ok {
-		x.Action = nil
+	if _, ok := x.xxx_hidden_Action.(*action_LockAction); ok {
+		x.xxx_hidden_Action = nil
+	}
+}
+
+func (x *Action) ClearDrainAction() {
+	if _, ok := x.xxx_hidden_Action.(*action_DrainAction); ok {
+		x.xxx_hidden_Action = nil
+	}
+}
+
+func (x *Action) ClearCordonAction() {
+	if _, ok := x.xxx_hidden_Action.(*action_CordonAction); ok {
+		x.xxx_hidden_Action = nil
 	}
 }
 
 const Action_Action_not_set_case case_Action_Action = 0
 const Action_LockAction_case case_Action_Action = 1
+const Action_DrainAction_case case_Action_Action = 2
+const Action_CordonAction_case case_Action_Action = 3
 
 func (x *Action) WhichAction() case_Action_Action {
 	if x == nil {
 		return Action_Action_not_set_case
 	}
-	switch x.Action.(type) {
-	case *Action_LockAction:
+	switch x.xxx_hidden_Action.(type) {
+	case *action_LockAction:
 		return Action_LockAction_case
+	case *action_DrainAction:
+		return Action_DrainAction_case
+	case *action_CordonAction:
+		return Action_CordonAction_case
 	default:
 		return Action_Action_not_set_case
 	}
@@ -1360,9 +1470,11 @@ func (x *Action) WhichAction() case_Action_Action {
 type Action_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof Action:
-	LockAction *LockAction
-	// -- end of Action
+	// Fields of oneof xxx_hidden_Action:
+	LockAction   *LockAction
+	DrainAction  *DrainAction
+	CordonAction *CordonAction
+	// -- end of xxx_hidden_Action
 }
 
 func (b0 Action_builder) Build() *Action {
@@ -1370,7 +1482,13 @@ func (b0 Action_builder) Build() *Action {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.LockAction != nil {
-		x.Action = &Action_LockAction{b.LockAction}
+		x.xxx_hidden_Action = &action_LockAction{b.LockAction}
+	}
+	if b.DrainAction != nil {
+		x.xxx_hidden_Action = &action_DrainAction{b.DrainAction}
+	}
+	if b.CordonAction != nil {
+		x.xxx_hidden_Action = &action_CordonAction{b.CordonAction}
 	}
 	return m0
 }
@@ -1378,7 +1496,7 @@ func (b0 Action_builder) Build() *Action {
 type case_Action_Action protoreflect.FieldNumber
 
 func (x case_Action_Action) String() string {
-	md := file_draft_protos_ydb_maintenance_proto_msgTypes[7].Descriptor()
+	md := file_draft_protos_ydb_maintenance_proto_msgTypes[9].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -1389,22 +1507,34 @@ type isAction_Action interface {
 	isAction_Action()
 }
 
-type Action_LockAction struct {
-	LockAction *LockAction `protobuf:"bytes,1,opt,name=lock_action,json=lockAction,oneof"`
+type action_LockAction struct {
+	LockAction *LockAction `protobuf:"bytes,1,opt,name=lock_action,json=lockAction,proto3,oneof"`
 }
 
-func (*Action_LockAction) isAction_Action() {}
+type action_DrainAction struct {
+	DrainAction *DrainAction `protobuf:"bytes,2,opt,name=drain_action,json=drainAction,proto3,oneof"`
+}
+
+type action_CordonAction struct {
+	CordonAction *CordonAction `protobuf:"bytes,3,opt,name=cordon_action,json=cordonAction,proto3,oneof"`
+}
+
+func (*action_LockAction) isAction_Action() {}
+
+func (*action_DrainAction) isAction_Action() {}
+
+func (*action_CordonAction) isAction_Action() {}
 
 type ActionGroup struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Actions       []*Action              `protobuf:"bytes,1,rep,name=actions" json:"actions,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Actions *[]*Action             `protobuf:"bytes,1,rep,name=actions,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ActionGroup) Reset() {
 	*x = ActionGroup{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[8]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1416,7 +1546,7 @@ func (x *ActionGroup) String() string {
 func (*ActionGroup) ProtoMessage() {}
 
 func (x *ActionGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[8]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1429,13 +1559,15 @@ func (x *ActionGroup) ProtoReflect() protoreflect.Message {
 
 func (x *ActionGroup) GetActions() []*Action {
 	if x != nil {
-		return x.Actions
+		if x.xxx_hidden_Actions != nil {
+			return *x.xxx_hidden_Actions
+		}
 	}
 	return nil
 }
 
 func (x *ActionGroup) SetActions(v []*Action) {
-	x.Actions = v
+	x.xxx_hidden_Actions = &v
 }
 
 type ActionGroup_builder struct {
@@ -1448,22 +1580,22 @@ func (b0 ActionGroup_builder) Build() *ActionGroup {
 	m0 := &ActionGroup{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Actions = b.Actions
+	x.xxx_hidden_Actions = &b.Actions
 	return m0
 }
 
 type CreateMaintenanceTaskRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	TaskOptions     *MaintenanceTaskOptions         `protobuf:"bytes,2,opt,name=task_options,json=taskOptions" json:"task_options,omitempty"`
-	ActionGroups    []*ActionGroup                  `protobuf:"bytes,3,rep,name=action_groups,json=actionGroups" json:"action_groups,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_TaskOptions     *MaintenanceTaskOptions         `protobuf:"bytes,2,opt,name=task_options,json=taskOptions,proto3"`
+	xxx_hidden_ActionGroups    *[]*ActionGroup                 `protobuf:"bytes,3,rep,name=action_groups,json=actionGroups,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CreateMaintenanceTaskRequest) Reset() {
 	*x = CreateMaintenanceTaskRequest{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[9]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1475,7 +1607,7 @@ func (x *CreateMaintenanceTaskRequest) String() string {
 func (*CreateMaintenanceTaskRequest) ProtoMessage() {}
 
 func (x *CreateMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[9]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1488,57 +1620,59 @@ func (x *CreateMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
 
 func (x *CreateMaintenanceTaskRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CreateMaintenanceTaskRequest) GetTaskOptions() *MaintenanceTaskOptions {
 	if x != nil {
-		return x.TaskOptions
+		return x.xxx_hidden_TaskOptions
 	}
 	return nil
 }
 
 func (x *CreateMaintenanceTaskRequest) GetActionGroups() []*ActionGroup {
 	if x != nil {
-		return x.ActionGroups
+		if x.xxx_hidden_ActionGroups != nil {
+			return *x.xxx_hidden_ActionGroups
+		}
 	}
 	return nil
 }
 
 func (x *CreateMaintenanceTaskRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *CreateMaintenanceTaskRequest) SetTaskOptions(v *MaintenanceTaskOptions) {
-	x.TaskOptions = v
+	x.xxx_hidden_TaskOptions = v
 }
 
 func (x *CreateMaintenanceTaskRequest) SetActionGroups(v []*ActionGroup) {
-	x.ActionGroups = v
+	x.xxx_hidden_ActionGroups = &v
 }
 
 func (x *CreateMaintenanceTaskRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *CreateMaintenanceTaskRequest) HasTaskOptions() bool {
 	if x == nil {
 		return false
 	}
-	return x.TaskOptions != nil
+	return x.xxx_hidden_TaskOptions != nil
 }
 
 func (x *CreateMaintenanceTaskRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *CreateMaintenanceTaskRequest) ClearTaskOptions() {
-	x.TaskOptions = nil
+	x.xxx_hidden_TaskOptions = nil
 }
 
 type CreateMaintenanceTaskRequest_builder struct {
@@ -1553,23 +1687,23 @@ func (b0 CreateMaintenanceTaskRequest_builder) Build() *CreateMaintenanceTaskReq
 	m0 := &CreateMaintenanceTaskRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.TaskOptions = b.TaskOptions
-	x.ActionGroups = b.ActionGroups
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_TaskOptions = b.TaskOptions
+	x.xxx_hidden_ActionGroups = &b.ActionGroups
 	return m0
 }
 
 type RefreshMaintenanceTaskRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	TaskUid         *string                         `protobuf:"bytes,2,opt,name=task_uid,json=taskUid" json:"task_uid,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_TaskUid         string                          `protobuf:"bytes,2,opt,name=task_uid,json=taskUid,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *RefreshMaintenanceTaskRequest) Reset() {
 	*x = RefreshMaintenanceTaskRequest{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[10]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1581,7 +1715,7 @@ func (x *RefreshMaintenanceTaskRequest) String() string {
 func (*RefreshMaintenanceTaskRequest) ProtoMessage() {}
 
 func (x *RefreshMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[10]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1594,77 +1728,65 @@ func (x *RefreshMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
 
 func (x *RefreshMaintenanceTaskRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *RefreshMaintenanceTaskRequest) GetTaskUid() string {
-	if x != nil && x.TaskUid != nil {
-		return *x.TaskUid
+	if x != nil {
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
 func (x *RefreshMaintenanceTaskRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *RefreshMaintenanceTaskRequest) SetTaskUid(v string) {
-	x.TaskUid = &v
+	x.xxx_hidden_TaskUid = v
 }
 
 func (x *RefreshMaintenanceTaskRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *RefreshMaintenanceTaskRequest) HasTaskUid() bool {
-	if x == nil {
-		return false
-	}
-	return x.TaskUid != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *RefreshMaintenanceTaskRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *RefreshMaintenanceTaskRequest) ClearTaskUid() {
-	x.TaskUid = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type RefreshMaintenanceTaskRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	TaskUid         *string
+	TaskUid         string
 }
 
 func (b0 RefreshMaintenanceTaskRequest_builder) Build() *RefreshMaintenanceTaskRequest {
 	m0 := &RefreshMaintenanceTaskRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.TaskUid = b.TaskUid
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_TaskUid = b.TaskUid
 	return m0
 }
 
 type ActionUid struct {
-	state   protoimpl.MessageState `protogen:"hybrid.v1"`
-	TaskUid *string                `protobuf:"bytes,1,opt,name=task_uid,json=taskUid" json:"task_uid,omitempty"`
-	// Unique ids within a single task, assigned by the server.
-	GroupId       *string `protobuf:"bytes,2,opt,name=group_id,json=groupId" json:"group_id,omitempty"`
-	ActionId      *string `protobuf:"bytes,3,opt,name=action_id,json=actionId" json:"action_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskUid  string                 `protobuf:"bytes,1,opt,name=task_uid,json=taskUid,proto3"`
+	xxx_hidden_GroupId  string                 `protobuf:"bytes,2,opt,name=group_id,json=groupId,proto3"`
+	xxx_hidden_ActionId string                 `protobuf:"bytes,3,opt,name=action_id,json=actionId,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ActionUid) Reset() {
 	*x = ActionUid{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[11]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1676,7 +1798,7 @@ func (x *ActionUid) String() string {
 func (*ActionUid) ProtoMessage() {}
 
 func (x *ActionUid) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[11]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1688,105 +1810,72 @@ func (x *ActionUid) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ActionUid) GetTaskUid() string {
-	if x != nil && x.TaskUid != nil {
-		return *x.TaskUid
+	if x != nil {
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
 func (x *ActionUid) GetGroupId() string {
-	if x != nil && x.GroupId != nil {
-		return *x.GroupId
+	if x != nil {
+		return x.xxx_hidden_GroupId
 	}
 	return ""
 }
 
 func (x *ActionUid) GetActionId() string {
-	if x != nil && x.ActionId != nil {
-		return *x.ActionId
+	if x != nil {
+		return x.xxx_hidden_ActionId
 	}
 	return ""
 }
 
 func (x *ActionUid) SetTaskUid(v string) {
-	x.TaskUid = &v
+	x.xxx_hidden_TaskUid = v
 }
 
 func (x *ActionUid) SetGroupId(v string) {
-	x.GroupId = &v
+	x.xxx_hidden_GroupId = v
 }
 
 func (x *ActionUid) SetActionId(v string) {
-	x.ActionId = &v
-}
-
-func (x *ActionUid) HasTaskUid() bool {
-	if x == nil {
-		return false
-	}
-	return x.TaskUid != nil
-}
-
-func (x *ActionUid) HasGroupId() bool {
-	if x == nil {
-		return false
-	}
-	return x.GroupId != nil
-}
-
-func (x *ActionUid) HasActionId() bool {
-	if x == nil {
-		return false
-	}
-	return x.ActionId != nil
-}
-
-func (x *ActionUid) ClearTaskUid() {
-	x.TaskUid = nil
-}
-
-func (x *ActionUid) ClearGroupId() {
-	x.GroupId = nil
-}
-
-func (x *ActionUid) ClearActionId() {
-	x.ActionId = nil
+	x.xxx_hidden_ActionId = v
 }
 
 type ActionUid_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	TaskUid *string
+	TaskUid string
 	// Unique ids within a single task, assigned by the server.
-	GroupId  *string
-	ActionId *string
+	GroupId  string
+	ActionId string
 }
 
 func (b0 ActionUid_builder) Build() *ActionUid {
 	m0 := &ActionUid{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.TaskUid = b.TaskUid
-	x.GroupId = b.GroupId
-	x.ActionId = b.ActionId
+	x.xxx_hidden_TaskUid = b.TaskUid
+	x.xxx_hidden_GroupId = b.GroupId
+	x.xxx_hidden_ActionId = b.ActionId
 	return m0
 }
 
 type ActionState struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Action        *Action                   `protobuf:"bytes,1,opt,name=action" json:"action,omitempty"`
-	ActionUid     *ActionUid                `protobuf:"bytes,2,opt,name=action_uid,json=actionUid" json:"action_uid,omitempty"`
-	Status        *ActionState_ActionStatus `protobuf:"varint,3,opt,name=status,enum=Ydb.Maintenance.ActionState_ActionStatus" json:"status,omitempty"`
-	Reason        *ActionState_ActionReason `protobuf:"varint,4,opt,name=reason,enum=Ydb.Maintenance.ActionState_ActionReason" json:"reason,omitempty"`
-	ReasonDetails *string                   `protobuf:"bytes,6,opt,name=reason_details,json=reasonDetails" json:"reason_details,omitempty"`
-	Deadline      *timestamppb.Timestamp    `protobuf:"bytes,5,opt,name=deadline" json:"deadline,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Action    *Action                  `protobuf:"bytes,1,opt,name=action,proto3"`
+	xxx_hidden_ActionUid *ActionUid               `protobuf:"bytes,2,opt,name=action_uid,json=actionUid,proto3"`
+	xxx_hidden_Status    ActionState_ActionStatus `protobuf:"varint,3,opt,name=status,proto3,enum=Ydb.Maintenance.ActionState_ActionStatus"`
+	xxx_hidden_Reason    ActionState_ActionReason `protobuf:"varint,4,opt,name=reason,proto3,enum=Ydb.Maintenance.ActionState_ActionReason"`
+	xxx_hidden_Details   string                   `protobuf:"bytes,6,opt,name=details,proto3"`
+	xxx_hidden_Deadline  *timestamppb.Timestamp   `protobuf:"bytes,5,opt,name=deadline,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ActionState) Reset() {
 	*x = ActionState{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[12]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1798,7 +1887,7 @@ func (x *ActionState) String() string {
 func (*ActionState) ProtoMessage() {}
 
 func (x *ActionState) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[12]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1811,170 +1900,137 @@ func (x *ActionState) ProtoReflect() protoreflect.Message {
 
 func (x *ActionState) GetAction() *Action {
 	if x != nil {
-		return x.Action
+		return x.xxx_hidden_Action
 	}
 	return nil
 }
 
 func (x *ActionState) GetActionUid() *ActionUid {
 	if x != nil {
-		return x.ActionUid
+		return x.xxx_hidden_ActionUid
 	}
 	return nil
 }
 
 func (x *ActionState) GetStatus() ActionState_ActionStatus {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return ActionState_ACTION_STATUS_UNSPECIFIED
 }
 
 func (x *ActionState) GetReason() ActionState_ActionReason {
-	if x != nil && x.Reason != nil {
-		return *x.Reason
+	if x != nil {
+		return x.xxx_hidden_Reason
 	}
 	return ActionState_ACTION_REASON_UNSPECIFIED
 }
 
-func (x *ActionState) GetReasonDetails() string {
-	if x != nil && x.ReasonDetails != nil {
-		return *x.ReasonDetails
+func (x *ActionState) GetDetails() string {
+	if x != nil {
+		return x.xxx_hidden_Details
 	}
 	return ""
 }
 
 func (x *ActionState) GetDeadline() *timestamppb.Timestamp {
 	if x != nil {
-		return x.Deadline
+		return x.xxx_hidden_Deadline
 	}
 	return nil
 }
 
 func (x *ActionState) SetAction(v *Action) {
-	x.Action = v
+	x.xxx_hidden_Action = v
 }
 
 func (x *ActionState) SetActionUid(v *ActionUid) {
-	x.ActionUid = v
+	x.xxx_hidden_ActionUid = v
 }
 
 func (x *ActionState) SetStatus(v ActionState_ActionStatus) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *ActionState) SetReason(v ActionState_ActionReason) {
-	x.Reason = &v
+	x.xxx_hidden_Reason = v
 }
 
-func (x *ActionState) SetReasonDetails(v string) {
-	x.ReasonDetails = &v
+func (x *ActionState) SetDetails(v string) {
+	x.xxx_hidden_Details = v
 }
 
 func (x *ActionState) SetDeadline(v *timestamppb.Timestamp) {
-	x.Deadline = v
+	x.xxx_hidden_Deadline = v
 }
 
 func (x *ActionState) HasAction() bool {
 	if x == nil {
 		return false
 	}
-	return x.Action != nil
+	return x.xxx_hidden_Action != nil
 }
 
 func (x *ActionState) HasActionUid() bool {
 	if x == nil {
 		return false
 	}
-	return x.ActionUid != nil
-}
-
-func (x *ActionState) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
-}
-
-func (x *ActionState) HasReason() bool {
-	if x == nil {
-		return false
-	}
-	return x.Reason != nil
-}
-
-func (x *ActionState) HasReasonDetails() bool {
-	if x == nil {
-		return false
-	}
-	return x.ReasonDetails != nil
+	return x.xxx_hidden_ActionUid != nil
 }
 
 func (x *ActionState) HasDeadline() bool {
 	if x == nil {
 		return false
 	}
-	return x.Deadline != nil
+	return x.xxx_hidden_Deadline != nil
 }
 
 func (x *ActionState) ClearAction() {
-	x.Action = nil
+	x.xxx_hidden_Action = nil
 }
 
 func (x *ActionState) ClearActionUid() {
-	x.ActionUid = nil
-}
-
-func (x *ActionState) ClearStatus() {
-	x.Status = nil
-}
-
-func (x *ActionState) ClearReason() {
-	x.Reason = nil
-}
-
-func (x *ActionState) ClearReasonDetails() {
-	x.ReasonDetails = nil
+	x.xxx_hidden_ActionUid = nil
 }
 
 func (x *ActionState) ClearDeadline() {
-	x.Deadline = nil
+	x.xxx_hidden_Deadline = nil
 }
 
 type ActionState_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Action        *Action
-	ActionUid     *ActionUid
-	Status        *ActionState_ActionStatus
-	Reason        *ActionState_ActionReason
-	ReasonDetails *string
-	Deadline      *timestamppb.Timestamp
+	Action    *Action
+	ActionUid *ActionUid
+	Status    ActionState_ActionStatus
+	Reason    ActionState_ActionReason
+	Details   string
+	Deadline  *timestamppb.Timestamp
 }
 
 func (b0 ActionState_builder) Build() *ActionState {
 	m0 := &ActionState{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Action = b.Action
-	x.ActionUid = b.ActionUid
-	x.Status = b.Status
-	x.Reason = b.Reason
-	x.ReasonDetails = b.ReasonDetails
-	x.Deadline = b.Deadline
+	x.xxx_hidden_Action = b.Action
+	x.xxx_hidden_ActionUid = b.ActionUid
+	x.xxx_hidden_Status = b.Status
+	x.xxx_hidden_Reason = b.Reason
+	x.xxx_hidden_Details = b.Details
+	x.xxx_hidden_Deadline = b.Deadline
 	return m0
 }
 
 type ActionGroupStates struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	ActionStates  []*ActionState         `protobuf:"bytes,1,rep,name=action_states,json=actionStates" json:"action_states,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ActionStates *[]*ActionState        `protobuf:"bytes,1,rep,name=action_states,json=actionStates,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ActionGroupStates) Reset() {
 	*x = ActionGroupStates{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[13]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1986,7 +2042,7 @@ func (x *ActionGroupStates) String() string {
 func (*ActionGroupStates) ProtoMessage() {}
 
 func (x *ActionGroupStates) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[13]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1999,13 +2055,15 @@ func (x *ActionGroupStates) ProtoReflect() protoreflect.Message {
 
 func (x *ActionGroupStates) GetActionStates() []*ActionState {
 	if x != nil {
-		return x.ActionStates
+		if x.xxx_hidden_ActionStates != nil {
+			return *x.xxx_hidden_ActionStates
+		}
 	}
 	return nil
 }
 
 func (x *ActionGroupStates) SetActionStates(v []*ActionState) {
-	x.ActionStates = v
+	x.xxx_hidden_ActionStates = &v
 }
 
 type ActionGroupStates_builder struct {
@@ -2018,23 +2076,24 @@ func (b0 ActionGroupStates_builder) Build() *ActionGroupStates {
 	m0 := &ActionGroupStates{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ActionStates = b.ActionStates
+	x.xxx_hidden_ActionStates = &b.ActionStates
 	return m0
 }
 
 type MaintenanceTaskResult struct {
-	state             protoimpl.MessageState `protogen:"hybrid.v1"`
-	TaskUid           *string                `protobuf:"bytes,1,opt,name=task_uid,json=taskUid" json:"task_uid,omitempty"`
-	ActionGroupStates []*ActionGroupStates   `protobuf:"bytes,2,rep,name=action_group_states,json=actionGroupStates" json:"action_group_states,omitempty"`
-	// Try again after this deadline. Specified if there are no performed actions.
-	RetryAfter    *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=retry_after,json=retryAfter" json:"retry_after,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskUid           string                 `protobuf:"bytes,1,opt,name=task_uid,json=taskUid,proto3"`
+	xxx_hidden_ActionGroupStates *[]*ActionGroupStates  `protobuf:"bytes,2,rep,name=action_group_states,json=actionGroupStates,proto3"`
+	xxx_hidden_RetryAfter        *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=retry_after,json=retryAfter,proto3,oneof"`
+	xxx_hidden_CreateTime        *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=create_time,json=createTime,proto3"`
+	xxx_hidden_LastRefreshTime   *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=last_refresh_time,json=lastRefreshTime,proto3"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *MaintenanceTaskResult) Reset() {
 	*x = MaintenanceTaskResult{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[14]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2046,7 +2105,7 @@ func (x *MaintenanceTaskResult) String() string {
 func (*MaintenanceTaskResult) ProtoMessage() {}
 
 func (x *MaintenanceTaskResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[14]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2058,90 +2117,130 @@ func (x *MaintenanceTaskResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *MaintenanceTaskResult) GetTaskUid() string {
-	if x != nil && x.TaskUid != nil {
-		return *x.TaskUid
+	if x != nil {
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
 func (x *MaintenanceTaskResult) GetActionGroupStates() []*ActionGroupStates {
 	if x != nil {
-		return x.ActionGroupStates
+		if x.xxx_hidden_ActionGroupStates != nil {
+			return *x.xxx_hidden_ActionGroupStates
+		}
 	}
 	return nil
 }
 
 func (x *MaintenanceTaskResult) GetRetryAfter() *timestamppb.Timestamp {
 	if x != nil {
-		return x.RetryAfter
+		return x.xxx_hidden_RetryAfter
+	}
+	return nil
+}
+
+func (x *MaintenanceTaskResult) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_CreateTime
+	}
+	return nil
+}
+
+func (x *MaintenanceTaskResult) GetLastRefreshTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_LastRefreshTime
 	}
 	return nil
 }
 
 func (x *MaintenanceTaskResult) SetTaskUid(v string) {
-	x.TaskUid = &v
+	x.xxx_hidden_TaskUid = v
 }
 
 func (x *MaintenanceTaskResult) SetActionGroupStates(v []*ActionGroupStates) {
-	x.ActionGroupStates = v
+	x.xxx_hidden_ActionGroupStates = &v
 }
 
 func (x *MaintenanceTaskResult) SetRetryAfter(v *timestamppb.Timestamp) {
-	x.RetryAfter = v
+	x.xxx_hidden_RetryAfter = v
 }
 
-func (x *MaintenanceTaskResult) HasTaskUid() bool {
-	if x == nil {
-		return false
-	}
-	return x.TaskUid != nil
+func (x *MaintenanceTaskResult) SetCreateTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CreateTime = v
+}
+
+func (x *MaintenanceTaskResult) SetLastRefreshTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_LastRefreshTime = v
 }
 
 func (x *MaintenanceTaskResult) HasRetryAfter() bool {
 	if x == nil {
 		return false
 	}
-	return x.RetryAfter != nil
+	return x.xxx_hidden_RetryAfter != nil
 }
 
-func (x *MaintenanceTaskResult) ClearTaskUid() {
-	x.TaskUid = nil
+func (x *MaintenanceTaskResult) HasCreateTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CreateTime != nil
+}
+
+func (x *MaintenanceTaskResult) HasLastRefreshTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_LastRefreshTime != nil
 }
 
 func (x *MaintenanceTaskResult) ClearRetryAfter() {
-	x.RetryAfter = nil
+	x.xxx_hidden_RetryAfter = nil
+}
+
+func (x *MaintenanceTaskResult) ClearCreateTime() {
+	x.xxx_hidden_CreateTime = nil
+}
+
+func (x *MaintenanceTaskResult) ClearLastRefreshTime() {
+	x.xxx_hidden_LastRefreshTime = nil
 }
 
 type MaintenanceTaskResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	TaskUid           *string
+	TaskUid           string
 	ActionGroupStates []*ActionGroupStates
 	// Try again after this deadline. Specified if there are no performed actions.
 	RetryAfter *timestamppb.Timestamp
+	// The time when the mainteance task was created.
+	CreateTime *timestamppb.Timestamp
+	// The last time when the mainteance task was refreshed. Initially equals to create_time.
+	LastRefreshTime *timestamppb.Timestamp
 }
 
 func (b0 MaintenanceTaskResult_builder) Build() *MaintenanceTaskResult {
 	m0 := &MaintenanceTaskResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.TaskUid = b.TaskUid
-	x.ActionGroupStates = b.ActionGroupStates
-	x.RetryAfter = b.RetryAfter
+	x.xxx_hidden_TaskUid = b.TaskUid
+	x.xxx_hidden_ActionGroupStates = &b.ActionGroupStates
+	x.xxx_hidden_RetryAfter = b.RetryAfter
+	x.xxx_hidden_CreateTime = b.CreateTime
+	x.xxx_hidden_LastRefreshTime = b.LastRefreshTime
 	return m0
 }
 
 type MaintenanceTaskResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// operation.result = MaintenanceTaskResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *MaintenanceTaskResponse) Reset() {
 	*x = MaintenanceTaskResponse{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[15]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2153,7 +2252,7 @@ func (x *MaintenanceTaskResponse) String() string {
 func (*MaintenanceTaskResponse) ProtoMessage() {}
 
 func (x *MaintenanceTaskResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[15]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2166,24 +2265,24 @@ func (x *MaintenanceTaskResponse) ProtoReflect() protoreflect.Message {
 
 func (x *MaintenanceTaskResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *MaintenanceTaskResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *MaintenanceTaskResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *MaintenanceTaskResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type MaintenanceTaskResponse_builder struct {
@@ -2197,21 +2296,21 @@ func (b0 MaintenanceTaskResponse_builder) Build() *MaintenanceTaskResponse {
 	m0 := &MaintenanceTaskResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type GetMaintenanceTaskRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	TaskUid         *string                         `protobuf:"bytes,2,opt,name=task_uid,json=taskUid" json:"task_uid,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_TaskUid         string                          `protobuf:"bytes,2,opt,name=task_uid,json=taskUid,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *GetMaintenanceTaskRequest) Reset() {
 	*x = GetMaintenanceTaskRequest{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[16]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2223,7 +2322,7 @@ func (x *GetMaintenanceTaskRequest) String() string {
 func (*GetMaintenanceTaskRequest) ProtoMessage() {}
 
 func (x *GetMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[16]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2236,75 +2335,66 @@ func (x *GetMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
 
 func (x *GetMaintenanceTaskRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *GetMaintenanceTaskRequest) GetTaskUid() string {
-	if x != nil && x.TaskUid != nil {
-		return *x.TaskUid
+	if x != nil {
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
 func (x *GetMaintenanceTaskRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *GetMaintenanceTaskRequest) SetTaskUid(v string) {
-	x.TaskUid = &v
+	x.xxx_hidden_TaskUid = v
 }
 
 func (x *GetMaintenanceTaskRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *GetMaintenanceTaskRequest) HasTaskUid() bool {
-	if x == nil {
-		return false
-	}
-	return x.TaskUid != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *GetMaintenanceTaskRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *GetMaintenanceTaskRequest) ClearTaskUid() {
-	x.TaskUid = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type GetMaintenanceTaskRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	TaskUid         *string
+	TaskUid         string
 }
 
 func (b0 GetMaintenanceTaskRequest_builder) Build() *GetMaintenanceTaskRequest {
 	m0 := &GetMaintenanceTaskRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.TaskUid = b.TaskUid
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_TaskUid = b.TaskUid
 	return m0
 }
 
 type GetMaintenanceTaskResult struct {
-	state             protoimpl.MessageState  `protogen:"hybrid.v1"`
-	TaskOptions       *MaintenanceTaskOptions `protobuf:"bytes,1,opt,name=task_options,json=taskOptions" json:"task_options,omitempty"`
-	ActionGroupStates []*ActionGroupStates    `protobuf:"bytes,2,rep,name=action_group_states,json=actionGroupStates" json:"action_group_states,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                        protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_TaskOptions       *MaintenanceTaskOptions `protobuf:"bytes,1,opt,name=task_options,json=taskOptions,proto3"`
+	xxx_hidden_ActionGroupStates *[]*ActionGroupStates   `protobuf:"bytes,2,rep,name=action_group_states,json=actionGroupStates,proto3"`
+	xxx_hidden_CreateTime        *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=create_time,json=createTime,proto3"`
+	xxx_hidden_LastRefreshTime   *timestamppb.Timestamp  `protobuf:"bytes,4,opt,name=last_refresh_time,json=lastRefreshTime,proto3"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *GetMaintenanceTaskResult) Reset() {
 	*x = GetMaintenanceTaskResult{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[17]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2316,7 +2406,7 @@ func (x *GetMaintenanceTaskResult) String() string {
 func (*GetMaintenanceTaskResult) ProtoMessage() {}
 
 func (x *GetMaintenanceTaskResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[17]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2329,35 +2419,81 @@ func (x *GetMaintenanceTaskResult) ProtoReflect() protoreflect.Message {
 
 func (x *GetMaintenanceTaskResult) GetTaskOptions() *MaintenanceTaskOptions {
 	if x != nil {
-		return x.TaskOptions
+		return x.xxx_hidden_TaskOptions
 	}
 	return nil
 }
 
 func (x *GetMaintenanceTaskResult) GetActionGroupStates() []*ActionGroupStates {
 	if x != nil {
-		return x.ActionGroupStates
+		if x.xxx_hidden_ActionGroupStates != nil {
+			return *x.xxx_hidden_ActionGroupStates
+		}
+	}
+	return nil
+}
+
+func (x *GetMaintenanceTaskResult) GetCreateTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_CreateTime
+	}
+	return nil
+}
+
+func (x *GetMaintenanceTaskResult) GetLastRefreshTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_LastRefreshTime
 	}
 	return nil
 }
 
 func (x *GetMaintenanceTaskResult) SetTaskOptions(v *MaintenanceTaskOptions) {
-	x.TaskOptions = v
+	x.xxx_hidden_TaskOptions = v
 }
 
 func (x *GetMaintenanceTaskResult) SetActionGroupStates(v []*ActionGroupStates) {
-	x.ActionGroupStates = v
+	x.xxx_hidden_ActionGroupStates = &v
+}
+
+func (x *GetMaintenanceTaskResult) SetCreateTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CreateTime = v
+}
+
+func (x *GetMaintenanceTaskResult) SetLastRefreshTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_LastRefreshTime = v
 }
 
 func (x *GetMaintenanceTaskResult) HasTaskOptions() bool {
 	if x == nil {
 		return false
 	}
-	return x.TaskOptions != nil
+	return x.xxx_hidden_TaskOptions != nil
+}
+
+func (x *GetMaintenanceTaskResult) HasCreateTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CreateTime != nil
+}
+
+func (x *GetMaintenanceTaskResult) HasLastRefreshTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_LastRefreshTime != nil
 }
 
 func (x *GetMaintenanceTaskResult) ClearTaskOptions() {
-	x.TaskOptions = nil
+	x.xxx_hidden_TaskOptions = nil
+}
+
+func (x *GetMaintenanceTaskResult) ClearCreateTime() {
+	x.xxx_hidden_CreateTime = nil
+}
+
+func (x *GetMaintenanceTaskResult) ClearLastRefreshTime() {
+	x.xxx_hidden_LastRefreshTime = nil
 }
 
 type GetMaintenanceTaskResult_builder struct {
@@ -2365,28 +2501,33 @@ type GetMaintenanceTaskResult_builder struct {
 
 	TaskOptions       *MaintenanceTaskOptions
 	ActionGroupStates []*ActionGroupStates
+	// The time when the mainteance task was created.
+	CreateTime *timestamppb.Timestamp
+	// The last time when the mainteance task was refreshed. Initially equals to create_time.
+	LastRefreshTime *timestamppb.Timestamp
 }
 
 func (b0 GetMaintenanceTaskResult_builder) Build() *GetMaintenanceTaskResult {
 	m0 := &GetMaintenanceTaskResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.TaskOptions = b.TaskOptions
-	x.ActionGroupStates = b.ActionGroupStates
+	x.xxx_hidden_TaskOptions = b.TaskOptions
+	x.xxx_hidden_ActionGroupStates = &b.ActionGroupStates
+	x.xxx_hidden_CreateTime = b.CreateTime
+	x.xxx_hidden_LastRefreshTime = b.LastRefreshTime
 	return m0
 }
 
 type GetMaintenanceTaskResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// operation.result = GetMaintenanceTaskResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetMaintenanceTaskResponse) Reset() {
 	*x = GetMaintenanceTaskResponse{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[18]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2398,7 +2539,7 @@ func (x *GetMaintenanceTaskResponse) String() string {
 func (*GetMaintenanceTaskResponse) ProtoMessage() {}
 
 func (x *GetMaintenanceTaskResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[18]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2411,24 +2552,24 @@ func (x *GetMaintenanceTaskResponse) ProtoReflect() protoreflect.Message {
 
 func (x *GetMaintenanceTaskResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *GetMaintenanceTaskResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *GetMaintenanceTaskResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *GetMaintenanceTaskResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type GetMaintenanceTaskResponse_builder struct {
@@ -2442,24 +2583,23 @@ func (b0 GetMaintenanceTaskResponse_builder) Build() *GetMaintenanceTaskResponse
 	m0 := &GetMaintenanceTaskResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type ListMaintenanceTasksRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	// User SID (Security ID).
-	// If specified, it will return the tasks created by this user.
-	// Otherwise all tasks will be returned.
-	User          *string `protobuf:"bytes,2,opt,name=user" json:"user,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_User            *string                         `protobuf:"bytes,2,opt,name=user,proto3,oneof"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ListMaintenanceTasksRequest) Reset() {
 	*x = ListMaintenanceTasksRequest{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[19]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2471,7 +2611,7 @@ func (x *ListMaintenanceTasksRequest) String() string {
 func (*ListMaintenanceTasksRequest) ProtoMessage() {}
 
 func (x *ListMaintenanceTasksRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[19]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2484,46 +2624,51 @@ func (x *ListMaintenanceTasksRequest) ProtoReflect() protoreflect.Message {
 
 func (x *ListMaintenanceTasksRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *ListMaintenanceTasksRequest) GetUser() string {
-	if x != nil && x.User != nil {
-		return *x.User
+	if x != nil {
+		if x.xxx_hidden_User != nil {
+			return *x.xxx_hidden_User
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *ListMaintenanceTasksRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *ListMaintenanceTasksRequest) SetUser(v string) {
-	x.User = &v
+	x.xxx_hidden_User = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *ListMaintenanceTasksRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *ListMaintenanceTasksRequest) HasUser() bool {
 	if x == nil {
 		return false
 	}
-	return x.User != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
 func (x *ListMaintenanceTasksRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 func (x *ListMaintenanceTasksRequest) ClearUser() {
-	x.User = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_User = nil
 }
 
 type ListMaintenanceTasksRequest_builder struct {
@@ -2540,21 +2685,24 @@ func (b0 ListMaintenanceTasksRequest_builder) Build() *ListMaintenanceTasksReque
 	m0 := &ListMaintenanceTasksRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.User = b.User
+	x.xxx_hidden_OperationParams = b.OperationParams
+	if b.User != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_User = b.User
+	}
 	return m0
 }
 
 type ListMaintenanceTasksResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	TasksUids     []string               `protobuf:"bytes,1,rep,name=tasks_uids,json=tasksUids" json:"tasks_uids,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TasksUids []string               `protobuf:"bytes,1,rep,name=tasks_uids,json=tasksUids,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListMaintenanceTasksResult) Reset() {
 	*x = ListMaintenanceTasksResult{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[20]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2566,7 +2714,7 @@ func (x *ListMaintenanceTasksResult) String() string {
 func (*ListMaintenanceTasksResult) ProtoMessage() {}
 
 func (x *ListMaintenanceTasksResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[20]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2579,13 +2727,13 @@ func (x *ListMaintenanceTasksResult) ProtoReflect() protoreflect.Message {
 
 func (x *ListMaintenanceTasksResult) GetTasksUids() []string {
 	if x != nil {
-		return x.TasksUids
+		return x.xxx_hidden_TasksUids
 	}
 	return nil
 }
 
 func (x *ListMaintenanceTasksResult) SetTasksUids(v []string) {
-	x.TasksUids = v
+	x.xxx_hidden_TasksUids = v
 }
 
 type ListMaintenanceTasksResult_builder struct {
@@ -2598,21 +2746,20 @@ func (b0 ListMaintenanceTasksResult_builder) Build() *ListMaintenanceTasksResult
 	m0 := &ListMaintenanceTasksResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.TasksUids = b.TasksUids
+	x.xxx_hidden_TasksUids = b.TasksUids
 	return m0
 }
 
 type ListMaintenanceTasksResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// operation.result = ListMaintenanceTasksResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListMaintenanceTasksResponse) Reset() {
 	*x = ListMaintenanceTasksResponse{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[21]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2624,7 +2771,7 @@ func (x *ListMaintenanceTasksResponse) String() string {
 func (*ListMaintenanceTasksResponse) ProtoMessage() {}
 
 func (x *ListMaintenanceTasksResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[21]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2637,24 +2784,24 @@ func (x *ListMaintenanceTasksResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ListMaintenanceTasksResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ListMaintenanceTasksResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ListMaintenanceTasksResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ListMaintenanceTasksResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ListMaintenanceTasksResponse_builder struct {
@@ -2668,21 +2815,21 @@ func (b0 ListMaintenanceTasksResponse_builder) Build() *ListMaintenanceTasksResp
 	m0 := &ListMaintenanceTasksResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type DropMaintenanceTaskRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	TaskUid         *string                         `protobuf:"bytes,2,opt,name=task_uid,json=taskUid" json:"task_uid,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_TaskUid         string                          `protobuf:"bytes,2,opt,name=task_uid,json=taskUid,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *DropMaintenanceTaskRequest) Reset() {
 	*x = DropMaintenanceTaskRequest{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[22]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2694,7 +2841,7 @@ func (x *DropMaintenanceTaskRequest) String() string {
 func (*DropMaintenanceTaskRequest) ProtoMessage() {}
 
 func (x *DropMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[22]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2707,74 +2854,63 @@ func (x *DropMaintenanceTaskRequest) ProtoReflect() protoreflect.Message {
 
 func (x *DropMaintenanceTaskRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *DropMaintenanceTaskRequest) GetTaskUid() string {
-	if x != nil && x.TaskUid != nil {
-		return *x.TaskUid
+	if x != nil {
+		return x.xxx_hidden_TaskUid
 	}
 	return ""
 }
 
 func (x *DropMaintenanceTaskRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *DropMaintenanceTaskRequest) SetTaskUid(v string) {
-	x.TaskUid = &v
+	x.xxx_hidden_TaskUid = v
 }
 
 func (x *DropMaintenanceTaskRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
-}
-
-func (x *DropMaintenanceTaskRequest) HasTaskUid() bool {
-	if x == nil {
-		return false
-	}
-	return x.TaskUid != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *DropMaintenanceTaskRequest) ClearOperationParams() {
-	x.OperationParams = nil
-}
-
-func (x *DropMaintenanceTaskRequest) ClearTaskUid() {
-	x.TaskUid = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type DropMaintenanceTaskRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	OperationParams *Ydb_Operations.OperationParams
-	TaskUid         *string
+	TaskUid         string
 }
 
 func (b0 DropMaintenanceTaskRequest_builder) Build() *DropMaintenanceTaskRequest {
 	m0 := &DropMaintenanceTaskRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.TaskUid = b.TaskUid
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_TaskUid = b.TaskUid
 	return m0
 }
 
 type ManageMaintenanceTaskResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ManageMaintenanceTaskResponse) Reset() {
 	*x = ManageMaintenanceTaskResponse{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[23]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2786,7 +2922,7 @@ func (x *ManageMaintenanceTaskResponse) String() string {
 func (*ManageMaintenanceTaskResponse) ProtoMessage() {}
 
 func (x *ManageMaintenanceTaskResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[23]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2799,24 +2935,24 @@ func (x *ManageMaintenanceTaskResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ManageMaintenanceTaskResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ManageMaintenanceTaskResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ManageMaintenanceTaskResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ManageMaintenanceTaskResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ManageMaintenanceTaskResponse_builder struct {
@@ -2829,21 +2965,21 @@ func (b0 ManageMaintenanceTaskResponse_builder) Build() *ManageMaintenanceTaskRe
 	m0 := &ManageMaintenanceTaskResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type CompleteActionRequest struct {
-	state           protoimpl.MessageState          `protogen:"hybrid.v1"`
-	OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams" json:"operation_params,omitempty"`
-	ActionUids      []*ActionUid                    `protobuf:"bytes,2,rep,name=action_uids,json=actionUids" json:"action_uids,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                      protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_OperationParams *Ydb_Operations.OperationParams `protobuf:"bytes,1,opt,name=operation_params,json=operationParams,proto3"`
+	xxx_hidden_ActionUids      *[]*ActionUid                   `protobuf:"bytes,2,rep,name=action_uids,json=actionUids,proto3"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *CompleteActionRequest) Reset() {
 	*x = CompleteActionRequest{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[24]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2855,7 +2991,7 @@ func (x *CompleteActionRequest) String() string {
 func (*CompleteActionRequest) ProtoMessage() {}
 
 func (x *CompleteActionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[24]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2868,35 +3004,37 @@ func (x *CompleteActionRequest) ProtoReflect() protoreflect.Message {
 
 func (x *CompleteActionRequest) GetOperationParams() *Ydb_Operations.OperationParams {
 	if x != nil {
-		return x.OperationParams
+		return x.xxx_hidden_OperationParams
 	}
 	return nil
 }
 
 func (x *CompleteActionRequest) GetActionUids() []*ActionUid {
 	if x != nil {
-		return x.ActionUids
+		if x.xxx_hidden_ActionUids != nil {
+			return *x.xxx_hidden_ActionUids
+		}
 	}
 	return nil
 }
 
 func (x *CompleteActionRequest) SetOperationParams(v *Ydb_Operations.OperationParams) {
-	x.OperationParams = v
+	x.xxx_hidden_OperationParams = v
 }
 
 func (x *CompleteActionRequest) SetActionUids(v []*ActionUid) {
-	x.ActionUids = v
+	x.xxx_hidden_ActionUids = &v
 }
 
 func (x *CompleteActionRequest) HasOperationParams() bool {
 	if x == nil {
 		return false
 	}
-	return x.OperationParams != nil
+	return x.xxx_hidden_OperationParams != nil
 }
 
 func (x *CompleteActionRequest) ClearOperationParams() {
-	x.OperationParams = nil
+	x.xxx_hidden_OperationParams = nil
 }
 
 type CompleteActionRequest_builder struct {
@@ -2910,21 +3048,21 @@ func (b0 CompleteActionRequest_builder) Build() *CompleteActionRequest {
 	m0 := &CompleteActionRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.OperationParams = b.OperationParams
-	x.ActionUids = b.ActionUids
+	x.xxx_hidden_OperationParams = b.OperationParams
+	x.xxx_hidden_ActionUids = &b.ActionUids
 	return m0
 }
 
 type ManageActionResult struct {
-	state          protoimpl.MessageState       `protogen:"hybrid.v1"`
-	ActionStatuses []*ManageActionResult_Status `protobuf:"bytes,1,rep,name=action_statuses,json=actionStatuses" json:"action_statuses,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                     protoimpl.MessageState        `protogen:"opaque.v1"`
+	xxx_hidden_ActionStatuses *[]*ManageActionResult_Status `protobuf:"bytes,1,rep,name=action_statuses,json=actionStatuses,proto3"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *ManageActionResult) Reset() {
 	*x = ManageActionResult{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[25]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2936,7 +3074,7 @@ func (x *ManageActionResult) String() string {
 func (*ManageActionResult) ProtoMessage() {}
 
 func (x *ManageActionResult) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[25]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2949,13 +3087,15 @@ func (x *ManageActionResult) ProtoReflect() protoreflect.Message {
 
 func (x *ManageActionResult) GetActionStatuses() []*ManageActionResult_Status {
 	if x != nil {
-		return x.ActionStatuses
+		if x.xxx_hidden_ActionStatuses != nil {
+			return *x.xxx_hidden_ActionStatuses
+		}
 	}
 	return nil
 }
 
 func (x *ManageActionResult) SetActionStatuses(v []*ManageActionResult_Status) {
-	x.ActionStatuses = v
+	x.xxx_hidden_ActionStatuses = &v
 }
 
 type ManageActionResult_builder struct {
@@ -2968,21 +3108,20 @@ func (b0 ManageActionResult_builder) Build() *ManageActionResult {
 	m0 := &ManageActionResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ActionStatuses = b.ActionStatuses
+	x.xxx_hidden_ActionStatuses = &b.ActionStatuses
 	return m0
 }
 
 type ManageActionResponse struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// operation.result = ManageActionResult
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ManageActionResponse) Reset() {
 	*x = ManageActionResponse{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[26]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2994,7 +3133,7 @@ func (x *ManageActionResponse) String() string {
 func (*ManageActionResponse) ProtoMessage() {}
 
 func (x *ManageActionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[26]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3007,24 +3146,24 @@ func (x *ManageActionResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ManageActionResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ManageActionResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ManageActionResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ManageActionResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ManageActionResponse_builder struct {
@@ -3038,19 +3177,19 @@ func (b0 ManageActionResponse_builder) Build() *ManageActionResponse {
 	m0 := &ManageActionResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type Node_StorageNode struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Node_StorageNode) Reset() {
 	*x = Node_StorageNode{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[27]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3062,7 +3201,7 @@ func (x *Node_StorageNode) String() string {
 func (*Node_StorageNode) ProtoMessage() {}
 
 func (x *Node_StorageNode) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[27]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3086,15 +3225,15 @@ func (b0 Node_StorageNode_builder) Build() *Node_StorageNode {
 }
 
 type Node_DynamicNode struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Tenant        *string                `protobuf:"bytes,1,opt,name=tenant" json:"tenant,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Tenant string                 `protobuf:"bytes,1,opt,name=tenant,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *Node_DynamicNode) Reset() {
 	*x = Node_DynamicNode{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[28]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3106,7 +3245,7 @@ func (x *Node_DynamicNode) String() string {
 func (*Node_DynamicNode) ProtoMessage() {}
 
 func (x *Node_DynamicNode) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[28]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3118,52 +3257,354 @@ func (x *Node_DynamicNode) ProtoReflect() protoreflect.Message {
 }
 
 func (x *Node_DynamicNode) GetTenant() string {
-	if x != nil && x.Tenant != nil {
-		return *x.Tenant
+	if x != nil {
+		return x.xxx_hidden_Tenant
 	}
 	return ""
 }
 
 func (x *Node_DynamicNode) SetTenant(v string) {
-	x.Tenant = &v
-}
-
-func (x *Node_DynamicNode) HasTenant() bool {
-	if x == nil {
-		return false
-	}
-	return x.Tenant != nil
-}
-
-func (x *Node_DynamicNode) ClearTenant() {
-	x.Tenant = nil
+	x.xxx_hidden_Tenant = v
 }
 
 type Node_DynamicNode_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Tenant *string
+	Tenant string
 }
 
 func (b0 Node_DynamicNode_builder) Build() *Node_DynamicNode {
 	m0 := &Node_DynamicNode{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Tenant = b.Tenant
+	x.xxx_hidden_Tenant = b.Tenant
 	return m0
 }
 
+type ActionScope_PDiskId struct {
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_NodeId  uint32                 `protobuf:"varint,1,opt,name=node_id,json=nodeId,proto3"`
+	xxx_hidden_PdiskId uint32                 `protobuf:"varint,2,opt,name=pdisk_id,json=pdiskId,proto3"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ActionScope_PDiskId) Reset() {
+	*x = ActionScope_PDiskId{}
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ActionScope_PDiskId) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActionScope_PDiskId) ProtoMessage() {}
+
+func (x *ActionScope_PDiskId) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ActionScope_PDiskId) GetNodeId() uint32 {
+	if x != nil {
+		return x.xxx_hidden_NodeId
+	}
+	return 0
+}
+
+func (x *ActionScope_PDiskId) GetPdiskId() uint32 {
+	if x != nil {
+		return x.xxx_hidden_PdiskId
+	}
+	return 0
+}
+
+func (x *ActionScope_PDiskId) SetNodeId(v uint32) {
+	x.xxx_hidden_NodeId = v
+}
+
+func (x *ActionScope_PDiskId) SetPdiskId(v uint32) {
+	x.xxx_hidden_PdiskId = v
+}
+
+type ActionScope_PDiskId_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	NodeId  uint32
+	PdiskId uint32
+}
+
+func (b0 ActionScope_PDiskId_builder) Build() *ActionScope_PDiskId {
+	m0 := &ActionScope_PDiskId{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_NodeId = b.NodeId
+	x.xxx_hidden_PdiskId = b.PdiskId
+	return m0
+}
+
+type ActionScope_PDiskLocation struct {
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Host string                 `protobuf:"bytes,1,opt,name=host,proto3"`
+	xxx_hidden_Path string                 `protobuf:"bytes,2,opt,name=path,proto3"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *ActionScope_PDiskLocation) Reset() {
+	*x = ActionScope_PDiskLocation{}
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ActionScope_PDiskLocation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActionScope_PDiskLocation) ProtoMessage() {}
+
+func (x *ActionScope_PDiskLocation) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ActionScope_PDiskLocation) GetHost() string {
+	if x != nil {
+		return x.xxx_hidden_Host
+	}
+	return ""
+}
+
+func (x *ActionScope_PDiskLocation) GetPath() string {
+	if x != nil {
+		return x.xxx_hidden_Path
+	}
+	return ""
+}
+
+func (x *ActionScope_PDiskLocation) SetHost(v string) {
+	x.xxx_hidden_Host = v
+}
+
+func (x *ActionScope_PDiskLocation) SetPath(v string) {
+	x.xxx_hidden_Path = v
+}
+
+type ActionScope_PDiskLocation_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Host string
+	Path string
+}
+
+func (b0 ActionScope_PDiskLocation_builder) Build() *ActionScope_PDiskLocation {
+	m0 := &ActionScope_PDiskLocation{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Host = b.Host
+	x.xxx_hidden_Path = b.Path
+	return m0
+}
+
+type ActionScope_PDisk struct {
+	state            protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Pdisk isActionScope_PDisk_Pdisk `protobuf_oneof:"pdisk"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ActionScope_PDisk) Reset() {
+	*x = ActionScope_PDisk{}
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ActionScope_PDisk) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActionScope_PDisk) ProtoMessage() {}
+
+func (x *ActionScope_PDisk) ProtoReflect() protoreflect.Message {
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ActionScope_PDisk) GetPdiskId() *ActionScope_PDiskId {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Pdisk.(*actionScope_PDisk_PdiskId); ok {
+			return x.PdiskId
+		}
+	}
+	return nil
+}
+
+func (x *ActionScope_PDisk) GetPdiskLocation() *ActionScope_PDiskLocation {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Pdisk.(*actionScope_PDisk_PdiskLocation); ok {
+			return x.PdiskLocation
+		}
+	}
+	return nil
+}
+
+func (x *ActionScope_PDisk) SetPdiskId(v *ActionScope_PDiskId) {
+	if v == nil {
+		x.xxx_hidden_Pdisk = nil
+		return
+	}
+	x.xxx_hidden_Pdisk = &actionScope_PDisk_PdiskId{v}
+}
+
+func (x *ActionScope_PDisk) SetPdiskLocation(v *ActionScope_PDiskLocation) {
+	if v == nil {
+		x.xxx_hidden_Pdisk = nil
+		return
+	}
+	x.xxx_hidden_Pdisk = &actionScope_PDisk_PdiskLocation{v}
+}
+
+func (x *ActionScope_PDisk) HasPdisk() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Pdisk != nil
+}
+
+func (x *ActionScope_PDisk) HasPdiskId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Pdisk.(*actionScope_PDisk_PdiskId)
+	return ok
+}
+
+func (x *ActionScope_PDisk) HasPdiskLocation() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Pdisk.(*actionScope_PDisk_PdiskLocation)
+	return ok
+}
+
+func (x *ActionScope_PDisk) ClearPdisk() {
+	x.xxx_hidden_Pdisk = nil
+}
+
+func (x *ActionScope_PDisk) ClearPdiskId() {
+	if _, ok := x.xxx_hidden_Pdisk.(*actionScope_PDisk_PdiskId); ok {
+		x.xxx_hidden_Pdisk = nil
+	}
+}
+
+func (x *ActionScope_PDisk) ClearPdiskLocation() {
+	if _, ok := x.xxx_hidden_Pdisk.(*actionScope_PDisk_PdiskLocation); ok {
+		x.xxx_hidden_Pdisk = nil
+	}
+}
+
+const ActionScope_PDisk_Pdisk_not_set_case case_ActionScope_PDisk_Pdisk = 0
+const ActionScope_PDisk_PdiskId_case case_ActionScope_PDisk_Pdisk = 1
+const ActionScope_PDisk_PdiskLocation_case case_ActionScope_PDisk_Pdisk = 2
+
+func (x *ActionScope_PDisk) WhichPdisk() case_ActionScope_PDisk_Pdisk {
+	if x == nil {
+		return ActionScope_PDisk_Pdisk_not_set_case
+	}
+	switch x.xxx_hidden_Pdisk.(type) {
+	case *actionScope_PDisk_PdiskId:
+		return ActionScope_PDisk_PdiskId_case
+	case *actionScope_PDisk_PdiskLocation:
+		return ActionScope_PDisk_PdiskLocation_case
+	default:
+		return ActionScope_PDisk_Pdisk_not_set_case
+	}
+}
+
+type ActionScope_PDisk_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Pdisk:
+	PdiskId       *ActionScope_PDiskId
+	PdiskLocation *ActionScope_PDiskLocation
+	// -- end of xxx_hidden_Pdisk
+}
+
+func (b0 ActionScope_PDisk_builder) Build() *ActionScope_PDisk {
+	m0 := &ActionScope_PDisk{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.PdiskId != nil {
+		x.xxx_hidden_Pdisk = &actionScope_PDisk_PdiskId{b.PdiskId}
+	}
+	if b.PdiskLocation != nil {
+		x.xxx_hidden_Pdisk = &actionScope_PDisk_PdiskLocation{b.PdiskLocation}
+	}
+	return m0
+}
+
+type case_ActionScope_PDisk_Pdisk protoreflect.FieldNumber
+
+func (x case_ActionScope_PDisk_Pdisk) String() string {
+	md := file_draft_protos_ydb_maintenance_proto_msgTypes[33].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isActionScope_PDisk_Pdisk interface {
+	isActionScope_PDisk_Pdisk()
+}
+
+type actionScope_PDisk_PdiskId struct {
+	PdiskId *ActionScope_PDiskId `protobuf:"bytes,1,opt,name=pdisk_id,json=pdiskId,proto3,oneof"`
+}
+
+type actionScope_PDisk_PdiskLocation struct {
+	PdiskLocation *ActionScope_PDiskLocation `protobuf:"bytes,2,opt,name=pdisk_location,json=pdiskLocation,proto3,oneof"`
+}
+
+func (*actionScope_PDisk_PdiskId) isActionScope_PDisk_Pdisk() {}
+
+func (*actionScope_PDisk_PdiskLocation) isActionScope_PDisk_Pdisk() {}
+
 type ManageActionResult_Status struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	ActionUid     *ActionUid                `protobuf:"bytes,1,opt,name=action_uid,json=actionUid" json:"action_uid,omitempty"`
-	Status        *Ydb.StatusIds_StatusCode `protobuf:"varint,2,opt,name=status,enum=Ydb.StatusIds_StatusCode" json:"status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_ActionUid *ActionUid               `protobuf:"bytes,1,opt,name=action_uid,json=actionUid,proto3"`
+	xxx_hidden_Status    Ydb.StatusIds_StatusCode `protobuf:"varint,2,opt,name=status,proto3,enum=Ydb.StatusIds_StatusCode"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ManageActionResult_Status) Reset() {
 	*x = ManageActionResult_Status{}
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[29]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3175,7 +3616,7 @@ func (x *ManageActionResult_Status) String() string {
 func (*ManageActionResult_Status) ProtoMessage() {}
 
 func (x *ManageActionResult_Status) ProtoReflect() protoreflect.Message {
-	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[29]
+	mi := &file_draft_protos_ydb_maintenance_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3188,61 +3629,50 @@ func (x *ManageActionResult_Status) ProtoReflect() protoreflect.Message {
 
 func (x *ManageActionResult_Status) GetActionUid() *ActionUid {
 	if x != nil {
-		return x.ActionUid
+		return x.xxx_hidden_ActionUid
 	}
 	return nil
 }
 
 func (x *ManageActionResult_Status) GetStatus() Ydb.StatusIds_StatusCode {
-	if x != nil && x.Status != nil {
-		return *x.Status
+	if x != nil {
+		return x.xxx_hidden_Status
 	}
 	return Ydb.StatusIds_StatusCode(0)
 }
 
 func (x *ManageActionResult_Status) SetActionUid(v *ActionUid) {
-	x.ActionUid = v
+	x.xxx_hidden_ActionUid = v
 }
 
 func (x *ManageActionResult_Status) SetStatus(v Ydb.StatusIds_StatusCode) {
-	x.Status = &v
+	x.xxx_hidden_Status = v
 }
 
 func (x *ManageActionResult_Status) HasActionUid() bool {
 	if x == nil {
 		return false
 	}
-	return x.ActionUid != nil
-}
-
-func (x *ManageActionResult_Status) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.Status != nil
+	return x.xxx_hidden_ActionUid != nil
 }
 
 func (x *ManageActionResult_Status) ClearActionUid() {
-	x.ActionUid = nil
-}
-
-func (x *ManageActionResult_Status) ClearStatus() {
-	x.Status = nil
+	x.xxx_hidden_ActionUid = nil
 }
 
 type ManageActionResult_Status_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	ActionUid *ActionUid
-	Status    *Ydb.StatusIds_StatusCode
+	Status    Ydb.StatusIds_StatusCode
 }
 
 func (b0 ManageActionResult_Status_builder) Build() *ManageActionResult_Status {
 	m0 := &ManageActionResult_Status{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.ActionUid = b.ActionUid
-	x.Status = b.Status
+	x.xxx_hidden_ActionUid = b.ActionUid
+	x.xxx_hidden_Status = b.Status
 	return m0
 }
 
@@ -3250,7 +3680,7 @@ var File_draft_protos_ydb_maintenance_proto protoreflect.FileDescriptor
 
 const file_draft_protos_ydb_maintenance_proto_rawDesc = "" +
 	"\n" +
-	"\"draft/protos/ydb_maintenance.proto\x12\x0fYdb.Maintenance\x1a#protos/annotations/validation.proto\x1a\x1dprotos/ydb_status_codes.proto\x1a\x1aprotos/ydb_discovery.proto\x1a\x1aprotos/ydb_operation.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\"\xc3\x03\n" +
+	"\"draft/protos/ydb_maintenance.proto\x12\x0fYdb.Maintenance\x1a#protos/annotations/validation.proto\x1a\x1dprotos/ydb_status_codes.proto\x1a\x1aprotos/ydb_discovery.proto\x1a\x1aprotos/ydb_operation.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc3\x03\n" +
 	"\x04Node\x12\x17\n" +
 	"\anode_id\x18\x01 \x01(\rR\x06nodeId\x12\x12\n" +
 	"\x04host\x18\x02 \x01(\tR\x04host\x12\x12\n" +
@@ -3277,18 +3707,35 @@ const file_draft_protos_ydb_maintenance_proto_rawDesc = "" +
 	"\vdescription\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\x80\x01R\vdescription\x12N\n" +
 	"\x11availability_mode\x18\x03 \x01(\x0e2!.Ydb.Maintenance.AvailabilityModeR\x10availabilityMode\x12\x17\n" +
 	"\adry_run\x18\x04 \x01(\bR\x06dryRun\x12+\n" +
-	"\bpriority\x18\x05 \x01(\x05B\x0f\xb2\xe6*\v[-100; 100]R\bpriority\"P\n" +
+	"\bpriority\x18\x05 \x01(\x05B\x0f\xb2\xe6*\v[-100; 100]R\bpriority\"\xc1\x03\n" +
 	"\vActionScope\x12\x19\n" +
 	"\anode_id\x18\x01 \x01(\rH\x00R\x06nodeId\x12\x1d\n" +
-	"\x04host\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\xff\x01H\x00R\x04hostB\a\n" +
+	"\x04host\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\xff\x01H\x00R\x04host\x12:\n" +
+	"\x05pdisk\x18\x03 \x01(\v2\".Ydb.Maintenance.ActionScope.PDiskH\x00R\x05pdisk\x1a=\n" +
+	"\aPDiskId\x12\x17\n" +
+	"\anode_id\x18\x01 \x01(\rR\x06nodeId\x12\x19\n" +
+	"\bpdisk_id\x18\x02 \x01(\rR\apdiskId\x1aI\n" +
+	"\rPDiskLocation\x12\x1b\n" +
+	"\x04host\x18\x01 \x01(\tB\a\xa2\xe6*\x03\x18\xff\x01R\x04host\x12\x1b\n" +
+	"\x04path\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\xff\x01R\x04path\x1a\xa8\x01\n" +
+	"\x05PDisk\x12A\n" +
+	"\bpdisk_id\x18\x01 \x01(\v2$.Ydb.Maintenance.ActionScope.PDiskIdH\x00R\apdiskId\x12S\n" +
+	"\x0epdisk_location\x18\x02 \x01(\v2*.Ydb.Maintenance.ActionScope.PDiskLocationH\x00R\rpdiskLocationB\a\n" +
+	"\x05pdiskB\a\n" +
 	"\x05scope\"w\n" +
 	"\n" +
 	"LockAction\x122\n" +
 	"\x05scope\x18\x01 \x01(\v2\x1c.Ydb.Maintenance.ActionScopeR\x05scope\x125\n" +
-	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\bduration\"R\n" +
+	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\bduration\"A\n" +
+	"\vDrainAction\x122\n" +
+	"\x05scope\x18\x01 \x01(\v2\x1c.Ydb.Maintenance.ActionScopeR\x05scope\"B\n" +
+	"\fCordonAction\x122\n" +
+	"\x05scope\x18\x01 \x01(\v2\x1c.Ydb.Maintenance.ActionScopeR\x05scope\"\xdb\x01\n" +
 	"\x06Action\x12>\n" +
 	"\vlock_action\x18\x01 \x01(\v2\x1b.Ydb.Maintenance.LockActionH\x00R\n" +
-	"lockActionB\b\n" +
+	"lockAction\x12A\n" +
+	"\fdrain_action\x18\x02 \x01(\v2\x1c.Ydb.Maintenance.DrainActionH\x00R\vdrainAction\x12D\n" +
+	"\rcordon_action\x18\x03 \x01(\v2\x1d.Ydb.Maintenance.CordonActionH\x00R\fcordonActionB\b\n" +
 	"\x06action\"H\n" +
 	"\vActionGroup\x129\n" +
 	"\aactions\x18\x01 \x03(\v2\x17.Ydb.Maintenance.ActionB\x06\x9a\xe6*\x02(\x01R\aactions\"\x81\x02\n" +
@@ -3302,19 +3749,20 @@ const file_draft_protos_ydb_maintenance_proto_rawDesc = "" +
 	"\tActionUid\x12\"\n" +
 	"\btask_uid\x18\x01 \x01(\tB\a\xa2\xe6*\x03\x18\x80\x01R\ataskUid\x12\"\n" +
 	"\bgroup_id\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\x80\x01R\agroupId\x12$\n" +
-	"\taction_id\x18\x03 \x01(\tB\a\xa2\xe6*\x03\x18\x80\x01R\bactionId\"\xcb\x06\n" +
+	"\taction_id\x18\x03 \x01(\tB\a\xa2\xe6*\x03\x18\x80\x01R\bactionId\"\xde\x06\n" +
 	"\vActionState\x12/\n" +
 	"\x06action\x18\x01 \x01(\v2\x17.Ydb.Maintenance.ActionR\x06action\x129\n" +
 	"\n" +
 	"action_uid\x18\x02 \x01(\v2\x1a.Ydb.Maintenance.ActionUidR\tactionUid\x12A\n" +
 	"\x06status\x18\x03 \x01(\x0e2).Ydb.Maintenance.ActionState.ActionStatusR\x06status\x12A\n" +
-	"\x06reason\x18\x04 \x01(\x0e2).Ydb.Maintenance.ActionState.ActionReasonR\x06reason\x12%\n" +
-	"\x0ereason_details\x18\x06 \x01(\tR\rreasonDetails\x126\n" +
-	"\bdeadline\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\bdeadline\"e\n" +
+	"\x06reason\x18\x04 \x01(\x0e2).Ydb.Maintenance.ActionState.ActionReasonR\x06reason\x12\x18\n" +
+	"\adetails\x18\x06 \x01(\tR\adetails\x126\n" +
+	"\bdeadline\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\bdeadline\"\x84\x01\n" +
 	"\fActionStatus\x12\x1d\n" +
 	"\x19ACTION_STATUS_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15ACTION_STATUS_PENDING\x10\x01\x12\x1b\n" +
-	"\x17ACTION_STATUS_PERFORMED\x10\x02\"\x83\x03\n" +
+	"\x17ACTION_STATUS_PERFORMED\x10\x02\x12\x1d\n" +
+	"\x19ACTION_STATUS_IN_PROGRESS\x10\x03\"\x83\x03\n" +
 	"\fActionReason\x12\x1d\n" +
 	"\x19ACTION_REASON_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10ACTION_REASON_OK\x10\x01\x12-\n" +
@@ -3326,25 +3774,33 @@ const file_draft_protos_ydb_maintenance_proto_rawDesc = "" +
 	",ACTION_REASON_SYS_TABLETS_NODE_LIMIT_REACHED\x10\a\x12\x19\n" +
 	"\x15ACTION_REASON_GENERIC\x10\b\"V\n" +
 	"\x11ActionGroupStates\x12A\n" +
-	"\raction_states\x18\x01 \x03(\v2\x1c.Ydb.Maintenance.ActionStateR\factionStates\"\xc3\x01\n" +
+	"\raction_states\x18\x01 \x03(\v2\x1c.Ydb.Maintenance.ActionStateR\factionStates\"\xdd\x02\n" +
 	"\x15MaintenanceTaskResult\x12\x19\n" +
 	"\btask_uid\x18\x01 \x01(\tR\ataskUid\x12R\n" +
-	"\x13action_group_states\x18\x02 \x03(\v2\".Ydb.Maintenance.ActionGroupStatesR\x11actionGroupStates\x12;\n" +
-	"\vretry_after\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"retryAfter\"R\n" +
+	"\x13action_group_states\x18\x02 \x03(\v2\".Ydb.Maintenance.ActionGroupStatesR\x11actionGroupStates\x12@\n" +
+	"\vretry_after\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\n" +
+	"retryAfter\x88\x01\x01\x12;\n" +
+	"\vcreate_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"createTime\x12F\n" +
+	"\x11last_refresh_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\x0flastRefreshTimeB\x0e\n" +
+	"\f_retry_after\"R\n" +
 	"\x17MaintenanceTaskResponse\x127\n" +
 	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"\x8b\x01\n" +
 	"\x19GetMaintenanceTaskRequest\x12J\n" +
 	"\x10operation_params\x18\x01 \x01(\v2\x1f.Ydb.Operations.OperationParamsR\x0foperationParams\x12\"\n" +
-	"\btask_uid\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\x80\x01R\ataskUid\"\xba\x01\n" +
+	"\btask_uid\x18\x02 \x01(\tB\a\xa2\xe6*\x03\x18\x80\x01R\ataskUid\"\xbf\x02\n" +
 	"\x18GetMaintenanceTaskResult\x12J\n" +
 	"\ftask_options\x18\x01 \x01(\v2'.Ydb.Maintenance.MaintenanceTaskOptionsR\vtaskOptions\x12R\n" +
-	"\x13action_group_states\x18\x02 \x03(\v2\".Ydb.Maintenance.ActionGroupStatesR\x11actionGroupStates\"U\n" +
+	"\x13action_group_states\x18\x02 \x03(\v2\".Ydb.Maintenance.ActionGroupStatesR\x11actionGroupStates\x12;\n" +
+	"\vcreate_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"createTime\x12F\n" +
+	"\x11last_refresh_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x0flastRefreshTime\"U\n" +
 	"\x1aGetMaintenanceTaskResponse\x127\n" +
-	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"}\n" +
+	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"\x8b\x01\n" +
 	"\x1bListMaintenanceTasksRequest\x12J\n" +
-	"\x10operation_params\x18\x01 \x01(\v2\x1f.Ydb.Operations.OperationParamsR\x0foperationParams\x12\x12\n" +
-	"\x04user\x18\x02 \x01(\tR\x04user\";\n" +
+	"\x10operation_params\x18\x01 \x01(\v2\x1f.Ydb.Operations.OperationParamsR\x0foperationParams\x12\x17\n" +
+	"\x04user\x18\x02 \x01(\tH\x00R\x04user\x88\x01\x01B\a\n" +
+	"\x05_user\";\n" +
 	"\x1aListMaintenanceTasksResult\x12\x1d\n" +
 	"\n" +
 	"tasks_uids\x18\x01 \x03(\tR\ttasksUids\"W\n" +
@@ -3371,16 +3827,17 @@ const file_draft_protos_ydb_maintenance_proto_rawDesc = "" +
 	"\x16ITEM_STATE_UNSPECIFIED\x10\x00\x12\x11\n" +
 	"\rITEM_STATE_UP\x10\x01\x12\x1a\n" +
 	"\x16ITEM_STATE_MAINTENANCE\x10\x02\x12\x13\n" +
-	"\x0fITEM_STATE_DOWN\x10\x03*\x8c\x01\n" +
+	"\x0fITEM_STATE_DOWN\x10\x03*\xa9\x01\n" +
 	"\x10AvailabilityMode\x12!\n" +
 	"\x1dAVAILABILITY_MODE_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18AVAILABILITY_MODE_STRONG\x10\x01\x12\x1a\n" +
 	"\x16AVAILABILITY_MODE_WEAK\x10\x02\x12\x1b\n" +
-	"\x17AVAILABILITY_MODE_FORCE\x10\x03Bv\n" +
-	"#tech.ydb.proto.draft.maintenance.v1ZDgithub.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Maintenance\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	"\x17AVAILABILITY_MODE_FORCE\x10\x03\x12\x1b\n" +
+	"\x17AVAILABILITY_MODE_SMART\x10\x04Bn\n" +
+	"#tech.ydb.proto.draft.maintenance.v1ZDgithub.com/ydb-platform/ydb-go-genproto/draft/protos/Ydb_Maintenance\xf8\x01\x01b\x06proto3"
 
 var file_draft_protos_ydb_maintenance_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_draft_protos_ydb_maintenance_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
+var file_draft_protos_ydb_maintenance_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_draft_protos_ydb_maintenance_proto_goTypes = []any{
 	(ItemState)(0),                         // 0: Ydb.Maintenance.ItemState
 	(AvailabilityMode)(0),                  // 1: Ydb.Maintenance.AvailabilityMode
@@ -3393,82 +3850,98 @@ var file_draft_protos_ydb_maintenance_proto_goTypes = []any{
 	(*MaintenanceTaskOptions)(nil),         // 8: Ydb.Maintenance.MaintenanceTaskOptions
 	(*ActionScope)(nil),                    // 9: Ydb.Maintenance.ActionScope
 	(*LockAction)(nil),                     // 10: Ydb.Maintenance.LockAction
-	(*Action)(nil),                         // 11: Ydb.Maintenance.Action
-	(*ActionGroup)(nil),                    // 12: Ydb.Maintenance.ActionGroup
-	(*CreateMaintenanceTaskRequest)(nil),   // 13: Ydb.Maintenance.CreateMaintenanceTaskRequest
-	(*RefreshMaintenanceTaskRequest)(nil),  // 14: Ydb.Maintenance.RefreshMaintenanceTaskRequest
-	(*ActionUid)(nil),                      // 15: Ydb.Maintenance.ActionUid
-	(*ActionState)(nil),                    // 16: Ydb.Maintenance.ActionState
-	(*ActionGroupStates)(nil),              // 17: Ydb.Maintenance.ActionGroupStates
-	(*MaintenanceTaskResult)(nil),          // 18: Ydb.Maintenance.MaintenanceTaskResult
-	(*MaintenanceTaskResponse)(nil),        // 19: Ydb.Maintenance.MaintenanceTaskResponse
-	(*GetMaintenanceTaskRequest)(nil),      // 20: Ydb.Maintenance.GetMaintenanceTaskRequest
-	(*GetMaintenanceTaskResult)(nil),       // 21: Ydb.Maintenance.GetMaintenanceTaskResult
-	(*GetMaintenanceTaskResponse)(nil),     // 22: Ydb.Maintenance.GetMaintenanceTaskResponse
-	(*ListMaintenanceTasksRequest)(nil),    // 23: Ydb.Maintenance.ListMaintenanceTasksRequest
-	(*ListMaintenanceTasksResult)(nil),     // 24: Ydb.Maintenance.ListMaintenanceTasksResult
-	(*ListMaintenanceTasksResponse)(nil),   // 25: Ydb.Maintenance.ListMaintenanceTasksResponse
-	(*DropMaintenanceTaskRequest)(nil),     // 26: Ydb.Maintenance.DropMaintenanceTaskRequest
-	(*ManageMaintenanceTaskResponse)(nil),  // 27: Ydb.Maintenance.ManageMaintenanceTaskResponse
-	(*CompleteActionRequest)(nil),          // 28: Ydb.Maintenance.CompleteActionRequest
-	(*ManageActionResult)(nil),             // 29: Ydb.Maintenance.ManageActionResult
-	(*ManageActionResponse)(nil),           // 30: Ydb.Maintenance.ManageActionResponse
-	(*Node_StorageNode)(nil),               // 31: Ydb.Maintenance.Node.StorageNode
-	(*Node_DynamicNode)(nil),               // 32: Ydb.Maintenance.Node.DynamicNode
-	(*ManageActionResult_Status)(nil),      // 33: Ydb.Maintenance.ManageActionResult.Status
-	(*Ydb_Discovery.NodeLocation)(nil),     // 34: Ydb.Discovery.NodeLocation
-	(*timestamppb.Timestamp)(nil),          // 35: google.protobuf.Timestamp
-	(*Ydb_Operations.OperationParams)(nil), // 36: Ydb.Operations.OperationParams
-	(*Ydb_Operations.Operation)(nil),       // 37: Ydb.Operations.Operation
-	(*durationpb.Duration)(nil),            // 38: google.protobuf.Duration
-	(Ydb.StatusIds_StatusCode)(0),          // 39: Ydb.StatusIds.StatusCode
+	(*DrainAction)(nil),                    // 11: Ydb.Maintenance.DrainAction
+	(*CordonAction)(nil),                   // 12: Ydb.Maintenance.CordonAction
+	(*Action)(nil),                         // 13: Ydb.Maintenance.Action
+	(*ActionGroup)(nil),                    // 14: Ydb.Maintenance.ActionGroup
+	(*CreateMaintenanceTaskRequest)(nil),   // 15: Ydb.Maintenance.CreateMaintenanceTaskRequest
+	(*RefreshMaintenanceTaskRequest)(nil),  // 16: Ydb.Maintenance.RefreshMaintenanceTaskRequest
+	(*ActionUid)(nil),                      // 17: Ydb.Maintenance.ActionUid
+	(*ActionState)(nil),                    // 18: Ydb.Maintenance.ActionState
+	(*ActionGroupStates)(nil),              // 19: Ydb.Maintenance.ActionGroupStates
+	(*MaintenanceTaskResult)(nil),          // 20: Ydb.Maintenance.MaintenanceTaskResult
+	(*MaintenanceTaskResponse)(nil),        // 21: Ydb.Maintenance.MaintenanceTaskResponse
+	(*GetMaintenanceTaskRequest)(nil),      // 22: Ydb.Maintenance.GetMaintenanceTaskRequest
+	(*GetMaintenanceTaskResult)(nil),       // 23: Ydb.Maintenance.GetMaintenanceTaskResult
+	(*GetMaintenanceTaskResponse)(nil),     // 24: Ydb.Maintenance.GetMaintenanceTaskResponse
+	(*ListMaintenanceTasksRequest)(nil),    // 25: Ydb.Maintenance.ListMaintenanceTasksRequest
+	(*ListMaintenanceTasksResult)(nil),     // 26: Ydb.Maintenance.ListMaintenanceTasksResult
+	(*ListMaintenanceTasksResponse)(nil),   // 27: Ydb.Maintenance.ListMaintenanceTasksResponse
+	(*DropMaintenanceTaskRequest)(nil),     // 28: Ydb.Maintenance.DropMaintenanceTaskRequest
+	(*ManageMaintenanceTaskResponse)(nil),  // 29: Ydb.Maintenance.ManageMaintenanceTaskResponse
+	(*CompleteActionRequest)(nil),          // 30: Ydb.Maintenance.CompleteActionRequest
+	(*ManageActionResult)(nil),             // 31: Ydb.Maintenance.ManageActionResult
+	(*ManageActionResponse)(nil),           // 32: Ydb.Maintenance.ManageActionResponse
+	(*Node_StorageNode)(nil),               // 33: Ydb.Maintenance.Node.StorageNode
+	(*Node_DynamicNode)(nil),               // 34: Ydb.Maintenance.Node.DynamicNode
+	(*ActionScope_PDiskId)(nil),            // 35: Ydb.Maintenance.ActionScope.PDiskId
+	(*ActionScope_PDiskLocation)(nil),      // 36: Ydb.Maintenance.ActionScope.PDiskLocation
+	(*ActionScope_PDisk)(nil),              // 37: Ydb.Maintenance.ActionScope.PDisk
+	(*ManageActionResult_Status)(nil),      // 38: Ydb.Maintenance.ManageActionResult.Status
+	(*Ydb_Discovery.NodeLocation)(nil),     // 39: Ydb.Discovery.NodeLocation
+	(*timestamppb.Timestamp)(nil),          // 40: google.protobuf.Timestamp
+	(*Ydb_Operations.OperationParams)(nil), // 41: Ydb.Operations.OperationParams
+	(*Ydb_Operations.Operation)(nil),       // 42: Ydb.Operations.Operation
+	(*durationpb.Duration)(nil),            // 43: google.protobuf.Duration
+	(Ydb.StatusIds_StatusCode)(0),          // 44: Ydb.StatusIds.StatusCode
 }
 var file_draft_protos_ydb_maintenance_proto_depIdxs = []int32{
-	34, // 0: Ydb.Maintenance.Node.location:type_name -> Ydb.Discovery.NodeLocation
+	39, // 0: Ydb.Maintenance.Node.location:type_name -> Ydb.Discovery.NodeLocation
 	0,  // 1: Ydb.Maintenance.Node.state:type_name -> Ydb.Maintenance.ItemState
-	31, // 2: Ydb.Maintenance.Node.storage:type_name -> Ydb.Maintenance.Node.StorageNode
-	32, // 3: Ydb.Maintenance.Node.dynamic:type_name -> Ydb.Maintenance.Node.DynamicNode
-	35, // 4: Ydb.Maintenance.Node.start_time:type_name -> google.protobuf.Timestamp
-	36, // 5: Ydb.Maintenance.ListClusterNodesRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	33, // 2: Ydb.Maintenance.Node.storage:type_name -> Ydb.Maintenance.Node.StorageNode
+	34, // 3: Ydb.Maintenance.Node.dynamic:type_name -> Ydb.Maintenance.Node.DynamicNode
+	40, // 4: Ydb.Maintenance.Node.start_time:type_name -> google.protobuf.Timestamp
+	41, // 5: Ydb.Maintenance.ListClusterNodesRequest.operation_params:type_name -> Ydb.Operations.OperationParams
 	4,  // 6: Ydb.Maintenance.ListClusterNodesResult.nodes:type_name -> Ydb.Maintenance.Node
-	37, // 7: Ydb.Maintenance.ListClusterNodesResponse.operation:type_name -> Ydb.Operations.Operation
+	42, // 7: Ydb.Maintenance.ListClusterNodesResponse.operation:type_name -> Ydb.Operations.Operation
 	1,  // 8: Ydb.Maintenance.MaintenanceTaskOptions.availability_mode:type_name -> Ydb.Maintenance.AvailabilityMode
-	9,  // 9: Ydb.Maintenance.LockAction.scope:type_name -> Ydb.Maintenance.ActionScope
-	38, // 10: Ydb.Maintenance.LockAction.duration:type_name -> google.protobuf.Duration
-	10, // 11: Ydb.Maintenance.Action.lock_action:type_name -> Ydb.Maintenance.LockAction
-	11, // 12: Ydb.Maintenance.ActionGroup.actions:type_name -> Ydb.Maintenance.Action
-	36, // 13: Ydb.Maintenance.CreateMaintenanceTaskRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	8,  // 14: Ydb.Maintenance.CreateMaintenanceTaskRequest.task_options:type_name -> Ydb.Maintenance.MaintenanceTaskOptions
-	12, // 15: Ydb.Maintenance.CreateMaintenanceTaskRequest.action_groups:type_name -> Ydb.Maintenance.ActionGroup
-	36, // 16: Ydb.Maintenance.RefreshMaintenanceTaskRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	11, // 17: Ydb.Maintenance.ActionState.action:type_name -> Ydb.Maintenance.Action
-	15, // 18: Ydb.Maintenance.ActionState.action_uid:type_name -> Ydb.Maintenance.ActionUid
-	2,  // 19: Ydb.Maintenance.ActionState.status:type_name -> Ydb.Maintenance.ActionState.ActionStatus
-	3,  // 20: Ydb.Maintenance.ActionState.reason:type_name -> Ydb.Maintenance.ActionState.ActionReason
-	35, // 21: Ydb.Maintenance.ActionState.deadline:type_name -> google.protobuf.Timestamp
-	16, // 22: Ydb.Maintenance.ActionGroupStates.action_states:type_name -> Ydb.Maintenance.ActionState
-	17, // 23: Ydb.Maintenance.MaintenanceTaskResult.action_group_states:type_name -> Ydb.Maintenance.ActionGroupStates
-	35, // 24: Ydb.Maintenance.MaintenanceTaskResult.retry_after:type_name -> google.protobuf.Timestamp
-	37, // 25: Ydb.Maintenance.MaintenanceTaskResponse.operation:type_name -> Ydb.Operations.Operation
-	36, // 26: Ydb.Maintenance.GetMaintenanceTaskRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	8,  // 27: Ydb.Maintenance.GetMaintenanceTaskResult.task_options:type_name -> Ydb.Maintenance.MaintenanceTaskOptions
-	17, // 28: Ydb.Maintenance.GetMaintenanceTaskResult.action_group_states:type_name -> Ydb.Maintenance.ActionGroupStates
-	37, // 29: Ydb.Maintenance.GetMaintenanceTaskResponse.operation:type_name -> Ydb.Operations.Operation
-	36, // 30: Ydb.Maintenance.ListMaintenanceTasksRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	37, // 31: Ydb.Maintenance.ListMaintenanceTasksResponse.operation:type_name -> Ydb.Operations.Operation
-	36, // 32: Ydb.Maintenance.DropMaintenanceTaskRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	37, // 33: Ydb.Maintenance.ManageMaintenanceTaskResponse.operation:type_name -> Ydb.Operations.Operation
-	36, // 34: Ydb.Maintenance.CompleteActionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
-	15, // 35: Ydb.Maintenance.CompleteActionRequest.action_uids:type_name -> Ydb.Maintenance.ActionUid
-	33, // 36: Ydb.Maintenance.ManageActionResult.action_statuses:type_name -> Ydb.Maintenance.ManageActionResult.Status
-	37, // 37: Ydb.Maintenance.ManageActionResponse.operation:type_name -> Ydb.Operations.Operation
-	15, // 38: Ydb.Maintenance.ManageActionResult.Status.action_uid:type_name -> Ydb.Maintenance.ActionUid
-	39, // 39: Ydb.Maintenance.ManageActionResult.Status.status:type_name -> Ydb.StatusIds.StatusCode
-	40, // [40:40] is the sub-list for method output_type
-	40, // [40:40] is the sub-list for method input_type
-	40, // [40:40] is the sub-list for extension type_name
-	40, // [40:40] is the sub-list for extension extendee
-	0,  // [0:40] is the sub-list for field type_name
+	37, // 9: Ydb.Maintenance.ActionScope.pdisk:type_name -> Ydb.Maintenance.ActionScope.PDisk
+	9,  // 10: Ydb.Maintenance.LockAction.scope:type_name -> Ydb.Maintenance.ActionScope
+	43, // 11: Ydb.Maintenance.LockAction.duration:type_name -> google.protobuf.Duration
+	9,  // 12: Ydb.Maintenance.DrainAction.scope:type_name -> Ydb.Maintenance.ActionScope
+	9,  // 13: Ydb.Maintenance.CordonAction.scope:type_name -> Ydb.Maintenance.ActionScope
+	10, // 14: Ydb.Maintenance.Action.lock_action:type_name -> Ydb.Maintenance.LockAction
+	11, // 15: Ydb.Maintenance.Action.drain_action:type_name -> Ydb.Maintenance.DrainAction
+	12, // 16: Ydb.Maintenance.Action.cordon_action:type_name -> Ydb.Maintenance.CordonAction
+	13, // 17: Ydb.Maintenance.ActionGroup.actions:type_name -> Ydb.Maintenance.Action
+	41, // 18: Ydb.Maintenance.CreateMaintenanceTaskRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	8,  // 19: Ydb.Maintenance.CreateMaintenanceTaskRequest.task_options:type_name -> Ydb.Maintenance.MaintenanceTaskOptions
+	14, // 20: Ydb.Maintenance.CreateMaintenanceTaskRequest.action_groups:type_name -> Ydb.Maintenance.ActionGroup
+	41, // 21: Ydb.Maintenance.RefreshMaintenanceTaskRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	13, // 22: Ydb.Maintenance.ActionState.action:type_name -> Ydb.Maintenance.Action
+	17, // 23: Ydb.Maintenance.ActionState.action_uid:type_name -> Ydb.Maintenance.ActionUid
+	2,  // 24: Ydb.Maintenance.ActionState.status:type_name -> Ydb.Maintenance.ActionState.ActionStatus
+	3,  // 25: Ydb.Maintenance.ActionState.reason:type_name -> Ydb.Maintenance.ActionState.ActionReason
+	40, // 26: Ydb.Maintenance.ActionState.deadline:type_name -> google.protobuf.Timestamp
+	18, // 27: Ydb.Maintenance.ActionGroupStates.action_states:type_name -> Ydb.Maintenance.ActionState
+	19, // 28: Ydb.Maintenance.MaintenanceTaskResult.action_group_states:type_name -> Ydb.Maintenance.ActionGroupStates
+	40, // 29: Ydb.Maintenance.MaintenanceTaskResult.retry_after:type_name -> google.protobuf.Timestamp
+	40, // 30: Ydb.Maintenance.MaintenanceTaskResult.create_time:type_name -> google.protobuf.Timestamp
+	40, // 31: Ydb.Maintenance.MaintenanceTaskResult.last_refresh_time:type_name -> google.protobuf.Timestamp
+	42, // 32: Ydb.Maintenance.MaintenanceTaskResponse.operation:type_name -> Ydb.Operations.Operation
+	41, // 33: Ydb.Maintenance.GetMaintenanceTaskRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	8,  // 34: Ydb.Maintenance.GetMaintenanceTaskResult.task_options:type_name -> Ydb.Maintenance.MaintenanceTaskOptions
+	19, // 35: Ydb.Maintenance.GetMaintenanceTaskResult.action_group_states:type_name -> Ydb.Maintenance.ActionGroupStates
+	40, // 36: Ydb.Maintenance.GetMaintenanceTaskResult.create_time:type_name -> google.protobuf.Timestamp
+	40, // 37: Ydb.Maintenance.GetMaintenanceTaskResult.last_refresh_time:type_name -> google.protobuf.Timestamp
+	42, // 38: Ydb.Maintenance.GetMaintenanceTaskResponse.operation:type_name -> Ydb.Operations.Operation
+	41, // 39: Ydb.Maintenance.ListMaintenanceTasksRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	42, // 40: Ydb.Maintenance.ListMaintenanceTasksResponse.operation:type_name -> Ydb.Operations.Operation
+	41, // 41: Ydb.Maintenance.DropMaintenanceTaskRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	42, // 42: Ydb.Maintenance.ManageMaintenanceTaskResponse.operation:type_name -> Ydb.Operations.Operation
+	41, // 43: Ydb.Maintenance.CompleteActionRequest.operation_params:type_name -> Ydb.Operations.OperationParams
+	17, // 44: Ydb.Maintenance.CompleteActionRequest.action_uids:type_name -> Ydb.Maintenance.ActionUid
+	38, // 45: Ydb.Maintenance.ManageActionResult.action_statuses:type_name -> Ydb.Maintenance.ManageActionResult.Status
+	42, // 46: Ydb.Maintenance.ManageActionResponse.operation:type_name -> Ydb.Operations.Operation
+	35, // 47: Ydb.Maintenance.ActionScope.PDisk.pdisk_id:type_name -> Ydb.Maintenance.ActionScope.PDiskId
+	36, // 48: Ydb.Maintenance.ActionScope.PDisk.pdisk_location:type_name -> Ydb.Maintenance.ActionScope.PDiskLocation
+	17, // 49: Ydb.Maintenance.ManageActionResult.Status.action_uid:type_name -> Ydb.Maintenance.ActionUid
+	44, // 50: Ydb.Maintenance.ManageActionResult.Status.status:type_name -> Ydb.StatusIds.StatusCode
+	51, // [51:51] is the sub-list for method output_type
+	51, // [51:51] is the sub-list for method input_type
+	51, // [51:51] is the sub-list for extension type_name
+	51, // [51:51] is the sub-list for extension extendee
+	0,  // [0:51] is the sub-list for field type_name
 }
 
 func init() { file_draft_protos_ydb_maintenance_proto_init() }
@@ -3477,15 +3950,24 @@ func file_draft_protos_ydb_maintenance_proto_init() {
 		return
 	}
 	file_draft_protos_ydb_maintenance_proto_msgTypes[0].OneofWrappers = []any{
-		(*Node_Storage)(nil),
-		(*Node_Dynamic)(nil),
+		(*node_Storage)(nil),
+		(*node_Dynamic)(nil),
 	}
 	file_draft_protos_ydb_maintenance_proto_msgTypes[5].OneofWrappers = []any{
-		(*ActionScope_NodeId)(nil),
-		(*ActionScope_Host)(nil),
+		(*actionScope_NodeId)(nil),
+		(*actionScope_Host)(nil),
+		(*actionScope_Pdisk)(nil),
 	}
-	file_draft_protos_ydb_maintenance_proto_msgTypes[7].OneofWrappers = []any{
-		(*Action_LockAction)(nil),
+	file_draft_protos_ydb_maintenance_proto_msgTypes[9].OneofWrappers = []any{
+		(*action_LockAction)(nil),
+		(*action_DrainAction)(nil),
+		(*action_CordonAction)(nil),
+	}
+	file_draft_protos_ydb_maintenance_proto_msgTypes[16].OneofWrappers = []any{}
+	file_draft_protos_ydb_maintenance_proto_msgTypes[21].OneofWrappers = []any{}
+	file_draft_protos_ydb_maintenance_proto_msgTypes[33].OneofWrappers = []any{
+		(*actionScope_PDisk_PdiskId)(nil),
+		(*actionScope_PDisk_PdiskLocation)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -3493,7 +3975,7 @@ func file_draft_protos_ydb_maintenance_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_draft_protos_ydb_maintenance_proto_rawDesc), len(file_draft_protos_ydb_maintenance_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   30,
+			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

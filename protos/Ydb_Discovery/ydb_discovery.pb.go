@@ -4,15 +4,12 @@
 // 	protoc        v6.30.2
 // source: protos/ydb_discovery.proto
 
-//go:build !protoopaque
-
 package Ydb_Discovery
 
 import (
 	Ydb_Operations "github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Operations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -25,11 +22,11 @@ const (
 )
 
 type ListEndpointsRequest struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Database      *string                `protobuf:"bytes,1,opt,name=database" json:"database,omitempty"`
-	Service       []string               `protobuf:"bytes,2,rep,name=service" json:"service,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Database string                 `protobuf:"bytes,1,opt,name=database,proto3"`
+	xxx_hidden_Service  []string               `protobuf:"bytes,2,rep,name=service,proto3"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ListEndpointsRequest) Reset() {
@@ -58,42 +55,31 @@ func (x *ListEndpointsRequest) ProtoReflect() protoreflect.Message {
 }
 
 func (x *ListEndpointsRequest) GetDatabase() string {
-	if x != nil && x.Database != nil {
-		return *x.Database
+	if x != nil {
+		return x.xxx_hidden_Database
 	}
 	return ""
 }
 
 func (x *ListEndpointsRequest) GetService() []string {
 	if x != nil {
-		return x.Service
+		return x.xxx_hidden_Service
 	}
 	return nil
 }
 
 func (x *ListEndpointsRequest) SetDatabase(v string) {
-	x.Database = &v
+	x.xxx_hidden_Database = v
 }
 
 func (x *ListEndpointsRequest) SetService(v []string) {
-	x.Service = v
-}
-
-func (x *ListEndpointsRequest) HasDatabase() bool {
-	if x == nil {
-		return false
-	}
-	return x.Database != nil
-}
-
-func (x *ListEndpointsRequest) ClearDatabase() {
-	x.Database = nil
+	x.xxx_hidden_Service = v
 }
 
 type ListEndpointsRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Database *string
+	Database string
 	Service  []string
 }
 
@@ -101,32 +87,25 @@ func (b0 ListEndpointsRequest_builder) Build() *ListEndpointsRequest {
 	m0 := &ListEndpointsRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Database = b.Database
-	x.Service = b.Service
+	x.xxx_hidden_Database = b.Database
+	x.xxx_hidden_Service = b.Service
 	return m0
 }
 
 type EndpointInfo struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// This is an address (usually fqdn) and port of this node's grpc endpoint
-	Address    *string  `protobuf:"bytes,1,opt,name=address" json:"address,omitempty"`
-	Port       *uint32  `protobuf:"varint,2,opt,name=port" json:"port,omitempty"`
-	LoadFactor *float32 `protobuf:"fixed32,3,opt,name=load_factor,json=loadFactor" json:"load_factor,omitempty"`
-	Ssl        *bool    `protobuf:"varint,4,opt,name=ssl" json:"ssl,omitempty"`
-	Service    []string `protobuf:"bytes,5,rep,name=service" json:"service,omitempty"`
-	Location   *string  `protobuf:"bytes,6,opt,name=location" json:"location,omitempty"`
-	NodeId     *uint32  `protobuf:"varint,7,opt,name=node_id,json=nodeId" json:"node_id,omitempty"`
-	// Optional ipv4 and/or ipv6 addresses of the endpoint, which clients may
-	// use instead of a dns name in the address field.
-	IpV4 []string `protobuf:"bytes,8,rep,name=ip_v4,json=ipV4" json:"ip_v4,omitempty"`
-	IpV6 []string `protobuf:"bytes,9,rep,name=ip_v6,json=ipV6" json:"ip_v6,omitempty"`
-	// Optional value for grpc.ssl_target_name_override option that must be
-	// used when connecting to this endpoint. This may be specified when an ssl
-	// endpoint is using certificate chain valid for a balancer hostname, and
-	// not this specific node hostname.
-	SslTargetNameOverride *string `protobuf:"bytes,10,opt,name=ssl_target_name_override,json=sslTargetNameOverride" json:"ssl_target_name_override,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Address               string                 `protobuf:"bytes,1,opt,name=address,proto3"`
+	xxx_hidden_Port                  uint32                 `protobuf:"varint,2,opt,name=port,proto3"`
+	xxx_hidden_LoadFactor            float32                `protobuf:"fixed32,3,opt,name=load_factor,json=loadFactor,proto3"`
+	xxx_hidden_Ssl                   bool                   `protobuf:"varint,4,opt,name=ssl,proto3"`
+	xxx_hidden_Service               []string               `protobuf:"bytes,5,rep,name=service,proto3"`
+	xxx_hidden_Location              string                 `protobuf:"bytes,6,opt,name=location,proto3"`
+	xxx_hidden_NodeId                uint32                 `protobuf:"varint,7,opt,name=node_id,json=nodeId,proto3"`
+	xxx_hidden_IpV4                  []string               `protobuf:"bytes,8,rep,name=ip_v4,json=ipV4,proto3"`
+	xxx_hidden_IpV6                  []string               `protobuf:"bytes,9,rep,name=ip_v6,json=ipV6,proto3"`
+	xxx_hidden_SslTargetNameOverride string                 `protobuf:"bytes,10,opt,name=ssl_target_name_override,json=sslTargetNameOverride,proto3"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *EndpointInfo) Reset() {
@@ -155,203 +134,126 @@ func (x *EndpointInfo) ProtoReflect() protoreflect.Message {
 }
 
 func (x *EndpointInfo) GetAddress() string {
-	if x != nil && x.Address != nil {
-		return *x.Address
+	if x != nil {
+		return x.xxx_hidden_Address
 	}
 	return ""
 }
 
 func (x *EndpointInfo) GetPort() uint32 {
-	if x != nil && x.Port != nil {
-		return *x.Port
+	if x != nil {
+		return x.xxx_hidden_Port
 	}
 	return 0
 }
 
 func (x *EndpointInfo) GetLoadFactor() float32 {
-	if x != nil && x.LoadFactor != nil {
-		return *x.LoadFactor
+	if x != nil {
+		return x.xxx_hidden_LoadFactor
 	}
 	return 0
 }
 
 func (x *EndpointInfo) GetSsl() bool {
-	if x != nil && x.Ssl != nil {
-		return *x.Ssl
+	if x != nil {
+		return x.xxx_hidden_Ssl
 	}
 	return false
 }
 
 func (x *EndpointInfo) GetService() []string {
 	if x != nil {
-		return x.Service
+		return x.xxx_hidden_Service
 	}
 	return nil
 }
 
 func (x *EndpointInfo) GetLocation() string {
-	if x != nil && x.Location != nil {
-		return *x.Location
+	if x != nil {
+		return x.xxx_hidden_Location
 	}
 	return ""
 }
 
 func (x *EndpointInfo) GetNodeId() uint32 {
-	if x != nil && x.NodeId != nil {
-		return *x.NodeId
+	if x != nil {
+		return x.xxx_hidden_NodeId
 	}
 	return 0
 }
 
 func (x *EndpointInfo) GetIpV4() []string {
 	if x != nil {
-		return x.IpV4
+		return x.xxx_hidden_IpV4
 	}
 	return nil
 }
 
 func (x *EndpointInfo) GetIpV6() []string {
 	if x != nil {
-		return x.IpV6
+		return x.xxx_hidden_IpV6
 	}
 	return nil
 }
 
 func (x *EndpointInfo) GetSslTargetNameOverride() string {
-	if x != nil && x.SslTargetNameOverride != nil {
-		return *x.SslTargetNameOverride
+	if x != nil {
+		return x.xxx_hidden_SslTargetNameOverride
 	}
 	return ""
 }
 
 func (x *EndpointInfo) SetAddress(v string) {
-	x.Address = &v
+	x.xxx_hidden_Address = v
 }
 
 func (x *EndpointInfo) SetPort(v uint32) {
-	x.Port = &v
+	x.xxx_hidden_Port = v
 }
 
 func (x *EndpointInfo) SetLoadFactor(v float32) {
-	x.LoadFactor = &v
+	x.xxx_hidden_LoadFactor = v
 }
 
 func (x *EndpointInfo) SetSsl(v bool) {
-	x.Ssl = &v
+	x.xxx_hidden_Ssl = v
 }
 
 func (x *EndpointInfo) SetService(v []string) {
-	x.Service = v
+	x.xxx_hidden_Service = v
 }
 
 func (x *EndpointInfo) SetLocation(v string) {
-	x.Location = &v
+	x.xxx_hidden_Location = v
 }
 
 func (x *EndpointInfo) SetNodeId(v uint32) {
-	x.NodeId = &v
+	x.xxx_hidden_NodeId = v
 }
 
 func (x *EndpointInfo) SetIpV4(v []string) {
-	x.IpV4 = v
+	x.xxx_hidden_IpV4 = v
 }
 
 func (x *EndpointInfo) SetIpV6(v []string) {
-	x.IpV6 = v
+	x.xxx_hidden_IpV6 = v
 }
 
 func (x *EndpointInfo) SetSslTargetNameOverride(v string) {
-	x.SslTargetNameOverride = &v
-}
-
-func (x *EndpointInfo) HasAddress() bool {
-	if x == nil {
-		return false
-	}
-	return x.Address != nil
-}
-
-func (x *EndpointInfo) HasPort() bool {
-	if x == nil {
-		return false
-	}
-	return x.Port != nil
-}
-
-func (x *EndpointInfo) HasLoadFactor() bool {
-	if x == nil {
-		return false
-	}
-	return x.LoadFactor != nil
-}
-
-func (x *EndpointInfo) HasSsl() bool {
-	if x == nil {
-		return false
-	}
-	return x.Ssl != nil
-}
-
-func (x *EndpointInfo) HasLocation() bool {
-	if x == nil {
-		return false
-	}
-	return x.Location != nil
-}
-
-func (x *EndpointInfo) HasNodeId() bool {
-	if x == nil {
-		return false
-	}
-	return x.NodeId != nil
-}
-
-func (x *EndpointInfo) HasSslTargetNameOverride() bool {
-	if x == nil {
-		return false
-	}
-	return x.SslTargetNameOverride != nil
-}
-
-func (x *EndpointInfo) ClearAddress() {
-	x.Address = nil
-}
-
-func (x *EndpointInfo) ClearPort() {
-	x.Port = nil
-}
-
-func (x *EndpointInfo) ClearLoadFactor() {
-	x.LoadFactor = nil
-}
-
-func (x *EndpointInfo) ClearSsl() {
-	x.Ssl = nil
-}
-
-func (x *EndpointInfo) ClearLocation() {
-	x.Location = nil
-}
-
-func (x *EndpointInfo) ClearNodeId() {
-	x.NodeId = nil
-}
-
-func (x *EndpointInfo) ClearSslTargetNameOverride() {
-	x.SslTargetNameOverride = nil
+	x.xxx_hidden_SslTargetNameOverride = v
 }
 
 type EndpointInfo_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// This is an address (usually fqdn) and port of this node's grpc endpoint
-	Address    *string
-	Port       *uint32
-	LoadFactor *float32
-	Ssl        *bool
+	Address    string
+	Port       uint32
+	LoadFactor float32
+	Ssl        bool
 	Service    []string
-	Location   *string
-	NodeId     *uint32
+	Location   string
+	NodeId     uint32
 	// Optional ipv4 and/or ipv6 addresses of the endpoint, which clients may
 	// use instead of a dns name in the address field.
 	IpV4 []string
@@ -360,32 +262,32 @@ type EndpointInfo_builder struct {
 	// used when connecting to this endpoint. This may be specified when an ssl
 	// endpoint is using certificate chain valid for a balancer hostname, and
 	// not this specific node hostname.
-	SslTargetNameOverride *string
+	SslTargetNameOverride string
 }
 
 func (b0 EndpointInfo_builder) Build() *EndpointInfo {
 	m0 := &EndpointInfo{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Address = b.Address
-	x.Port = b.Port
-	x.LoadFactor = b.LoadFactor
-	x.Ssl = b.Ssl
-	x.Service = b.Service
-	x.Location = b.Location
-	x.NodeId = b.NodeId
-	x.IpV4 = b.IpV4
-	x.IpV6 = b.IpV6
-	x.SslTargetNameOverride = b.SslTargetNameOverride
+	x.xxx_hidden_Address = b.Address
+	x.xxx_hidden_Port = b.Port
+	x.xxx_hidden_LoadFactor = b.LoadFactor
+	x.xxx_hidden_Ssl = b.Ssl
+	x.xxx_hidden_Service = b.Service
+	x.xxx_hidden_Location = b.Location
+	x.xxx_hidden_NodeId = b.NodeId
+	x.xxx_hidden_IpV4 = b.IpV4
+	x.xxx_hidden_IpV6 = b.IpV6
+	x.xxx_hidden_SslTargetNameOverride = b.SslTargetNameOverride
 	return m0
 }
 
 type ListEndpointsResult struct {
-	state         protoimpl.MessageState `protogen:"hybrid.v1"`
-	Endpoints     []*EndpointInfo        `protobuf:"bytes,1,rep,name=endpoints" json:"endpoints,omitempty"`
-	SelfLocation  *string                `protobuf:"bytes,2,opt,name=self_location,json=selfLocation" json:"self_location,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Endpoints    *[]*EndpointInfo       `protobuf:"bytes,1,rep,name=endpoints,proto3"`
+	xxx_hidden_SelfLocation string                 `protobuf:"bytes,2,opt,name=self_location,json=selfLocation,proto3"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *ListEndpointsResult) Reset() {
@@ -415,58 +317,49 @@ func (x *ListEndpointsResult) ProtoReflect() protoreflect.Message {
 
 func (x *ListEndpointsResult) GetEndpoints() []*EndpointInfo {
 	if x != nil {
-		return x.Endpoints
+		if x.xxx_hidden_Endpoints != nil {
+			return *x.xxx_hidden_Endpoints
+		}
 	}
 	return nil
 }
 
 func (x *ListEndpointsResult) GetSelfLocation() string {
-	if x != nil && x.SelfLocation != nil {
-		return *x.SelfLocation
+	if x != nil {
+		return x.xxx_hidden_SelfLocation
 	}
 	return ""
 }
 
 func (x *ListEndpointsResult) SetEndpoints(v []*EndpointInfo) {
-	x.Endpoints = v
+	x.xxx_hidden_Endpoints = &v
 }
 
 func (x *ListEndpointsResult) SetSelfLocation(v string) {
-	x.SelfLocation = &v
-}
-
-func (x *ListEndpointsResult) HasSelfLocation() bool {
-	if x == nil {
-		return false
-	}
-	return x.SelfLocation != nil
-}
-
-func (x *ListEndpointsResult) ClearSelfLocation() {
-	x.SelfLocation = nil
+	x.xxx_hidden_SelfLocation = v
 }
 
 type ListEndpointsResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Endpoints    []*EndpointInfo
-	SelfLocation *string
+	SelfLocation string
 }
 
 func (b0 ListEndpointsResult_builder) Build() *ListEndpointsResult {
 	m0 := &ListEndpointsResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Endpoints = b.Endpoints
-	x.SelfLocation = b.SelfLocation
+	x.xxx_hidden_Endpoints = &b.Endpoints
+	x.xxx_hidden_SelfLocation = b.SelfLocation
 	return m0
 }
 
 type ListEndpointsResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListEndpointsResponse) Reset() {
@@ -496,24 +389,24 @@ func (x *ListEndpointsResponse) ProtoReflect() protoreflect.Message {
 
 func (x *ListEndpointsResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *ListEndpointsResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *ListEndpointsResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *ListEndpointsResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type ListEndpointsResponse_builder struct {
@@ -526,16 +419,15 @@ func (b0 ListEndpointsResponse_builder) Build() *ListEndpointsResponse {
 	m0 := &ListEndpointsResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type WhoAmIRequest struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// Include user groups in response
-	IncludeGroups *bool `protobuf:"varint,1,opt,name=include_groups,json=includeGroups" json:"include_groups,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_IncludeGroups bool                   `protobuf:"varint,1,opt,name=include_groups,json=includeGroups,proto3"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *WhoAmIRequest) Reset() {
@@ -564,50 +456,37 @@ func (x *WhoAmIRequest) ProtoReflect() protoreflect.Message {
 }
 
 func (x *WhoAmIRequest) GetIncludeGroups() bool {
-	if x != nil && x.IncludeGroups != nil {
-		return *x.IncludeGroups
+	if x != nil {
+		return x.xxx_hidden_IncludeGroups
 	}
 	return false
 }
 
 func (x *WhoAmIRequest) SetIncludeGroups(v bool) {
-	x.IncludeGroups = &v
-}
-
-func (x *WhoAmIRequest) HasIncludeGroups() bool {
-	if x == nil {
-		return false
-	}
-	return x.IncludeGroups != nil
-}
-
-func (x *WhoAmIRequest) ClearIncludeGroups() {
-	x.IncludeGroups = nil
+	x.xxx_hidden_IncludeGroups = v
 }
 
 type WhoAmIRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Include user groups in response
-	IncludeGroups *bool
+	IncludeGroups bool
 }
 
 func (b0 WhoAmIRequest_builder) Build() *WhoAmIRequest {
 	m0 := &WhoAmIRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.IncludeGroups = b.IncludeGroups
+	x.xxx_hidden_IncludeGroups = b.IncludeGroups
 	return m0
 }
 
 type WhoAmIResult struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// User SID (Security ID)
-	User *string `protobuf:"bytes,1,opt,name=user" json:"user,omitempty"`
-	// List of group SIDs (Security IDs) for the user
-	Groups        []string `protobuf:"bytes,2,rep,name=groups" json:"groups,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_User   string                 `protobuf:"bytes,1,opt,name=user,proto3"`
+	xxx_hidden_Groups []string               `protobuf:"bytes,2,rep,name=groups,proto3"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *WhoAmIResult) Reset() {
@@ -636,43 +515,32 @@ func (x *WhoAmIResult) ProtoReflect() protoreflect.Message {
 }
 
 func (x *WhoAmIResult) GetUser() string {
-	if x != nil && x.User != nil {
-		return *x.User
+	if x != nil {
+		return x.xxx_hidden_User
 	}
 	return ""
 }
 
 func (x *WhoAmIResult) GetGroups() []string {
 	if x != nil {
-		return x.Groups
+		return x.xxx_hidden_Groups
 	}
 	return nil
 }
 
 func (x *WhoAmIResult) SetUser(v string) {
-	x.User = &v
+	x.xxx_hidden_User = v
 }
 
 func (x *WhoAmIResult) SetGroups(v []string) {
-	x.Groups = v
-}
-
-func (x *WhoAmIResult) HasUser() bool {
-	if x == nil {
-		return false
-	}
-	return x.User != nil
-}
-
-func (x *WhoAmIResult) ClearUser() {
-	x.User = nil
+	x.xxx_hidden_Groups = v
 }
 
 type WhoAmIResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// User SID (Security ID)
-	User *string
+	User string
 	// List of group SIDs (Security IDs) for the user
 	Groups []string
 }
@@ -681,16 +549,16 @@ func (b0 WhoAmIResult_builder) Build() *WhoAmIResult {
 	m0 := &WhoAmIResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.User = b.User
-	x.Groups = b.Groups
+	x.xxx_hidden_User = b.User
+	x.xxx_hidden_Groups = b.Groups
 	return m0
 }
 
 type WhoAmIResponse struct {
-	state         protoimpl.MessageState    `protogen:"hybrid.v1"`
-	Operation     *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Operation *Ydb_Operations.Operation `protobuf:"bytes,1,opt,name=operation,proto3"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *WhoAmIResponse) Reset() {
@@ -720,24 +588,24 @@ func (x *WhoAmIResponse) ProtoReflect() protoreflect.Message {
 
 func (x *WhoAmIResponse) GetOperation() *Ydb_Operations.Operation {
 	if x != nil {
-		return x.Operation
+		return x.xxx_hidden_Operation
 	}
 	return nil
 }
 
 func (x *WhoAmIResponse) SetOperation(v *Ydb_Operations.Operation) {
-	x.Operation = v
+	x.xxx_hidden_Operation = v
 }
 
 func (x *WhoAmIResponse) HasOperation() bool {
 	if x == nil {
 		return false
 	}
-	return x.Operation != nil
+	return x.xxx_hidden_Operation != nil
 }
 
 func (x *WhoAmIResponse) ClearOperation() {
-	x.Operation = nil
+	x.xxx_hidden_Operation = nil
 }
 
 type WhoAmIResponse_builder struct {
@@ -750,30 +618,25 @@ func (b0 WhoAmIResponse_builder) Build() *WhoAmIResponse {
 	m0 := &WhoAmIResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.Operation = b.Operation
+	x.xxx_hidden_Operation = b.Operation
 	return m0
 }
 
 type NodeLocation struct {
-	state protoimpl.MessageState `protogen:"hybrid.v1"`
-	// compatibility section -- will be removed in future versions
-	//
-	// Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
-	DataCenterNum *uint32 `protobuf:"varint,1,opt,name=data_center_num,json=dataCenterNum" json:"data_center_num,omitempty"`
-	// Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
-	RoomNum *uint32 `protobuf:"varint,2,opt,name=room_num,json=roomNum" json:"room_num,omitempty"`
-	// Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
-	RackNum *uint32 `protobuf:"varint,3,opt,name=rack_num,json=rackNum" json:"rack_num,omitempty"`
-	// Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
-	BodyNum *uint32 `protobuf:"varint,4,opt,name=body_num,json=bodyNum" json:"body_num,omitempty"`
-	// Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
-	Body          *uint32 `protobuf:"varint,100500,opt,name=body" json:"body,omitempty"` // for compatibility with WalleLocation
-	DataCenter    *string `protobuf:"bytes,10,opt,name=data_center,json=dataCenter" json:"data_center,omitempty"`
-	Module        *string `protobuf:"bytes,20,opt,name=module" json:"module,omitempty"`
-	Rack          *string `protobuf:"bytes,30,opt,name=rack" json:"rack,omitempty"`
-	Unit          *string `protobuf:"bytes,40,opt,name=unit" json:"unit,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DataCenterNum uint32                 `protobuf:"varint,1,opt,name=data_center_num,json=dataCenterNum,proto3,oneof"`
+	xxx_hidden_RoomNum       uint32                 `protobuf:"varint,2,opt,name=room_num,json=roomNum,proto3,oneof"`
+	xxx_hidden_RackNum       uint32                 `protobuf:"varint,3,opt,name=rack_num,json=rackNum,proto3,oneof"`
+	xxx_hidden_BodyNum       uint32                 `protobuf:"varint,4,opt,name=body_num,json=bodyNum,proto3,oneof"`
+	xxx_hidden_Body          uint32                 `protobuf:"varint,100500,opt,name=body,proto3,oneof"`
+	xxx_hidden_DataCenter    *string                `protobuf:"bytes,10,opt,name=data_center,json=dataCenter,proto3,oneof"`
+	xxx_hidden_Module        *string                `protobuf:"bytes,20,opt,name=module,proto3,oneof"`
+	xxx_hidden_Rack          *string                `protobuf:"bytes,30,opt,name=rack,proto3,oneof"`
+	xxx_hidden_Unit          *string                `protobuf:"bytes,40,opt,name=unit,proto3,oneof"`
+	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
+	XXX_presence             [1]uint32
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *NodeLocation) Reset() {
@@ -803,111 +666,132 @@ func (x *NodeLocation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) GetDataCenterNum() uint32 {
-	if x != nil && x.DataCenterNum != nil {
-		return *x.DataCenterNum
+	if x != nil {
+		return x.xxx_hidden_DataCenterNum
 	}
 	return 0
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) GetRoomNum() uint32 {
-	if x != nil && x.RoomNum != nil {
-		return *x.RoomNum
+	if x != nil {
+		return x.xxx_hidden_RoomNum
 	}
 	return 0
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) GetRackNum() uint32 {
-	if x != nil && x.RackNum != nil {
-		return *x.RackNum
+	if x != nil {
+		return x.xxx_hidden_RackNum
 	}
 	return 0
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) GetBodyNum() uint32 {
-	if x != nil && x.BodyNum != nil {
-		return *x.BodyNum
+	if x != nil {
+		return x.xxx_hidden_BodyNum
 	}
 	return 0
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) GetBody() uint32 {
-	if x != nil && x.Body != nil {
-		return *x.Body
+	if x != nil {
+		return x.xxx_hidden_Body
 	}
 	return 0
 }
 
 func (x *NodeLocation) GetDataCenter() string {
-	if x != nil && x.DataCenter != nil {
-		return *x.DataCenter
+	if x != nil {
+		if x.xxx_hidden_DataCenter != nil {
+			return *x.xxx_hidden_DataCenter
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *NodeLocation) GetModule() string {
-	if x != nil && x.Module != nil {
-		return *x.Module
+	if x != nil {
+		if x.xxx_hidden_Module != nil {
+			return *x.xxx_hidden_Module
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *NodeLocation) GetRack() string {
-	if x != nil && x.Rack != nil {
-		return *x.Rack
+	if x != nil {
+		if x.xxx_hidden_Rack != nil {
+			return *x.xxx_hidden_Rack
+		}
+		return ""
 	}
 	return ""
 }
 
 func (x *NodeLocation) GetUnit() string {
-	if x != nil && x.Unit != nil {
-		return *x.Unit
+	if x != nil {
+		if x.xxx_hidden_Unit != nil {
+			return *x.xxx_hidden_Unit
+		}
+		return ""
 	}
 	return ""
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) SetDataCenterNum(v uint32) {
-	x.DataCenterNum = &v
+	x.xxx_hidden_DataCenterNum = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 9)
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) SetRoomNum(v uint32) {
-	x.RoomNum = &v
+	x.xxx_hidden_RoomNum = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 9)
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) SetRackNum(v uint32) {
-	x.RackNum = &v
+	x.xxx_hidden_RackNum = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 9)
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) SetBodyNum(v uint32) {
-	x.BodyNum = &v
+	x.xxx_hidden_BodyNum = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 9)
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) SetBody(v uint32) {
-	x.Body = &v
+	x.xxx_hidden_Body = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 9)
 }
 
 func (x *NodeLocation) SetDataCenter(v string) {
-	x.DataCenter = &v
+	x.xxx_hidden_DataCenter = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 9)
 }
 
 func (x *NodeLocation) SetModule(v string) {
-	x.Module = &v
+	x.xxx_hidden_Module = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 9)
 }
 
 func (x *NodeLocation) SetRack(v string) {
-	x.Rack = &v
+	x.xxx_hidden_Rack = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 9)
 }
 
 func (x *NodeLocation) SetUnit(v string) {
-	x.Unit = &v
+	x.xxx_hidden_Unit = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 9)
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
@@ -915,7 +799,7 @@ func (x *NodeLocation) HasDataCenterNum() bool {
 	if x == nil {
 		return false
 	}
-	return x.DataCenterNum != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
@@ -923,7 +807,7 @@ func (x *NodeLocation) HasRoomNum() bool {
 	if x == nil {
 		return false
 	}
-	return x.RoomNum != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
@@ -931,7 +815,7 @@ func (x *NodeLocation) HasRackNum() bool {
 	if x == nil {
 		return false
 	}
-	return x.RackNum != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
@@ -939,7 +823,7 @@ func (x *NodeLocation) HasBodyNum() bool {
 	if x == nil {
 		return false
 	}
-	return x.BodyNum != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
@@ -947,76 +831,85 @@ func (x *NodeLocation) HasBody() bool {
 	if x == nil {
 		return false
 	}
-	return x.Body != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
 func (x *NodeLocation) HasDataCenter() bool {
 	if x == nil {
 		return false
 	}
-	return x.DataCenter != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
 }
 
 func (x *NodeLocation) HasModule() bool {
 	if x == nil {
 		return false
 	}
-	return x.Module != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
 }
 
 func (x *NodeLocation) HasRack() bool {
 	if x == nil {
 		return false
 	}
-	return x.Rack != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
 }
 
 func (x *NodeLocation) HasUnit() bool {
 	if x == nil {
 		return false
 	}
-	return x.Unit != nil
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 8)
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) ClearDataCenterNum() {
-	x.DataCenterNum = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_DataCenterNum = 0
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) ClearRoomNum() {
-	x.RoomNum = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_RoomNum = 0
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) ClearRackNum() {
-	x.RackNum = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_RackNum = 0
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) ClearBodyNum() {
-	x.BodyNum = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_BodyNum = 0
 }
 
 // Deprecated: Marked as deprecated in protos/ydb_discovery.proto.
 func (x *NodeLocation) ClearBody() {
-	x.Body = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_Body = 0
 }
 
 func (x *NodeLocation) ClearDataCenter() {
-	x.DataCenter = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_DataCenter = nil
 }
 
 func (x *NodeLocation) ClearModule() {
-	x.Module = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_Module = nil
 }
 
 func (x *NodeLocation) ClearRack() {
-	x.Rack = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	x.xxx_hidden_Rack = nil
 }
 
 func (x *NodeLocation) ClearUnit() {
-	x.Unit = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 8)
+	x.xxx_hidden_Unit = nil
 }
 
 type NodeLocation_builder struct {
@@ -1044,15 +937,42 @@ func (b0 NodeLocation_builder) Build() *NodeLocation {
 	m0 := &NodeLocation{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.DataCenterNum = b.DataCenterNum
-	x.RoomNum = b.RoomNum
-	x.RackNum = b.RackNum
-	x.BodyNum = b.BodyNum
-	x.Body = b.Body
-	x.DataCenter = b.DataCenter
-	x.Module = b.Module
-	x.Rack = b.Rack
-	x.Unit = b.Unit
+	if b.DataCenterNum != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 9)
+		x.xxx_hidden_DataCenterNum = *b.DataCenterNum
+	}
+	if b.RoomNum != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 9)
+		x.xxx_hidden_RoomNum = *b.RoomNum
+	}
+	if b.RackNum != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 9)
+		x.xxx_hidden_RackNum = *b.RackNum
+	}
+	if b.BodyNum != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 9)
+		x.xxx_hidden_BodyNum = *b.BodyNum
+	}
+	if b.Body != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 9)
+		x.xxx_hidden_Body = *b.Body
+	}
+	if b.DataCenter != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 9)
+		x.xxx_hidden_DataCenter = b.DataCenter
+	}
+	if b.Module != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 9)
+		x.xxx_hidden_Module = b.Module
+	}
+	if b.Rack != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 9)
+		x.xxx_hidden_Rack = b.Rack
+	}
+	if b.Unit != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 9)
+		x.xxx_hidden_Unit = b.Unit
+	}
 	return m0
 }
 
@@ -1060,7 +980,7 @@ var File_protos_ydb_discovery_proto protoreflect.FileDescriptor
 
 const file_protos_ydb_discovery_proto_rawDesc = "" +
 	"\n" +
-	"\x1aprotos/ydb_discovery.proto\x12\rYdb.Discovery\x1a\x1aprotos/ydb_operation.proto\x1a!google/protobuf/go_features.proto\"L\n" +
+	"\x1aprotos/ydb_discovery.proto\x12\rYdb.Discovery\x1a\x1aprotos/ydb_operation.proto\"L\n" +
 	"\x14ListEndpointsRequest\x12\x1a\n" +
 	"\bdatabase\x18\x01 \x01(\tR\bdatabase\x12\x18\n" +
 	"\aservice\x18\x02 \x03(\tR\aservice\"\xa1\x02\n" +
@@ -1088,20 +1008,29 @@ const file_protos_ydb_discovery_proto_rawDesc = "" +
 	"\x04user\x18\x01 \x01(\tR\x04user\x12\x16\n" +
 	"\x06groups\x18\x02 \x03(\tR\x06groups\"I\n" +
 	"\x0eWhoAmIResponse\x127\n" +
-	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"\x92\x02\n" +
-	"\fNodeLocation\x12*\n" +
-	"\x0fdata_center_num\x18\x01 \x01(\rB\x02\x18\x01R\rdataCenterNum\x12\x1d\n" +
-	"\broom_num\x18\x02 \x01(\rB\x02\x18\x01R\aroomNum\x12\x1d\n" +
-	"\brack_num\x18\x03 \x01(\rB\x02\x18\x01R\arackNum\x12\x1d\n" +
-	"\bbody_num\x18\x04 \x01(\rB\x02\x18\x01R\abodyNum\x12\x18\n" +
-	"\x04body\x18\x94\x91\x06 \x01(\rB\x02\x18\x01R\x04body\x12\x1f\n" +
+	"\toperation\x18\x01 \x01(\v2\x19.Ydb.Operations.OperationR\toperation\"\xb0\x03\n" +
+	"\fNodeLocation\x12/\n" +
+	"\x0fdata_center_num\x18\x01 \x01(\rB\x02\x18\x01H\x00R\rdataCenterNum\x88\x01\x01\x12\"\n" +
+	"\broom_num\x18\x02 \x01(\rB\x02\x18\x01H\x01R\aroomNum\x88\x01\x01\x12\"\n" +
+	"\brack_num\x18\x03 \x01(\rB\x02\x18\x01H\x02R\arackNum\x88\x01\x01\x12\"\n" +
+	"\bbody_num\x18\x04 \x01(\rB\x02\x18\x01H\x03R\abodyNum\x88\x01\x01\x12\x1d\n" +
+	"\x04body\x18\x94\x91\x06 \x01(\rB\x02\x18\x01H\x04R\x04body\x88\x01\x01\x12$\n" +
 	"\vdata_center\x18\n" +
-	" \x01(\tR\n" +
-	"dataCenter\x12\x16\n" +
-	"\x06module\x18\x14 \x01(\tR\x06module\x12\x12\n" +
-	"\x04rack\x18\x1e \x01(\tR\x04rack\x12\x12\n" +
-	"\x04unit\x18( \x01(\tR\x04unitBt\n" +
-	"\x18tech.ydb.proto.discoveryB\x0fDiscoveryProtosZ<github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Discovery\xf8\x01\x01\x92\x03\x05\xd2>\x02\x10\x02b\beditionsp\xe8\a"
+	" \x01(\tH\x05R\n" +
+	"dataCenter\x88\x01\x01\x12\x1b\n" +
+	"\x06module\x18\x14 \x01(\tH\x06R\x06module\x88\x01\x01\x12\x17\n" +
+	"\x04rack\x18\x1e \x01(\tH\aR\x04rack\x88\x01\x01\x12\x17\n" +
+	"\x04unit\x18( \x01(\tH\bR\x04unit\x88\x01\x01B\x12\n" +
+	"\x10_data_center_numB\v\n" +
+	"\t_room_numB\v\n" +
+	"\t_rack_numB\v\n" +
+	"\t_body_numB\a\n" +
+	"\x05_bodyB\x0e\n" +
+	"\f_data_centerB\t\n" +
+	"\a_moduleB\a\n" +
+	"\x05_rackB\a\n" +
+	"\x05_unitBl\n" +
+	"\x18tech.ydb.proto.discoveryB\x0fDiscoveryProtosZ<github.com/ydb-platform/ydb-go-genproto/protos/Ydb_Discovery\xf8\x01\x01b\x06proto3"
 
 var file_protos_ydb_discovery_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_protos_ydb_discovery_proto_goTypes = []any{
@@ -1131,6 +1060,7 @@ func file_protos_ydb_discovery_proto_init() {
 	if File_protos_ydb_discovery_proto != nil {
 		return
 	}
+	file_protos_ydb_discovery_proto_msgTypes[7].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
