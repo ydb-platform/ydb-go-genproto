@@ -1,6 +1,6 @@
 module github.com/ydb-platform/ydb-go-genproto
 
-go 1.16
+go 1.21
 
 require (
 	google.golang.org/grpc v1.47.0
